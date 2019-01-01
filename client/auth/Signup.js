@@ -5,7 +5,6 @@ import Input from '../form/Input';
 import Button from '../form/Button';
 import validationTypes from '../form/validationTypes';
 import { useAppContext } from '../app-context';
-
 import * as actions from './actions';
 export default function Signup() {
   const { form, auth } = useAppContext();
@@ -32,15 +31,15 @@ export default function Signup() {
     );
   }
   return (
-    <div data-testid='signupform' className='auth-form'>
-      <Form formTitle='Sign up'>
+    <div data-testid="signupform" className="auth-form">
+      <Form formTitle="Sign up">
         <Input
           value={username}
           onChange={handleChange}
-          type='text'
-          id='username'
-          name='username'
-          placeholder='username'
+          type="text"
+          id="username"
+          name="username"
+          placeholder="username"
           validationTypes={[
             validationTypes.USERNAME_FORMAT_VALIDATION,
             validationTypes.USERNAME_TAKEN,
@@ -49,10 +48,10 @@ export default function Signup() {
         <Input
           onChange={handleChange}
           value={email}
-          placeholder='email'
-          type='email'
-          id='email'
-          name='email'
+          placeholder="email"
+          type="email"
+          id="email"
+          name="email"
           validationTypes={[
             validationTypes.EMAIL_FORMAT_VALIDATION,
             validationTypes.REGISTERED_EMAIL,
@@ -61,18 +60,18 @@ export default function Signup() {
         <Input
           onChange={handleChange}
           value={password}
-          placeholder='password'
-          type='password'
-          id='password'
-          name='password'
+          placeholder="password"
+          type="password"
+          id="password"
+          name="password"
           validationTypes={[validationTypes.PASSWORD_FORMAT_VALIDATION]}
         />
         <Button
-          className='btn'
-          type='button'
+          className="btn"
+          type="button"
           onClick={handleSignup}
-          id='signup-btn'
-          title='Signup'
+          id="signup-btn"
+          title="Signup"
         />
       </Form>
     </div>

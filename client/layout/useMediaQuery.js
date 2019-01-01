@@ -22,8 +22,8 @@ export function useMediaQuery() {
         case width <= 600:
           setDevice('phone');
           break;
-      //  case width <= 768:
-       // case width <= 992:
+        case width <= 768:
+        case width <= 992:
         case width <= 1200:
           setDevice('tablet');
           break;

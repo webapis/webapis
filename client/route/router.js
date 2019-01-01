@@ -8,7 +8,7 @@ export function Route(props) {
   const [route] = useRouteContext();
 
   if (route === path) {
-debugger
+
     return children;
   }
   return null;

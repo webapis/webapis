@@ -53,14 +53,15 @@ export default function Navigation(props) {
           minHeight: 64,
           paddingLeft: 16,
           paddingRight: 16,
-          display: 'flex',
-          alignItems: 'center',
-          position: 'relative',
+          display: 'fixed',
+          width: '100%',
         }}
       >
-        <MenuWhite onClick={toggleDrawer} device={device} />
+        <div style={{ display: 'flex' }}>
+          <MenuWhite onClick={toggleDrawer} device={device} />
 
-        {children}
+          {children}
+        </div>
       </div>
     </div>
   );
