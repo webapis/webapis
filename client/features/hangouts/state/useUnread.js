@@ -7,6 +7,7 @@ import {
   updateUnread,
   updateHangout,
   removeUnreads,
+  removeTargetUnreads,
 } from "./local-storage/common";
 export default function useUnread({
   unreadhangouts,
@@ -24,21 +25,10 @@ export default function useUnread({
 
   function onUnreadSelect({ hangout }) {
     dispatch({ type: actionTypes.SELECTED_HANGOUT, hangout });
-    debugger;
+
     onAppRoute({ featureRoute: `/${hangout.state}`, appRoute: "/hangouts" });
-    debugger;
-    removeUnreads({
-      hangout,
-      dispatch,
-      username: user && user.username,
-      state: "ACCEPTER",
-    });
-    removeUnreads({
-      hangout,
-      dispatch,
-      username: user && user.username,
-      state: "INVITER",
-    });
+
+    removeTargetUnreads({ dispatch, username: user && user.username, hangout });
   }
 
   function onUnreadRemove() {}

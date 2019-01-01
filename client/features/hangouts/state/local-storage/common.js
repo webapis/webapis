@@ -226,7 +226,22 @@ export function removeUnreads({ dispatch, username, hangout, state }) {
   } else {
   }
 }
+export function removeTargetUnreads({ dispatch, username, hangout }) {
+  const { target } = hangout;
+  const hangoutKey = `${username}-unread-hangouts`;
 
+  const localHangouts = JSON.parse(localStorage.getItem(hangoutKey));
+  if (localHangouts && localHangouts.length > 0) {
+    let filtered = localHangouts.filter((f) => f.target !== target);
+
+    dispatch({
+      type: actionTypes.UNREAD_HANGOUTS_UPDATED,
+      unreadhangouts: filtered,
+    });
+    localStorage.setItem(hangoutKey, JSON.stringify(filtered));
+  } else {
+  }
+}
 export function loadMessages({ hangout, username, dispatch }) {
   const { target } = hangout;
   const messageKey = `${username}-${target}-messages`;

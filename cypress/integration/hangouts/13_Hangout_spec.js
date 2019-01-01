@@ -38,5 +38,10 @@ describe("HangoutSpec", () => {
       .click();
     cy.get("[data-testid=beroclient]").find("[data-testid=unread-ui]");
     cy.get("[data-testid=beroclient]").find("[data-testid=demouser]").click();
+    cy.get("[data-testid=beroclient]")
+      .find("[data-testid=message-count]")
+      .contains(0);
+
+    cy.get("[data-testid=beroclient]").find("[data-testid=accept-btn]").click();
   });
 });

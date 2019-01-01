@@ -43,6 +43,8 @@ export default function HangoutServer({ children }) {
         });
         break;
       case clientCommands.ACCEPT:
+        debugger;
+
         break;
       case clientCommands.DECLINE:
         break;
@@ -56,7 +58,44 @@ export default function HangoutServer({ children }) {
         throw "No client command provided";
     }
   }
-  function sendMessageBero() {}
+  function sendMessageBero({ data, type }) {
+    debugger;
+    const { timestamp, browserId } = data;
+    switch (data.command) {
+      case clientCommands.ACCEPT:
+        debugger;
+        setBeroState({
+          data: {
+            hangout: {
+              target: "demouser",
+              timestamp,
+              email: "demouser@gmail.com",
+              state: "ACCEPTED",
+              message: data.message,
+            },
+            type: "ACKHOWLEDGEMENT",
+          },
+          type: "HANGOUT",
+        });
+
+        setDemoState({
+          type: "HANGOUT",
+          data: {
+            type: "HANGOUT",
+            hangout: {
+              state: "ACCEPTER",
+              timestamp,
+              message: data.message,
+              target: "berouser",
+              email: "berouser@gmail.com",
+            },
+          },
+        });
+        break;
+      default:
+        throw "No client command provided";
+    }
+  }
   return children({
     sendMessageDemo,
     sendMessageBero,

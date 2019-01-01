@@ -166,15 +166,17 @@ export default function Hangchat({
         class="w-100"
         style="position:absolute; bottom:0;"
       >
-        ${hangout.state === "INVITE" ||
-        (hangout.state === "INVITED" &&
-          html` <${MessageEditor}
-            loading=${loading}
-            messageText=${messageText}
-            onMessageText=${onMessageText}
-            onMessage=${onUserClientCommand}
-            hangout=${hangout}
-          />`)}
+        ${(hangout.state === "ACCEPTED" ||
+          hangout.state === "INVITE" ||
+          hangout.state === "INVITED" ||
+          hangout.state === "ACCEPTER") &&
+        html` <${MessageEditor}
+          loading=${loading}
+          messageText=${messageText}
+          onMessageText=${onMessageText}
+          onMessage=${onUserClientCommand}
+          hangout=${hangout}
+        />`}
         ${hangout.state === "INVITER" &&
         html`
           <${InviteeControls} onUserClientCommand=${onUserClientCommand} />

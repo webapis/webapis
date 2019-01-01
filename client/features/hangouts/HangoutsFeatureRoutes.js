@@ -30,6 +30,7 @@ export default function HangoutsFeatureRoutes(props) {
   const { state, funcs } = useHangouts({ user });
   const { hangout } = state;
   const { onUnreadSelect, onUnreadRemove, reducedUnreads } = useUnread({
+    user,
     ...state,
     onAppRoute,
   });

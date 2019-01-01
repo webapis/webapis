@@ -8,7 +8,12 @@ import {
   updateHangout,
   removeUnreads,
 } from "../local-storage/common";
-export default function useSenderMessage({ message, dispatch, username }) {
+export default function useSenderMessage({
+  message,
+  dispatch,
+  username,
+  focusedHangout,
+}) {
   useEffect(() => {
     if (
       message &&
@@ -30,7 +35,13 @@ export default function useSenderMessage({ message, dispatch, username }) {
             username,
             dState: "unread",
           });
-          saveUnread(commonArg);
+          if (!focusedHangout) {
+            saveUnread(commonArg);
+          } else {
+            if (focusedHangout && focusedhangout.target !== hangout.target) {
+              saveUnread(commonArg);
+            }
+          }
           break;
         case "BLOCKER":
           updateHangout(commonArg);

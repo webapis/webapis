@@ -8,6 +8,7 @@ import {
   updateHangout,
   removeUnreads,
 } from "../local-storage/common";
+import { actionTypes } from "../actionTypes";
 export default function useDeliveryAcknowledgement({
   message,
   dispatch,
@@ -21,6 +22,7 @@ export default function useDeliveryAcknowledgement({
       message.data.type === "ACKHOWLEDGEMENT" &&
       username
     ) {
+      debugger;
       onDeliveryAcknowledgement();
     }
   }, [message, username]);
@@ -32,6 +34,7 @@ export default function useDeliveryAcknowledgement({
   }
 
   function onDeliveryAcknowledgement() {
+    debugger;
     const {
       data: { hangout },
     } = message;
@@ -78,10 +81,11 @@ export default function useDeliveryAcknowledgement({
         setTimeout(function () {
           dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
         }, 200);
-
         break;
       case "ACCEPTED":
+        debugger;
         setTimeout(function () {
+          debugger;
           updateHangout(commonArg);
           updateSentMessage(commonArg);
           dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
