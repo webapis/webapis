@@ -63,6 +63,7 @@ export function useHangouts() {
   }
   function onSelectUnread(e) {
     const username = e.target.id;
+    debugger;
     selectUnread({ dispatch, username });
     const hangout = hangouts.find((g) => g.username === username);
 

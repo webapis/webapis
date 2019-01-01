@@ -23,8 +23,8 @@ if(unreadhangouts){
           items.map((u) => {
        
           return  <div style={{display:'flex'}}>
-            <ListItem onClick={onSelectUnread} id={u.username} style={{flex:5}}>{u.username} messages: {u.messageCount}</ListItem>
-            <ListItem onClick={onRemoveUnread} id={u.username} style={{color:'red'}}>x</ListItem>
+            <ListItem onClick={onSelectUnread} id={u.username} style={{flex:5}} data-testid={`${u.username}-select`}>{u.username} messages: {u.messageCount}</ListItem>
+            <ListItem onClick={onRemoveUnread} id={u.username} style={{color:'red'}} data-testid={`${u.username}-remove`}>x</ListItem>
             </div>
           })}
       </List>
