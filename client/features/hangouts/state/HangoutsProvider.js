@@ -69,9 +69,10 @@ export default function HangoutsProvider(props) {
     browserId,
   });
   useEffect(() => {
-    if (messages) {
+    if (hangout) {
+      debugger;
     }
-  }, [messages]);
+  }, [hangout]);
   useEffect(() => {
     if (connectionState === "open") {
       dispatch({

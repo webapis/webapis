@@ -1,3 +1,4 @@
+import infoMessages from "../../../client/features/hangouts/ui-components/infoMessages";
 describe("HangoutSpec", () => {
   beforeEach(() => {
     cy.visit("/");
@@ -29,6 +30,16 @@ describe("HangoutSpec", () => {
     cy.get("[data-testid=democlient]")
       .find("[data-testid=oninvite-btn]")
       .click();
+    cy.get("[data-testid=democlient]")
+      .find("[data-testid=info-message]")
+      .contains(infoMessages.invited);
+    cy.get("[data-testid=democlient]")
+      .find("[data-testid=message-input]")
+      .should("be.disabled");
+    cy.get("[data-testid=democlient]")
+      .find("[data-testid=send-btn]")
+      .should("be.disabled");
+    cy.pause();
     //berouser
     cy.get("[data-testid=beroclient]")
       .find("[data-testid=message-count]")
@@ -43,5 +54,13 @@ describe("HangoutSpec", () => {
       .contains(0);
 
     cy.get("[data-testid=beroclient]").find("[data-testid=accept-btn]").click();
+
+    //demouser
+    cy.get("[data-testid=democlient]")
+      .find("[data-testid=message-input]")
+      .should("be.enabled");
+    cy.get("[data-testid=democlient]")
+      .find("[data-testid=send-btn]")
+      .should("be.enabled");
   });
 });

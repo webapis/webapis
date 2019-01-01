@@ -5,7 +5,8 @@ import {
 } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 import Layout from "./Layout";
-import Button from "controls/button/index";
+import Button from "../../../components/controls/button/index";
+import infoMessages from "./infoMessages";
 const html = htm.bind(h);
 export function Messages({ messages, username, ref }) {
   const { transformedMessages } = useTransformMessages({ messages, username });
@@ -18,17 +19,13 @@ export function Messages({ messages, username, ref }) {
     ${transformedMessages &&
     transformedMessages.length > 0 &&
     transformedMessages.map((msg) => {
-      if (msg.type === "blocked") {
-        return html`<${BlockingMessage}
-          text="You have blocked this chat room."
-        /> `;
-      } else if (msg.type === "blocker") {
-        return html`<${BlockingMessage}
-          text="You are blocked from using this chat room."
-        /> `;
-      } else {
-        return html` <${Message} ...${msg} /> `;
-      }
+      return html`<div>
+        <${Message} ...${msg} />
+        ${msg.type &&
+        msg.type === "invited" &&
+        msg.owner === "me" &&
+        html`<${InfoMessage} type="success" text=${infoMessages.invited} />`}
+      </div>`;
     })}
   </div>`;
 }
@@ -91,6 +88,16 @@ export function BlockingMessage({ text }) {
   >
     ${text}
   </div>`;
+}
+
+function InfoMessage({ type, text }) {
+  return html`<div
+    data-testid="info-message"
+    class=${`text-right text-${type}`}
+    style="font-size: 1rem;"
+  >
+    ${text}
+  </div> `;
 }
 
 export function useMessageTimeLog({ timestamp }) {

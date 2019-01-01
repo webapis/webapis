@@ -32,7 +32,9 @@ export default function useClientCommands({
     const timestamp = Date.now();
 
     const message =
-      messageText !== "" ? { text: messageText, timestamp } : null;
+      messageText !== ""
+        ? { text: messageText, timestamp, type: "invited" }
+        : null;
 
     const invitation = {
       target: hangout.target,
