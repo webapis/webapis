@@ -33,11 +33,10 @@ export default [
   image(),
   production && terser(),
   replace({
-    PREACT_APP_BACK: process.env.PREACT_APP_BACK
-      ? `${JSON.stringify(process.env.PREACT_APP_BACK)}`
-      : "PREACT_APP_PARSE",
+    PREACT_APP_RTC: process.env.PREACT_APP_RTC,
+    PREACT_APP_AUTH: process.env.PREACT_APP_AUTH,
+    PREACT_APP_BACK: process.env.PREACT_APP_BACK,
   }),
-
   replace({
     ip: JSON.stringify(process.env.ip),
     PORT: JSON.stringify(process.env.PORT),

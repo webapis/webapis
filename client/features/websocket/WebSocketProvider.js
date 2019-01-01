@@ -17,10 +17,10 @@ const html = htm.bind(h);
 export const WebSocketContext = createContext();
 
 export default function WebSocketProvider(props) {
-  const { url } = props || {};
+  const { url, children } = props || {};
 
   const [state, dispatch] = useReducer(reducer, initState);
-  const { websocket } = state;
+  const { websocket, message, connectionState } = state;
   useEffect(() => {
     if (url) {
       initWebSocket({ url, dispatch });
@@ -50,7 +50,15 @@ export default function WebSocketProvider(props) {
       };
     }
   }, [websocket]);
-  const value = useMemo(() => [state, dispatch], [state]);
 
-  return html`<${WebSocketContext.Provider} value=${value} ...${props} />`;
+  function sendMessage(msg) {
+    websocket.send(JSON.stringify(msg));
+  }
+
+  return html`<div
+    ...${props}
+    sendMessage=${sendMessage}
+    message=${message}
+    connectionState=${connectionState}
+  />`;
 }
