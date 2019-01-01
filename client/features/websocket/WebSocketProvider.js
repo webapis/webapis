@@ -51,8 +51,8 @@ export default function WebSocketProvider(props) {
     }
   }, [websocket]);
 
-  function sendMessage(msg) {
-    websocket.send(JSON.stringify(msg));
+  function sendMessage({ data, type }) {
+    websocket.send(JSON.stringify({ data, type }));
   }
 
   return children({ sendMessage, message, connectionState });

@@ -26,7 +26,7 @@ export const initState = {
   signupStarted: false, //used by service
   loginStarted: false, //used by service
   changePasswordStared: false, //used by service
-  requestPassChangeStarted: false, //used by service
+  requestPassChangeStarted: false, //used by service,
 };
 
 export function authReducer(state, action) {

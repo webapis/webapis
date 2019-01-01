@@ -11,8 +11,14 @@ import {
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 import { authReducer, initState } from "./authReducer";
 //import AuthAdapter from "./AuthAdapter";
+import serverValidation from "../validation/serverErrorActions";
+import {
+  generateBrowserId,
+  saveBrowserIdToLocalStorage,
+  browserIdExists,
+  loadBrowserId,
+} from "../state/onBrowserId";
 import { useAppRoute } from "components/app-route/index";
-import { loadBrowserId } from "./onBrowserId";
 import actionTypes from "./actionTypes";
 const AuthContext = createContext();
 const html = htm.bind(h);
@@ -40,21 +46,22 @@ export default function AuthProvider(props) {
     requestpasswordchange,
   } = props;
 
-  const [state, dispatch] = useReducer(authReducer, {
-    ...initState,
-    login,
-    signup,
-    changepassword,
-    requestpasswordchange,
-  });
+  const [state, dispatch] = useReducer(authReducer, initState);
   const { onAppRoute } = useAppRoute();
-  const { user } = state;
+  const { user, signupStarted, username, email, password } = state;
   const value = useMemo(() => [state, dispatch], [state]);
   useEffect(() => {
     if (userExist()) {
       loadUserAndBrowserId({ dispatch });
     }
   }, []);
+  useEffect(() => {
+    if (signupStarted && email && password && username) {
+      debugger;
+      const browserId = loadBrowserId();
+      handleSignUp({ username, email, password, browserId });
+    }
+  }, [signupStarted, email, password, username]);
   useEffect(() => {
     if (user) {
       onAppRoute({
@@ -65,7 +72,121 @@ export default function AuthProvider(props) {
       onAppRoute({ route: "/auth", featureRoute: "/login" });
     }
   }, [user]);
+  function handleLogin({ emailorusername, password }) {
+    login({
+      emailorusername,
+      password,
 
+      success: ({ reponse, result }) => {
+        if (response.status === 200) {
+          const { token, username, email } = result;
+          if (browserIdExists()) {
+            dispatch({
+              type: actionTypes.BROWSER_ID_LOADED,
+              browserId: loadBrowserId(),
+            });
+          } else {
+            const { browserId } = result;
+
+            saveBrowserIdToLocalStorage({ browserId });
+            dispatch({
+              type: actionTypes.BROWSER_ID_LOADED,
+              browserId,
+            });
+          }
+
+          dispatch({
+            type: actionTypes.LOGIN_SUCCESS,
+            user: { token, username, email },
+          });
+          window.localStorage.setItem(
+            "webcom",
+            JSON.stringify({
+              token,
+              username,
+              email,
+            })
+          );
+        } else if (response.status === 400) {
+          const { errors } = result;
+
+          errors.forEach((error) => {
+            serverValidation({ status: error, dispatch });
+          });
+          dispatch({ type: actionTypes.LOGIN_FAILED });
+        } else if (response.status === 500) {
+          const { error } = result;
+
+          dispatch({ type: actionTypes.SERVER_ERROR_RECIEVED, error });
+          dispatch({ type: actionTypes.LOGIN_FAILED });
+        }
+      },
+      failed: (error) => {
+        dispatch({ type: actionTypes.SERVER_ERROR_RECIEVED, error });
+        dispatch({ type: actionTypes.LOGIN_FAILED });
+      },
+      hasBrowserId: browserIdExists(),
+    });
+  }
+  function handleSignUp({ username, email, password, browserId }) {
+    debugger;
+    signup({
+      username,
+      email,
+      password,
+      browserId,
+
+      success: ({ result, response }) => {
+        debugger;
+        if (response.status === 200) {
+          const { token, username, email } = result;
+          dispatch({
+            type: actionTypes.SIGNUP_SUCCESS,
+            user: { token, username, email },
+          });
+
+          window.localStorage.setItem(
+            "webcom",
+            JSON.stringify({
+              token,
+              username,
+              email,
+            })
+          );
+          if (browserIdExists()) {
+            dispatch({
+              type: actionTypes.BROWSER_ID_LOADED,
+              browserId,
+            });
+          } else {
+            const { browserId } = result;
+            saveBrowserIdToLocalStorage({ browserId });
+            dispatch({
+              type: actionTypes.BROWSER_ID_LOADED,
+              browserId,
+            });
+          }
+        } else if (response.status === 400) {
+          const { errors } = result;
+
+          errors.forEach((error) => {
+            serverValidation({ status: error, dispatch });
+          });
+          dispatch({ type: actionTypes.SIGNUP_FAILED });
+        } else if (response.status === 500) {
+          const { error } = result;
+
+          dispatch({ type: actionTypes.SERVER_ERROR_RECIEVED, error });
+          dispatch({ type: actionTypes.SIGNUP_FAILED });
+        }
+      },
+      failed: (error) => {
+        const err = error;
+        debugger;
+        dispatch({ type: actionTypes.SIGNUP_FAILED, error });
+      },
+    });
+  }
   return html`
     <${AuthContext.Provider} value=${value} ...${props}>
       ${children}

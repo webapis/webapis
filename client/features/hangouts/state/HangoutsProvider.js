@@ -43,7 +43,7 @@ export default function HangoutsProvider(props) {
   const { state: authState } = useAuth();
   const { user } = authState;
   const [state, dispatch] = useReducer(reducer, initState);
-  const { hangout, message, on_user_client_command, messageText } = state;
+  const { hangout, on_user_client_command, messageText, browserId } = state;
   //TODO HG onmessage sound effect
   const handleMessage = useMessage({
     message,
@@ -68,16 +68,16 @@ export default function HangoutsProvider(props) {
       pendingHangout: { ...hangout, command: clientCommands.READING },
     });
   }
-  function sendPendingHangout({ hangout }) {
-    dispatch({
-      type: actionTypes.SENDING_HANGOUT_STARTED,
-      pendingHangout: hangout,
-    });
-    dispatch({
-      type: actionTypes.ON_USER_CLIENT_COMMAND,
-      on_user_client_command: null,
-    });
-  }
+  // function sendPendingHangout({ hangout }) {
+  //   dispatch({
+  //     type: actionTypes.SENDING_HANGOUT_STARTED,
+  //     pendingHangout: hangout,
+  //   });
+  //   dispatch({
+  //     type: actionTypes.ON_USER_CLIENT_COMMAND,
+  //     on_user_client_command: null,
+  //   });
+  // }
   function onInvite() {
     const { email } = hangout;
 
@@ -92,6 +92,7 @@ export default function HangoutsProvider(props) {
       message,
       command: "INVITE",
       timestamp,
+      browserId,
     };
 
     saveHangout({
@@ -109,7 +110,8 @@ export default function HangoutsProvider(props) {
 
     onAppRoute({ featureRoute: `/INVITE`, route: "/hangouts" });
 
-    sendPendingHangout({ hangout: invitation });
+    sendMessage({ data: invitation, type: "HANGOUT" });
+    // sendPendingHangout({ hangout: invitation });
   }
 
   function onAccept() {
@@ -121,6 +123,7 @@ export default function HangoutsProvider(props) {
       message: { text: "Accepted your invitation", timestamp },
       command: "ACCEPT",
       timestamp,
+      browserId,
     };
 
     saveHangout({
@@ -143,7 +146,8 @@ export default function HangoutsProvider(props) {
     });
     removeUnread({ dispatch, hangout: accept, name: user && user.username });
     onAppRoute({ featureRoute: `/ACCEPT`, route: "/hangouts" });
-    sendPendingHangout({ hangout: accept });
+    //sendPendingHangout({ hangout: accept });
+    sendMessage({ data: accept, type: "HANGOUT" });
   }
   function onDecline() {
     const { email, timestamp } = hangout;
@@ -154,10 +158,12 @@ export default function HangoutsProvider(props) {
       message: null,
       command: "DECLINE",
       timestamp,
+      browserId,
     };
     removeUnread({ hangout, dispatch, name: user && user.username });
     onAppRoute({ featureRoute: `/DECLINE`, route: "/hangouts" });
-    sendPendingHangout({ hangout: decline });
+    //sendPendingHangout({ hangout: decline });
+    sendMessage({ data: decline, type: "HANGOUT" });
   }
 
   function onMessage() {
@@ -171,6 +177,7 @@ export default function HangoutsProvider(props) {
       message,
       command: "MESSAGE",
       timestamp,
+      browserId,
     };
     saveSentMessage({
       hangout: messaging,
@@ -194,7 +201,8 @@ export default function HangoutsProvider(props) {
         dState: "pending",
       });
     } else {
-      sendPendingHangout({ hangout: messaging });
+      // sendPendingHangout({ hangout: messaging });
+      sendMessage({ data: messaging, type: "HANGOUT" });
     }
     dispatch({ type: actionTypes.MESSAGE_TEXT_CHANGED, text: "" });
   }
@@ -212,6 +220,7 @@ export default function HangoutsProvider(props) {
       },
       command: "BLOCK",
       timestamp,
+      browserId,
     };
 
     saveSentMessage({
@@ -222,7 +231,8 @@ export default function HangoutsProvider(props) {
       name: user && user.username,
       dState: "pending",
     });
-    sendPendingHangout({ hangout: block });
+    //sendPendingHangout({ hangout: block });
+    sendMessage({ data: block, type: "HANGOUT" });
   }
   function onUnblock() {}
   useEffect(() => {

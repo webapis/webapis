@@ -24,6 +24,7 @@ describe("2_Signup_server_side_stubbed_validation_spec", () => {
       .get("[data-testid=password]")
       .type("TestPassword2020!")
       .blur();
+
     cy.get("[data-testid=signup-btn]").click();
     cy.get("[data-testid=message-username]").contains(
       validationMessages.REQUIRED_FIELD

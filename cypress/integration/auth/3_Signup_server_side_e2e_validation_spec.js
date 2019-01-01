@@ -17,7 +17,7 @@ describe("3_Signup_server_side_e2e_validation_spec", () => {
     });
   });
 
-  it("client side JS disabled: user submmits empty fields", () => {
+  it.only("client side JS disabled: user submmits empty fields", () => {
     cy.get("[data-testid=signup-btn]").click();
     cy.get("[data-testid=message-username]").contains(
       validationMessages.REQUIRED_FIELD

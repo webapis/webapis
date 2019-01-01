@@ -158,15 +158,16 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
     });
   }
   useEffect(() => {
-    if (message && username) {
-      switch (message.type) {
+    if (message && message.type === "HANGOUT" && username) {
+      const { data } = message;
+      switch (message.data.type) {
         case "DELAYED_ACKHOWLEDGEMENTS":
           dispatch({
             type: actionTypes.ON_SOCKET_MESSAGE,
             on_socket_message: true,
           });
 
-          handleDelayedAcknowledgements({ hangouts: message.hangouts });
+          handleDelayedAcknowledgements({ hangouts: data.hangouts });
           setTimeout(() => {
             dispatch({
               type: actionTypes.ON_SOCKET_MESSAGE,
@@ -181,7 +182,7 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
           });
 
           onDeliveryAcknowledgement({
-            hangout: message.hangout,
+            hangout: data.hangout,
             offline: false,
           });
           setTimeout(() => {
@@ -199,11 +200,11 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
 
           if (
             focusedHangout &&
-            focusedHangout.username === message.hangout.username
+            focusedHangout.username === data.hangout.username
           ) {
-            onHangout({ hangout: message.hangout, unread: false });
+            onHangout({ hangout: data.hangout, unread: false });
           } else {
-            onHangout({ hangout: message.hangout, unread: true });
+            onHangout({ hangout: data.hangout, unread: true });
           }
           setTimeout(() => {
             dispatch({
@@ -217,7 +218,7 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
             type: actionTypes.ON_SOCKET_MESSAGE,
             on_socket_message: true,
           });
-          handleHangouts({ hangouts: message.hangouts });
+          handleHangouts({ hangouts: data.hangouts });
           setTimeout(() => {
             dispatch({
               type: actionTypes.ON_SOCKET_MESSAGE,

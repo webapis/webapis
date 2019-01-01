@@ -27,8 +27,16 @@ module.exports.authedHandler = async function ({ request, connections, ws }) {
     ws.on("message", function incoming(message) {
       console.log("recieved,", message);
       try {
-        const hangout = JSON.parse(message);
-        hangoutsHandler({ hangout, connections, ws, client });
+        const msg = JSON.parse(message);
+        const { data } = msg;
+        switch (msg.type) {
+          case "HANGOUT":
+            debugger;
+            hangoutsHandler({ hangout: data, connections, ws, client });
+            break;
+          default:
+            throw "No handler provided for message data type";
+        }
       } catch (error) {
         const err = error; //
         throw new Error(error);
