@@ -19,9 +19,11 @@
     "htm": "^3.0.4",
     "rollup": "^2.6.1",
     "rollup-plugin-babel": "^4.4.0",
-    "rollup-plugin-postcss": "^2.8.2"
+    "rollup-plugin-postcss": "^2.8.2",
+    "rollup-plugin-serve": "^1.0.1"
   },
   "dependencies": {
-    "preact": "^10.4.0"
+    "preact": "^10.4.0",
+    "preact-router": "^3.2.1"
   }
 }

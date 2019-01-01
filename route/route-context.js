@@ -8,7 +8,7 @@ export function Route(props) {
   const { state } = useRouteContext();
   const { location } = state;
 
-  if (location.hash === path) {
+  if (location.pathname === path) {
     return children;
   }
   return null;
