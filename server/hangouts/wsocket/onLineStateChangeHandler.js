@@ -1,13 +1,16 @@
+const { undefinedArguments } = require("../../helpers");
 module.exports.onLineStateChangeHandler = async function ({
-  client,
+  // client,
   ws,
   browserId,
   collection,
+  senderUser,
 }) {
   try {
+    undefinedArguments({ ws, browserId, collection, senderUser });
     //const collection = await client.db("auth").collection("users");
-
-    const user = await collection.findOne({ username: ws.user.username });
+    const { username } = senderUser;
+    const user = await collection.findOne({ username });
     const connectedBrowser = user.browsers.find((b) => {
       if (b.browserId === browserId) {
         return b;
@@ -28,32 +31,33 @@ module.exports.onLineStateChangeHandler = async function ({
       }
       pulldelayedHangouts({
         browserId: connectedBrowser.browserId,
-        username: ws.user.username,
+        username,
         collection,
       });
     }
-    //SEND DELAYED UNDELIVERED
-    if (connectedBrowser && connectedBrowser.undelivered) {
-      const undeliveredHangouts = connectedBrowser.undelivered;
-      if (undeliveredHangouts && undeliveredHangouts.length > 0) {
-        const msg = {
-          data: { hangouts: undeliveredHangouts, type: "UNDELIVERED_HANGOUTS" },
-          type: "HANGOUT",
-        };
-        ws.send(
-          JSON.stringify(msg) //--
-        );
-        pullUndeliveredHangouts({
-          browserId: connectedBrowser.browserId,
-          username: ws.user.username,
-          collection,
-        });
-      }
+    //SEND UNDELIVERED
+    if (
+      connectedBrowser &&
+      connectedBrowser.undelivered &&
+      connectedBrowser.undelivered.length > 0
+    ) {
+      const { undelivered } = connectedBrowser;
+      const msg = {
+        data: { hangouts: undelivered, type: "UNDELIVERED_HANGOUTS" },
+        type: "HANGOUT",
+      };
+      ws.send(
+        JSON.stringify(msg) //--
+      );
+      debugger;
+      pullUndeliveredHangouts({
+        browserId: connectedBrowser.browserId,
+        username,
+        collection,
+      });
     }
   } catch (error) {
-    const err = error;
-
-    console.log("onLineStateChangeHandlerError", error);
+    throw error;
   }
 };
 

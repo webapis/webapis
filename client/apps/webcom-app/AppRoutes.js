@@ -26,11 +26,9 @@ export function AppRoutes(props) {
   useEffect(() => {
     const browserId = loadBrowserId();
     if (user) {
-      debugger;
       setRtcUrl(
         `wss://localhost:${PORT}/authed-msg/webcom-app/?username=${user.username}&browserId=${browserId}`
       );
-      debugger;
     }
   }, [user]);
   switch (appRoute) {

@@ -93,7 +93,8 @@ Cypress.Commands.add("block", ({ PORT }) => {
       ])
     );
   cy.visit(`https://localhost:${PORT}`);
-
+  cy.get("[data-testid=democlient]").find("#connect").click();
+  cy.get("[data-testid=beroclient]").find("#connect").click();
   cy.get("[data-testid=beroclient]").find("[data-testid=demouser]").click();
 
   cy.get("[data-testid=democlient]").find("[data-testid=berouser]").click();
@@ -171,7 +172,6 @@ Cypress.Commands.add("block", ({ PORT }) => {
       };
       expect(browser).to.deep.equal(expected);
     });
-    //cy.pause();
   } //IF PORT
   //demouser will try to send a message to blocked user
 

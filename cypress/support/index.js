@@ -29,13 +29,15 @@ import "./auth/signup/takenEmail";
 import "./auth/signup/takenUserName";
 import "./auth/signup/successfulSignUp";
 
-import "./hangout/invitation";
-import "./hangout/block";
-import "./hangout/unblock";
-import "./hangout/decline";
-import "./hangout/undecline";
-import "./hangout/inviteasguest";
+import "./hangout/target-online/invitation";
+import "./hangout/target-online/block";
+import "./hangout/target-online/unblock";
+import "./hangout/target-online/decline";
+import "./hangout/target-online/undecline";
+import "./hangout/target-online/inviteasguest";
 import "./websocket/index";
+
+import "./hangout/target-offline/Invitation";
 Cypress.on("window:before:load", (win) => {
   delete win.fetch;
 });

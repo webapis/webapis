@@ -12,6 +12,8 @@ Cypress.Commands.add("inviteasguest", ({ PORT }) => {
     method: "POST",
   });
   cy.visit(`https://localhost:${PORT}`);
+  cy.get("[data-testid=democlient]").find("#connect").click();
+  cy.get("[data-testid=beroclient]").find("#connect").click();
   cy.get("[data-testid=democlient]")
     .find("[data-testid=user-search-input]")
     .type("berouser");

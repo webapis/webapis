@@ -36,7 +36,7 @@ module.exports.handlePersistance = async function ({
         for (const browser of senderBrowsers) {
           const senderOnline =
             connections[`${senderUserName}-${browser.browserId}`];
-
+          //
           if (!senderOnline) {
             await collection.update(
               { username: senderUserName },
@@ -88,7 +88,6 @@ module.exports.handlePersistance = async function ({
         const browsers = user.browsers;
 
         for await (const browser of browsers) {
-          debugger;
           const updateResult = await collection.update(
             { username: senderUserName },
             { $set: { "browsers.$[t].hangouts.$[u]": sender } },
@@ -100,7 +99,6 @@ module.exports.handlePersistance = async function ({
               multi: true,
             }
           );
-          debugger;
         }
       },
       pushSenderHangout: async function () {
@@ -227,7 +225,6 @@ module.exports.handlePersistance = async function ({
         funcs.targetOffline();
         break;
       case "UNDECLINE":
-        debugger;
         //SENDER-----------------------------------------
         funcs.updateSenderHangout(); //UNBLOCKED
         funcs.senderOffline();

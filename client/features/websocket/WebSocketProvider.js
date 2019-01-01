@@ -46,14 +46,12 @@ export default function WebSocketProvider(props) {
         dispatch({ type: actionTypes.MESSAGE_RECIEVED, message: msg });
       };
       websocket.onopen = () => {
-        debugger;
         dispatch({
           type: actionTypes.CONNECTION_STATE_CHANGED,
           connectionState: "open",
         });
       };
       websocket.onclose = () => {
-        debugger;
         dispatch({
           type: actionTypes.CONNECTION_STATE_CHANGED,
           connectionState: "close",
@@ -69,7 +67,6 @@ export default function WebSocketProvider(props) {
     websocket.send(JSON.stringify({ data, type }));
   }
   function setRtcUrl(url) {
-    debugger;
     dispatch({ type: actionTypes.URL_CHANGED, url });
   }
   return children({ sendMessage, message, connectionState, setRtcUrl });

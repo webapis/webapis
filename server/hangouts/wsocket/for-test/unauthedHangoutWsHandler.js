@@ -11,10 +11,10 @@ module.exports.unAuthedHangoutWsApp = function ({
   try {
     undefinedArguments({ ws, request, connections, peers, cb });
     let senderUser = JSON.parse(url.parse(request.url, true).query.user);
-    debugger;
+
     peers.push(senderUser);
     connections[`${senderUser.username}-${senderUser.browserId}`] = ws;
-    debugger;
+
     ws.on("message", (socketMessage) => {
       const {
         data: {
@@ -24,7 +24,7 @@ module.exports.unAuthedHangoutWsApp = function ({
       } = JSON.parse(socketMessage);
 
       let targetUser = peers.find((p) => p.username === target);
-      debugger; //
+      //
       hangoutsHandler({
         socketMessage,
         connections,

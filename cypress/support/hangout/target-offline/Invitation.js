@@ -1,6 +1,8 @@
-import infoMessages from "../../../client/features/hangouts/ui-components/infoMessages";
-Cypress.Commands.add("invitation", ({ PORT }) => {
+import infoMessages from "../../../../client/features/hangouts/ui-components/infoMessages";
+Cypress.Commands.add("targetOfflineInvitation", ({ PORT }) => {
   cy.visit(`https://localhost:${PORT}`);
+  cy.get("[data-testid=democlient]").find("#connect").click();
+
   cy.server();
   cy.route({
     url: "/authed-msg/hangouts/findOne?search=berouser&username=demouser",
@@ -57,34 +59,51 @@ Cypress.Commands.add("invitation", ({ PORT }) => {
       expect(browser).to.deep.equal(expected);
     });
 
-    //test data persistence to target
+    // test data persistence to target
     cy.task("query:mongodb", { username: "berouser" }).then((result) => {
       const { browsers } = result;
 
       expect(browsers.length).to.equal(1);
 
       const browser = browsers[0];
-      const { hangouts } = browser;
-      const { timestamp } = hangouts[0];
-      let expected = {
-        browserId: "BID1234567890",
-        hangouts: [
-          {
-            target: "demouser",
-            email: "demouser@gmail.com",
-            message: {
-              text: "Let's chat, berouser!",
-              timestamp,
-              type: "invited",
-            },
+      const { undelivered } = browser;
+
+      const { timestamp } = undelivered[0];
+
+      let expected = [
+        {
+          target: "demouser",
+          email: "demouser@gmail.com",
+          message: {
+            text: "Let's chat, berouser!",
             timestamp,
-            state: "INVITER",
+            type: "invited",
           },
-        ],
-      };
-      expect(browser).to.deep.equal(expected);
+          timestamp,
+          state: "INVITER",
+        },
+      ];
+
+      expect(undelivered).to.deep.equal(expected);
     });
   } //IF PORT//
+
+  //cy.pause();
+  cy.get("[data-testid=beroclient]").find("#connect").click();
+  if (PORT === 3006) {
+    // test data persistence to target
+    cy.task("query:mongodb", { username: "berouser" }).then((result) => {
+      const { browsers } = result;
+
+      expect(browsers.length).to.equal(1);
+
+      const browser = browsers[0];
+      const { undelivered } = browser;
+
+      expect(undelivered.length).to.equal(0);
+    });
+  }
+  //cy.pause();
   cy.get("[data-testid=democlient]")
     .find("[data-testid=info-message]")
     .contains(infoMessages.invited);
@@ -121,6 +140,7 @@ Cypress.Commands.add("invitation", ({ PORT }) => {
       const { timestamp } = hangouts[0];
       let expected = {
         browserId: "BID1234567890",
+        undelivered: [],
         hangouts: [
           {
             target: "demouser",
@@ -221,6 +241,7 @@ Cypress.Commands.add("invitation", ({ PORT }) => {
       const { timestamp } = hangouts[0];
       let expected = {
         browserId: "BID1234567890",
+        undelivered: [],
         hangouts: [
           {
             target: "demouser",

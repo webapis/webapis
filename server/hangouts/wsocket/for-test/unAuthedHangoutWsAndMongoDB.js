@@ -4,6 +4,7 @@ const { MongoClient } = require("mongodb");
 const { handlePersistance } = require("../handlePersistance");
 const { undefinedArguments } = require("../../../helpers");
 const { hangoutsHandler } = require("../hangoutHandler");
+const { onLineStateChangeHandler } = require("../onLineStateChangeHandler");
 module.exports.unAuthedHangoutWsAndMongoDB = async function ({
   ws,
   request,
@@ -14,13 +15,20 @@ module.exports.unAuthedHangoutWsAndMongoDB = async function ({
     const client = await new MongoClient(dbUrl, { useUnifiedTopology: true });
     await client.connect();
     const collection = await client.db("auth").collection("users");
-    const { username } = JSON.parse(url.parse(request.url, true).query.user);
+    const { username, browserId } = JSON.parse(
+      url.parse(request.url, true).query.user
+    );
     const senderUser = await collection.findOne({ username });
 
-    connections[
-      `${senderUser.username}-${senderUser.browsers[0].browserId}`
-    ] = ws;
+    connections[`${senderUser.username}-${browserId}`] = ws;
     //
+    onLineStateChangeHandler({
+      connections,
+      ws,
+      collection,
+      browserId,
+      senderUser,
+    });
     ws.on("message", async (socketMessage) => {
       const {
         data: {

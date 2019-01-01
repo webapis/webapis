@@ -8,16 +8,22 @@ module.exports.authedHangoutHandler = function ({
   browserId,
 }) {
   try {
-    onLineStateChangeHandler({ connections, ws, collection, browserId });
+    onLineStateChangeHandler({
+      connections,
+      ws,
+      collection,
+      browserId,
+      senderUser,
+    });
     ws.on("message", async (message) => {
       const socketMessage = JSON.parse(message);
       const { data } = socketMessage;
-      debugger;
+
       const {
         hangout: { target },
       } = data;
       const targetUser = await collection.findOne({ username: target });
-      debugger;
+
       hangoutsHandler({
         socketMessage,
         connections,

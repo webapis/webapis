@@ -85,6 +85,8 @@ Cypress.Commands.add("undecline", ({ PORT }) => {
       ])
     );
   cy.visit(`https://localhost:${PORT}`);
+  cy.get("[data-testid=democlient]").find("#connect").click();
+  cy.get("[data-testid=beroclient]").find("#connect").click();
   cy.get("[data-testid=democlient]").find("[data-testid=berouser]").click();
   cy.get("[data-testid=beroclient]").find("[data-testid=demouser]").click();
   cy.get("[data-testid=beroclient]").find("[data-testid=config-btn]").click();
@@ -154,7 +156,6 @@ Cypress.Commands.add("undecline", ({ PORT }) => {
       };
       expect(browser).to.deep.equal(expected);
     });
-    //cy.pause();
   } //IF PORT
   cy.get("[data-testid=democlient]")
     .find("[data-testid=message-input]")

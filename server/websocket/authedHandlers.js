@@ -14,7 +14,6 @@ module.exports.authedHandlers = async function ({
   try {
     undefinedArguments({ request, connections, ws, collection });
     const token = cookie.parse(request.headers["cookie"]);
-    debugger;
 
     let uname = url.parse(request.url, true).query.username;
     let browserId = url.parse(request.url, true).query.browserId;

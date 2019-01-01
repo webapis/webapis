@@ -1,62 +1,27 @@
-Cypress.Commands.add("decline", ({ PORT }) => {
+Cypress.Commands.add("unblock", ({ PORT }) => {
   if (PORT === 3006) {
     let demoHangout = {
       target: "berouser",
       email: "berouser@gmail.com",
-      state: "INVITED",
-      timestamp: 1543536000000,
-      message: { text: "Let's chat bero", timestamp: 1543536000000 },
+      state: "BLOCKER",
+      timestampe: 1543536000000,
+      message: { text: "", timestamp: 1543536000000 },
       browserId: "BID1234567890",
     };
     let beroHangout = {
       target: "demouser",
       email: "demouser@gmail.com",
-      state: "INVITER",
-      timestamp: 1543536000000,
-      message: { text: "Let's chat bero", timestamp: 1543536000000 },
+      state: "BLOCKED",
+      timestampe: 1543536000000,
+      message: { text: "", timestamp: 1543536000000 },
       browserId: "BID1234567890",
     };
     cy.task("seed:hangout", {
       username: "demouser",
       hangout: demoHangout,
     });
-
     cy.task("seed:hangout", { username: "berouser", hangout: beroHangout });
   }
-  cy.window()
-    .its("localStorage")
-    .invoke(
-      "setItem",
-      "demouser-hangouts",
-      JSON.stringify([
-        {
-          target: "berouser",
-          email: "berouser@gmail.com",
-          state: "INVITED",
-          message: {
-            text: "Lets chat bero",
-            timestamp: Date.now(),
-          },
-          timestamp: Date.now(),
-        },
-      ])
-    );
-
-  cy.window()
-    .its("localStorage")
-    .invoke(
-      "setItem",
-      "demouser-berouser-messages",
-      JSON.stringify([
-        {
-          owner: "demouser",
-          text: "Lets chat bero",
-          timestamp: Date.now(),
-          state: "delivered",
-        },
-      ])
-    );
-
   cy.window()
     .its("localStorage")
     .invoke(
@@ -66,16 +31,33 @@ Cypress.Commands.add("decline", ({ PORT }) => {
         {
           target: "demouser",
           email: "demouser@gmail.com",
-          state: "INVITER",
+          state: "BLOCKED",
+          timestamp: Date.now(),
           message: {
-            text: "Lets chat bero",
+            text: "",
             timestamp: Date.now(),
           },
-          timestamp: Date.now(),
         },
       ])
     );
-
+  cy.window()
+    .its("localStorage")
+    .invoke(
+      "setItem",
+      "berouser-hangouts",
+      JSON.stringify([
+        {
+          target: "demouser",
+          email: "demouser@gmail.com",
+          state: "BLOCKED",
+          timestamp: Date.now(),
+          message: {
+            text: "",
+            timestamp: Date.now(),
+          },
+        },
+      ])
+    );
   cy.window()
     .its("localStorage")
     .invoke(
@@ -83,17 +65,24 @@ Cypress.Commands.add("decline", ({ PORT }) => {
       "berouser-demouser-messages",
       JSON.stringify([
         {
-          owner: "demouser",
-          text: "Lets chat bero",
-          timestamp: Date.now(),
+          text: "",
+          datetime: Date.now(),
+          owner: "berouser",
+          type: "blocked",
           state: "delivered",
         },
       ])
     );
   cy.visit(`https://localhost:${PORT}`);
-
+  cy.get("[data-testid=democlient]").find("#connect").click();
+  cy.get("[data-testid=beroclient]").find("#connect").click();
+  //bero
   cy.get("[data-testid=beroclient]").find("[data-testid=demouser]").click();
-  cy.get("[data-testid=beroclient]").find("[data-testid=decline-btn]").click();
+  cy.get("[data-testid=beroclient]").find("[data-testid=config-btn]").click();
+  cy.get("[data-testid=beroclient]")
+    .find("[data-testid=blocked-ui-btn]")
+    .click();
+  cy.get("[data-testid=beroclient]").find("[data-testid=unblock-btn]").click();
   if (PORT === 3006) {
     //test data persistence to sender
     cy.task("query:mongodb", {
@@ -116,10 +105,10 @@ Cypress.Commands.add("decline", ({ PORT }) => {
             message: {
               text: "",
               timestamp,
-              type: "declined",
+              type: "unblocked",
             },
             timestamp,
-            state: "DECLINED",
+            state: "UNBLOCKED",
             browserId: "BID1234567890",
           },
         ],
@@ -145,15 +134,18 @@ Cypress.Commands.add("decline", ({ PORT }) => {
             message: {
               text: "",
               timestamp,
-              type: "declined",
+              type: "unblocked",
             },
             timestamp,
-            state: "DECLINER",
+            state: "UNBLOCKER",
           },
         ],
       };
       expect(browser).to.deep.equal(expected);
     });
-    //cy.pause();
   } //IF PORT
+  //demo views new message
+  cy.get("[data-testid=democlient]").find("[data-testid=unread-link]").click();
+  cy.get("[data-testid=democlient]").find("[data-testid=unread-ui]");
+  cy.get("[data-testid=democlient]").find("[data-testid=berouser]").click();
 });

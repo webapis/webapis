@@ -1,0 +1,29 @@
+import { useEffect } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
+import {
+  updateSentMessage,
+  saveUnread,
+  saveHangout,
+  saveSentMessage,
+  saveRecievedMessage,
+  updateHangout,
+  removeUnreads,
+} from "../local-storage/common";
+import { actionTypes } from "../actionTypes";
+export default function useUndeliveredHangouts({
+  message,
+  dispatch,
+  username,
+  browserId,
+}) {
+    useEffect(() => {
+        if (
+          message &&
+          message.type === "HANGOUT" &&
+          message.data.type === "UNDELIVERED_HANGOUTS" &&
+          username &&
+          message.data.sender !== username
+        ) {
+          onDeliveryAcknowledgement();
+        }
+      }, [message, username]);
+}

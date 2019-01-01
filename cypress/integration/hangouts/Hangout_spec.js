@@ -96,5 +96,10 @@ describe("Test websocket", () => {
     it("User not fount, Invite as a Guest", () => {
       cy.inviteasguest({ PORT });
     });
+    if (PORT === 3006) {
+      it("targetOffline invitation", () => {
+        cy.targetOfflineInvitation({ PORT });
+      });
+    }
   });
 });

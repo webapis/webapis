@@ -3,7 +3,7 @@ const assert = require("assert");
 const withPage = require("./test/_withPage");
 
 const mongoUrl = "mongodb://localhost:27017";
-const url = "https://localhost:3000";
+const url = "https://localhost:3007";
 const { MongoClient } = require("mongodb");
 
 test.before(async (t) => {
@@ -39,7 +39,7 @@ test(
     await berosPage.click("#signup");
     await berosPage.waitFor(".show");
     await berosPage.click(".navbar-toggler");
-
+    debugger;
     await berosPage.type("#username", "berouser");
     await berosPage.type("#email", "berouser@gmail.com");
     await berosPage.type("#password", "Testfly1977!");
