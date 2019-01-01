@@ -1,8 +1,0 @@
-import { h } from './index-f8cdbe26.js';
-
-function Hangouts() {
-  return h("div", null, "Hangouts");
-}
-
-export default Hangouts;
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXgtMzUzMzdhZmMuanMiLCJzb3VyY2VzIjpbIi4uLy4uLy4uL2NsaWVudC9oYW5nb3V0cy9pbmRleC5qcyJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQge2h9IGZyb20gJ3ByZWFjdCdcclxuZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24gSGFuZ291dHMoKXtcclxuICAgIHJldHVybiA8ZGl2PkhhbmdvdXRzPC9kaXY+XHJcbn0iXSwibmFtZXMiOlsiSGFuZ291dHMiXSwibWFwcGluZ3MiOiI7O0FBQ2UsU0FBU0EsUUFBVCxHQUFtQjtBQUM5QixTQUFPLDBCQUFQO0FBQ0g7Ozs7In0=
