@@ -45,7 +45,9 @@ export function Message({ message, username, float = 'left' }) {
     setTimeout(() => {
       convertMS(Date.now() - message.timestamp);
     }, 0);
-    setInterval(() => {}, 60000);
+    setInterval(() => {
+      convertMS(Date.now() - message.timestamp);
+    }, 60000);
   }, []);
 
   return (
@@ -55,7 +57,7 @@ export function Message({ message, username, float = 'left' }) {
         <div style={style.username}>{username && username}:</div>
         <div>
           {minutes === 0 && <div>Now</div>}
-          {hours === 0 && <div>{minutes} minutes ago </div>}
+          {hours === 0 && minutes > 0 && <div>{minutes} minutes ago </div>}
           {hours > 0 && days === 0 && (
             <div>
               {hours} hours {minutes} minutes ago{' '}

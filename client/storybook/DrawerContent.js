@@ -31,8 +31,15 @@ export function DrawerContent({ open }) {
         <ListItem id="hangchat" onClick={handleRoute}>
           Hangchat
         </ListItem>
+
+        <ListItem id="configure" onClick={handleRoute}>
+          Configure
+        </ListItem>
         <ListItem id="message" onClick={handleRoute}>
           Message
+        </ListItem>
+        <ListItem id="hangoutitemstate" onClick={handleRoute}>
+          HangoutItemStates
         </ListItem>
       </List>
     </div>

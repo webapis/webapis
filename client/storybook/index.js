@@ -11,7 +11,7 @@ import { Invitee } from '../hangouts/state-ui/Invitee';
 import { Inviter } from '../hangouts/state-ui/Inviter';
 import { Hangchat } from '../hangouts/state-ui/Hangchat';
 import { Message } from '../hangouts/ui/Message';
-
+import { HangoutItemStates } from './HangoutItemStates';
 import { ThemeProvider } from '../theme/theme-context';
 import { List, ListItem } from '../layout/NavList';
 import { DrawerContent } from './DrawerContent';
@@ -29,7 +29,7 @@ const hangout = {
 
 const message = {
   text: `Let's Chat on Hangout!`,
-  timestamp: 1590820782921,
+  timestamp: 1546308946119,
 };
 render(
   <ThemeProvider
@@ -41,7 +41,7 @@ render(
       },
     }}
   >
-    <RouteProvider initialRoute="/blocked">
+    <RouteProvider initialRoute="/configure">
       <Navigation drawerContent={<DrawerContent />}>
         <Route path="/hangouts">
           <Hangout hangouts={hangouts} />
@@ -71,6 +71,9 @@ render(
           <div style={{ padding: 20, backgroundColor: '#eeeeeee' }}>
             <Message message={message} username={hangout.username} />
           </div>
+        </Route>
+        <Route path="/hangoutitemstate">
+          <HangoutItemStates />
         </Route>
       </Navigation>
     </RouteProvider>
