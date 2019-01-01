@@ -38,7 +38,7 @@ export default function HangoutsFeatureRoutes({ user }) {
   switch (featureRoute) {
     case "/videocall":
       return html` <${Suspense} fallback=${Loading}>
-        <${VideoCall} hangout=${hangout} ...${webrtcState} ...${webrtcFuns} />
+        <${VideoCall} hangout=${hangout} />
       <//>`;
     case "/bckui":
       return html` <${Suspense} fallback=${Loading}>

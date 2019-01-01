@@ -1,4 +1,4 @@
-const stateMapper = require("../stateMapper");
+const stateMapper = require("./stateMapper");
 const { undefinedArguments } = require("../../helpers");
 //const mongoDBPersistance = require("./handlePersistance");
 

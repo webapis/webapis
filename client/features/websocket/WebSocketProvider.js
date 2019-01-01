@@ -19,7 +19,7 @@ export const WebSocketContext = createContext();
 export default function WebSocketProvider(props) {
   const { children, closeConnection, socketUrl } = props || {};
   const [state, dispatch] = useReducer(reducer, initState);
-  const { websocket, message, connectionState } = state;
+  const { websocket, message, connectionState, url } = state;
 
   useEffect(() => {
     if (closeConnection) {
@@ -34,6 +34,11 @@ export default function WebSocketProvider(props) {
     }
   }, [socketUrl]);
   useEffect(() => {
+    if (url && !websocket) {
+      initWebSocket({ url, dispatch });
+    }
+  }, [url, websocket]);
+  useEffect(() => {
     if (websocket) {
       websocket.onmessage = (message) => {
         const msg = JSON.parse(message.data);
@@ -41,12 +46,14 @@ export default function WebSocketProvider(props) {
         dispatch({ type: actionTypes.MESSAGE_RECIEVED, message: msg });
       };
       websocket.onopen = () => {
+        debugger;
         dispatch({
           type: actionTypes.CONNECTION_STATE_CHANGED,
           connectionState: "open",
         });
       };
       websocket.onclose = () => {
+        debugger;
         dispatch({
           type: actionTypes.CONNECTION_STATE_CHANGED,
           connectionState: "close",
@@ -62,6 +69,7 @@ export default function WebSocketProvider(props) {
     websocket.send(JSON.stringify({ data, type }));
   }
   function setRtcUrl(url) {
+    debugger;
     dispatch({ type: actionTypes.URL_CHANGED, url });
   }
   return children({ sendMessage, message, connectionState, setRtcUrl });

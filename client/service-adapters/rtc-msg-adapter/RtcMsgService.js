@@ -15,25 +15,31 @@ export default function RtcMsgService(props) {
             connectionState=${connectionState}
             message=${message}
             sendMessage=${sendMessage}
-            setRtcUrl=${setRtcUrl}
             ...${props}
-          />`;
+            >${() => {
+              return children({ setRtcUrl, connectionState });
+            }}
+          <//> `;
         }}<//
       >`;
     case "MOCK":
       return html`<${RtcMockServer} ...${props}
         >${({ sendMessage, message, connectionState, setRtcUrl }) => {
           return html`<${RtcMsgConsumers}
-            connectionState=${connectionState}
-            message=${message}
-            sendMessage=${sendMessage}
-            setRtcUrl=${setRtcUrl}
-            ...${props}
-          />`;
+              connectionState=${connectionState}
+              message=${message}
+              sendMessage=${sendMessage}
+              setRtcUrl=${setRtcUrl}
+              ...${props}
+              >${({ setRtcUrl }) => {
+                return children({ setRtcUrl, connectionState });
+              }}
+            <//>
+            >`;
         }}<//
       >`;
     case "NONE":
-      return html`<div ...${props} />`;
+      return children();
     default:
       throw "No RTCService";
   }

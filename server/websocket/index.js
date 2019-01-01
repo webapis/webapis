@@ -1,5 +1,5 @@
-const { authedHandler } = require("./authedHandler");
-const { unauthedHandler } = require("./unauthedHandler");
+const { authedHandlers } = require("./authedHandlers");
+const { unauthedHandlers } = require("./unauthedHandlers");
 const url = require("url");
 
 const EventEmitter = require("events");
@@ -14,9 +14,9 @@ module.exports = async function (server, client) {
 
   wss.on("connection", async function connection(ws, request) {
     if (request.url.includes("unauthed-msg")) {
-      unauthedHandler({ ws, request, connections, peers });
+      unauthedHandlers({ ws, request, connections, peers });
     } else if (request.url.includes("authed-msg")) {
-      authedHandler({ request, ws });
+      authedHandlers({ request, ws, connections, collection });
     } else {
       throw "proper url for websocket not provided";
     }

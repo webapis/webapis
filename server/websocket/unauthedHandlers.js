@@ -7,7 +7,7 @@ const hangoutsHandler = require("../hangouts/wsocket/hangoutHandler");
 const { handlePersistance } = require("../hangouts/wsocket/handlePersistance");
 const { undefinedArguments } = require("../helpers");
 
-module.exports.unauthedHandler = async function ({
+module.exports.unauthedHandlers = async function ({
   ws,
   request,
   connections,

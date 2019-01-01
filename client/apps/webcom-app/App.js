@@ -3,11 +3,11 @@ import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js"
 import { AppNavigation } from "./AppNavigation";
 import { AppRoutes } from "./AppRoutes";
 const html = htm.bind(h);
-export function App() {
+export function App(props) {
   return html`
     <div class="bg-success">
       <${AppNavigation} />
-      <${AppRoutes} />
+      <${AppRoutes} ...${props} />
     </div>
   `;
 }

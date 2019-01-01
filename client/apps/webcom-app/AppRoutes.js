@@ -4,10 +4,10 @@ import {
   Suspense,
   lazy,
 } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/preact.combat.cdn.js";
-
+import { useEffect } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 import { useAppRoute } from "components/app-route/index";
-import { useAuth } from "../../features/authentication/state/useAuth";
+import { loadBrowserId } from "../../features/authentication/state/AuthProvider";
 const AuthFeatureRoutes = lazy(() =>
   import("features/authentication/AuthFeatureRoutes")
 );
@@ -17,13 +17,22 @@ const HangoutsFeatureRoutes = lazy(() =>
 );
 const ErrorPage = lazy(() => import("./ErrorPage"));
 const AppMonitor = lazy(() => import("features/app-monitor/index"));
-export function AppRoutes() {
+export function AppRoutes(props) {
+  const { user, setRtcUrl, connectionState } = props;
   const {
     state: { appRoute },
-  } = useAppRoute({ appRoute: "/hangouts", featureRoute: "/hangout" });
-  const {
-    state: { user },
-  } = useAuth();
+  } = useAppRoute();
+
+  useEffect(() => {
+    const browserId = loadBrowserId();
+    if (user) {
+      debugger;
+      setRtcUrl(
+        `wss://localhost:${PORT}/authed-msg/webcom-app/?username=${user.username}&browserId=${browserId}`
+      );
+      debugger;
+    }
+  }, [user]);
   switch (appRoute) {
     case "/auth":
       return html`<div style=${{ height: "90vh" }}>
@@ -42,12 +51,6 @@ export function AppRoutes() {
         <${ErrorPage} />
       <//>`;
 
-    case "/monitor":
-      return html`
-        <${Suspense} fallback=${Loading}>
-          <${AppMonitor}//>
-        <//>
-      `;
     default:
       return null;
   }

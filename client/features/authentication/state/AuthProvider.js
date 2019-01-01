@@ -38,6 +38,7 @@ export default function AuthProvider(props) {
     signup,
     changepassword,
     requestpasswordchange,
+    staticUser,
   } = props;
 
   const [state, dispatch] = useReducer(authReducer, initState);
@@ -58,6 +59,11 @@ export default function AuthProvider(props) {
       loadUserAndBrowserId({ dispatch });
     }
   }, []);
+  useEffect(() => {
+    if (staticUser) {
+      dispatch({ type: actionTypes.LOGIN_SUCCESS, user: staticUser });
+    }
+  }, [staticUser]);
   useEffect(() => {
     if (signupStarted) {
       handleSignUp({ username, email, password });
@@ -172,7 +178,7 @@ export default function AuthProvider(props) {
   }
   return html`
     <${AuthContext.Provider} value=${value} ...${props}>
-      ${children}
+      ${children({ user })}
     <//>
   `;
 }
@@ -202,7 +208,7 @@ export function loadBrowserId() {
     return localStorage.getItem("browserId");
   } else {
     let browserId = `BID${Date.now()}`;
-    localStorage.setItem("browserId", JSON.stringify(browserId));
+    localStorage.setItem("browserId", browserId);
     return browserId;
   }
 }

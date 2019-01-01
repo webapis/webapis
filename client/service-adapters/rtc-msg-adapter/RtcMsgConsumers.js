@@ -5,5 +5,5 @@ const html = htm.bind(h);
 
 export default function (props) {
   const { children } = props;
-  return html`<${HangoutsAdapter} ...${props}>${children}<//>`;
+  return html`<${HangoutsAdapter} ...${props}>${children(props)}<//>`;
 }

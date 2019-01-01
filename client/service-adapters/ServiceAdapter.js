@@ -5,10 +5,16 @@ import AuthService from "./auth-adapter/AuthService";
 import RtcMsgService from "./rtc-msg-adapter/RtcMsgService";
 import AppRouteProvider from "../components/app-route/index";
 export default function ServiceAdapter(props) {
-  const { children } = props;
+  const { children, staticUser } = props;
   return html`<${AppRouteProvider}>
-    <${AuthService}>
-      <${RtcMsgService} ...${props}>${children}<//>
+    <${AuthService} staticUser=${staticUser}>
+      ${({ user }) => {
+        return html` <${RtcMsgService} ...${props}>
+          ${({ setRtcUrl, connectionState }) => {
+            return children({ user, setRtcUrl, connectionState });
+          }}<//
+        >`;
+      }}
     <//>
   <//>`;
 }

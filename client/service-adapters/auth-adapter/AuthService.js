@@ -9,6 +9,7 @@ import AuthMockService from "../../apps/auth-app/AuthMockService";
 import AuthProvider from "../../features/authentication/state/AuthProvider";
 const html = htm.bind(h);
 export default function AuthService(props) {
+  const { children } = props;
   switch (AUTH) {
     case "MOCK":
       return html`<${AuthMockService}
@@ -19,7 +20,10 @@ export default function AuthService(props) {
             login=${login}
             changepassword=${changepassword}
             requestpasswordchange=${requestpasswordchange}
-          />`;
+            >${({ user }) => {
+              return children({ user });
+            }}
+          <//>`;
         }}
       <//>`;
     case "NODEJS":
@@ -32,11 +36,14 @@ export default function AuthService(props) {
             login=${login}
             changepassword=${changepassword}
             requestpasswordchange=${requestpasswordchange}
-          />`;
+            >${({ user }) => {
+              return children({ user });
+            }}
+          <//> `;
         }}
       <//>`;
     case "NONE":
-      return html`<div ...${props} />`;
+      return children(props);
     default:
       throw "No Auth service provided";
   }
