@@ -22,7 +22,6 @@ export default function useDeliveryAcknowledgement({
       message.data.type === "ACKHOWLEDGEMENT" &&
       username
     ) {
-      debugger;
       onDeliveryAcknowledgement();
     }
   }, [message, username]);
@@ -34,7 +33,6 @@ export default function useDeliveryAcknowledgement({
   }
 
   function onDeliveryAcknowledgement() {
-    debugger;
     const {
       data: { hangout },
     } = message;
@@ -83,9 +81,7 @@ export default function useDeliveryAcknowledgement({
         }, 200);
         break;
       case "ACCEPTED":
-        debugger;
         setTimeout(function () {
-          debugger;
           updateHangout(commonArg);
           updateSentMessage(commonArg);
           dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });

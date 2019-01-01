@@ -8,6 +8,8 @@ import {
   updateHangout,
   removeUnreads,
   removeTargetUnreads,
+  updateRecievedMessages,
+  updateRecievedReadMessages,
 } from "./local-storage/common";
 export default function useUnread({
   unreadhangouts,
@@ -27,7 +29,11 @@ export default function useUnread({
     dispatch({ type: actionTypes.SELECTED_HANGOUT, hangout });
 
     onAppRoute({ featureRoute: `/${hangout.state}`, appRoute: "/hangouts" });
-
+    updateRecievedReadMessages({
+      hangout,
+      username: user && user.username,
+      dispatch,
+    });
     removeTargetUnreads({ dispatch, username: user && user.username, hangout });
   }
 

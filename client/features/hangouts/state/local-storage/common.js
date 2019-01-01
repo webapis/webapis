@@ -136,6 +136,33 @@ export function updateRecievedMessages({
     });
   }
 }
+export function updateRecievedReadMessages({
+  hangout,
+  username,
+  dispatch,
+  dState,
+}) {
+  const { target, state } = hangout;
+  debugger;
+  const messageKey = `${username}-${target}-messages`;
+  const localMessages = JSON.parse(localStorage.getItem(messageKey));
+
+  if (localMessages && localMessages.length > 0) {
+    debugger;
+    let updatedReadMessages = localMessages.map((l) => {
+      debugger;
+      if (l.owner === target) {
+        debugger;
+        return { ...l, state: "read" };
+      }
+    });
+    localStorage.setItem(messageKey, JSON.stringify(updatedReadMessages));
+    dispatch({
+      type: actionTypes.MESSAGES_UPDATED,
+      messages: updatedReadMessages,
+    });
+  }
+}
 export function updateRecievedMessage({ hangout, username, dispatch, dState }) {
   const { target, message } = hangout;
 

@@ -39,7 +39,7 @@ describe("HangoutSpec", () => {
     cy.get("[data-testid=democlient]")
       .find("[data-testid=send-btn]")
       .should("be.disabled");
-    cy.pause();
+    // cy.pause();
     //berouser
     cy.get("[data-testid=beroclient]")
       .find("[data-testid=message-count]")

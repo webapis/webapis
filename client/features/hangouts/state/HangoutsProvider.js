@@ -70,7 +70,6 @@ export default function HangoutsProvider(props) {
   });
   useEffect(() => {
     if (hangout) {
-      debugger;
     }
   }, [hangout]);
   useEffect(() => {

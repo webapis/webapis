@@ -24,7 +24,7 @@ export default function useSenderMessage({
       const {
         data: { hangout },
       } = message;
-      debugger;
+
       const commonArg = { dispatch, username, hangout };
       switch (hangout.state) {
         case "ACCEPTER":
@@ -33,19 +33,20 @@ export default function useSenderMessage({
             hangout,
             dispatch,
             username,
-            dState: "unread",
+            dState:
+              focusedHangout && focusedHangout.target === hangout.target
+                ? "read"
+                : "unread",
           });
-          // if (!focusedHangout) {
-          //   saveUnread(commonArg);
-          // } else {
-          //   if (focusedHangout && focusedhangout.target !== hangout.target) {
-          //     saveUnread(commonArg);
-          //   }
-          // }
+          if (
+            !focusedHangout ||
+            (focusedHangout && focusedHangout.target !== hangout.target)
+          ) {
+            saveUnread(commonArg);
+          }
           break;
         case "BLOCKER":
           updateHangout(commonArg);
-
           removeUnreads(commonArg);
           break;
         case "DECLINER":

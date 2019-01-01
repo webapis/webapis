@@ -43,8 +43,6 @@ export default function HangoutServer({ children }) {
         });
         break;
       case clientCommands.ACCEPT:
-        debugger;
-
         break;
       case clientCommands.DECLINE:
         break;
@@ -59,11 +57,9 @@ export default function HangoutServer({ children }) {
     }
   }
   function sendMessageBero({ data, type }) {
-    debugger;
     const { timestamp, browserId } = data;
     switch (data.command) {
       case clientCommands.ACCEPT:
-        debugger;
         setBeroState({
           data: {
             hangout: {
