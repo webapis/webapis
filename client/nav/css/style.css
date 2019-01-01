@@ -15,4 +15,34 @@
       -ms-flex-align: center;
           align-items: center;
 }
+
+.menu-white {
+  min-height: 36px;
+  min-width: 36px;
+  padding: 8px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.menu-white:hover {
+  background-color: #3700b3;
+  border-radius: 50%;
+}
+
+.app-shell {
+  position: relative;
+}
+
+.app-bar {
+  position: fixed;
+  left: 0;
+  top: 0;
+}
 /*# sourceMappingURL=style.css.map */

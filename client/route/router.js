@@ -8,6 +8,7 @@ export function Route(props) {
   const [route] = useRouteContext();
 
   if (route === path) {
+debugger
     return children;
   }
   return null;
@@ -15,7 +16,7 @@ export function Route(props) {
 
 export function Link(props) {
   const { to, id } = props;
-  const [route, setRoute] = useRouteContext();
+  const [route,setRoute] = useRouteContext();
   function handleClick(e) {
     e.preventDefault();
     setRoute(to);

@@ -10,3 +10,28 @@
   display: flex;
   align-items: center;
 }
+
+.menu-white {
+  min-height: 36px;
+  min-width: 36px;
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu-white:hover {
+  background-color: #3700b3;
+  border-radius: 50%;
+}
+.app-shell {
+  position: relative;
+}
+.app-bar {
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+
+
+

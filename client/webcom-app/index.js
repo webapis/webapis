@@ -17,24 +17,24 @@ render(
       }}
     >
       <RouteProvider>
-        <Navigation>
+        <Navigation drawerContent={<div>drawerConent</div>}>
           <NavItem>
-            <Link id='login' to='/login'>
+            <Link id="login" to="/login">
               LOGIN
             </Link>
           </NavItem>
           <NavItem>
-            <Link id='signup' to='/signup'>
+            <Link id="signup" to="/signup">
               SIGNUP
             </Link>
           </NavItem>
           <NavItem>
-            <Link id='forgotpassword' to='/forgotpassword'>
+            <Link id="forgotpassword" to="/forgotpassword">
               FORGOT PASSWORD
             </Link>
           </NavItem>
           <NavItem>
-            <Link id='changepassword' to='/changepassword'>
+            <Link id="changepassword" to="/changepassword">
               CHANGE PASSWORD
             </Link>
           </NavItem>
