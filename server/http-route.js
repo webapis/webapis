@@ -74,7 +74,6 @@ function route({ url, req, res, server }) {
       usersOperation(req, res);
       break;
     case hangoutsRegex.test(url):
-      debugger;
       hangoutsOperation(req, res);
       break;
     case appMonitorRegex.test(url):

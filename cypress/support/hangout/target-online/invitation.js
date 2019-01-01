@@ -4,6 +4,7 @@ Cypress.Commands.add("invitation", ({ PORT }) => {
   cy.get("[data-testid=democlient]").find("#connect").click();
   cy.get("[data-testid=beroclient]").find("#connect").click();
   cy.server();
+
   cy.route({
     url: "/authed-msg/hangouts/findOne?search=berouser&username=demouser",
     response: {

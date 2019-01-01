@@ -35,14 +35,14 @@ export async function fetchHangouts({ dispatch, username }) {
       `/authed-msg/hangouts/findHangouts?username=${username}`
     );
     if (response.ok) {
-      debugger;
       const { hangouts } = await response.json();
-      saveHangouts({ hangouts, username });
-      debugger;
-      dispatch({ type: actionTypes.FETCH_HANGOUTS_SUCCESS, hangouts });
+      if (hangouts.length > 0) {
+        saveHangouts({ hangouts, username });
+
+        dispatch({ type: actionTypes.FETCH_HANGOUTS_SUCCESS, hangouts });
+      }
     }
   } catch (error) {
-    debugger;
     dispatch({ type: actionTypes.FETCH_HANGOUTS_FAILED, error });
   }
 }

@@ -8,16 +8,15 @@ module.exports.saveUndelivered = async function ({
   col,
 }) {
   try {
-    debugger; //
+    //
     undefinedArguments({ tUser, col, hForTarget });
     const { browsers, username } = tUser;
-    debugger;
+
     const funcs = {
       targetOffline: async function () {
         for (const browser of browsers) {
-          debugger;
           const targetOnline = connections[`${username}-${browser.browserId}`];
-          debugger;
+
           if (!targetOnline) {
             let result = await col.update(
               { username },
@@ -27,16 +26,13 @@ module.exports.saveUndelivered = async function ({
                 upsert: true,
               }
             );
-            debugger;
           }
-
-          debugger;
         }
       },
     };
     funcs.targetOffline();
   } catch (error) {
-    debugger; //
+    //
     throw error;
   }
 };

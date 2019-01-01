@@ -1,6 +1,8 @@
 const { stateMapper } = require("./stateMapper");
+const { undefinedArguments } = require("../../helpers");
 module.exports.hangoutMapper = function ({ hangout, cUser }) {
   try {
+    undefinedArguments({ hangout, cUser });
     const { senderState, targetState } = stateMapper({
       command: hangout.command,
     });

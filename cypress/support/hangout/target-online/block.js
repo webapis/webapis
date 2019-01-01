@@ -92,8 +92,10 @@ Cypress.Commands.add("block", ({ PORT }) => {
         },
       ])
     );
+
   cy.visit(`https://localhost:${PORT}`);
   cy.get("[data-testid=democlient]").find("#connect").click();
+
   cy.get("[data-testid=beroclient]").find("#connect").click();
   cy.get("[data-testid=beroclient]").find("[data-testid=demouser]").click();
 

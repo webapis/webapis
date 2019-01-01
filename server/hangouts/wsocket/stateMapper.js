@@ -1,6 +1,7 @@
 const hangoutStates = require("./hangoutStates");
-
+const { undefinedArguments } = require("../../helpers");
 module.exports.stateMapper = function ({ command }) {
+  undefinedArguments({ command });
   switch (command) {
     case "ACCEPT":
       return {

@@ -66,7 +66,6 @@ export function Hangouts({
           ${
             hangouts &&
             hangouts.map((h) => {
-              debugger;
               return html`
                 <div>
                   <a

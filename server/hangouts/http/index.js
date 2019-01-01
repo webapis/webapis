@@ -10,11 +10,9 @@ module.exports = function hangoutsOperation(req, res) {
 
   switch (true) {
     case url.includes("/findOne"):
-      debugger;
       findOne({ req, res, collection });
       break;
     case url.includes("/findHangouts"):
-      debugger;
       findHangouts({ req, res, collection });
       break;
 

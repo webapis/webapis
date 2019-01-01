@@ -45,13 +45,16 @@ export function useHangouts({ user }) {
     let localHangouts = JSON.parse(
       localStorage.getItem(`${username}-hangouts`)
     );
-    let filteredHangouts = localHangouts.filter((h) =>
-      h.target.includes(e.target.value)
-    );
-    dispatch({
-      type: actionTypes.HANGOUTS_UPDATED,
-      hangouts: filteredHangouts,
-    });
+    if (localHangouts && localHangouts.length > 0) {
+      let filteredHangouts = localHangouts.filter((h) =>
+        h.target.includes(e.target.value)
+      );
+      dispatch({
+        type: actionTypes.HANGOUTS_UPDATED,
+        hangouts: filteredHangouts,
+      });
+    }
+
     dispatch({ type: actionTypes.SEARCH_INPUT_CHANGE, search: e.target.value });
   }
 

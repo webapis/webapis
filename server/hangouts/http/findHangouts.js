@@ -13,7 +13,7 @@ module.exports = async function findHangouts({ req, res, collection }) {
     if (user && user.browsers) {
       const hangouts = user.browsers[0].hangouts;
       // search for users hangouts
-      debugger;
+
       res.writeHead(200, { "Content-Type": "application/json" });
       res.write(
         JSON.stringify({
@@ -22,7 +22,6 @@ module.exports = async function findHangouts({ req, res, collection }) {
       );
       res.end();
     } else {
-      debugger;
       res.writeHead(200, { "Content-Type": "application/json" });
       res.write(
         JSON.stringify({
@@ -33,7 +32,7 @@ module.exports = async function findHangouts({ req, res, collection }) {
     }
   } catch (error) {
     const err = error;
-    debugger;
+
     res.statusCode = 500;
     res.writeHead(500, { "Content-Type": "application/json" });
     res.write(JSON.stringify({ error }));

@@ -96,7 +96,6 @@ export function reducer(state, action) {
     case actionTypes.FETCH_HANGOUTS_STARTED:
       return { ...state, fetchHangouts: true };
     case actionTypes.FETCH_HANGOUTS_SUCCESS:
-      debugger;
       return { ...state, fetchHangouts: false, hangouts: action.hangouts };
     case actionTypes.FETCH_HANGOUTS_FAILED:
       return { ...state, fetchHangouts: false, error: action.error };
@@ -129,7 +128,6 @@ export function reducer(state, action) {
       return { ...state, hangout: action.hangout };
 
     case actionTypes.HANGOUTS_UPDATED:
-      debugger;
       return { ...state, hangouts: action.hangouts };
 
     case actionTypes.MESSAGES_UPDATED:
@@ -143,7 +141,6 @@ export function reducer(state, action) {
       return { ...state, messageText: action.text };
     //search
     case actionTypes.SEARCH_HANGOUT_STARTED:
-      debugger;
       return { ...state, loading: true, searchHangouts: true, searching: true };
     case actionTypes.SEARCH_HANGOUT_SUCCESS:
       return {
