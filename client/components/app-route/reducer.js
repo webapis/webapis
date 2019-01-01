@@ -5,7 +5,7 @@ export function reducer(state, action) {
     case actionTypes.APP_ROUTE_CHANGED:
       return {
         ...state,
-        route: action.route,
+        appRoute: action.appRoute,
         featureRoute: action.featureRoute,
       };
     default:

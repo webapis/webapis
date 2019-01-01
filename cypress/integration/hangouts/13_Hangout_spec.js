@@ -8,7 +8,7 @@ describe("HangoutSpec", () => {
       url: "/authed-msg/hangouts/findOne?search=berouser&username=demouser",
       response: {
         hangout: {
-          username: "berouser",
+          target: "berouser",
           state: "INVITEE",
           email: "berouser@gmail.com",
         },
@@ -25,6 +25,7 @@ describe("HangoutSpec", () => {
       .click();
 
     cy.get("[data-testid=democlient]").find("[data-testid=berouser]").click();
+    cy.pause();
     cy.get("[data-testid=democlient]")
       .find("[data-testid=oninvite-btn]")
       .click();

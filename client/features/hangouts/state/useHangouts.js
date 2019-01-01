@@ -1,7 +1,7 @@
 import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
 
 import { useHangoutContext } from "./HangoutsProvider";
-import { useAppRoute } from "./message-hooks/node_modules/components/app-route/index";
+import { useAppRoute } from "../../../components/app-route/index";
 import { changeMessageText } from "./actions";
 import { emailRegex } from "../../authentication/validation/validationRegex";
 
@@ -14,9 +14,9 @@ export function useHangoutNav({ user }) {
     e.preventDefault();
     if (user) {
       const id = e.currentTarget.id;
-      onAppRoute({ featureRoute: `/${id}`, route: "/hangouts" });
+      onAppRoute({ featureRoute: `/${id}`, appRoute: "/hangouts" });
     } else {
-      onAppRoute({ featureRoute: `/login`, route: "/auth" });
+      onAppRoute({ featureRoute: `/login`, appRoute: "/auth" });
     }
   }
   return { onNavigation };
@@ -25,7 +25,7 @@ export function useHangoutNav({ user }) {
 export function useHangouts({ user }) {
   const { onAppRoute } = useAppRoute();
   const { onNavigation } = useHangoutNav({ user });
-  const username = user && username;
+  const username = user && user.username;
   const [state, dispatch] = useHangoutContext();
   const { hangouts, inviteGuest, guestEmail } = state;
 
@@ -53,7 +53,7 @@ export function useHangouts({ user }) {
 
     const { id } = e.currentTarget;
 
-    const selectedHangout = hangouts.find((s) => s.username === id);
+    const selectedHangout = hangouts.find((s) => s.target === id);
 
     if (selectedHangout) {
       dispatch({
@@ -62,7 +62,7 @@ export function useHangouts({ user }) {
       });
       onAppRoute({
         featureRoute: `/${selectedHangout.state}`,
-        route: "/hangouts",
+        appRoute: "/hangouts",
       });
     }
   }

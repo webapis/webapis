@@ -14,69 +14,35 @@ import { actionTypes } from "./actionTypes";
 const html = htm.bind(h);
 const AppRouteContext = createContext();
 
-function useAppRouteContext() {
+export function useAppRoute() {
   const context = useContext(AppRouteContext);
 
   if (!context) {
     throw new Error("useAppRouteContext must be used with AppRouteProvider");
   }
-  return context;
-}
-export function FeatureRoute(props) {
-  const { children, path, paths } = props;
-
-  const [state, dispatch] = useAppRouteContext();
-  const { featureRoute } = state;
-
-  if (path && featureRoute === path) {
-    return children;
-  } else if (paths && featureRoute === paths.find((p) => p === featureRoute)) {
-    return children;
-  }
-  return null;
-}
-export function useAppRoute() {
-  const [state, dispatch] = useAppRouteContext();
+  const [state, dispatch] = context;
   const { name } = state;
-  function onAppRoute({ route, featureRoute }) {
+  function onAppRoute({ appRoute, featureRoute }) {
     if (name) {
       localStorage.setItem(name, JSON.stringify({ route, featureRoute }));
     }
 
-    dispatch({ type: actionTypes.APP_ROUTE_CHANGED, featureRoute, route });
+    dispatch({ type: actionTypes.APP_ROUTE_CHANGED, featureRoute, appRoute });
   }
 
-  return { onAppRoute, routeState: state };
+  return { onAppRoute, state };
 }
 
-export function AppRoute(props) {
-  const { children, path, paths } = props;
-
-  const [state, dispatch] = useAppRouteContext();
-  useEffect(() => {
-    if (state && state.route === "/error-monitor") {
-      //
-    }
-  }, [state]);
-  const { route } = state;
-
-  if (path && route === path) {
-    return children;
-  } else if (paths && route === paths.find((p) => p === route)) {
-    return children;
-  }
-  return null;
-}
 export default function AppRouteProvider(props) {
   const { initState } = props;
   const [state, dispatch] = useReducer(reducer, initState);
 
   useEffect(() => {
     if (state && state.name && localStorage.getItem(state.name)) {
-      const { featureRoute, route } = JSON.parse(
+      const { featureRoute, appRoute } = JSON.parse(
         localStorage.getItem(state.name)
       );
-      dispatch({ type: actionTypes.APP_ROUTE_CHANGED, featureRoute, route });
+      dispatch({ type: actionTypes.APP_ROUTE_CHANGED, featureRoute, appRoute });
     }
   }, []);
 

@@ -6,15 +6,16 @@ import {
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 import Layout from "./Layout";
 const html = htm.bind(h);
-export function Messages({ messages, name, ref }) {
-  const { transformedMessages } = useTransformMessages({ messages, name });
+export function Messages({ messages, username, ref }) {
+  const { transformedMessages } = useTransformMessages({ messages, username });
   useEffect(() => {
     if (messages) {
-      debugger;
+      console.log("raw messages", messages);
     }
   }, [messages]);
   return html` <div ref=${ref} class="bg-light container-fluid pb-5">
     ${transformedMessages &&
+    transformedMessages.length > 0 &&
     transformedMessages.map((msg) => {
       if (msg.type === "blocked") {
         return html`<${BlockingMessage}
@@ -136,10 +137,10 @@ export default function Hangchat({
   messages = [],
   onMessageText,
   messageText,
-  name,
+  user,
   hangout,
   onUserClientCommand,
-  username,
+  target,
   onNavigation,
   scrollToBottom,
   onScrollToBottom,
@@ -152,13 +153,13 @@ export default function Hangchat({
 
   return html`
     <${Layout}
-      username=${username}
+      target=${target}
       desc="Chat room with"
       onNavigation=${onNavigation}
       scrollToBottom=${scrollToBottom}
       onScrollToBottom=${onScrollToBottom}
     >
-      <${Messages} messages=${messages} name=${name} />
+      <${Messages} messages=${messages} username=${user && user.username} />
       <div
         data-testid="hangchat-ui"
         class="w-100"
@@ -176,37 +177,62 @@ export default function Hangchat({
   `;
 }
 
-function useTransformMessages({ messages, name }) {
-  const [transformedMessages, setTransformedMessages] = useState(messages);
-
+function useTransformMessages({ messages, username }) {
+  const [transformedMessages, setTransformedMessages] = useState([]);
+  const [sortedMessages, setSortedMessages] = useState([]);
+  const [floatedMessages, setFloatedMessages] = useState([]);
   useEffect(() => {
-    if (messages) {
-      setTransformedMessages(
-        sortMessages({ messages: floatMessages({ messages, username: name }) })
-      );
-    }
-  }, [messages]);
+    if (messages && messages.length > 0 && username) {
+      debugger;
+      const sorted = sortMessages({ messages });
 
+      debugger;
+      setSortedMessages(sorted);
+    }
+  }, [messages, username]);
+  useEffect(() => {
+    if (sortedMessages && sortedMessages.length > 0 && username) {
+      debugger;
+      const floated = floatMessages({ messages: sortedMessages, username });
+      setFloatedMessages(floated);
+    }
+  }, [sortedMessages, username]);
+  useEffect(() => {
+    if (floatedMessages && floatedMessages.length > 0 && username) {
+      debugger;
+      setTransformedMessages(floatedMessages);
+    }
+  }, [floatedMessages, username]);
   return { transformedMessages };
 }
 
 function floatMessages({ messages, username }) {
+  debugger;
   if (messages && messages.length > 0 && username) {
-    return messages.map((msg) => {
-      if (msg.username === username) {
-        return { ...msg, float: "right", username: "me" };
+    let floated = messages.map((msg) => {
+      debugger;
+      if (msg.owner === username) {
+        return { ...msg, float: "right", owner: "me" };
       } else {
         return { ...msg, float: "left" };
       }
     });
+    console.log("floated", floated);
+    debugger;
+    return floated;
   } else {
+    debugger;
     return [];
   }
 }
 function sortMessages({ messages }) {
   if (messages) {
-    return messages.sort((a, b) => a.timestamp - b.timestamp);
+    let sorted = messages.sort((a, b) => a.timestamp - b.timestamp);
+    debugger;
+    console.log("sorted", sorted);
+    return sorted;
   } else {
+    debugger;
     return [];
   }
 }

@@ -24,7 +24,7 @@ import {
   saveRecievedMessage,
   removeUnread,
 } from "./local-storage/common";
-import { useAppRoute } from "./message-hooks/node_modules/components/app-route/index";
+//import { useAppRoute } from "./message-hooks/node_modules/components/app-route/index";
 import useClientCommands from "./useClientCommands";
 const html = htm.bind(h);
 const HangoutContext = createContext();
@@ -40,7 +40,7 @@ export function useHangoutContext() {
 export default function HangoutsProvider(props) {
   const { sendMessage, message, connectionState, authState } = props;
 
-  const { onAppRoute } = useAppRoute();
+  //const { onAppRoute } = useAppRoute();
   const { user, browserId } = authState;
 
   const [state, dispatch] = useReducer(reducer, initState);
@@ -50,6 +50,7 @@ export default function HangoutsProvider(props) {
     //  messageText,
     searchHangouts,
     search,
+    messages,
     //  sendhangout,
   } = state;
 
@@ -63,11 +64,14 @@ export default function HangoutsProvider(props) {
   useClientCommands({
     state,
     dispatch,
-    onAppRoute,
     sendMessage,
     user,
     browserId,
   });
+  useEffect(() => {
+    if (messages) {
+    }
+  }, [messages]);
   useEffect(() => {
     if (connectionState === "open") {
       dispatch({
@@ -130,7 +134,7 @@ export default function HangoutsProvider(props) {
         case "INVITEE":
           dispatch({
             type: actionTypes.MESSAGE_TEXT_CHANGED,
-            text: `Let's chat, ${hangout.username}!`,
+            text: `Let's chat, ${hangout.target}!`,
           });
           break;
         default:
@@ -138,7 +142,7 @@ export default function HangoutsProvider(props) {
       }
 
       // load messages from local storage
-      loadMessages({ hangout, name: user && user.username, dispatch });
+      // loadMessages({ hangout, name: user && user.username, dispatch });
       setTimeout(() => {}, 100);
     }
   }, [hangout, user]);

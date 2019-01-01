@@ -9,10 +9,10 @@ import {
   useEffect,
 } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
-import HangoutFeatureRoutes from "../../features/hangouts/HangoutsFeatureRoutes";
 import NavigationContainer from "./NavigationContainer";
 import AppRouteProvider from "../../components/app-route/index";
 import HangoutProvider from "../../features/hangouts/state/HangoutsProvider";
+import RouteContainer from "./RouteContainer";
 const html = htm.bind(h);
 
 export default function HangoutClient({
@@ -26,7 +26,7 @@ export default function HangoutClient({
   return html`<div>
     <${AppRouteProvider}
       title="Hangout"
-      initState=${{ route: "/hangout", featureRoute: "/hangouts" }}
+      initState=${{ appRoute: "/hangouts", featureRoute: "/hangout" }}
     >
       <${HangoutProvider}
         authState=${authState}
@@ -35,7 +35,7 @@ export default function HangoutClient({
         connectionState=${connectionState}
       >
         <${NavigationContainer} user=${user} messageCounter=${0} />
-        <${HangoutFeatureRoutes} user=${user} />
+        <${RouteContainer} user=${user} />
       <//>
     <//>
   </div>`;

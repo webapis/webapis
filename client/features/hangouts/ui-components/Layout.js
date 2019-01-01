@@ -10,7 +10,7 @@ const html = htm.bind(h);
 export default function Layout({
   children,
   id,
-  username,
+  target,
   desc,
   onNavigation,
   scrollToBottom,
@@ -70,7 +70,7 @@ export default function Layout({
             <div class="card-header">
               <div class="d-flex justify-content-between">
                 <div>
-                  ${desc} <span class="font-weight-bold">${username}</span>
+                  ${desc} <span class="font-weight-bold">${target}</span>
                 </div>
                 <div>
                   <button

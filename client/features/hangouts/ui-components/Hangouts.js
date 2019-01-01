@@ -67,13 +67,13 @@ export function Hangouts({
               return html`
                 <div>
                   <a
-                    id=${h.username}
+                    id=${h.target}
                     onClick=${onSearchSelect}
-                    data-testid=${h.username}
+                    data-testid=${h.target}
                     href="#"
                     class="list-group-item list-group-item-action mb-1 border rounded-pill border-success p-0 pl-4"
                   >
-                    <div class="p-0 m-0">${h.username}</div>
+                    <div class="p-0 m-0">${h.target}</div>
                     <i class="p-0 m-0" style="font-size:0.6em">${h.email}</i>
                   </a>
                 </div>
@@ -284,10 +284,11 @@ export function BackSpace() {
 }
 
 export default function HangoutContainer({ state, funcs }) {
-  const { name } = state;
-  useEffect(() => {
-    loadHangouts({ ...state, name });
-  }, []);
+  // const { name } = state;
+  // useEffect(() => {
+  //   debugger;
+  //   loadHangouts({ ...state, name });
+  // }, []);
 
   return html`<${Hangouts} ...${state} ...${funcs} /> `;
 }

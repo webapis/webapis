@@ -3,6 +3,7 @@ import {
   lazy,
   Suspense,
 } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/preact.combat.cdn.js";
+import { useEffect } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 import { useAppRoute } from "components/app-route/index";
 import { useHangouts } from "./state/useHangouts";
@@ -21,17 +22,23 @@ const UnreadHangouts = lazy(() => import("./ui-components/UnreadHangouts"));
 const VideoCall = lazy(() => import("./ui-components/VideoCall"));
 const html = htm.bind(h);
 export default function HangoutsFeatureRoutes(props) {
-  const { onAppRoute, routeState, user } = useAppRoute();
-  const { featureRoute } = routeState;
+  const {
+    onAppRoute,
+    state: { featureRoute },
+  } = useAppRoute();
+  const { user } = props;
   const { state, funcs } = useHangouts({ user });
   const { hangout } = state;
   const { onUnreadSelect, onUnreadRemove, reducedUnreads } = useUnread({
     ...state,
     onAppRoute,
   });
-  // const { webrtcFuns, state: webrtcState } = useWebRTC({
-  //   target: hangout && hangout.username,
-  // });
+
+  useEffect(() => {
+    if (featureRoute) {
+    }
+  }, [featureRoute]);
+
   switch (featureRoute) {
     case "/videocall":
       return html` <${Suspense} fallback=${Loading}>
@@ -71,7 +78,7 @@ export default function HangoutsFeatureRoutes(props) {
     case "/READER":
     case "/INVITED":
       return html` <${Suspense} fallback=${Loading}>
-        <${Hangchat} ...${state} ...${funcs} ...${hangout} />
+        <${Hangchat} ...${state} ...${funcs} ...${hangout} user=${user} />
       <//>`;
     case "/INVITEE":
       return html` <${Suspense} fallback=${Loading}>

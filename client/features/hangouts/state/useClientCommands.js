@@ -15,14 +15,16 @@ import {
   saveRecievedMessage,
   removeUnread,
 } from "./local-storage/common";
+import { useAppRoute } from "../../../components/app-route/index";
+import { actionTypes } from "./actionTypes";
 export default function useClientCommands({
   state,
-  onAppRoute,
   sendMessage,
   user,
   browserId,
   dispatch,
 }) {
+  const { onAppRoute } = useAppRoute();
   const { hangout, sendhangout, on_user_client_command, messageText } = state;
   function onInvite() {
     const { email } = hangout;
@@ -33,7 +35,7 @@ export default function useClientCommands({
       messageText !== "" ? { text: messageText, timestamp } : null;
 
     const invitation = {
-      username: hangout.username,
+      target: hangout.target,
       email,
       message,
       command: "INVITE",
@@ -43,28 +45,27 @@ export default function useClientCommands({
 
     saveHangout({
       hangout: { ...invitation, state: "INVITE", command: undefined },
-      name: user && user.username,
+      username: user && user.username,
       dispatch,
     });
 
     saveSentMessage({
       hangout: invitation,
       dispatch,
-      name: user && user.username,
+      username: user && user.username,
       dState: "pending",
     });
 
-    onAppRoute({ featureRoute: `/INVITED`, route: "/hangouts" });
+    onAppRoute({ featureRoute: `/INVITED`, appRoute: "/hangouts" });
 
     sendMessage({ data: invitation, type: "HANGOUT" });
-    // sendPendingHangout({ hangout: invitation });
   }
 
   function onAccept() {
     const { email, timestamp } = hangout;
 
     const accept = {
-      username: hangout.username,
+      target: hangout.target,
       email,
       message: { text: "Accepted your invitation", timestamp },
       command: "ACCEPT",
@@ -74,24 +75,28 @@ export default function useClientCommands({
 
     saveHangout({
       hangout: { ...accept, state: "ACCEPT", command: undefined },
-      name: user && user.username,
+      username: user && user.username,
       dispatch,
     });
     saveSentMessage({
       hangout: accept,
       dispatch,
-      name: user && user.username,
+      username: user && user.username,
       dState: "pending",
     });
 
     saveRecievedMessage({
       hangout,
       dispatch,
-      name: user && user.username,
+      username: user && user.username,
       dState: "read",
     });
-    removeUnread({ dispatch, hangout: accept, name: user && user.username });
-    onAppRoute({ featureRoute: `/ACCEPT`, route: "/hangouts" });
+    removeUnread({
+      dispatch,
+      hangout: accept,
+      username: user && user.username,
+    });
+    onAppRoute({ featureRoute: `/ACCEPT`, appRoute: "/hangouts" });
     //sendPendingHangout({ hangout: accept });
     sendMessage({ data: accept, type: "HANGOUT" });
   }
@@ -99,15 +104,15 @@ export default function useClientCommands({
     const { email, timestamp } = hangout;
 
     const decline = {
-      username: hangout.username,
+      target: hangout.target,
       email,
       message: null,
       command: "DECLINE",
       timestamp,
       browserId,
     };
-    removeUnread({ hangout, dispatch, name: user && user.username });
-    onAppRoute({ featureRoute: `/DECLINE`, route: "/hangouts" });
+    removeUnread({ hangout, dispatch, username: user && user.username });
+    onAppRoute({ featureRoute: `/DECLINE`, appRoute: "/hangouts" });
     //sendPendingHangout({ hangout: decline });
     sendMessage({ data: decline, type: "HANGOUT" });
   }
@@ -118,7 +123,7 @@ export default function useClientCommands({
     const message = { text: messageText, timestamp };
 
     const messaging = {
-      username: hangout.username,
+      target: hangout.target,
       email: hangout.email,
       message,
       command: "MESSAGE",
@@ -128,7 +133,7 @@ export default function useClientCommands({
     saveSentMessage({
       hangout: messaging,
       dispatch,
-      name: user && user.username,
+      username: user && user.username,
       dState: "pending",
     });
     if (hangout.state === "BLOCKER") {
@@ -143,7 +148,7 @@ export default function useClientCommands({
           },
         },
         dispatch,
-        name: user && user.username,
+        username: user && user.username,
         dState: "pending",
       });
     } else {
@@ -157,7 +162,7 @@ export default function useClientCommands({
 
     const timestamp = Date.now();
     const block = {
-      username: hangout.username,
+      target: hangout.target,
       email,
       message: {
         text: "You have blocked this message",
@@ -174,7 +179,7 @@ export default function useClientCommands({
         ...block,
       },
       dispatch,
-      name: user && user.username,
+      username: user && user.username,
       dState: "pending",
     });
     //sendPendingHangout({ hangout: block });
@@ -187,27 +192,35 @@ export default function useClientCommands({
       switch (on_user_client_command) {
         case clientCommands.MESSAGE:
           onMessage();
+          clientCommandFulfilled();
           break;
         case clientCommands.INVITE:
           onInvite();
+          clientCommandFulfilled();
           break;
         case clientCommands.ACCEPT:
           onAccept();
+          clientCommandFulfilled();
           break;
         case clientCommands.DECLINE:
           onDecline();
+          clientCommandFulfilled();
           break;
         case clientCommands.BLOCK:
           onBlock();
+          clientCommandFulfilled();
           break;
         case clientCommands.UNBLOCK:
           onUnblock();
+          clientCommandFulfilled();
           break;
         default:
           throw "No matching clientCommand found";
       }
     }
   }, [on_user_client_command, user, hangout]);
-
+  function clientCommandFulfilled() {
+    dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
+  }
   return {};
 }

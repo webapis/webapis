@@ -8,16 +8,16 @@ import {
   updateHangout,
   removeUnreads,
 } from "../local-storage/common";
-export default function useSenderMessage({ message }) {
+export default function useSenderMessage({ message, dispatch, username }) {
   useEffect(() => {
-    const commonArg = { dispatch, name: username, hangout };
+    const commonArg = { dispatch, username, hangout };
     switch (hangout.state) {
       case "ACCEPTER":
         updateHangout(commonArg);
         saveRecievedMessage({
           hangout,
           dispatch,
-          name: username,
+          username,
           dState: "unread",
         });
         saveUnread(commonArg);
@@ -41,13 +41,13 @@ export default function useSenderMessage({ message }) {
         saveRecievedMessage({
           hangout,
           dispatch,
-          name: username,
+          username,
           dState: "unread",
         });
         if (!focusedHangout) {
           saveUnread(commonArg);
         } else {
-          if (focusedHangout && focusedHangout.username !== hangout.username) {
+          if (focusedHangout && focusedhangout.target !== hangout.target) {
             saveUnread(commonArg);
           }
         }

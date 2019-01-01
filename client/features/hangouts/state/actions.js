@@ -116,7 +116,7 @@ export function startClientCommand({ dispatch }) {
 }
 
 export function loadMessages({ hangout, dispatch, username }) {
-  const key = `${username}-${hangout.username}-messages`;
+  const key = `${username}-${hangout.target}-messages`;
   const messages = JSON.parse(localStorage.getItem(key));
   dispatch({ type: actionTypes.LOADED_MESSAGES, messages });
 }

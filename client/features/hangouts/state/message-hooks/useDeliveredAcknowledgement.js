@@ -9,16 +9,20 @@ import {
   removeUnreads,
 } from "../local-storage/common";
 export default function useDeliveryAcknowledgement({
-  hangout,
+  message,
   dispatch,
   username,
+  browserId,
 }) {
   useEffect(() => {
-    debugger;
-    if (hangout) {
+    if (
+      message &&
+      message.type === "HANGOUT" &&
+      message.data.type === "ACKHOWLEDGEMENT"
+    ) {
       onDeliveryAcknowledgement();
     }
-  }, [hangout]);
+  }, [message]);
 
   function handleDelayedAcknowledgements({ hangouts }) {
     hangouts.forEach((hangout) => {
@@ -27,7 +31,11 @@ export default function useDeliveryAcknowledgement({
   }
 
   function onDeliveryAcknowledgement() {
-    const commonArg = { dispatch, name: username, hangout };
+    const {
+      data: { hangout },
+    } = message;
+
+    const commonArg = { dispatch, username, hangout };
     switch (hangout.state) {
       case "UNBLOCKED":
         setTimeout(function () {
@@ -43,19 +51,27 @@ export default function useDeliveryAcknowledgement({
 
         break;
       case "INVITED":
-        debugger;
         setTimeout(function () {
           if (browserId === hangout.browserId) {
-            updateHangout(commonArg);
-            updateSentMessage(commonArg);
+            updateHangout({ hangout, dispatch, username });
+
+            updateSentMessage({
+              hangout,
+              dispatch,
+              username,
+              dState: "delivered",
+            });
           } else {
-            saveHangout({ hangout, dispatch, name: username });
-            updateSentMessage({ hangout, dispatch, name, dState: "delivered" });
+            saveHangout({ hangout, dispatch, username });
+            saveSentMessage({
+              hangout,
+              dispatch,
+              username,
+              dState: "delivered",
+            });
           }
-
-          dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
         }, 200);
-
+        // dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
         break;
       case "DECLINED":
         setTimeout(function () {

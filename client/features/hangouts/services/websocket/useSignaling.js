@@ -2,7 +2,7 @@ import { useEffect } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/asset
 import useWebRTC from "../../../webrtc/state/useWebRTC";
 export default function useSignaling({ socket, hangout }) {
   const { state, dispatch } = useWebRTC({
-    target: hangout && hangout.username,
+    target: hangout && hangout.target,
   });
   const { offer, answer, candidate } = state;
 
