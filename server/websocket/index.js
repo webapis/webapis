@@ -22,7 +22,6 @@ module.exports = async function (server, client) {
     }
   });
 };
-//
 
 /*
 const hangoutsHandler = require("../hangouts/wsocket");

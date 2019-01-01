@@ -61,9 +61,8 @@ export default function useClientCommands({
     onAppRoute({ featureRoute: `/INVITED`, appRoute: "/hangouts" });
 
     sendMessage({
-      data: invitation,
+      data: { hangout: invitation, sender: user && user.username },
       type: "HANGOUT",
-      sender: user && user.username,
     });
   }
 
@@ -89,9 +88,8 @@ export default function useClientCommands({
     onAppRoute({ featureRoute: `/ACCEPT`, appRoute: "/hangouts" });
 
     sendMessage({
-      data: accept,
+      data: { hangout: accept, sender: user && user.username },
       type: "HANGOUT",
-      sender: user && user.username,
     });
   }
   function onDecline() {
@@ -114,9 +112,8 @@ export default function useClientCommands({
     onAppRoute({ featureRoute: `/HANGCHAT`, appRoute: "/hangouts" });
     //sendPendingHangout({ hangout: decline });
     sendMessage({
-      data: decline,
+      data: { hangout: decline, sender: user && user.username },
       type: "HANGOUT",
-      sender: user && user.username,
     });
   }
 
@@ -156,9 +153,8 @@ export default function useClientCommands({
         dState: "pending",
       });
       sendMessage({
-        data: messaging,
+        data: { hangout: messaging, sender: user && user.username },
         type: "HANGOUT",
-        sender: user && user.username,
       });
     }
     dispatch({ type: actionTypes.MESSAGE_TEXT_CHANGED, text: "" });
@@ -191,9 +187,8 @@ export default function useClientCommands({
     //sendPendingHangout({ hangout: block });
     onAppRoute({ featureRoute: "/HANGCHAT", appRoute: "/hangouts" });
     sendMessage({
-      data: block,
+      data: { hangout: block, sender: user && user.username },
       type: "HANGOUT",
-      sender: user && user.username,
     });
   }
   function onUnblock() {
@@ -218,9 +213,8 @@ export default function useClientCommands({
     });
     onAppRoute({ featureRoute: `/HANGCHAT`, appRoute: "/hangouts" });
     sendMessage({
-      data: unblock,
+      data: { hangout: unblock, sender: user && user.username },
       type: "HANGOUT",
-      sender: user && user.username,
     });
   }
   function onUndecline() {
@@ -249,9 +243,8 @@ export default function useClientCommands({
     });
     onAppRoute({ featureRoute: `/HANGCHAT`, appRoute: "/hangouts" });
     sendMessage({
-      data: undecline,
+      data: { hangout: undecline, sender: user && user.username },
       type: "HANGOUT",
-      sender: user && user.username,
     });
   }
   useEffect(() => {

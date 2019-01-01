@@ -64,7 +64,7 @@ function clientScript({ appName, outputAppName, env, rtc, auth, port }) {
 const hangoutTestApps = [
   {
     appName: "hangout-app",
-    outputAppName: "hgws-app",
+    outputAppName: "hg-ws-app",
     rtc: "WEBSOCKET",
     auth: "NODEJS",
     env: "dev",

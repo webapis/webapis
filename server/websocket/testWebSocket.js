@@ -6,7 +6,7 @@ module.exports.testWebSocket = async function ({
 }) {
   try {
     const {
-      data: { target, text },
+      data: { target, text, sender },
     } = message;
     debugger;
     const socket = connections[target];

@@ -8,7 +8,7 @@ module.exports.handlePersistance = async function ({
   connections,
 }) {
   ////
-
+  debugger;
   try {
     const { email, message, offline, timestamp } = hangout;
 
@@ -23,7 +23,11 @@ module.exports.handlePersistance = async function ({
             connections[`${senderUserName}-${browser.browserId}`];
           if (senderOnline) {
             const msg = {
-              data: { hangout: sender, type: "ACKHOWLEDGEMENT" },
+              data: {
+                hangout: sender,
+                type: "ACKHOWLEDGEMENT",
+                sender: senderUserName,
+              },
               type: "HANGOUT",
             };
             senderOnline.send(JSON.stringify(msg));
@@ -44,7 +48,11 @@ module.exports.handlePersistance = async function ({
           const targetOnline = connections[`${username}-${browser.browserId}`];
           if (targetOnline) {
             const msg = {
-              data: { hangout: target, type: "HANGOUT" },
+              data: {
+                hangout: target,
+                type: "HANGOUT",
+                sender: senderUserName,
+              },
               type: "HANGOUT",
             };
             targetOnline.send(JSON.stringify(msg)); //-----------------
@@ -237,5 +245,6 @@ module.exports.handlePersistance = async function ({
     }
   } catch (error) {
     const err = error;
+    debugger;
   }
 };

@@ -1,7 +1,7 @@
 const {
   onLineStateChangeHandler,
 } = require("../hangouts/wsocket/onLineStateChangeHandler");
-const hangoutsHandler = require("../hangouts/wsocket");
+const hangoutsHandler = require("../hangouts/wsocket/hangoutHandler");
 const jwt = require("jsonwebtoken");
 const url = require("url");
 const cookie = require("cookie");
@@ -33,12 +33,12 @@ module.exports.authedHandler = async function ({
     ws.on("message", function incoming(message) {
       console.log("recieved,", message);
       try {
-        const msg = JSON.parse(message);
-        const { data } = msg;
+        const socketMessage = JSON.parse(message);
+        const { data } = socketMessage;
 
         switch (msg.type) {
           case "HANGOUT":
-            hangoutsHandler({ data, connections, ws, collection });
+            hangoutsHandler({ socketMessage, connections, ws, collection });
             break;
           default:
             throw "No handler provided for message data type";

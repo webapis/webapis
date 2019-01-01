@@ -33,4 +33,19 @@ describe("Test hangout with ws", () => {
   it("Invitation", () => {
     cy.invitation({ PORT: 3004 });
   });
+  it("Block user from sending message", () => {
+    cy.block({ PORT: 3004 });
+  });
+
+  it("Unblock user ", () => {
+    cy.unblock({ PORT: 3004 });
+  });
+
+  it("decline invitation", () => {
+    cy.decline({ PORT: 3004 });
+  });
+
+  it("bero undeclines invitation", () => {
+    cy.undecline({ PORT: 3004 });
+  });
 });

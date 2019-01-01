@@ -42,7 +42,7 @@ export default function WebSocketClient({
     const msg = {
       type: "test-websocket",
 
-      data: { text: messageText, target },
+      data: { text: messageText, target, sender: username },
     };
 
     sendMessage(msg);

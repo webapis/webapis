@@ -1,18 +1,33 @@
 const stateMapper = require("../stateMapper");
-const mongoDBPersistance = require("./handlePersistance");
+//const mongoDBPersistance = require("./handlePersistance");
+
 module.exports = async function hangoutHandler({
   collection,
-  hangout,
+  socketMessage,
   ws,
   connections,
+  targetUser,
+  senderUser,
+  cb,
 }) {
   try {
+    debugger;
+    const {
+      data: { hangout },
+    } = socketMessage;
     const { senderState, targetState } = stateMapper({
       command: hangout.command,
     });
-    const { username, email, message, offline, timestamp, browserId } = hangout;
+    const {
+      target: sTarget,
+      email,
+      message,
+      offline,
+      timestamp,
+      browserId,
+    } = hangout;
     const sender = {
-      username,
+      target: sTarget,
       email,
       message,
       timestamp,
@@ -21,25 +36,66 @@ module.exports = async function hangoutHandler({
     };
 
     const target = {
-      username: ws.user.username,
-      email: ws.user.email,
+      target: senderUser.user.username,
+      email: senderUser.user.email,
       message,
       timestamp,
       state: targetState,
     };
-
-    await mongoDBPersistance.handlePersistance({
+    const targetBrowsers = targetUser.browsers;
+    const senderBrowsers = senderUser.browsers;
+    let funcs = {
+      senderOnline: async function () {
+        for (const browser of senderBrowsers) {
+          const senderOnline =
+            connections[`${senderUser.user.username}-${browser.browserId}`];
+          debugger;
+          if (senderOnline) {
+            const msg = {
+              data: {
+                hangout: sender,
+                type: "ACKHOWLEDGEMENT",
+                sender: senderUser.user.username,
+              },
+              type: "HANGOUT",
+            };
+            senderOnline.send(JSON.stringify(msg));
+          }
+        }
+      },
+      targetOnline: async function () {
+        for (const browser of targetBrowsers) {
+          const targetOnline =
+            connections[`${targetUser.user.username}-${browser.browserId}`];
+          debugger;
+          if (targetOnline) {
+            const msg = {
+              data: {
+                hangout: target,
+                type: "HANGOUT",
+                sender: senderUser.user.username,
+              },
+              type: "HANGOUT",
+            };
+            targetOnline.send(JSON.stringify(msg)); //-----------------
+          }
+        }
+      },
+    };
+    await funcs.senderOnline();
+    await funcs.targetOnline();
+    cb({
       connections,
       target,
       sender,
       collection,
-      senderUserName: ws.user.username,
-      username,
+      senderUserName: senderUser.user.username,
+      username: sTarget,
       hangout,
     });
   } catch (error) {
     const err = error;
-
+    debugger;
     console.log("hangoutHandlerError", error);
   }
 };

@@ -10,9 +10,13 @@ import protocolSender from "./protocolSender";
 export default function HangoutServer({ children }) {
   const [message, setMessage] = useState(null);
 
-  function sendMessage({ data, type, sender }) {
-    const { timestamp, browserId, target, email } = data;
-    switch (data.command) {
+  function sendMessage({ data, type }) {
+    const {
+      hangout: { timestamp, browserId, target, email, message },
+      sender,
+    } = data;
+    debugger;
+    switch (data.hangout.command) {
       case clientCommands.INVITE:
         setMessage({
           data: {
@@ -23,7 +27,7 @@ export default function HangoutServer({ children }) {
               email,
               state: "INVITED",
               browserId,
-              message: data.message,
+              message,
             },
             sender,
           },
@@ -39,7 +43,7 @@ export default function HangoutServer({ children }) {
                 timestamp,
                 email: `${sender}@gmail.com`,
                 state: "INVITER",
-                message: data.message,
+                message,
               },
               sender,
             },
@@ -57,7 +61,7 @@ export default function HangoutServer({ children }) {
               email,
               state: "ACCEPTED",
               browserId,
-              message: data.message,
+              message,
             },
             sender,
           },
@@ -73,7 +77,7 @@ export default function HangoutServer({ children }) {
                 timestamp,
                 email: `${sender}@gmail.com`,
                 state: "ACCEPTER",
-                message: data.message,
+                message,
               },
               sender,
             },
@@ -91,7 +95,7 @@ export default function HangoutServer({ children }) {
               email,
               state: "DECLINED",
               browserId,
-              message: data.message,
+              message,
             },
             sender,
           },
@@ -124,7 +128,7 @@ export default function HangoutServer({ children }) {
               email,
               state: "BLOCKED",
               browserId,
-              message: data.message,
+              message,
             },
             sender,
           },
@@ -140,7 +144,7 @@ export default function HangoutServer({ children }) {
                 timestamp,
                 email: `${sender}@gmail.com`,
                 state: "BLOCKER",
-                message: data.message,
+                message,
               },
               sender,
             },
@@ -158,7 +162,7 @@ export default function HangoutServer({ children }) {
               email,
               state: "UNBLOCKED",
               browserId,
-              message: data.message,
+              message,
             },
             sender,
           },
@@ -174,7 +178,7 @@ export default function HangoutServer({ children }) {
                 timestamp,
                 email: `${sender}@gmail.com`,
                 state: "UNBLOCKER",
-                message: data.message,
+                message,
               },
               sender,
             },
@@ -192,7 +196,7 @@ export default function HangoutServer({ children }) {
               email,
               state: "UNDECLINED",
               browserId,
-              message: data.message,
+              message,
             },
             sender,
           },
@@ -208,7 +212,7 @@ export default function HangoutServer({ children }) {
                 timestamp,
                 email: `${sender}@gmail.com`,
                 state: "UNDECLINER",
-                message: data.message,
+                message,
               },
               sender,
             },
@@ -226,7 +230,7 @@ export default function HangoutServer({ children }) {
               email,
               state: "MESSAGED",
               browserId,
-              message: data.message,
+              message,
             },
             sender,
           },
@@ -242,7 +246,7 @@ export default function HangoutServer({ children }) {
                 timestamp,
                 email: `${sender}@gmail.com`,
                 state: "MESSANGER",
-                message: data.message,
+                message,
               },
               sender,
             },

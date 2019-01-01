@@ -9,17 +9,27 @@ import HangoutServer from "./HangoutServer";
 import RtcMsgService from "../../service-adapters/rtc-msg-adapter/RtcMsgService";
 const html = htm.bind(h);
 const demoAuthState = {
-  user: { username: "demouser" },
-  browserId: "1234567890",
+  user: {
+    username: "demouser",
+    email: "demouser@gmail.com",
+    browserId: "1234567890",
+  },
+  browsers: [{ browserId: "1234567890" }],
 };
 const beroAuthState = {
-  user: { username: "berouser" },
-  browserId: "1234567890",
+  user: {
+    username: "berouser",
+    email: "berouser@gmail.com",
+    browserId: "1234567890",
+  },
+  browsers: [{ browserId: "1234567890" }],
 };
 render(
   html`
     <${RtcMsgService}
-      url=${`wss://localhost:${PORT}/unauthed-msg/?username=berouser`}
+      url=${`wss://localhost:${PORT}/hangout-app/unauthed-msg/?userone=${JSON.stringify(
+        beroAuthState
+      )}&usertwo=${JSON.stringify(demoAuthState)}`}
       >${({ sendMessage, message, connectionState }) => {
         return html` <div class="row">
           <div class="col" data-testid="democlient">
