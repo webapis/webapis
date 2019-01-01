@@ -46,7 +46,7 @@ render(
       },
     }}
   >
-    <AppRouteProvider initState={{ featureRoute: '/', route: '/icons' }}>
+    <AppRouteProvider initState={{ featureRoute: '/', route: '/unread' }}>
       <Navigation drawerContent={<DrawerContent />}>
         <AppRoute path="/hangouts">
           <Hangout hangouts={hangouts} />

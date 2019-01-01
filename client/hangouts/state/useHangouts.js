@@ -42,6 +42,9 @@ export function useHangouts() {
     }
   }, [socket, readyState, username]);
 
+  function onRemoveUnread(){
+
+  }
   function onNavigation(e){
     e.stopPropagation()
    // const id =e.target.id
@@ -148,5 +151,6 @@ export function useHangouts() {
     onHangout,
     unreadhangouts,
     readyState,
+    onRemoveUnread
   };
 }

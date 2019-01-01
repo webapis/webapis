@@ -46,7 +46,6 @@
     "node-static": "^0.7.11",
     "nodemailer": "^6.4.6",
     "preact": "^10.4.0",
-    "preact-router": "^3.2.1",
     "puppeteer-core": "^3.2.0",
     "ws": "^7.3.0"
   },

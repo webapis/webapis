@@ -32,6 +32,7 @@ export default function Mobile() {
     unreadhangouts,
     onNavigation,
     onSelectUnread,
+    onRemoveUnread
   } = useHangouts();
 
   return (
@@ -110,6 +111,7 @@ export default function Mobile() {
           <UnreadHangouts
             unreadhangouts={unreadhangouts}
             onSelectUnread={onSelectUnread}
+            onRemoveUnread={onRemoveUnread}
           />
         </Suspense>
       </FeatureRoute>

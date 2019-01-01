@@ -1,4 +1,5 @@
 import { actionTypes } from '../../actionTypes';
+import {hangoutStates}  from '../../../../../server/hangouts/hangoutStates'
 export function saveRecievedHangout({
   dispatch,
   hangout,
@@ -64,8 +65,19 @@ export function saveRecievedHangout({
   }
 
   if (unread) {
-    saveUnreadHangout({ name, hangout,dispatch });
-  }
+    debugger;
+    switch(hangout.state){
+      case hangoutStates.ACCEPTER:
+      case hangoutStates.INVITER:
+      case hangoutStates.MESSANGER:
+        saveUnreadHangout({ name, hangout,dispatch });
+        break;
+        default:
+          break;
+      }
+
+    }
+ 
 }
 export function saveRecievedMessage({
   dispatch,

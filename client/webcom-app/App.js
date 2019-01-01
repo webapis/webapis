@@ -3,7 +3,7 @@ import { Suspense, lazy } from 'preact/compat';
 
 import {AppNavigation} from './AppNavigation'
 import {AppRoutes} from './AppRoutes'
-import './app.css';
+import './css/app.css';
 
 export function App() {
   return (
