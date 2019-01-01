@@ -24,6 +24,7 @@ import {
   saveSentMessage,
   saveRecievedMessage,
   removeUnread,
+  loadOfflineSentHangouts,
 } from "./local-storage/common";
 
 //import { useAppRoute } from "./message-hooks/node_modules/components/app-route/index";
@@ -53,6 +54,7 @@ export default function HangoutsProvider(props) {
     invitingGuest,
     guestEmail,
     messageForGuest,
+    socketConnected,
     //  sendhangout,
   } = state;
 
@@ -70,7 +72,22 @@ export default function HangoutsProvider(props) {
     user,
     browserId: loadBrowserId(),
   });
-
+  useEffect(() => {
+    if (
+      socketConnected &&
+      user &&
+      loadOfflineSentHangouts({ username: user.username })
+    ) {
+      sendMessage({
+        data: {
+          hangouts: loadOfflineSentHangouts({ username: user.username }),
+          sender: user && user.username,
+          type: "OFFLINE_HANGOUTS",
+        },
+        type: "HANGOUT",
+      });
+    }
+  }, [socketConnected, user]);
   useEffect(() => {
     if (invitingGuest && user && guestEmail && messageForGuest) {
       actions.InviteAsGuest({

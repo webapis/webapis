@@ -35,6 +35,8 @@ import "./hangout/target-online/unblock";
 import "./hangout/target-online/decline";
 import "./hangout/target-online/undecline";
 import "./hangout/target-online/inviteasguest";
+import "./hangout/sender-offline/invitation";
+
 import "./websocket/index";
 
 import "./hangout/target-offline/Invitation";

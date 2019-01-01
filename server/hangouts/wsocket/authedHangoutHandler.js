@@ -15,6 +15,7 @@ module.exports.authedHangoutHandler = function ({
       browserId,
       senderUser,
     });
+
     ws.on("message", async (message) => {
       const socketMessage = JSON.parse(message);
       const { data } = socketMessage;

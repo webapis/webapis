@@ -1,12 +1,13 @@
 const { errorMonitor } = require("../app-monitor/wsocket");
 const { testWebSocket } = require("./testWebSocket");
-const {
-  unAuthedHangoutWsAndMongoDB,
-} = require("../hangouts/wsocket/for-test/unAuthedHangoutWsAndMongoDB");
-const {
-  unAuthedHangoutWsApp,
-} = require("../hangouts/wsocket/for-test/unauthedHangoutWsHandler");
-
+const url = require("url");
+// const {
+//   unAuthedHangoutWsAndMongoDB,
+// } = require("../hangouts/wsocket/for-test/unAuthedHangoutWsAndMongoDB");
+// const {
+//   unAuthedHangoutWsApp,
+// } = require("../hangouts/wsocket/for-test/unauthedHangoutWsHandler");
+const { hangoutHandlerNew } = require("../hangouts/wsocket/index");
 const { undefinedArguments } = require("../helpers");
 
 module.exports.unauthedHandlers = async function ({
@@ -15,15 +16,33 @@ module.exports.unauthedHandlers = async function ({
   connections,
   peers,
 }) {
-  //
   try {
     undefinedArguments({ ws, request, connections, peers });
+
     switch (true) {
       case request.url.includes("hangout-app"):
+        let username = url.parse(request.url, true).query.username;
+        let browserId = url.parse(request.url, true).query.browserId;
+
         if (request.url.includes("mongodb")) {
-          unAuthedHangoutWsAndMongoDB({ ws, request, connections });
+          hangoutHandlerNew({
+            ws,
+            connections,
+            persist: true,
+            username,
+            browserId,
+          });
+
+          //unAuthedHangoutWsAndMongoDB({ ws, request, connections });
         } else {
-          unAuthedHangoutWsApp({ ws, request, connections, peers });
+          hangoutHandlerNew({
+            ws,
+            connections,
+            persist: false,
+            username,
+            browserId,
+          });
+          //unAuthedHangoutWsApp({ ws, request, connections, peers });
         }
 
         break;

@@ -15,21 +15,21 @@ const html = htm.bind(h);
 
 export default function HangoutClient({ user }) {
   const [socketUrl, setSocketUrl] = useState(null);
-  useEffect(() => {
-    if (user) {
-    }
-  }, [user]);
-  function connect() {
-    setSocketUrl(
-      `${RTC_URL}/?user=${JSON.stringify({
-        ...user,
-        browserId: "BID1234567890",
-        browsers: [{ browserId: "BID1234567890" }],
-      })}`
-    );
-  }
+
   return html`<${ServiceAdapter} user=${user} socketUrl=${socketUrl}>
-    ${() => {
+    ${({ setRtcUrl }) => {
+      function connect() {
+        setRtcUrl(
+          `${RTC_URL}/?username=${user.username}&browserId=${user.browserId}`
+        );
+        // setSocketUrl(
+        //   `${RTC_URL}/?user=${JSON.stringify({
+        //     ...user,
+        //     browserId: "BID1234567890",
+        //     browsers: [{ browserId: "BID1234567890" }],
+        //   })}`
+        // );
+      } //
       return html`<div>
         <button id="connect" disabled=${!user} class="btn" onClick=${connect}>
           Connect

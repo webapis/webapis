@@ -22,7 +22,7 @@ module.exports.hangoutsHandler = async function ({
       cb,
     });
     const {
-      data: { hangout },
+      data: { hangout, type },
     } = JSON.parse(socketMessage);
     const { senderState, targetState } = stateMapper({
       command: hangout.command,
@@ -69,8 +69,9 @@ module.exports.hangoutsHandler = async function ({
               },
               type: "HANGOUT",
             };
-
-            senderOnline.send(JSON.stringify(msg));
+            if (type === "HANGOUT") {
+              senderOnline.send(JSON.stringify(msg));
+            }
           }
         }
       },
@@ -95,7 +96,7 @@ module.exports.hangoutsHandler = async function ({
     };
     await funcs.senderOnline();
     await funcs.targetOnline();
-    //persist to  databas//
+    //persist to  database
 
     await cb({
       connections,

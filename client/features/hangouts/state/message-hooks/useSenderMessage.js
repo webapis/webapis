@@ -37,7 +37,9 @@ export default function useSenderMessage({
       const {
         data: { hangouts },
       } = message;
-      hangouts.forEach((hangout) => {
+      hangouts.forEach((d) => {
+        const { hangout } = d.data;
+
         handleSenderHangout({ hangout });
       });
     }

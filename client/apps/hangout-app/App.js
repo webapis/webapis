@@ -15,12 +15,12 @@ const html = htm.bind(h);
 const demoUser = {
   username: "demouser",
   email: "demouser@gmail.com",
-  browserId: "1234567890",
+  browserId: "BID1234567890",
 };
 const beroUser = {
   username: "berouser",
   email: "berouser@gmail.com",
-  browserId: "1234567890",
+  browserId: "BID1234567890",
 };
 
 export default function App(props) {
@@ -33,7 +33,5 @@ export default function App(props) {
         <${HangoutClient} user=${beroUser} />
       </div>
     </div>
-
-    ;
   `;
 }

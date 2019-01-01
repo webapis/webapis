@@ -9,7 +9,16 @@ import { clientCommands } from "../../features/hangouts/state/clientCommands";
 import protocolSender from "./protocolSender";
 export default function RtcMockServer({ children, user }) {
   const [message, setMessage] = useState(null);
-  const [connectionState, setConnectionState] = useState("open");
+  const [connectionState, setConnectionState] = useState("");
+  const [offlineHangouts, setOfflineHangouts] = useState([]);
+  useEffect(() => {
+    if (connectionState === "open" && offlineHangouts.length > 0) {
+      setMessage({
+        data: { hangouts: offlineHangouts, type: "UNDELIVERED_HANGOUTS" },
+        type: "HANGOUT",
+      });
+    }
+  }, [connectionState, offlineHangouts]);
 
   useEffect(() => {
     if (user) {
@@ -17,8 +26,12 @@ export default function RtcMockServer({ children, user }) {
 
       window.addEventListener(username, function (e) {
         const { message: remoteMessage } = e.detail;
-        setMessage(remoteMessage);
-        console.log(`${username},recieved event issssss:`, e.detail);
+        if (connectionState === "open") {
+          setMessage(remoteMessage);
+          console.log(`${username},recieved event issssss:`, e.detail);
+        } else {
+          setOfflineHangouts((prev) => [...prev, remoteMessage]);
+        }
       });
     }
   }, [user]);
@@ -32,15 +45,12 @@ export default function RtcMockServer({ children, user }) {
     });
     window.dispatchEvent(event);
   }
-  function sendMessage({ data, type }) {
-    const {
-      hangout: { timestamp, browserId, target, email, message },
-      sender,
-    } = data;
-
-    switch (data.hangout.command) {
+  function handleSendMessage({ sender, hangout, type }) {
+    const { timestamp, browserId, target, email, message } = hangout;
+    let localMessage = {};
+    switch (hangout.command) {
       case clientCommands.INVITE:
-        setMessage({
+        localMessage = {
           data: {
             type: "ACKHOWLEDGEMENT",
             hangout: {
@@ -54,8 +64,13 @@ export default function RtcMockServer({ children, user }) {
             sender,
           },
           type: "HANGOUT",
-        });
+        };
 
+        if (type === "OFFLINE_HANGOUTS") {
+          // setOfflineHangouts((prev) => [...prev, localMessage]);
+        } else {
+          setMessage(localMessage);
+        }
         setTimeout(() => {
           const remoteMessage = {
             data: {
@@ -73,9 +88,9 @@ export default function RtcMockServer({ children, user }) {
           };
           dispatchMessage(remoteMessage);
         }, 500);
-        break;
+        return localMessage;
       case clientCommands.ACCEPT:
-        setMessage({
+        localMessage = {
           data: {
             type: "ACKHOWLEDGEMENT",
             hangout: {
@@ -89,8 +104,13 @@ export default function RtcMockServer({ children, user }) {
             sender,
           },
           type: "HANGOUT",
-        });
-
+        };
+        // setMessage(localMessage);
+        if (type === "OFFLINE_HANGOUTS") {
+          // setOfflineHangouts((prev) => [...prev, localMessage]);
+        } else {
+          setMessage(localMessage);
+        }
         setTimeout(() => {
           let remoteMessage = {
             data: {
@@ -108,9 +128,9 @@ export default function RtcMockServer({ children, user }) {
           };
           dispatchMessage(remoteMessage);
         }, 500);
-        break;
+        return localMessage;
       case clientCommands.DECLINE:
-        setMessage({
+        localMessage = {
           data: {
             type: "ACKHOWLEDGEMENT",
             hangout: {
@@ -124,8 +144,13 @@ export default function RtcMockServer({ children, user }) {
             sender,
           },
           type: "HANGOUT",
-        });
-
+        };
+        //  setMessage(localMessage);
+        if (type === "OFFLINE_HANGOUTS") {
+          //  setOfflineHangouts((prev) => [...prev, localMessage]);
+        } else {
+          setMessage(localMessage);
+        }
         // setTimeout(()=>{
         //   setMessage({
         //     data: {
@@ -141,9 +166,9 @@ export default function RtcMockServer({ children, user }) {
         //     type: "HANGOUT",
         //   });
         // },5000)
-        break;
+        return localMessage;
       case clientCommands.BLOCK:
-        setMessage({
+        localMessage = {
           data: {
             type: "ACKHOWLEDGEMENT",
             hangout: {
@@ -157,8 +182,13 @@ export default function RtcMockServer({ children, user }) {
             sender,
           },
           type: "HANGOUT",
-        });
-
+        };
+        // setMessage(localMessage);
+        if (type === "OFFLINE_HANGOUTS") {
+          //setOfflineHangouts((prev) => [...prev, localMessage]);
+        } else {
+          setMessage(localMessage);
+        }
         setTimeout(() => {
           let remoteMessage = {
             data: {
@@ -176,9 +206,9 @@ export default function RtcMockServer({ children, user }) {
           };
           dispatchMessage(remoteMessage);
         }, 500);
-        break;
+        return localMessage;
       case clientCommands.UNBLOCK:
-        setMessage({
+        localMessage = {
           data: {
             type: "ACKHOWLEDGEMENT",
             hangout: {
@@ -192,8 +222,13 @@ export default function RtcMockServer({ children, user }) {
             sender,
           },
           type: "HANGOUT",
-        });
-
+        };
+        // setMessage(localMessage);
+        if (type === "OFFLINE_HANGOUTS") {
+          // setOfflineHangouts((prev) => [...prev, localMessage]);
+        } else {
+          setMessage(localMessage);
+        }
         setTimeout(() => {
           let remoteMessage = {
             data: {
@@ -211,9 +246,9 @@ export default function RtcMockServer({ children, user }) {
           };
           dispatchMessage(remoteMessage);
         }, 500);
-        break;
+        return localMessage;
       case clientCommands.UNDECLINE:
-        setMessage({
+        localMessage = {
           data: {
             type: "ACKHOWLEDGEMENT",
             hangout: {
@@ -227,8 +262,13 @@ export default function RtcMockServer({ children, user }) {
             sender,
           },
           type: "HANGOUT",
-        });
-
+        };
+        // setMessage(localMessage);
+        if (type === "OFFLINE_HANGOUTS") {
+          // setOfflineHangouts((prev) => [...prev, localMessage]);
+        } else {
+          setMessage(localMessage);
+        }
         setTimeout(() => {
           let remoteMessage = {
             data: {
@@ -246,9 +286,9 @@ export default function RtcMockServer({ children, user }) {
           };
           dispatchMessage(remoteMessage);
         }, 500);
-        break;
+        return localMessage;
       case clientCommands.MESSAGE:
-        setMessage({
+        localMessage = {
           data: {
             type: "ACKHOWLEDGEMENT",
             hangout: {
@@ -262,8 +302,13 @@ export default function RtcMockServer({ children, user }) {
             sender,
           },
           type: "HANGOUT",
-        });
-
+        };
+        //  setMessage(localMessage);
+        if (type === "OFFLINE_HANGOUTS") {
+          // setOfflineHangouts((prev) => [...prev, localMessage]);
+        } else {
+          setMessage(localMessage);
+        }
         setTimeout(() => {
           let remoteMessage = {
             data: {
@@ -281,16 +326,42 @@ export default function RtcMockServer({ children, user }) {
           };
           dispatchMessage(remoteMessage);
         }, 500);
-        break;
+        return localMessage;
       default:
         throw "No client command provided";
     }
   }
-  function setRtcUrl() {}
+  function sendMessage({ data, type }) {
+    if (data.type === "HANGOUT") {
+      const { hangout, sender } = data;
+      handleSendMessage({ hangout, sender, type: data.type });
+    } else if (data.type === "OFFLINE_HANGOUTS") {
+      const { hangouts, sender } = data;
+
+      hangouts.forEach((hangout, i) => {
+        let hgs = [];
+
+        hgs.push(handleSendMessage({ hangout, sender, type: data.type }));
+        if (i + 1 === hangouts.length) {
+          setMessage({
+            data: {
+              type: "OFFLINE_ACKHOWLEDGEMENT",
+              hangouts: hgs,
+              sender,
+            },
+            type: "HANGOUT",
+          });
+        }
+      });
+    }
+  }
+  function setRtcUrl() {
+    setConnectionState("open");
+  }
   return children({
     message,
     sendMessage,
-    connectionState: "open",
+    connectionState,
     setRtcUrl,
   });
 }

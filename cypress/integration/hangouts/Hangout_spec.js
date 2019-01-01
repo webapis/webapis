@@ -5,8 +5,8 @@ describe("Test websocket", () => {
   it.skip("websocket", () => {
     cy.websocket();
   });
-});
-[3005, 3004, 3006].forEach((PORT) => {
+}); //3004,3005,3006
+[3004 /*, 3004, 3006*/].forEach((PORT) => {
   let backend = null;
   if (PORT === 3005) {
     backend = "RtcMock";
@@ -96,10 +96,13 @@ describe("Test websocket", () => {
     it("User not fount, Invite as a Guest", () => {
       cy.inviteasguest({ PORT });
     });
-    if (PORT === 3006) {
-      it("targetOffline invitation", () => {
-        cy.targetOfflineInvitation({ PORT });
-      });
-    }
+
+    it.skip("targetOffline invitation", () => {
+      cy.targetOfflineInvitation({ PORT });
+    });
+
+    it.only("invitation senderOffline", () => {
+      cy.senderOfflineInvitation({ PORT });
+    });
   });
 });

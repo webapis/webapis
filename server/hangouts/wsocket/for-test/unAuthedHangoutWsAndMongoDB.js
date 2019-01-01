@@ -21,7 +21,7 @@ module.exports.unAuthedHangoutWsAndMongoDB = async function ({
     const senderUser = await collection.findOne({ username });
 
     connections[`${senderUser.username}-${browserId}`] = ws;
-    //
+
     onLineStateChangeHandler({
       connections,
       ws,

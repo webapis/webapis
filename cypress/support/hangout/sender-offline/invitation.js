@@ -1,7 +1,6 @@
 import infoMessages from "../../../../client/features/hangouts/ui-components/infoMessages";
-Cypress.Commands.add("targetOfflineInvitation", ({ PORT }) => {
+Cypress.Commands.add("senderOfflineInvitation", ({ PORT }) => {
   cy.visit(`https://localhost:${PORT}`);
-  cy.get("[data-testid=democlient]").find("#connect").click();
 
   cy.server();
   cy.route({
@@ -27,7 +26,10 @@ Cypress.Commands.add("targetOfflineInvitation", ({ PORT }) => {
   cy.get("[data-testid=democlient]").find("[data-testid=berouser]").click();
 
   cy.get("[data-testid=democlient]").find("[data-testid=oninvite-btn]").click();
-  // cy.pause()
+
+  cy.get("[data-testid=democlient]").find("#connect").click();
+  cy.get("[data-testid=beroclient]").find("#connect").click();
+
   if (PORT === 3006) {
     //test data persistence to sender
     cy.task("query:mongodb", {
@@ -60,52 +62,34 @@ Cypress.Commands.add("targetOfflineInvitation", ({ PORT }) => {
       expect(browser).to.deep.equal(expected);
     });
 
-    // test data persistence to target
+    //test data persistence to target
     cy.task("query:mongodb", { username: "berouser" }).then((result) => {
       const { browsers } = result;
 
       expect(browsers.length).to.equal(1);
 
       const browser = browsers[0];
-      const { undelivered } = browser;
-
-      const { timestamp } = undelivered[0];
-
-      let expected = [
-        {
-          target: "demouser",
-          email: "demouser@gmail.com",
-          message: {
-            text: "Let's chat, berouser!",
+      const { hangouts } = browser;
+      const { timestamp } = hangouts[0];
+      let expected = {
+        browserId: "BID1234567890",
+        hangouts: [
+          {
+            target: "demouser",
+            email: "demouser@gmail.com",
+            message: {
+              text: "Let's chat, berouser!",
+              timestamp,
+              type: "invited",
+            },
             timestamp,
-            type: "invited",
+            state: "INVITER",
           },
-          timestamp,
-          state: "INVITER",
-        },
-      ];
-
-      expect(undelivered).to.deep.equal(expected);
+        ],
+      };
+      expect(browser).to.deep.equal(expected);
     });
   } //IF PORT//
-
-  //cy.pause();
-  cy.get("[data-testid=beroclient]").find("#connect").click();
-  // cy.pause()
-  if (PORT === 3006) {
-    // test data persistence to target
-    cy.task("query:mongodb", { username: "berouser" }).then((result) => {
-      const { browsers } = result;
-
-      expect(browsers.length).to.equal(1);
-
-      const browser = browsers[0];
-      const { undelivered } = browser;
-
-      expect(undelivered.length).to.equal(0);
-    });
-  }
-  //cy.pause();
   cy.get("[data-testid=democlient]")
     .find("[data-testid=info-message]")
     .contains(infoMessages.invited);
@@ -142,7 +126,6 @@ Cypress.Commands.add("targetOfflineInvitation", ({ PORT }) => {
       const { timestamp } = hangouts[0];
       let expected = {
         browserId: "BID1234567890",
-        undelivered: [],
         hangouts: [
           {
             target: "demouser",
@@ -243,7 +226,6 @@ Cypress.Commands.add("targetOfflineInvitation", ({ PORT }) => {
       const { timestamp } = hangouts[0];
       let expected = {
         browserId: "BID1234567890",
-        undelivered: [],
         hangouts: [
           {
             target: "demouser",

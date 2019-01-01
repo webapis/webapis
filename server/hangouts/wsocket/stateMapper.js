@@ -1,6 +1,6 @@
 const hangoutStates = require("./hangoutStates");
 
-module.exports = function stateMapper({ command }) {
+module.exports.stateMapper = function ({ command }) {
   switch (command) {
     case "ACCEPT":
       return {

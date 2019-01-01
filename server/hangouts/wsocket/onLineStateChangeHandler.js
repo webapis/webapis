@@ -49,7 +49,7 @@ module.exports.onLineStateChangeHandler = async function ({
       ws.send(
         JSON.stringify(msg) //--
       );
-      debugger;
+
       pullUndeliveredHangouts({
         browserId: connectedBrowser.browserId,
         username,

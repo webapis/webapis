@@ -41,6 +41,30 @@ export function saveSentMessage({ hangout, dispatch, username, dState }) {
     });
   }
 }
+export function saveOfflineSentHangout({ hangout, username }) {
+  const { target } = hangout;
+  const hangoutKey = `${username}-offline-hangouts`;
+  let localHangouts = JSON.parse(localStorage.getItem(hangoutKey));
+
+  if (localHangouts && localHangouts.length > 0) {
+    localStorage.setItem(
+      hangoutKey,
+      JSON.stringify([...localHangouts, hangout])
+    );
+  } else {
+    localStorage.setItem(hangoutKey, JSON.stringify([hangout]));
+  }
+}
+export function removeOfflineSentHangouts({ username }) {
+  const hangoutKey = `${username}-offline-hangouts`;
+  localStorage.removeItem(hangoutKey);
+}
+
+export function loadOfflineSentHangouts({ username }) {
+  const hangoutKey = `${username}-offline-hangouts`;
+  return JSON.parse(localStorage.getItem(hangoutKey));
+}
+
 export function saveRecievedMessage({ hangout, dispatch, username, dState }) {
   const { target, message } = hangout;
   const messageKey = `${username}-${target}-messages`;

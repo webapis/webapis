@@ -14,6 +14,7 @@ import {
   saveSentMessage,
   saveRecievedMessage,
   removeUnread,
+  saveOfflineSentHangout,
 } from "./local-storage/common";
 import { useAppRoute } from "../../../components/app-route/index";
 import { actionTypes } from "./actionTypes";
@@ -24,6 +25,7 @@ export default function useClientCommands({
   browserId,
   dispatch,
 }) {
+  const { socketConnected } = state;
   const { onAppRoute } = useAppRoute();
   const { hangout, sendhangout, on_user_client_command, messageText } = state;
   function onInvite() {
@@ -55,15 +57,25 @@ export default function useClientCommands({
       hangout: invitation,
       dispatch,
       username: user && user.username,
-      dState: "pending",
+      dState: socketConnected ? "pending" : "offline",
     });
 
     onAppRoute({ featureRoute: `/INVITED`, appRoute: "/hangouts" });
-
-    sendMessage({
-      data: { hangout: invitation, sender: user && user.username },
-      type: "HANGOUT",
-    });
+    if (socketConnected) {
+      sendMessage({
+        data: {
+          type: "HANGOUT",
+          hangout: invitation,
+          sender: user && user.username,
+        },
+        type: "HANGOUT",
+      });
+    } else {
+      saveOfflineSentHangout({
+        hangout: invitation,
+        username: user && user.username,
+      });
+    }
   }
 
   function onAccept() {
@@ -82,13 +94,13 @@ export default function useClientCommands({
       hangout: accept,
       dispatch,
       username: user && user.username,
-      dState: "pending",
+      dState: socketConnected ? "pending" : "offline",
     });
 
     onAppRoute({ featureRoute: `/ACCEPT`, appRoute: "/hangouts" });
 
     sendMessage({
-      data: { hangout: accept, sender: user && user.username },
+      data: { type: "HANGOUT", hangout: accept, sender: user && user.username },
       type: "HANGOUT",
     });
   }
@@ -107,12 +119,16 @@ export default function useClientCommands({
       hangout: decline,
       dispatch,
       username: user && user.username,
-      dState: "declined",
+      dState: socketConnected ? "pending" : "offline",
     });
     onAppRoute({ featureRoute: `/HANGCHAT`, appRoute: "/hangouts" });
     //sendPendingHangout({ hangout: decline });
     sendMessage({
-      data: { hangout: decline, sender: user && user.username },
+      data: {
+        type: "HANGOUT",
+        hangout: decline,
+        sender: user && user.username,
+      },
       type: "HANGOUT",
     });
   }
@@ -143,7 +159,7 @@ export default function useClientCommands({
         },
         dispatch,
         username: user && user.username,
-        dState: "blocked",
+        dState: socketConnected ? "pending" : "offline",
       });
     } else {
       saveSentMessage({
@@ -153,7 +169,11 @@ export default function useClientCommands({
         dState: "pending",
       });
       sendMessage({
-        data: { hangout: messaging, sender: user && user.username },
+        data: {
+          type: "HANGOUT",
+          hangout: messaging,
+          sender: user && user.username,
+        },
         type: "HANGOUT",
       });
     }
@@ -182,12 +202,12 @@ export default function useClientCommands({
       },
       dispatch,
       username: user && user.username,
-      dState: "pending",
+      dState: socketConnected ? "pending" : "offline",
     });
     //sendPendingHangout({ hangout: block });
     onAppRoute({ featureRoute: "/HANGCHAT", appRoute: "/hangouts" });
     sendMessage({
-      data: { hangout: block, sender: user && user.username },
+      data: { type: "HANGOUT", hangout: block, sender: user && user.username },
       type: "HANGOUT",
     });
   }
@@ -213,7 +233,11 @@ export default function useClientCommands({
     });
     onAppRoute({ featureRoute: `/HANGCHAT`, appRoute: "/hangouts" });
     sendMessage({
-      data: { hangout: unblock, sender: user && user.username },
+      data: {
+        type: "HANGOUT",
+        hangout: unblock,
+        sender: user && user.username,
+      },
       type: "HANGOUT",
     });
   }
@@ -239,11 +263,15 @@ export default function useClientCommands({
       hangout: undecline,
       dispatch,
       username: user && user.username,
-      dState: "pending",
+      dState: socketConnected ? "pending" : "offline",
     });
     onAppRoute({ featureRoute: `/HANGCHAT`, appRoute: "/hangouts" });
     sendMessage({
-      data: { hangout: undecline, sender: user && user.username },
+      data: {
+        type: "HANGOUT",
+        hangout: undecline,
+        sender: user && user.username,
+      },
       type: "HANGOUT",
     });
   }
