@@ -2,7 +2,7 @@ const stateMapper = require("./stateMapper");
 const { undefinedArguments } = require("../../helpers");
 //const mongoDBPersistance = require("./handlePersistance");
 
-module.exports = async function hangoutHandler({
+module.exports.hangoutsHandler = async function ({
   //collection,
   socketMessage,
   ws,

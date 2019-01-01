@@ -27,7 +27,11 @@ export default function HangoutClient({ user }) {
     }
   }, [user]);
   return html`<${ServiceAdapter} user=${user} socketUrl=${socketUrl}>
-    <${NavigationContainer} user=${user} />
-    <${RouteContainer} user=${user} />
+    ${() => {
+      return html`<div>
+        <${NavigationContainer} user=${user} />
+        <${RouteContainer} user=${user} />
+      </div>`;
+    }}
   <//>`;
 }

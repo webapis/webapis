@@ -9,9 +9,4 @@ import ServiceAdapter from "../../service-adapters/ServiceAdapter";
 import App from "./App";
 const html = htm.bind(h);
 
-render(
-  html`<${ServiceAdapter}>
-    <${App} />
-  <//> `,
-  document.body
-);
+render(html` <${App} /> `, document.body);
