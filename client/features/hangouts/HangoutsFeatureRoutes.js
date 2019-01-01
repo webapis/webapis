@@ -77,6 +77,7 @@ export default function HangoutsFeatureRoutes(props) {
     case "/READ":
     case "/READER":
     case "/INVITED":
+    case "/INVITER":
       return html` <${Suspense} fallback=${Loading}>
         <${Hangchat} ...${state} ...${funcs} ...${hangout} user=${user} />
       <//>`;
@@ -90,10 +91,10 @@ export default function HangoutsFeatureRoutes(props) {
     //   return html` <${Suspense} fallback=${Loading}>
     //     <${Invitee} ...${state} ...${funcs} ...${hangout} />
     //   <//>`;
-    case "/INVITER":
-      return html` <${Suspense} fallback=${Loading}>
-        <${InviterContainer} state=${state} funcs=${funcs} hangout=${hangout} />
-      <//>`;
+    // case "/INVITER":
+    //   return html` <${Suspense} fallback=${Loading}>
+    //     <${InviterContainer} state=${state} funcs=${funcs} hangout=${hangout} />
+    //   <//>`;
     case "/unread":
       return html` <${Suspense} fallback=${Loading}>
         <${UnreadHangouts}

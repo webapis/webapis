@@ -9,16 +9,22 @@ import {
   useEffect,
 } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
-import { useHangoutNav } from "../../features/hangouts/state/useHangouts";
+import {
+  useHangoutNav,
+  useHangouts,
+} from "../../features/hangouts/state/useHangouts";
 import Navigation from "../../features/hangouts/ui-components/Navigation";
 const html = htm.bind(h);
-export default function NavigationContainer({ user, messageCounter }) {
+export default function NavigationContainer({ user }) {
   const { onNavigation } = useHangoutNav({ user });
+  const {
+    state: { unreadsCount },
+  } = useHangouts({ user });
   return html`
     <${Navigation}
       socketConnected=${true}
       authed=${true}
-      messageCounter=${messageCounter}
+      messageCounter=${unreadsCount}
       username=${user.username}
       onAuthNavigation=${() => {}}
       onHangoutNavigation=${onNavigation}

@@ -25,9 +25,18 @@ describe("HangoutSpec", () => {
       .click();
 
     cy.get("[data-testid=democlient]").find("[data-testid=berouser]").click();
-    cy.pause();
+
     cy.get("[data-testid=democlient]")
       .find("[data-testid=oninvite-btn]")
       .click();
+    //berouser
+    cy.get("[data-testid=beroclient]")
+      .find("[data-testid=message-count]")
+      .contains(1);
+    cy.get("[data-testid=beroclient]")
+      .find("[data-testid=unread-link]")
+      .click();
+    cy.get("[data-testid=beroclient]").find("[data-testid=unread-ui]");
+    cy.get("[data-testid=beroclient]").find("[data-testid=demouser]").click();
   });
 });

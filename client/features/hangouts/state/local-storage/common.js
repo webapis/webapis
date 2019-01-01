@@ -2,7 +2,6 @@ import { actionTypes } from "../actionTypes";
 
 export function updateUnread({ dispatch, hangout, username, dState }) {
   try {
-    debugger;
     const { username, timestamp } = hangout;
 
     const hangoutKey = `${name}-unread-hangouts`;
@@ -21,7 +20,6 @@ export function updateUnread({ dispatch, hangout, username, dState }) {
 }
 
 export function saveSentMessage({ hangout, dispatch, username, dState }) {
-  debugger;
   const { target, message } = hangout;
   const messageKey = `${username}-${target}-messages`;
   const localMessages = JSON.parse(localStorage.getItem(messageKey));
@@ -44,7 +42,6 @@ export function saveSentMessage({ hangout, dispatch, username, dState }) {
   }
 }
 export function saveRecievedMessage({ hangout, dispatch, username, dState }) {
-  debugger;
   const { target, message } = hangout;
   const messageKey = `${username}-${target}-messages`;
   const localMessages = JSON.parse(localStorage.getItem(messageKey));
@@ -67,8 +64,8 @@ export function saveRecievedMessage({ hangout, dispatch, username, dState }) {
   }
 }
 export function saveUnread({ dispatch, username, hangout }) {
-  debugger;
   const { state } = hangout;
+
   const hangoutKey = `${username}-unread-hangouts`;
   let localHangouts = JSON.parse(localStorage.getItem(hangoutKey));
   const unreadHangout = { ...hangout, state };
@@ -91,9 +88,8 @@ export function saveUnread({ dispatch, username, hangout }) {
 }
 
 export function updateSentMessage({ hangout, username, dispatch }) {
-  debugger;
   const { target, message } = hangout;
-  debugger;
+
   const { timestamp } = message;
   const messageKey = `${username}-${target}-messages`;
   const updatedMessage = { ...message, owner: username, state: "delivered" };
@@ -115,7 +111,7 @@ export function updateRecievedMessages({
   dState,
 }) {
   const { target, state } = hangout;
-  debugger;
+
   const messageKey = `${username}-${target}-messages`;
   const localMessages = JSON.parse(localStorage.getItem(messageKey));
   const sentMessages = localMessages.filter((u) => u.owner === target);
@@ -141,7 +137,6 @@ export function updateRecievedMessages({
   }
 }
 export function updateRecievedMessage({ hangout, username, dispatch, dState }) {
-  debugger;
   const { target, message } = hangout;
 
   const { timestamp } = message;
@@ -158,7 +153,6 @@ export function updateRecievedMessage({ hangout, username, dispatch, dState }) {
   dispatch({ type: actionTypes.MESSAGES_UPDATED, messages: localMessages });
 }
 export function updateHangout({ dispatch, username, hangout }) {
-  debugger;
   const { target } = hangout;
 
   const hangoutKey = `${username}-hangouts`;
@@ -171,7 +165,6 @@ export function updateHangout({ dispatch, username, hangout }) {
 }
 
 export function saveHangout({ hangout, dispatch, username }) {
-  debugger;
   const { target } = hangout;
 
   const hangoutKey = `${username}-hangouts`;
@@ -199,7 +192,6 @@ export function saveHangout({ hangout, dispatch, username }) {
 }
 
 export function removeUnread({ hangout, dispatch, username }) {
-  debugger;
   const { target, timestamp } = hangout;
   const hangoutKey = `${username}-unread-hangouts`;
 
@@ -218,7 +210,6 @@ export function removeUnread({ hangout, dispatch, username }) {
 }
 
 export function removeUnreads({ dispatch, username, hangout, state }) {
-  debugger;
   const { target } = hangout;
   const hangoutKey = `${username}-unread-hangouts`;
 
@@ -237,7 +228,6 @@ export function removeUnreads({ dispatch, username, hangout, state }) {
 }
 
 export function loadMessages({ hangout, username, dispatch }) {
-  debugger;
   const { target } = hangout;
   const messageKey = `${username}-${target}-messages`;
   const messages = JSON.parse(localStorage.getItem(messageKey));
@@ -249,12 +239,10 @@ export function loadMessages({ hangout, username, dispatch }) {
 }
 
 export function saveHangouts({ hangouts, username }) {
-  debugger;
   localStorage.setItem(`${username}-hangouts`, JSON.stringify(hangouts));
 }
 
 export function loadHangouts({ username, dispatch }) {
-  debugger;
   const hangoutKey = `${username}-hangouts`;
 
   const localHangouts = JSON.parse(localStorage.getItem(hangoutKey));

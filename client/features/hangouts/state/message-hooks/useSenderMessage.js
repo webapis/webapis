@@ -10,62 +10,80 @@ import {
 } from "../local-storage/common";
 export default function useSenderMessage({ message, dispatch, username }) {
   useEffect(() => {
-    const commonArg = { dispatch, username, hangout };
-    switch (hangout.state) {
-      case "ACCEPTER":
-        updateHangout(commonArg);
-        saveRecievedMessage({
-          hangout,
-          dispatch,
-          username,
-          dState: "unread",
-        });
-        saveUnread(commonArg);
-        break;
-      case "BLOCKER":
-        updateHangout(commonArg);
+    if (
+      message &&
+      message.type === "HANGOUT" &&
+      message.data.type === "HANGOUT" &&
+      username
+    ) {
+      const {
+        data: { hangout },
+      } = message;
 
-        removeUnreads(commonArg);
-        break;
-      case "DECLINER":
-        updateHangout(commonArg);
-        break;
-      case "INVITER":
-        saveUnread(commonArg);
-
-        break;
-      case "MESSANGER":
-        //FIXME GH focused hangout issue
-
-        updateHangout(commonArg);
-        saveRecievedMessage({
-          hangout,
-          dispatch,
-          username,
-          dState: "unread",
-        });
-        if (!focusedHangout) {
+      const commonArg = { dispatch, username, hangout };
+      switch (hangout.state) {
+        case "ACCEPTER":
+          updateHangout(commonArg);
+          saveRecievedMessage({
+            hangout,
+            dispatch,
+            username,
+            dState: "unread",
+          });
           saveUnread(commonArg);
-        } else {
-          if (focusedHangout && focusedhangout.target !== hangout.target) {
+          break;
+        case "BLOCKER":
+          updateHangout(commonArg);
+
+          removeUnreads(commonArg);
+          break;
+        case "DECLINER":
+          updateHangout(commonArg);
+          break;
+        case "INVITER":
+          saveHangout({ hangout, dispatch, username });
+          saveRecievedMessage({
+            hangout,
+            dispatch,
+            username,
+            dState: "unread",
+          });
+          saveUnread(commonArg);
+
+          break;
+        case "MESSANGER":
+          //FIXME GH focused hangout issue
+
+          updateHangout(commonArg);
+          saveRecievedMessage({
+            hangout,
+            dispatch,
+            username,
+            dState: "unread",
+          });
+          if (!focusedHangout) {
             saveUnread(commonArg);
+          } else {
+            if (focusedHangout && focusedhangout.target !== hangout.target) {
+              saveUnread(commonArg);
+            }
           }
-        }
-        break;
-      case "UNBLOCKER":
-        // saveUnblocker({
-        //   dispatch,
-        //   hangout,
-        //   name: username,
-        //   focusedHangout,
-        //   onAppRoute,
-        //   unread,
-        // });
-        break;
-      case "READER":
-        break;
-      default:
-        break;
+          break;
+        case "UNBLOCKER":
+          // saveUnblocker({
+          //   dispatch,
+          //   hangout,
+          //   name: username,
+          //   focusedHangout,
+          //   onAppRoute,
+          //   unread,
+          // });
+          break;
+        case "READER":
+          break;
+        default:
+          break;
+      }
     }
-  }, [message]);
+  }, [message, username]);
 }

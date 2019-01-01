@@ -28,6 +28,19 @@ export default function HangoutServer({ children }) {
           },
           type: "HANGOUT",
         });
+        setBeroState({
+          data: {
+            type: "HANGOUT",
+            hangout: {
+              target: "demouser",
+              timestamp,
+              email: "demouser@gmail.com",
+              state: "INVITER",
+              message: data.message,
+            },
+          },
+          type: "HANGOUT",
+        });
         break;
       case clientCommands.ACCEPT:
         break;

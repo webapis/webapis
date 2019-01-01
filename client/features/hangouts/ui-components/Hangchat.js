@@ -5,6 +5,7 @@ import {
 } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 import Layout from "./Layout";
+import Button from "controls/button/index";
 const html = htm.bind(h);
 export function Messages({ messages, username, ref }) {
   const { transformedMessages } = useTransformMessages({ messages, username });
@@ -165,13 +166,19 @@ export default function Hangchat({
         class="w-100"
         style="position:absolute; bottom:0;"
       >
-        <${MessageEditor}
-          loading=${loading}
-          messageText=${messageText}
-          onMessageText=${onMessageText}
-          onMessage=${onUserClientCommand}
-          hangout=${hangout}
-        />
+        ${hangout.state === "INVITE" ||
+        (hangout.state === "INVITED" &&
+          html` <${MessageEditor}
+            loading=${loading}
+            messageText=${messageText}
+            onMessageText=${onMessageText}
+            onMessage=${onUserClientCommand}
+            hangout=${hangout}
+          />`)}
+        ${hangout.state === "INVITER" &&
+        html`
+          <${InviteeControls} onUserClientCommand=${onUserClientCommand} />
+        `}
       </div>
     <//>
   `;
@@ -183,23 +190,19 @@ function useTransformMessages({ messages, username }) {
   const [floatedMessages, setFloatedMessages] = useState([]);
   useEffect(() => {
     if (messages && messages.length > 0 && username) {
-      debugger;
       const sorted = sortMessages({ messages });
 
-      debugger;
       setSortedMessages(sorted);
     }
   }, [messages, username]);
   useEffect(() => {
     if (sortedMessages && sortedMessages.length > 0 && username) {
-      debugger;
       const floated = floatMessages({ messages: sortedMessages, username });
       setFloatedMessages(floated);
     }
   }, [sortedMessages, username]);
   useEffect(() => {
     if (floatedMessages && floatedMessages.length > 0 && username) {
-      debugger;
       setTransformedMessages(floatedMessages);
     }
   }, [floatedMessages, username]);
@@ -207,10 +210,8 @@ function useTransformMessages({ messages, username }) {
 }
 
 function floatMessages({ messages, username }) {
-  debugger;
   if (messages && messages.length > 0 && username) {
     let floated = messages.map((msg) => {
-      debugger;
       if (msg.owner === username) {
         return { ...msg, float: "right", owner: "me" };
       } else {
@@ -218,21 +219,19 @@ function floatMessages({ messages, username }) {
       }
     });
     console.log("floated", floated);
-    debugger;
+
     return floated;
   } else {
-    debugger;
     return [];
   }
 }
 function sortMessages({ messages }) {
   if (messages) {
     let sorted = messages.sort((a, b) => a.timestamp - b.timestamp);
-    debugger;
+
     console.log("sorted", sorted);
     return sorted;
   } else {
-    debugger;
     return [];
   }
 }
@@ -248,7 +247,10 @@ function MessageEditor({
     <div>
       <div class="input-group">
         <input
-          disabled=${hangout && hangout.state === "BLOCKED"}
+          disabled=${hangout &&
+          (hangout.state === "BLOCKED" ||
+            hangout.state === "INVITE" ||
+            hangout.state === "INVITED")}
           type="text"
           class="form-control"
           aria-label="Recipient's username"
@@ -262,7 +264,10 @@ function MessageEditor({
             class="btn btn-success outlined"
             type="button"
             loading=${loading}
-            disabled=${hangout && hangout.state === "BLOCKED"}
+            disabled=${hangout &&
+            (hangout.state === "BLOCKED" ||
+              hangout.state === "INVITE" ||
+              hangout.state === "INVITED")}
             id="MESSAGE"
             onClick=${onMessage}
             data-testid="send-btn"
@@ -271,6 +276,33 @@ function MessageEditor({
           </button>
         </div>
       </div>
+    </div>
+  `;
+}
+
+function InviteeControls({ onUserClientCommand, pendingHangout }) {
+  return html`
+    <div class="btn-group d-flex" role="group">
+      <${Button}
+        id="DECLINE"
+        onClick=${onUserClientCommand}
+        data-testid="decline-btn"
+        loading=${pendingHangout && pendingHangout.command === "DECLINE"}
+        title="Decline"
+        block
+        bg="danger"
+        outline
+      />
+
+      <${Button}
+        id="ACCEPT"
+        onClick=${onUserClientCommand}
+        data-testid="accept-btn"
+        loading=${pendingHangout && pendingHangout.command === "ACCEPT"}
+        title="Accept"
+        bg="success"
+        block
+      />
     </div>
   `;
 }

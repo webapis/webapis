@@ -34,7 +34,7 @@ export default function HangoutClient({
         message=${message}
         connectionState=${connectionState}
       >
-        <${NavigationContainer} user=${user} messageCounter=${0} />
+        <${NavigationContainer} user=${user} />
         <${RouteContainer} user=${user} />
       <//>
     <//>

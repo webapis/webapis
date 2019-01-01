@@ -286,7 +286,7 @@ export function BackSpace() {
 export default function HangoutContainer({ state, funcs }) {
   // const { name } = state;
   // useEffect(() => {
-  //   debugger;
+  //
   //   loadHangouts({ ...state, name });
   // }, []);
 

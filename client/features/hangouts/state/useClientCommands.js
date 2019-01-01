@@ -73,11 +73,6 @@ export default function useClientCommands({
       browserId,
     };
 
-    saveHangout({
-      hangout: { ...accept, state: "ACCEPT", command: undefined },
-      username: user && user.username,
-      dispatch,
-    });
     saveSentMessage({
       hangout: accept,
       dispatch,
@@ -85,19 +80,8 @@ export default function useClientCommands({
       dState: "pending",
     });
 
-    saveRecievedMessage({
-      hangout,
-      dispatch,
-      username: user && user.username,
-      dState: "read",
-    });
-    removeUnread({
-      dispatch,
-      hangout: accept,
-      username: user && user.username,
-    });
     onAppRoute({ featureRoute: `/ACCEPT`, appRoute: "/hangouts" });
-    //sendPendingHangout({ hangout: accept });
+
     sendMessage({ data: accept, type: "HANGOUT" });
   }
   function onDecline() {

@@ -18,11 +18,12 @@ export default function useDeliveryAcknowledgement({
     if (
       message &&
       message.type === "HANGOUT" &&
-      message.data.type === "ACKHOWLEDGEMENT"
+      message.data.type === "ACKHOWLEDGEMENT" &&
+      username
     ) {
       onDeliveryAcknowledgement();
     }
-  }, [message]);
+  }, [message, username]);
 
   function handleDelayedAcknowledgements({ hangouts }) {
     hangouts.forEach((hangout) => {

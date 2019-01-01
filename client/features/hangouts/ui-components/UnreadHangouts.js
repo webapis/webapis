@@ -10,12 +10,12 @@ export default function UnreadHangouts({ unreadhangouts, onUnreadSelect }) {
         unreadhangouts.map((u) => {
           return html`
             <li
-              id=${u.username}
-              data-testid=${u.username}
+              id=${u.target}
+              data-testid=${u.target}
               onClick=${() => onUnreadSelect({ hangout: u })}
               class="list-group-item d-flex justify-content-between align-items-center list-group-item-action"
             >
-              ${u.username}, messages:
+              ${u.target}, messages:
               <span class="badge badge-primary">${u.messageCounter}</span>
             </li>
           `;

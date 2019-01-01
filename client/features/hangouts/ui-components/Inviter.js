@@ -6,9 +6,9 @@ import Button from "controls/button/index";
 import Layout from "./Layout";
 const html = htm.bind(h);
 export function Inviter(props) {
-  const { pendingHangout, onUserClientCommand, username } = props;
+  const { pendingHangout, onUserClientCommand, target } = props;
   return html`
-    <${Layout} username=${username} desc="Invitation from ">
+    <${Layout} target=${target} desc="Invitation from ">
       <div
         data-testid="inviter-ui"
         class="d-flex flex-column justify-content-between"
@@ -44,7 +44,7 @@ export function Inviter(props) {
 }
 
 export default function InviterContainer({ state, funcs, hangout }) {
-  const { username, message } = hangout;
+  const { target, message } = hangout;
   const { timestamp, text, state: messageState } = message;
   const { timelog } = useMessageTimeLog({ timestamp });
   return html`
@@ -55,7 +55,7 @@ export default function InviterContainer({ state, funcs, hangout }) {
       timelog=${timelog}
       text=${text}
       state=${messageState}
-      username=${username}
+      target=${target}
     />
   `;
 }
