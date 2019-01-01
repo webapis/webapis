@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import { Done } from '../../layout/icons/Done';
+import { Done } from '../../icons/Done';
 import { Center } from '../../layout/Center';
 import { Layout } from '../state-ui/Layout';
 

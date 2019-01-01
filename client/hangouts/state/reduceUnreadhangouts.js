@@ -1,5 +1,5 @@
 export function reducerUnreadhangouts({unreadhangouts}){
-    return   unreadhangouts.reduce((accumulator, current, index) => {
+    return unreadhangouts.filter(f=> f.read===false).reduce((accumulator, current, index) => {
         if (index === 0) {
           return (accumulator = [{ ...current, messageCount: 1 }]);
         } else {

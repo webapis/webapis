@@ -2,7 +2,7 @@ import { h } from 'preact';
 import {useEffect} from 'preact/hooks'
 import { Suspense, lazy } from 'preact/compat';
 import { NavItem } from '../nav/NavItem';
-import { DrawerContent } from '../layout/DrawerContent';
+import { DrawerContent } from '../components/DrawerContent';
 import { AuthDrawerContent } from '../auth/AuthDrawerContent';
 import { HangoutDrawerContent } from '../hangouts/nav/HangoutDrawerContent';
 import { HangoutTopMenu } from '../hangouts/nav/HangoutTopMenu';

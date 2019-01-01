@@ -1,8 +1,8 @@
 import { h } from 'preact';
 import { useEffect } from 'preact/hooks';
-import { List, ListItem } from '../layout/NavList';
-import { TextInput } from '../layout/TextInput';
-import { Button } from '../layout/Button';
+import { List, ListItem } from '../components/list';
+import { TextInput } from '../components/TextInput';
+import { Button } from '../components/Button';
 import {useAppRoute}from '../app-route/AppRouteProvider'
 import {saveMessage}from './state/actions/delivering-actions/savePendingHangout'
 
@@ -60,7 +60,7 @@ export default function Hangout({
           hangouts.length > 0 &&
           hangouts.map((g) => {
             return (
-              <ListItem id={g.username} onClick={handleHangoutSelection}>
+              <ListItem id={g.username} data-testid={g.username} onClick={handleHangoutSelection}>
                 {g.username}
               </ListItem>
             );

@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import { List, ListItem } from '../../layout/NavList';
+import { List, ListItem } from '../../components/list';
 import { useUserName } from '../../auth/useUserName';
 import {useAppRoute} from '../../app-route/AppRouteProvider'
 import {actionTypes} from '../../app-route/actionTypes'
@@ -29,7 +29,7 @@ const {onAppRoute} =useAppRoute()
       }}
     >
       <List>
-        <ListItem onClick={handleRoute} id='hangouts'>
+        <ListItem onClick={handleRoute} data-testid='hangouts'>
           Hangout
         </ListItem>
  

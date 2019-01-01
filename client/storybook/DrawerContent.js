@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import { List, ListItem } from '../layout/NavList';
+import { List, ListItem } from '../components/list';
 
 import {useAppRoute} from '../app-route/AppRouteProvider'
 export function DrawerContent({ open }) {

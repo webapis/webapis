@@ -119,9 +119,9 @@ function saveUnreadHangout({ name, hangout,dispatch }) {
   let unreadhangouts = JSON.parse(localStorage.getItem(unreadhangoutsKey));
   let updatedunreads = null;
   if (unreadhangouts) {
-    updatedunreads = [unreadhangouts, hangout];
+    updatedunreads = [unreadhangouts, {...hangout,read:false}];
   } else {
-    updatedunreads = [hangout];
+    updatedunreads = [{...hangout,read:false}];
   }
   localStorage.setItem(unreadhangoutsKey, JSON.stringify(updatedunreads));
 

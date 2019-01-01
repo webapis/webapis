@@ -1,6 +1,6 @@
 import { h } from 'preact';
 import { useEffect } from 'preact/hooks';
-import { Button } from '../../layout/Button';
+import { Button } from '../../components/Button';
 import { Message } from '../message-ui/Message';
 import { Layout } from '../state-ui/Layout';
 const style = {

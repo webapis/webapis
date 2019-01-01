@@ -1,6 +1,6 @@
 import { h } from 'preact';
-import { TextInput } from '../../layout/TextInput';
-import { Button } from '../../layout/Button';
+import { TextInput } from '../../components/TextInput';
+import { Button } from '../../components/Button';
 const styles = {
   root: {
     display: 'flex',

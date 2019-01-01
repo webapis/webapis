@@ -1,7 +1,7 @@
 
 import { h } from 'preact';
 import {useAppRoute} from '../app-route/AppRouteProvider'
-import { List, ListItem } from '../layout/NavList';
+import { List, ListItem } from '../components/list';
 import userIcon from './icons/user64.png';
 import { logout } from './actions';
 import { useAuthContext } from './auth-context';

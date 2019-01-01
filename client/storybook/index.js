@@ -12,9 +12,9 @@ import Hangchat from '../hangouts/state-ui/Hangchat';
 import { Message } from '../hangouts/message-ui/Message';
 import { Messages } from '../hangouts/message-ui/Messages';
 import { MessageEditor } from '../hangouts/message-ui/MessageEditor';
-import { OnlineStatus } from '../layout/icons/onlineStatus';
+import { OnlineStatus } from '../icons/onlineStatus';
 import { ThemeProvider } from '../theme/theme-context';
-import { List, ListItem } from '../layout/NavList';
+import { List, ListItem } from '../components/list';
 import { DrawerContent } from './DrawerContent';
 import {IconsDemo} from './IconsDemo'
 import { messages } from './fakeMessages';
