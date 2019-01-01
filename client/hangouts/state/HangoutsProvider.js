@@ -75,6 +75,7 @@ export function HangoutsProvider(props) {
         }
       }
       if (!hangout.read) {
+        debugger;
        debugger;
         updateReadHangouts({ dispatch, hangout, name: username });
       }

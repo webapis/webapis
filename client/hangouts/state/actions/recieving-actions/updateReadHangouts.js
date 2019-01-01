@@ -2,12 +2,24 @@ import { actionTypes } from '../../actionTypes';
 export function updateReadHangouts({ dispatch, name, hangout }) {
   const { username, message } = hangout;
 
-
   // set read to true on unread hangouts
   let unreadhangoutsKey = `${name}-unread-hangouts`;
-  const unreadhangouts =JSON.parse( localStorage.getItem(unreadhangoutsKey))
-  if(unreadhangouts){
-  //  const updatedunread = unreadhangouts.map(u=>u.timestamp===timestamp && u.username===username)
+  const unreadhangouts = JSON.parse(localStorage.getItem(unreadhangoutsKey));
+  debugger
+  if (unreadhangouts&& unreadhangouts.length>0) {
+    debugger;
+    let updatedunread = unreadhangouts.map(u => {
+      if (u.username === username) {
+        debugger;
+        return { ...u, read: true };
+      } else {
+        return u;
+      }
+    });
+debugger
+    localStorage.setItem(unreadhangoutsKey, JSON.stringify(updatedunread));
+dispatch({type:actionTypes.UNREAD_HANGOUTS_UPDATED,unreadhangouts:updatedunread})
+    debugger;
   }
 
   // set hangout to read
@@ -18,9 +30,9 @@ export function updateReadHangouts({ dispatch, name, hangout }) {
   //
   localStorage.setItem(hangoutKey, JSON.stringify(hangouts));
   dispatch({ type: actionTypes.HANGOUTS_UPDATED, hangouts });
-  
+
   if (message) {
-   // updateReadMesssages({ dispatch, hangout, name });
+    // updateReadMesssages({ dispatch, hangout, name });
   }
 }
 

@@ -46,7 +46,7 @@ describe('UNREAD_HANGOUTS', () => {
       password: 'Dragonly_1999!',
     });
     cy.visit('/');
-   
+   cy.wait(50)
   
    // cy.get('[data-testid=nav-unreads]').click()
    // cy.get('[data-testid=demo]').click()
