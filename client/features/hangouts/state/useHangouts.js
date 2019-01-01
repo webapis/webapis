@@ -42,6 +42,16 @@ export function useHangouts({ user }) {
     });
   }
   function onSearchInput(e) {
+    let localHangouts = JSON.parse(
+      localStorage.getItem(`${username}-hangouts`)
+    );
+    let filteredHangouts = localHangouts.filter((h) =>
+      h.target.includes(e.target.value)
+    );
+    dispatch({
+      type: actionTypes.HANGOUTS_UPDATED,
+      hangouts: filteredHangouts,
+    });
     dispatch({ type: actionTypes.SEARCH_INPUT_CHANGE, search: e.target.value });
   }
 
@@ -114,9 +124,9 @@ export function useHangouts({ user }) {
     dispatch({ type: actionTypes.SCROLL_TO_BOTTOM, scrollToBottom });
   }
 
-  function loadLocalHangouts() {
-    loadHangouts({ username, dispatch });
-  }
+  // function loadLocalHangouts() {
+  //   loadHangouts({ username, dispatch });
+  // }
   function resetGuestInvitation() {
     dispatch({ type: actionTypes.RESET_GUEST_INVITATION });
   }
@@ -135,7 +145,7 @@ export function useHangouts({ user }) {
       onGuestEmailInputFocus,
       onNavigation,
       onMessageText,
-      loadLocalHangouts,
+      // loadLocalHangouts,
       resetGuestInvitation,
     },
   };

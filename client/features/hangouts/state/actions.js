@@ -1,5 +1,5 @@
 import { actionTypes } from "./actionTypes";
-
+import { saveHangouts } from "./local-storage/common";
 //retrieves hangouts from localStorage
 export function loadHangouts({ username, dispatch }) {
   const hangouts = JSON.parse(localStorage.getItem(`${username}-hangouts`));
@@ -28,19 +28,22 @@ export function filterHangouts({ dispatch }) {
 }
 
 //fetch hangout from server if not found in local hangouts
-export async function fetchHangout({ search, dispatch, username }) {
+export async function fetchHangouts({ dispatch, username }) {
   try {
-    dispatch({ type: actionTypes.FETCH_HANGOUT_STARTED });
+    dispatch({ type: actionTypes.FETCH_HANGOUTS_STARTED });
     const response = await fetch(
-      `/authed-msg/hangouts/find?search=${search}&username=${username}`
+      `/authed-msg/hangouts/findHangouts?username=${username}`
     );
     if (response.ok) {
+      debugger;
       const { hangouts } = await response.json();
-
-      dispatch({ type: actionTypes.FETCH_HANGOUT_SUCCESS, hangouts });
+      saveHangouts({ hangouts, username });
+      debugger;
+      dispatch({ type: actionTypes.FETCH_HANGOUTS_SUCCESS, hangouts });
     }
   } catch (error) {
-    dispatch({ type: actionTypes.FETCH_HANGOUT_FAILED, error });
+    debugger;
+    dispatch({ type: actionTypes.FETCH_HANGOUTS_FAILED, error });
   }
 }
 export async function searchHangouts({ search, dispatch, username }) {

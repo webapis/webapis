@@ -8,7 +8,7 @@ export default function useFilter({ state, dispatch, onAppRoute, username }) {
 
   useEffect(() => {
     if (username) {
-      loadHangouts({ dispatch, name: username });
+      //  loadHangouts({ dispatch, name: username });
     }
   }, []);
 

@@ -15,6 +15,7 @@ import { actionTypes } from "./actionTypes";
 import * as actions from "./actions";
 import { clientCommands } from "./clientCommands";
 import { loadBrowserId } from "../../authentication/state/AuthProvider";
+import { loadHangouts } from "./local-storage/common";
 import {
   loadMessages,
   removeUnreads,
@@ -55,6 +56,7 @@ export default function HangoutsProvider(props) {
     guestEmail,
     messageForGuest,
     socketConnected,
+    hangouts,
     //  sendhangout,
   } = state;
 
@@ -72,6 +74,16 @@ export default function HangoutsProvider(props) {
     user,
     browserId: loadBrowserId(),
   });
+
+  useEffect(() => {
+    if (user && socketConnected) {
+      actions.fetchHangouts({ dispatch, username: user.username });
+    }
+    if (user && !socketConnected) {
+      loadHangouts({ username: user.username, dispatch });
+    }
+  }, [user, socketConnected]);
+
   useEffect(() => {
     if (
       socketConnected &&

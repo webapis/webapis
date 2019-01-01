@@ -2,9 +2,10 @@ const jwt = require("jsonwebtoken");
 const url = require("url");
 const cookie = require("cookie");
 const { undefinedArguments } = require("../helpers");
-const {
-  authedHangoutHandler,
-} = require("../hangouts/wsocket/authedHangoutHandler");
+// const {
+//   authedHangoutHandler,
+// } = require("../hangouts/wsocket/authedHangoutHandler");
+const { hangoutHandlerNew } = require("../hangouts/wsocket/index");
 module.exports.authedHandlers = async function ({
   request,
   connections,
@@ -28,11 +29,11 @@ module.exports.authedHandlers = async function ({
     connections[`${username}-${browserId}`] = ws;
     switch (true) {
       case request.url.includes("hangouts"):
-        authedHangoutHandler({
+        hangoutHandlerNew({
           ws,
-          request,
-          senderUser,
-          collection,
+          connections,
+          persist: true,
+          username,
           browserId,
         });
         break;

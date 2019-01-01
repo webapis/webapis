@@ -34,14 +34,7 @@ export function WebSocketContainer(props) {
   } = hangoutState;
   const { browserId, authStarted, user } = authState;
   const sng = useSignaling({ socket, hangout, browserId });
-  // function onSocket() {
-  //   const sock = new WebSocket(
-  //     `${socketUrl}/hangouts/?username=${
-  //       user && user.username
-  //     }&browserId=${browserId}`
-  //   );
-  //   dispatch({ type: socketActionTypes.SOCKET_INITIALIZED, socket: sock });
-  // }
+
   useEffect(() => {
     if (authStarted) {
       dispatch({ type: socketActionTypes.INITIAL_STATE });
@@ -59,84 +52,5 @@ export function WebSocketContainer(props) {
     }
   }, [user, socket, browserId]);
 
-  // useEffect(() => {
-  //   if (socket && user) {
-  //     socket.onmessage = (serverMessage) => {
-  //       const msg = JSON.parse(serverMessage.data);
-  //       hangoutDispatch({
-  //         type: actionTypes.SERVER_MESSAGE_RECIEVED,
-  //         message: msg,
-  //       });
-  //     };
-  //     socket.onopen = () => {
-  //       dispatch({
-  //         type: socketActionTypes.SOCKET_CONNECTION_CHANGED,
-  //         connected: true,
-  //       });
-  //       hangoutDispatch({
-  //         type: actionTypes.SOCKET_CONNECTION_STATE_CHANGED,
-  //         connected: true,
-  //       });
-  //     };
-  //     socket.onclose = () => {
-  //       dispatch({
-  //         type: socketActionTypes.SOCKET_CONNECTION_CHANGED,
-  //         connected: false,
-  //       });
-  //       hangoutDispatch({
-  //         type: actionTypes.SOCKET_CONNECTION_STATE_CHANGED,
-  //         connected: false,
-  //       });
-  //     };
-  //     socket.onerror = (error) => {
-  //       const err = error.message;
-  //       //
-  //       hangoutDispatch({ type: actionTypes.SOCKET_ERROR, error });
-  //     };
-  //   }
-  // }, [socket, user]);
-
-  // useEffect(() => {
-  //   if (searchHangouts) {
-  //     //2.
-
-  //     actions.searchHangouts({
-  //       dispatch: hangoutDispatch,
-  //       search,
-  //       username: user && user.username,
-  //     });
-  //   }
-  // }, [searchHangouts]);
-
-  // useEffect(() => {
-  //   if (pendingHangout && socket && socket.readyState === 1) {
-  //     sendPendingHangout();
-  //   }
-  // }, [pendingHangout, socket]);
-
-  // useEffect(() => {
-  //   if (fetchHangouts && user && user.username) {
-  //     actions.findHangouts({
-  //       dispatch: hangoutDispatch,
-  //       username: user.username,
-  //     });
-  //   }
-  // }, [fetchHangouts, user]);
-
-  // useEffect(() => {
-  //   if (invitingGuest && user) {
-  //     actions.InviteAsGuest({
-  //       from: user.email,
-  //       to: guestEmail,
-  //       subject: messageForGuest,
-  //       text: "invitation",
-  //       type: "GUEST_INVITATION",
-  //       dispatch: hangoutDispatch,
-  //     });
-  //   }
-  // }, [invitingGuest, user]);
-  // function sendPendingHangout() {
-  //   socket.send(JSON.stringify({ ...pendingHangout, browserId }));
-  // }
   return html`${children}`;
 }

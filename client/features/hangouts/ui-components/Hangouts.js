@@ -29,7 +29,7 @@ export function Hangouts({
   resetGuestInvitation,
 }) {
   return html`
-    <${Layout} desc="Contact List">
+    <${Layout} desc="Contact List" data-testid="hangout-list">
       <div class="h-100 p-2">
         <${SeachComponent}
           onSearchInput=${onSearchInput}
@@ -62,10 +62,11 @@ export function Hangouts({
           `
         }
 
-        <div class="list-group">
+        <div class="list-group" data-testid="hangouts-list-group">
           ${
             hangouts &&
             hangouts.map((h) => {
+              debugger;
               return html`
                 <div>
                   <a
@@ -290,11 +291,11 @@ export function BackSpace() {
 }
 
 export default function HangoutContainer({ state, funcs, user }) {
-  const { loadLocalHangouts } = funcs;
+  //  const { loadLocalHangouts } = funcs;
 
-  useEffect(() => {
-    loadLocalHangouts({ username: user && user.username });
-  }, []);
+  // useEffect(() => {
+  //   loadLocalHangouts({ username: user && user.username });
+  // }, []);
 
   return html`<${Hangouts} ...${state} ...${funcs} /> `;
 }

@@ -2,14 +2,14 @@ const dbUrl = process.env.DB_URL || "mongodb://127.0.0.1:27017";
 const { MongoClient } = require("mongodb");
 const { undefinedArguments } = require("../../helpers");
 const { sendDelayedAck } = require("./send-message/sendDelayedAck");
-const { removeDelayedAck } = require("./persistance/removeDelayedAck");
+const { removeDelayedAck } = require("./persist-message/removeDelayedAck");
 const { sendUndelivered } = require("./send-message/sendUndelivered");
-const { removeDelivered } = require("./persistance/removeDelivered");
+const { removeDelivered } = require("./persist-message/removeDelivered");
 
 const { sendHangout } = require("./send-message/sendHangout");
-const { updateHangout } = require("./persistance/updateHangout");
-const { saveDelayedAck } = require("./persistance/saveDelayedAck");
-const { saveUndelivered } = require("./persistance/saveUndelivered");
+const { updateHangout } = require("./persist-message/updateHangout");
+const { saveDelayedAck } = require("./persist-message/saveDelayedAck");
+const { saveUndelivered } = require("./persist-message/saveUndelivered");
 
 const { hangoutMapper } = require("./hangoutMapper");
 module.exports.hangoutHandlerNew = async function ({

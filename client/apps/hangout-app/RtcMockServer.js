@@ -33,7 +33,7 @@ export default function RtcMockServer({ children, user }) {
           const {
             data: { hangout },
           } = remoteMessage;
-          debugger;
+
           setOfflineHangouts((prev) => [...prev, hangout]);
         }
       });

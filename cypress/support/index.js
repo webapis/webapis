@@ -36,7 +36,7 @@ import "./hangout/target-online/decline";
 import "./hangout/target-online/undecline";
 import "./hangout/target-online/inviteasguest";
 import "./hangout/sender-offline/invitation";
-
+import "./hangout/findNewUser";
 import "./websocket/index";
 
 import "./hangout/target-offline/Invitation";
