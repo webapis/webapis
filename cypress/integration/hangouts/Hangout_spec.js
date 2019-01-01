@@ -2,11 +2,11 @@ import infoMessages from "../../../client/features/hangouts/ui-components/infoMe
 import testProtocols from "./testProtocols";
 
 describe("Test websocket", () => {
-  it("websocket", () => {
+  it.skip("websocket", () => {
     cy.websocket();
   });
 });
-[/*3005, 3004,*/ 3006].forEach((PORT) => {
+[3005, 3004, 3006].forEach((PORT) => {
   let backend = null;
   if (PORT === 3005) {
     backend = "RtcMock";
@@ -18,15 +18,62 @@ describe("Test websocket", () => {
   describe(`Test hangout with ${backend}`, () => {
     beforeEach(() => {
       cy.viewport(1280, 720);
+      cy.window()
+        .its("localStorage")
+        .invoke("setItem", "browserId", "BID1234567890");
+
       if (PORT === 3006) {
         cy.task("seed:deleteCollection", {
           dbName: "auth",
           collectionName: "users",
         });
+
+        cy.task("seed:user", {
+          email: "demouser@gmail.com",
+          username: "demouser",
+          password: "TestPassword!22s",
+        });
+        cy.task("query:mongodb", {
+          username: "demouser",
+        }).then((result) => {
+          const { email, username, browsers } = result;
+          let actual = { email, username, browsers };
+          let expected = {
+            email: "demouser@gmail.com",
+            username: "demouser",
+            browsers: [
+              {
+                browserId: "BID1234567890",
+              },
+            ],
+          };
+          expect(actual).to.deep.equal(expected);
+        });
+        cy.task("seed:user", {
+          email: "berouser@gmail.com",
+          username: "berouser",
+          password: "TestPassword!22s",
+        });
+        cy.task("query:mongodb", {
+          username: "berouser",
+        }).then((result) => {
+          const { email, username, browsers } = result;
+          let actual = { email, username, browsers };
+          let expected = {
+            email: "berouser@gmail.com",
+            username: "berouser",
+            browsers: [
+              {
+                browserId: "BID1234567890",
+              },
+            ],
+          };
+          expect(actual).to.deep.equal(expected);
+        });
       }
     });
 
-    it.only("Invitation", () => {
+    it("Invitation", () => {
       cy.invitation({ PORT });
     });
 
@@ -34,7 +81,7 @@ describe("Test websocket", () => {
       cy.block({ PORT });
     });
 
-    it("Unblock user ", () => {
+    it("Unblock user", () => {
       cy.unblock({ PORT });
     });
 

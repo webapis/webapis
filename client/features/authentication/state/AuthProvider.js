@@ -198,10 +198,10 @@ function loadUserAndBrowserId({ dispatch }) {
 }
 
 export function loadBrowserId() {
-  if (JSON.parse(localStorage.getItem("browserId"))) {
-    return JSON.parse(localStorage.getItem("browserId"));
+  if (localStorage.getItem("browserId")) {
+    return localStorage.getItem("browserId");
   } else {
-    let browserId = Date.now() + 10;
+    let browserId = `BID${Date.now()}`;
     localStorage.setItem("browserId", JSON.stringify(browserId));
     return browserId;
   }

@@ -2,12 +2,12 @@
 const seedLogin = require("./seedLogin");
 const seedDelete = require("./seedDelete");
 const seedUser = require("./seedUser");
-const seedHangouts = require("./seedHangouts");
 const deleteCollection = require("./deleteCollection");
 const seedOnInvite = require("./seedOnInvite");
 const seedOnAccept = require("./seedOnAccept");
 const dropDatabase = require("./dropDatabase");
 const queryMongoDb = require("./hangout/queryMongoDb");
+const seedHangout = require("./hangout/seedHangout");
 //const onHangoutSeed = require("./hangout/onHangoutSeed");
 ///
 // ***********************************************************
@@ -31,6 +31,9 @@ module.exports = (on, config) => {
   // `config` is the resolved Cypress config
 
   on("task", {
+    "seed:hangout": ({ username, hangout }) => {
+      return seedHangout({ username, hangout });
+    },
     "query:mongodb": ({ username }) => {
       return queryMongoDb({ username });
     },
@@ -42,9 +45,6 @@ module.exports = (on, config) => {
     },
     "seed:delete": () => {
       return seedDelete();
-    },
-    "seed:hangouts": () => {
-      return seedHangouts();
     },
     "seed:deleteCollection": ({ dbName, collectionName }) => {
       return deleteCollection({ dbName, collectionName });

@@ -1,4 +1,27 @@
 Cypress.Commands.add("undecline", ({ PORT }) => {
+  if (PORT === 3006) {
+    let demoHangout = {
+      target: "berouser",
+      email: "berouser@gmail.com",
+      state: "DECLINER",
+      timestampe: 1543536000000,
+      message: { text: "", timestamp: 1543536000000 },
+      browserId: "BID1234567890",
+    };
+    let beroHangout = {
+      target: "demouser",
+      email: "demouser@gmail.com",
+      state: "DECLINED",
+      timestampe: 1543536000000,
+      message: { text: "", timestamp: 1543536000000 },
+      browserId: "BID1234567890",
+    };
+    cy.task("seed:hangout", {
+      username: "demouser",
+      hangout: demoHangout,
+    });
+    cy.task("seed:hangout", { username: "berouser", hangout: beroHangout });
+  }
   cy.window()
     .its("localStorage")
     .invoke(
@@ -71,7 +94,68 @@ Cypress.Commands.add("undecline", ({ PORT }) => {
   cy.get("[data-testid=beroclient]")
     .find("[data-testid=undecline-btn]")
     .click();
+  if (PORT === 3006) {
+    //test data persistence to sender
+    cy.task("query:mongodb", {
+      username: "berouser",
+    }).then((result) => {
+      const { browsers } = result;
 
+      expect(browsers.length).to.equal(1);
+
+      const browser = browsers[0];
+      const { hangouts } = browser;
+      const { timestamp } = hangouts[0];
+
+      let expected = {
+        browserId: "BID1234567890",
+        hangouts: [
+          {
+            target: "demouser",
+            email: "demouser@gmail.com",
+            message: {
+              text: "Invitation accepted",
+              timestamp,
+              type: "undeclined",
+            },
+            timestamp,
+            state: "UNDECLINED",
+            browserId: "BID1234567890",
+          },
+        ],
+      };
+      expect(browser).to.deep.equal(expected);
+    });
+
+    //test data persistence to target
+    cy.task("query:mongodb", { username: "demouser" }).then((result) => {
+      const { browsers } = result;
+
+      expect(browsers.length).to.equal(1);
+
+      const browser = browsers[0];
+      const { hangouts } = browser;
+      const { timestamp } = hangouts[0];
+      let expected = {
+        browserId: "BID1234567890",
+        hangouts: [
+          {
+            target: "berouser",
+            email: "berouser@gmail.com",
+            message: {
+              text: "Invitation accepted",
+              timestamp,
+              type: "undeclined",
+            },
+            timestamp,
+            state: "UNDECLINER",
+          },
+        ],
+      };
+      expect(browser).to.deep.equal(expected);
+    });
+    //cy.pause();
+  } //IF PORT
   cy.get("[data-testid=democlient]")
     .find("[data-testid=message-input]")
     .should("be.enabled");

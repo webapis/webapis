@@ -1,3 +1,5 @@
+const dbUrl = process.env.DB_URL || "mongodb://127.0.0.1:27017";
+const { MongoClient } = require("mongodb");
 const assert = require("assert");
 const { undefinedArguments } = require("../../helpers");
 module.exports.handlePersistance = async function ({
@@ -7,7 +9,7 @@ module.exports.handlePersistance = async function ({
   username,
   hangout,
   connections,
-  collection,
+  //collection,
 }) {
   try {
     undefinedArguments({
@@ -17,24 +19,25 @@ module.exports.handlePersistance = async function ({
       username,
       hangout,
       connections,
-      collection,
+      // collection,
     });
-    debugger;
+    const client = await new MongoClient(dbUrl, { useUnifiedTopology: true });
+    await client.connect();
+    const collection = await client.db("auth").collection("users");
     const { email, message, offline, timestamp } = hangout;
 
     const senderUser = await collection.findOne({ username: senderUserName });
     const senderBrowsers = senderUser.browsers;
     const targetUser = await collection.findOne({ username });
     const targetBrowsers = targetUser.browsers;
-    debugger;
+
     let funcs = {
       senderOffline: async function () {
         for (const browser of senderBrowsers) {
-          debugger;
-          const senderOffline =
+          const senderOnline =
             connections[`${senderUserName}-${browser.browserId}`];
-          debugger;
-          if (senderOffline) {
+
+          if (!senderOnline) {
             await collection.update(
               { username: senderUserName },
               { $push: { "browsers.$[t].delayed": sender } },
@@ -48,8 +51,8 @@ module.exports.handlePersistance = async function ({
       },
       targetOffline: async function () {
         for (const browser of targetBrowsers) {
-          const targetOffline = connections[`${username}-${browser.browserId}`];
-          if (targetOffline) {
+          const targetOnline = connections[`${username}-${browser.browserId}`];
+          if (!targetOnline) {
             await collection.update(
               { username },
               { $push: { "browsers.$[t].undelivered": target } },
@@ -72,7 +75,7 @@ module.exports.handlePersistance = async function ({
             {
               arrayFilters: [
                 { "t.browserId": browser.browserId },
-                { "u.username": senderUserName },
+                { "u.target": senderUserName },
               ],
               multi: true,
             }
@@ -85,13 +88,14 @@ module.exports.handlePersistance = async function ({
         const browsers = user.browsers;
 
         for await (const browser of browsers) {
+          debugger;
           const updateResult = await collection.update(
             { username: senderUserName },
             { $set: { "browsers.$[t].hangouts.$[u]": sender } },
             {
               arrayFilters: [
                 { "t.browserId": browser.browserId },
-                { "u.username": username },
+                { "u.target": username },
               ],
               multi: true,
             }
@@ -105,6 +109,19 @@ module.exports.handlePersistance = async function ({
           const updateResult = await collection.update(
             { username: senderUserName },
             { $push: { "browsers.$[t].hangouts": sender } },
+            {
+              arrayFilters: [{ "t.browserId": browser.browserId }],
+              upsert: true,
+            }
+          );
+        }
+      },
+      pushTargetHangout: async function () {
+        //PUSH HANGOUT ON SENDER
+        for await (const browser of targetBrowsers) {
+          const updateResult = await collection.update(
+            { username },
+            { $push: { "browsers.$[t].hangouts": target } },
             {
               arrayFilters: [{ "t.browserId": browser.browserId }],
               upsert: true,
@@ -143,26 +160,28 @@ module.exports.handlePersistance = async function ({
         funcs.senderOffline();
         //TARGET
         //  funcs.pushTargetUnread(); //INVITER
+        funcs.pushTargetHangout();
         funcs.targetOffline();
         break;
       case "ACCEPT":
         //SENDER-----------------------------------------
         // funcs.pullSenderUnread(); //INVITER
-        funcs.pushSenderHangout(); //ACCEPTED
+        funcs.updateSenderHangout(); //ACCEPTED
         funcs.senderOffline();
         //TARGET-----------------------------------------
         funcs.updateTargetHangout(); //ACCEPTER
         // funcs.pushTargetUnread(); //ACCEPTER
         funcs.targetOffline();
         break;
-      case "DECLINE":
-        //SENDER-----------------------------------------
-        //   funcs.pullSenderUnread(); //INVITER
-        funcs.senderOffline();
-        //TARGET-----------------------------------------
-        funcs.updateTargetHangout(); //DECLINER
-        funcs.targetOffline();
-        break;
+      // case "DECLINE":
+      //   //SENDER-----------------------------------------
+      //   //   funcs.pullSenderUnread(); //INVITER
+      //   funcs.updateSenderHangout(); //DECLINED
+      //   funcs.senderOffline();
+      //   //TARGET-----------------------------------------
+      //   funcs.updateTargetHangout(); //DECLINER
+      //   funcs.targetOffline();
+      //   break;
       case "MESSAGE":
         //SENDER-----------------------------------------
         funcs.updateSenderHangout(); //MESSAGED
@@ -194,7 +213,29 @@ module.exports.handlePersistance = async function ({
         //   funcs.pushTargetUnread(); //UNBLOCKER
         funcs.targetOffline();
         break;
+      case "DECLINE":
+        //SENDER-----------------------------------------
+        funcs.updateSenderHangout(); //BLOCKED
+        funcs.senderOffline();
 
+        //TARGET-----------------------------------------
+        funcs.updateTargetHangout(); //BLOCKER
+        //    funcs.pullTargetAllUnreads(); //ALL
+        //    funcs.pushTargetUnread(); //BLOCKER
+        funcs.pullTargetAllUndelivered();
+
+        funcs.targetOffline();
+        break;
+      case "UNDECLINE":
+        debugger;
+        //SENDER-----------------------------------------
+        funcs.updateSenderHangout(); //UNBLOCKED
+        funcs.senderOffline();
+        //TARGET-----------------------------------------
+        funcs.updateTargetHangout(); //UNBLOCKER
+        //   funcs.pushTargetUnread(); //UNBLOCKER
+        funcs.targetOffline();
+        break;
       case "READING":
         //SENDER-----------------------------------------
         // funcs.pullSenderAllUnreads(); //ALL
@@ -216,7 +257,7 @@ module.exports.handlePersistance = async function ({
     }
   } catch (error) {
     const err = error;
-    debugger;
+
     throw error;
   }
 };

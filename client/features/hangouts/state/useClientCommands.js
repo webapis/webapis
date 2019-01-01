@@ -218,6 +218,7 @@ export default function useClientCommands({
     });
   }
   function onUndecline() {
+    debugger;
     const timestamp = Date.now();
 
     const message = {

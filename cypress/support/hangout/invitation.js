@@ -1,15 +1,5 @@
 import infoMessages from "../../../client/features/hangouts/ui-components/infoMessages";
 Cypress.Commands.add("invitation", ({ PORT }) => {
-  cy.task("seed:user", {
-    email: "demouser@gmail.com",
-    username: "demouser",
-    password: "TestPassword!22s",
-  });
-  cy.task("seed:user", {
-    email: "berouser@gmail.com",
-    username: "berouser",
-    password: "TestPassword!22s",
-  });
   cy.visit(`https://localhost:${PORT}`);
   cy.server();
   cy.route({
@@ -35,17 +25,66 @@ Cypress.Commands.add("invitation", ({ PORT }) => {
   cy.get("[data-testid=democlient]").find("[data-testid=berouser]").click();
 
   cy.get("[data-testid=democlient]").find("[data-testid=oninvite-btn]").click();
-  cy.task("query:mongodb", {
-    username: "demouser",
-  }).then((result) => {
-    debugger;
-  });
-  cy.pause();
-  //cy.pause()
-  // cy.wait("@protocolCatcher").then((xhr) => {
-  //   const { requestBody } = xhr;
-  //   testProtocols({ protocol: requestBody });
-  // });
+  if (PORT === 3006) {
+    //test data persistence to sender
+    cy.task("query:mongodb", {
+      username: "demouser",
+    }).then((result) => {
+      const { browsers } = result;
+
+      expect(browsers.length).to.equal(1);
+
+      const browser = browsers[0];
+      const { hangouts } = browser;
+      const { timestamp } = hangouts[0];
+      let expected = {
+        browserId: "BID1234567890",
+        hangouts: [
+          {
+            target: "berouser",
+            email: "berouser@gmail.com",
+            message: {
+              text: "Let's chat, berouser!",
+              timestamp,
+              type: "invited",
+            },
+            timestamp,
+            state: "INVITED",
+            browserId: "BID1234567890",
+          },
+        ],
+      };
+      expect(browser).to.deep.equal(expected);
+    });
+
+    //test data persistence to target
+    cy.task("query:mongodb", { username: "berouser" }).then((result) => {
+      const { browsers } = result;
+
+      expect(browsers.length).to.equal(1);
+
+      const browser = browsers[0];
+      const { hangouts } = browser;
+      const { timestamp } = hangouts[0];
+      let expected = {
+        browserId: "BID1234567890",
+        hangouts: [
+          {
+            target: "demouser",
+            email: "demouser@gmail.com",
+            message: {
+              text: "Let's chat, berouser!",
+              timestamp,
+              type: "invited",
+            },
+            timestamp,
+            state: "INVITER",
+          },
+        ],
+      };
+      expect(browser).to.deep.equal(expected);
+    });
+  } //IF PORT//
   cy.get("[data-testid=democlient]")
     .find("[data-testid=info-message]")
     .contains(infoMessages.invited);
@@ -68,7 +107,65 @@ Cypress.Commands.add("invitation", ({ PORT }) => {
     .contains(0);
 
   cy.get("[data-testid=beroclient]").find("[data-testid=accept-btn]").click();
+  //test accepted persistence
+  if (PORT === 3006) {
+    cy.task("query:mongodb", {
+      username: "berouser",
+    }).then((result) => {
+      const { browsers } = result;
 
+      expect(browsers.length).to.equal(1);
+
+      const browser = browsers[0];
+      const { hangouts } = browser;
+      const { timestamp } = hangouts[0];
+      let expected = {
+        browserId: "BID1234567890",
+        hangouts: [
+          {
+            target: "demouser",
+            email: "demouser@gmail.com",
+            message: {
+              text: "Accepted your invitation",
+              timestamp,
+            },
+            timestamp,
+            state: "ACCEPTED",
+            browserId: "BID1234567890",
+          },
+        ],
+      };
+      expect(browser).to.deep.equal(expected);
+    });
+
+    cy.task("query:mongodb", {
+      username: "demouser",
+    }).then((result) => {
+      const { browsers } = result;
+
+      expect(browsers.length).to.equal(1);
+
+      const browser = browsers[0];
+      const { hangouts } = browser;
+      const { timestamp } = hangouts[0];
+      let expected = {
+        browserId: "BID1234567890",
+        hangouts: [
+          {
+            target: "berouser",
+            email: "berouser@gmail.com",
+            message: {
+              text: "Accepted your invitation",
+              timestamp,
+            },
+            timestamp,
+            state: "ACCEPTER",
+          },
+        ],
+      };
+      expect(browser).to.deep.equal(expected);
+    });
+  } //IF PORT
   //demouser send a message
   cy.get("[data-testid=democlient]")
     .find("[data-testid=message-input]")
@@ -81,7 +178,66 @@ Cypress.Commands.add("invitation", ({ PORT }) => {
     .find("[data-testid=message-input]")
     .type("Hello Bero how are you");
   cy.get("[data-testid=democlient]").find("[data-testid=send-btn]").click();
+  if (PORT === 3006) {
+    //test data persistence to sender
+    cy.task("query:mongodb", {
+      username: "demouser",
+    }).then((result) => {
+      const { browsers } = result;
 
+      expect(browsers.length).to.equal(1);
+
+      const browser = browsers[0];
+      const { hangouts } = browser;
+      const { timestamp } = hangouts[0];
+      let expected = {
+        browserId: "BID1234567890",
+        hangouts: [
+          {
+            target: "berouser",
+            email: "berouser@gmail.com",
+            message: {
+              text: "Hello Bero how are you",
+              timestamp,
+              //type: "invited",
+            },
+            timestamp,
+            state: "MESSAGED",
+            browserId: "BID1234567890",
+          },
+        ],
+      };
+      expect(browser).to.deep.equal(expected);
+    });
+
+    //test data persistence to target
+    cy.task("query:mongodb", { username: "berouser" }).then((result) => {
+      const { browsers } = result;
+
+      expect(browsers.length).to.equal(1);
+
+      const browser = browsers[0];
+      const { hangouts } = browser;
+      const { timestamp } = hangouts[0];
+      let expected = {
+        browserId: "BID1234567890",
+        hangouts: [
+          {
+            target: "demouser",
+            email: "demouser@gmail.com",
+            message: {
+              text: "Hello Bero how are you",
+              timestamp,
+              //  type: "invited",
+            },
+            timestamp,
+            state: "MESSANGER",
+          },
+        ],
+      };
+      expect(browser).to.deep.equal(expected);
+    });
+  } //IF PORT
   //berouser send a messages
   cy.get("[data-testid=beroclient]")
     .find("[data-testid=message-input]")

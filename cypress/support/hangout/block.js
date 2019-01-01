@@ -1,4 +1,29 @@
 Cypress.Commands.add("block", ({ PORT }) => {
+  if (PORT === 3006) {
+    let demoHangout = {
+      target: "berouser",
+      email: "berouser@gmail.com",
+      state: "MESSAGED",
+      timestampe: 1543536000000,
+      message: { text: "Hello bero", timestamp: 1543536000000 },
+      browserId: "BID1234567890",
+    };
+    let beroHangout = {
+      target: "demouser",
+      email: "demouser@gmail.com",
+      state: "MESSAGER",
+      timestampe: 1543536000000,
+      message: { text: "Hello bero", timestamp: 1543536000000 },
+      browserId: "BID1234567890",
+    };
+    cy.task("seed:hangout", {
+      username: "demouser",
+      hangout: demoHangout,
+    });
+
+    cy.task("seed:hangout", { username: "berouser", hangout: beroHangout });
+  }
+
   cy.window()
     .its("localStorage")
     .invoke(
@@ -86,8 +111,70 @@ Cypress.Commands.add("block", ({ PORT }) => {
   cy.get("[data-testid=beroclient]").find("[data-testid=config-btn]").click();
   cy.get("[data-testid=beroclient]").find("[data-testid=bckui-btn]").click();
   cy.get("[data-testid=beroclient]").find("[data-testid=block-btn]").click();
+  if (PORT === 3006) {
+    //test data persistence to sender
+    cy.task("query:mongodb", {
+      username: "berouser",
+    }).then((result) => {
+      const { browsers } = result;
 
+      expect(browsers.length).to.equal(1);
+
+      const browser = browsers[0];
+      const { hangouts } = browser;
+      const { timestamp } = hangouts[0];
+
+      let expected = {
+        browserId: "BID1234567890",
+        hangouts: [
+          {
+            target: "demouser",
+            email: "demouser@gmail.com",
+            message: {
+              text: "",
+              timestamp,
+              type: "blocked",
+            },
+            timestamp,
+            state: "BLOCKED",
+            browserId: "BID1234567890",
+          },
+        ],
+      };
+      expect(browser).to.deep.equal(expected);
+    });
+
+    //test data persistence to target
+    cy.task("query:mongodb", { username: "demouser" }).then((result) => {
+      const { browsers } = result;
+
+      expect(browsers.length).to.equal(1);
+
+      const browser = browsers[0];
+      const { hangouts } = browser;
+      const { timestamp } = hangouts[0];
+      let expected = {
+        browserId: "BID1234567890",
+        hangouts: [
+          {
+            target: "berouser",
+            email: "berouser@gmail.com",
+            message: {
+              text: "",
+              timestamp,
+              type: "blocked",
+            },
+            timestamp,
+            state: "BLOCKER",
+          },
+        ],
+      };
+      expect(browser).to.deep.equal(expected);
+    });
+    //cy.pause();
+  } //IF PORT
   //demouser will try to send a message to blocked user
+
   cy.get("[data-testid=democlient]")
     .find("[data-testid=message-input]")
     .type("Hi bero hope you have not blovked me");

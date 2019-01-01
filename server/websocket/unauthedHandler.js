@@ -46,11 +46,10 @@ function unAuthedHangoutWsApp({
   try {
     undefinedArguments({ ws, request, connections, peers, cb });
     let senderUser = JSON.parse(url.parse(request.url, true).query.user);
+    debugger;
     peers.push(senderUser);
-    connections[
-      `${senderUser.user.username}-${senderUser.user.browserId}`
-    ] = ws;
-
+    connections[`${senderUser.username}-${senderUser.browserId}`] = ws;
+    debugger;
     ws.on("message", (socketMessage) => {
       const {
         data: {
@@ -59,23 +58,21 @@ function unAuthedHangoutWsApp({
         },
       } = JSON.parse(socketMessage);
 
-      let targetUser = peers.find((p) => p.user.username === target);
-
+      let targetUser = peers.find((p) => p.username === target);
+      debugger; //
       hangoutsHandler({
         socketMessage,
         connections,
         ws,
-        targetUser: targetUser.user,
-        senderUser: senderUser.user,
+        targetUser,
+        senderUser,
         cb,
       });
     });
     ws.on("close", () => {
-      delete connections[
-        `${senderUser.user.username}-${senderUser.user.browserId}`
-      ];
+      delete connections[`${senderUser.username}-${senderUser.browserId}`];
 
-      console.log("socket closed by", senderUser.user.username);
+      console.log("socket closed by", senderUser.username);
     });
   } catch (error) {
     throw error;
@@ -88,9 +85,7 @@ async function unAuthedHangoutWsAndMongoDB({ ws, request, connections }) {
     const client = await new MongoClient(dbUrl, { useUnifiedTopology: true });
     await client.connect();
     const collection = await client.db("auth").collection("users");
-    const {
-      user: { username },
-    } = JSON.parse(url.parse(request.url, true).query.user);
+    const { username } = JSON.parse(url.parse(request.url, true).query.user);
     const senderUser = await collection.findOne({ username });
 
     connections[

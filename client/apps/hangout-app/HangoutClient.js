@@ -19,7 +19,8 @@ export default function HangoutClient({ user }) {
     if (user) {
       setSocketUrl(
         `${RTC_URL}/?user=${JSON.stringify({
-          user: { ...user, browserId: "1234567890" },
+          ...user,
+          browserId: "1234567890",
           browsers: [{ browserId: "1234567890" }],
         })}`
       );

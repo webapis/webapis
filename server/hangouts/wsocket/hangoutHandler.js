@@ -3,7 +3,7 @@ const { undefinedArguments } = require("../../helpers");
 //const mongoDBPersistance = require("./handlePersistance");
 
 module.exports = async function hangoutHandler({
-  collection,
+  //collection,
   socketMessage,
   ws,
   connections,
@@ -13,7 +13,7 @@ module.exports = async function hangoutHandler({
 }) {
   try {
     undefinedArguments({
-      collection,
+      // collection,
       socketMessage,
       ws,
       connections,
@@ -35,6 +35,7 @@ module.exports = async function hangoutHandler({
       timestamp,
       browserId,
     } = hangout;
+
     const sender = {
       target: sTarget,
       email,
@@ -95,10 +96,10 @@ module.exports = async function hangoutHandler({
     await funcs.senderOnline();
     await funcs.targetOnline();
     //persist to  databas//
-    debugger;
+
     await cb({
       connections,
-      collection,
+      //  collection,
       target,
       sender,
       senderUserName: senderUser.username,
@@ -106,7 +107,6 @@ module.exports = async function hangoutHandler({
       hangout,
     });
   } catch (error) {
-    debugger;
     throw error;
   }
 };

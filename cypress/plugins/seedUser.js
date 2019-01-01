@@ -11,12 +11,11 @@ module.exports = async function seedUser({
   email,
   username,
   password,
-  browserId = "1234567890",
+  browserId = "BID1234567890",
 }) {
   try {
     const clnt = await client.connect();
     const database = clnt.db("auth");
-
     const collection = database.collection("users");
     const { hash, salt, iterations } = passhash.hashPassword(password);
     const result = await collection.insertOne({
