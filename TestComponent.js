@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import { AppProvider, useAppContext } from './app-state';
+import { AppProvider, useAppContext } from './app-context';
 
 function Counter() {
   const { state, increment } = useAppContext();

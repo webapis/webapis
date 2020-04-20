@@ -1,0 +1,54 @@
+.auth-form {
+  background-color: #455a64;
+  padding: 5px;
+  border: 1px solid white;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+
+  input {
+    padding: 5px;
+    margin: 5px;
+  }
+
+  button {
+    padding: 5px;
+    margin: 5px;
+  }
+
+  fieldset {
+    padding: 10px;
+    color: white;
+  }
+  a {
+    color: white;
+  }
+}
+
+.main-content {
+  background-color: #546e7a;
+  position: fixed;
+  left: 320px;
+  top: 100px;
+  display: flex;
+  width: 80%;
+  height: 80%;
+  padding: 5px;
+}
+.loading {
+  height: 100%;
+  width: 100%;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+// input:invalid {
+//   box-shadow: 0 0 5px 1px red;
+//   //color: red;
+// }
+.btn {
+  border-radius: 2px;
+  height: 33px;
+  // background-color: red;
+}
