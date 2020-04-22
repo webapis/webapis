@@ -12,7 +12,7 @@ const client = new MongoClient(url, {
 });
 
 export default async function httpRoute(req, res) {
-  serveStatic();
+  
   const { url } = req;
   const authRegex = /.*\/auth\/.*/;
   const crudRegex = /.*\/crud\/.*/;
@@ -65,7 +65,7 @@ export default async function httpRoute(req, res) {
             seedOperation(req, res);
             break;
           default:
-            break;
+            serveStatic(req, res);
         }
       });
       break;
@@ -84,7 +84,7 @@ export default async function httpRoute(req, res) {
           seedOperation(req, res);
           break;
         default:
-          break;
+          serveStatic(req, res);
       }
 
       break;
