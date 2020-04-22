@@ -1,15 +1,15 @@
 import { h, render } from 'preact';
 import { Suspense, lazy } from 'preact/compat';
 import { html } from 'htm/preact';
-import TestComponent from './TestComponent';
-import { AppProvider } from './app-context';
-import { AuthProvider } from './auth/auth-context';
-import { RouteProvider, Route, Link } from './route/router';
+import TestComponent from '../../TestComponent';
+import { AppProvider } from '../../app-context';
+import { AuthProvider } from '../auth/auth-context';
+import { RouteProvider, Route, Link } from '../route/router';
 
-const Login = lazy(() => import('./auth/Login'));
-const ChangePassword = lazy(() => import('./auth/ChangePassword'));
-const ForgotPassword = lazy(() => import('./auth/ForgotPassword'));
-const Signup = lazy(() => import('./auth/Signup'));
+const Login = lazy(() => import('../auth/Login'));
+const ChangePassword = lazy(() => import('../auth/ChangePassword'));
+const ForgotPassword = lazy(() => import('../auth/ForgotPassword'));
+const Signup = lazy(() => import('../auth/Signup'));
 
 render(
   <AppProvider>

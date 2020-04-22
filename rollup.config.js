@@ -1,22 +1,29 @@
-require('dotenv').config()
+require('dotenv').config();
 import resolve from '@rollup/plugin-node-resolve';
 import babel from 'rollup-plugin-babel';
 import postcss from 'rollup-plugin-postcss';
 import image from '@rollup/plugin-image';
-import serve from 'rollup-plugin-serve'
-
+import serve from 'rollup-plugin-serve';
+import htmlTemplate from 'rollup-plugin-generate-html-template';
+import del from 'rollup-plugin-delete';
 const production = !process.env.ROLLUP_WATCH;
 
 export default {
-  input: 'index.js',
+  input: `client/${process.env.appName}/index.js`,
   output: [
     {
-      dir: 'build',
+      dir: `apps/${process.env.appName}/build`,
       format: 'es',
-      sourcemap: "inline",
+      sourcemap: 'inline',
     },
   ],
   plugins: [
+    del({ targets: `apps/${process.env.appName}/build/*` }),
+    htmlTemplate({
+      template: 'config/rollup/html-template/index.html',
+      target: `apps/${process.env.appName}/build/index.html`,
+      attrs: ['type="module"'],
+    }),
     image(),
     postcss({
       extensions: ['.css'],
@@ -24,6 +31,6 @@ export default {
     }),
     resolve(),
     babel(),
-    serve('build')
+    serve(`apps/${process.env.appName}/build/`),
   ],
 };
