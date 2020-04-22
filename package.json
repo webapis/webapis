@@ -7,13 +7,15 @@
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "webcom:dev": "cross-env appName=webcom-app rollup -c -w",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev:serve": "nodemon --exec babel-node server/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.9.0",
+    "@babel/node": "^7.8.7",
     "@babel/plugin-transform-react-jsx": "^7.9.4",
     "@rollup/plugin-image": "^2.0.4",
     "@rollup/plugin-node-resolve": "^7.1.3",

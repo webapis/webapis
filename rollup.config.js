@@ -30,7 +30,17 @@ export default {
       plugins: [],
     }),
     resolve(),
-    babel(),
+    babel({
+      babelrc: false,
+      exclude: 'node_modules/**',
+      plugins: [
+       [ "@babel/plugin-transform-react-jsx",
+        {
+          pragma: "h",
+          pragmaFrag: "Fragment",
+        }],
+      ],
+    }),
     serve(`apps/${process.env.appName}/build/`),
   ],
 };
