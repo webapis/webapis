@@ -4,8 +4,8 @@ var path = require('path');
 
 export default function serveStatic(request, response) {
   debugger;
-  console.log('process.env.appName',`${__dirname}../apps/${process.env.appName}/build/index.html`)
-  console.log('request ', request.url);
+ // console.log('process.env.appName',`${__dirname}../apps/${process.env.appName}/build/index.html`)
+ // console.log('request ', request.url);
 
   var filePath = '.' + request.url;
   if (filePath == './') {

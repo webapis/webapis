@@ -5,10 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "rollup -c",
-    "dev": "rollup -c -w",
-    "webcom:dev": "cross-env appName=webcom-app rollup -c -w",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev:serve": "cross-env appName=webcom-app nodemon --exec babel-node server/index.js"
+    "webcom:dev": "concurrently \"cross-env appName=webcom-app nodemon --exec babel-node server/index.js\" \" cross-env appName=webcom-app rollup -c -w \" "
   },
   "keywords": [],
   "author": "",
@@ -34,6 +32,7 @@
   },
   "dependencies": {
     "bcrypt": "^4.0.1",
+    "concurrently": "^5.1.0",
     "cross-env": "^7.0.2",
     "dotenv": "^8.2.0",
     "jsonwebtoken": "^8.5.1",
