@@ -1,10 +1,10 @@
-import validationMessages from '../../../src/form/validationMessages';
-import authMessages from '../../../src/auth/authMessages';
+import validationMessages from '../../../client/form/validationMessages';
+import authMessages from '../../../client/auth/authMessages';
 describe('Login', () => {
   beforeEach(() => {
     cy.server();
 
-    cy.visit('http://localhost:3000');
+    cy.visit('http://localhost:8000');
     cy.get('[data-testid=bar-tool-Authentication]').click();
     cy.get('[data-testid=login]').click();
   });
