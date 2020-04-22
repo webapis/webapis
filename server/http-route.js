@@ -3,6 +3,7 @@
 import crudOperation from './crud/crud';
 import authOperation from './auth/index';
 import seedOperation from './seed';
+import serveStatic from './serve-static/index';
 const url = 'mongodb://localhost:27017';
 const MongoClient = require('mongodb').MongoClient;
 const client = new MongoClient(url, {
@@ -11,6 +12,7 @@ const client = new MongoClient(url, {
 });
 
 export default async function httpRoute(req, res) {
+  serveStatic();
   const { url } = req;
   const authRegex = /.*\/auth\/.*/;
   const crudRegex = /.*\/crud\/.*/;
@@ -35,40 +37,36 @@ export default async function httpRoute(req, res) {
       debugger;
       res.writeHead(200, responseHeader);
       res.end();
-break;
+      break;
     case 'POST':
     case 'PUT':
-     
+
     case 'DELETE':
-  
       req.on('data', (chunk) => {
-     
         data.push(chunk);
       });
       req.on('end', () => {
-    
         if (data.length > 0) {
-          debugger
+          debugger;
           const body = JSON.parse(data);
           req.body = body;
         }
-          switch (true) {
-            case authRegex.test(url):
-              debugger;
-              authOperation(req, res);
-              break;
-            case crudRegex.test(url):
-              debugger;
-              crudOperation(req, res);
-              break;
-            case seedRegex.test(url):
-              debugger;
-              seedOperation(req, res);
-              break;
-            default:
-              break;
-          }
-        
+        switch (true) {
+          case authRegex.test(url):
+            debugger;
+            authOperation(req, res);
+            break;
+          case crudRegex.test(url):
+            debugger;
+            crudOperation(req, res);
+            break;
+          case seedRegex.test(url):
+            debugger;
+            seedOperation(req, res);
+            break;
+          default:
+            break;
+        }
       });
       break;
     case 'GET':

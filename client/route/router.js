@@ -15,7 +15,7 @@ export function Route(props) {
 
 export function Link(props) {
   const { to } = props;
-  const [setRoute] = useRouteContext();
+  const [route,setRoute] = useRouteContext();
   function handleClick(e) {
     e.preventDefault();
     setRoute(to);
