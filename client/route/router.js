@@ -1,5 +1,5 @@
 import { h, createContext } from 'preact';
-import { useContext, useState, useMemo, useEffect } from 'preact/hooks';
+import { useContext, useState, useMemo } from 'preact/hooks';
 
 const RouteContext = createContext();
 
@@ -15,7 +15,7 @@ export function Route(props) {
 
 export function Link(props) {
   const { to } = props;
-  const [route, setRoute] = useRouteContext();
+  const [setRoute] = useRouteContext();
   function handleClick(e) {
     e.preventDefault();
     setRoute(to);

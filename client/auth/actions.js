@@ -21,7 +21,7 @@ export async function login({ dispatch, state }) {
         headers: {
           'Conten-Type': 'application/json',
           'Access-Control-Allow-Headers': '*',
-          Authorization: 'Basic ' + btoa(`${emailorusername}:${password}`),
+          Authorization: `Basic ${  btoa(`${emailorusername}:${password}`)}`,
         },
         method: 'GET',
       }
@@ -85,8 +85,8 @@ export async function logout({ dispatch, state }) {
   try {
     const { token } = state;
     const response = await fetch(
-      `${process.env.REACT_APP_XAF_SERVER_URL}/auth/logout?` +
-        new URLSearchParams({ token })
+      `${process.env.REACT_APP_XAF_SERVER_URL}/auth/logout?${ 
+        new URLSearchParams({ token })}`
     );
     dispatch({ type: actionTypes.LOGOUT_STARTED });
   } catch (error) {
@@ -131,7 +131,7 @@ export async function changePassword({ dispatch, state }) {
 
       dispatch({
         type: actionTypes.CHANGE_PASSWORD_FAILED,
-        error: error,
+        error,
       });
     } else {
       throw new Error('Changing password failed');
@@ -172,7 +172,7 @@ export async function forgotPassword({ dispatch, state }) {
 
       dispatch({
         type: actionTypes.CHANGE_PASSWORD_FAILED,
-        error: error,
+        error,
       });
     } else {
       throw new Error('Changing password failed');
