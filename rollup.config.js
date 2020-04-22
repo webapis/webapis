@@ -1,8 +1,12 @@
+require('dotenv').config()
 import resolve from '@rollup/plugin-node-resolve';
 import babel from 'rollup-plugin-babel';
 import postcss from 'rollup-plugin-postcss';
 import image from '@rollup/plugin-image';
 import serve from 'rollup-plugin-serve'
+
+const production = !process.env.ROLLUP_WATCH;
+
 export default {
   input: 'index.js',
   output: [
