@@ -1,21 +1,24 @@
-import validationMessages from '../../../src/form/validationMessages';
+import validationMessages from '../../../client/form/validationMessages';
 
 describe('ChangePassword', () => {
   describe('change password with token', () => {
     beforeEach(() => {
       cy.server();
-      cy.route({
-        url: 'http://localhost:8000/auth/changepass',
-        method: 'PUT',
-        status: 400,
-        response: { errors: ['412'] },
-      }).as('changepassSuccess');
-      cy.visit(
-        'http://localhost:3000/auth/changepassword?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlOTU2ZGU2NTUyNmJhM2JkYzdjNDg4YSIsIm5hbWUiOiJ3ZWJhcGlzLmdpdGh1YkBnbWFpbC5jb20iLCJpYXQiOjE1ODY4NjQzNzksImV4cCI6MTYxODQyMTMwNX0.6ija-jjG0Uva5StvQnZucndLOiUigEoQnd88W_qbEBc'
-      );
+      // cy.route({
+      //   url: 'http://localhost:8000/auth/changepass',
+      //   method: 'PUT',
+      //   status: 400,
+      //   response: { errors: ['412'] },
+      // }).as('changepassSuccess');
+      // cy.visit(
+      //   'http://localhost:3000/auth/changepassword?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlOTU2ZGU2NTUyNmJhM2JkYzdjNDg4YSIsIm5hbWUiOiJ3ZWJhcGlzLmdpdGh1YkBnbWFpbC5jb20iLCJpYXQiOjE1ODY4NjQzNzksImV4cCI6MTYxODQyMTMwNX0.6ija-jjG0Uva5StvQnZucndLOiUigEoQnd88W_qbEBc'
+      // );
+
+      cy.visit('/');
+      cy.get('[data-testid=changepassword]').click();
     });
 
-    it('passwordDoNotMatch client', () => {
+    it.only('passwordDoNotMatch client', () => {
       cy.get('[data-testid=password]').type('Dragonfly200!').blur();
       cy.get('[data-testid=confirm]').type('Dragonfly200!_').blur();
       cy.get('[data-testid=message-confirm]').contains(

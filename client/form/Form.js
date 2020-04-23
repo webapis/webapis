@@ -1,7 +1,6 @@
 import { h } from 'preact';
 import { useEffect } from 'preact/hooks';
 import * as validationActions from './actions';
-import { FormProvider } from './form-context';
 const style = {
   display: 'flex',
   flexDirection: 'column',
@@ -10,7 +9,7 @@ const style = {
 
 export default function Form({ children, formTitle, error }) {
   return (
-    <FormProvider>
+
       <fieldset style={style}>
         <legend>{formTitle}:</legend>
         {children}
@@ -27,6 +26,6 @@ export default function Form({ children, formTitle, error }) {
           </div>
         )}
       </fieldset>
-    </FormProvider>
+   
   );
 }

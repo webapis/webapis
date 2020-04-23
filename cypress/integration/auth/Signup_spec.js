@@ -1,28 +1,19 @@
-import validationMessages from '../../../src/form/validationMessages';
-import authMessages from '../../../src/auth/authMessages';
+import validationMessages from '../../../client/form/validationMessages';
+import authMessages from '../../../client/auth/authMessages';
 describe('Signup', () => {
   beforeEach(() => {
     cy.server();
-
-    cy.route({
-      url:
-        'http://localhost:8000/auth/signup?password=1234!&email=registered@gmail.com&username=tkmhouse',
-      status: 400,
-      response: { errors: ['406'] },
-    }).as('passwordInvalid');
-
-    cy.visit('http://localhost:3000');
-    cy.get('[data-testid=bar-tool-Authentication]').click();
+    cy.visit('/')
     cy.get('[data-testid=signup]').click();
   });
   it('signup success', () => {
     cy.server();
     cy.route({
       method: 'post',
-      url: 'http://localhost:8000/auth/signup',
+      url: '/auth/signup',
       response: { token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlOTU2ZGU2NTUyNmJhM2JkYzdjNDg4YSIsIm5hbWUiOiJ3ZWJhcGlzLmdpdGh1YkBnbWFpbC5jb20iLCJpYXQiOjE1ODY4NjQzNzksImV4cCI6MTYxODQyMTMwNX0.6ija-jjG0Uva5StvQnZucndLOiUigEoQnd88W_qbEBc' },
     }).as('success');
-    cy.visit('http://localhost:3000/auth/signup');
+
     cy.get('[data-testid=username]')
       .type('tkmhousenew')
       .get('[data-testid=email]')
@@ -32,9 +23,7 @@ describe('Signup', () => {
       .blur()
       .get('[data-testid=signup-btn]')
       .click();
-    cy.get('[data-testid=welcome]').contains(
-      authMessages.SIGNUP_SUCCESS_MESSAGE
-    );
+
   });
   it('invalid username client', () => {
     cy.get('[data-testid=username]')
@@ -59,10 +48,10 @@ describe('Signup', () => {
   });
 
   it('usernameIsTaken 402 sever', () => {
-    cy.server();
+ 
     cy.route({
       method: 'POST',
-      url: 'http://localhost:8000/auth/signup',
+      url: '/auth/signup',
       status: 400,
       response: { errors: ['402'] },
     }).as('usernameIsTaken');
@@ -79,9 +68,10 @@ describe('Signup', () => {
     );
   });
   it('emailIsRegistered 403 server', () => {
-    cy.server();
+
     cy.route({
-      url: 'http://localhost:8000/auth/signup',
+      url: '/auth/signup',
+      method:'post',
       status: 400,
       response: { errors: ['403'] },
     }).as('emailIsRegistered');
@@ -101,8 +91,9 @@ describe('Signup', () => {
   it('usernameInvalid 405 server', () => {
     cy.server();
     cy.route({
-      url: 'http://localhost:8000/auth/signup',
+      url: '/auth/signup',
       status: 400,
+      method:'post',
       response: { errors: ['405'] },
     }).as('usernameInvalid');
     cy.get('[data-testid=username]')
@@ -118,9 +109,9 @@ describe('Signup', () => {
     );
   });
   it('passwordInvalid 406 server', () => {
-    cy.server();
     cy.route({
-      url: 'http://localhost:8000/auth/signup',
+      url: '/auth/signup',
+      method:'post',
       status: 400,
       response: { errors: ['405'] },
     }).as('usernameInvalid');
@@ -139,7 +130,8 @@ describe('Signup', () => {
   it('emailInvalid 407 server', () => {
     cy.server();
     cy.route({
-      url: 'http://localhost:8000/auth/signup',
+      url: '/auth/signup',
+      method:'post',
       status: 400,
       response: { errors: ['407'] },
     }).as('emailInvalid');

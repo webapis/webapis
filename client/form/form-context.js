@@ -6,7 +6,7 @@ const FormContext = createContext();
 export function useFormContext() {
   const context = useContext(FormContext);
   if (!context) {
-    throw new Error('useFormContext must be used with AppProvider');
+    throw new Error('useFormContext must be used with AuthProvider');
   }
   const [state, dispatch] = context;
 

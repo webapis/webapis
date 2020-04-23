@@ -1,7 +1,7 @@
 import { h } from 'preact';
 import { Suspense, lazy } from 'preact/compat';
 
-
+import { FormProvider } from '../form/form-context';
 import { AuthProvider } from '../auth/auth-context';
 import { Route, Link } from '../route/router';
 
@@ -11,31 +11,29 @@ const ForgotPassword = lazy(() => import('../auth/ForgotPassword'));
 const Signup = lazy(() => import('../auth/Signup'));
 export default function Authentication() {
   return (
-
+    <FormProvider>
       <AuthProvider>
-    
-          <Route path='/changepassword'>
-            <Suspense fallback={<div>loading...</div>}>
-              <ChangePassword />
-            </Suspense>
-          </Route>
-          <Route path='/login'>
-            <Suspense fallback={<div>loading...</div>}>
-              <Login />
-            </Suspense>
-          </Route>
-          <Route path='/signup'>
-            <Suspense fallback={<div>loading...</div>}>
-              <Signup />
-            </Suspense>
-          </Route>
-          <Route path='/forgotpassword'>
-            <Suspense fallback={<div>loading...</div>}>
-              <ForgotPassword />
-            </Suspense>
-          </Route>
-  
+        <Route path='/changepassword'>
+          <Suspense fallback={<div>loading...</div>}>
+            <ChangePassword />
+          </Suspense>
+        </Route>
+        <Route path='/login'>
+          <Suspense fallback={<div>loading...</div>}>
+            <Login />
+          </Suspense>
+        </Route>
+        <Route path='/signup'>
+          <Suspense fallback={<div>loading...</div>}>
+            <Signup />
+          </Suspense>
+        </Route>
+        <Route path='/forgotpassword'>
+          <Suspense fallback={<div>loading...</div>}>
+            <ForgotPassword />
+          </Suspense>
+        </Route>
       </AuthProvider>
-  
+    </FormProvider>
   );
 }

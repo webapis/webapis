@@ -4,6 +4,7 @@ import validationState from './validationStates';
 export const initState = { validation: {} };
 
 export function formReducer(state, action) {
+  debugger;
   let nextState = null;
   switch (action.type) {
     case actionTypes.SERVER_VALIDATION:
@@ -17,7 +18,7 @@ export function formReducer(state, action) {
           },
         },
       };
-
+debugger;
       return nextState;
     case actionTypes.CLIENT_VALIDATION:
       nextState = {

@@ -1,19 +1,21 @@
-import authMessages from '../../../src/auth/authMessages';
-import validationMessages from '../../../src/form/validationMessages';
+import authMessages from '../../../client/auth/authMessages';
+import validationMessages from '../../../client/form/validationMessages';
 describe('Forgot password', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:3000/auth/requestpasschange');
+    cy.server();
+    cy.visit('/');
+    cy.get('[data-testid=forgotpassword]').click();
   });
   it('invalid email', () => {
     cy.get('[data-testid=email]').type('tmerer').blur();
+
     cy.get('[data-testid=message-email]').contains(
       validationMessages.INVALID_EMAIL
     );
   });
   it('email not registered', () => {
-    cy.server();
     cy.route({
-      url: 'http://localhost:8000/auth/requestpasschange',
+      url: '/auth/requestpasschange',
       method: 'post',
       status: 400,
       response: { errors: ['408'] },
@@ -32,15 +34,12 @@ describe('Forgot password', () => {
   it('passwordchange request submitted successfully', () => {
     cy.server();
     cy.route({
-      url: 'http://localhost:8000/auth/requestpasschange',
+      url: '/auth/requestpasschange',
       method: 'post',
-
       response: {},
     });
     cy.get('[data-testid=email]').type('test@gmail.com');
     cy.get('[data-testid=requestpasschange-btn]').click();
-    cy.get('[data-testid=welcome]').contains(
-      authMessages.FORGOT_PASSWORD_SUCCESS_MESSAGE
-    );
+  
   });
 });

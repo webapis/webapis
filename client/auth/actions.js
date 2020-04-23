@@ -11,21 +11,18 @@ export function valueChanged({ propName, value }) {
   };
 }
 
-export async function login({ dispatch, state }) {
+export async function login({ dispatch, state, formDispatch }) {
   try {
     const { emailorusername, password } = state;
     dispatch({ type: actionTypes.LOGIN_STARTED });
-    const response = await fetch(
-      `${REACT_APP_XAF_SERVER_URL}/auth/login`,
-      {
-        headers: {
-          'Conten-Type': 'application/json',
-          'Access-Control-Allow-Headers': '*',
-          Authorization: `Basic ${  btoa(`${emailorusername}:${password}`)}`,
-        },
-        method: 'GET',
-      }
-    );
+    const response = await fetch(`${REACT_APP_XAF_SERVER_URL}/auth/login`, {
+      headers: {
+        'Conten-Type': 'application/json',
+        'Access-Control-Allow-Headers': '*',
+        Authorization: `Basic ${btoa(`${emailorusername}:${password}`)}`,
+      },
+      method: 'GET',
+    });
     debugger;
     const result = await response.json();
     debugger;
@@ -35,7 +32,7 @@ export async function login({ dispatch, state }) {
       const { errors } = result;
 
       errors.forEach((error) => {
-        dispatch(
+        formDispatch(
           serverValidation({
             status: error,
           })
@@ -50,28 +47,26 @@ export async function login({ dispatch, state }) {
   }
 }
 
-export async function signup({ dispatch, state }) {
+export async function signup({ dispatch, formDispatch, state }) {
   dispatch({ type: actionTypes.SIGNUP_STARTED });
   const { email, password, username } = state;
   try {
-    const response = await fetch(
-      `${REACT_APP_XAF_SERVER_URL}/auth/signup`,
-      {
-        body: JSON.stringify({ password, email, username }),
-        headers: {
-          ContentType: 'application/json',
-          Accept: 'application/json',
-        },
-        method: 'POST',
-      }
-    );
+    const response = await fetch(`${REACT_APP_XAF_SERVER_URL}/auth/signup`, {
+      body: JSON.stringify({ password, email, username }),
+      headers: {
+        ContentType: 'application/json',
+        Accept: 'application/json',
+      },
+      method: 'POST',
+    });
     const result = await response.json();
     if (response.status === 200) {
       dispatch({ type: actionTypes.SIGNUP_SUCCESS, token: result.token });
     } else if (response.status === 400) {
       const { errors } = result;
       errors.forEach((error) => {
-        dispatch(
+        debugger;
+        formDispatch(
           serverValidation({
             status: error,
           })
@@ -88,8 +83,9 @@ export async function logout({ dispatch, state }) {
   try {
     const { token } = state;
     const response = await fetch(
-      `${REACT_APP_XAF_SERVER_URL}/auth/logout?${ 
-        new URLSearchParams({ token })}`
+      `${REACT_APP_XAF_SERVER_URL}/auth/logout?${new URLSearchParams({
+        token,
+      })}`
     );
     dispatch({ type: actionTypes.LOGOUT_STARTED });
   } catch (error) {
@@ -147,14 +143,17 @@ export async function changePassword({ dispatch, state }) {
   }
 }
 
-export async function forgotPassword({ dispatch, state }) {
+export async function forgotPassword({ dispatch, state, formDispatch }) {
   try {
     dispatch({ type: actionTypes.REQUEST_PASS_CHANGE_STARTED });
     const { email } = state;
-    const response = await fetch('/requestpasschange', {
-      method: 'post',
-      body: JSON.stringify({ email }),
-    });
+    const response = await fetch(
+      `${REACT_APP_XAF_SERVER_URL}/auth/requestpasschange`,
+      {
+        method: 'post',
+        body: JSON.stringify({ email }),
+      }
+    );
     const result = await response.json();
     if (response.status === 200) {
       dispatch({
@@ -164,7 +163,7 @@ export async function forgotPassword({ dispatch, state }) {
     } else if (response.status === 400) {
       const { errors } = result;
       errors.forEach((error) => {
-        dispatch(
+        formDispatch(
           serverValidation({
             status: error,
           })
