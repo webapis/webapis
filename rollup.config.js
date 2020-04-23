@@ -6,6 +6,8 @@ import image from '@rollup/plugin-image';
 import serve from 'rollup-plugin-serve';
 import htmlTemplate from 'rollup-plugin-generate-html-template';
 import del from 'rollup-plugin-delete';
+import { terser } from "rollup-plugin-terser";
+
 const production = !process.env.ROLLUP_WATCH;
 
 export default {
@@ -18,6 +20,7 @@ export default {
     },
   ],
   plugins: [
+
     del({ targets: `apps/${process.env.appName}/build/*` }),
     htmlTemplate({
       template: 'config/rollup/html-template/index.html',
@@ -41,6 +44,8 @@ export default {
         }],
       ],
     }),
+    production &&  terser(),
+  
     serve(`apps/${process.env.appName}/build/`),
   ],
 };

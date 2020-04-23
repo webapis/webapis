@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "cypress:open":"npx cypress open",
+    "cypress:open": "npx cypress open",
     "build": "rollup -c",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "webcom:client": "cross-env appName=webcom-app rollup -c -w ",
     "webcom:dev": "concurrently \"cross-env appName=webcom-app nodemon --exec babel-node server/index.js\" \" cross-env appName=webcom-app rollup -c -w \" \"npm run cypress:open\""
   },
   "keywords": [],
@@ -27,8 +28,10 @@
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-delete": "^1.2.0",
     "rollup-plugin-generate-html-template": "^1.6.1",
+    "rollup-plugin-gzip": "^2.4.0",
     "rollup-plugin-postcss": "^2.8.2",
     "rollup-plugin-serve": "^1.0.1",
+    "rollup-plugin-terser": "^5.3.0",
     "supertest": "^4.0.2"
   },
   "dependencies": {

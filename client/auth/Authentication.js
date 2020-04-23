@@ -14,10 +14,6 @@ export default function Authentication() {
 
       <AuthProvider>
     
-          <Link to='/changepassword'>ChangePassword</Link>
-          <Link to='/login'>Login</Link>
-          <Link to='/signup'>Signup</Link>
-          <Link to='/forgotpassword'>ForgotPassword</Link>
           <Route path='/changepassword'>
             <Suspense fallback={<div>loading...</div>}>
               <ChangePassword />

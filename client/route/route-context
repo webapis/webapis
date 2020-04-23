@@ -17,13 +17,21 @@ export function Route(props) {
 export function Link(props) {
   const { to } = props;
   const { state, push } = useRouteContext();
+  const theme = useThemeContext();
   function handleClick(e) {
     e.preventDefault();
     push(to);
   }
-  return <a {...props} href={to} onClick={handleClick} />;
+  return (
+    <a
+      style={{ backgroundColor: 'yellow' }}
+      {...props}
+      href={to}
+      onClick={handleClick}
+    />
+  );
 }
-
+//////
 export function useRouteContext() {
   const context = useContext(RouteContext);
   if (!context) {
@@ -47,9 +55,8 @@ export function RouteProvider(props) {
   function handlePopState() {
     setState((prev) => ({ ...prev, location: window.location }));
   }
- 
-  useEffect(() => {
 
+  useEffect(() => {
     window.addEventListener('popstate', handlePopState);
     return () => {
       window.removeEventListener('popstate', handlePopState);

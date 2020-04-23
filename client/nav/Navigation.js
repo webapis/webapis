@@ -1,9 +1,28 @@
 import { h } from 'preact';
-
-export default function Navigation() {
+import { useThemeContext } from '../theme/theme-context';
+import './css/style.css';
+export default function Navigation(props) {
+  const { children } = props;
+  debugger;
+  const theme = useThemeContext();
+  debugger;
   return (
-    <ul>
-      <li>Login</li>
-    </ul>
+    <div
+      style={{
+        ...theme.primary,
+        minHeight: 56,
+        paddingLeft: 16,
+        paddingRight: 16,
+        display: 'flex',
+        alignItems: 'center',
+      }}
+    >
+      {children}
+    </div>
   );
+}
+
+export function NavItem(props) {
+  const { children } = props;
+  return <div className='nav-item'>{children}</div>;
 }

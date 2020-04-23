@@ -5,7 +5,7 @@ import { FormProvider } from './form-context';
 const style = {
   display: 'flex',
   flexDirection: 'column',
-  width: 300,
+
 };
 
 export default function Form({ children, formTitle, error }) {

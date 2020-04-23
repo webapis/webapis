@@ -15,12 +15,19 @@ export function Route(props) {
 
 export function Link(props) {
   const { to } = props;
-  const [route,setRoute] = useRouteContext();
+  const [route, setRoute] = useRouteContext();
   function handleClick(e) {
     e.preventDefault();
     setRoute(to);
   }
-  return <a {...props} href={to} onClick={handleClick} />;
+  return (
+    <a
+      {...props}
+      href={to}
+      onClick={handleClick}
+      style={{ textDecoration: 'none', color: 'inherit' }}
+    />
+  );
 }
 
 export function useRouteContext() {
@@ -31,7 +38,7 @@ export function useRouteContext() {
 
   return context;
 }
-
+//
 export function RouteProvider(props) {
   const [route, setRoute] = useState('/');
 
