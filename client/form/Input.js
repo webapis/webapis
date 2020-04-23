@@ -105,7 +105,7 @@ export default function Input({
   }, [inputValidation]);
   function handleFocus() {
     validationTypes.forEach((validationName) => {
-      if (state.form.validation[validationName]) {
+      if (state.validation[validationName]) {
         dispatch(
           actions.resetInputValidationState({ validationType: validationName })
         );
@@ -170,7 +170,7 @@ export default function Input({
             <div key={validationName} style={style.message}>
               {message !== '' && (
                 <div
-                  role="message"
+                  role='message'
                   data-testid={`message-${name}`}
                 >{`* ${message}`}</div>
               )}

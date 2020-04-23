@@ -1,3 +1,4 @@
+import 'whatwg-fetch';
 import { h, render } from 'preact';
 import { RouteProvider, Link } from '../route/router';
 import Navigation, { NavItem } from '../nav/Navigation';
@@ -17,10 +18,24 @@ render(
     <RouteProvider>
       <Navigation>
         <NavItem>
-          <Link to='/login'>LOGIN</Link>
+          <Link id='login' to='/login'>
+            LOGIN
+          </Link>
         </NavItem>
         <NavItem>
-          <Link to='/signup'>SIGNUP</Link>
+          <Link id='signup' to='/signup'>
+            SIGNUP
+          </Link>
+        </NavItem>
+        <NavItem>
+          <Link id='forgotpassword' to='/forgotpassword'>
+            FORGOT PASSWORD
+          </Link>
+        </NavItem>
+        <NavItem>
+          <Link id='changepassword' to='/changepassword'>
+            CHANGE PASSWORD
+          </Link>
         </NavItem>
       </Navigation>
       <Authentication />
@@ -28,4 +43,3 @@ render(
   </ThemeProvider>,
   document.body
 );
-

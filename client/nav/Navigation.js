@@ -3,9 +3,9 @@ import { useThemeContext } from '../theme/theme-context';
 import './css/style.css';
 export default function Navigation(props) {
   const { children } = props;
-  debugger;
+
   const theme = useThemeContext();
-  debugger;
+
   return (
     <div
       style={{

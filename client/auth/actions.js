@@ -16,7 +16,7 @@ export async function login({ dispatch, state }) {
     const { emailorusername, password } = state;
     dispatch({ type: actionTypes.LOGIN_STARTED });
     const response = await fetch(
-      `${process.env.REACT_APP_XAF_SERVER_URL}/auth/login`,
+      `${REACT_APP_XAF_SERVER_URL}/auth/login`,
       {
         headers: {
           'Conten-Type': 'application/json',
@@ -26,7 +26,9 @@ export async function login({ dispatch, state }) {
         method: 'GET',
       }
     );
+    debugger;
     const result = await response.json();
+    debugger;
     if (response.status === 200) {
       dispatch({ type: actionTypes.LOGIN_SUCCESS, token: result.token });
     } else if (response.status === 400) {
@@ -43,6 +45,7 @@ export async function login({ dispatch, state }) {
       throw new Error('Login failed');
     }
   } catch (error) {
+    debugger;
     dispatch({ type: actionTypes.LOGIN_FAILED, payload: { error } });
   }
 }
@@ -52,7 +55,7 @@ export async function signup({ dispatch, state }) {
   const { email, password, username } = state;
   try {
     const response = await fetch(
-      `${process.env.REACT_APP_XAF_SERVER_URL}/auth/signup`,
+      `${REACT_APP_XAF_SERVER_URL}/auth/signup`,
       {
         body: JSON.stringify({ password, email, username }),
         headers: {
@@ -85,7 +88,7 @@ export async function logout({ dispatch, state }) {
   try {
     const { token } = state;
     const response = await fetch(
-      `${process.env.REACT_APP_XAF_SERVER_URL}/auth/logout?${ 
+      `${REACT_APP_XAF_SERVER_URL}/auth/logout?${ 
         new URLSearchParams({ token })}`
     );
     dispatch({ type: actionTypes.LOGOUT_STARTED });
@@ -98,7 +101,7 @@ export async function changePassword({ dispatch, state }) {
   try {
     const { confirm, password, token, emailorusername, current } = state;
     const response = await fetch(
-      `${process.env.REACT_APP_XAF_SERVER_URL}/auth/changepass`,
+      `${REACT_APP_XAF_SERVER_URL}/auth/changepass`,
       {
         method: 'put',
         body: JSON.stringify({

@@ -14,7 +14,7 @@ export function Route(props) {
 }
 
 export function Link(props) {
-  const { to } = props;
+  const { to, id } = props;
   const [route, setRoute] = useRouteContext();
   function handleClick(e) {
     e.preventDefault();
@@ -22,6 +22,7 @@ export function Link(props) {
   }
   return (
     <a
+      data-testid={id}
       {...props}
       href={to}
       onClick={handleClick}

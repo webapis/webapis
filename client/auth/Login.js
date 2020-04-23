@@ -13,7 +13,7 @@ export default function Login() {
 
   function handleChange(e) {
     const { name, value } = e.target;
-    dispatch(actions.valueChanged({ propName, value, dispatch, state }));
+    dispatch(actions.valueChanged({ propName:name, value, dispatch, state }));
   }
   function handleLogin() {
     dispatch(actions.login({ dispatch, state }));
