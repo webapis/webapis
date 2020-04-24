@@ -116,6 +116,7 @@ export function validateEmptyString({ value }) {
 }
 
 export function validatePasswordMatch({ state }) {
+  debugger;
   const { password, confirm } = state.auth;
 
   if (password === '' || password !== confirm) {

@@ -17,6 +17,40 @@ describe('ChangePassword', () => {
       cy.visit('/');
       cy.get('[data-testid=changepassword]').click();
     });
+    
+    describe('STATE:User was not logged in',()=>{
+      it.only('empty emailorusername,current, password,confirm client', () => {
+     
+        cy.get('[data-testid=emailorusername]')
+          .focus()
+          .blur()
+          .get('[data-testid=message-emailorusername]')
+          .contains(validationMessages.INVALID_USERNAME_OR_EMAIL);
+        cy.get('[data-testid=current]')
+          .focus()
+          .blur()
+          .get('[data-testid=message-current]')
+          .contains(validationMessages.INVALID_EMPTY_STRING);
+        cy.get('[data-testid=password]')
+          .focus()
+          .blur()
+          .get('[data-testid=message-password]')
+          .contains(validationMessages.INVALID_PASSWORD);
+        cy.get('[data-testid=confirm]')
+          .focus()
+          .blur()
+          .get('[data-testid=message-confirm]')
+          .contains(validationMessages.PASSWORDS_DO_NOT_MATCH);
+      });
+    })
+
+    describe('STATE:User was logged in',()=>{
+
+    })
+
+    describe('STATE:user changes password from email link',()=>{
+
+    })
 
     it.only('passwordDoNotMatch client', () => {
       cy.get('[data-testid=password]').type('Dragonfly200!').blur();
@@ -71,29 +105,7 @@ describe('ChangePassword', () => {
   });
 
   describe('change password with email and password', () => {
-    it('empty emailorusername,current, password,confirm client', () => {
-      cy.visit('http://localhost:3000/auth/changepassword');
-      cy.get('[data-testid=emailorusername]')
-        .focus()
-        .blur()
-        .get('[data-testid=message-emailorusername]')
-        .contains(validationMessages.INVALID_USERNAME_OR_EMAIL);
-      cy.get('[data-testid=current]')
-        .focus()
-        .blur()
-        .get('[data-testid=message-current]')
-        .contains(validationMessages.INVALID_EMPTY_STRING);
-      cy.get('[data-testid=password]')
-        .focus()
-        .blur()
-        .get('[data-testid=message-password]')
-        .contains(validationMessages.INVALID_PASSWORD);
-      cy.get('[data-testid=confirm]')
-        .focus()
-        .blur()
-        .get('[data-testid=message-confirm]')
-        .contains(validationMessages.PASSWORDS_DO_NOT_MATCH);
-    });
+
 
     it('invalid emailorusername client', () => {
       cy.visit('http://localhost:3000/auth/changepassword');
