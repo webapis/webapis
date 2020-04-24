@@ -4,7 +4,7 @@ import * as actions from './actions';
 import validationStates from './validationStates';
 import { isClientValidationType } from './constraintValidators';
 import EyeIcon from './EyeIcon';
-import { useFormContext } from './form-context';
+import { useAppContext } from '../app-context';
 function ValidityIcon({ valid }) {
   let stateColor = '#4fc3f7';
   switch (valid) {
@@ -38,7 +38,6 @@ function ValidityIcon({ valid }) {
 
 const style = {
   input: {
-   
     border: '1px solid',
     padding: 8,
     flex: 10,
@@ -71,7 +70,8 @@ export default function Input({
   validationTypes = [],
   id,
 }) {
-  const { state, dispatch } = useFormContext();
+  const { form, auth } = useAppContext();
+  const { state, dispatch } = form;
 
   const [inputValidation, setInputValidation] = useState({
     validationState: validationStates.INACTIVE,
@@ -120,6 +120,7 @@ export default function Input({
             validationType: validationName,
             value,
             state,
+             auth,
           })
         );
       }

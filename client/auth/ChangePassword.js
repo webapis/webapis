@@ -5,13 +5,20 @@ import Input from '../form/Input';
 import Form from '../form/Form';
 import Button from '../form/Button';
 import validationTypes from '../form/validationTypes';
-import { useAuthContext } from './auth-context';
+import { useAppContext } from '../app-context';
 import * as actions from './actions';
-import { getTokenFromUrl } from './actions';
-export default function ChangePassword() {
-  const { dispatch, state } = useAuthContext();
 
-  const { password, confirm, current, emailorusername, token, error } = state;
+export default function ChangePassword() {
+  const { form, auth } = useAppContext();
+const {state,dispatch}=auth
+  const {
+    password,
+    confirm,
+    current,
+    emailorusername,
+    token,
+    error,
+  } = state;
 
   useEffect(() => {
     let url = new URL(window.location.href);
@@ -23,21 +30,34 @@ export default function ChangePassword() {
 
   function handleChange(e) {
     const { name, value } = e.target;
-    actions.valueChanged({ propName: name, value, dispatch, state });
+   dispatch(
+      actions.valueChanged({
+        propName: name,
+        value,
+        dispatch,
+        state
+      })
+    );
   }
   function handleChangePass() {
-    actions.changePassword({ dispatch, state });
+    dispatch(
+      actions.changePassword({
+        dispatch,
+        state,
+        formDispatch: form.dispatch,
+      })
+    );
   }
   return (
-    <div data-testid="signupform" className="auth-form">
-      <Form formTitle="Change Password" error={error}>
+    <div data-testid='signupform' className='auth-form'>
+      <Form formTitle='Change Password' error={error}>
         {!token && (
           <Input
             value={emailorusername}
-            type="text"
-            id="emailorusername"
-            name="emailorusername"
-            placeholder="Enter email or username"
+            type='text'
+            id='emailorusername'
+            name='emailorusername'
+            placeholder='Enter email or username'
             onChange={handleChange}
             validationTypes={[
               validationTypes.USERNAME_OR_EMAIL_FORMAT_VALIDATION,
@@ -48,11 +68,11 @@ export default function ChangePassword() {
         {!token && (
           <Input
             value={current}
-            type="password"
-            id="current"
-            name="current"
+            type='password'
+            id='current'
+            name='current'
             onChange={handleChange}
-            placeholder="Enter current password"
+            placeholder='Enter current password'
             validationTypes={[
               validationTypes.EMPTY_STRING_VALIDATION,
               validationTypes.INVALID_CREDENTIALS,
@@ -62,28 +82,28 @@ export default function ChangePassword() {
 
         <Input
           value={password}
-          type="password"
-          id="password"
-          name="password"
-          placeholder="Enter new password"
+          type='password'
+          id='password'
+          name='password'
+          placeholder='Enter new password'
           onChange={handleChange}
           validationTypes={[validationTypes.PASSWORD_FORMAT_VALIDATION]}
         />
         <Input
           value={confirm}
-          type="password"
-          id="confirm"
-          name="confirm"
-          placeholder="Confirm new password"
+          type='password'
+          id='confirm'
+          name='confirm'
+          placeholder='Confirm new password'
           onChange={handleChange}
           validationTypes={[validationTypes.PASSWORDS_MATCH_VALIDATION]}
         />
         <Button
-          type="button"
-          id="change-pass-btn"
-          data-testid="change-pass-btn"
+          type='button'
+          id='change-pass-btn'
+          data-testid='change-pass-btn'
           onClick={handleChangePass}
-          title="Change"
+          title='Change'
         />
       </Form>
     </div>

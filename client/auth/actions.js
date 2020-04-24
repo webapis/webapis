@@ -12,6 +12,7 @@ export function valueChanged({ propName, value }) {
 }
 
 export async function login({ dispatch, state, formDispatch }) {
+  debugger;
   try {
     const { emailorusername, password } = state;
     dispatch({ type: actionTypes.LOGIN_STARTED });
@@ -23,14 +24,15 @@ export async function login({ dispatch, state, formDispatch }) {
       },
       method: 'GET',
     });
- 
+    debugger;
     const result = await response.json();
-
+    debugger;
     if (response.status === 200) {
       dispatch({ type: actionTypes.LOGIN_SUCCESS, token: result.token });
     } else if (response.status === 400) {
+      debugger;
       const { errors } = result;
-
+      debugger;
       errors.forEach((error) => {
         formDispatch(
           serverValidation({
@@ -42,7 +44,7 @@ export async function login({ dispatch, state, formDispatch }) {
       throw new Error('Login failed');
     }
   } catch (error) {
- 
+ debugger;
     dispatch({ type: actionTypes.LOGIN_FAILED, payload: { error } });
   }
 }
@@ -92,7 +94,7 @@ export async function logout({ dispatch, state }) {
     dispatch({ type: actionTypes.LOGOUT_FAILED, error });
   }
 }
-export async function changePassword({ dispatch, state }) {
+export async function changePassword({ dispatch, state, formDispatch }) {
   dispatch({ type: actionTypes.CHANGE_PASSWORD_STARTED });
   try {
     const { confirm, password, token, emailorusername, current } = state;
@@ -119,7 +121,7 @@ export async function changePassword({ dispatch, state }) {
     } else if (response.status === 400) {
       const { errors } = result;
       errors.forEach((error) => {
-        dispatch(
+        formDispatch(
           serverValidation({
             status: error,
           })

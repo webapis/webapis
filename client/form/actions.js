@@ -7,7 +7,7 @@ import actionTypes from './actionTypes';
 import httpStatus from './http-status';
 import validationMessages from './validationMessages';
 
-export function clientValidation({ validationType, value, state }) {
+export function clientValidation({ validationType, value, auth }) {
   let validation = null;
   switch (validationType) {
     case constValTypes.EMAIL_FORMAT_VALIDATION:
@@ -35,7 +35,7 @@ export function clientValidation({ validationType, value, state }) {
       break;
     case constValTypes.PASSWORDS_MATCH_VALIDATION:
    
-      validation = validations.validatePasswordMatch({ state });
+      validation = validations.validatePasswordMatch({ auth });
       break;
     default:
       break;

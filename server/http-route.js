@@ -1,5 +1,5 @@
 /* eslint-disable linebreak-style */
-/* eslint-disable indent */
+/* eslint-disable indent *///
 import crudOperation from './crud/crud';
 import authOperation from './auth/index';
 import seedOperation from './seed';

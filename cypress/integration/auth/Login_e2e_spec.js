@@ -11,7 +11,7 @@ describe('Login e2e', () => {
     cy.get('[data-testid=login]').click();
   });
 
-  it.only('Sucess Login', () => {
+  it('Sucess Login', () => {
     cy.server()
     cy.route('GET', '/auth/login').as('login')
     cy.get('[data-testid=emailOrUsername]').type('test@gmail.com');

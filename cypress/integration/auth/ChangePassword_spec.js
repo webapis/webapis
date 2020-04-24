@@ -17,10 +17,9 @@ describe('ChangePassword', () => {
       cy.visit('/');
       cy.get('[data-testid=changepassword]').click();
     });
-    
-    describe('STATE:User was not logged in',()=>{
-      it.only('empty emailorusername,current, password,confirm client', () => {
-     
+
+    describe('STATE:User was not logged in', () => {
+      it('all fields are empty client', () => {
         cy.get('[data-testid=emailorusername]')
           .focus()
           .blur()
@@ -42,17 +41,59 @@ describe('ChangePassword', () => {
           .get('[data-testid=message-confirm]')
           .contains(validationMessages.PASSWORDS_DO_NOT_MATCH);
       });
-    })
 
-    describe('STATE:User was logged in',()=>{
+      it('invalid emailorusername client', () => {
+        cy.get('[data-testid=emailorusername]')
+          .type('1234')
+          .blur()
+          .get('[data-testid=message-emailorusername]')
+          .contains(validationMessages.INVALID_USERNAME_OR_EMAIL);
+      });
 
-    })
+      it('invalid credentials server', () => {
+        cy.route({
+          method: 'put',
+          url: '/auth/changepass',
+          status: 400,
+          response: { errors: ['401'] },
+        }).as('changepass');
+        cy.get('[data-testid=emailorusername]').type('test@gmail.com');
+        cy.get('[data-testid=current]').type('Dragondlt!23');
+        cy.get('[data-testid=password]').type('Dragondlt!23');
+        cy.get('[data-testid=confirm]').type('Dragondlt!23');
+        cy.get('[data-testid=change-pass-btn]').click();
 
-    describe('STATE:user changes password from email link',()=>{
+        cy.wait('@changepass').should((xhr) => {
+          expect(xhr.status).to.equal(400);
+        });
+      });
+      it('invalid password client', () => {
+        cy.get('[data-testid=emailorusername]').type('test@gmail.com');
+        cy.get('[data-testid=current]').type('Dragondlt!23');
+        cy.get('[data-testid=password]')
+          .type('Dra')
+          .blur()
+          .get('[data-testid=message-password]')
+          .contains(validationMessages.INVALID_PASSWORD);
+      });
+      it('passwords do not match client',()=>{
+        cy.get('[data-testid=emailorusername]').type('test@gmail.com');
+        cy.get('[data-testid=current]').type('Dragondlt!23');
+        cy.get('[data-testid=password]').type('Dragondlt!23');
+        cy.get('[data-testid=confirm]').type('Dragondlt!').blur()
+        .get('[data-testid=message-confirm]')
+        .contains(validationMessages.PASSWORDS_DO_NOT_MATCH);
+      });
+    });
 
-    })
+    describe('STATE:User was logged in', () => {
+      it.only('')
 
-    it.only('passwordDoNotMatch client', () => {
+    });
+
+    describe('STATE:user changes password from email link', () => {});
+
+    it('passwordDoNotMatch client', () => {
       cy.get('[data-testid=password]').type('Dragonfly200!').blur();
       cy.get('[data-testid=confirm]').type('Dragonfly200!_').blur();
       cy.get('[data-testid=message-confirm]').contains(
@@ -103,18 +144,4 @@ describe('ChangePassword', () => {
       cy.get('[data-testid=change-pass-btn]').click();
     });
   });
-
-  describe('change password with email and password', () => {
-
-
-    it('invalid emailorusername client', () => {
-      cy.visit('http://localhost:3000/auth/changepassword');
-      cy.get('[data-testid=emailorusername]')
-        .type('1234')
-        .blur()
-        .get('[data-testid=message-emailorusername]')
-        .contains(validationMessages.INVALID_USERNAME_OR_EMAIL);
-    });
-  });
-  describe('change password with emailorusername and password', () => {});
 });

@@ -115,9 +115,9 @@ export function validateEmptyString({ value }) {
   }
 }
 
-export function validatePasswordMatch({ state }) {
-  debugger;
-  const { password, confirm } = state.auth;
+export function validatePasswordMatch({ auth }) {
+
+  const { password, confirm } = auth.state;
 
   if (password === '' || password !== confirm) {
     return {
