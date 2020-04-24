@@ -47,8 +47,8 @@ export default {
     }),
     production && terser(),
     replace({
-			api_url: JSON.stringify(process.env.api_url)
-		}),
+      api_url: JSON.stringify(process.env.api_url),
+    }),
     serve(`apps/${process.env.appName}/build/`),
   ],
 };

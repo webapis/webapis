@@ -1,4 +1,4 @@
-import validationMessages from '../../../src/form/validationMessages';
+import validationMessages from '../../../client/form/validationMessages';
 
 
 describe('Change password with token', () => {
@@ -10,8 +10,38 @@ describe('Change password with token', () => {
     });
   });
 
+  describe('Logged in user',()=>{
+    beforeEach(()=>{
+      cy.visit('http://localhost:3000/');
+      cy.get('[data-testid=login]').click();
+      cy.get('[data-testid=emailOrUsername]')
+        .type('tkm.house@gmail.com')
+        .get('[data-testid=password]')
+        .type('DragondFFFly!2324.')
+        .get('[data-testid=login-btn]')
+        .click();
+    })
+    it.only('confirm did not match to new password', () => {
+  
+  
+      cy.get('[data-testid=emailOrUsername]').type('test@gmail.com');
+      cy.get('[data-testid=password]').type('Dragonfly1922!!');
+      cy.get('[data-testid=login-btn]').click();
+      cy.wait(1000);
+      cy.get('[data-testid=change-password]').click();
+      cy.get('[data-testid=password]').type('Dragonfly1933!!');
+      cy.get('[data-testid=confirm]').type('Dragonfly1933!');
+      cy.get('[data-testid=change-pass-btn]').click();
+      cy.get('[data-testid=message-confirm]').contains(
+        validationMessages.PASSWORDS_DO_NOT_MATCH
+      );
+    });
+  
+  })
+
   it('confirm did not match to new password', () => {
-    cy.visit('http://localhost:3000/auth/login');
+    cy.visit('http://localhost:3000/');
+
     cy.get('[data-testid=emailOrUsername]').type('test@gmail.com');
     cy.get('[data-testid=password]').type('Dragonfly1922!!');
     cy.get('[data-testid=login-btn]').click();
@@ -25,7 +55,7 @@ describe('Change password with token', () => {
     );
   });
 
-  it.only('Success ChangePassword with token', () => {
+  it('Success ChangePassword with token', () => {
     cy.visit('http://localhost:3000/auth/login');
     cy.get('[data-testid=emailOrUsername]').type('test@gmail.com');
     cy.get('[data-testid=password]').type('Dragonfly1922!!');

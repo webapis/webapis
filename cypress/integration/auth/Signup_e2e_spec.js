@@ -59,7 +59,7 @@ describe('Signup e2e', () => {
     );
   });
 
-  it.only('invalid username, email,password (invalid field values types)', () => {
+  it('invalid username, email,password (invalid field values types)', () => {
 
     cy.get('[data-testid=username]').type('123');
     cy.get('[data-testid=email]').type('lionardogmail.com');
