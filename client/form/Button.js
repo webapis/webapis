@@ -1,11 +1,20 @@
-import {h} from 'preact';
-
-export default function Button({ onClick, title, disabled, id }) {
+import { h } from 'preact';
+import { useThemeContext } from '../theme/theme-context';
+import './css/style.css';
+export default function Button({
+  onClick,
+  title,
+  disabled,
+  id,
+  color = 'primary',
+}) {
+  const theme = useThemeContext();
   return (
     <button
+      className='btn'
       data-testid={id}
       disabled={disabled}
-      style={{ borderRadius: 2, height: 33 }}
+      style={{ ...theme[color] }}
       onClick={onClick}
     >
       {title}

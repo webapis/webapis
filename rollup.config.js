@@ -47,7 +47,7 @@ export default {
     }),
     production && terser(),
     replace({
-			REACT_APP_XAF_SERVER_URL: JSON.stringify('http://localhost:10001')
+			api_url: JSON.stringify(process.env.api_url)
 		}),
     serve(`apps/${process.env.appName}/build/`),
   ],

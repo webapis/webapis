@@ -1,20 +1,27 @@
-import validationMessages from '../../../src/form/validationMessages';
-import authMessages from '../../../src/auth/authMessages';
+import validationMessages from '../../../client/form/validationMessages';
+import authMessages from '../../../client/auth/authMessages';
 describe('Signup e2e', () => {
+  beforeEach(()=>{
+    cy.visit('http://localhost:3000')
+    cy.get('[data-testid=signup]').click();
 
+  })
 
-  it('success', () => {
+  it('success signup', () => {
+    cy.server()
+    cy.route('POST', '/auth/signup').as('signup')
     cy.task('seed:delete', {});
-    cy.visit('http://localhost:3000/auth/signup');
     cy.get('[data-testid=username]').type('lionardo');
     cy.get('[data-testid=email]').type('lionardo@gmail.com');
     cy.get('[data-testid=password]')
       .type('Dragonfly1978.')
       .get('[data-testid=signup-btn]')
       .click();
-    cy.get('[data-testid=welcome]').contains(
-      authMessages.SIGNUP_SUCCESS_MESSAGE
-    );
+  
+    cy.wait('@signup').should(xhr=>{
+    
+      expect(xhr.status).to.equal(200)
+    })  
   });
 
   it('username is taken, email is registered', () => {
@@ -23,7 +30,6 @@ describe('Signup e2e', () => {
       username: 'lionardo',
       password: 'Dragonfly1978.',
     });
-    cy.visit('http://localhost:3000/auth/signup');
     cy.get('[data-testid=username]').type('lionardo');
     cy.get('[data-testid=email]').type('lionardo@gmail.com');
     cy.get('[data-testid=password]')
@@ -40,7 +46,7 @@ describe('Signup e2e', () => {
   });
 
   it('invalid username, email,password (empty fields)', () => {
-    cy.visit('http://localhost:3000/auth/signup');
+  
     cy.get('[data-testid=signup-btn]').click();
     cy.get('[data-testid=message-username]').contains(
       validationMessages.INVALID_USERNAME
@@ -53,8 +59,7 @@ describe('Signup e2e', () => {
     );
   });
 
-  it('invalid username, email,password (invalid field values types)', () => {
-    cy.visit('http://localhost:3000/auth/signup');
+  it.only('invalid username, email,password (invalid field values types)', () => {
 
     cy.get('[data-testid=username]').type('123');
     cy.get('[data-testid=email]').type('lionardogmail.com');

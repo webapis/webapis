@@ -34,7 +34,7 @@ export function clientValidation({ validationType, value, state }) {
       validation = validations.validateEmptyString({ value });
       break;
     case constValTypes.PASSWORDS_MATCH_VALIDATION:
-      debugger;
+   
       validation = validations.validatePasswordMatch({ state });
       break;
     default:

@@ -15,7 +15,7 @@ export async function login({ dispatch, state, formDispatch }) {
   try {
     const { emailorusername, password } = state;
     dispatch({ type: actionTypes.LOGIN_STARTED });
-    const response = await fetch(`${REACT_APP_XAF_SERVER_URL}/auth/login`, {
+    const response = await fetch(`/auth/login`, {
       headers: {
         'Conten-Type': 'application/json',
         'Access-Control-Allow-Headers': '*',
@@ -23,9 +23,9 @@ export async function login({ dispatch, state, formDispatch }) {
       },
       method: 'GET',
     });
-    debugger;
+ 
     const result = await response.json();
-    debugger;
+
     if (response.status === 200) {
       dispatch({ type: actionTypes.LOGIN_SUCCESS, token: result.token });
     } else if (response.status === 400) {
@@ -42,7 +42,7 @@ export async function login({ dispatch, state, formDispatch }) {
       throw new Error('Login failed');
     }
   } catch (error) {
-    debugger;
+ 
     dispatch({ type: actionTypes.LOGIN_FAILED, payload: { error } });
   }
 }
@@ -51,7 +51,7 @@ export async function signup({ dispatch, formDispatch, state }) {
   dispatch({ type: actionTypes.SIGNUP_STARTED });
   const { email, password, username } = state;
   try {
-    const response = await fetch(`${REACT_APP_XAF_SERVER_URL}/auth/signup`, {
+    const response = await fetch(`/auth/signup`, {
       body: JSON.stringify({ password, email, username }),
       headers: {
         ContentType: 'application/json',
@@ -65,7 +65,7 @@ export async function signup({ dispatch, formDispatch, state }) {
     } else if (response.status === 400) {
       const { errors } = result;
       errors.forEach((error) => {
-        debugger;
+      
         formDispatch(
           serverValidation({
             status: error,
@@ -83,7 +83,7 @@ export async function logout({ dispatch, state }) {
   try {
     const { token } = state;
     const response = await fetch(
-      `${REACT_APP_XAF_SERVER_URL}/auth/logout?${new URLSearchParams({
+      `/auth/logout?${new URLSearchParams({
         token,
       })}`
     );
@@ -97,7 +97,7 @@ export async function changePassword({ dispatch, state }) {
   try {
     const { confirm, password, token, emailorusername, current } = state;
     const response = await fetch(
-      `${REACT_APP_XAF_SERVER_URL}/auth/changepass`,
+      `/auth/changepass`,
       {
         method: 'put',
         body: JSON.stringify({
@@ -148,7 +148,7 @@ export async function forgotPassword({ dispatch, state, formDispatch }) {
     dispatch({ type: actionTypes.REQUEST_PASS_CHANGE_STARTED });
     const { email } = state;
     const response = await fetch(
-      `${REACT_APP_XAF_SERVER_URL}/auth/requestpasschange`,
+      `/auth/requestpasschange`,
       {
         method: 'post',
         body: JSON.stringify({ email }),

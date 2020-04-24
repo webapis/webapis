@@ -3,16 +3,16 @@ var path = require('path');
 
 
 export default function serveStatic(request, response) {
-  debugger;
+
  // console.log('process.env.appName',`${__dirname}../apps/${process.env.appName}/build/index.html`)
  // console.log('request ', request.url);
 
   var filePath = '.' + request.url;
   if (filePath == './') {
-    debugger;
+
     filePath = '/index.html';
   }
-
+//
   var extname = String(path.extname(filePath)).toLowerCase();
   var mimeTypes = {
       '.html': 'text/html',
@@ -33,24 +33,23 @@ export default function serveStatic(request, response) {
   };
 
   var contentType = mimeTypes[extname] || 'application/octet-stream';
- debugger;
+
  let normailzie= ''
  if (filePath === '/index.html') {
   
    normailzie = path.normalize(__dirname+`../../../apps/${process.env.appName}/build/index.html`)
-debugger;
+
 }
 else{
    normailzie = path.normalize(__dirname+`../../../apps/${process.env.appName}/build/${request.url}`)
-  debugger;
+
 }
 
-debugger;
+
   fs.readFile(normailzie, function(error, content) {
 
-    debugger;
       if (error) {
-        debugger;
+    
           if(error.code == 'ENOENT') {
               fs.readFile('./404.html', function(error, content) {
                   response.writeHead(404, { 'Content-Type': 'text/html' });
@@ -58,13 +57,13 @@ debugger;
               });
           }
           else {
-            debugger;
+        
               response.writeHead(500);
               response.end('Sorry, check with the site admin for error: '+error.code+' ..\n');
           }
       }
       else {
-        debugger;
+    
           response.writeHead(200, { 'Content-Type': contentType });
           response.end(content, 'utf-8');
       }

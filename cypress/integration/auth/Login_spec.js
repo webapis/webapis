@@ -6,7 +6,7 @@ describe('Login', () => {
     cy.visit('/');
     cy.get('[data-testid=login]').click();
   });
-  it('Login Success', () => {
+  it.only('Login Success', () => {
     cy.server();
     cy.route({
       url: '/auth/login',

@@ -17,7 +17,7 @@ export default async function httpRoute(req, res) {
   const authRegex = /.*\/auth\/.*/;
   const crudRegex = /.*\/crud\/.*/;
   const seedRegex = /.*\/seed\/.*/;
-  debugger;
+
 
   req.auth = null;
   const clnt = await client.connect();

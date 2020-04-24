@@ -8,7 +8,7 @@
     "build": "rollup -c",
     "test": "echo \"Error: no test specified\" && exit 1",
     "webcom:client": "cross-env appName=webcom-app rollup -c -w ",
-    "webcom:dev": "concurrently \"cross-env appName=webcom-app nodemon --exec babel-node server/index.js\" \" cross-env appName=webcom-app rollup -c -w \" \"npm run cypress:open\""
+    "webcom:server": "concurrently \"cross-env appName=webcom-app nodemon --exec babel-node server/index.js\" \" cross-env appName=webcom-app rollup -c -w \" \"npm run cypress:open\""
   },
   "keywords": [],
   "author": "",

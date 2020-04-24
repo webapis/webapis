@@ -23,7 +23,7 @@ export default function Login() {
 
   return (
 
-      <div dat-testid='laoginform' className='auth-form'>
+      <div dat-testid='laoginform' className="surface" >
         <Form formTitle='Login' error={error}>
           <Input
             value={emailorusername}
@@ -60,7 +60,7 @@ export default function Login() {
             id='login-btn'
             data-testid='login-btn'
             onClick={handleLogin}
-            title='Login'
+            title='LOGIN'
           />
           <a href='#/requestpasschange'>Forgot Password!</a>
         </Form>

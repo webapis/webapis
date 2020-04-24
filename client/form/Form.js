@@ -1,16 +1,14 @@
 import { h } from 'preact';
-import { useEffect } from 'preact/hooks';
-import * as validationActions from './actions';
+import './css/style.css';
 const style = {
   display: 'flex',
   flexDirection: 'column',
-
 };
 
 export default function Form({ children, formTitle, error }) {
   return (
-
-      <fieldset style={style}>
+    <div className='paper'>
+ 
         <legend>{formTitle}:</legend>
         {children}
         {error && (
@@ -25,7 +23,7 @@ export default function Form({ children, formTitle, error }) {
             * {error.message}
           </div>
         )}
-      </fieldset>
    
+    </div>
   );
 }

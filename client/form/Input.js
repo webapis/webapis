@@ -38,7 +38,7 @@ function ValidityIcon({ valid }) {
 
 const style = {
   input: {
-    margin: 1,
+   
     border: '1px solid',
     padding: 8,
     flex: 10,
@@ -46,7 +46,7 @@ const style = {
   },
   root: {
     borderRadius: 2,
-    margin: 3,
+
     display: 'flex',
     flexDirection: 'column',
     backgroundColor: 'white',
