@@ -1,8 +1,10 @@
 import validationMessages from '../../../client/form/validationMessages';
 import authMessages from '../../../client/auth/authMessages';
+
 describe('Login', () => {
   beforeEach(() => {
     cy.server();
+    cy.viewport('iphone-5')
     cy.visit('/');
     cy.get('[data-testid=login]').click();
   });

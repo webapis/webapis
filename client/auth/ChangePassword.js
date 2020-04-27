@@ -7,18 +7,14 @@ import Button from '../form/Button';
 import validationTypes from '../form/validationTypes';
 import { useAppContext } from '../app-context';
 import * as actions from './actions';
-
+import { useMediaQuery } from '../layout/useMediaQuery';
+import { Paper } from '../layout/Paper';
+import { Grid } from '../layout/Grid';
 export default function ChangePassword() {
+  const { device } = useMediaQuery();
   const { form, auth } = useAppContext();
-const {state,dispatch}=auth
-  const {
-    password,
-    confirm,
-    current,
-    emailorusername,
-    token,
-    error,
-  } = state;
+  const { state, dispatch } = auth;
+  const { password, confirm, current, emailorusername, token, error } = state;
 
   useEffect(() => {
     let url = new URL(window.location.href);
@@ -30,12 +26,12 @@ const {state,dispatch}=auth
 
   function handleChange(e) {
     const { name, value } = e.target;
-   dispatch(
+    dispatch(
       actions.valueChanged({
         propName: name,
         value,
         dispatch,
-        state
+        state,
       })
     );
   }
@@ -49,63 +45,65 @@ const {state,dispatch}=auth
     );
   }
   return (
-    <div data-testid='signupform' className='auth-form'>
-      <Form formTitle='Change Password' error={error}>
-        {!token && (
-          <Input
-            value={emailorusername}
-            type='text'
-            id='emailorusername'
-            name='emailorusername'
-            placeholder='Enter email or username'
-            onChange={handleChange}
-            validationTypes={[
-              validationTypes.USERNAME_OR_EMAIL_FORMAT_VALIDATION,
-              validationTypes.INVALID_CREDENTIALS,
-            ]}
-          />
-        )}
-        {!token && (
-          <Input
-            value={current}
-            type='password'
-            id='current'
-            name='current'
-            onChange={handleChange}
-            placeholder='Enter current password'
-            validationTypes={[
-              validationTypes.EMPTY_STRING_VALIDATION,
-              validationTypes.INVALID_CREDENTIALS,
-            ]}
-          />
-        )}
+    <Grid width={device === 'phone' ? 100 : 25}>
+      <Paper>
+        <Form formTitle='Change Password' error={error}>
+          {!token && (
+            <Input
+              value={emailorusername}
+              type='text'
+              id='emailorusername'
+              name='emailorusername'
+              placeholder='Enter email or username'
+              onChange={handleChange}
+              validationTypes={[
+                validationTypes.USERNAME_OR_EMAIL_FORMAT_VALIDATION,
+                validationTypes.INVALID_CREDENTIALS,
+              ]}
+            />
+          )}
+          {!token && (
+            <Input
+              value={current}
+              type='password'
+              id='current'
+              name='current'
+              onChange={handleChange}
+              placeholder='Enter current password'
+              validationTypes={[
+                validationTypes.EMPTY_STRING_VALIDATION,
+                validationTypes.INVALID_CREDENTIALS,
+              ]}
+            />
+          )}
 
-        <Input
-          value={password}
-          type='password'
-          id='password'
-          name='password'
-          placeholder='Enter new password'
-          onChange={handleChange}
-          validationTypes={[validationTypes.PASSWORD_FORMAT_VALIDATION]}
-        />
-        <Input
-          value={confirm}
-          type='password'
-          id='confirm'
-          name='confirm'
-          placeholder='Confirm new password'
-          onChange={handleChange}
-          validationTypes={[validationTypes.PASSWORDS_MATCH_VALIDATION]}
-        />
-        <Button
-          type='button'
-          id='change-pass-btn'
-          data-testid='change-pass-btn'
-          onClick={handleChangePass}
-          title='Change'
-        />
-      </Form>
-    </div>
+          <Input
+            value={password}
+            type='password'
+            id='password'
+            name='password'
+            placeholder='Enter new password'
+            onChange={handleChange}
+            validationTypes={[validationTypes.PASSWORD_FORMAT_VALIDATION]}
+          />
+          <Input
+            value={confirm}
+            type='password'
+            id='confirm'
+            name='confirm'
+            placeholder='Confirm new password'
+            onChange={handleChange}
+            validationTypes={[validationTypes.PASSWORDS_MATCH_VALIDATION]}
+          />
+          <Button
+            type='button'
+            id='change-pass-btn'
+            data-testid='change-pass-btn'
+            onClick={handleChangePass}
+            title='Change'
+          />
+        </Form>
+      </Paper>
+    </Grid>
   );
 }

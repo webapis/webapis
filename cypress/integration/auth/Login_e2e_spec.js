@@ -7,6 +7,7 @@ describe('Login e2e', () => {
       username: 'tkmhousenew',
       password: 'Dragonfly1922!!',
     });
+    cy.viewport('iphone-5')
     cy.visit('http://localhost:3000')
     cy.get('[data-testid=login]').click();
   });

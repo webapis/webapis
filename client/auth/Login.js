@@ -10,7 +10,7 @@ import { Grid } from '../layout/Grid';
 import * as actions from './actions';
 
 export default function Login() {
-  const { device } = useMediaQuery;
+  const { device } = useMediaQuery();
   const { auth, form } = useAppContext();
 
   const { emailorusername, password, error } = auth.state;
@@ -37,17 +37,17 @@ export default function Login() {
   }
 
   return (
-    <Grid start={2} end={2}>
+    <Grid width={device === 'phone' ? 100 : 25}>
       <Paper>
-        <Form formTitle="Login" error={error}>
+        <Form formTitle='Login' error={error}>
           <Input
             value={emailorusername}
             onChange={handleChange}
-            name="emailorusername"
-            type="text"
-            placeholder="Enter email or username"
-            id="emailOrUsername"
-            data-testid="emailOrUsername"
+            name='emailorusername'
+            type='text'
+            placeholder='Enter email or username'
+            id='emailOrUsername'
+            data-testid='emailOrUsername'
             validationTypes={[
               validationTypes.USERNAME_OR_EMAIL_FORMAT_VALIDATION,
               validationTypes.INVALID_CREDENTIALS,
@@ -59,11 +59,11 @@ export default function Login() {
           <Input
             value={password}
             onChange={handleChange}
-            name="password"
-            type="password"
-            placeholder="enter password"
-            id="password"
-            data-testid="password"
+            name='password'
+            type='password'
+            placeholder='enter password'
+            id='password'
+            data-testid='password'
             validationTypes={[
               validationTypes.EMPTY_STRING_VALIDATION,
               validationTypes.INVALID_CREDENTIALS,
@@ -71,13 +71,13 @@ export default function Login() {
           />
 
           <Button
-            type="button"
-            id="login-btn"
-            data-testid="login-btn"
+            type='button'
+            id='login-btn'
+            data-testid='login-btn'
             onClick={handleLogin}
-            title="LOGIN"
+            title='LOGIN'
           />
-          <a href="#/requestpasschange">Forgot Password!</a>
+          <a href='#/requestpasschange'>Forgot Password!</a>
         </Form>
       </Paper>
     </Grid>

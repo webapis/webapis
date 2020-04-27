@@ -2,7 +2,6 @@ import { h } from 'preact';
 import { useState, useEffect } from 'preact/hooks';
 import deviceType from './deviceType';
 
-
 export function useMediaQuery() {
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
@@ -39,7 +38,9 @@ export function useMediaQuery() {
     }
   }, [width]);
 
-
+  useEffect(() => {
+    console.log('device', device);
+  }, [device]);
   useEffect(() => {
     handleViewportSize();
     handleScreenOrientation();
@@ -47,8 +48,8 @@ export function useMediaQuery() {
     window.addEventListener('resize', () => handleViewportSize);
 
     return () => {
-         window.removeEventListener(handleViewportSize);
-       window.removeEventListener(handleScreenOrientation);
+      // window.removeEventListener();
+      // window.removeEventListener(handleScreenOrientation);
     };
   }, []);
 

@@ -4,7 +4,8 @@ import { useState, useEffect, useReducer } from 'preact/hooks';
 import { useThemeContext } from '../theme/theme-context';
 import './css/style.css';
 import { MenuWhite } from './icons/MenuWhite';
-
+import { AppShell } from '../layout/AppShell';
+import { AppBar } from '../layout/AppBar';
 import { useMediaQuery } from '../layout/useMediaQuery';
 const PhoneDrawer = lazy(() => import('./PhoneDrawer'));
 const TabletDrawer = lazy(() => import('./TabletDrawer'));
@@ -25,7 +26,7 @@ export default function Navigation(props) {
   }
 
   return (
-    <div className="app-shell">
+    <AppShell>
       {route === '/phone' && open ? (
         <Suspense fallback={<div>Loading...</div>}>
           <PhoneDrawer onClick={toggleDrawer}>{drawerContent}</PhoneDrawer>
@@ -46,28 +47,15 @@ export default function Navigation(props) {
           <DesktopDrawer onClick={toggleDrawer}>{drawerContent}</DesktopDrawer>{' '}
         </Suspense>
       ) : null}
-      <div
-        className="app-bar"
-        style={{
-          ...theme.primary,
-          minHeight: 64,
-          paddingLeft: 16,
-          paddingRight: 16,
-          display: 'fixed',
-          width: '100%',
-        }}
-      >
-        <div style={{ display: 'flex' }}>
-          <MenuWhite onClick={toggleDrawer} device={device} />
-
-          {children}
-        </div>
-      </div>
-    </div>
+      <AppBar>
+        <MenuWhite onClick={toggleDrawer} device={device} />
+        {children}
+      </AppBar>
+    </AppShell>
   );
 }
 
 export function NavItem(props) {
   const { children } = props;
-  return <div className="nav-item">{children}</div>;
+  return <div className='nav-item'>{children}</div>;
 }
