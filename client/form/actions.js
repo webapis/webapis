@@ -58,10 +58,10 @@ export function incInputCount() {
 
 
 export function serverValidation({ status = 0 }) {
-  debugger;
+
   switch (status) {
     case httpStatus.credentialInvalid:
-      debugger;
+    
       return {
         type: actionTypes.SERVER_VALIDATION,
         validationType: validationTypes.INVALID_CREDENTIALS,
@@ -97,7 +97,7 @@ export function serverValidation({ status = 0 }) {
         validationState: validationStates.INVALID,
       };
     case httpStatus.emailIsNotRegistered:
-      debugger;
+    
       return {
         type: actionTypes.SERVER_VALIDATION,
         validationType: validationTypes.EMAIL_NOT_REGISTERED,

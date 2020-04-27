@@ -1,0 +1,11 @@
+.drawer-list-item:hover {
+  background-color: #f5f5f5;
+  cursor: pointer;
+}
+
+.drawer-list-item * {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+/*# sourceMappingURL=style.css.map */

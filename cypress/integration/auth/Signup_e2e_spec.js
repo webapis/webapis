@@ -3,6 +3,9 @@ import authMessages from '../../../client/auth/authMessages';
 describe('Signup e2e', () => {
   beforeEach(()=>{
     cy.visit('http://localhost:3000')
+    cy.wait(50);
+    cy.get('[data-testid=menu]').click();
+
     cy.get('[data-testid=signup]').click();
 
   })

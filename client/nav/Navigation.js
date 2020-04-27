@@ -48,7 +48,7 @@ export default function Navigation(props) {
         </Suspense>
       ) : null}
       <AppBar>
-        <MenuWhite onClick={toggleDrawer} device={device} />
+        <MenuWhite onClick={toggleDrawer} device={device} id="menu" />
         {children}
       </AppBar>
     </AppShell>

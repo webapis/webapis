@@ -4,6 +4,9 @@ describe('Signup', () => {
   beforeEach(() => {
     cy.server();
     cy.visit('/')
+    cy.wait(50);
+    cy.get('[data-testid=menu]').click();
+
     cy.get('[data-testid=signup]').click();
   });
   it('signup success', () => {

@@ -4,7 +4,7 @@ export default function TabletDrawer(props) {
   const { open, onClick, children } = props;
   return (
     <div style={{ ...drawer, width: '15%' }} onClick={onClick}>
-      tablet
+   
       {children}
     </div>
   );

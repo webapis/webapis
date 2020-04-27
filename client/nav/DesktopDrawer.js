@@ -5,11 +5,10 @@ export default function DesktopDrawer(props) {
   const { open, onClick, children } = props;
   return (
     <div
-      className="desktop"
+      className='desktop'
       style={{ ...drawer, width: '15%' }}
       onClick={onClick}
     >
-      desktop
       {children}
     </div>
   );

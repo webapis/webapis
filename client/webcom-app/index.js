@@ -5,6 +5,9 @@ import Navigation, { NavItem } from '../nav/Navigation';
 import Authentication from '../auth/Authentication';
 import { ThemeProvider } from '../theme/theme-context';
 import { AppProvider } from '../app-context';
+import { DrawerContent } from '../layout/DrawerContent';
+import { AuthContent } from '../auth/AuthContent';
+import { OtherContent } from './OtherContent';
 render(
   <AppProvider>
     <ThemeProvider
@@ -17,27 +20,15 @@ render(
       }}
     >
       <RouteProvider>
-        <Navigation drawerContent={<div>drawerConent</div>}>
-          <NavItem>
-            <Link id="login" to="/login">
-              LOGIN
-            </Link>
-          </NavItem>
-          <NavItem>
-            <Link id="signup" to="/signup">
-              SIGNUP
-            </Link>
-          </NavItem>
-          <NavItem>
-            <Link id="forgotpassword" to="/forgotpassword">
-              FORGOT PASSWORD
-            </Link>
-          </NavItem>
-          <NavItem>
-            <Link id="changepassword" to="/changepassword">
-              CHANGE PASSWORD
-            </Link>
-          </NavItem>
+        <Navigation
+          drawerContent={
+            <DrawerContent
+              authContent={<AuthContent />}
+              otherContent={<OtherContent />}
+            />
+          }
+        >
+          <NavItem>WEB COM</NavItem>
         </Navigation>
         <Authentication />
       </RouteProvider>{' '}

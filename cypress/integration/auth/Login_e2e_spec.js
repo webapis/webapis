@@ -9,20 +9,12 @@ describe('Login e2e', () => {
     });
     cy.viewport('iphone-5')
     cy.visit('http://localhost:3000')
+    cy.wait(50);
+    cy.get('[data-testid=menu]').click();
     cy.get('[data-testid=login]').click();
   });
 
-  it('Sucess Login', () => {
-    cy.server()
-    cy.route('GET', '/auth/login').as('login')
-    cy.get('[data-testid=emailOrUsername]').type('test@gmail.com');
-    cy.get('[data-testid=password]').type('Dragonfly1922!!');
-    cy.get('[data-testid=login-btn]').click();
-  
-    cy.wait('@login').should(xhr=>{
-      expect(xhr.status).to.equal(200)
-    })
-  });
+
 
   it('invalid credentials(wrong email) provided', () => {
 
@@ -48,5 +40,16 @@ describe('Login e2e', () => {
     cy.get('[data-testid=message-password]').contains(
       validationMessages.INVALID_CREDENTIALS
     );
+  });
+  it.only('Sucess Login', () => {
+    cy.server()
+    cy.route('GET', '/auth/login').as('login')
+    cy.get('[data-testid=emailOrUsername]').type('test@gmail.com');
+    cy.get('[data-testid=password]').type('Dragonfly1922!!');
+    cy.get('[data-testid=login-btn]').click();
+  
+    cy.wait('@login').should(xhr=>{
+      expect(xhr.status).to.equal(200)
+    })
   });
 });

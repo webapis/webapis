@@ -4,8 +4,11 @@ import authMessages from '../../../client/auth/authMessages';
 describe('Login', () => {
   beforeEach(() => {
     cy.server();
-    cy.viewport('iphone-5')
+    cy.viewport('iphone-5');
     cy.visit('/');
+    cy.wait(50);
+    cy.get('[data-testid=menu]').click();
+
     cy.get('[data-testid=login]').click();
   });
   it('Login Success', () => {
@@ -18,7 +21,6 @@ describe('Login', () => {
       },
     }).as('loginSuccess');
 
-    cy.get('[data-testid=login]').click();
     cy.get('[data-testid=emailOrUsername]')
       .type('tkm.house@gmail.com')
       .get('[data-testid=password]')
@@ -33,7 +35,6 @@ describe('Login', () => {
   });
 
   it('invalid usernameoremail and password client', () => {
-  
     cy.route({
       url: '/auth/login',
       status: 400,
@@ -64,7 +65,6 @@ describe('Login', () => {
       .contains(validationMessages.INVALID_USERNAME_OR_EMAIL);
   });
   it('invalid credentials 401 server', () => {
-
     cy.route({
       url: '/auth/login',
       status: 400,
@@ -86,7 +86,6 @@ describe('Login', () => {
   });
 
   it('emailorusernameNotValid 410 server', () => {
- 
     cy.route({
       url: '/auth/login',
       status: 400,
@@ -103,7 +102,6 @@ describe('Login', () => {
     );
   });
   it('emptyStringNotValid(password) 409  server', () => {
-  
     cy.route({
       url: '/auth/login',
       status: 400,
@@ -118,7 +116,6 @@ describe('Login', () => {
     );
   });
   it('emailIsNotRegistered 408 server', () => {
-  
     cy.route({
       url: '/auth/login',
       status: 400,

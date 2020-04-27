@@ -5,15 +5,23 @@ import Form from '../form/Form';
 import validationTypes from '../form/validationTypes';
 import { useAppContext } from '../app-context';
 import { useMediaQuery } from '../layout/useMediaQuery';
+import { useRouteContext } from '../route/router';
 import { Paper } from '../layout/Paper';
 import { Grid } from '../layout/Grid';
 import * as actions from './actions';
 
 export default function Login() {
+  const [route, setRoute] = useRouteContext();
   const { device } = useMediaQuery();
   const { auth, form } = useAppContext();
 
   const { emailorusername, password, error } = auth.state;
+
+  function handleRoute(e) {
+    e.preventDefault();
+    const { id } = e.target;
+    setRoute(`/${id}`);
+  }
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -77,7 +85,9 @@ export default function Login() {
             onClick={handleLogin}
             title='LOGIN'
           />
-          <a href='#/requestpasschange'>Forgot Password!</a>
+          <a href='/' onClick={handleRoute} id='forgotpassword'>
+            Forgot Password!
+          </a>
         </Form>
       </Paper>
     </Grid>
