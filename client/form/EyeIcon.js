@@ -4,9 +4,9 @@ import openIcon from './icons/openEye.png';
 import closeIcon from './icons/closeEye.png';
 function IconState({ open }) {
   if (open) {
-    return <img width="30px" src={openIcon} />;
+    return <img style={{width:25}}  src={openIcon} />;
   }
-  return <img width="30px" src={closeIcon} />;
+  return <img style={{width:25}} src={closeIcon} />;
 }
 
 export default function EyeIcon({onClick}) {

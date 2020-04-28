@@ -70,23 +70,26 @@ export default async function ({ req, res, collection }) {
         debugger;
         const hash = await bcrypt.hash(password, salt);
         debugger;
-        const result = await collection.insertOne({ password: hash, email, username });
+        const result = await collection.insertOne({
+          password: hash,
+          email,
+          username,
+        });
         debugger;
         const user = result.ops[0];
         debugger;
-        const payload = { id: user._id.toString(), name: user.email };
+        const payload = { id: user._id.toString(), email, username };
         debugger;
         const token = await jwt.sign(payload, process.env.secret, {
           expiresIn: 31556926,
         });
         debugger;
         res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.write(JSON.stringify({ token }));
+        res.write(JSON.stringify({ token,email,username }));
         res.end();
       }
     }
   } catch (error) {
-  
     debugger;
     res.writeHead(500, { 'Content-Type': 'application/json' });
     res.write(JSON.stringify({ error }));

@@ -26,6 +26,8 @@ export function authReducer(state, action) {
         success: true,
         loading: false,
         token: action.token,
+        username: action.username,
+        email: action.email,
         isLoggedIn: true,
         password: '',
         successMessage: 'Welcome, ',
@@ -41,6 +43,8 @@ export function authReducer(state, action) {
         success: true,
         isLoggedIn: true,
         token: action.token,
+        username: action.username,
+        email: action.email,
         password: '',
         successMessage: 'Welcome',
       };
@@ -53,6 +57,9 @@ export function authReducer(state, action) {
         ...state,
         success: true,
         loading: false,
+        token: action.token,
+        username: action.username,
+        email: action.email,
         isPasswordChanged: true,
         successMessage: 'Password changed successfully',
       };
@@ -66,6 +73,8 @@ export function authReducer(state, action) {
       return { ...state, loading: false, error: action.payload.error };
     case actionTypes.GOT_TOKEN_FROM_URL:
       return { ...state, token: action.token };
+    case actionTypes.LOGOUT_SUCCESS:
+      return { ...initState };
     default:
       return state;
   }

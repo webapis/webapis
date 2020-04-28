@@ -11,20 +11,23 @@ describe('CHANGE PASSWORD', () => {
 
   describe('Change password with token', () => {
     beforeEach(() => {
-      cy.visit('http://localhost:3000/');
+    
       cy.wait(50);
-      cy.get('[data-testid=menu]').click();
-      cy.get('[data-testid=login]').click();
-      cy.get('[data-testid=emailOrUsername]')
-        .type('test@gmail.com')
-        .get('[data-testid=password]')
-        .type('Dragonfly1922!!')
-        .get('[data-testid=login-btn]')
-        .click();
-      cy.get('[data-testid=menu]').click();
+      cy.login();
+      cy.visit('http://localhost:3000/');
+      //cy.get('[data-testid=menu]').click();
+      // cy.get('[data-testid=login]').click();
+      // cy.get('[data-testid=emailOrUsername]')
+      //   .type('test@gmail.com')
+      //   .get('[data-testid=password]')
+      //   .type('Dragonfly1922!!')
+      //   .get('[data-testid=login-btn]')
+      //   .click();
+    //  cy.get('[data-testid=menu]').click();
+      cy.pause()
       cy.get('[data-testid=changepassword]').click();
     });
-    it('user sent empty password and confirm 406', () => {
+    it.only('user sent empty password and confirm 406', () => {
       cy.get('[data-testid=change-pass-btn]').click();
       cy.get('[data-testid=message-password]').contains(
         validationMessages.INVALID_PASSWORD

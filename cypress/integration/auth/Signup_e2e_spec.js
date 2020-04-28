@@ -1,18 +1,17 @@
 import validationMessages from '../../../client/form/validationMessages';
 import authMessages from '../../../client/auth/authMessages';
 describe('Signup e2e', () => {
-  beforeEach(()=>{
-    cy.visit('http://localhost:3000')
+  beforeEach(() => {
+    cy.visit('http://localhost:3000');
     cy.wait(50);
     cy.get('[data-testid=menu]').click();
 
     cy.get('[data-testid=signup]').click();
+  });
 
-  })
-
-  it('success signup', () => {
-    cy.server()
-    cy.route('POST', '/auth/signup').as('signup')
+  it.only('success signup', () => {
+    cy.server();
+    cy.route('POST', '/auth/signup').as('signup');
     cy.task('seed:delete', {});
     cy.get('[data-testid=username]').type('lionardo');
     cy.get('[data-testid=email]').type('lionardo@gmail.com');
@@ -20,11 +19,10 @@ describe('Signup e2e', () => {
       .type('Dragonfly1978.')
       .get('[data-testid=signup-btn]')
       .click();
-  
-    cy.wait('@signup').should(xhr=>{
-    
-      expect(xhr.status).to.equal(200)
-    })  
+
+    cy.wait('@signup').should((xhr) => {
+      expect(xhr.status).to.equal(200);
+    });
   });
 
   it('username is taken, email is registered', () => {
@@ -49,7 +47,6 @@ describe('Signup e2e', () => {
   });
 
   it('invalid username, email,password (empty fields)', () => {
-  
     cy.get('[data-testid=signup-btn]').click();
     cy.get('[data-testid=message-username]').contains(
       validationMessages.INVALID_USERNAME
@@ -63,7 +60,6 @@ describe('Signup e2e', () => {
   });
 
   it('invalid username, email,password (invalid field values types)', () => {
-
     cy.get('[data-testid=username]').type('123');
     cy.get('[data-testid=email]').type('lionardogmail.com');
     cy.get('[data-testid=password]').type('159357');

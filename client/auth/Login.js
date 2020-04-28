@@ -1,4 +1,5 @@
 import { h } from 'preact';
+import { useEffect } from 'preact/hooks';
 import Input from '../form/Input';
 import Button from '../form/Button';
 import Form from '../form/Form';
@@ -16,6 +17,12 @@ export default function Login() {
   const { auth, form } = useAppContext();
 
   const { emailorusername, password, error } = auth.state;
+
+  useEffect(() => {
+    if (auth.state.token) {
+      setRoute('/');
+    }
+  }, [auth.state.token]);
 
   function handleRoute(e) {
     e.preventDefault();

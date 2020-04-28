@@ -1,4 +1,5 @@
 import { h } from 'preact';
+import { useEffect } from 'preact/hooks';
 import './css/style.css';
 import Form from '../form/Form';
 import Input from '../form/Input';
@@ -9,10 +10,17 @@ import * as actions from './actions';
 import { Grid } from '../layout/Grid';
 import { Paper } from '../layout/Paper';
 import { useMediaQuery } from '../layout/useMediaQuery';
+import { useRouteContext } from '../route/router';
 export default function Signup() {
+  const [route, setRoute] = useRouteContext();
   const { form, auth } = useAppContext();
   const { device } = useMediaQuery();
   const { username, password, email } = auth.state;
+  useEffect(() => {
+    if (auth.state.token) {
+      setRoute('/');
+    }
+  }, [auth.state.token]);
 
   function handleSignup() {
     auth.dispatch(

@@ -243,6 +243,12 @@ async function updatePassword({
   });
   res.statusCode = 200;
   res.writeHead(200, { 'Content-Type': 'application/json' });
-  res.write(JSON.stringify({ token: newToken }));
+  res.write(
+    JSON.stringify({
+      token: newToken,
+      username: user.username,
+      email: user.email,
+    })
+  );
   res.end();
 }

@@ -23,3 +23,37 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+Cypress.Commands.add('login', () => {
+  cy.request({
+    url: 'http://localhost:3000/seed/users',
+    method: 'post',
+    body: {
+      username: 'demo',
+      email: 'demo@gmail.com',
+    },
+  })
+    .its('body')
+    .then((body) => {
+      cy.request({
+        url: 'http://localhost:3000/auth/login',
+        method: 'GET',
+        headers: {
+          'Conten-Type': 'application/json',
+          'Access-Control-Allow-Headers': '*',
+          Authorization: `Basic ${btoa(`${body.email}:${body.password}`)}`,
+        },
+      })
+        .its('body')
+        .then((body) => {
+          const { email, username, token } = body;
+          cy.window()
+            .its('localStorage')
+            .invoke(
+              'setItem',
+              username,
+              JSON.stringify({ username, email, token })
+            );
+          debugger;
+        });
+    });
+});

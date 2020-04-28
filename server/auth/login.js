@@ -65,13 +65,23 @@ export default async function ({ req, res, collection }) {
 
               if (resBcrypt) {
                 debugger;
-                const payload = { id: user._id.toString(), name: user.email };
+                const payload = {
+                  id: user._id.toString(),
+                  username: user.username,
+                  email: user.email,
+                };
                 const token = await jwt.sign(payload, process.env.secret, {
                   expiresIn: 31556926,
                 });
                 // success login---------------------------------------------
                 res.writeHead(200, { 'Content-Type': 'application/json' });
-                res.write(JSON.stringify({ token }));
+                res.write(
+                  JSON.stringify({
+                    token,
+                    username: user.username,
+                    email: user.email,
+                  })
+                );
                 res.end();
               } else {
                 // invalid credential 401-------------------------------------
@@ -99,13 +109,24 @@ export default async function ({ req, res, collection }) {
               debugger;
               if (resBcrypt) {
                 debugger;
-                const payload = { id: user._id.toString(), name: user.email };
+                const payload = {
+                  id: user._id.toString(),
+                  email: user.email,
+                  username: user.username,
+                };
                 const token = await jwt.sign(payload, process.env.secret, {
                   expiresIn: 31556926,
                 });
                 //success login 200------------------------------------------
                 res.writeHead(200, { 'Content-Type': 'application/json' });
-                res.write(JSON.stringify({ token }));
+                res.write(
+                  JSON.stringify({
+                    token,
+                    username: user.username,
+                    email: user.email,
+                  })
+                );
+                debugger;
                 res.end();
               } else {
                 debugger;
@@ -121,7 +142,7 @@ export default async function ({ req, res, collection }) {
       }
     }
   } catch (error) {
-    const err=error
+    const err = error;
     debugger;
     res.writeHead(500, { 'Content-Type': 'application/json' });
     res.write(JSON.stringify({ error }));

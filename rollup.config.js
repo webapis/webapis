@@ -3,6 +3,7 @@ import resolve from '@rollup/plugin-node-resolve';
 import babel from 'rollup-plugin-babel';
 import postcss from 'rollup-plugin-postcss';
 import image from '@rollup/plugin-image';
+//import image from 'rollup-plugin-image-files';
 import serve from 'rollup-plugin-serve';
 import htmlTemplate from 'rollup-plugin-generate-html-template';
 import del from 'rollup-plugin-delete';

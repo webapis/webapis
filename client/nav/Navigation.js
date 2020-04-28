@@ -7,6 +7,7 @@ import { MenuWhite } from './icons/MenuWhite';
 import { AppShell } from '../layout/AppShell';
 import { AppBar } from '../layout/AppBar';
 import { useMediaQuery } from '../layout/useMediaQuery';
+import { useUserName } from '../auth/useUserName';
 const PhoneDrawer = lazy(() => import('./PhoneDrawer'));
 const TabletDrawer = lazy(() => import('./TabletDrawer'));
 const LaptopDrawer = lazy(() => import('./LapTopDrawer'));
@@ -14,6 +15,7 @@ const DesktopDrawer = lazy(() => import('./DesktopDrawer'));
 
 export default function Navigation(props) {
   const [route, setRoute] = useState('');
+  const { userName } = useUserName();
   const { width, height, orientation, device } = useMediaQuery();
   const [open, setOpen] = useState(false);
   const { children, drawerContent } = props;
@@ -48,8 +50,9 @@ export default function Navigation(props) {
         </Suspense>
       ) : null}
       <AppBar>
-        <MenuWhite onClick={toggleDrawer} device={device} id="menu" />
+        <MenuWhite onClick={toggleDrawer} device={device} id='menu' />
         {children}
+        <NavItem>{userName}</NavItem>
       </AppBar>
     </AppShell>
   );

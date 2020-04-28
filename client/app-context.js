@@ -4,8 +4,6 @@ import { useContext } from 'preact/hooks';
 import { useAuthContext, AuthProvider } from './auth/auth-context';
 import { useFormContext, FormProvider } from './form/form-context';
 
-
-
 const AppContext = createContext();
 
 function useAppContext() {
@@ -14,6 +12,11 @@ function useAppContext() {
     throw new Error('useAppContext must be used with AppProvider');
   }
   const { auth, form } = context;
+
+  if (window.Cypress) {
+    window.appContext = context;
+  }
+
   return { auth, form };
 }
 
@@ -32,13 +35,13 @@ function CompinedProvider(props) {
   );
 }
 function AppProvider(props) {
-    const { children } = props;
-    return (
-      <FormProvider>
-        <AuthProvider>
-          <CompinedProvider>{children}</CompinedProvider>
-        </AuthProvider>
-      </FormProvider>
-    );
-  }
+  const { children } = props;
+  return (
+    <FormProvider>
+      <AuthProvider>
+        <CompinedProvider>{children}</CompinedProvider>
+      </AuthProvider>
+    </FormProvider>
+  );
+}
 export { useAppContext, AppProvider };

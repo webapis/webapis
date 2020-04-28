@@ -10,7 +10,11 @@ import * as actions from './actions';
 import { useMediaQuery } from '../layout/useMediaQuery';
 import { Paper } from '../layout/Paper';
 import { Grid } from '../layout/Grid';
+import { useRouteContext } from '../route/router';
+import { useUserName } from './useUserName';
 export default function ChangePassword() {
+  const { userName } = useUserName();
+  const [route, setRoute] = useRouteContext();
   const { device } = useMediaQuery();
   const { form, auth } = useAppContext();
   const { state, dispatch } = auth;
@@ -23,6 +27,12 @@ export default function ChangePassword() {
       actions.getTokenFromUrl({ token, dispatch, state });
     }
   }, []);
+
+  useEffect(() => {
+    if (auth.state.token) {
+      setRoute('/');
+    }
+  }, [auth.state.token]);
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -48,7 +58,7 @@ export default function ChangePassword() {
     <Grid width={device === 'phone' ? 100 : 25}>
       <Paper>
         <Form formTitle='Change Password' error={error}>
-          {!token && (
+          {!userName && (
             <Input
               value={emailorusername}
               type='text'
@@ -62,7 +72,7 @@ export default function ChangePassword() {
               ]}
             />
           )}
-          {!token && (
+          {!userName && (
             <Input
               value={current}
               type='password'

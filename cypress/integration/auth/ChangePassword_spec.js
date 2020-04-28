@@ -125,24 +125,28 @@ describe('ChangePassword', () => {
       cy.route({
         url: '/auth/login',
         response: {
+          username: 'demo',
+          email: 'demo@gmail.com',
           token:
             'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlOTU2ZGU2NTUyNmJhM2JkYzdjNDg4YSIsIm5hbWUiOiJ3ZWJhcGlzLmdpdGh1YkBnbWFpbC5jb20iLCJpYXQiOjE1ODY4NjQzNzksImV4cCI6MTYxODQyMTMwNX0.6ija-jjG0Uva5StvQnZucndLOiUigEoQnd88W_qbEBc',
         },
       }).as('loginSuccess');
       cy.visit('/');
       cy.wait(50);
-      cy.get('[data-testid=menu]').click();
-      cy.get('[data-testid=login]').click();
-      cy.get('[data-testid=emailOrUsername]')
-        .type('tkm.house@gmail.com')
-        .get('[data-testid=password]')
-        .type('DragondFFFly!2324.')
-        .get('[data-testid=login-btn]')
-        .click();
+      cy.login();
+  
+      // cy.get('[data-testid=menu]').click();
+      // cy.get('[data-testid=login]').click();
+      // cy.get('[data-testid=emailOrUsername]')
+      //   .type('tkm.house@gmail.com')
+      //   .get('[data-testid=password]')
+      //   .type('DragondFFFly!2324.')
+      //   .get('[data-testid=login-btn]')
+      //   .click();
       cy.get('[data-testid=menu]').click();
       cy.get('[data-testid=changepassword]').click();
     });
-    it('invalid password client', () => {
+    it.only('invalid password client', () => {
       cy.get('[data-testid=password]')
         .type('Dra')
         .blur()

@@ -1,10 +1,10 @@
-import authSeedOperation from './auth/authSeedOperation';
-export default function authSeed(req, res) {
+import usersSeed from './users';
+export default function seedOperation(req, res) {
   debugger;
   const { url } = req;
   switch (true) {
-    case url.includes('/authseed'):
-      authSeedOperation(req, res);
+    case url.includes('/users'):
+      usersSeed(req, res);
       break;
     default:
       null;
