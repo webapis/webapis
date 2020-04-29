@@ -107,24 +107,24 @@ export function logout() {
   window.localStorage.removeItem('webcom');
   return { type: actionTypes.LOGOUT_SUCCESS };
 }
-export async function changePassword({ dispatch, state, formDispatch }) {
+export async function changePassword({ dispatch, state, formDispatch, token }) {
   dispatch({ type: actionTypes.CHANGE_PASSWORD_STARTED });
   try {
-    const { confirm, password, token, emailorusername, current } = state;
+    const { confirm, password } = state;
+
     const response = await fetch(`/auth/changepass`, {
       method: 'put',
       body: JSON.stringify({
         confirm,
         password,
-        current,
         token,
-        emailorusername,
       }),
     });
 
     const result = await response.json();
     if (response.status === 200) {
       const { token, username, email } = result;
+      debugger;
       dispatch({
         type: actionTypes.CHANGE_PASSWORD_SUCCESS,
         token,
@@ -142,6 +142,7 @@ export async function changePassword({ dispatch, state, formDispatch }) {
       );
     } else if (response.status === 400) {
       const { errors } = result;
+      debugger;
       errors.forEach((error) => {
         formDispatch(
           serverValidation({
@@ -178,8 +179,9 @@ export async function forgotPassword({ dispatch, state, formDispatch }) {
     const result = await response.json();
     if (response.status === 200) {
       dispatch({
-        type: actionTypes.CHANGE_PASSWORD_SUCCESS,
+        type: actionTypes.REQUEST_PASS_CHANGE_SUCCESS,
         token: result.token,
+        message: `A link for password change  has been sent to, ${email}! `,
       });
     } else if (response.status === 400) {
       const { errors } = result;
@@ -194,7 +196,7 @@ export async function forgotPassword({ dispatch, state, formDispatch }) {
       const { error } = result;
 
       dispatch({
-        type: actionTypes.CHANGE_PASSWORD_FAILED,
+        type: actionTypes.REQUEST_PASS_CHANGE_FAILED,
         error,
       });
     } else {

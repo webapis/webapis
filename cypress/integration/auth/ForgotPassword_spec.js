@@ -1,19 +1,22 @@
-import authMessages from '../../../client/auth/authMessages';
+
 import validationMessages from '../../../client/form/validationMessages';
 describe('Forgot password', () => {
   beforeEach(() => {
     cy.server();
     cy.visit('/');
+    cy.wait(50);
+    cy.get('[data-testid=menu]').click();
+    cy.get('[data-testid=login]').click();
     cy.get('[data-testid=forgotpassword]').click();
   });
-  it('invalid email', () => {
+  it('invalid email format (client side validation)', () => {
     cy.get('[data-testid=email]').type('tmerer').blur();
 
     cy.get('[data-testid=message-email]').contains(
       validationMessages.INVALID_EMAIL
     );
   });
-  it('email not registered', () => {
+  it('email not registered (server side validation)', () => {
     cy.route({
       url: '/auth/requestpasschange',
       method: 'post',
@@ -40,6 +43,5 @@ describe('Forgot password', () => {
     });
     cy.get('[data-testid=email]').type('test@gmail.com');
     cy.get('[data-testid=requestpasschange-btn]').click();
-  
   });
 });

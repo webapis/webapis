@@ -23,13 +23,14 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
-Cypress.Commands.add('login', () => {
+Cypress.Commands.add('login', ({ username, email, password }) => {
   cy.request({
     url: 'http://localhost:3000/seed/users',
     method: 'post',
     body: {
-      username: 'demo',
-      email: 'demo@gmail.com',
+      username,
+      email,
+      password,
     },
   })
     .its('body')
@@ -50,10 +51,46 @@ Cypress.Commands.add('login', () => {
             .its('localStorage')
             .invoke(
               'setItem',
-              username,
+              'webcom',
               JSON.stringify({ username, email, token })
             );
-          debugger;
         });
     });
 });
+
+Cypress.Commands.add(
+  'signup',
+  ({ username, password, email, click, client = false, type = true }) => {
+    if (client && type) {
+      cy.get('[data-testid=username]')
+        .type(`${username}`)
+        .blur()
+        .get('[data-testid=email]')
+        .type(`${email}`)
+        .blur()
+        .get('[data-testid=password]')
+        .type(`${password}`)
+        .blur();
+      if (click) {
+        cy.get('[data-testid=signup-btn]').click();
+      }
+    }
+    if (!client && type) {
+      cy.get('[data-testid=username]')
+        .type(`${username}`)
+        .get('[data-testid=email]')
+        .type(`${email}`)
+        .get('[data-testid=password]')
+        .type(`${password}`);
+      if (click) {
+        cy.get('[data-testid=signup-btn]').click();
+      }
+    }
+
+    if (!type) {
+      if (click) {
+        cy.get('[data-testid=signup-btn]').click();
+      }
+    }
+  }
+);

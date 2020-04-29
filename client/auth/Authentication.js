@@ -7,6 +7,7 @@ const ChangePassword = lazy(() => import('../auth/ChangePassword'));
 const ForgotPassword = lazy(() => import('../auth/ForgotPassword'));
 const Signup = lazy(() => import('../auth/Signup'));
 const Profile = lazy(() => import('../auth/Profile'));
+const AuthFeedback = lazy(() => import('../auth/AuthFeedback'));
 export default function Authentication() {
   return (
     <div>
@@ -37,6 +38,11 @@ export default function Authentication() {
       <Route path='/profile'>
         <Suspense fallback={<div>loading...</div>}>
           <Profile />
+        </Suspense>
+      </Route>
+      <Route path='/authfeedback'>
+        <Suspense fallback={<div>loading...</div>}>
+          <AuthFeedback />
         </Suspense>
       </Route>
     </div>

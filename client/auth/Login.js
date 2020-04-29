@@ -92,7 +92,7 @@ export default function Login() {
             onClick={handleLogin}
             title='LOGIN'
           />
-          <a href='/' onClick={handleRoute} id='forgotpassword'>
+          <a href='/' onClick={handleRoute} id='forgotpassword' data-testid='forgotpassword'>
             Forgot Password!
           </a>
         </Form>

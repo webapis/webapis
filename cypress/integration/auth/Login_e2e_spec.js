@@ -1,10 +1,10 @@
 import validationMessages from '../../../client/form/validationMessages';
-import authMessages from '../../../client/auth/authMessages';
+
 describe('Login e2e', () => {
   beforeEach(() => {
     cy.task('seed:login', {
-      email: 'test@gmail.com',
-      username: 'tkmhousenew',
+      email: 'testuser@gmail.com',
+      username: 'testuser',
       password: 'Dragonfly1922!!',
     });
     cy.viewport('iphone-5')
@@ -41,10 +41,10 @@ describe('Login e2e', () => {
       validationMessages.INVALID_CREDENTIALS
     );
   });
-  it.only('Sucess Login', () => {
+  it('Sucess Login', () => {
     cy.server()
     cy.route('GET', '/auth/login').as('login')
-    cy.get('[data-testid=emailOrUsername]').type('test@gmail.com');
+    cy.get('[data-testid=emailOrUsername]').type('testuser@gmail.com');
     cy.get('[data-testid=password]').type('Dragonfly1922!!');
     cy.get('[data-testid=login-btn]').click();
   

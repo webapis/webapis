@@ -12,6 +12,7 @@ export const initState = {
   token: null,
   isLoggedIn: false,
   isPasswordChanged: false,
+  authFeedback: null,
 };
 
 export function authReducer(state, action) {
@@ -68,7 +69,12 @@ export function authReducer(state, action) {
     case actionTypes.REQUEST_PASS_CHANGE_STARTED:
       return { ...state, loading: true };
     case actionTypes.REQUEST_PASS_CHANGE_SUCCESS:
-      return { ...state, loading: false, success: true };
+      return {
+        ...state,
+        loading: false,
+        success: true,
+        authFeedback: action.message,
+      };
     case actionTypes.REQUEST_PASS_CHANGE_FAILED:
       return { ...state, loading: false, error: action.payload.error };
     case actionTypes.GOT_TOKEN_FROM_URL:

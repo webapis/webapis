@@ -13,20 +13,20 @@ import { Grid } from '../layout/Grid';
 import { useRouteContext } from '../route/router';
 import { useUserName } from './useUserName';
 export default function ChangePassword() {
-  const { userName } = useUserName();
+  const { token } = useUserName();
   const [route, setRoute] = useRouteContext();
   const { device } = useMediaQuery();
   const { form, auth } = useAppContext();
   const { state, dispatch } = auth;
-  const { password, confirm, current, emailorusername, token, error } = state;
+  const { password, confirm, error } = state;
 
-  useEffect(() => {
-    let url = new URL(window.location.href);
-    var token = url.searchParams.get('token');
-    if (token) {
-      actions.getTokenFromUrl({ token, dispatch, state });
-    }
-  }, []);
+  // useEffect(() => {
+  //   let url = new URL(window.location.href);
+  //   var token = url.searchParams.get('token');
+  //   if (token) {
+  //     actions.getTokenFromUrl({ token, dispatch, state });
+  //   }
+  // }, []);
 
   useEffect(() => {
     if (auth.state.token) {
@@ -50,6 +50,7 @@ export default function ChangePassword() {
       actions.changePassword({
         dispatch,
         state,
+        token,
         formDispatch: form.dispatch,
       })
     );
@@ -58,35 +59,6 @@ export default function ChangePassword() {
     <Grid width={device === 'phone' ? 100 : 25}>
       <Paper>
         <Form formTitle='Change Password' error={error}>
-          {!userName && (
-            <Input
-              value={emailorusername}
-              type='text'
-              id='emailorusername'
-              name='emailorusername'
-              placeholder='Enter email or username'
-              onChange={handleChange}
-              validationTypes={[
-                validationTypes.USERNAME_OR_EMAIL_FORMAT_VALIDATION,
-                validationTypes.INVALID_CREDENTIALS,
-              ]}
-            />
-          )}
-          {!userName && (
-            <Input
-              value={current}
-              type='password'
-              id='current'
-              name='current'
-              onChange={handleChange}
-              placeholder='Enter current password'
-              validationTypes={[
-                validationTypes.EMPTY_STRING_VALIDATION,
-                validationTypes.INVALID_CREDENTIALS,
-              ]}
-            />
-          )}
-
           <Input
             value={password}
             type='password'

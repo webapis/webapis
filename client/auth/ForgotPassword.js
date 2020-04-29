@@ -1,28 +1,42 @@
 import { h } from 'preact';
+import { useEffect } from 'preact/hooks';
 import Input from '../form/Input';
 import Form from '../form/Form';
 import Button from '../form/Button';
 import validationTypes from '../form/validationTypes';
 import './css/style.css';
-import { useAuthContext } from './auth-context';
-import { useFormContext } from '../form/form-context';
+import { useAppContext } from '../app-context';
 import * as actions from './actions';
 import { useMediaQuery } from '../layout/useMediaQuery';
 import { Paper } from '../layout/Paper';
 import { Grid } from '../layout/Grid';
+import { useRouteContext } from '../route/router';
 export default function RequestPassChange() {
+  const { form, auth } = useAppContext();
+  const { state, dispatch } = auth;
+  const [route, setRoute] = useRouteContext();
   const { device } = useMediaQuery();
-  const { dispatch, state } = useAuthContext();
-  const { dispatch: formDispatch } = useFormContext();
+  //const { dispatch, state } = useAuthContext();
+  //const { dispatch: formDispatch } = useFormContext();
   const { email } = state;
 
   function handleForgotPassword() {
-    dispatch(actions.forgotPassword({ dispatch, state, formDispatch }));
+    dispatch(
+      actions.forgotPassword({ dispatch, state, formDispatch: form.dispatch })
+    );
   }
   function handleChange(e) {
     const { name, value } = e.target;
     dispatch(actions.valueChanged({ propName: name, value, dispatch, state }));
   }
+
+  useEffect(() => {
+    if (state.authFeedback) {
+      debugger;
+      setRoute('/authfeedback');
+    }
+  }, [state.authFeedback]);
+
   return (
     <Grid width={device === 'phone' ? 100 : 25}>
       <Paper>

@@ -9,12 +9,13 @@ export default async function users(req, res) {
 
     debugger;
     //successful signup-------------------------------------
-    let { username, email } = req.body;
-    const password = 'testPass1988__!';
+    let { username, email, password } = req.body;
+
     const salt = await bcrypt.genSalt(10);
     debugger;
     const hash = await bcrypt.hash(password, salt);
     debugger;
+    await collection.deleteMany({});
     const result = await collection.insertOne({
       password: hash,
       email,

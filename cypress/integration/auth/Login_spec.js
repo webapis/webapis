@@ -11,28 +11,6 @@ describe('Login', () => {
 
     cy.get('[data-testid=login]').click();
   });
-  it('Login Success', () => {
-    cy.server();
-    cy.route({
-      url: '/auth/login',
-      response: {
-        token:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlOTU2ZGU2NTUyNmJhM2JkYzdjNDg4YSIsIm5hbWUiOiJ3ZWJhcGlzLmdpdGh1YkBnbWFpbC5jb20iLCJpYXQiOjE1ODY4NjQzNzksImV4cCI6MTYxODQyMTMwNX0.6ija-jjG0Uva5StvQnZucndLOiUigEoQnd88W_qbEBc',
-      },
-    }).as('loginSuccess');
-
-    cy.get('[data-testid=emailOrUsername]')
-      .type('tkm.house@gmail.com')
-      .get('[data-testid=password]')
-      .type('DragondFFFly!2324.')
-      .get('[data-testid=login-btn]')
-      .click();
-    cy.wait('@loginSuccess').then((xhr) => {
-      expect(xhr.request.headers['authorization']).to.equal(
-        'Basic dGttLmhvdXNlQGdtYWlsLmNvbTpEcmFnb25kRkZGbHkhMjMyNC4='
-      );
-    });
-  });
 
   it('invalid usernameoremail and password client', () => {
     cy.route({
@@ -147,5 +125,30 @@ describe('Login', () => {
     cy.get('[data-testid=message-emailorusername]').contains(
       validationMessages.USERNAME_NOT_REGISTERED
     );
+  });
+
+  it('Login Success', () => {
+    cy.server();
+    cy.route({
+      url: '/auth/login',
+      response: {
+        username: 'testuser',
+        email: 'testuser@gmail.com',
+        token:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlOTU2ZGU2NTUyNmJhM2JkYzdjNDg4YSIsIm5hbWUiOiJ3ZWJhcGlzLmdpdGh1YkBnbWFpbC5jb20iLCJpYXQiOjE1ODY4NjQzNzksImV4cCI6MTYxODQyMTMwNX0.6ija-jjG0Uva5StvQnZucndLOiUigEoQnd88W_qbEBc',
+      },
+    }).as('loginSuccess');
+
+    cy.get('[data-testid=emailOrUsername]')
+      .type('testuser@gmail.com')
+      .get('[data-testid=password]')
+      .type('DragondFFFly!2324.')
+      .get('[data-testid=login-btn]')
+      .click();
+    cy.wait('@loginSuccess').then((xhr) => {
+      expect(xhr.request.headers['authorization']).to.equal(
+        'Basic dGVzdHVzZXJAZ21haWwuY29tOkRyYWdvbmRGRkZseSEyMzI0Lg=='
+      );
+    });
   });
 });
