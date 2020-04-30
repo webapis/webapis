@@ -21,7 +21,7 @@ render(
         },
       }}
     >
-      <RouteProvider>
+      <RouteProvider initialRoute="/">
         <Navigation
           drawerContent={
             <DrawerContent

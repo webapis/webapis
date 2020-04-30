@@ -20,19 +20,29 @@ export default function ChangePassword() {
   const { state, dispatch } = auth;
   const { password, confirm, error } = state;
 
-  // useEffect(() => {
-  //   let url = new URL(window.location.href);
-  //   var token = url.searchParams.get('token');
-  //   if (token) {
-  //     actions.getTokenFromUrl({ token, dispatch, state });
-  //   }
-  // }, []);
+  useEffect(() => {
+    let url = new URL(window.location.href);
+    var urltoken = url.searchParams.get('token');
+    debugger;
+    if (urltoken) {
+      auth.dispatch(actions.getTokenFromUrl({ token:urltoken }));
+    }
+  }, []);
 
   useEffect(() => {
     if (auth.state.token) {
-      setRoute('/');
+      debugger;
+      //    setRoute('/');
     }
   }, [auth.state.token]);
+
+  useEffect(() => {
+    if (state.authFeedback) {
+      debugger;
+      setRoute('/authfeedback');
+    }
+  }, [state.authFeedback]);
+
 
   function handleChange(e) {
     const { name, value } = e.target;

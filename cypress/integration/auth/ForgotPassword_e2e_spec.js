@@ -29,17 +29,14 @@ describe('ForgotPassword e2e', () => {
     );
   });
   it.only('Successfull password change request submission', () => {
-    const password = 'TestPassword2020_!!';
-    const username = 'webapis';
-    const email = 'webapis.github@gmail.com';
-
+ 
     cy.request({
       url: 'http://localhost:3000/seed/users',
       method: 'post',
       body: {
-        username,
-        email,
-        password,
+        username:'webapis',
+        email:'webapis.github@gmail.com',
+        password:'Dragonfly1977_!',
       },
     });
  

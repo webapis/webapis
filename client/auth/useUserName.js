@@ -18,9 +18,10 @@ export function useUserName() {
 
   useEffect(() => {
     if (auth.state.token) {
-      const { username, token, email } = JSON.parse(
-        window.localStorage.getItem('webcom')
-      );
+      const { username, email, token } = auth.state;
+      // const { username, token, email } = JSON.parse(
+      //   window.localStorage.getItem('webcom')
+      // );
       setUsername(username);
       setToken(token);
       setEmail(email);

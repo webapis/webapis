@@ -9,7 +9,7 @@ import del from 'rollup-plugin-delete';
 import { terser } from 'rollup-plugin-terser';
 import replace from 'rollup-plugin-replace';
 const production = !process.env.ROLLUP_WATCH;
-//  ,
+
 const commonPlugins = [
   image(),
   postcss({

@@ -62,7 +62,7 @@ export function authReducer(state, action) {
         username: action.username,
         email: action.email,
         isPasswordChanged: true,
-        successMessage: 'Password changed successfully',
+        authFeedback: action.message,
       };
     case actionTypes.CHANGE_PASSWORD_FAILED:
       return { ...state, loading: false, error: action.error };
@@ -78,6 +78,7 @@ export function authReducer(state, action) {
     case actionTypes.REQUEST_PASS_CHANGE_FAILED:
       return { ...state, loading: false, error: action.payload.error };
     case actionTypes.GOT_TOKEN_FROM_URL:
+      debugger;
       return { ...state, token: action.token };
     case actionTypes.LOGOUT_SUCCESS:
       return { ...initState };

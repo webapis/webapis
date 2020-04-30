@@ -15,7 +15,7 @@ export default async function users(req, res) {
     debugger;
     const hash = await bcrypt.hash(password, salt);
     debugger;
-    await collection.deleteMany({});
+     await collection.deleteMany();
     const result = await collection.insertOne({
       password: hash,
       email,

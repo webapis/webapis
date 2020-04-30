@@ -42,7 +42,8 @@ export function useRouteContext() {
 }
 //
 export function RouteProvider(props) {
-  const [route, setRoute] = useState('/');
+  const {initialRoute}=props
+  const [route, setRoute] = useState(initialRoute);
 
   const value = useMemo(() => [route, setRoute], [route]);
 

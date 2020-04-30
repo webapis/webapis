@@ -112,7 +112,7 @@ export async function changePassword({ dispatch, state, formDispatch, token }) {
   try {
     const { confirm, password } = state;
 
-    const response = await fetch(`/auth/changepass`, {
+    const response = await fetch(`${api_url}/auth/changepass`, {
       method: 'put',
       body: JSON.stringify({
         confirm,
@@ -130,6 +130,7 @@ export async function changePassword({ dispatch, state, formDispatch, token }) {
         token,
         username,
         email,
+        message: `Password changed successfully.`,
       });
 
       window.localStorage.setItem(
@@ -211,6 +212,7 @@ export async function forgotPassword({ dispatch, state, formDispatch }) {
 }
 
 export function getTokenFromUrl({ token }) {
+  debugger;
   return {
     type: actionTypes.GOT_TOKEN_FROM_URL,
     token,

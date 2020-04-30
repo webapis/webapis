@@ -54,6 +54,7 @@ export default async function changePassword({ req, res, collection }) {
       debugger;
       const hash = await bcrypt.hash(password, salt);
       debugger;
+
       const result = await collection.findOneAndUpdate(
         { _id: new ObjectID(id) },
         { $set: { password: hash } }
@@ -83,7 +84,7 @@ export default async function changePassword({ req, res, collection }) {
     debugger;
     res.statusCode = 500;
     res.writeHead(500, { 'Content-Type': 'application/json' });
-    res.write(JSON.stringify({ error }));
+    res.write(JSON.stringify({ error: { message: error.message } }));
     res.end();
   }
 }
