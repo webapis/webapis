@@ -77,14 +77,14 @@ describe('Signup', () => {
       response: { errors: ['403'] },
     }).as('emailIsRegistered');
 
-      cy.signup({
-        username: 'testuser',
-        email: 'test@gmail.com',
-        password: 'DragonflyRRR!1977!',
-        click: true,
-        client: false,
-        type: true,
-      });
+    cy.signup({
+      username: 'testuser',
+      email: 'test@gmail.com',
+      password: 'DragonflyRRR!1977!',
+      click: true,
+      client: false,
+      type: true,
+    });
     cy.get('[data-testid=message-email]').contains(
       validationMessages.REGISTERED_EMAIL
     );
@@ -95,17 +95,17 @@ describe('Signup', () => {
       url: '/auth/signup',
       status: 400,
       method: 'post',
-      response: { errors: ['405','406','407'] },
+      response: { errors: ['405', '406', '407'] },
     }).as('usernameInvalid');
 
-      cy.signup({
-        username: '1234',
-        email: 'testgmail.com',
-        password: '11!',
-        click: true,
-        client: false,
-        type: true,
-      });
+    cy.signup({
+      username: '1234',
+      email: 'testgmail.com',
+      password: '11!',
+      click: true,
+      client: false,
+      type: true,
+    });
 
     cy.get('[data-testid=message-username]').contains(
       validationMessages.INVALID_USERNAME

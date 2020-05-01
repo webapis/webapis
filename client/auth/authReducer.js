@@ -18,7 +18,9 @@ export const initState = {
 export function authReducer(state, action) {
   switch (action.type) {
     case actionTypes.VALUE_CHANGED:
-      return { ...state, [action.payload.propName]: action.payload.value };
+          const nextState = { ...state, [action.payload.propName]: action.payload.value }
+          debugger;
+      return nextState
     case actionTypes.LOGIN_STARTED:
       return { ...state, loading: true };
     case actionTypes.LOGIN_SUCCESS:
@@ -78,7 +80,7 @@ export function authReducer(state, action) {
     case actionTypes.REQUEST_PASS_CHANGE_FAILED:
       return { ...state, loading: false, error: action.payload.error };
     case actionTypes.GOT_TOKEN_FROM_URL:
-      debugger;
+   
       return { ...state, token: action.token };
     case actionTypes.LOGOUT_SUCCESS:
       return { ...initState };

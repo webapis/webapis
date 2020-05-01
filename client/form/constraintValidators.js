@@ -117,8 +117,8 @@ export function validateEmptyString({ value }) {
 
 export function validatePasswordMatch({ auth }) {
 
-  const { password, confirm } = auth.state;
-
+  const { password, confirm } =auth;
+debugger;
   if (password === '' || password !== confirm) {
     return {
       validationState: validationState.INVALID,

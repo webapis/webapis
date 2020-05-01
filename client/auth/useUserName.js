@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'preact/hooks';
-import { useAppContext } from '../app-context';
+import { useAuthContext } from './auth-context';
 export function useUserName() {
   const [userName, setUsername] = useState(null);
   const [token, setToken] = useState(null);
   const [email, setEmail] = useState('');
-  const { auth } = useAppContext();
+  const { state,dispatch } = useAuthContext();
   useEffect(() => {
     if (window.localStorage.getItem('webcom')) {
       const { username, token, email } = JSON.parse(
@@ -17,8 +17,8 @@ export function useUserName() {
   }, []);
 
   useEffect(() => {
-    if (auth.state.token) {
-      const { username, email, token } = auth.state;
+    if (state.token) {
+      const { username, email, token } =state;
       // const { username, token, email } = JSON.parse(
       //   window.localStorage.getItem('webcom')
       // );
@@ -26,7 +26,7 @@ export function useUserName() {
       setToken(token);
       setEmail(email);
     }
-  }, [auth.state]);
+  }, [state]);
 
   return { userName, token, email };
 }

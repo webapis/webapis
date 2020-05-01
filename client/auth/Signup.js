@@ -5,40 +5,42 @@ import Form from '../form/Form';
 import Input from '../form/Input';
 import Button from '../form/Button';
 import validationTypes from '../form/validationTypes';
-import { useAppContext } from '../app-context';
+import { useAuthContext } from './auth-context';
+import { useFormContext } from '../form/form-context';
 import * as actions from './actions';
 import { Grid } from '../layout/Grid';
 import { Paper } from '../layout/Paper';
 import { useMediaQuery } from '../layout/useMediaQuery';
 import { useRouteContext } from '../route/router';
 export default function Signup() {
+  const { state, dispatch } = useAuthContext();
+  const { dispatch: formDispatch } = useFormContext();
   const [route, setRoute] = useRouteContext();
-  const { form, auth } = useAppContext();
   const { device } = useMediaQuery();
-  const { username, password, email } = auth.state;
+  const { username, password, email } = state;
   useEffect(() => {
-    if (auth.state.token) {
+    if (state.token) {
       setRoute('/');
     }
-  }, [auth.state.token]);
+  }, [state.token]);
 
   function handleSignup() {
-    auth.dispatch(
+    dispatch(
       actions.signup({
-        dispatch: auth.dispatch,
-        state: auth.state,
-        formDispatch: form.dispatch,
+        dispatch,
+        state,
+        formDispatch,
       })
     );
   }
   function handleChange(e) {
     const { name, value } = e.target;
-    auth.dispatch(
+    dispatch(
       actions.valueChanged({
         propName: name,
         value,
-        dispatch: auth.dispatch,
-        state: auth.state,
+        dispatch,
+        state,
       })
     );
   }

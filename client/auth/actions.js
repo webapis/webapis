@@ -2,6 +2,7 @@ import actionTypes from './actionTypes';
 import { serverValidation } from '../form/actions';
 import httpStatus from '../form/http-status';
 export function valueChanged({ propName, value }) {
+debugger;
   return {
     type: actionTypes.VALUE_CHANGED,
     payload: {
@@ -73,9 +74,9 @@ export async function signup({ dispatch, formDispatch, state }) {
     const result = await response.json();
     if (response.status === 200) {
       const { token, username, email } = result;
-      debugger;
+
       dispatch({ type: actionTypes.SIGNUP_SUCCESS, token, username, email });
-      debugger;
+ 
       window.localStorage.setItem(
         'webcom',
         JSON.stringify({
@@ -111,7 +112,7 @@ export async function changePassword({ dispatch, state, formDispatch, token }) {
   dispatch({ type: actionTypes.CHANGE_PASSWORD_STARTED });
   try {
     const { confirm, password } = state;
-
+debugger;
     const response = await fetch(`${api_url}/auth/changepass`, {
       method: 'put',
       body: JSON.stringify({
@@ -212,7 +213,7 @@ export async function forgotPassword({ dispatch, state, formDispatch }) {
 }
 
 export function getTokenFromUrl({ token }) {
-  debugger;
+
   return {
     type: actionTypes.GOT_TOKEN_FROM_URL,
     token,

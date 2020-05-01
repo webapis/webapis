@@ -1,7 +1,6 @@
 import { h } from 'preact';
 import { Suspense, lazy } from 'preact/compat';
 import { Route } from '../route/router';
-
 const Login = lazy(() => import('../auth/Login'));
 const ChangePassword = lazy(() => import('../auth/ChangePassword'));
 const ForgotPassword = lazy(() => import('../auth/ForgotPassword'));

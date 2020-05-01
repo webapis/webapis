@@ -28,7 +28,7 @@ describe('ForgotPassword e2e', () => {
       validationMessages.EMAIL_NOT_REGISTERED
     );
   });
-  it.only('Successfull password change request submission', () => {
+  it('Successfull password change request submission', () => {
  
     cy.request({
       url: 'http://localhost:3000/seed/users',

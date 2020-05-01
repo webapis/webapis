@@ -4,7 +4,8 @@ import Input from '../form/Input';
 import Button from '../form/Button';
 import Form from '../form/Form';
 import validationTypes from '../form/validationTypes';
-import { useAppContext } from '../app-context';
+import { useAuthContext } from './auth-context';
+import {useFormContext} from '../form/form-context'
 import { useMediaQuery } from '../layout/useMediaQuery';
 import { useRouteContext } from '../route/router';
 import { Paper } from '../layout/Paper';
@@ -14,15 +15,16 @@ import * as actions from './actions';
 export default function Login() {
   const [route, setRoute] = useRouteContext();
   const { device } = useMediaQuery();
-  const { auth, form } = useAppContext();
+  const {state, dispatch} = useAuthContext();
+  const {dispatch:formDispatch}=useFormContext()
 
-  const { emailorusername, password, error } = auth.state;
+  const { emailorusername, password, error } =state;
 
   useEffect(() => {
-    if (auth.state.token) {
+    if (state.token) {
       setRoute('/');
     }
-  }, [auth.state.token]);
+  }, [state.token]);
 
   function handleRoute(e) {
     e.preventDefault();
@@ -32,26 +34,29 @@ export default function Login() {
 
   function handleChange(e) {
     const { name, value } = e.target;
-    auth.dispatch(
+    dispatch(
       actions.valueChanged({
         propName: name,
         value,
-        dispatch: auth.dispatch,
-        state: auth.state,
+        dispatch,
+        state,
       })
     );
   }
   function handleLogin() {
-    auth.dispatch(
+    dispatch(
       actions.login({
-        dispatch: auth.dispatch,
-        state: auth.state,
-        formDispatch: form.dispatch,
+        dispatch,
+        state,
+        formDispatch
       })
     );
   }
 
   return (
+
+
+ 
     <Grid width={device === 'phone' ? 100 : 25}>
       <Paper>
         <Form formTitle='Login' error={error}>

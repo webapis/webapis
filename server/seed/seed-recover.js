@@ -1,15 +1,16 @@
-import * as validations from './validations/validations';
-import httpStatus from './http-status';
+import * as validations from '../auth/validations/validations';
+import httpStatus from '../auth/http-status';
 const jwt = require('jsonwebtoken');
-const nodemailer = require('nodemailer');
 
-export default async function ({ req, res, collection }) {
+export default async function seedRecover(req, res) {
   try {
+    const collectionName = 'users';
+    const database = req.client.db('auth');
+    const collection = database.collection(collectionName);
     const { email } = req.body;
     let user = null;
     let errors = [];
     debugger;
-
     if (
       validations.isEmptyEmailOrUsername({ emailorusername: email }) ||
       !validations.isValidEmail({ email })
@@ -36,27 +37,8 @@ export default async function ({ req, res, collection }) {
           expiresIn: '10h',
         });
         debugger;
-        const link = `${process.env.resetUrl}?token=${token}`;
-        let transporter = nodemailer.createTransport({
-          host: 'smtp.googlemail.com',
-          port: 465,
-          secure: true, // true for 465, false for other ports
-          auth: {
-            user: process.env.email, // generated ethereal user
-            pass: process.env.password, // generated ethereal password
-          },
-        });
-        debugger;
-        await transporter.sendMail({
-          from: process.env.email, // sender address
-          to: email, // list of receivers
-          subject: 'Password Reset', // Subject line
-          text: 'Click the link below to reset password', // plain text body
-          html: `<p>Click <a data-testid="resetlink" href="${link}">here</a> to reset your password</p>`, // html body
-        });
-        debugger;
         res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.write(JSON.stringify({ message:"request accepted" }));
+        res.write(JSON.stringify({ token }));
         res.end();
       } else {
         //user not registered
@@ -65,7 +47,6 @@ export default async function ({ req, res, collection }) {
         res.statusCode = 400;
         res.writeHead(400, { 'Content-Type': 'application/json' });
         res.write(JSON.stringify({ errors }));
-     
         res.end();
       }
     }
@@ -75,7 +56,8 @@ export default async function ({ req, res, collection }) {
     debugger;
     res.statusCode = 500;
     res.writeHead(500, { 'Content-Type': 'application/json' });
-    res.write(JSON.stringify({ error }));
+    res.write(JSON.stringify({ error: { message: error.message } }));
     res.end();
   }
 }
+//

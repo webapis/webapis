@@ -1,40 +1,10 @@
 import { h } from 'preact';
-import { useEffect, useState } from 'preact/hooks';
-import * as actions from './actions';
-import validationStates from './validationStates';
-import { isClientValidationType } from './constraintValidators';
-import EyeIcon from './EyeIcon';
-import { useAppContext } from '../app-context';
-function ValidityIcon({ valid }) {
-  let stateColor = '#4fc3f7';
-  switch (valid) {
-    case validationStates.VALID:
-      stateColor = 'green';
-      break;
-    case validationStates.INVALID:
-      stateColor = 'red';
-      break;
-    case validationStates.INACTIVE:
-      stateColor = '#4fc3f7';
-      break;
-    default:
-      stateColor = '#4fc3f7';
-  }
+import { useState } from 'preact/hooks';
 
-  return (
-    <div
-      style={{
-        flex: 1,
-        color: stateColor,
-        lineHeight: 2,
-        width: 20,
-        textAlign: 'center',
-      }}
-    >
-      {valid ? '✓' : '☓'}
-    </div>
-  );
-}
+import { ValidationMessage } from './ValidationMessage';
+import { ValidityIcon } from './ValidityIcon';
+import { useClientValidation } from './useClientValidation';
+import EyeIcon from './EyeIcon';
 
 const style = {
   input: {
@@ -45,7 +15,6 @@ const style = {
   },
   root: {
     borderRadius: 2,
-
     display: 'flex',
     flexDirection: 'column',
     backgroundColor: 'white',
@@ -55,10 +24,6 @@ const style = {
   inputContainer: {
     display: 'flex',
     flex: 1,
-  },
-  message: {
-    color: 'red',
-    paddingLeft: 3,
   },
 };
 export default function Input({
@@ -70,61 +35,23 @@ export default function Input({
   validationTypes = [],
   id,
 }) {
-  const { form, auth } = useAppContext();
-  const { state, dispatch } = form;
-
-  const [inputValidation, setInputValidation] = useState({
-    validationState: validationStates.INACTIVE,
-    message: '',
-    validationType: undefined,
+  const { validate, resetValidationState } = useClientValidation({
+    validationTypes,
+    value,
+    name,
   });
-
+  const [focused, setFocused] = useState(false);
   const [inputType, setInputType] = useState(type);
 
-  const [borderColor, setBorderColor] = useState('');
-
-  useEffect(() => {
-    if (
-      inputValidation &&
-      inputValidation.validationState === validationStates.VALID
-    ) {
-      setBorderColor('green');
-    }
-    if (
-      inputValidation &&
-      inputValidation.validationState === validationStates.INVALID
-    ) {
-      setBorderColor('red');
-    }
-    if (
-      inputValidation &&
-      inputValidation.validationState === validationStates.INACTIVE
-    ) {
-      setBorderColor('#4fc3f7');
-    }
-  }, [inputValidation]);
   function handleFocus() {
-    validationTypes.forEach((validationName) => {
-      if (state.validation[validationName]) {
-        dispatch(
-          actions.resetInputValidationState({ validationType: validationName })
-        );
-      }
-    });
+    resetValidationState();
+    setFocused(true);
   }
-  function handleBlur() {
-    validationTypes.forEach((validationName) => {
-      if (isClientValidationType({ validationType: validationName })) {
-        dispatch(
-          actions.clientValidation({
-            validationType: validationName,
-            value,
-            state,
-             auth,
-          })
-        );
-      }
-    });
+  function handleBlur(e) {
+    if (e.target.name === name) {
+      debugger;
+      validate();
+    }
   }
 
   function toggleEye() {
@@ -138,7 +65,7 @@ export default function Input({
     <div style={style.root}>
       <div style={style.inputContainer}>
         <input
-          style={{ ...style.input, borderColor }}
+          style={{ ...style.input }}
           type={inputType}
           name={name}
           onChange={onChange}
@@ -148,37 +75,10 @@ export default function Input({
           onFocus={handleFocus}
           data-testid={id}
         />
-        {validationTypes.map((validationName) => {
-          if (state.validation[validationName]) {
-            const { validationState } = state.validation[validationName];
-            if (
-              validationState === validationStates.VALID ||
-              validationState === validationStates.INVALID
-            ) {
-              return (
-                <ValidityIcon key={validationName} valid={validationState} />
-              );
-            }
-            return null;
-          }
-        })}
-        {type === 'password' && <EyeIcon onClick={toggleEye} />}
+        <ValidityIcon validationTypes={validationTypes} />
+        <EyeIcon inputType={type} onClick={toggleEye} />
       </div>
-      {validationTypes.map((validationName) => {
-        if (state.validation[validationName]) {
-          const { message } = state.validation[validationName];
-          return (
-            <div key={validationName} style={style.message}>
-              {message !== '' && (
-                <div
-                  role='message'
-                  data-testid={`message-${name}`}
-                >{`* ${message}`}</div>
-              )}
-            </div>
-          );
-        }
-      })}
+      <ValidationMessage validationTypes={validationTypes} name={name} />
     </div>
   );
 }

@@ -7,7 +7,8 @@ import actionTypes from './actionTypes';
 import httpStatus from './http-status';
 import validationMessages from './validationMessages';
 
-export function clientValidation({ validationType, value, auth }) {
+export function clientValidation({ validationType, value, state,auth }) {
+
   let validation = null;
   switch (validationType) {
     case constValTypes.EMAIL_FORMAT_VALIDATION:

@@ -5,7 +5,8 @@ import Input from '../form/Input';
 import Form from '../form/Form';
 import Button from '../form/Button';
 import validationTypes from '../form/validationTypes';
-import { useAppContext } from '../app-context';
+import { useAuthContext } from './auth-context';
+import { useFormContext } from '../form/form-context';
 import * as actions from './actions';
 import { useMediaQuery } from '../layout/useMediaQuery';
 import { Paper } from '../layout/Paper';
@@ -13,36 +14,28 @@ import { Grid } from '../layout/Grid';
 import { useRouteContext } from '../route/router';
 import { useUserName } from './useUserName';
 export default function ChangePassword() {
+  const { state, dispatch } = useAuthContext();
+  const { dispatch: formDispatch } = useFormContext();
   const { token } = useUserName();
   const [route, setRoute] = useRouteContext();
   const { device } = useMediaQuery();
-  const { form, auth } = useAppContext();
-  const { state, dispatch } = auth;
+
   const { password, confirm, error } = state;
 
   useEffect(() => {
     let url = new URL(window.location.href);
     var urltoken = url.searchParams.get('token');
-    debugger;
+
     if (urltoken) {
-      auth.dispatch(actions.getTokenFromUrl({ token:urltoken }));
+      dispatch(actions.getTokenFromUrl({ token: urltoken }));
     }
   }, []);
 
   useEffect(() => {
-    if (auth.state.token) {
-      debugger;
-      //    setRoute('/');
-    }
-  }, [auth.state.token]);
-
-  useEffect(() => {
     if (state.authFeedback) {
-      debugger;
       setRoute('/authfeedback');
     }
   }, [state.authFeedback]);
-
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -61,7 +54,7 @@ export default function ChangePassword() {
         dispatch,
         state,
         token,
-        formDispatch: form.dispatch,
+        formDispatch,
       })
     );
   }

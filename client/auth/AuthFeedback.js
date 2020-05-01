@@ -1,8 +1,8 @@
 import { h } from 'preact';
-import { useAppContext } from '../app-context';
+import { useAuthContext } from '../auth/auth-context';
 export default function AuthFeedback({ message, children }) {
-  const { auth } = useAppContext();
-  const { state } = auth;
+  const { state } = useAuthContext();
+
 
   return (
     <div
