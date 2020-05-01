@@ -1,6 +1,4 @@
 import { h } from 'preact';
-import { useEffect, useState } from 'preact/hooks';
-import { useAppContext } from '../app-context';
 import { useRouteContext } from '../route/router';
 import { List, ListItem } from '../layout/NavList';
 import userIcon from './icons/user64.png';

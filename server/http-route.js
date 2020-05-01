@@ -2,6 +2,7 @@
 /* eslint-disable indent */ //
 import crudOperation from './crud/crud';
 import authOperation from './auth/index';
+import contactsOperation from './contacts';
 import seedOperation from './seed';
 import serveStatic from './serve-static/index';
 import servePassReset from './serve-static/serve-pass-reset';
@@ -18,7 +19,7 @@ export default async function httpRoute(req, res) {
   const resetRegex = /.*\/reset\/.*/;
   const crudRegex = /.*\/crud\/.*/;
   const seedRegex = /.*\/seed\/.*/;
-
+  const contactsRegex = /.*\/contacts\/.*/;
   req.auth = null;
   const clnt = await client.connect();
   req.client = clnt;
@@ -67,6 +68,9 @@ export default async function httpRoute(req, res) {
           case resetRegex.test(url):
             servePassReset(req, res);
             break;
+          case contactsRegex.test(url):
+            contactsOperation(req, res);
+            break;
           default:
             serveStatic(req, res);
         }
@@ -88,6 +92,9 @@ export default async function httpRoute(req, res) {
           break;
         case resetRegex.test(url):
           servePassReset(req, res);
+          break;
+        case contactsRegex.test(url):
+          contactsOperation(req, res);
           break;
         default:
           serveStatic(req, res);

@@ -6,7 +6,9 @@ export function useUserName() {
   const [email, setEmail] = useState('');
   const { state,dispatch } = useAuthContext();
   useEffect(() => {
+  
     if (window.localStorage.getItem('webcom')) {
+ 
       const { username, token, email } = JSON.parse(
         window.localStorage.getItem('webcom')
       );
@@ -18,6 +20,7 @@ export function useUserName() {
 
   useEffect(() => {
     if (state.token) {
+  
       const { username, email, token } =state;
       // const { username, token, email } = JSON.parse(
       //   window.localStorage.getItem('webcom')
