@@ -1,5 +1,5 @@
 import { h } from 'preact';
 
 export function Home() {
-  return <div>Home</div>;
+  return <div data-testid='home'>Home</div>;
 }
