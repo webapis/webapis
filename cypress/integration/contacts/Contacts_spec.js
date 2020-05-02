@@ -15,7 +15,6 @@ describe('Contacts', () => {
 
     cy.visit('/');
     cy.wait(50);
-
   });
 
   it('fetch contacts', () => {
@@ -23,6 +22,8 @@ describe('Contacts', () => {
       cy.route({ url: '/contacts/find', response: { contacts: json } });
       cy.get('[data-testid=menu]').click();
       cy.get('[data-testid=contacts]').click();
+      cy.get('[data-testid=conversation]').click();
+      cy.get('[data-testid=testuser]').click();
     });
   });
 });

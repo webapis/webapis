@@ -12,7 +12,7 @@ import { FormProvider } from '../form/form-context';
 import { OtherContent } from './OtherContent';
 
 import { Home } from './Home';
-const Contacts = lazy(() => import('../contacts/Contacts'));
+const Contacts = lazy(() => import('../chat/contacts/Contacts'));
 render(
   <AuthProvider>
     <FormProvider>

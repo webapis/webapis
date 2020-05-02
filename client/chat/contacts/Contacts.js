@@ -2,11 +2,11 @@ import { h } from 'preact';
 import { useReducer, useEffect, useState } from 'preact/hooks';
 import { fetchContacts } from './actions';
 import { contactReducer, initState } from './contactsReducer';
-import { List, ListItem } from '../layout/NavList';
-import { TextInput } from '../layout/TextInput';
-import { Paper } from '../layout/Paper';
-import { Fab } from '../layout/Fab';
-import { AddIcon } from '../layout/icons/AddIcon';
+import { List, ListItem } from '../../layout/NavList';
+import { TextInput } from '../../layout/TextInput';
+import { Paper } from '../../layout/Paper';
+import { Fab } from '../../layout/Fab';
+import { AddIcon } from '../../layout/icons/AddIcon';
 export default function Contacts() {
   const [state, dispatch] = useReducer(contactReducer, initState);
   const { contacts } = state;
@@ -26,7 +26,7 @@ export default function Contacts() {
         <List>
           {contacts.length > 0 &&
             contacts.map((c) => {
-              return <ListItem>{c.username}</ListItem>;
+              return <ListItem id={c.username}>{c.username}</ListItem>;
             })}
         </List>
       </Paper>
@@ -46,7 +46,7 @@ function NewConversation() {
       {newConversation ? (
         <TextInput placeholder='Enter username or email' />
       ) : (
-        <ListItem onClick={handleNewConversation}>
+        <ListItem onClick={handleNewConversation} id='conversation'>
           <Fab>
             <AddIcon />
           </Fab>
