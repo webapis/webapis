@@ -3,6 +3,7 @@
 import crudOperation from './crud/crud';
 import authOperation from './auth/index';
 import contactsOperation from './contacts';
+import usersOperation from './users';
 import seedOperation from './seed';
 import serveStatic from './serve-static/index';
 import servePassReset from './serve-static/serve-pass-reset';
@@ -20,6 +21,7 @@ export default async function httpRoute(req, res) {
   const crudRegex = /.*\/crud\/.*/;
   const seedRegex = /.*\/seed\/.*/;
   const contactsRegex = /.*\/contacts\/.*/;
+  const usersRegex = /.*\/users\/.*/;
   req.auth = null;
   const clnt = await client.connect();
   req.client = clnt;
@@ -71,6 +73,9 @@ export default async function httpRoute(req, res) {
           case contactsRegex.test(url):
             contactsOperation(req, res);
             break;
+          case usersRegex.test(url):
+            usersOperation(req, res);
+            break;
           default:
             serveStatic(req, res);
         }
@@ -95,6 +100,9 @@ export default async function httpRoute(req, res) {
           break;
         case contactsRegex.test(url):
           contactsOperation(req, res);
+          break;
+        case usersRegex.test(url):
+          usersOperation(req, res);
           break;
         default:
           serveStatic(req, res);

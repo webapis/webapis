@@ -11,9 +11,10 @@ const style = {
 };
 
 export function TextInput(props) {
+  const { id } = props;
   return (
     <div style={{ display: 'flex', width: '100%' }}>
-      <input style={style} {...props} />
+      <input style={style} {...props} data-testid={id} />
     </div>
   );
 }

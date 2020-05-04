@@ -1,40 +1,33 @@
 import { h } from 'preact';
-import { useReducer, useEffect, useState } from 'preact/hooks';
-import { fetchContacts } from './actions';
-import { contactReducer, initState } from './contactsReducer';
+import { useState } from 'preact/hooks';
 import { List, ListItem } from '../../layout/NavList';
 import { TextInput } from '../../layout/TextInput';
 import { Paper } from '../../layout/Paper';
 import { Fab } from '../../layout/Fab';
 import { AddIcon } from '../../layout/icons/AddIcon';
+import Users from '../users/Users';
+import UsersInContact from '../users-in-contact/UsersInContact';
+import { useContactsContext } from './contacts-context';
 export default function Contacts() {
-  const [state, dispatch] = useReducer(contactReducer, initState);
-  const { contacts } = state;
+  const { state } = useContactsContext();
+  const [filter, setFilter] = useState(null);
 
-  function getContacts() {
-    fetchContacts({ dispatch });
+  function handleFilter(e) {
+    setFilter(e.target.value);
   }
 
-  useEffect(() => {
-    getContacts();
-  }, []);
-
   return (
-    <div style={{ display: 'flex' }}>
+    <div style={{ display: 'flex' }} data-testid="contact-list">
       <Paper>
-        <NewConversation />
-        <List>
-          {contacts.length > 0 &&
-            contacts.map((c) => {
-              return <ListItem id={c.username}>{c.username}</ListItem>;
-            })}
-        </List>
+        <NewConversation onChange={handleFilter} />
+        {<UsersInContact filter={filter}  />}
+        { <Users filter={filter} />}
       </Paper>
     </div>
   );
 }
 
-function NewConversation() {
+function NewConversation({ onChange }) {
   const [newConversation, setNewConversation] = useState(false);
 
   function handleNewConversation() {
@@ -44,7 +37,7 @@ function NewConversation() {
   return (
     <List>
       {newConversation ? (
-        <TextInput placeholder='Enter username or email' />
+        <TextInput onChange={onChange} placeholder='Enter username or email' id='contactsearch' />
       ) : (
         <ListItem onClick={handleNewConversation} id='conversation'>
           <Fab>

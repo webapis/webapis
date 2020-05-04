@@ -1,8 +1,9 @@
 import { h } from 'preact';
 import './css/style.css';
-export function List({ children }) {
+export function List({ children, id }) {
   return (
     <div
+    data-testid={id}
       style={{
         boxSizing: 'border-box',
         backgroundColor: '#fff',

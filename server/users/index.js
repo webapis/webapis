@@ -3,6 +3,7 @@
 import 'babel-polyfill';
 import find from './find';
 
+
 export default function (req, res) {
   const { url } = req;
   const collectionName = 'users';

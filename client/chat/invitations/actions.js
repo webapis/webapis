@@ -6,10 +6,8 @@ export async function sendInvitation({ dispatch }) {
       method: 'post',
     });
 
-    const { users } = await response.json();
-
-    dispatch({ type: actionTypes.FETCH_USERS_SUCCESS, users });
+    dispatch({ type: actionTypes.SEND_INVITATION_SUCCESS });
   } catch (error) {
-    dispatch({ type: actionTypes.FETCH_USERS_FAILED, error });
+    dispatch({ type: actionTypes.SEND_INVITATION_FAILED, error });
   }
 }
