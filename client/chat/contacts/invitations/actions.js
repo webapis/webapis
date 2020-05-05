@@ -11,3 +11,10 @@ export async function sendInvitation({ dispatch }) {
     dispatch({ type: actionTypes.SEND_INVITATION_FAILED, error });
   }
 }
+
+export function openInvitation({ dispatch, invitation }) {
+
+  dispatch({ type: actionTypes.OPEN_INVITATION, invitation });
+}
+
+export function closeInvitation() {}

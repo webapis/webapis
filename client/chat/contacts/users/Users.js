@@ -1,10 +1,16 @@
 import { h } from 'preact';
 import { useEffect } from 'preact/hooks';
-import { List, ListItem } from '../../layout/NavList';
-import { useContactsContext } from '../contacts/contacts-context';
-import { fetchUsers, selectUser } from '../contacts/actions';
+import { List, ListItem } from '../../../layout/NavList';
+import { useContactsContext } from '../contacts-context';
+import { openInvitation } from '../invitations/actions';
+import { useInvitationContext } from '../invitations/invitation-context';
+import { useAuthContext } from '../../../auth/auth-context';
+import { fetchUsers } from '../actions';
 
 export default function Users({ filter }) {
+  const { dispatch: invitDispatch } = useInvitationContext();
+  const { state: authState } = useAuthContext();
+
   const { state, dispatch } = useContactsContext();
   const { users } = state;
 
@@ -15,7 +21,9 @@ export default function Users({ filter }) {
   }, [state.contacts, filter]);
 
   function handleSelectUser(e) {
-    selectUser({ dispatch, userName: e.target.id });
+    
+    const invitation = { sender: authState.username, reciever: e.target.id };
+    openInvitation({ dispatch: invitDispatch, invitation });
   }
 
   return (
@@ -23,6 +31,7 @@ export default function Users({ filter }) {
       {users &&
         users.length > 0 &&
         users.map((c) => {
+     
           return (
             <ListItem id={c.username} onClick={handleSelectUser}>
               {c.username}

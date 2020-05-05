@@ -1,14 +1,16 @@
 import { h } from 'preact';
 import { useEffect } from 'preact/hooks';
-import { useContactsContext } from '../contacts/contacts-context';
+import { useContactsContext } from '../contacts-context';
+import { useRoomContext } from '../rooms/room-context';
 import {
   fetchUsersInContact,
   getLocalContacts,
   findLocalContact,
-  selectContact,
-} from '../contacts/actions';
-import { List, ListItem } from '../../layout/NavList';
+} from '../actions';
+import { openRoom } from '../rooms/actions';
+import { List, ListItem } from '../../../layout/NavList';
 export default function UsersInContact({ filter }) {
+  const { state: roomState, dispatch: roomDispatch } = useRoomContext();
   const { state, dispatch } = useContactsContext();
   const { contacts } = state;
 
@@ -27,7 +29,9 @@ export default function UsersInContact({ filter }) {
   }, [filter]);
 
   function handleSelectContact(e) {
-    selectContact({ dispatch, contactName: e.target.id });
+    debugger;
+    const room = state.contacts.find((c) => c.username === e.target.id);
+    openRoom({ dispatch: roomDispatch, room });
   }
   return (
     <List id='usersincontact'>

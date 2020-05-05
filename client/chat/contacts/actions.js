@@ -20,7 +20,7 @@ export async function fetchUsers({ dispatch, filter }) {
       `http://localhost:3000/users/find?filter=${filter}`
     );
     const { users } = await response.json();
-    debugger;
+
     dispatch({ type: actionTypes.FETCH_USERS_SUCCESS, users });
   } catch (error) {
     dispatch({ type: actionTypes.FETCH_USERS_FAILED, error });
@@ -55,13 +55,12 @@ export function findLocalContact({ dispatch, filter }) {
   }
 }
 
-export function selectUser({ dispatch, userName }) {
-  dispatch({
-    type: actionTypes.USER_SELECTED,
-    userName,
-  });
-}
+// export function selectUser({ dispatch, userName }) {
+//   debugger;
+//   dispatch({
+//     type: actionTypes.USER_SELECTED,
+//     userName,
+//   });
+// }
 
-export function selectContact({ dispatch, contactName }) {
-  dispatch({ type: actionTypes.CONTACT_SELECTED, contactName });
-}
+

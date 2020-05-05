@@ -39,6 +39,8 @@ export function contactsReducer(state, action) {
       return { ...state, contacts: action.contacts, loading: false };
     case actionTypes.FIND_LOCAL_CONTACT_FAILED:
       return { ...state, error: action.error, loading: false };
+    case actionTypes.USER_SELECTED:
+      return { ...state, selectedUser: action.userName };
     default:
       return state;
   }
