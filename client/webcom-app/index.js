@@ -10,13 +10,14 @@ import { AuthContent } from '../auth/AuthContent';
 import { AuthProvider } from '../auth/auth-context';
 import { FormProvider } from '../form/form-context';
 import { OtherContent } from './OtherContent';
-import { ContactsProvider } from '../chat/contacts/contacts-context';
+import { ContactsProvider } from '../contacts/contact-context';
 import { Home } from './Home';
-const Contacts = lazy(() => import('../chat/contacts/Contacts'));
+
+const Contacts = lazy(() => import('../contacts/Contacts'));
 render(
   <AuthProvider>
-    <ContactsProvider>
-      <FormProvider>
+    <FormProvider>
+      <ContactsProvider>
         <ThemeProvider
           initState={{
             primary: {
@@ -42,15 +43,15 @@ render(
               <Home />
             </Route>
             <Route path='/contacts'>
-              <Suspense fallback={<div>Loading...</div>}>
+              <Suspense fallback={<div>loading...</div>}>
                 <Contacts />
               </Suspense>
             </Route>
-       
-          </RouteProvider>{''}
+          </RouteProvider>
+          {''}
         </ThemeProvider>
-      </FormProvider>
-    </ContactsProvider>
+      </ContactsProvider>
+    </FormProvider>
   </AuthProvider>,
   document.body
 );
