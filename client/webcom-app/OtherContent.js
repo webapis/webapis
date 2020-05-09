@@ -29,8 +29,9 @@ export function OtherContent() {
       <List>
         <ListItem>Item One</ListItem>
         <ListItem>Item Two</ListItem>
-        <ListItem onClick={handleRoute} id='contacts'>
-          Contacts
+   
+        <ListItem onClick={handleRoute} id='p2p'>
+          Peer to Peer
         </ListItem>
       </List>
     </div>

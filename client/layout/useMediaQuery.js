@@ -8,8 +8,10 @@ export function useMediaQuery() {
   const [orientation, setOrientation] = useState('');
   const [device, setDevice] = useState('');
   function handleViewportSize() {
-    setWidth(window.innerWidth);
-    setHeight(window.innerHeight);
+   
+      setWidth(window.innerWidth);
+      setHeight(window.innerHeight);
+    
   }
 
   function handleScreenOrientation() {

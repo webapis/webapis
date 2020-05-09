@@ -1,5 +1,6 @@
 describe('Contacts', () => {
   beforeEach(() => {
+    cy.viewport(700, 700);
     cy.window()
       .its('localStorage')
       .invoke(
@@ -39,10 +40,10 @@ describe('Contacts', () => {
     cy.visit('/');
     cy.wait(50);
     cy.get('[data-testid=menu]').click();
-    cy.get('[data-testid=contacts]').click();
-    cy.get('[data-testid=contact-list]').children().should('have.length', 2);
+    cy.get('[data-testid=p2p]').click();
+    cy.get('[data-testid=contacts-list]').children().should('have.length', 2);
   });
-  it('user has remove contacts', () => {
+  it('user has remote contacts', () => {
     cy.server();
     cy.route({
       url: '/contacts/find?username=testuser',
@@ -57,7 +58,7 @@ describe('Contacts', () => {
     cy.wait(50);
     cy.get('[data-testid=menu]').click();
     cy.get('[data-testid=contacts]').click();
-    cy.get('[data-testid=contact-list]').children().should('have.length', 2);
+    cy.get('[data-testid=contacts-list]').children().should('have.length', 2);
   });
   it('user has no contacts at all', () => {
     cy.server();
@@ -94,7 +95,7 @@ describe('Contacts', () => {
     cy.get('[data-testid=contact-search]').type('bred');
     cy.get('[data-testid=contacts-list]').children().should('have.length', 1);
   });
-  it.only('user searches for new user', () => {
+  it('user searches for new user', () => {
     cy.server();
     cy.route({
       url: '/users/find?filter=bred',

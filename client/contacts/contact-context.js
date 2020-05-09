@@ -1,9 +1,5 @@
 import { h, createContext } from 'preact';
-import {
-  useContext,
-  useReducer,
-  useMemo,
-} from 'preact/hooks';
+import { useContext, useReducer, useMemo } from 'preact/hooks';
 
 const ContactsContext = createContext();
 
@@ -22,12 +18,14 @@ const actionTypes = {
 };
 
 export function selectContact({ dispatch, contact }) {
+
   dispatch({ type: actionTypes.SELECTED_CONTACT, contact });
 }
 
 function reducer(state, action) {
   switch (action.type) {
     case actionTypes.SELECTED_CONTACT:
+   
       return { ...state, contact: action.contact };
     default:
       return state;
