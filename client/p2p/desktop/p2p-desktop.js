@@ -1,7 +1,7 @@
 import { h } from 'preact';
-import Contacts from '../contacts/Contacts';
-import { InvitationDesktop } from '../invitation/Invitation';
-import PeerToPeerChat from './p2p-chat';
+import Contacts from '../../contacts/Contacts';
+import { InvitationDesktop } from '../../invitation/Invitation';
+import PeerToPeerChat from '../mobile/p2p-chat-mobile';
 import {
   useP2PDesktopContext,
   removeChat,

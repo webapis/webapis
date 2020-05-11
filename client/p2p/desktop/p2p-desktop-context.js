@@ -1,6 +1,6 @@
 import { h, createContext } from 'preact';
 import { useEffect, useContext, useReducer, useMemo } from 'preact/hooks';
-import { useContactsContext } from '../contacts/contact-context';
+import { useContactsContext } from '../../contacts/contact-context';
 
 const P2PDesktopContext = createContext();
 

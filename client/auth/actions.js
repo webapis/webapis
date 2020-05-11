@@ -220,6 +220,5 @@ export function getTokenFromUrl({ token }) {
 }
 
 export function recoverLocalAuthState({ user, dispatch }) {
-  debugger;
   dispatch({ type: actionTypes.RECOVER_LOCAL_AUTH_STATE, user });
 }

@@ -19,6 +19,7 @@ const actionTypes = {
 };
 
 export function selectContact({ dispatch, contact }) {
+
   dispatch({ type: actionTypes.SELECTED_CONTACT, contact });
 }
 export function removeContact({ dispatch }) {
@@ -27,6 +28,7 @@ export function removeContact({ dispatch }) {
 function reducer(state, action) {
   switch (action.type) {
     case actionTypes.SELECTED_CONTACT:
+     
       return { ...state, contact: action.contact };
     case actionTypes.REMOVE_CONTACT:
       return { ...state, contact: null };

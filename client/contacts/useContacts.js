@@ -59,7 +59,7 @@ export function useContacts({ filter, username }) {
   const [state, dispatch] = useReducer(contactsReducer, initState);
   useEffect(() => {
     if (localStorage.getItem(`contacts-${username}`)) {
-debugger;
+
       const storage = JSON.parse(localStorage.getItem(`contacts-${username}`));
       getLocalContacts({ dispatch, contacts: storage.contacts });
     } else {

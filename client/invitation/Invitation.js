@@ -6,6 +6,8 @@ export default function Invitation() {
 
 export function InvitationDesktop({ invitation }) {
   return (
-    <div data-testid='chat-invitation'>{invitation.username},Invitation</div>
+    <div data-testid='chat-invitation-mobile'>
+      {invitation.username},Invitation
+    </div>
   );
 }

@@ -1,21 +1,20 @@
 import { h } from 'preact';
 import { Suspense, lazy } from 'preact/compat';
 import { useEffect } from 'preact/hooks';
-import { useRouteContext } from '../route/router';
-import { useRootRouteContext,RootRoute } from '../route/root-router';
-import { useMediaQuery } from '../layout/useMediaQuery';
-import { Route } from '../route/router';
-import { PeerToPeerMobileContext } from '../p2p/p2p-mobile-context';
+import { useRouteContext } from '../../route/router';
+import { useMediaQuery } from '../../layout/useMediaQuery';
+import { Route } from '../../route/router';
+import { PeerToPeerMobileContext } from './p2p-mobile-context';
+import { PeerToPeerInvitationMobile } from './p2p-invitation-mobile';
+import Messaging from '../../messaging/Messaging';
+import { useContactsContext } from '../../contacts/contact-context';
+const Contacts = lazy(() => import('../../contacts/Contacts'));
+const PeerToPeerChat = lazy(() => import('./p2p-chat-mobile'));
 
-import Invitation from '../invitation/Invitation';
-import Messaging from '../messaging/Messaging';
-
-const Contacts = lazy(() => import('../contacts/Contacts'));
-const PeerToPeerChat = lazy(() => import('../p2p/p2p-chat'));
-const PeerToPeer = lazy(() => import('./p2p'));
 export default function PeerToPeerMobile() {
+  const [state, dispatch] = useContactsContext();
   const [route, setRoute] = useRouteContext();
-  const [rootRoute, setRootRoute] = useRootRouteContext();
+  const { contact } = state;
   const { width } = useMediaQuery();
 
   useEffect(() => {
@@ -23,6 +22,7 @@ export default function PeerToPeerMobile() {
       setRoute('/contacts');
     }
   }, []);
+
   return (
     <PeerToPeerMobileContext>
       <Route path='/contacts'>
@@ -33,7 +33,7 @@ export default function PeerToPeerMobile() {
 
       <Route path='/invitation'>
         <Suspense fallback={<div>loading...</div>}>
-          <Invitation />
+          <PeerToPeerInvitationMobile invitation={contact} />
         </Suspense>
       </Route>
       <Route path='/messaging'>
@@ -43,10 +43,9 @@ export default function PeerToPeerMobile() {
       </Route>
       <Route path='/p2p-chat'>
         <Suspense fallback={<div>loading...</div>}>
-          <PeerToPeerChat />
+          <PeerToPeerChat chat={contact} />
         </Suspense>
       </Route>
-    
     </PeerToPeerMobileContext>
   );
 }

@@ -49,7 +49,7 @@ export default function Contacts() {
   }, [userState.users, usersFilter]);
 
   function handleItemClick(e) {
-    debugger;
+    
     const selectedContact = items.find((item) => item.username === e.target.id);
 
     selectContact({ dispatch, contact: selectedContact });

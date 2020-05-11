@@ -5,12 +5,10 @@ const RouteContext = createContext();
 
 export function Route(props) {
   const { children, path } = props;
+
   const [route] = useRouteContext();
 
-
-
   if (route === path) {
-
     return children;
   }
   return null;
@@ -18,7 +16,7 @@ export function Route(props) {
 
 export function Link(props) {
   const { to, id } = props;
-  const [route,setRoute] = useRouteContext();
+  const [route, setRoute] = useRouteContext();
   function handleClick(e) {
     e.preventDefault();
     setRoute(to);
@@ -44,7 +42,7 @@ export function useRouteContext() {
 }
 //
 export function RouteProvider(props) {
-  const {initialRoute}=props
+  const { initialRoute } = props;
   const [route, setRoute] = useState(initialRoute);
 
   const value = useMemo(() => [route, setRoute], [route]);
