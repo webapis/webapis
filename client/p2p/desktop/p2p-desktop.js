@@ -1,11 +1,9 @@
 import { h } from 'preact';
 import Contacts from '../../contacts/Contacts';
-import { InvitationDesktop } from '../../invitation/Invitation';
-import PeerToPeerChat from '../mobile/p2p-chat-mobile';
+import { PeerToPeerInvitationDesktop } from '../desktop/p2p-invitation-desktop';
+import PeerToPeerChatDesktop from '../desktop/p2p-chat-desktop';
 import {
-  useP2PDesktopContext,
-  removeChat,
-  removeInvitation,
+  useP2PDesktopContext
 } from './p2p-desktop-context';
 export default function PeerToPeerDesktop() {
   const [state, dispatch] = useP2PDesktopContext();
@@ -25,7 +23,7 @@ export default function PeerToPeerDesktop() {
         {chats.length > 0 &&
           chats.map((chat) => {
             debugger;
-            return <PeerToPeerChat chat={chat} />;
+            return <PeerToPeerChatDesktop chat={chat} />;
           })}
       </div>
       <div
@@ -35,7 +33,7 @@ export default function PeerToPeerDesktop() {
         {invitations.length > 0 &&
           invitations.map((invitation) => {
             debugger;
-            return <InvitationDesktop invitation={invitation} />;
+            return <PeerToPeerInvitationDesktop invitation={invitation} />;
           })}
       </div>
     </div>

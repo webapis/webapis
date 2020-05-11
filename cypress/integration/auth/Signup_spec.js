@@ -6,7 +6,7 @@ describe('Signup', () => {
     cy.visit('/');
     cy.wait(50);
     cy.get('[data-testid=menu]').click();
-
+    cy.wait(50);
     cy.get('[data-testid=signup]').click();
   });
 
@@ -38,6 +38,15 @@ describe('Signup', () => {
       client: true,
       type: false,
     });
+    cy.get('[data-testid=username]')
+      .focus()
+      .blur()
+      .get('[data-testid=email]')
+      .focus()
+      .blur()
+      .get('[data-testid=password]')
+      .focus()
+      .blur();
 
     cy.get('[data-testid=message-username]').contains(
       validationMessages.INVALID_USERNAME

@@ -11,10 +11,10 @@ const style = {
 };
 
 export function TextInput(props) {
-  const { id } = props;
+  const { id, type = 'text' } = props;
   return (
-    <div  style={{ display: 'flex', width: '100%' }}>
-      <input style={style} {...props} data-testid={id} />
+    <div style={{ display: 'flex', width: '100%' }}>
+      <input style={style} {...props} data-testid={id} type={type} />
     </div>
   );
 }

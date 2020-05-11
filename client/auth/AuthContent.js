@@ -19,13 +19,14 @@ export function AuthContent() {
   function handleRoute(e) {
     e.preventDefault();
     const { id } = e.target;
+
     setRootRoute(`/${id}`);
   }
 
   return (
     <div style={{ paddingTop: 10 }}>
       {!state.username && <UnAuthedState handleRoute={handleRoute} />}
-      {state.username  && (
+      {state.username && (
         <AuthedState
           setRootRoute={setRootRoute}
           handleRoute={handleRoute}

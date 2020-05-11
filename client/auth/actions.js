@@ -171,6 +171,7 @@ export async function changePassword({ dispatch, state, formDispatch, token }) {
 }
 
 export async function forgotPassword({ dispatch, state, formDispatch }) {
+  debugger;
   try {
     dispatch({ type: actionTypes.REQUEST_PASS_CHANGE_STARTED });
     const { email } = state;
@@ -178,14 +179,18 @@ export async function forgotPassword({ dispatch, state, formDispatch }) {
       method: 'post',
       body: JSON.stringify({ email }),
     });
-    const result = await response.json();
+    debugger;
+
     if (response.status === 200) {
+      const result = await response.json();
+      debugger;
       dispatch({
         type: actionTypes.REQUEST_PASS_CHANGE_SUCCESS,
         token: result.token,
         message: `A link for password change  has been sent to, ${email}! `,
       });
     } else if (response.status === 400) {
+      debugger;
       const { errors } = result;
       errors.forEach((error) => {
         formDispatch(
@@ -195,8 +200,9 @@ export async function forgotPassword({ dispatch, state, formDispatch }) {
         );
       });
     } else if (response.status === 500) {
+      debugger;
       const { error } = result;
-
+      debugger;
       dispatch({
         type: actionTypes.REQUEST_PASS_CHANGE_FAILED,
         error,
@@ -205,9 +211,11 @@ export async function forgotPassword({ dispatch, state, formDispatch }) {
       throw new Error('Changing password failed');
     }
   } catch (error) {
+    const err = error;
+    debugger;
     dispatch({
       type: actionTypes.REQUEST_PASS_CHANGE_FAILED,
-      payload: { error: err },
+      payload: { error },
     });
   }
 }
