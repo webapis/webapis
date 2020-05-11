@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import { useRouteContext } from '../route/router';
+import { useRootRouteContext } from '../route/root-router';
 import { List, ListItem } from '../layout/NavList';
 import userIcon from './icons/user64.png';
 import { logout } from '../auth/actions';
@@ -15,11 +15,11 @@ const style = {
 export function AuthContent() {
   const { userName } = useUserName();
 
-  const [route, setRoute] = useRouteContext();
+  const [rootRoute, setRootRoute] = useRootRouteContext();
   function handleRoute(e) {
     e.preventDefault();
     const { id } = e.target;
-    setRoute(`/${id}`);
+    setRootRoute(`/${id}`);
   }
 
   return (
@@ -27,7 +27,7 @@ export function AuthContent() {
       {!userName && <UnAuthedState handleRoute={handleRoute} />}
       {userName && (
         <AuthedState
-          setRoute={setRoute}
+          setRootRoute={setRootRoute}
           handleRoute={handleRoute}
           userName={userName}
         />
@@ -37,10 +37,10 @@ export function AuthContent() {
   );
 }
 
-export function AuthedState({ handleRoute, userName, setRoute }) {
+export function AuthedState({ handleRoute, userName, setRootRoute }) {
   function handleLogOut() {
     debugger;
-    setRoute('/');
+    setRootRoute('/home');
     logout();
   }
 

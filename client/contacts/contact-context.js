@@ -15,18 +15,21 @@ function useContactsContext() {
 
 const actionTypes = {
   SELECTED_CONTACT: 'SELECTED_CONTACT',
+  REMOVE_CONTACT: 'REMOVE_CONTACT',
 };
 
 export function selectContact({ dispatch, contact }) {
-
   dispatch({ type: actionTypes.SELECTED_CONTACT, contact });
 }
-
+export function removeContact({ dispatch }) {
+  dispatch({ type: actionTypes.REMOVE_CONTACT });
+}
 function reducer(state, action) {
   switch (action.type) {
     case actionTypes.SELECTED_CONTACT:
-   
       return { ...state, contact: action.contact };
+    case actionTypes.REMOVE_CONTACT:
+      return { ...state, contact: null };
     default:
       return state;
   }

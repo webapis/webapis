@@ -13,7 +13,7 @@ describe('p2p_invitation', () => {
         })
       );
   });
-  it('user invokes chat', () => {
+  it.only('user invokes chat', () => {
     cy.window()
       .its('localStorage')
       .invoke(
@@ -34,6 +34,7 @@ describe('p2p_invitation', () => {
     cy.visit('/');
     cy.wait(50);
     cy.get('[data-testid=menu]').click();
+   // cy.pause()
     cy.get('[data-testid=p2p]').click();
     cy.get('[data-testid=contacts-list]').children().should('have.length', 3);
     cy.get('[data-testid=contacts-list]').children().contains('bred').click();

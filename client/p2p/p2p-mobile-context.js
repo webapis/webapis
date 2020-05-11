@@ -10,6 +10,7 @@ export function PeerToPeerMobileContext({ children }) {
   const { contact } = state;
   useEffect(() => {
     if (width < 800) {
+      debugger;
       if (contact && contact.room) {
         debugger;
         setRoute('/p2p-chat');

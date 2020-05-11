@@ -8,15 +8,15 @@ import { AppShell } from '../layout/AppShell';
 import { AppBar } from '../layout/AppBar';
 import { useMediaQuery } from '../layout/useMediaQuery';
 import { useUserName } from '../auth/useUserName';
-import { recoverLocalAuthState } from '../auth/actions';
-import { useAuthContext } from '../auth/auth-context';
+
+
 const PhoneDrawer = lazy(() => import('./PhoneDrawer'));
 const TabletDrawer = lazy(() => import('./TabletDrawer'));
 const LaptopDrawer = lazy(() => import('./LapTopDrawer'));
 const DesktopDrawer = lazy(() => import('./DesktopDrawer'));
 
 export default function Navigation(props) {
-  const { dispatch } = useAuthContext();
+
   const [route, setRoute] = useState('');
   const { userName } = useUserName();
   const { width, height, orientation, device } = useMediaQuery();
@@ -24,15 +24,6 @@ export default function Navigation(props) {
   const { children, drawerContent } = props;
 
   const theme = useThemeContext();
-
-  useEffect(() => {
-    if (localStorage.getItem('webcom')) {
-      recoverLocalAuthState({
-        dispatch,
-        user: JSON.parse(localStorage.getItem('webcom')),
-      });
-    }
-  }, []);
 
   function toggleDrawer(to) {
     setRoute(to);

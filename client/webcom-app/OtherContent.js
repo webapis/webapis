@@ -1,21 +1,21 @@
 import { h } from 'preact';
-import { useEffect } from 'preact/hooks';
 import { List, ListItem } from '../layout/NavList';
 import { useUserName } from '../auth/useUserName';
-import { useRouteContext } from '../route/router';
+
+import { useRootRouteContext } from '../route/root-router';
 export function OtherContent() {
-  const [route, setRoute] = useRouteContext();
+  const [rootRoute, setRootRoute] = useRootRouteContext();
   const { userName } = useUserName();
-
-
 
   function handleRoute(e) {
     e.preventDefault();
     const { id } = e.target;
     if (userName) {
-      setRoute(`/${id}`);
+      debugger;
+      setRootRoute(`/${id}`);
     } else {
-      setRoute('/login');
+      debugger;
+      setRootRoute('/auth');
     }
   }
   return (
@@ -29,9 +29,12 @@ export function OtherContent() {
       <List>
         <ListItem>Item One</ListItem>
         <ListItem>Item Two</ListItem>
-   
+
         <ListItem onClick={handleRoute} id='p2p'>
           Peer to Peer
+        </ListItem>
+        <ListItem onClick={handleRoute} id='group'>
+          Group
         </ListItem>
       </List>
     </div>
