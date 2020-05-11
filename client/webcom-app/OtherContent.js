@@ -11,10 +11,10 @@ export function OtherContent() {
     e.preventDefault();
     const { id } = e.target;
     if (userName) {
-      debugger;
+  
       setRootRoute(`/${id}`);
     } else {
-      debugger;
+   
       setRootRoute('/auth');
     }
   }

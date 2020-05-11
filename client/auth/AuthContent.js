@@ -3,7 +3,7 @@ import { useRootRouteContext } from '../route/root-router';
 import { List, ListItem } from '../layout/NavList';
 import userIcon from './icons/user64.png';
 import { logout } from '../auth/actions';
-import { useUserName } from './useUserName';
+import { useAuthContext } from './auth-context';
 const style = {
   grid: {
     display: 'grid',
@@ -13,7 +13,7 @@ const style = {
 };
 
 export function AuthContent() {
-  const { userName } = useUserName();
+  const { state } = useAuthContext();
 
   const [rootRoute, setRootRoute] = useRootRouteContext();
   function handleRoute(e) {
@@ -24,12 +24,12 @@ export function AuthContent() {
 
   return (
     <div style={{ paddingTop: 10 }}>
-      {!userName && <UnAuthedState handleRoute={handleRoute} />}
-      {userName && (
+      {!state.username && <UnAuthedState handleRoute={handleRoute} />}
+      {state.username  && (
         <AuthedState
           setRootRoute={setRootRoute}
           handleRoute={handleRoute}
-          userName={userName}
+          userName={state.username}
         />
       )}
       <hr style={{ height: 1 }} />

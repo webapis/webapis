@@ -2,8 +2,7 @@ import { h } from 'preact';
 import { useEffect } from 'preact/hooks';
 import { Suspense, lazy } from 'preact/compat';
 import { Route } from '../route/router';
-import { useAuthContext } from './auth-context';
-import { recoverLocalAuthState } from '../auth/actions';
+
 const Login = lazy(() => import('../auth/Login'));
 const ChangePassword = lazy(() => import('../auth/ChangePassword'));
 const ForgotPassword = lazy(() => import('../auth/ForgotPassword'));
@@ -11,15 +10,7 @@ const Signup = lazy(() => import('../auth/Signup'));
 const Profile = lazy(() => import('../auth/Profile'));
 const AuthFeedback = lazy(() => import('../auth/AuthFeedback'));
 export default function Authentication() {
-  const { dispatch } = useAuthContext();
-  useEffect(() => {
-    if (localStorage.getItem('webcom')) {
-      recoverLocalAuthState({
-        dispatch,
-        user: JSON.parse(localStorage.getItem('webcom')),
-      });
-    }
-  }, []);
+
 
   return (
   

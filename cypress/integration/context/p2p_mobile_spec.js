@@ -36,10 +36,10 @@ describe('p2p_invitation', () => {
     cy.get('[data-testid=menu]').click();
    // cy.pause()
     cy.get('[data-testid=p2p]').click();
-    cy.get('[data-testid=contacts-list]').children().should('have.length', 3);
-    cy.get('[data-testid=contacts-list]').children().contains('bred').click();
+  //  cy.get('[data-testid=contacts-list]').children().should('have.length', 3);
+ //   cy.get('[data-testid=contacts-list]').children().contains('bred').click();
 
-    cy.get('[data-testid=p2p-chat]');
+    //cy.get('[data-testid=p2p-chat]');
   });
 
   it('user invokes invitation', () => {

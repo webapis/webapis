@@ -8,7 +8,8 @@ import { AppShell } from '../layout/AppShell';
 import { AppBar } from '../layout/AppBar';
 import { useMediaQuery } from '../layout/useMediaQuery';
 import { useUserName } from '../auth/useUserName';
-
+import { useAuthContext } from '../auth/auth-context';
+import { recoverLocalAuthState } from '../auth/actions';
 
 const PhoneDrawer = lazy(() => import('./PhoneDrawer'));
 const TabletDrawer = lazy(() => import('./TabletDrawer'));
@@ -16,7 +17,6 @@ const LaptopDrawer = lazy(() => import('./LapTopDrawer'));
 const DesktopDrawer = lazy(() => import('./DesktopDrawer'));
 
 export default function Navigation(props) {
-
   const [route, setRoute] = useState('');
   const { userName } = useUserName();
   const { width, height, orientation, device } = useMediaQuery();
@@ -29,7 +29,15 @@ export default function Navigation(props) {
     setRoute(to);
     setOpen((prev) => !prev);
   }
-
+  const { dispatch } = useAuthContext();
+  useEffect(() => {
+    if (localStorage.getItem('webcom')) {
+      recoverLocalAuthState({
+        dispatch,
+        user: JSON.parse(localStorage.getItem('webcom')),
+      });
+    }
+  }, []);
   return (
     <AppShell>
       {route === '/phone' && open ? (

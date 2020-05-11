@@ -6,9 +6,9 @@ const RootRouteContext = createContext();
 export function RootRoute(props) {
   const { children, path } = props;
   const [rootRoute,setRootRoute] = useRootRouteContext();
-debugger;
+
   if (rootRoute === path) {
-    debugger;
+
     return children;
   }
   return null;
