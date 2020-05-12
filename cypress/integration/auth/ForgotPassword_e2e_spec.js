@@ -14,7 +14,7 @@ describe('ForgotPassword e2e', () => {
       validationMessages.INVALID_EMAIL
     );
   });
-  it.only('empty email (server side validation)', () => {
+  it('empty email (server side validation)', () => {
     cy.get('[data-testid=email]');
     cy.get('[data-testid=requestpasschange-btn]').click();
     cy.get('[data-testid=message-email]').contains(

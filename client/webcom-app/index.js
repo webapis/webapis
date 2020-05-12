@@ -41,17 +41,13 @@ render(
             >
               <NavItem>WEB COM</NavItem>
             </Navigation>
-            <RootRoute path='/login'>
+            <RootRoute path='/auth'>
               <RouteProvider initialRoute='/login'>
                 <Authentication />
               </RouteProvider>
             </RootRoute>
-            <RootRoute path='/signup'>
-              <RouteProvider initialRoute='/signup'>
-                <Authentication />
-              </RouteProvider>
-            </RootRoute>
-            <RootRoute path='/home'>
+           
+            <RootRoute path='/'>
               <Home />
             </RootRoute>
 

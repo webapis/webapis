@@ -11,13 +11,13 @@ import * as actions from './actions';
 import { useMediaQuery } from '../layout/useMediaQuery';
 import { Paper } from '../layout/Paper';
 import { Grid } from '../layout/Grid';
-import { useRouteContext } from '../route/router';
+import { useAuthRouteContext } from './auth-route-context';
 import { useUserName } from './useUserName';
 export default function ChangePassword() {
   const { state, dispatch } = useAuthContext();
   const { dispatch: formDispatch } = useFormContext();
   const { token } = useUserName();
-  const [route, setRoute] = useRouteContext();
+  const [authRoute, setAuthRoute] = useAuthRouteContext();
   const { device } = useMediaQuery();
 
   const { password, confirm, error } = state;
@@ -33,7 +33,7 @@ export default function ChangePassword() {
 
   useEffect(() => {
     if (state.authFeedback) {
-      setRoute('/authfeedback');
+      setAuthRoute('/authfeedback');
     }
   }, [state.authFeedback]);
 

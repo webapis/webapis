@@ -11,13 +11,15 @@ describe('CHANGE PASSWORD', () => {
 
   describe('Change password with token', () => {
     beforeEach(() => {
-      cy.visit('http://localhost:3000');
+   
       cy.login({
         username: 'demo',
         email: 'demo@gmail.com',
         password: 'Dragonfly1977_!',
       });
+      cy.visit('http://localhost:3000');
       cy.get('[data-testid=menu]').click();
+      cy.wait(50)
       cy.get('[data-testid=changepassword]').click();
     });
     it('user sent empty password and confirm 406', () => {
@@ -60,5 +62,4 @@ describe('CHANGE PASSWORD', () => {
       });
     });
   });
-
 });

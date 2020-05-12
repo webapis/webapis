@@ -11,9 +11,10 @@ import * as actions from './actions';
 import { useMediaQuery } from '../layout/useMediaQuery';
 import { Paper } from '../layout/Paper';
 import { Grid } from '../layout/Grid';
-import { useRouteContext } from '../route/router';
+
+import { useAuthRouteContext } from './auth-route-context';
 export default function RequestPassChange() {
-  const [route, setRoute] = useRouteContext();
+  const [authRoute, setAuthRoute] = useAuthRouteContext();
   const { device } = useMediaQuery();
   const { dispatch, state } = useAuthContext();
   const { dispatch: formDispatch } = useFormContext();
@@ -30,7 +31,7 @@ export default function RequestPassChange() {
   useEffect(() => {
     if (state.authFeedback) {
       debugger;
-      setRoute('/authfeedback');
+      setAuthRoute('/authfeedback');
     }
   }, [state.authFeedback]);
 

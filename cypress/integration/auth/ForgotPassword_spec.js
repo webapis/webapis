@@ -24,6 +24,7 @@ describe('Forgot password', () => {
       response: { errors: ['408'] },
     });
     cy.get('[data-testid=email]').type('test@gmail.com').blur();
+   
     cy.get('[data-testid=message-email]').should(
       'not.contain',
       validationMessages.INVALID_EMAIL

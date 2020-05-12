@@ -22,7 +22,7 @@ export function authReducer(state, action) {
         ...state,
         [action.payload.propName]: action.payload.value,
       };
-      debugger;
+  
       return nextState;
     case actionTypes.LOGIN_STARTED:
       return { ...state, loading: true };

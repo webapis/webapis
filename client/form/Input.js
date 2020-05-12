@@ -49,7 +49,7 @@ export default function Input({
   }
   function handleBlur(e) {
     if (e.target.name === name) {
-      debugger;
+    
       validate();
     }
   }

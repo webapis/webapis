@@ -2,7 +2,7 @@ import actionTypes from './actionTypes';
 import { serverValidation } from '../form/actions';
 import httpStatus from '../form/http-status';
 export function valueChanged({ propName, value }) {
-  debugger;
+
   return {
     type: actionTypes.VALUE_CHANGED,
     payload: {
@@ -190,6 +190,7 @@ export async function forgotPassword({ dispatch, state, formDispatch }) {
         message: `A link for password change  has been sent to, ${email}! `,
       });
     } else if (response.status === 400) {
+      const result = await response.json();
       debugger;
       const { errors } = result;
       errors.forEach((error) => {
@@ -200,6 +201,7 @@ export async function forgotPassword({ dispatch, state, formDispatch }) {
         );
       });
     } else if (response.status === 500) {
+      const result = await response.json();
       debugger;
       const { error } = result;
       debugger;

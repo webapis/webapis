@@ -32,6 +32,7 @@ export default function Navigation(props) {
   const { dispatch } = useAuthContext();
   useEffect(() => {
     if (localStorage.getItem('webcom')) {
+  
       recoverLocalAuthState({
         dispatch,
         user: JSON.parse(localStorage.getItem('webcom')),

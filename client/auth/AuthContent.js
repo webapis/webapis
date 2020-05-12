@@ -1,5 +1,6 @@
 import { h } from 'preact';
 import { useRootRouteContext } from '../route/root-router';
+import { useAuthRouteContext } from './auth-route-context';
 import { List, ListItem } from '../layout/NavList';
 import userIcon from './icons/user64.png';
 import { logout } from '../auth/actions';
@@ -14,13 +15,13 @@ const style = {
 
 export function AuthContent() {
   const { state } = useAuthContext();
-
+  const [authRoute, setAuthRoute] = useAuthRouteContext();
   const [rootRoute, setRootRoute] = useRootRouteContext();
   function handleRoute(e) {
     e.preventDefault();
     const { id } = e.target;
-
-    setRootRoute(`/${id}`);
+    setRootRoute(`/auth`);
+    setAuthRoute(`/${id}`);
   }
 
   return (
