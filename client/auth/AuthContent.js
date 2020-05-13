@@ -41,7 +41,7 @@ export function AuthContent() {
 
 export function AuthedState({ handleRoute, userName, setRootRoute }) {
   function handleLogOut() {
-    debugger;
+   
     setRootRoute('/home');
     logout();
   }

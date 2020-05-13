@@ -1,5 +1,6 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable indent */ //
+import invitationOperation from './invitation';
 import crudOperation from './crud/crud';
 import authOperation from './auth/index';
 import contactsOperation from './contacts';
@@ -22,6 +23,7 @@ export default async function httpRoute(req, res) {
   const seedRegex = /.*\/seed\/.*/;
   const contactsRegex = /.*\/contacts\/.*/;
   const usersRegex = /.*\/users\/.*/;
+  const invitationRegex = /.*\/invitation\/.*/;
   req.auth = null;
   const clnt = await client.connect();
   req.client = clnt;
@@ -43,7 +45,6 @@ export default async function httpRoute(req, res) {
       break;
     case 'POST':
     case 'PUT':
-
     case 'DELETE':
       req.on('data', (chunk) => {
         data.push(chunk);
@@ -76,6 +77,9 @@ export default async function httpRoute(req, res) {
           case usersRegex.test(url):
             usersOperation(req, res);
             break;
+          case invitationRegex.test(url):
+            invitationOperation(req, res);
+            break;
           default:
             serveStatic(req, res);
         }
@@ -103,6 +107,9 @@ export default async function httpRoute(req, res) {
           break;
         case usersRegex.test(url):
           usersOperation(req, res);
+          break;
+        case invitationRegex.test(url):
+          invitationOperation(req, res);
           break;
         default:
           serveStatic(req, res);

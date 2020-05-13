@@ -30,7 +30,7 @@ export function OtherContent() {
       }}
     >
       <List>
-        <ListItem>Item One</ListItem>
+        <ListItem onClick={handleRoute} id='chat'>Chat</ListItem>
         <ListItem>Item Two</ListItem>
 
         <ListItem onClick={handleRoute} id='p2p'>

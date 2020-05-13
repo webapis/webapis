@@ -28,8 +28,9 @@ export async function login({ dispatch, state, formDispatch }) {
     const result = await response.json();
 
     if (response.status === 200) {
+ 
       const { token, username, email } = result;
-      debugger;
+
       dispatch({ type: actionTypes.LOGIN_SUCCESS, token, username, email });
       window.localStorage.setItem(
         'webcom',
@@ -41,7 +42,7 @@ export async function login({ dispatch, state, formDispatch }) {
       );
     } else if (response.status === 400) {
       const { errors } = result;
-      debugger;
+     
       errors.forEach((error) => {
         formDispatch(
           serverValidation({
@@ -50,7 +51,7 @@ export async function login({ dispatch, state, formDispatch }) {
         );
       });
     } else {
-      debugger;
+   
       throw new Error('Login failed');
     }
   } catch (error) {

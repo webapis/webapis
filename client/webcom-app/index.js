@@ -17,6 +17,7 @@ import { Home } from './Home';
 
 const PeerToPeer = lazy(() => import('../p2p/p2p'));
 const Group = lazy(() => import('../group/group'));
+const Chat = lazy(() => import('./Chat'));
 render(
   <AuthProvider>
     <RootRouteProvider initialRoute='/'>
@@ -46,7 +47,7 @@ render(
                 <Authentication />
               </RouteProvider>
             </RootRoute>
-           
+
             <RootRoute path='/'>
               <Home />
             </RootRoute>
@@ -61,7 +62,11 @@ render(
                 <Group />
               </Suspense>
             </RootRoute>
-
+            <RootRoute path='/chat'>
+              <Suspense fallback={<div>loading...</div>}>
+                <Chat />
+              </Suspense>
+            </RootRoute>
             {''}
           </ThemeProvider>
         </ContactsProvider>

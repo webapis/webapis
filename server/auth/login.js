@@ -55,7 +55,7 @@ export default async function ({ req, res, collection }) {
             debugger;
             if (user === null) {
               debugger;
-              // email is not registered 408  ----------------------------
+              // email is not registered 408  ----------------------------///Cookies
               errors.push(httpStatus.credentialInvalid);
               res.writeHead(400, { 'Content-Type': 'application/json' });
               res.write(JSON.stringify({ errors }));
@@ -74,7 +74,10 @@ export default async function ({ req, res, collection }) {
                   expiresIn: 31556926,
                 });
                 // success login---------------------------------------------
-                res.writeHead(200, { 'Content-Type': 'application/json' });
+                res.writeHead(200, {
+                  'Content-Type': 'application/json',
+                  'Set-Cookie': `tkn=${token}; Path=/chat`,
+                });
                 res.write(
                   JSON.stringify({
                     token,
@@ -118,7 +121,10 @@ export default async function ({ req, res, collection }) {
                   expiresIn: 31556926,
                 });
                 //success login 200------------------------------------------
-                res.writeHead(200, { 'Content-Type': 'application/json' });
+                res.writeHead(200, {
+                  'Content-Type': 'application/json',
+                  'Set-Cookie': `tkn=${token}; Path=/chat`,
+                });
                 res.write(
                   JSON.stringify({
                     token,

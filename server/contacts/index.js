@@ -9,10 +9,10 @@ export default function (req, res) {
   const database = req.client.db('auth');
   const collection = database.collection(collectionName);
   req.collection = collection;
-  debugger;
+
   switch (true) {
     case url.includes('/find'):
-      debugger;
+ 
       find({ req, res, collection });
       break;
     default:

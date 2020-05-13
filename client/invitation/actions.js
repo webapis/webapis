@@ -4,7 +4,7 @@ export async function sendInvitation({ dispatch, message, token, target }) {
 
   try {
     dispatch({ type: actionTypes.SEND_INVITATION_STARTED });
-    const response = await fetch('/p2p/invitation', {
+    const response = await fetch('/invitation/insertOne', {
       headers: {
         'Conten-Type': 'application/json',
         'Access-Control-Allow-Headers': '*',
