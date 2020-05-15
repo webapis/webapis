@@ -1,52 +1,85 @@
 /** @jsx h */
 import { h } from 'preact';
-
+import { ContactState } from '../client/contacts/ContactState';
 export default {
   title: 'Contacts',
 };
 
-export const PendingInviter = () => <div>PendingInviter</div>;
-
+const inviteeContact = { username: 'dragos', state: 'invitee' };
+export const PendingInviter = () => <ContactState contact={inviteeContact} />;
+//inviter
 PendingInviter.story = {
-  name: 'PENDING_INVITER',
-};
-export const PendingInvitee = () => <div>PendingInvitee</div>;
-
-PendingInvitee.story = {
-  name: 'PENDING_INVITEE',
+  name: 'INVITEE',
 };
 
-export const Accepted = () => <div>Accepted</div>;
+const inviterContact = { username: 'dragos', state: 'inviter' };
+export const Inviter = () => <ContactState contact={inviterContact} />;
+
+//invitee
+Inviter.story = {
+  name: 'INVITER',
+};
+const acceptedContact = {
+  username: 'dragos',
+  state: 'accepted',
+  lastMessage: { text: 'hello', datetime: 'Now' },
+};
+export const Accepted = () => <ContactState contact={acceptedContact} />;
 
 Accepted.story = {
   name: 'ACCEPTED',
 };
 
-export const BlockedInviter = () => <div>BlockedInviter</div>;
-
-BlockedInviter.story = {
-  name: 'BLOCKED_INVITER',
+const blockedContact = {
+  username: 'dragos',
+  email: 'dragons@gmail.com',
+  state: 'blocked',
+  lastMessage: { text: 'hello', datetime: 'Now' },
 };
 
-export const BlockedInvitee = () => <div>BlockedInvitee</div>;
+export const Blocked = () => <ContactState contact={blockedContact} />;
 
-BlockedInvitee.story = {
-  name: 'BLOCKED_INVITEE',
+Blocked.story = {
+  name: 'BLOCKED',
+};
+const blockerContact = {
+  username: 'dragos',
+  email: 'dragons@gmail.com',
+  state: 'blocker',
+  lastMessage: { text: 'hello', datetime: 'Now' },
+};
+export const Blocker = () => <ContactState contact={blockerContact} />;
+Blocker.story = {
+  name: 'BLOCKER',
 };
 
-export const DeclinedInvitee = () => <div>DeclinedInvitee</div>;
-
-DeclinedInvitee.story = {
-  name: 'DECLINED_INVITEE',
+const declinedContact = {
+  username: 'dragos',
+  email: 'dragons@gmail.com',
+  state: 'declined',
 };
 
-export const DeclinedInviter = () => <div>DeclinedInviter</div>;
+export const Declined = () => <ContactState contact={declinedContact} />;
 
-DeclinedInviter.story = {
-  name: 'DECLINED_INVITER',
+Declined.story = {
+  name: 'DECLINED',
 };
+const declinerContact = {
+  username: 'dragos',
+  email: 'dragons@gmail.com',
+  state: 'decliner',
+};
+export const Decliner = () => <ContactState contact={declinerContact} />;
 
-export const NotDefined = () => <div>UNDEFIEND</div>;
+Decliner.story = {
+  name: 'DECLINER',
+};
+const nullContact = {
+  username: 'dragos',
+  email: 'dragons@gmail.com',
+  state: null,
+};
+export const NotDefined = () => <ContactState contact={nullContact} />;
 
 NotDefined.story = {
   name: 'UNDEFINED',

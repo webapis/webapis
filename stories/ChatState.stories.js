@@ -1,21 +1,22 @@
 import { h } from 'preact';
 
 export default {
-  title: 'ChatView',
+  title: 'ChatState',
 };
 
-export const PendingInvitee = () => <div>PendingInvitee</div>;
+//inviter
+export const PendingInvitee = () => <div>Pending</div>;
 
 PendingInvitee.story = {
-  name: 'PENDING_INVITEE',
+  name: 'INVITEE',
 };
 
-export const PendingInviter = () => <div>PendingInviter</div>;
+//invitee
+export const Invited = () => <div>Invited</div>;
 
-PendingInviter.story = {
-  name: 'PENDING_INVITER',
+Invited.story = {
+  name: 'INVITED',
 };
-
 
 export const Accepted = () => <div>Accepted</div>;
 
@@ -34,7 +35,6 @@ BlockedInviter.story = {
   name: 'BLOCKED_INVITER',
 };
 
-
 export const DeclinedInviter = () => <div>DeclinedInviter</div>;
 
 DeclinedInviter.story = {
@@ -45,7 +45,6 @@ export const DeclinedInvitee = () => <div>DeclinedInvitee</div>;
 DeclinedInvitee.story = {
   name: 'DECLINED_INVITEE',
 };
-
 
 export const NotDefined = () => <div>UNDEFIEND</div>;
 
