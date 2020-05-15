@@ -1,4 +1,4 @@
-
+import invwsocket from '../invitation/wsocket';
 const jwt = require('jsonwebtoken');
 const cookie = require('cookie');
 const EventEmitter = require('events');
@@ -7,6 +7,7 @@ export const wsocket = new EventEmitter();
 
 export const connections = {};
 export default function (server) {
+  invwsocket();
   const wss = new WebSocket.Server({ server });
   wss.on('connection', async function connection(ws, request) {
     try {
@@ -14,8 +15,9 @@ export default function (server) {
       const decoded = await jwt.verify(token.tkn, process.env.secret);
       const { username } = decoded;
       connections[username] = ws;
-      let sock = connections[username];
+
       debugger;
+      wsocket.emit('connection', username);
       ws.on('message', function incoming(message) {
         wsocket.emit('message', { message, username });
         console.log('received: %s', message);
@@ -34,6 +36,4 @@ export default function (server) {
       socket.destroy();
     }
   });
-
-
 }

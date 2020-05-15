@@ -14,14 +14,14 @@ describe('Contacts', () => {
       );
   });
 
-  it('user has local contacts', () => {
+  it.only('user has local ACCEPTED contacts', () => {
     cy.server();
     cy.route({
       url: '/contacts/find?username=testuser',
       response: {
         contacts: [
-          { username: 'dragos', email: 'dragos@gmail.com' },
-          { username: 'bred', email: 'bred@gmail.com' },
+          { username: 'dragos', email: 'dragos@gmail.com', accepted: true },
+          { username: 'bred', email: 'bred@gmail.com', accepted: true },
         ],
       },
     });
@@ -43,6 +43,11 @@ describe('Contacts', () => {
     cy.get('[data-testid=p2p]').click();
     cy.get('[data-testid=contacts-list]').children().should('have.length', 2);
   });
+  it('user has local PENDING contact');
+  it('user has local DECLINED contact');
+  it('user has local BLOCKED contact');
+  it('user has local REPORTED contact');
+  
   it('user has remote contacts', () => {
     cy.server();
     cy.route({

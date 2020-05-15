@@ -1,11 +1,13 @@
 import { useEffect, useReducer } from 'preact/hooks';
-
-const actionTypes = {
+import { useWSocketContext } from '../wsocket/wsocket-context';
+export const actionTypes = {
   FETCH_CONTACTS_STARTED: 'FETCH_CONTACTS_STARTED',
   FETCH_CONTACTS_SUCCESS: 'FETCH_CONTACTS_SUCCESS',
   FETCH_CONTACTS_FAILED: 'FETCH_CONTACTS_FAILED',
   GET_LOCAL_CONTACTS: 'GET_LOCAL_CONTACTS',
   FIND_CONTACT: 'FIND_CONTACT',
+  CONTACT_IS_ONLINE: 'CONTACT_IS_ONLINE',
+  CONTACT_IS_OFFLINE: 'CONTACT_IS_OFFLINE',
 };
 
 async function fetchContacts({ dispatch, username }) {
@@ -48,18 +50,58 @@ function contactsReducer(state, action) {
       };
     case actionTypes.GET_LOCAL_CONTACTS:
       const nextState = { ...state, contacts: action.contacts };
-     
+
       return nextState;
+    case actionTypes.CONTACT_IS_ONLINE:
+      return {
+        ...state,
+        contacts: state.contacts.map((c) => {
+          if (c.username === action.username) {
+            return { ...c, online: true };
+          }
+        }),
+      };
+    case actionTypes.CONTACT_IS_OFFLINE:
+      return {
+        ...state,
+        contacts: state.contacts.map((c) => {
+          if (c.username === action.username) {
+            return { ...c, online: false };
+          }
+        }),
+      };
     default:
       return state;
   }
 }
 
 export function useContacts({ filter, username }) {
+  const { message } = useWSocketContext();
   const [state, dispatch] = useReducer(contactsReducer, initState);
+
+  useEffect(() => {
+    if (message) {
+      switch (message.type) {
+        case 'online':
+          dispatch({
+            type: actionTypes.CONTACT_IS_ONLINE,
+            username: message.username,
+          });
+          break;
+        case 'offline':
+          dispatch({
+            type: actionTypes.CONTACT_IS_OFFLINE,
+            username: message.username,
+          });
+          break;
+        default:
+          return null;
+      }
+    }
+  }, [message]);
+
   useEffect(() => {
     if (localStorage.getItem(`contacts-${username}`)) {
-
       const storage = JSON.parse(localStorage.getItem(`contacts-${username}`));
       getLocalContacts({ dispatch, contacts: storage.contacts });
     } else {

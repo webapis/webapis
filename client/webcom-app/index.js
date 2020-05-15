@@ -12,7 +12,7 @@ import { AuthContent } from '../auth/AuthContent';
 import { AuthProvider } from '../auth/auth-context';
 import { FormProvider } from '../form/form-context';
 import { OtherContent } from './OtherContent';
-
+import { WSocketProvider } from '../wsocket/wsocket-context';
 import { Home } from './Home';
 
 const PeerToPeer = lazy(() => import('../p2p/p2p'));
@@ -20,58 +20,60 @@ const Group = lazy(() => import('../group/group'));
 const Chat = lazy(() => import('./Chat'));
 render(
   <AuthProvider>
-    <RootRouteProvider initialRoute='/'>
-      <FormProvider>
-        <ContactsProvider>
-          <ThemeProvider
-            initState={{
-              primary: {
-                background: '#6200EE',
-                color: '#ffffff',
-                fontFamily: 'Roboto, Helvetica, "Arial"',
-              },
-            }}
-          >
-            <Navigation
-              drawerContent={
-                <DrawerContent
-                  authContent={<AuthContent />}
-                  otherContent={<OtherContent />}
-                />
-              }
+    <WSocketProvider url="ws://localhost:3000/chat">
+      <RootRouteProvider initialRoute='/'>
+        <FormProvider>
+          <ContactsProvider>
+            <ThemeProvider
+              initState={{
+                primary: {
+                  background: '#6200EE',
+                  color: '#ffffff',
+                  fontFamily: 'Roboto, Helvetica, "Arial"',
+                },
+              }}
             >
-              <NavItem>WEB COM</NavItem>
-            </Navigation>
-            <RootRoute path='/auth'>
-              <RouteProvider initialRoute='/login'>
-                <Authentication />
-              </RouteProvider>
-            </RootRoute>
+              <Navigation
+                drawerContent={
+                  <DrawerContent
+                    authContent={<AuthContent />}
+                    otherContent={<OtherContent />}
+                  />
+                }
+              >
+                <NavItem>WEB COM</NavItem>
+              </Navigation>
+              <RootRoute path='/auth'>
+                <RouteProvider initialRoute='/login'>
+                  <Authentication />
+                </RouteProvider>
+              </RootRoute>
 
-            <RootRoute path='/'>
-              <Home />
-            </RootRoute>
+              <RootRoute path='/'>
+                <Home />
+              </RootRoute>
 
-            <RootRoute path='/p2p'>
-              <Suspense fallback={<div>loading...</div>}>
-                <PeerToPeer />
-              </Suspense>
-            </RootRoute>
-            <RootRoute path='/group'>
-              <Suspense fallback={<div>loading...</div>}>
-                <Group />
-              </Suspense>
-            </RootRoute>
-            <RootRoute path='/chat'>
-              <Suspense fallback={<div>loading...</div>}>
-                <Chat />
-              </Suspense>
-            </RootRoute>
-            {''}
-          </ThemeProvider>
-        </ContactsProvider>
-      </FormProvider>
-    </RootRouteProvider>
+              <RootRoute path='/p2p'>
+                <Suspense fallback={<div>loading...</div>}>
+                  <PeerToPeer />
+                </Suspense>
+              </RootRoute>
+              <RootRoute path='/group'>
+                <Suspense fallback={<div>loading...</div>}>
+                  <Group />
+                </Suspense>
+              </RootRoute>
+              <RootRoute path='/chat'>
+                <Suspense fallback={<div>loading...</div>}>
+                  <Chat />
+                </Suspense>
+              </RootRoute>
+              {''}
+            </ThemeProvider>
+          </ContactsProvider>
+        </FormProvider>
+      </RootRouteProvider>
+    </WSocketProvider>
   </AuthProvider>,
   document.body
 );
