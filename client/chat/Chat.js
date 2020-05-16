@@ -1,5 +1,9 @@
 import { h } from 'preact';
-
-export function Chat() {
-  return <div>Chat..</div>;
+import MessagesDispaler from './messages-displayer';
+export function Chat({ messages }) {
+  return (
+    <div style={{ margin: 8 }}>
+      <MessagesDispaler messages={messages} />
+    </div>
+  );
 }

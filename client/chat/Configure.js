@@ -33,7 +33,7 @@ export function Configure() {
             <label>Conversation</label>
           </div>
 
-          <hr style={{ width: '100%' }} />
+          <hr style={{ width: '96%' }} />
           <div style={style.btnContainer}>
             <button className='config-btn'>
               <Archive color='#737373' />

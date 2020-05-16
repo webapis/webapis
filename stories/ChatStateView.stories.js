@@ -6,8 +6,8 @@ import { Chat } from '../client/chat/Chat';
 import { Configure } from '../client/chat/Configure';
 import { Invite } from '../client/chat/Invite';
 import { Invitee } from '../client/chat/Invitee';
-
 import accept_inv_img from '../client/app-context/img/accept_invitation.png';
+import messages from './fake-data/messages';
 export default {
   title: 'ChatStateView',
 };
@@ -46,7 +46,11 @@ BlockedInvitation.story = {
   name: 'Blocked',
 };
 
-export const ChatView = () => <Chat />;
+export const ChatView = () => (
+  <div style={{ height: '80vh' }}>
+    <Chat messages={messages} />
+  </div>
+);
 
 ChatView.story = {
   name: 'Chat',
