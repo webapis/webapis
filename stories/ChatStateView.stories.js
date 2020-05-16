@@ -1,29 +1,46 @@
 import { h } from 'preact';
-import { Accept } from '../client/chat/Accept';
+import { Inviter } from '../client/chat/Inviter';
 import { Block } from '../client/chat/Block';
 import { Blocked } from '../client/chat/Blocked';
 import { Chat } from '../client/chat/Chat';
 import { Configure } from '../client/chat/Configure';
 import { Invite } from '../client/chat/Invite';
 import { Invitee } from '../client/chat/Invitee';
-import { Inviter } from '../client/chat/Inviter';
+
+import accept_inv_img from '../client/app-context/img/accept_invitation.png';
 export default {
   title: 'ChatStateView',
 };
 //inviter
-export const AcceptInvitation = () => <Accept />;
+export const AcceptInvitation = () => (
+  <div style={{ height: '80vh' }}>
+    <Inviter
+      accept_inv_img={accept_inv_img}
+      username={'dragos'}
+      message={{ text: "Let's chat on Webcom!", datetime: 'Now' }}
+    />
+  </div>
+);
 
 AcceptInvitation.story = {
-  name: 'Accept',
+  name: 'Inviter',
 };
 
-export const BlockInvitation = () => <Block />;
+export const BlockInvitation = () => (
+  <div style={{ height: '80vh' }}>
+    <Block username='dragos' />
+  </div>
+);
 
 BlockInvitation.story = {
   name: 'Block',
 };
 
-export const BlockedInvitation = () => <Blocked />;
+export const BlockedInvitation = () => (
+  <div style={{ height: '80vh' }}>
+    <Blocked username='dragos' />
+  </div>
+);
 
 BlockedInvitation.story = {
   name: 'Blocked',
@@ -35,26 +52,32 @@ ChatView.story = {
   name: 'Chat',
 };
 
-export const ConfigureView = () => <Configure />;
+export const ConfigureView = () => (
+  <div style={{ height: '80vh' }}>
+    <Configure />
+  </div>
+);
 
 ConfigureView.story = {
   name: 'Configure',
 };
 
-export const InviteView = () => <Invite />;
+export const InviteView = () => (
+  <div style={{ height: '80vh' }}>
+    <Invite email={'deros@gmail.com'} />
+  </div>
+);
 
 InviteView.story = {
   name: 'Invite',
 };
 
-export const InviteeView = () => <Invitee />;
+export const InviteeView = () => (
+  <div style={{ height: '80vh' }}>
+    <Invitee email={'dragos@gmail.com'} />
+  </div>
+);
 
 InviteeView.story = {
   name: 'Invitee',
-};
-
-export const InviterView = () => <Inviter />;
-
-InviterView.story = {
-  name: 'Inviter',
 };

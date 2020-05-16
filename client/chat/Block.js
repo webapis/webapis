@@ -1,4 +1,23 @@
 import { h } from 'preact';
-export function Block() {
-  return <div>Block..</div>;
+import './css/style.css';
+export function Block({ username }) {
+  return (
+    <div className='chat-state-view'>
+      <div style={{ flex: 10 }}>
+        <h5>Block & report</h5>
+        <div>
+          {username} will not be able to message you any more.{' '}
+          <a href=''>Learn more here.</a>
+        </div>
+        <p>
+          <input type='checkbox' id='report-checkbox' />
+          <label for='report-checkbox'>Also report</label>
+        </p>
+      </div>
+      <div style={{ display: 'flex', flex: 1 }}>
+        <button className='btn'>Cancel</button>
+        <button className='btn btn-confirm'>Confirm</button>
+      </div>
+    </div>
+  );
 }
