@@ -25,33 +25,30 @@ export default function Contacts() {
 
   useEffect(() => {
     if (contactState.contacts.length > 0) {
-     
       setItems(contactState.contacts);
     }
   }, [contactState]);
 
   useEffect(() => {
     if (contactsfilter && contactState.contacts.length === 0) {
-
       setUsersFilter(contactsfilter);
     }
 
     if (contactsfilter && contactState.contacts.length > 0) {
-   
       setItems(contactState.contacts);
     }
   }, [contactState.contacts, contactsfilter]);
 
   useEffect(() => {
     if (usersFilter && userState.users.length > 0) {
+      debugger;
       setItems(userState.users);
     }
   }, [userState.users, usersFilter]);
 
   function handleItemClick(e) {
-    
     const selectedContact = items.find((item) => item.username === e.target.id);
-
+    debugger;
     selectContact({ dispatch, contact: selectedContact });
   }
 
@@ -65,7 +62,6 @@ export default function Contacts() {
       <List id='contacts-list'>
         {items.length > 0 &&
           items.map((item) => {
-          
             return (
               <ListItem onClick={handleItemClick} id={item.username}>
                 {item.username}

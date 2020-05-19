@@ -57,6 +57,45 @@ Cypress.Commands.add('login', ({ username, email, password }) => {
         });
     });
 });
+Cypress.Commands.add('remoteLogin', ({ username, email, password }) => {
+  cy.request({
+    url: 'http://localhost:3000/seed/users',
+    method: 'post',
+    body: {
+      username,
+      email,
+      password,
+    },
+  })
+    .its('body')
+    .then((body) => {
+      cy.request({
+        url: 'http://localhost:3000/auth/login',
+        method: 'GET',
+        headers: {
+          'Conten-Type': 'application/json',
+          'Access-Control-Allow-Headers': '*',
+          Authorization: `Basic ${btoa(`${body.email}:${body.password}`)}`,
+        },
+      })
+        .its('body')
+        .then((body) => {
+          const { email, username, token } = body;
+    
+          cy.window()
+            .its('WebSocket')
+            .then((WebSocket) => {
+              const socket = new WebSocket('ws://localhost:3000/chat');
+              socket.onmessage = (message) => {
+                console.log('message from server', message);
+                socket.send('helloooooo');
+              };
+
+            
+            });
+        });
+    });
+});
 
 Cypress.Commands.add('register', ({ username, email, password }) => {
   cy.request({
@@ -71,15 +110,14 @@ Cypress.Commands.add('register', ({ username, email, password }) => {
 });
 
 Cypress.Commands.add('forgotpassword', ({ email }) => {
- return  cy.request({
+  return cy.request({
     url: 'http://localhost:3000/seed/requestpasschange',
     method: 'post',
     body: {
       email,
     },
-  })
+  });
 });
-
 
 Cypress.Commands.add(
   'signup',

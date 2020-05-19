@@ -1,7 +1,8 @@
 import { h } from 'preact';
 import PersonAddIcon from '../layout/icons/PersonAdd';
-export default function Invite({ contact }) {
+export default function Invite({ contact, onChange, onInvite, value }) {
   const { email, message } = contact;
+
   return (
     <div className='chat-state-view' data-testid='invite'>
       <div
@@ -26,12 +27,20 @@ export default function Invite({ contact }) {
       </div>
       <div>
         <div style={{ display: 'flex', padding: 8 }}>
-          <textarea rows='3' style={{ flex: 1 }} />
+          <textarea
+            rows='3'
+            style={{ flex: 1 }}
+            name='message'
+            onChange={onChange}
+            value={value}
+          />
         </div>
 
         <div style={{ display: 'flex', flex: 1 }}>
           <button className='btn'>Close</button>
-          <button className='btn unblock-btn'>Send Invitation</button>
+          <button className='btn unblock-btn' onClick={onInvite}>
+            Send Invitation
+          </button>
         </div>
       </div>
     </div>

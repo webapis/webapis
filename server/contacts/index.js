@@ -5,7 +5,7 @@ import find from './find';
 
 export default function (req, res) {
   const { url } = req;
-  const collectionName = 'users';
+  const collectionName = 'contacts';
   const database = req.client.db('auth');
   const collection = database.collection(collectionName);
   req.collection = collection;

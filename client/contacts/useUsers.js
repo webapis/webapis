@@ -16,6 +16,7 @@ async function fetchUsers({ dispatch, filter }) {
     dispatch({ type: actionTypes.FETCH_USERS_STARTED });
     const response = await fetch(`/users/find?filter=${filter}`);
     const { users } = await response.json();
+    debugger;
     dispatch({ type: actionTypes.FETCH_USERS_SUCCESS, users });
   } catch (error) {
     dispatch({ type: actionTypes.FETCH_USERS_FAILED, error });
@@ -27,7 +28,14 @@ function usersReducer(state, action) {
     case actionTypes.FETCH_USERS_STARTED:
       return { ...state, loading: true };
     case actionTypes.FETCH_USERS_SUCCESS:
-      return { ...state, users: action.users };
+      const nextState = {
+        ...state,
+        users: action.users.map((user) => {
+          return { ...user, state: 'invite' };
+        }),
+      };
+      debugger;
+      return nextState;
     case actionTypes.FETCH_USERS_FAILED:
       return { ...state, error: action.error };
     default:

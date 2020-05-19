@@ -1,13 +1,16 @@
+import url from 'url';
 export default async function ({ req, res, collection }) {
   try {
-    let contacts = null;
-    contacts = await collection.find().toArray();
+    let users = null;
+    let filter = url.parse(req.url, true).query.filter;
+    debugger;
+    users = await collection.find({ username: filter }).toArray();
     debugger;
 
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.write(
       JSON.stringify({
-        contacts,
+        users,
       })
     );
     res.end();

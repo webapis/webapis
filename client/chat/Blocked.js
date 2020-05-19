@@ -1,7 +1,7 @@
 import { h } from 'preact';
 import './css/style.css';
 import { Block } from '../layout/icons/Block';
-export default function Blocked({ contact }) {
+export default function Blocked({ contact,setRoute }) {
   const { username } = contact;
   return (
     <div className='chat-state-view' data-testid='blocked'>

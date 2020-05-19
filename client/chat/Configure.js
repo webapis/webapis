@@ -2,7 +2,6 @@ import { h } from 'preact';
 import { Archive } from '../layout/icons/Archive';
 import { Delete } from '../layout/icons/Delete';
 import { Block } from '../layout/icons/Block';
-import { useRouteContext } from '../route/router';
 import './css/style.css';
 const style = {
   btnContainer: {
@@ -15,13 +14,11 @@ const style = {
   },
 };
 
-export default function Configure() {
-  const [route, setRoute] = useRouteContext();
-
+export default function Configure({ setRoute }) {
   function handleRoute(e) {
     e.preventDefault();
     const { id } = e.target;
-    debugger;
+
     setRoute(`/${id}`);
   }
 

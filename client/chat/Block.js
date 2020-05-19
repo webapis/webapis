@@ -1,6 +1,6 @@
 import { h } from 'preact';
 import './css/style.css';
-export default function Block({ contact }) {
+export default function Block({ contact,setRoute }) {
   const { username } = contact;
   return (
     <div className='chat-state-view' data-testid='block'>
