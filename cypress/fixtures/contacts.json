@@ -1,14 +1,17 @@
 [
   {
     "username": "testuser",
-    "email": "testuser@gmail.com"
+    "email": "testuser@gmail.com",
+    "state": "invitee"
   },
   {
     "username": "testuser2",
-    "email": "testuser2@gmail.com"
+    "email": "testuser2@gmail.com",
+    "state": "inviter"
   },
   {
     "username": "testuser3",
-    "email": "testuser3@gmail.com"
+    "email": "testuser3@gmail.com",
+    "state": "blocked"
   }
 ]

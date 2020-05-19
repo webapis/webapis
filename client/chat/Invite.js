@@ -1,15 +1,15 @@
 import { h } from 'preact';
 import PersonAddIcon from '../layout/icons/PersonAdd';
-export function Invite({ email }) {
+export default function Invite({ contact }) {
+  const { email, message } = contact;
   return (
-    <div className='chat-state-view'>
+    <div className='chat-state-view' data-testid='invite'>
       <div
         style={{
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
           flex: 10,
-          marginTop: 50,
         }}
       >
         <PersonAddIcon
@@ -21,7 +21,7 @@ export function Invite({ email }) {
         />
 
         <p>
-          Start conversation with <b>{email}</b>{' '}
+          Start conversation with <b>{email && email}</b>{' '}
         </p>
       </div>
       <div>

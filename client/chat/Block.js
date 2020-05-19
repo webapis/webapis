@@ -1,12 +1,15 @@
 import { h } from 'preact';
 import './css/style.css';
-export function Block({ username }) {
+export default function Block({ contact }) {
+  const { username } = contact;
   return (
-    <div className='chat-state-view'>
+    <div className='chat-state-view' data-testid='block'>
       <div style={{ flex: 10 }}>
-        <h5>Block & report</h5>
+        <h5>
+          Block & report <b>{username}</b>
+        </h5>
         <div>
-          {username} will not be able to message you any more.{' '}
+          {username && username} will not be able to message you any more.{' '}
           <a href=''>Learn more here.</a>
         </div>
         <p>

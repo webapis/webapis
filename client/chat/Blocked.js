@@ -1,9 +1,10 @@
 import { h } from 'preact';
 import './css/style.css';
 import { Block } from '../layout/icons/Block';
-export function Blocked({ username }) {
+export default function Blocked({ contact }) {
+  const { username } = contact;
   return (
-    <div className='chat-state-view'>
+    <div className='chat-state-view' data-testid='blocked'>
       <div
         style={{
           flex: 10,
@@ -18,8 +19,8 @@ export function Blocked({ username }) {
         <Block color='red' width={50} height={50} />
         <div>{username}</div>
         <p style={{ textAlign: 'center' }}>
-          You blocked {username}.You cannot communicate with someone you
-          blocked.
+          You blocked <b>{username && username}</b>.You cannot communicate with
+          someone you blocked.
         </p>
       </div>
 

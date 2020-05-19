@@ -1,51 +1,77 @@
 import { h } from 'preact';
 import { Suspense, lazy } from 'preact/compat';
 import { useEffect } from 'preact/hooks';
-import { useRouteContext } from '../../route/router';
-import { useMediaQuery } from '../../layout/useMediaQuery';
-import { Route } from '../../route/router';
-import { PeerToPeerMobileContext } from './p2p-mobile-context';
-import { PeerToPeerInvitationMobile } from './p2p-invitation-mobile';
-import Messaging from '../../messaging/Messaging';
+import { Route, useRouteContext } from '../../route/router';
 import { useContactsContext } from '../../contacts/contact-context';
+import { useAppContext } from '../../app-context/app-context';
 const Contacts = lazy(() => import('../../contacts/Contacts'));
-const PeerToPeerChat = lazy(() => import('./p2p-chat-mobile'));
+const Block = lazy(() => import('../../chat/Block'));
+const Blocked = lazy(() => import('../../chat/Blocked'));
+const Chat = lazy(() => import('../../chat/Chat'));
+const Configure = lazy(() => import('../../chat/Configure'));
+const Invite = lazy(() => import('../../chat/Invite'));
+const Invitee = lazy(() => import('../../chat/Invitee'));
+const Inviter = lazy(() => import('../../chat/Inviter'));
 
 export default function PeerToPeerMobile() {
   const [state, dispatch] = useContactsContext();
   const [route, setRoute] = useRouteContext();
   const { contact } = state;
-  const { width } = useMediaQuery();
-
+  const { accept_inv_img } = useAppContext();
   useEffect(() => {
-    if (width < 800) {
-      setRoute('/contacts');
+    if (contact) {
+    
+      setRoute(`/${contact.state}`);
     }
-  }, []);
+  }, [contact]);
+
+  function onSetting (){
+    setRoute('/cofigure')
+  }
 
   return (
-    <PeerToPeerMobileContext>
+    <div style={{ height: '85vh' }}>
       <Route path='/contacts'>
         <Suspense fallback={<div>loading...</div>}>
           <Contacts />
         </Suspense>
       </Route>
 
-      <Route path='/invitation'>
+      <Route path='/block'>
         <Suspense fallback={<div>loading...</div>}>
-          <PeerToPeerInvitationMobile invitation={contact} />
+          <Block contact={contact} />
         </Suspense>
       </Route>
-      <Route path='/messaging'>
+      <Route path='/blocked'>
         <Suspense fallback={<div>loading...</div>}>
-          <Messaging />
+          <Blocked contact={contact} />
         </Suspense>
       </Route>
-      <Route path='/p2p-chat'>
+      <Route path='/chat'>
         <Suspense fallback={<div>loading...</div>}>
-          <PeerToPeerChat chat={contact} />
+          <Chat contact={contact} onSetting={onSetting} />
         </Suspense>
       </Route>
-    </PeerToPeerMobileContext>
+      <Route path='/cofigure'>
+        <Suspense fallback={<div>loading...</div>}>
+          <Configure contact={contact} />
+        </Suspense>
+      </Route>
+      <Route path='/invite'>
+        <Suspense fallback={<div>loading...</div>}>
+          <Invite contact={contact} />
+        </Suspense>
+      </Route>
+      <Route path='/invitee'>
+        <Suspense fallback={<div>loading...</div>}>
+          <Invitee contact={contact} />
+        </Suspense>
+      </Route>
+      <Route path='/inviter'>
+        <Suspense fallback={<div>loading...</div>}>
+          <Inviter accept_inv_img={accept_inv_img} contact={contact} />
+        </Suspense>
+      </Route>
+    </div>
   );
 }

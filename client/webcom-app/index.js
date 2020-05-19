@@ -15,12 +15,12 @@ import { OtherContent } from './OtherContent';
 import { WSocketProvider } from '../wsocket/wsocket-context';
 import { AppProvider } from '../app-context/app-context';
 import { Home } from './Home';
-
+import accept_inv_img from '../app-context/img/accept_invitation.png';
 const PeerToPeer = lazy(() => import('../p2p/p2p'));
 const Group = lazy(() => import('../group/group'));
 const Chat = lazy(() => import('./Chat'));
 render(
-  <AppProvider title='Webcom'>
+  <AppProvider title='Webcom' accept_inv_img={accept_inv_img}>
     <AuthProvider>
       <WSocketProvider url='ws://localhost:3000/chat'>
         <RootRouteProvider initialRoute='/'>

@@ -1,8 +1,9 @@
 import { h } from 'preact';
 import './css/style.css';
-export function Inviter({ accept_inv_img, username, message }) {
+export default function Inviter({ accept_inv_img, contact }) {
+  const { message, username } = contact;
   return (
-    <div className='chat-state-view'>
+    <div className='chat-state-view' data-testid='inviter'>
       <div
         style={{
           flex: 1,
@@ -15,11 +16,11 @@ export function Inviter({ accept_inv_img, username, message }) {
         }}
       >
         <img src={accept_inv_img} style={{ width: 100 }} />
-        <div>{username}</div>
+        <div>{username && username}</div>
       </div>
       <hr style={{ width: '99%' }} />
       <div style={{ flex: 5, backgroundColor: '#eeeeee' }}>
-        <Message message={message} />
+        <Message message={message && message} />
       </div>
 
       <div style={{ display: 'flex', flex: 1 }}>

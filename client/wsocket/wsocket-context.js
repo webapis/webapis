@@ -5,7 +5,7 @@ const WSocketContext = createContext();
 
 export function useWSocketContext() {
   const context = useContext(WSocketContext);
-  debugger;
+
   if (!context) {
     throw new Error('useWSocketContext must be used with WSocketProvider');
   }

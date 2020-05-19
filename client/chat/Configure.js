@@ -2,7 +2,8 @@ import { h } from 'preact';
 import { Archive } from '../layout/icons/Archive';
 import { Delete } from '../layout/icons/Delete';
 import { Block } from '../layout/icons/Block';
-
+import { useRouteContext } from '../route/router';
+import './css/style.css';
 const style = {
   btnContainer: {
     display: 'flex',
@@ -14,9 +15,18 @@ const style = {
   },
 };
 
-export function Configure() {
+export default function Configure() {
+  const [route, setRoute] = useRouteContext();
+
+  function handleRoute(e) {
+    e.preventDefault();
+    const { id } = e.target;
+    debugger;
+    setRoute(`/${id}`);
+  }
+
   return (
-    <div className='chat-state-view'>
+    <div className='chat-state-view' data-testid='configure'>
       <div
         style={{
           marginLeft: 16,
@@ -47,8 +57,13 @@ export function Configure() {
             <div style={style.btnText}>Delete conversation</div>
           </div>
           <div style={style.btnContainer}>
-            <button className='config-btn'>
-              <Block color='red' />
+            <button
+              className='config-btn'
+              id='block'
+              data-testid='block-btn'
+              onClick={handleRoute}
+            >
+              <Block color='red' id='block' />
             </button>
             <div style={style.btnText}>Block conversation</div>
           </div>

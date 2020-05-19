@@ -13,7 +13,7 @@ export function useAppContext() {
 }
 //
 export function AppProvider(props) {
-  const { title, accept_inv_img = accept_inv_img_png } = prop;
+  const { title, accept_inv_img = accept_inv_img_png } = props;
 
   return <AppContext.Provider value={{ title, accept_inv_img }} {...props} />;
 }
