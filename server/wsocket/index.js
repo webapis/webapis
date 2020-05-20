@@ -1,67 +1,64 @@
 import invwsocket from '../invitation/wsocket';
+import chatMessages from './chatMessages';
+import url from 'url';
 const jwt = require('jsonwebtoken');
 const cookie = require('cookie');
 const EventEmitter = require('events');
 const WebSocket = require('ws');
 export const wsocket = new EventEmitter();
 
-export const connections = {};
+let connections = {};
+let con = [];
 export default function (server) {
   invwsocket();
   const wss = new WebSocket.Server({ server });
   wss.on('connection', async function connection(ws, request) {
-    debugger;
     try {
       const token = cookie.parse(request.headers['cookie']);
-      const decoded = await jwt.verify(token.tkn, process.env.secret);
-      const { username } = decoded;
-      connections[username] = ws;
+      let uname = url.parse(request.url, true).query.username;
 
-      debugger;
+        debugger;
+      const decoded = await jwt.verify(token[uname], process.env.secret);
+      const { username } = decoded;
+      ws.username = username;
+      connections[username] = ws; //
+      con.push(ws);
+      console.log('new connection', username);
+      //  debugger;
       wsocket.emit('connection', username);
       ws.on('message', function incoming(message) {
         try {
+          console.log('recieved,', message);
           const msg = JSON.parse(message);
-       
-          console.log('received: %s', msg.type);
 
-          switch (msg.type) {
-            case 'INVITE':
-              wsocket.emit('invite', msg);
-              break;
-            case 'ACCEPT':
-              wsocket.emit('accept', msg);
-              break;
-            case 'BLOCK':
-              wsocket.emit('block', msg);
-              break;
-            case 'UNBLOCK':
-              wsocket.emit('unblock', msg);
-              break;
-            case 'DECLINE':
-              wsocket.emit('decline', msg);
-              break;
-            case 'MESSAGE':
-
-            default:
-              throw new Error('No message type is provided');
+          if (msg && msg.path) {
+            switch (msg.path) {
+              case 'chat':
+                chatMessages({ message: msg, connections });
+                break;
+              default:
+                throw new Error('No message path is provided');
+            }
           }
         } catch (error) {
+          const err = error;
+
+          debugger;
           throw new Error(error);
         }
       });
       ws.on('close', function () {
-        delete connections[username];
+        console.log('coonection closed:', username);
         debugger;
+        delete connections[username];
       });
-
-      debugger;
     } catch (error) {
       const err = error;
       console.log(err);
-      debugger;
+
       socket.write('HTTP/1.1 401 Unauthorized\r\n\r\n');
       socket.destroy();
     }
   });
 }
+

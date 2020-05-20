@@ -6,40 +6,34 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
 export default async function ({ req, res, collection }) {
-  debugger;
   try {
     let user = null;
     let resBcrypt = null;
-    debugger;
+
     let { emailorusername, password } = getCredentials(req);
-    debugger;
+
     let errors = [];
 
     //user sent empty email or username 410 tested----------------------------
     if (validations.isEmptyEmailOrUsername({ emailorusername })) {
-      debugger;
       errors.push(httpStatus.emailorusernameNotValid);
     }
     // user sent empty password 409 tested -----------------------------------
     if (validations.isEmptyPassword({ password })) {
-      debugger;
       errors.push(httpStatus.emptyStringNotValid);
     }
     if (errors.length > 0) {
-      debugger;
       res.statusCode = 400;
       res.writeHead(400, { 'Content-Type': 'application/json' });
       res.write(JSON.stringify({ errors }));
       res.end();
     } else {
       //username or email is not valid 410 regex tested
-      debugger;
+
       if (!validations.isValidUsernameOrEmail({ emailorusername })) {
-        debugger;
         errors.push(httpStatus.emailorusernameNotValid);
       }
       if (errors.length > 0) {
-        debugger;
         res.statusCode = 400;
         res.writeHead(400, { 'Content-Type': 'application/json' });
         res.write(JSON.stringify({ errors }));
@@ -47,14 +41,11 @@ export default async function ({ req, res, collection }) {
       } else {
         //username or email is valid
         if (validations.isValidUsernameOrEmail({ emailorusername })) {
-          debugger;
           //is email
           if (validations.isValidEmail({ email: emailorusername })) {
-            debugger;
             user = await collection.findOne({ email: emailorusername });
-            debugger;
+
             if (user === null) {
-              debugger;
               // email is not registered 408  ----------------------------///Cookies
               errors.push(httpStatus.credentialInvalid);
               res.writeHead(400, { 'Content-Type': 'application/json' });
@@ -64,7 +55,6 @@ export default async function ({ req, res, collection }) {
               resBcrypt = await bcrypt.compare(password, user.password);
 
               if (resBcrypt) {
-                debugger;
                 const payload = {
                   id: user._id.toString(),
                   username: user.username,
@@ -76,7 +66,7 @@ export default async function ({ req, res, collection }) {
                 // success login---------------------------------------------
                 res.writeHead(200, {
                   'Content-Type': 'application/json',
-                  'Set-Cookie': `tkn=${token}; Path=/chat`,
+                  'Set-Cookie': `${user.username}=${token};Expires=Wed, 21 Oct 2025 07:28:00 GMT;  Path=/chat`,
                 });
                 res.write(
                   JSON.stringify({
@@ -95,23 +85,19 @@ export default async function ({ req, res, collection }) {
               }
             }
           } else {
-            debugger;
             //is username
             user = await collection.findOne({ username: emailorusername });
 
             if (!user) {
-              debugger;
               // username is not registered 411  ------------------------------
               errors.push(httpStatus.usernameIsNotRegistered);
               res.writeHead(400, { 'Content-Type': 'application/json' });
               res.write(JSON.stringify({ errors }));
               res.end();
             } else {
-              debugger;
               resBcrypt = await bcrypt.compare(password, user.password);
-              debugger;
+
               if (resBcrypt) {
-                debugger;
                 const payload = {
                   id: user._id.toString(),
                   email: user.email,
@@ -123,7 +109,7 @@ export default async function ({ req, res, collection }) {
                 //success login 200------------------------------------------
                 res.writeHead(200, {
                   'Content-Type': 'application/json',
-                  'Set-Cookie': `tkn=${token}; Path=/chat`,
+                  'Set-Cookie': `${user.username}=${token};Expires=Wed, 21 Oct 2025 07:28:00 GMT; Path=/chat`,
                 });
                 res.write(
                   JSON.stringify({
@@ -132,10 +118,9 @@ export default async function ({ req, res, collection }) {
                     email: user.email,
                   })
                 );
-                debugger;
+
                 res.end();
               } else {
-                debugger;
                 // invalid credential 401 ------------------------------------
                 errors.push(httpStatus.credentialInvalid);
                 res.writeHead(400, { 'Content-Type': 'application/json' });
@@ -149,7 +134,7 @@ export default async function ({ req, res, collection }) {
     }
   } catch (error) {
     const err = error;
-    debugger;
+
     res.writeHead(500, { 'Content-Type': 'application/json' });
     res.write(JSON.stringify({ error }));
     res.end();

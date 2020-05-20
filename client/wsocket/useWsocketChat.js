@@ -13,28 +13,40 @@ export function useWsocketChat({ username, target }) {
   const [message, setMessage] = useState('');
   const { socket } = useWSocketContext();
   function onInvite() {
-    let msg = { message, type: messageType.INVITE, username, target };
-    debugger;
+    let msg = {
+      message,
+      type: messageType.INVITE,
+      username,
+      target,
+      path: 'chat',
+    };
+  
     socket.send(JSON.stringify(msg));
   }
 
   function onAccept() {
-    let msg = { message, type: messageType.ACCEPT, username, target };
+    let msg = {
+      message,
+      type: messageType.ACCEPT,
+      username,
+      target,
+      path: 'chat',
+    };
     socket.send({ message: JSON.stringify(msg) });
   }
 
   function onDecline() {
-    let msg = { type: messageType.DECLINE, username, target };
+    let msg = { type: messageType.DECLINE, username, target, path: 'chat' };
     socket.send({ message: JSON.stringify(msg) });
   }
 
   function onBlock() {
-    let msg = { type: messageType.BLOCK, username, target };
+    let msg = { type: messageType.BLOCK, username, target, path: 'chat' };
     socket.send({ message: JSON.stringify(msg) });
   }
 
   function onUnblock() {
-    let msg = { type: messageType.UNBLOCK, username, target };
+    let msg = { type: messageType.UNBLOCK, username, target, path: 'chat' };
     socket.send({ message: JSON.stringify(msg) });
   }
 
@@ -45,7 +57,13 @@ export function useWsocketChat({ username, target }) {
 
   function sendMessage() {
     try {
-      let msg = { type: messageType.MESSAGE, username, target, message };
+      let msg = {
+        type: messageType.MESSAGE,
+        username,
+        target,
+        message,
+        path: 'chat',
+      };
       let strMgs = JSON.stringify(msg);
       debugger;
       socket.send(JSON.stringify(strMgs));

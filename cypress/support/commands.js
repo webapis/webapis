@@ -81,20 +81,12 @@ Cypress.Commands.add('remoteLogin', ({ username, email, password }) => {
         .its('body')
         .then((body) => {
           const { email, username, token } = body;
-    
-          cy.window()
-            .its('WebSocket')
-            .then((WebSocket) => {
-              const socket = new WebSocket('ws://localhost:3000/chat');
-              socket.onmessage = (message) => {
-                console.log('message from server', message);
-                socket.send('helloooooo');
-              };
 
-            
-            });
+        
         });
     });
+
+ 
 });
 
 Cypress.Commands.add('register', ({ username, email, password }) => {
