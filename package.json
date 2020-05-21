@@ -52,5 +52,12 @@
     "preact": "^10.4.0",
     "preact-router": "^3.2.1",
     "ws": "^7.3.0"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "client/*",
+      "apps",
+      "cypress/*"
+    ]
   }
 }

@@ -1,0 +1,9 @@
+export const status = {
+  INVITEE: 'INVITEE',
+  INVITER: 'INVITER',
+  CHAT: 'CHAT',
+  DECLINED: 'DECLINED',
+  DECLINER: 'DECLINER',
+  BLOCKED: 'BLOCKED',
+  BLOCKER: 'BLOCKER',
+};

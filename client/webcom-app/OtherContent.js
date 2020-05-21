@@ -1,12 +1,8 @@
 import { h } from 'preact';
 import { List, ListItem } from '../layout/NavList';
 import { useUserName } from '../auth/useUserName';
-
 import { useRootRouteContext } from '../route/root-router';
-import { useRouteContext } from '../route/router';
-import { useContactsContext, removeContact } from '../contacts/contact-context';
 export function OtherContent() {
-  const [state, dispatch] = useContactsContext();
   const [rootRoute, setRootRoute] = useRootRouteContext();
 
   const { userName } = useUserName();
@@ -16,7 +12,6 @@ export function OtherContent() {
     const { id } = e.target;
     if (userName) {
       setRootRoute(`/${id}`);
-      removeContact({ dispatch });
     } else {
       setRootRoute('/auth');
     }
@@ -30,11 +25,13 @@ export function OtherContent() {
       }}
     >
       <List>
-        <ListItem onClick={handleRoute} id='chat'>Chat</ListItem>
+        <ListItem onClick={handleRoute} id='chat'>
+          Chat
+        </ListItem>
         <ListItem>Item Two</ListItem>
 
-        <ListItem onClick={handleRoute} id='p2p'>
-          Peer to Peer
+        <ListItem onClick={handleRoute} id='hangouts'>
+          Hangout
         </ListItem>
         <ListItem onClick={handleRoute} id='group'>
           Group
