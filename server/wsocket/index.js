@@ -9,34 +9,42 @@ let connections = {};
 export default function (server) {
   const wss = new WebSocket.Server({ server });
   wss.on('connection', async function connection(ws, request) {
-    const token = cookie.parse(request.headers['cookie']);
-
-    let uname = url.parse(request.url, true).query.username;
-
     debugger;
-    const decoded = await jwt.verify(token[uname], process.env.secret);
-    const { username } = decoded;
-    ws.username = username;
-    connections[username] = ws; //
+    try {
+      const token = cookie.parse(request.headers['cookie']);
 
-    ws.on('message', function incoming(message) {
-      try {
-        if (request.url.includes('hangouts')) {
-          console.log('recieved,', message);
-          const msg = JSON.parse(message);
-          hangouts({ message: msg, connections });
-        }
-      } catch (error) {
-        const err = error;
+      let uname = url.parse(request.url, true).query.username;
 
-        debugger;
-        throw new Error(error);
-      }
-    });
-    ws.on('close', function () {
-      console.log('coonection closed:', username);
       debugger;
-      delete connections[username];
-    });
+      const decoded = await jwt.verify(token[uname], process.env.secret);
+      const { username } = decoded;
+      ws.username = username;
+      connections[username] = ws; //
+
+      ws.on('message', function incoming(message) {
+        try {
+          if (request.url.includes('hangouts')) {
+            console.log('recieved,', message);
+            const msg = JSON.parse(message);
+            hangouts({ message: msg, connections });
+          }
+        } catch (error) {
+          const err = error;
+
+          debugger;
+          throw new Error(error);
+        }
+      });
+      ws.on('close', function () {
+        console.log('coonection closed:', username);
+        debugger;
+        delete connections[username];
+      });
+    } catch (error) {
+      const err = error;
+
+      debugger;
+    }
   });
 }
+//

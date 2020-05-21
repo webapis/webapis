@@ -21,12 +21,11 @@ describe('wsocket', () => {
       .then((WebSocket) => {
         debugger;
         const socket = new WebSocket(
-          `ws://localhost:3000/chat/?username=remote`
+          `ws://localhost:3000/hangouts/?username=remote`
         );
         socket.onmessage = (message) => {
           debugger;
           console.log('message from server', message);
-       
         };
         socket.onclose = () => {
           debugger;
