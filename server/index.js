@@ -4,6 +4,8 @@ import http from 'http';
 
 const server = http.createServer(httpRoute);
 server.on('clientError', (err, socket) => {
+
+  console.log('err---------------',err)
   socket.end('HTTP/1.1 400 Bad Request\r\n\r\n');
 });
 server.listen(3000, () => {

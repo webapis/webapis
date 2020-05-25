@@ -2,7 +2,7 @@ import { ObjectID } from 'mongodb';
 import * as validations from './validations/validations';
 import httpStatus from './http-status';
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
+import {hashPassword} from './hashPassword'
 
 export default async function changePassword({ req, res, collection }) {
   debugger;
@@ -50,14 +50,13 @@ export default async function changePassword({ req, res, collection }) {
       debugger;
       let { id } = decoded;
       debugger;
-      const salt = await bcrypt.genSalt(10);
-      debugger;
-      const hash = await bcrypt.hash(password, salt);
-      debugger;
-
+      const {salt,hash,iterations}=hashPassword(password)
       const result = await collection.findOneAndUpdate(
         { _id: new ObjectID(id) },
-        { $set: { password: hash } }
+        { $set: {
+          hash,
+          salt,
+          iterations,} }
       );
       debugger;
       user = result.value;

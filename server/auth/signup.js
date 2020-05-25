@@ -1,8 +1,8 @@
 import apiurl from 'url';
 import httpStatus from './http-status';
 import * as validations from './validations/validations';
+import {hashPassword} from './hashPassword'
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
 
 export default async function ({ req, res, collection }) {
   try {
@@ -66,12 +66,13 @@ export default async function ({ req, res, collection }) {
       } else {
         debugger;
         //successful signup-------------------------------------
-        const salt = await bcrypt.genSalt(10);
-        debugger;
-        const hash = await bcrypt.hash(password, salt);
+        const  {hash,salt,iterations}= hashPassword(password)
+        
         debugger;
         const result = await collection.insertOne({
-          password: hash,
+          hash,
+          salt,
+          iterations,
           email,
           username,
         });
@@ -90,6 +91,7 @@ export default async function ({ req, res, collection }) {
       }
     }
   } catch (error) {
+    const err =error
     debugger;
     res.writeHead(500, { 'Content-Type': 'application/json' });
     res.write(JSON.stringify({ error }));

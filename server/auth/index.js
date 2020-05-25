@@ -1,7 +1,7 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable no-unused-vars */
 import 'babel-polyfill';
-const bcrypt = require('bcrypt');
+const bcrypt = require('crypto');
 const ObjectID = require('mongodb').ObjectId;
 import apiurl from 'url';
 import login from './login';
