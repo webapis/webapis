@@ -24,10 +24,9 @@
     "@storybook/preact": "^5.3.18",
     "babel-loader": "^8.1.0",
     "babel-polyfill": "^6.26.0",
-    "cypress": "^4.4.1",
     "htm": "^3.0.4",
     "nodemon": "^2.0.3",
-    "rollup": "^2.6.1",
+    "rollup": "^2.10.9",
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-delete": "^1.2.0",
     "rollup-plugin-generate-html-template": "^1.6.1",
@@ -40,7 +39,7 @@
     "whatwg-fetch": "^3.0.0"
   },
   "dependencies": {
-    "concurrently": "^5.1.0",
+    "concurrently": "^5.2.0",
     "cookie": "^0.4.1",
     "cross-env": "^7.0.2",
     "dotenv": "^8.2.0",

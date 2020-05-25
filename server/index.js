@@ -3,8 +3,6 @@ import httpRoute from './http-route';
 import http from 'http';
 import ws from './wsocket';
 import database from './db';
-
-<<<<<<< HEAD
 const url = 'mongodb://localhost:27017';
 const { MongoClient } = require('mongodb');
 // const client = server.on('clientError', (err, socket) => {
@@ -24,15 +22,4 @@ const { MongoClient } = require('mongodb');
   });
 
 })();
-=======
-const server = http.createServer(httpRoute);
-server.on('clientError', (err, socket) => {
 
-  console.log('err---------------',err)
-  socket.end('HTTP/1.1 400 Bad Request\r\n\r\n');
-});
-server.listen(3000, () => {
-  console.log('processId', process.pid);
-});
-//
->>>>>>> master
