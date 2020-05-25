@@ -3,7 +3,7 @@ import * as validations from './validations/validations';
 import httpStatus from './http-status';
 import { getCredentials } from './http-auth';
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
+import {hashPassword,isPasswordCorrect} from './hashPassword'
 
 export default async function ({ req, res, collection }) {
   try {
@@ -52,7 +52,9 @@ export default async function ({ req, res, collection }) {
               res.write(JSON.stringify({ errors }));
               res.end();
             } else {
-              resBcrypt = await bcrypt.compare(password, user.password);
+            
+              debugger
+              resBcrypt = isPasswordCorrect(user.hash,user.salt,user.iterations,password);
 
               if (resBcrypt) {
                 const payload = {
@@ -95,7 +97,12 @@ export default async function ({ req, res, collection }) {
               res.write(JSON.stringify({ errors }));
               res.end();
             } else {
-              resBcrypt = await bcrypt.compare(password, user.password);
+
+              debugger;
+    
+              debugger
+              resBcrypt = isPasswordCorrect(user.hash,user.salt,user.iterations,password);
+              debugger;
 
               if (resBcrypt) {
                 const payload = {
@@ -135,6 +142,7 @@ export default async function ({ req, res, collection }) {
   } catch (error) {
     const err = error;
 
+    console.log('err---------------',err)
     res.writeHead(500, { 'Content-Type': 'application/json' });
     res.write(JSON.stringify({ error }));
     res.end();
