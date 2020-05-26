@@ -33,12 +33,13 @@ export default function Invite({ contact, onChange, onInvite, value }) {
             name='message'
             onChange={onChange}
             value={value}
+            data-testid='msgtextarea'
           />
         </div>
 
         <div style={{ display: 'flex', flex: 1 }}>
           <button className='btn'>Close</button>
-          <button className='btn unblock-btn' onClick={onInvite}>
+          <button className='btn unblock-btn' onClick={onInvite} data-testid='inv-btn'>
             Send Invitation
           </button>
         </div>

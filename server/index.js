@@ -1,9 +1,10 @@
+
 require('dotenv').config();
 import httpRoute from './http-route';
 import http from 'http';
 import ws from './wsocket';
 import database from './db';
-const url = 'mongodb://localhost:27017';
+const url = 'mongodb://127.0.0.1:27017';
 const { MongoClient } = require('mongodb');
 // const client = server.on('clientError', (err, socket) => {
 //   socket.end('HTTP/1.1 400 Bad Request\r\n\r\n');
@@ -11,10 +12,10 @@ const { MongoClient } = require('mongodb');
 
 
 (async () => {
-  const client = await new MongoClient('mongodb://localhost:27017', { useUnifiedTopology: true });
+  const client = await new MongoClient(url, { useUnifiedTopology: true });
   await client.connect();
   const server = http.createServer(httpRoute(client));
- // database();
+  database();
   ws(server);
   
   server.listen(3000, () => {
@@ -22,4 +23,5 @@ const { MongoClient } = require('mongodb');
   });
 
 })();
+
 

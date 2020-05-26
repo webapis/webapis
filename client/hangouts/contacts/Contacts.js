@@ -41,14 +41,14 @@ export default function Contacts() {
 
   useEffect(() => {
     if (usersFilter && userState.users.length > 0) {
-      debugger;
+      
       setItems(userState.users);
     }
   }, [userState.users, usersFilter]);
 
   function handleItemClick(e) {
     const selectedContact = items.find((item) => item.username === e.target.id);
-    debugger;
+    
     selectContact({ dispatch, contact: selectedContact });
   }
 

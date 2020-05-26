@@ -31,7 +31,7 @@ export default function PeerToPeerMobile() {
     onChange,
     message,
     sendMessage,
-  } = useWebSocket({ username, target: contact && contact.username });
+  } = useWebSocket({ username, target: contact && contact.username, dispatch });
   useEffect(() => {
     if (contact) {
       setRoute(`/${contact.state}`);

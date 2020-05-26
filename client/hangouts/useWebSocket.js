@@ -14,7 +14,6 @@ export function useWebSocket({ username, target, dispatch }) {
     let msg = {
       message,
       type: status.INVITEE,
-      username,
       target,
     };
 
@@ -30,7 +29,6 @@ export function useWebSocket({ username, target, dispatch }) {
     let msg = {
       message,
       type: status.CHAT,
-      username,
       target,
     };
     socket.send({ message: JSON.stringify(msg) });
@@ -42,7 +40,7 @@ export function useWebSocket({ username, target, dispatch }) {
       username: target,
       state: status.DECLINED,
     });
-    let msg = { type: status.DECLINED, username, target };
+    let msg = { type: status.DECLINED, target };
     socket.send({ message: JSON.stringify(msg) });
   }
 
@@ -52,7 +50,7 @@ export function useWebSocket({ username, target, dispatch }) {
       username: target,
       state: status.BLOCKED,
     });
-    let msg = { type: status.BLOCKED, username, target };
+    let msg = { type: status.BLOCKED, target };
     socket.send({ message: JSON.stringify(msg) });
   }
 
@@ -62,7 +60,7 @@ export function useWebSocket({ username, target, dispatch }) {
       username: target,
       state: status.CHAT,
     });
-    let msg = { type: status.CHAT, username, target };
+    let msg = { type: status.CHAT, target };
     socket.send({ message: JSON.stringify(msg) });
   }
 
@@ -75,10 +73,8 @@ export function useWebSocket({ username, target, dispatch }) {
     try {
       let msg = {
         type: contactStatus.MESSAGE,
-        username,
         target,
         message,
-        path: 'chat',
       };
       let strMgs = JSON.stringify(msg);
       debugger;

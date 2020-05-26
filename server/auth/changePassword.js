@@ -1,8 +1,9 @@
+
 import { ObjectID } from 'mongodb';
 import * as validations from './validations/validations';
 import httpStatus from './http-status';
 const jwt = require('jsonwebtoken');
-import {hashPassword} from './hashPassword'
+const passhash = require('../../server/auth/hashPassword');
 
 export default async function changePassword({ req, res, collection }) {
   
@@ -51,7 +52,7 @@ export default async function changePassword({ req, res, collection }) {
       let { id } = decoded;
 
       debugger;
-      const {salt,hash,iterations}=hashPassword(password)
+      const {salt,hash,iterations}=passhash.hashPassword(password)
 
       const result = await collection.findOneAndUpdate(
         { _id: new ObjectID(id) },
@@ -72,7 +73,7 @@ export default async function changePassword({ req, res, collection }) {
       res.statusCode = 200;
       res.writeHead(200, {
         'Content-Type': 'application/json',
-        'Set-Cookie': `${user.username}=${newToken};Expires=Wed, 21 Oct 2025 07:28:00 GMT; Path=/chat`,
+        'Set-Cookie': `${user.username}=${newToken};Expires=Wed, 21 Oct 2025 07:28:00 GMT; Path=/hangout`,
       });
       res.write(
         JSON.stringify({
@@ -92,4 +93,5 @@ export default async function changePassword({ req, res, collection }) {
     res.end();
   }
 }
+
 //

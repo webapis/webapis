@@ -62,8 +62,8 @@ describe('hangouts-mobile-route', () => {
         })
       );
   });
-  it('Invitee', () => {
-    cy.visit('/');
+  it.only('Invitee', () => {
+    cy.visit('http://localhost:3000');
     cy.wait(50);
     cy.get('[data-testid=menu]').click();
     cy.get('[data-testid=hangouts]').click();

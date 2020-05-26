@@ -14,6 +14,7 @@ export default async function () {
   });
   const clnt = await client.connect();
   db.on('insertOne', async function (conf) {
+    debugger;
       console.log('insertOne emitted')
     try {
       console.log('insertOne', conf);
