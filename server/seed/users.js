@@ -1,5 +1,6 @@
+
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
+const bcrypt = require('crypto');
 
 export default async function users(req, res) {
   try {
@@ -40,3 +41,4 @@ export default async function users(req, res) {
     res.end();
   }
 }
+

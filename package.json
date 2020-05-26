@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "name": "webapis",
   "version": "1.0.0",
@@ -61,3 +62,66 @@
     ]
   }
 }
+=======
+{
+  "name": "webapis",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "storybook": "start-storybook",
+    "cypress:open": "npx cypress open",
+    "build": "rollup -c",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "webcom:client": "cross-env appName=webcom-app rollup -c -w ",
+    "webcom:server": "concurrently \"cross-env appName=webcom-app nodemon --exec babel-node server/index.js\" \" cross-env appName=webcom-app rollup -c -w \" "
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "@babel/node": "^7.8.7",
+    "@babel/plugin-transform-react-jsx": "^7.9.4",
+    "@babel/preset-env": "^7.9.5",
+    "@rollup/plugin-image": "^2.0.4",
+    "@rollup/plugin-node-resolve": "^7.1.3",
+    "@storybook/preact": "^5.3.18",
+    "babel-loader": "^8.1.0",
+    "babel-polyfill": "^6.26.0",
+    "htm": "^3.0.4",
+    "nodemon": "^2.0.3",
+    "rollup": "^2.10.9",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-delete": "^1.2.0",
+    "rollup-plugin-generate-html-template": "^1.6.1",
+    "rollup-plugin-gzip": "^2.4.0",
+    "rollup-plugin-postcss": "^2.8.2",
+    "rollup-plugin-replace": "^2.2.0",
+    "rollup-plugin-serve": "^1.0.1",
+    "rollup-plugin-terser": "^5.3.0",
+    "supertest": "^4.0.2",
+    "whatwg-fetch": "^3.0.0"
+  },
+  "dependencies": {
+    "concurrently": "^5.2.0",
+    "cookie": "^0.4.1",
+    "cross-env": "^7.0.2",
+    "dotenv": "^8.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.5.6",
+    "node-static": "^0.7.11",
+    "nodemailer": "^6.4.6",
+    "preact": "^10.4.0",
+    "preact-router": "^3.2.1",
+    "ws": "^7.3.0"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "client/*",
+      "apps",
+      "cypress/*"
+    ]
+  }
+}
+>>>>>>> 1315a224c16e8ced1a4d562a9c6bd35a218c2172

@@ -1,9 +1,9 @@
+
 require('dotenv').config();
 import httpRoute from './http-route';
 import http from 'http';
 import ws from './wsocket';
-
-
+import database from './db';
 const url = 'mongodb://localhost:27017';
 const { MongoClient } = require('mongodb');
 // const client = server.on('clientError', (err, socket) => {
@@ -23,3 +23,5 @@ const { MongoClient } = require('mongodb');
   });
 
 })();
+
+

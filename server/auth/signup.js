@@ -1,8 +1,9 @@
+
 import apiurl from 'url';
 import httpStatus from './http-status';
 import * as validations from './validations/validations';
+import {hashPassword} from './hashPassword'
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
 
 export default async function ({ req, res, collection }) {
   try {
@@ -66,12 +67,15 @@ export default async function ({ req, res, collection }) {
       } else {
         
         //successful signup-------------------------------------
-        const salt = await bcrypt.genSalt(10);
+
+        const  {hash,salt,iterations}= hashPassword(password)
         
-        const hash = await bcrypt.hash(password, salt);
-        
+        debugger;
+
         const result = await collection.insertOne({
-          password: hash,
+          hash,
+          salt,
+          iterations,
           email,
           username,
         });
@@ -86,16 +90,20 @@ export default async function ({ req, res, collection }) {
         
         res.writeHead(200, {
           'Content-Type': 'application/json',
-          'Set-Cookie': `${user.username}=${token};Expires=Wed, 21 Oct 2025 07:28:00 GMT; Path=/hangouts`,
+          'Set-Cookie': `${user.username}=${token};Expires=Wed, 21 Oct 2025 07:28:00 GMT; Path=/hangout`,
         });
         res.write(JSON.stringify({ token, email, username }));
         res.end();
       }
     }
   } catch (error) {
-    
+
+    const err =error
+    debugger;
+
     res.writeHead(500, { 'Content-Type': 'application/json' });
     res.write(JSON.stringify({ error }));
     res.end();
   }
 }
+>>>>>>> 1315a224c16e8ced1a4d562a9c6bd35a218c2172
