@@ -1,11 +1,17 @@
-debugger;
+import { db } from '../db';
 export default function hangouts({ message, connections }) {
   switch (message.type) {
-    case 'INVITE':
+    case 'INVITEE':
       const sender = connections[message.username];
       const target = connections[message.target];
       debugger;
-      target.send(JSON.stringify(message));
+      db.emit('updateOne', {
+        dbName: 'hangout',
+        collectionName: 'users',
+        query: {},
+        modifier: {},
+        options: {},
+      });
       break;
     case 'ACCEPT':
       break;
@@ -18,6 +24,6 @@ export default function hangouts({ message, connections }) {
     case 'MESSAGE':
 
     default:
-      throw new Error('No message type is provided');
+      throw new Error('No message type is provided for switch statement');
   }
 }

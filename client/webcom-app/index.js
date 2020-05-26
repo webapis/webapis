@@ -11,7 +11,6 @@ import { AuthContent } from '../auth/AuthContent';
 import { AuthProvider } from '../auth/auth-context';
 import { FormProvider } from '../form/form-context';
 import { OtherContent } from './OtherContent';
-
 import { AppProvider } from '../app-context/app-context';
 import { Home } from './Home';
 import accept_inv_img from '../app-context/img/accept_invitation.png';

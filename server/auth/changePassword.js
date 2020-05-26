@@ -71,7 +71,7 @@ export default async function changePassword({ req, res, collection }) {
       res.statusCode = 200;
       res.writeHead(200, {
         'Content-Type': 'application/json',
-        'Set-Cookie': `${user.username}=${newToken};Expires=Wed, 21 Oct 2025 07:28:00 GMT; Path=/chat`,
+        'Set-Cookie': `${user.username}=${newToken};Expires=Wed, 21 Oct 2025 07:28:00 GMT; Path=/hangouts`,
       });
       res.write(
         JSON.stringify({

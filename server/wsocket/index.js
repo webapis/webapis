@@ -22,9 +22,12 @@ export default function (server) {
       connections[username] = ws; //
 
       ws.on('message', function incoming(message) {
+        console.log('recieved,', message);
+        debugger;
         try {
           if (request.url.includes('hangouts')) {
-            console.log('recieved,', message);
+            debugger;
+          
             const msg = JSON.parse(message);
             hangouts({ message: msg, connections });
           }

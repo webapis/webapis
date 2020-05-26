@@ -19,7 +19,6 @@ describe('wsocket', () => {
     cy.window()
       .its('WebSocket')
       .then((WebSocket) => {
-        debugger;
         const socket = new WebSocket(
           `ws://localhost:3000/hangouts/?username=remote`
         );
@@ -29,15 +28,13 @@ describe('wsocket', () => {
         };
         socket.onclose = () => {
           debugger;
-
           console.log('i am closed');
         };
 
         socket.onopen = () => {
           debugger;
-
           console.log('i am closed');
-          socket.send(JSON.stringify({ message: 'hello' }));
+          //socket.send(JSON.stringify({ message: 'hello' }));
         };
         socket.onconnect = () => {
           debugger;
@@ -52,6 +49,8 @@ describe('wsocket', () => {
           .contains('remote')
           .click();
         cy.get('[data-testid=invite]');
+        cy.get('[data-testid=msgtextarea]').type('Lets caht');
+        cy.get('[data-testid=inv-btn]').click();
       });
   });
 });

@@ -66,7 +66,7 @@ export default async function ({ req, res, collection }) {
                 // success login---------------------------------------------
                 res.writeHead(200, {
                   'Content-Type': 'application/json',
-                  'Set-Cookie': `${user.username}=${token};Expires=Wed, 21 Oct 2025 07:28:00 GMT;  Path=/chat`,
+                  'Set-Cookie': `${user.username}=${token};Expires=Wed, 21 Oct 2025 07:28:00 GMT;  Path=/hangouts`,
                 });
                 res.write(
                   JSON.stringify({
@@ -109,7 +109,7 @@ export default async function ({ req, res, collection }) {
                 //success login 200------------------------------------------
                 res.writeHead(200, {
                   'Content-Type': 'application/json',
-                  'Set-Cookie': `${user.username}=${token};Expires=Wed, 21 Oct 2025 07:28:00 GMT; Path=/chat`,
+                  'Set-Cookie': `${user.username}=${token};Expires=Wed, 21 Oct 2025 07:28:00 GMT; Path=/hangouts`,
                 });
                 res.write(
                   JSON.stringify({
@@ -140,3 +140,4 @@ export default async function ({ req, res, collection }) {
     res.end();
   }
 }
+////
