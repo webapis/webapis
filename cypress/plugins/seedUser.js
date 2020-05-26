@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-const bcrypt = require('bcrypt');
+const passhash = require('../../server/auth/hashPassword');
 const url = 'mongodb://localhost:27017';
 const MongoClient = require('mongodb').MongoClient;
 const client = new MongoClient(url, {
@@ -14,11 +14,14 @@ module.exports = async function seedUser({ email, username, password }) {
     const collection = database.collection('users');
     await collection.deleteMany();
 
-    const salt = await bcrypt.genSalt(10);
+    const { hash, salt, iterations } = passhash.hashPassword(password);
 
-    const hash = await bcrypt.hash(password, salt);
+    debugger;
+
     const result = await collection.insertOne({
-      password: hash,
+      hash,
+      salt,
+      iterations,
       email,
       username,
     });

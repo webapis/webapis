@@ -2,7 +2,7 @@
 import apiurl from 'url';
 import httpStatus from './http-status';
 import * as validations from './validations/validations';
-import {hashPassword} from './hashPassword'
+const passhash = require('../../server/auth/hashPassword');
 const jwt = require('jsonwebtoken');
 
 export default async function ({ req, res, collection }) {
@@ -68,7 +68,7 @@ export default async function ({ req, res, collection }) {
         
         //successful signup-------------------------------------
 
-        const  {hash,salt,iterations}= hashPassword(password)
+        const  {hash,salt,iterations}= passhash.hashPassword(password)
         
         debugger;
 
@@ -90,7 +90,7 @@ export default async function ({ req, res, collection }) {
         
         res.writeHead(200, {
           'Content-Type': 'application/json',
-          'Set-Cookie': `${user.username}=${token};Expires=Wed, 21 Oct 2025 07:28:00 GMT; Path=/hangout`,
+          'Set-Cookie': `${user.username}=${token};Expires=Wed, 21 Oct 2025 07:28:00 GMT; Path=/hangouts`,
         });
         res.write(JSON.stringify({ token, email, username }));
         res.end();
@@ -106,4 +106,4 @@ export default async function ({ req, res, collection }) {
     res.end();
   }
 }
->>>>>>> 1315a224c16e8ced1a4d562a9c6bd35a218c2172
+

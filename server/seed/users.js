@@ -1,6 +1,5 @@
-
 const jwt = require('jsonwebtoken');
-const bcrypt = require('crypto');
+const passhash = require('../../server/auth/hashPassword');
 
 export default async function users(req, res) {
   try {
@@ -11,13 +10,15 @@ export default async function users(req, res) {
     //successful signup-------------------------------------
     let { username, email, password } = req.body;
 
-    const salt = await bcrypt.genSalt(10);
+    const { hash, salt, iterations } = passhash.hashPassword(password);
 
-    const hash = await bcrypt.hash(password, salt);
+    debugger;
 
     await collection.deleteMany({ username });
     const result = await collection.insertOne({
-      password: hash,
+      hash,
+      salt,
+      iterations,
       email,
       username,
     });
@@ -35,10 +36,9 @@ export default async function users(req, res) {
     res.end();
   } catch (error) {
     const err = error;
-
+    debugger;
     res.writeHead(500, { 'Content-Type': 'application/json' });
     res.write(JSON.stringify({ error }));
     res.end();
   }
 }
-

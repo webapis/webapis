@@ -6,7 +6,6 @@ export function useWebSocket({ username, target, dispatch }) {
   const [message, setMessage] = useState('');
   const { socket } = useWebSocketContext();
   function onInvite() {
-
     dispatch({
       type: actionTypes.CONTACT_STATE_CHANGED,
       username: target,

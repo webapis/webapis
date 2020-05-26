@@ -3,7 +3,7 @@ import { ObjectID } from 'mongodb';
 import * as validations from './validations/validations';
 import httpStatus from './http-status';
 const jwt = require('jsonwebtoken');
-import {hashPassword} from './hashPassword'
+const passhash = require('../../server/auth/hashPassword');
 
 export default async function changePassword({ req, res, collection }) {
   
@@ -52,7 +52,7 @@ export default async function changePassword({ req, res, collection }) {
       let { id } = decoded;
 
       debugger;
-      const {salt,hash,iterations}=hashPassword(password)
+      const {salt,hash,iterations}=passhash.hashPassword(password)
 
       const result = await collection.findOneAndUpdate(
         { _id: new ObjectID(id) },
