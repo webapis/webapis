@@ -6,7 +6,7 @@ const EventEmitter = require('events');
 const WebSocket = require('ws');
 export const wsocket = new EventEmitter();
 let connections = {};
-export default function (server) {
+export default function (server,client) {
   const wss = new WebSocket.Server({ server });
   wss.on('connection', async function connection(ws, request) {
     debugger;
@@ -29,7 +29,7 @@ export default function (server) {
             debugger;
           
             const msg = JSON.parse(message);
-            hangouts({ message: msg, connections,username:ws.username });
+            hangouts({ message: msg, connections,username:ws.username,client });
           }
         } catch (error) {
           const err = error;

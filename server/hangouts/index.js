@@ -1,15 +1,9 @@
-import { db } from '../db';
-export default function hangouts({ message,username }) {
+
+export default async function hangouts({ message,username,client }) {
+  const collection = await client.db('hangouts').collection('users');
   switch (message.type) {
     case 'INVITEE':
       debugger;
-      db.emit('updateOne', {
-        dbName: 'hangouts',
-        colName: 'users',
-        query:{username},
-        modifier:{...message},
-        options: {},
-      });
       break;
     case 'ACCEPT':
       break;
