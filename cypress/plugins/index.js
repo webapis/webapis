@@ -2,6 +2,7 @@
 const seedLogin = require('./seedLogin');
 const seedDelete = require('./seedDelete');
 const seedUser = require('./seedUser');
+const seedHangouts =require('./seedHangouts')
 /// <reference types="cypress" />
 // ***********************************************************
 // This example plugins/index.js can be used to load plugins
@@ -33,5 +34,8 @@ module.exports = (on, config) => {
     'seed:delete': () => {
       return seedDelete();
     },
+    'seed:hangouts':()=>{
+      return seedHangouts()
+    }
   });
 };

@@ -2,7 +2,7 @@ import { useWebSocketContext } from './WebSocketProvider';
 import { useState } from 'preact/hooks';
 import { status } from './contacts/status';
 import { actionTypes } from './contacts/useContacts';
-export function useWebSocket({ username, target, dispatch }) {
+export function useWebSocket({target, dispatch }) {
   const [message, setMessage] = useState('');
   const { socket } = useWebSocketContext();
   function onInvite() {
@@ -11,13 +11,13 @@ export function useWebSocket({ username, target, dispatch }) {
       username: target,
       state: status.INVITEE,
     });
-    let msg = {
+    let contact = {
       message,
-      type: status.INVITEE,
-      target,
+      state: status.INVITEE,
+      username: target,
     };
 
-    socket.send(JSON.stringify(msg));
+    socket.send(JSON.stringify(contact));
   }
 
   function onAccept() {
@@ -26,12 +26,12 @@ export function useWebSocket({ username, target, dispatch }) {
       username: target,
       state: status.CHAT,
     });
-    let msg = {
+    let contact = {
       message,
-      type: status.CHAT,
-      target,
+      state: status.CHAT,
+      username: target,
     };
-    socket.send({ message: JSON.stringify(msg) });
+    socket.send(JSON.stringify(contact));
   }
 
   function onDecline() {
@@ -40,8 +40,8 @@ export function useWebSocket({ username, target, dispatch }) {
       username: target,
       state: status.DECLINED,
     });
-    let msg = { type: status.DECLINED, target };
-    socket.send({ message: JSON.stringify(msg) });
+    let contact = { state: status.DECLINED,   username: target };
+    socket.send(JSON.stringify(contact));
   }
 
   function onBlock() {
@@ -50,8 +50,8 @@ export function useWebSocket({ username, target, dispatch }) {
       username: target,
       state: status.BLOCKED,
     });
-    let msg = { type: status.BLOCKED, target };
-    socket.send({ message: JSON.stringify(msg) });
+    let contact = { state: status.BLOCKED,  username: target };
+    socket.send(JSON.stringify(contact));
   }
 
   function onUnblock() {
@@ -60,8 +60,8 @@ export function useWebSocket({ username, target, dispatch }) {
       username: target,
       state: status.CHAT,
     });
-    let msg = { type: status.CHAT, target };
-    socket.send({ message: JSON.stringify(msg) });
+    let contact = { state: status.CHAT,   username: target };
+    socket.send(JSON.stringify(contact) );
   }
 
   function onChange(e) {
@@ -71,14 +71,13 @@ export function useWebSocket({ username, target, dispatch }) {
 
   function sendMessage() {
     try {
-      let msg = {
+      let contact = {
         type: contactStatus.MESSAGE,
-        target,
+        username: target,
         message,
       };
-      let strMgs = JSON.stringify(msg);
       debugger;
-      socket.send(JSON.stringify(strMgs));
+      socket.send(JSON.stringify(contact));
     } catch (error) {
       const err = error;
       debugger;
