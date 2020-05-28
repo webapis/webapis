@@ -1,31 +1,23 @@
 import { useWebSocketContext } from './WebSocketProvider';
 import { useState } from 'preact/hooks';
 import { status } from '../state/status';
-import { actionTypes } from '../state/useHangouts';
-export function useWebSocket({ target, dispatch }) {
+import { useHangouts } from '../state/useHangouts';
+export function useWebSocket({ target }) {
   const [message, setMessage] = useState('');
+  const {updateHangsoutState}=useHangouts()
   const { socket } = useWebSocketContext();
   function onInvite() {
-    dispatch({
-      type: actionTypes.CONTACT_STATE_CHANGED,
-      username: target,
-      state: status.INVITEE,
-    });
+    updateHangsoutState({state:status.INVITEE,username})
     let hangouts = {
       message,
       state: status.INVITEE,
       username: target,
     };
-
     socket.send(JSON.stringify(hangouts));
   }
 
   function onAccept() {
-    dispatch({
-      type: actionTypes.CONTACT_STATE_CHANGED,
-      username: target,
-      state: status.CHAT,
-    });
+    updateHangsoutState({state:status.CHAT,username})
     let hangouts = {
       message,
       state: status.CHAT,
@@ -35,31 +27,19 @@ export function useWebSocket({ target, dispatch }) {
   }
 
   function onDecline() {
-    dispatch({
-      type: actionTypes.CONTACT_STATE_CHANGED,
-      username: target,
-      state: status.DECLINED,
-    });
+    updateHangsoutState({state:status.DECLINED,username})
     let hangouts = { state: status.DECLINED, username: target };
     socket.send(JSON.stringify(hangouts));
   }
 
   function onBlock() {
-    dispatch({
-      type: actionTypes.CONTACT_STATE_CHANGED,
-      username: target,
-      state: status.BLOCKED,
-    });
+    updateHangsoutState({state:status.BLOCKED,username})
     let hangouts = { state: status.BLOCKED, username: target };
     socket.send(JSON.stringify(hangouts));
   }
 
   function onUnblock() {
-    dispatch({
-      type: actionTypes.CONTACT_STATE_CHANGED,
-      username: target,
-      state: status.CHAT,
-    });
+    updateHangsoutState({state:status.CHAT,username})
     let hangouts = { state: status.CHAT, username: target };
     socket.send(JSON.stringify(hangouts));
   }

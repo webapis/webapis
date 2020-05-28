@@ -1,8 +1,9 @@
 import { actionTypes } from './actionTypes';
-const initState = {
+export const initState = {
   loading: false,
   error: null,
   hangouts: [],
+  hangout:null
 };
 export function reducer(state, action) {
   switch (action.type) {

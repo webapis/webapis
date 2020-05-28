@@ -3,7 +3,6 @@ import { Suspense, lazy } from 'preact/compat';
 import { useEffect } from 'preact/hooks';
 import { Route, useRouteContext } from '../route/router';
 import { useContactsContext } from './Provider';
-import {useContacts} from './state/useHangouts'
 import { useAppContext } from '../app-context/app-context';
 import { useAuthContext } from '../auth/auth-context';
 import { useWebSocket } from './wsocket/useWebSocket';
