@@ -1,12 +1,12 @@
 import { h } from 'preact';
 import { useState, useEffect } from 'preact/hooks';
-import { List, ListItem } from '../../layout/NavList';
-import { TextInput } from '../../layout/TextInput';
-import { useContacts } from './useContacts';
-import { useUsers } from './useUsers';
-import { useAuthContext } from '../../auth/auth-context';
-import { useContactsContext, selectContact } from './contact-context';
-export default function Contacts() {
+import { List, ListItem } from '../layout/NavList';
+import { TextInput } from '../layout/TextInput';
+import { useContacts } from './state/useHangouts';
+import { useUsers } from './state/useUsers';
+import { useAuthContext } from '../auth/auth-context';
+import { useContactsContext, selectContact } from './Provider';
+export default function Hangouts() {
   const [state, dispatch] = useContactsContext();
   const { state: authState } = useAuthContext();
   const [contactsfilter, setContactsFilter] = useState(null);

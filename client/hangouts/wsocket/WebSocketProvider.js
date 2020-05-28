@@ -1,6 +1,6 @@
 import { h, createContext } from 'preact';
 import { useContext, useState, useEffect } from 'preact/hooks';
-import { useAuthContext } from '../auth/auth-context';
+import { useAuthContext } from '../../auth/auth-context';
 const WebSocketContext = createContext();
 
 export function useWebSocketContext() {

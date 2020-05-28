@@ -2,8 +2,8 @@ import { h } from 'preact';
 import { Suspense, lazy } from 'preact/compat';
 import { useMediaQuery } from '../layout/useMediaQuery';
 import { RouteProvider } from '../route/router';
-import { WebSocketProvider } from './WebSocketProvider';
-import { ContactsProvider } from './contacts/contact-context';
+import { WebSocketProvider } from './wsocket/WebSocketProvider';
+import { HangoutsProvider } from './state/HangoutsProvider';
 const HangoutDesktop = lazy(() => import('./desktop'));
 const HangoutMobile = lazy(() => import('./mobile'));
 
@@ -12,7 +12,7 @@ export default function Hangout() {
 
   if (width > 0 && width < 800) {
     return (
-      <ContactsProvider>
+      <HangoutsProvider>
         <WebSocketProvider url='ws://localhost:3000/hangouts'>
           <RouteProvider initialRoute='/contacts'>
             <Suspense fallback={<div>Loading...</div>}>
@@ -20,18 +20,18 @@ export default function Hangout() {
             </Suspense>
           </RouteProvider>
         </WebSocketProvider>
-      </ContactsProvider>
+      </HangoutsProvider>
     );
   }
   if (width > 800) {
     return (
-      <ContactsProvider>
+      <HangoutsProvider>
         <WebSocketProvider url='ws://localhost:3000/hangouts'>
           <Suspense fallback={<div>Loading...</div>}>
             <HangoutDesktop />
           </Suspense>
         </WebSocketProvider>
-      </ContactsProvider>
+      </HangoutsProvider>
     );
   }
 }

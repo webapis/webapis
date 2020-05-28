@@ -1,8 +1,8 @@
 import { useWebSocketContext } from './WebSocketProvider';
 import { useState } from 'preact/hooks';
-import { status } from './contacts/status';
-import { actionTypes } from './contacts/useContacts';
-export function useWebSocket({target, dispatch }) {
+import { status } from '../state/status';
+import { actionTypes } from '../state/useHangouts';
+export function useWebSocket({ target, dispatch }) {
   const [message, setMessage] = useState('');
   const { socket } = useWebSocketContext();
   function onInvite() {
@@ -11,13 +11,13 @@ export function useWebSocket({target, dispatch }) {
       username: target,
       state: status.INVITEE,
     });
-    let contact = {
+    let hangouts = {
       message,
       state: status.INVITEE,
       username: target,
     };
 
-    socket.send(JSON.stringify(contact));
+    socket.send(JSON.stringify(hangouts));
   }
 
   function onAccept() {
@@ -26,12 +26,12 @@ export function useWebSocket({target, dispatch }) {
       username: target,
       state: status.CHAT,
     });
-    let contact = {
+    let hangouts = {
       message,
       state: status.CHAT,
       username: target,
     };
-    socket.send(JSON.stringify(contact));
+    socket.send(JSON.stringify(hangouts));
   }
 
   function onDecline() {
@@ -40,8 +40,8 @@ export function useWebSocket({target, dispatch }) {
       username: target,
       state: status.DECLINED,
     });
-    let contact = { state: status.DECLINED,   username: target };
-    socket.send(JSON.stringify(contact));
+    let hangouts = { state: status.DECLINED, username: target };
+    socket.send(JSON.stringify(hangouts));
   }
 
   function onBlock() {
@@ -50,8 +50,8 @@ export function useWebSocket({target, dispatch }) {
       username: target,
       state: status.BLOCKED,
     });
-    let contact = { state: status.BLOCKED,  username: target };
-    socket.send(JSON.stringify(contact));
+    let hangouts = { state: status.BLOCKED, username: target };
+    socket.send(JSON.stringify(hangouts));
   }
 
   function onUnblock() {
@@ -60,8 +60,8 @@ export function useWebSocket({target, dispatch }) {
       username: target,
       state: status.CHAT,
     });
-    let contact = { state: status.CHAT,   username: target };
-    socket.send(JSON.stringify(contact) );
+    let hangouts = { state: status.CHAT, username: target };
+    socket.send(JSON.stringify(hangouts));
   }
 
   function onChange(e) {
@@ -71,13 +71,13 @@ export function useWebSocket({target, dispatch }) {
 
   function sendMessage() {
     try {
-      let contact = {
+      let hangouts = {
         type: contactStatus.MESSAGE,
         username: target,
         message,
       };
       debugger;
-      socket.send(JSON.stringify(contact));
+      socket.send(JSON.stringify(hangouts));
     } catch (error) {
       const err = error;
       debugger;

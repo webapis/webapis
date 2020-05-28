@@ -1,4 +1,4 @@
-import hangouts from '../hangouts';
+import hangoutsHandler from '../hangouts';
 import url from 'url';
 const jwt = require('jsonwebtoken');
 const cookie = require('cookie');
@@ -28,8 +28,8 @@ export default function (server,client) {
           if (request.url.includes('hangouts')) {
             debugger;
           
-            const msg = JSON.parse(message);
-            hangouts({ message: msg, connections,username:ws.username,client });
+            const hangouts = JSON.parse(message);
+            hangoutsHandler({ hangouts, connections,ws,client });
           }
         } catch (error) {
           const err = error;

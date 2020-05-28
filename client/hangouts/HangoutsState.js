@@ -3,7 +3,7 @@ import { ListItem } from '../layout/NavList';
 import { Avatar } from '../layout/Avatar';
 import { AccountCircle } from '../layout/icons/AccountCircle';
 import { Block } from '../layout/icons/Block';
-export function ContactState({ contact, onClick }) {
+export function HangoutsState({ contact, onClick }) {
   return (
     <ListItem onClick={onClick}>
       <div
