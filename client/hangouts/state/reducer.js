@@ -3,7 +3,9 @@ export const initState = {
   loading: false,
   error: null,
   hangouts: [],
-  hangout:null
+  hangout:null,
+  users:[],
+  filter:null
 };
 export function reducer(state, action) {
   switch (action.type) {
@@ -61,6 +63,8 @@ export function reducer(state, action) {
       };
     case actionTypes.FETCH_USERS_FAILED:
       return { ...state, error: action.error };
+    case actionTypes.FILTER_SET:
+      return {...state,filter:action.filter}
     default:
       return state;
   }

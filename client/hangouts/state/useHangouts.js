@@ -1,13 +1,11 @@
 import { useEffect } from 'preact/hooks';
-import { fetchHangouts,  } from './actions';
 import {actionTypes} from './actionTypes'
 import { useHangoutsContext } from './HangoutsProvider';
-export function useHangouts({ filter, username }) {
+export function useHangouts() {
   const [state, dispatch] = useHangoutsContext();
-
+  const {hangout,filter}=state
 
   useEffect(() => {
-    
     if (filter && filter.length > 3) {
       findContact({ dispatch, filter });
     }
@@ -17,14 +15,16 @@ export function useHangouts({ filter, username }) {
     dispatch({ type: actionTypes.CONTACT_STATE_CHANGED, username, state });
   }
 
-  export function selectHangout({ dispatch, hangout }) {
-
+   function selectHangout({ dispatch, hangout }) {
     dispatch({ type: actionTypes.SELECT_HANGOUT, hangout });
   }
 
-  export function removeHangout({ dispatch }) {
+   function removeHangout({ dispatch }) {
     dispatch({ type: actionTypes.REMOVE_HANGOUT });
   }
+function setFilter ({filter}){
+  dispatch({type:actionTypes.FILTER_SET,filter})
+}
 
-  return { state, updateHangsoutState,selectHangout,removeHangout };
+  return { state,hangout, updateHangsoutState,selectHangout,removeHangout,setFilter };
 }

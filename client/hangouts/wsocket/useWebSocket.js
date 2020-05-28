@@ -1,46 +1,47 @@
 import { useWebSocketContext } from './WebSocketProvider';
 import { useState } from 'preact/hooks';
-import { status } from '../state/status';
+import { hangoutStates } from '../state/hangoutStates';
 import { useHangouts } from '../state/useHangouts';
-export function useWebSocket({ target }) {
+export function useWebSocket() {
   const [message, setMessage] = useState('');
-  const {updateHangsoutState}=useHangouts()
+  const {updateHangsoutState, hangout}=useHangouts()
   const { socket } = useWebSocketContext();
+  const {username}= hangout
   function onInvite() {
-    updateHangsoutState({state:status.INVITEE,username})
+    updateHangsoutState({state:hangoutStates.INVITEE,username})
     let hangouts = {
       message,
-      state: status.INVITEE,
-      username: target,
+      state: hangoutStates.INVITEE,
+      username
     };
     socket.send(JSON.stringify(hangouts));
   }
 
   function onAccept() {
-    updateHangsoutState({state:status.CHAT,username})
+    updateHangsoutState({state:hangoutStates.CHAT,username})
     let hangouts = {
       message,
-      state: status.CHAT,
-      username: target,
+      state: hangoutStates.CHAT,
+      username
     };
     socket.send(JSON.stringify(hangouts));
   }
 
   function onDecline() {
-    updateHangsoutState({state:status.DECLINED,username})
-    let hangouts = { state: status.DECLINED, username: target };
+    updateHangsoutState({state:hangoutStates.DECLINED,username})
+    let hangouts = { state: hangoutStates.DECLINED, username };
     socket.send(JSON.stringify(hangouts));
   }
 
   function onBlock() {
-    updateHangsoutState({state:status.BLOCKED,username})
-    let hangouts = { state: status.BLOCKED, username: target };
+    updateHangsoutState({state:hangoutStates.BLOCKED,username})
+    let hangouts = { state: hangoutStates.BLOCKED, username };
     socket.send(JSON.stringify(hangouts));
   }
 
   function onUnblock() {
-    updateHangsoutState({state:status.CHAT,username})
-    let hangouts = { state: status.CHAT, username: target };
+    updateHangsoutState({state:hangoutStates.CHAT,username})
+    let hangouts = { state: hangoutStates.CHAT, username };
     socket.send(JSON.stringify(hangouts));
   }
 
@@ -53,7 +54,7 @@ export function useWebSocket({ target }) {
     try {
       let hangouts = {
         type: contactStatus.MESSAGE,
-        username: target,
+        username,
         message,
       };
       debugger;

@@ -2,11 +2,10 @@ import { h } from 'preact';
 import { Suspense, lazy } from 'preact/compat';
 import { useEffect } from 'preact/hooks';
 import { Route, useRouteContext } from '../route/router';
-import { useContactsContext } from './Provider';
 import { useAppContext } from '../app-context/app-context';
-import { useAuthContext } from '../auth/auth-context';
 import { useWebSocket } from './wsocket/useWebSocket';
-const Contacts = lazy(() => import('./Hangouts'));
+import {useHangouts} from './state/useHangouts'
+const Hangouts = lazy(() => import('./Hangouts'));
 const Block = lazy(() => import('./views/Block'));
 const Blocked = lazy(() => import('./views/Blocked'));
 const Chat = lazy(() => import('./views/Chat'));
@@ -16,11 +15,8 @@ const Invitee = lazy(() => import('./views/Invitee'));
 const Inviter = lazy(() => import('./views/Inviter'));
 
 export default function PeerToPeerMobile() {
-  const authContext = useAuthContext();
-  const [state, dispatch] = useContactsContext();
+  const {hangout}=useHangouts()
   const [route, setRoute] = useRouteContext();
-  const { contact } = state;
-  const { username } = authContext.state;
   const { accept_inv_img } = useAppContext();
   const {
     onInvite,
@@ -31,33 +27,33 @@ export default function PeerToPeerMobile() {
     onChange,
     message,
     sendMessage,
-  } = useWebSocket({ username, target: contact && contact.username, dispatch });
+  } = useWebSocket();
   useEffect(() => {
-    if (contact) {
-      setRoute(`/${contact.state}`);
+    if (hangout) {
+      setRoute(`/${hangout.state}`);
     }
-  }, [contact]);
+  }, [hangout]);
 
   function onSetting() {
     setRoute('/cofigure');
   }
   return (
     <div style={{ height: '85vh' }}>
-      <Route path="/contacts">
+      <Route path="/hangouts">
         <Suspense fallback={<div>loading...</div>}>
-          <Contacts />
+          <Hangouts />
         </Suspense>
       </Route>
 
       <Route path="/block">
         <Suspense fallback={<div>loading...</div>}>
-          <Block contact={contact} onBlock={onBlock} setRoute={setRoute} />
+          <Block hangout={hangout} onBlock={onBlock} setRoute={setRoute} />
         </Suspense>
       </Route>
       <Route path="/blocked">
         <Suspense fallback={<div>loading...</div>}>
           <Blocked
-            contact={contact}
+            hangout={hangout}
             onUnblock={onUnblock}
             setRoute={setRoute}
           />
@@ -66,7 +62,7 @@ export default function PeerToPeerMobile() {
       <Route path="/accepted">
         <Suspense fallback={<div>loading...</div>}>
           <Chat
-            contact={contact}
+            hangout={hangout}
             onSetting={onSetting}
             onChange={onChange}
             message={message}
@@ -76,13 +72,13 @@ export default function PeerToPeerMobile() {
       </Route>
       <Route path="/cofigure">
         <Suspense fallback={<div>loading...</div>}>
-          <Configure contact={contact} setRoute={setRoute} />
+          <Configure hangout={hangout} setRoute={setRoute} />
         </Suspense>
       </Route>
       <Route path="/invite">
         <Suspense fallback={<div>loading...</div>}>
           <Invite
-            contact={contact}
+            hangout={hangout}
             onInvite={onInvite}
             setRoute={setRoute}
             onChange={onChange}
@@ -92,14 +88,14 @@ export default function PeerToPeerMobile() {
       </Route>
       <Route path="/invitee">
         <Suspense fallback={<div>loading...</div>}>
-          <Invitee contact={contact} />
+          <Invitee hangout={hangout} />
         </Suspense>
       </Route>
       <Route path="/inviter">
         <Suspense fallback={<div>loading...</div>}>
           <Inviter
             accept_inv_img={accept_inv_img}
-            contact={contact}
+            hangout={hangout}
             onAccept={onAccept}
             onDecline={onDecline}
             setRoute={setRoute}

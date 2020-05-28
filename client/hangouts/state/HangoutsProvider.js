@@ -7,9 +7,7 @@ const HangoutsContext = createContext();
 
 function useHangoutsContext() {
   const context = useContext(HangoutsContext);
-
   if (!context) {
-
     throw new Error('useHangoutsContext must be used with HangoutsProvider');
   }
   return context;

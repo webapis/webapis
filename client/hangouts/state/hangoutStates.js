@@ -1,0 +1,11 @@
+export const hangoutStates = {
+  INVITEE: 'INVITEE',
+  INVITER: 'INVITER',
+  CHAT: 'CHAT',
+  DECLINED: 'DECLINED',
+  DECLINER: 'DECLINER',
+  BLOCKED: 'BLOCKED',
+  BLOCKER: 'BLOCKER',
+};
+
+
