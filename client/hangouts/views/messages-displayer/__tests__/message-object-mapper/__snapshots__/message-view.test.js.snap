@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`MessageView snapshot test renders correctly 1`] = `"<div style=\\"padding: 5px; margin: 2px; border-radius: 15px; border-color: #9E9E9E; border-style: solid; border-width: 2px; max-width: 100%; word-wrap: break-word; word-break: break-all; min-width: 30%;\\"><div>hello from subsequent message</div><div style=\\"font-size: 10px; padding-top: 2px; text-align: end;\\"><i style=\\"background-color: #efebe9;\\">11:46:00 AM</i></div></div>"`;

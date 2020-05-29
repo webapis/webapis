@@ -87,5 +87,31 @@ export default [
       }),
     ],
   },
+
+  {
+    input: `client/storybook/index.js`,
+    output: [
+      {
+        dir: `client/storybook/build`,
+        format: 'es',
+        sourcemap: 'inline',
+      },
+    ],
+    plugins: [
+      del({ targets: `client/storybook/build/*` }),
+      ...commonPlugins,
+      htmlTemplate({
+        template: 'config/rollup/html-template/index.html',
+        target: `client/storybook/build/index.html`,
+        attrs: ['type="module"'],
+      }),
+      serve({
+        contentBase: `client/storybook/build/`,
+        openPage: '/index.html',
+        port: 10004,
+        open: true,
+      }),
+    ],
+  },
 ];
 
