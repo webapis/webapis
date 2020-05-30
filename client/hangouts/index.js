@@ -1,4 +1,9 @@
-import {h} from 'preact'
-export default function (){
-    return <div>Hangouts</div>
+import { h } from 'preact'
+import Mobile from './Hangout'
+import { HangoutsProvider } from './state/HangoutsProvider'
+export default function () {
+    return <HangoutsProvider socketUrl="ws://localhost:3000/hangouts">
+        <Mobile />
+    </HangoutsProvider>
+
 }
