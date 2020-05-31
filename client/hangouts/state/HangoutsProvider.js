@@ -19,7 +19,7 @@ export function HangoutsProvider(props) {
   const { socketUrl } = props
   const [state, dispatch] = useReducer(reducer, initState)
   const { socket, hangout } = state
-  const { } = useSocket({ dispatch, socket, hangout })
+  const sockethandler = useSocket({ dispatch, socket, hangout })
 
   useEffect(() => {
     initWSocket({ url: socketUrl, dispatch })

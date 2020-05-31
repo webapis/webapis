@@ -1,11 +1,11 @@
 export function hangoutToMessage({ hangout, type }) {
-    const message = { username: hangout.username, type, message: hangout.message }
-    return message
+ 
+    return{ username: hangout.username, type, message: hangout.message }
 }
 
 export function messageToHangout({ message, hangout }) {
-    const hangout = { ...hangout, state: message.type, message: message }
-    return hangout
+  
+    return { ...hangout, state: message.type, message: message }
 }
 
 export function messageToNewHangout(msg) {

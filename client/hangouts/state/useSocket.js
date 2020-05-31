@@ -23,6 +23,8 @@ export function useSocket({ socket, dispatch, hangout }) {
             }
         }
     }, [socket])
+
+    return null
 }
 
 
@@ -49,9 +51,7 @@ function handlePeerMessages({ dispatch, msg, hangout }) {
         default:
             throw new Error('Message type for messagesFromServer is not defined')
     }
-
 }
-
 
 function updateHangoutStateInLocalStorage(key, hangout) {
     const hangouts = localStorage.getItem(key);
