@@ -1,7 +1,8 @@
 import { h, createContext } from 'preact';
-import { useContext, useState, useMemo, useReducer,useEffect } from 'preact/hooks';
-import {reducer,initState} from './reducer'
-import {initWSocket} from './actions'
+import { useContext, useState, useMemo, useReducer, useEffect } from 'preact/hooks';
+import { reducer, initState } from './reducer'
+import { initWSocket } from './actions'
+import { useSocket } from './useSocket'
 
 const HangoutContext = createContext();
 
@@ -15,14 +16,16 @@ export function useHangoutContext() {
 }
 
 export function HangoutsProvider(props) {
-  const {socketUrl}=props
-const [state,dispatch]=useReducer(reducer,initState)
+  const { socketUrl } = props
+  const [state, dispatch] = useReducer(reducer, initState)
+  const { socket, hangout } = state
+  const { } = useSocket({ dispatch, socket, hangout })
 
-useEffect(()=>{
-  initWSocket({url:socketUrl,dispatch})
-},[])
+  useEffect(() => {
+    initWSocket({ url: socketUrl, dispatch })
+  }, [])
 
 
-const value = useMemo(() => [state, dispatch], [state]);
+  const value = useMemo(() => [state, dispatch], [state]);
   return <HangoutContext.Provider value={value} {...props} />;
 }

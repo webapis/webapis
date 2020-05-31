@@ -1,71 +1,74 @@
 import { useEffect } from 'preact/hooks'
 import { actionTypes } from './actionTypes'
-import { acknowledgmentTypes, messagesFromServer, messageCategories } from './messageTypes'
-export function useSocket({ socket, dispatch }) {
+import { messageToHangout, messageToNewHangout } from './messageConverter'
+import { messagesFromServer, messageCategories } from './messageTypes'
+export function useSocket({ socket, dispatch, hangout }) {
 
     useEffect(() => {
-
         if (socket) {
             socket.onmessage = (message) => {
                 const msg = JSON.parse(message.data)
                 switch (msg.category) {
                     case messageCategories.ACKNOWLEDGEMENT:
-                        handleAckhowledgements({ dispatch, msg })
+                        handleAckhowledgements({ dispatch, msg,hangout })
                     case messageCategories.PEER:
-                        handlePeerMessages({ dispatch, msg })
+                        handlePeerMessages({ dispatch, msg, hangout })
                     default:
                         throw new Error('Message cateory is not defined')
                 }
             }
             socket.onclose = () => {
-
             }
-
             socket.onerror = (error) => {
-
             }
         }
-
     }, [socket])
-
 }
 
 
-function handleAckhowledgements({ dispatch, msg }) {
-    switch (msg.type) {
-        case acknowledgmentTypes.ACCEPTED:
-            dispatch({ type: actionTypes.ACCEPT_SUCCESS, msg })
-        case acknowledgmentTypes.BLOCKED:
-            dispatch({ type: actionTypes.BLOCK_SUCCESS, msg })
-        case acknowledgmentTypes.DECLINED:
-            dispatch({ type: actionTypes.DECLINE_SUCCESS, msg })
-        case acknowledgmentTypes.MESSAGED:
-            dispatch({ type: actionTypes.MESSAGE_SUCCESS, msg })
-        case acknowledgmentTypes.OFFERED:
-            dispatch({ type: actionTypes.OFFER_SUCCESS, msg })
-        case acknowledgmentTypes.UNBLOCKED:
-            dispatch({ type: actionTypes.UNBLOCK_SUCCESS, msg })
-        default:
-            throw new Error('Message type for acknowledgmentTypes is not defined')
-    }
+function handleAckhowledgements({ dispatch, msg,hangout }) {
+    let updatedHangout = messageToHangout({ hangout, message: msg })
+    dispatch({ type: actionTypes.ACKNOWLEDGEMENT_RECIEVED, hangout: updatedHangout })
+    updateHangoutStateInLocalStorage(`${username}-hangouts`, updatedHangout)
 }
 
-function handlePeerMessages({ dispatch, msg }) {
+function handlePeerMessages({ dispatch, msg, hangout }) {
+    let updatedHangout = messageToHangout({ hangout, message: msg })
+    let newHangout =messageToNewHangout(msg)
     switch (msg.type) {
         case messagesFromServer.BLOCKER:
-            dispatch({ type: actionTypes.BLOCKER_RECIEVED, msg })
         case messagesFromServer.DECLINER:
-            dispatch({ type: actionTypes.DECLINER_RECIEVED, msg })
         case messagesFromServer.MESSANGER:
-            dispatch({ type: actionTypes.MESSANGER_RECIVED, msg })
-        case messagesFromServer.OFFERER:
-            dispatch({ type: actionTypes.OFFERER_RECIEVED, msg })
         case messagesFromServer.UNBLOCKER:
-            dispatch({ type: actionTypes.UNBLOCKER_RECIEVED, msg })
         case messagesFromServer.ACCEPTER:
-            dispatch({ type: actionTypes.ACCEPTER_RECIEVED, msg })
+            dispatch({ type: actionTypes.HANGOUT_CHANGED_ITS_STATE, hangout:updatedHangout })
+            updateHangoutStateInLocalStorage(`${username}-hangouts`, updatedHangout)
+            case messagesFromServer.OFFERER:
+                dispatch({ type: actionTypes.HANGOUT_CHANGED_ITS_STATE, hangout:newHangout })
+                addNewHangoutToLocalStorage(`${username}-hangouts`, updatedHangout)
         default:
             throw new Error('Message type for messagesFromServer is not defined')
     }
+
+}
+
+
+function updateHangoutStateInLocalStorage(key, hangout) {
+    const hangouts = localStorage.getItem(key);
+    const updated = hangouts.map((g) => {
+        if (g.username === hangout.username) {
+            return hangout
+        }
+        else {
+            return g
+        }
+    })
+    localStorage.setItem(key, JSON.stringify(updated))
+}
+
+function addNewHangoutToLocalStorage(key, hangout) {
+    const hangouts = localStorage.getItem(key);
+    const inserted = hangouts.push(hangout)
+    localStorage.setItem(key, JSON.stringify(inserted))
 
 }

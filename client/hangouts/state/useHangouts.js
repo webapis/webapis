@@ -9,8 +9,6 @@ export function useHangout() {
     const [state, dispatch] = useHangoutContext()
     const { hangout, hangouts, socket } = state
 
-
-
     function onSelectHangout({ username }) {
         selectHangout({ dispatch, username })
     }
