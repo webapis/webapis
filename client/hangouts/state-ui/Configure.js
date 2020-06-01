@@ -24,7 +24,7 @@ const style = {
   },
 };
 
-export function Configure({
+export default function Configure({
   onBlock,
   onDelete,
   onArchive,

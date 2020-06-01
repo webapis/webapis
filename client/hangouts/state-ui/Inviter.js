@@ -11,9 +11,9 @@ const style = {
   },
 };
 
-export function Inviter({ hangout }) {
+export default function Inviter({ hangout }) {
   return (
-    <Layout>
+    <Layout id='inviter-ui'>
       <div style={style.root}>
         <div style={{ flex: 1, marginTop: 16, marginLeft: 8 }}>
           <Message

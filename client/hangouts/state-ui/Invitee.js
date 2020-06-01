@@ -10,9 +10,9 @@ const style = {
     justifyContent: 'center',
   },
 };
-export function Invitee({ hangout }) {
+export default function Invitee({ hangout }) {
   return (
-    <Layout style={style.layout}>
+    <Layout style={style.layout} id="invitee-ui">
       <Center>
         <Done width="70" height="70" color="green" />
       </Center>

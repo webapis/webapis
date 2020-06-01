@@ -1,16 +1,20 @@
 import { h } from 'preact'
-import { useEffect } from 'preact/hooks'
+import { useEffect, useState } from 'preact/hooks'
 import { useHangoutContext } from './HangoutsProvider'
-import { selectHangout } from './actions'
+import { selectHangout,searchHangouts } from './actions'
 import { actionTypes } from './actionTypes'
 import { messageToServer, messageCategories } from './messageTypes'
 
-export function useHangout() {
+export function useHangouts() {
     const [state, dispatch] = useHangoutContext()
-    const { hangout, hangouts, socket } = state
+   
 
-    function onSelectHangout({ username }) {
-        selectHangout({ dispatch, username })
+    const { hangout, hangouts, socket,search } = state
+
+    function onSelect(e) {
+        const username=e.target.id
+        debugger;
+        selectHangout({ dispatch,username })
     }
     function onInvite() {
         socket.send(JSON.stringify({ ...hangout, type: messageToServer.OFFER }))
@@ -37,5 +41,10 @@ export function useHangout() {
         socket.send(JSON.stringify({ ...hangout, type: messageToServer.MESSAGE }))
         dispatch({ type: actionTypes.MESSAGE_STARTED, hangout })
     }
-    return { onMessage, onInvite, onAccept, onBlock, onUnblock, onSelectHangout, onDecline, hangout, hangouts }
+
+    function onSearch(e){
+       
+        searchHangouts({search:e.target.value,dispatch})
+    }
+    return {onSearch,search, onMessage, onInvite, onAccept, onBlock, onUnblock, onSelect, onDecline, hangout, hangouts }
 }

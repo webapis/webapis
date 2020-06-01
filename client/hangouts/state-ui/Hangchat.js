@@ -1,4 +1,5 @@
 import {h} from 'preact'
-export function Hangchat(){
-    return <div className="hangchat-ui">Hangchat</div>
+import { Layout } from './Layout';
+export default function Hangchat(){
+    return <Layout id="hangchat-ui">Hangchat</Layout>
 }

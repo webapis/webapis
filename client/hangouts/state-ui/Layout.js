@@ -5,6 +5,6 @@ const styles = {
     height: '100%',
   },
 };
-export function Layout({ children, style }) {
-  return <div style={{ ...styles.root, ...style }}>{children}</div>;
+export function Layout({ children, style, id }) {
+  return <div data-testid={id} style={{ ...styles.root, ...style }}>{children}</div>;
 }

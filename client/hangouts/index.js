@@ -1,9 +1,14 @@
 import { h } from 'preact'
-import Mobile from './Hangout'
+import Mobile from './mobile'
 import { HangoutsProvider } from './state/HangoutsProvider'
+import { RouteProvider, useRouteContext } from '../route/router';
 export default function () {
     return <HangoutsProvider socketUrl="ws://localhost:3000/hangouts">
-        <Mobile />
+         <RouteProvider initialRoute="/hangouts">
+         <Mobile />
+
+         </RouteProvider>
+    
     </HangoutsProvider>
 
 }

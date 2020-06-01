@@ -21,7 +21,7 @@ const style = {
   },
 };
 
-export function Block({ onCancel, onBlock, onReport }) {
+export default function Block({ onCancel, onBlock, onReport }) {
   return (
     <Layout style={style.layout}>
       <div style={style.checkboxRoot}>

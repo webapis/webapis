@@ -12,9 +12,9 @@ const style = {
   },
 };
 
-export function Invite({ hangout, sendInvite, onChange, value }) {
+export default function Invite({ hangout, sendInvite, onChange, value }) {
   return (
-    <Layout style={style.layout}>
+    <Layout style={style.layout}id="invite-ui">
       <Center>
         <PersonAdd color="green" />
       </Center>
