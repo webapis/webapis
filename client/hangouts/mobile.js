@@ -23,6 +23,7 @@ export default function Mobile() {
     onSelect,
     onUnblock,
     onSearch,
+    users,
     search
   } = useHangouts();
   useEffect(() => {
@@ -35,7 +36,7 @@ export default function Mobile() {
     <div style={{ height: '85vh' }}>
       <Route path="/hangouts">
         <Suspense fallback={<div>Loading...</div>}>
-          <Hangouts search={search} hangouts={hangouts} onSelect={onSelect}onSearch={onSearch} />
+          <Hangouts users={users} search={search} hangouts={hangouts} onSelect={onSelect}onSearch={onSearch} />
         </Suspense>
       </Route>
       <Route path="/BLOCK">

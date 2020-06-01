@@ -9,7 +9,7 @@ export function useHangouts() {
     const [state, dispatch] = useHangoutContext()
    
 
-    const { hangout, hangouts, socket,search } = state
+    const { hangout, hangouts, socket,search,users } = state
 
     function onSelect(e) {
         const username=e.target.id
@@ -46,5 +46,5 @@ export function useHangouts() {
        
         searchHangouts({search:e.target.value,dispatch})
     }
-    return {onSearch,search, onMessage, onInvite, onAccept, onBlock, onUnblock, onSelect, onDecline, hangout, hangouts }
+    return {onSearch,search, onMessage, onInvite, onAccept, onBlock, onUnblock, onSelect, onDecline, hangout, hangouts,users }
 }

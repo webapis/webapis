@@ -7,59 +7,62 @@ export function loadHangouts({ username, dispatch }) {
 
   dispatch({ type: actionTypes.LOAD_HANGOUTS, hangouts });
 }
-
+//select hangout from List
 export function selectHangout({ dispatch, username }) {
   dispatch({ type: actionTypes.SELECTED_HANGOUT, username });
 }
-
+//search for hangout by typing into TextInput
 export function searchHangouts({ search, dispatch }) {
   dispatch({ type: actionTypes.SEARCHED_HANGOUT, search });
 }
-
-export function initWSocket({ url, dispatch }) {
-  dispatch({ type: actionTypes.SET_SOCKET, socket: new WebSocket(url) });
-}
-
-
-
-
-
+//filter hangout after search state change
 export function filterHangouts({ dispatch }) {
   dispatch({ type: actionTypes.FILTER_HANGOUTS });
 }
 
+//fetch hangout from server if not found in local hangouts
 export async function fetchHangout({ search, dispatch }) {
-    debugger
+  
   try {
     dispatch({ type: actionTypes.FETCH_HANGOUT_STARTED });
     const response = await fetch(`/hangouts/find?search=${search}`);
-   
+
+   if(response.ok){
     const { hangouts } = await response.json();
 
     if (hangouts.length > 0) {
-      debugger
+
       dispatch({ type: actionTypes.FETCH_HANGOUT_SUCCESS, hangouts });
     } else {
-      debugger;
+ 
       dispatch({ type: actionTypes.FETCH_HANGOUT_NOT_FOUND });
-      fetchUser({ username, dispatch });
+      // fetch user from server in hangout is newuser
+      fetchUser({ search, dispatch });
     }
+
+   }
+
   } catch (error) {
-    const err=error
-    debugger;
+
     dispatch({ type: actionTypes.FETCH_HANGOUT_FAILED, error });
   }
 }
-
-export async function fetchUser({ username, dispatch }) {
+  // fetch user from server in hangout is newuser
+export async function fetchUser({ search, dispatch }) {
+  debugger
   try {
     dispatch({ type: actionTypes.FETCH_USER_STARTED });
-    const response = await fetch(`/users/find?username=${username}`);
+    const response = await fetch(`/users/find?search=${search}`);
     const { users } = await response.json();
+    debugger;
     dispatch({ type: actionTypes.FETCH_USER_SUCCESS, users });
   } catch (error) {
     dispatch({ type: actionTypes.FETCH_USER_FAILED, error });
   }
 }
 
+
+export function initWSocket({ url, dispatch }) {
+  dispatch({ type: actionTypes.SET_SOCKET, socket: new WebSocket(url) });
+}
 

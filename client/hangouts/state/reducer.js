@@ -17,10 +17,11 @@ export function reducer(state, action) {
     case actionTypes.FETCH_USER_STARTED:
       return { ...state, loading: true };
     case actionTypes.FETCH_USER_SUCCESS:
+      debugger;
       return {
         ...state,
         loading: false,
-        users: action.users.map((u) => (u[state] = 'INVITE')),
+        users: action.users.map(u=> ({...u,state:'INVITE'}))
       };
     case actionTypes.FETCH_HANGOUT_STARTED:
       return { ...state, loading: true };

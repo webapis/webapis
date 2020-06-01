@@ -37,5 +37,6 @@ describe('loadHangouts', () => {
     cy.get('[data-testid=localuser2]')
   });
 
+  it('loadHangout from server')
  
 });

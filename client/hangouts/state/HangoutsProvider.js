@@ -26,7 +26,7 @@ export function HangoutsProvider(props) {
   const { username } = authContext.state;
   const { socketUrl } = props;
   const [state, dispatch] = useReducer(reducer, initState);
-  const { socket, hangout, hangouts, search } = state;
+  const { socket, hangout, hangouts, search,users } = state;
   const sockethandler = useSocket({ dispatch, socket, hangout });
 
   useEffect(() => {
@@ -48,7 +48,11 @@ export function HangoutsProvider(props) {
       fetchHangout({ dispatch,search });
     }
   }, [state.search, state.hangouts]);
-
+useEffect(()=>{
+  if(users){
+    debugger;
+  }
+},[users])
   const value = useMemo(() => [state, dispatch], [state]);
   return <HangoutContext.Provider value={value} {...props} />;
 }
