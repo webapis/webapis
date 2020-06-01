@@ -40,19 +40,15 @@ export function HangoutsProvider(props) {
   useEffect(() => {
     
     if (search && hangouts && hangouts.length > 0) {
-     debugger;
+     
       filterHangouts({ dispatch });
     }
     if (search && (!hangouts || (hangouts && hangouts.length===0))) {
-      debugger;
+     
       fetchHangout({ dispatch,search });
     }
   }, [state.search, state.hangouts]);
-useEffect(()=>{
-  if(search){
-  //  debugger;
-  }
-},[search])
+
   const value = useMemo(() => [state, dispatch], [state]);
   return <HangoutContext.Provider value={value} {...props} />;
 }

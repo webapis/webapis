@@ -1,5 +1,15 @@
 describe('searchHangouts', () => {
   beforeEach(() => {
+    cy.server();
+    cy.route({ url: '/users/find?search=newuser',  response: {
+      users: [{ username: 'newuser', email: 'newuser@gmail.com' }],
+    } });
+    cy.route({
+      url: '/hangouts/find?search=userfromserver',
+      response: {
+        hangouts: [{ username: 'userfromserver', email: 'userfromserver@gmail.com' }],
+      },
+    });
     cy.login({
       username: 'demo',
       email: 'demo@gmail.com',
@@ -31,26 +41,20 @@ describe('searchHangouts', () => {
     cy.wait(50);
     cy.get('[data-testid=hangouts]').click();
   });
-  it('fetch hangout from server', () => {
-    cy.server();
-    //cy.route({ url: '/users/find?search=testuser', response: [] });
-    cy.route({
-      url: '/hangouts/find?search=userfromserver',
-      response: {
-        hangouts: [{ username: 'userfromserver', email: 'userfromserver@gmail.com' }],
-      },
-    });
-  });
-
+ 
   it('search from local hangouts', () => {
     cy.get('[data-testid=search-input]').type('localuser1');
     cy.get('[data-testid=hangouts-list]').children().should('have.length', 1);
   });
 
-  it.only('search from server FETCH_HANGOUT_SUCCESS', () => {
+  it('search from server FETCH_HANGOUT_SUCCESS', () => {
     cy.get('[data-testid=search-input]').type('userfromserver');
-    //cy.get('[data-testid=hangouts-list]').children().should('have.length', 1);
+    cy.get('[data-testid=hangouts-list]').children().should('have.length', 1);
 
   });
-  it('search from server FETCH_HANGOUT_NOT_FOUND', () => {});
+  it.only('search from server FETCH_HANGOUT_NOT_FOUND', () => {
+    cy.get('[data-testid=search-input]').type('newuser');
+   // cy.get('[data-testid=hangouts-list]').children().should('have.length', 1);
+
+  });
 });

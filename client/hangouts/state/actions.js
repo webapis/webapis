@@ -33,15 +33,19 @@ export async function fetchHangout({ search, dispatch }) {
   try {
     dispatch({ type: actionTypes.FETCH_HANGOUT_STARTED });
     const response = await fetch(`/hangouts/find?search=${search}`);
+   
     const { hangouts } = await response.json();
 
     if (hangouts.length > 0) {
+      debugger
       dispatch({ type: actionTypes.FETCH_HANGOUT_SUCCESS, hangouts });
     } else {
+      debugger;
       dispatch({ type: actionTypes.FETCH_HANGOUT_NOT_FOUND });
       fetchUser({ username, dispatch });
     }
   } catch (error) {
+    const err=error
     debugger;
     dispatch({ type: actionTypes.FETCH_HANGOUT_FAILED, error });
   }
