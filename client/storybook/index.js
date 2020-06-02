@@ -1,7 +1,6 @@
 import { h, render } from 'preact';
 import { RouteProvider, Route } from '../route/router';
 import Navigation from './Navigation';
-
 import Hangout from '../hangouts/Hangout';
 import  Block  from '../hangouts/state-ui/Block';
 import  Blocked  from '../hangouts/state-ui/Blocked';
@@ -11,7 +10,7 @@ import  Invitee  from '../hangouts/state-ui/Invitee';
 import  Inviter  from '../hangouts/state-ui/Inviter';
 import  Hangchat  from '../hangouts/state-ui/Hangchat';
 import  {Message } from '../hangouts/ui/Message';
-import { HangoutItemStates } from './HangoutItemStates';
+import { OnlineStatus } from '../layout/icons/onlineStatus';
 import { ThemeProvider } from '../theme/theme-context';
 import { List, ListItem } from '../layout/NavList';
 import { DrawerContent } from './DrawerContent';
@@ -41,7 +40,7 @@ render(
       },
     }}
   >
-    <RouteProvider initialRoute="/configure">
+    <RouteProvider initialRoute="/online">
       <Navigation drawerContent={<DrawerContent />}>
         <Route path="/hangouts">
           <Hangout hangouts={hangouts} />
@@ -72,8 +71,11 @@ render(
             <Message message={message} username={hangout.username} />
           </div>
         </Route>
-        <Route path="/hangoutitemstate">
-          <HangoutItemStates />
+        <Route path="/online">
+          <div>
+          <OnlineStatus online/>
+          <OnlineStatus />
+          </div>
         </Route>
       </Navigation>
     </RouteProvider>

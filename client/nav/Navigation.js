@@ -2,6 +2,8 @@ import { h } from 'preact';
 import { Suspense, lazy } from 'preact/compat';
 import { useState, useEffect, useReducer } from 'preact/hooks';
 import { useThemeContext } from '../theme/theme-context';
+import {useWSocketContext} from '../wsocket/WSocketProvider'
+import {OnlineStatus} from '../layout/icons/onlineStatus'
 import './css/style.css';
 import { MenuWhite } from './icons/MenuWhite';
 import { AppShell } from '../layout/AppShell';
@@ -17,6 +19,8 @@ const LaptopDrawer = lazy(() => import('./LapTopDrawer'));
 const DesktopDrawer = lazy(() => import('./DesktopDrawer'));
 
 export default function Navigation(props) {
+  const wsocketContext =useWSocketContext()
+  const {online}=wsocketContext
   const [route, setRoute] = useState('');
   const { userName } = useUserName();
   const { width, height, orientation, device } = useMediaQuery();
@@ -65,6 +69,9 @@ export default function Navigation(props) {
         <MenuWhite onClick={toggleDrawer} device={device} id='menu' />
         {children}
         <NavItem>{userName}</NavItem>
+        <NavItem>
+          <OnlineStatus online={online}/>
+        </NavItem>
       </AppBar>
     </AppShell>
   );

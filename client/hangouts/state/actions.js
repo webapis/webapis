@@ -88,6 +88,3 @@ dispatch({type:actionTypes.MESSAGE_TEXT_CHANGED,text})
 }
 
 
-export function initWSocket({ url, dispatch,username }) {
-  dispatch({ type: actionTypes.SET_SOCKET, socket: new WebSocket(`${url}/?username=${username}`) });
-}

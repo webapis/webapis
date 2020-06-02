@@ -7,18 +7,21 @@ import Navigation, { NavItem } from '../nav/Navigation';
 import Authentication from '../auth/Authentication';
 import { ThemeProvider } from '../theme/theme-context';
 import { DrawerContent } from '../layout/DrawerContent';
+
 import { AuthContent } from '../auth/AuthContent';
 import { AuthProvider } from '../auth/auth-context';
 import { FormProvider } from '../form/form-context';
 import { OtherContent } from './OtherContent';
 import { AppProvider } from '../app-context/app-context';
 import { Home } from './Home';
+import {WSocketProvider} from '../wsocket/WSocketProvider'
 import accept_inv_img from '../app-context/img/accept_invitation.png';
 const Hangouts = lazy(() => import('../hangouts'));
 const Group = lazy(() => import('../group/group'));
 render(
   <AppProvider title='Webcom' accept_inv_img={accept_inv_img}>
     <AuthProvider>
+      <WSocketProvider url ="ws://localhost:3000/hangouts">
       <RootRouteProvider initialRoute='/'>
         <FormProvider>
           <ThemeProvider
@@ -39,6 +42,7 @@ render(
               }
             >
               <NavItem>WEB COM</NavItem>
+             
             </Navigation>
             <RootRoute path='/auth'>
               <RouteProvider initialRoute='/login'>
@@ -64,6 +68,7 @@ render(
           </ThemeProvider>
         </FormProvider>
       </RootRouteProvider>
+      </WSocketProvider>
     </AuthProvider>
   </AppProvider>,
   document.body

@@ -8,10 +8,6 @@ describe('initWSocket', () => {
   });
   it('init websocket', () => {
     cy.visit('/');
-    //1. navigation to Hangouts
-    cy.wait(50);
-    cy.get('[data-testid=menu]').click();
-    cy.wait(50);
-    cy.get('[data-testid=hangouts]').click();
+
   });
 });

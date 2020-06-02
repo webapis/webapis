@@ -2,7 +2,7 @@ import { actionTypes } from './actionTypes';
 export const initState = {
   hangouts: [],
   hangout: null,
-  socket: null,
+
   messages: [],
   search: '',
   user: [],
@@ -49,8 +49,6 @@ export function reducer(state, action) {
       return { ...state, search: action.search };
     case actionTypes.LOAD_HANGOUTS:
       return { ...state, hangouts: action.hangouts };
-    case actionTypes.SET_SOCKET:
-      return { ...state, socket: action.socket };
     case actionTypes.SELECTED_USER:
       if (state.hangouts) {
         return {

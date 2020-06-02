@@ -38,8 +38,8 @@ export function DrawerContent({ open }) {
         <ListItem id="message" onClick={handleRoute}>
           Message
         </ListItem>
-        <ListItem id="hangoutitemstate" onClick={handleRoute}>
-          HangoutItemStates
+        <ListItem id="online" onClick={handleRoute}>
+         onlineStatus
         </ListItem>
       </List>
     </div>
