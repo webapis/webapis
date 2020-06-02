@@ -3,6 +3,7 @@ import { useEffect } from 'preact/hooks';
 import { lazy, Suspense } from 'preact/compat';
 import { Route, useRouteContext } from '../route/router';
 import { useHangouts } from './state/useHangouts';
+import {useSocket} from './state/useSocket'
 const Hangouts = lazy(() => import('./Hangout'));
 const Block = lazy(() => import('./state-ui/Block'));
 const Blocked = lazy(() => import('./state-ui/Blocked'));
@@ -14,6 +15,7 @@ const Inviter = lazy(() => import('./state-ui/Inviter'));
 
 export default function Mobile() {
   const [route, setRoute] = useRouteContext();
+  const sockethandler =useSocket()
   const {
     hangout,
     hangouts,

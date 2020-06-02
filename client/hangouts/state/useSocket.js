@@ -1,17 +1,23 @@
 import { useEffect } from 'preact/hooks';
 import { actionTypes } from './actionTypes';
 import { messageToHangout, messageToNewHangout } from './messageConverter';
+import { useHangoutContext } from './HangoutsProvider';
 import { messagesFromServer, messageCategories } from './messageTypes';
 import { useWSocketContext } from '../../wsocket/WSocketProvider';
-export function useSocket({ dispatch, hangout }) {
+export function useSocket() {
+  const [state, dispatch] = useHangoutContext();
+  const {hangout}=state
   const socketContext = useWSocketContext();
 const {socket}=socketContext
   useEffect(() => {
     if (socket) {
       socket.onmessage = (message) => {
+        debugger
         const msg = JSON.parse(message.data);
+        debugger;
         switch (msg.category) {
           case messageCategories.ACKNOWLEDGEMENT:
+            debugger;
             handleAckhowledgements({ dispatch, msg, hangout });
           case messageCategories.PEER:
             handlePeerMessages({ dispatch, msg, hangout });
@@ -35,6 +41,7 @@ const {socket}=socketContext
 }
 
 function handleAckhowledgements({ dispatch, msg, hangout }) {
+  debugger;
   let updatedHangout = messageToHangout({ hangout, message: msg });
   dispatch({
     type: actionTypes.ACKNOWLEDGEMENT_RECIEVED,
@@ -57,7 +64,7 @@ function handlePeerMessages({ dispatch, msg, hangout }) {
         hangout: updatedHangout,
       });
       updateHangoutStateInLocalStorage(`${username}-hangouts`, updatedHangout);
-    case messagesFromServer.OFFERER:
+    case messagesFromServer.INVITER:
       dispatch({
         type: actionTypes.HANGOUT_CHANGED_ITS_STATE,
         hangout: newHangout,

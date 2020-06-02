@@ -2,6 +2,7 @@ import { h } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
 import { useHangoutContext } from './HangoutsProvider';
 import { useAuthContext } from '../../auth/auth-context';
+import {useWSocketContext} from '../../wsocket/WSocketProvider'
 import {
   selectHangout,
   searchHangouts,
@@ -14,11 +15,13 @@ import { actionTypes } from './actionTypes';
 import { messageToServer, messageCategories } from './messageTypes';
 
 export function useHangouts() {
+  const socketContext =useWSocketContext()
+  const {socket}=socketContext
   const authContext = useAuthContext();
   const { username } = authContext.state;
   const [state, dispatch] = useHangoutContext();
 
-  const { hangout, hangouts, socket, search, users, messageText } = state;
+  const { hangout, hangouts, search, users, messageText } = state;
 
   function onSelectHangout(e) {
     const username = e.target.id;
@@ -31,13 +34,13 @@ export function useHangouts() {
     selectUser({ dispatch, user, username });
   }
   function onInvite() {
-    const updatedHangout = {
-      ...hangout,
+    const {username,email}=hangout
+    const updatedHangout = {username,email,
       message: { text: messageText, timestamp:  Date.now() },
     };
     debugger;
     socket.send(
-      JSON.stringify({ ...updatedHangout, type: messageToServer.OFFER })
+      JSON.stringify({ ...updatedHangout, type: messageToServer.INVITE })
     );
     dispatch({ type: actionTypes.OFFER_STARTED });
   }

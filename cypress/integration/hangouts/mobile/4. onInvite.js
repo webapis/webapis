@@ -17,7 +17,7 @@ describe('onInvite', () => {
     cy.wait(50);
     cy.get('[data-testid=hangouts]').click();
   });
-  it('onInvite', () => {
+  it.only('onInvite new user is offline', () => {
 
     //1.find newuser
     cy.get('[data-testid=search-input]').type('newuser');
@@ -31,4 +31,8 @@ describe('onInvite', () => {
     cy.get('[data-testid=messageTextInput]').type('Lets hangchat')
  // cy.get('[data-testid=oninvite-btn]').click()
   });
+
+  it('onInvite new user is offline',()=>{
+    
+  })
 });

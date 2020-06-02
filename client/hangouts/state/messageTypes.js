@@ -1,5 +1,5 @@
 export const acknowledgmentTypes = {
-    OFFERED: 'OFFERED',
+    INVITED: 'INVITED',
     ACCEPTED: 'ACCEPTED',
     BLOCKED: 'BLOCKED',
     UNBLOCKED: 'UNBLOCKED',
@@ -12,7 +12,7 @@ export const messagesFromServer = {
     BLOCKER: 'BLOCKER',
     ACCEPTER: 'ACCEPTER',
     UNBLOCKER: 'UNBLOCKER',
-    OFFERER: 'OFFERER',
+    INVITER: 'INVITER',
     DECLINER: 'DECLINER',
     MESSANGER: 'MESSANGER'
 
@@ -21,7 +21,7 @@ export const messagesFromServer = {
 export const messageToServer = {
     ACCEPT: 'ACCEPT',
     DECLINE: 'DECLINE',
-    OFFER: 'OFFER',
+    INVITE: 'INVITE',
     BlOCK: 'BlOCK',
     UNBLOCK: 'UNBLOCK',
     MESSAGE: 'MESSAGE'

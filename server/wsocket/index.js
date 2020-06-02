@@ -6,7 +6,8 @@ const EventEmitter = require('events');
 const WebSocket = require('ws');
 export const wsocket = new EventEmitter();
 let connections = {};
-export default function (server,client) {
+export default async function (server,client) {
+  const collection = await client.db('auth').collection('users');
   const wss = new WebSocket.Server({ server });
   wss.on('connection', async function connection(ws, request) {
 
@@ -20,18 +21,19 @@ debugger;
       debugger;
       const decoded = await jwt.verify(token[uname], process.env.secret);
       const { username } = decoded;
-      ws.username = username;
+      const user = await collection.findOne({username})
+      ws.user= user;
       connections[username] = ws; //
 
       ws.on('message', function incoming(message) {
         console.log('recieved,', message);
-        debugger;
+  
         try {
           if (request.url.includes('hangouts')) {
-            debugger;
+         
           
-            const hangouts = JSON.parse(message);
-            hangoutsHandler({ hangouts, connections,ws,client });
+            const hangout = JSON.parse(message);
+            hangoutsHandler({ hangout, connections,ws,client });
           }
         } catch (error) {
           const err = error;

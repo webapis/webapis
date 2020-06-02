@@ -1,30 +1,34 @@
 import { initUsers } from './initUsers';
-import { invitee } from './invitee';
+import { inviteHandler } from './inviteHandler';
+import {messageToServer} from '../../client/hangouts/state/messageTypes'
 export default async function hangouts({
-  hangouts,
+  hangout,
   ws,
   client,
   connections,
 }) {
   const collection = await client.db('hangouts').collection('users');
-  initUsers({ collection,ws, hangouts });
+  debugger;
+ await initUsers({ collection,ws, hangout });
 debugger;
-  switch (hangouts.state) {
-    case 'INVITEE':
-     invitee({ collection, hangouts,ws,connections });
-      debugger;
+  switch (hangout.type) {
+    case messageToServer.INVITE:
+     debugger;
+     inviteHandler({ collection, hangout,ws,connections });
+    
       break;
-    case 'ACCEPT':
+    case messageToServer.ACCEPT:
       break;
-    case 'BLOCK':
+    case messageToServer.BlOCK:
       break;
-    case 'UNBLOCK':
+    case messageToServer.UNBLOCK:
       break;
-    case 'DECLINE':
+    case messageToServer.DECLINE:
       break;
-    case 'MESSAGE':
+    case messageToServer.MESSAGE:
 
     default:
       throw new Error('No message type is provided for switch statement');
   }
-} //
+} 
+//

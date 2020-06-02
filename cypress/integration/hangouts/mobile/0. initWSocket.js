@@ -6,9 +6,10 @@ describe('initWSocket', () => {
       password: 'Dragonfly1977!!!',
     });
   });
-  it('init websocket', () => {
+  it('websocket is online', () => {
     cy.visit('/');
-
+    cy.wait(1000)
+    cy.get('[data-testid=online]')
   });
 });
 //

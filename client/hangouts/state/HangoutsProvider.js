@@ -8,10 +8,8 @@ import {
 } from 'preact/hooks';
 import { reducer, initState } from './reducer';
 import { loadHangouts, filterHangouts,fetchHangout } from './actions';
-import { useSocket } from './useSocket';
 import { useAuthContext } from '../../auth/auth-context';
 const HangoutContext = createContext();
-
 export function useHangoutContext() {
   const context = useContext(HangoutContext);
   if (!context) {
@@ -25,8 +23,8 @@ export function HangoutsProvider(props) {
   const authContext = useAuthContext();
   const { username } = authContext.state;
   const [state, dispatch] = useReducer(reducer, initState);
-  const { hangout, hangouts, search,users } = state;
-  const sockethandler = useSocket({ dispatch, hangout });
+  const { hangout } = state;
+
 
   useEffect(() => {
     if (username) {
