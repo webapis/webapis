@@ -32,7 +32,7 @@ export function HangoutsProvider(props) {
   useEffect(() => {
     if (username) {
       
-      initWSocket({ url: socketUrl, dispatch });
+      initWSocket({ url: socketUrl, dispatch, username });
       loadHangouts({ username, dispatch });
     }
   }, [username]);

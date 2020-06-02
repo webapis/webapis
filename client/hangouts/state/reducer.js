@@ -9,17 +9,14 @@ export const initState = {
   loading: false,
   error: null,
   messageText: '',
+  online:false
 };
 export function reducer(state, action) {
   switch (action.type) {
     case actionTypes.OFFER_STARTED:
       return {
         ...state,
-        hangouts: state.hangouts.map((g) => {
-          if (g.username === action.hangout.username) {
-            return action.hangout;
-          } else return g;
-        }),
+       loading:true
       };
     case actionTypes.MESSAGE_TEXT_CHANGED:
       return { ...state, messageText: action.text };

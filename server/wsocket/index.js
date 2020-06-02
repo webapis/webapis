@@ -9,12 +9,14 @@ let connections = {};
 export default function (server,client) {
   const wss = new WebSocket.Server({ server });
   wss.on('connection', async function connection(ws, request) {
+
     debugger;
     try {
       const token = cookie.parse(request.headers['cookie']);
-
+debugger;
       let uname = url.parse(request.url, true).query.username;
-
+      console.log('coonection open:', uname);
+debugger;
       debugger;
       const decoded = await jwt.verify(token[uname], process.env.secret);
       const { username } = decoded;
@@ -50,4 +52,5 @@ export default function (server,client) {
     }
   });
 }
+
 //

@@ -29,6 +29,6 @@ describe('onInvite', () => {
 
     //3. send Invitation
     cy.get('[data-testid=messageTextInput]').type('Lets hangchat')
-  cy.get('[data-testid=oninvite-btn]').click()
+ // cy.get('[data-testid=oninvite-btn]').click()
   });
 });

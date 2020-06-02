@@ -18,9 +18,15 @@ export function useSocket({ socket, dispatch, hangout }) {
                 }
             }
             socket.onclose = () => {
+                debugger;
             }
             socket.onerror = (error) => {
+                debugger;
             }
+            socket.onopen =()=>{
+                debugger;
+            }
+            
         }
     }, [socket])
 

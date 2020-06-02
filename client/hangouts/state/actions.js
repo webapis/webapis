@@ -80,11 +80,14 @@ export async function fetchUser({ search, dispatch }) {
 }
 
 
-export function initWSocket({ url, dispatch }) {
-  dispatch({ type: actionTypes.SET_SOCKET, socket: new WebSocket(url) });
-}
+
 
 export function changeMessageText({text,dispatch}){
 dispatch({type:actionTypes.MESSAGE_TEXT_CHANGED,text})
 
+}
+
+
+export function initWSocket({ url, dispatch,username }) {
+  dispatch({ type: actionTypes.SET_SOCKET, socket: new WebSocket(`${url}/?username=${username}`) });
 }

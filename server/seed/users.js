@@ -12,7 +12,7 @@ export default async function users(req, res) {
 
     const { hash, salt, iterations } = passhash.hashPassword(password);
 
-    debugger;
+
 
     await collection.deleteMany({ username });
     const result = await collection.insertOne({
@@ -36,7 +36,7 @@ export default async function users(req, res) {
     res.end();
   } catch (error) {
     const err = error;
-    debugger;
+  
     res.writeHead(500, { 'Content-Type': 'application/json' });
     res.write(JSON.stringify({ error }));
     res.end();

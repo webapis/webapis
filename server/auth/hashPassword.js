@@ -5,7 +5,7 @@ exports.hashPassword = function (password) {
   // var hash =crypto.pbkdf2(password, salt, iterations);
 
   const hash = crypto.pbkdf2Sync(password, salt, iterations, 512, 'sha512');
-  debugger;
+
   return {
     salt: salt,
     hash: hash,
@@ -19,12 +19,12 @@ exports.isPasswordCorrect = function (
   savedIterations,
   passwordAttempt
 ) {
-  debugger;
+
   let result =
     savedHash.toString('hex') ===
     crypto
       .pbkdf2Sync(passwordAttempt, savedSalt, savedIterations, 512, 'sha512')
       .toString('hex');
-  debugger;
+
   return result;
 };

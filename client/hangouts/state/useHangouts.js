@@ -39,10 +39,7 @@ export function useHangouts() {
     socket.send(
       JSON.stringify({ ...updatedHangout, type: messageToServer.OFFER })
     );
-    // update hangout in local storage
-    //updateLocalHangout({hangout:updatedHangout,username})
-    // update hangout in app state
-    dispatch({ type: actionTypes.OFFER_STARTED, hangout: updatedHangout });
+    dispatch({ type: actionTypes.OFFER_STARTED });
   }
   function onAccept() {
     socket.send(JSON.stringify({ ...hangout, type: messageToServer.ACCEPT }));

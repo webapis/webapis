@@ -54,7 +54,7 @@ export default async function ({ req, res, collection }) {
               res.end();
             } else {
             
-              debugger
+  
               resBcrypt = passhash.isPasswordCorrect(user.hash,user.salt,user.iterations,password);
 
               if (resBcrypt) {
@@ -99,11 +99,9 @@ export default async function ({ req, res, collection }) {
               res.end();
             } else {
 
-              debugger;
-    
-              debugger
+            
               resBcrypt = passhash.isPasswordCorrect(user.hash,user.salt,user.iterations,password);
-              debugger;
+          
 
               if (resBcrypt) {
                 const payload = {
