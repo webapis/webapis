@@ -35,6 +35,7 @@ describe('searchHangouts', () => {
 
   it('search from local hangouts', () => {
     cy.get('[data-testid=search-input]').type('localuser1');
+    cy.get('[data-testid=search-btn]').click();
     cy.get('[data-testid=hangouts-list]').children().should('have.length', 1);
   });
 
@@ -46,6 +47,7 @@ describe('searchHangouts', () => {
       },
     });
     cy.get('[data-testid=search-input]').type('userfromserver');
+    cy.get('[data-testid=search-btn]').click();
     cy.get('[data-testid=hangouts-list]').children().should('have.length', 1);
     cy.get('[data-testid=userfromserver]')
   });
@@ -62,6 +64,7 @@ describe('searchHangouts', () => {
       }
     });
     cy.get('[data-testid=search-input]').type('newuser');
+    cy.get('[data-testid=search-btn]').click();
     cy.get('[data-testid=users-list]').children().should('have.length', 1);
     cy.get('[data-testid=newuser]')
 

@@ -12,7 +12,7 @@ const style = {
   },
 };
 
-export default function Invite({ hangout, sendInvite, onChange, value }) {
+export default function Invite({ hangout, onInvite, onMessageText,messageText, value }) {
   return (
     <Layout style={style.layout}id="invite-ui">
       <Center>
@@ -21,9 +21,9 @@ export default function Invite({ hangout, sendInvite, onChange, value }) {
       <Center>
         Start Conversation with <b>{hangout && hangout.email}</b>
       </Center>
-      <TextInput onChange={onChange} value={value} />
+      <TextInput id="messageTextInput" onChange={onMessageText} value={messageText} />
       <Center>
-        <Button title="Send Invite" onClick={sendInvite} />
+        <Button title="Send Invite" onClick={onInvite} data-testid='oninvite-btn' />
       </Center>
     </Layout>
   );

@@ -20,15 +20,19 @@ export default function Mobile() {
     onAccept,
     onBlock,
     onInvite,
-    onSelect,
+    onSelectHangout,
+    onSelectUser,
     onUnblock,
     onSearch,
     users,
-    search
+    search,
+    onStartSearch,
+    onMessageText,
+    messageText
   } = useHangouts();
   useEffect(() => {
     if (hangout) {
-      debugger;
+      
       setRoute(`/${hangout.state}`);
     }
   }, [hangout]);
@@ -36,7 +40,15 @@ export default function Mobile() {
     <div style={{ height: '85vh' }}>
       <Route path="/hangouts">
         <Suspense fallback={<div>Loading...</div>}>
-          <Hangouts users={users} search={search} hangouts={hangouts} onSelect={onSelect}onSearch={onSearch} />
+          <Hangouts
+            users={users}
+            search={search}
+            hangouts={hangouts}
+            onSelectHangout={onSelectHangout}
+            onSelectUser={onSelectUser}
+            onSearch={onSearch}
+            onStartSearch={onStartSearch}
+          />
         </Suspense>
       </Route>
       <Route path="/BLOCK">
@@ -61,7 +73,7 @@ export default function Mobile() {
       </Route>
       <Route path="/INVITE">
         <Suspense fallback={<div>Loading...</div>}>
-          <Invite hangout={hangout} onInvite={onInvite} />
+          <Invite hangout={hangout} onInvite={onInvite} onMessageText={onMessageText} messageText={messageText}/>
         </Suspense>
       </Route>
       <Route path="/INVITEE">

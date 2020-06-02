@@ -4,12 +4,26 @@ import { messagesFromServer } from './messageTypes';
 //retrieves hangouts from localStorage
 export function loadHangouts({ username, dispatch }) {
   const hangouts = JSON.parse(localStorage.getItem(`${username}-hangouts`));
-
   dispatch({ type: actionTypes.LOAD_HANGOUTS, hangouts });
 }
 //select hangout from List
 export function selectHangout({ dispatch, username }) {
   dispatch({ type: actionTypes.SELECTED_HANGOUT, username });
+}
+
+export function selectUser({dispatch, user,username}){
+  // save selected user to hangouts
+  const hangout = {...user, state:'INVITE'}
+  const hangouts =JSON.parse(localStorage.getItem(`${username}-hangouts`))
+ 
+  if(hangouts){
+    localStorage.setItem(`${username}-hangouts`, JSON.stringify([...hangouts,hangout]))
+  }
+  else{
+    localStorage.setItem(`${username}-hangouts`, JSON.stringify([hangout]))
+  }
+
+  dispatch({type:actionTypes.SELECTED_USER,hangout})
 }
 //search for hangout by typing into TextInput
 export function searchHangouts({ search, dispatch }) {
@@ -33,13 +47,17 @@ export async function fetchHangout({ search, dispatch }) {
     if (hangouts.length > 0) {
 
       dispatch({ type: actionTypes.FETCH_HANGOUT_SUCCESS, hangouts });
-    } else {
- 
+    }  else{
       dispatch({ type: actionTypes.FETCH_HANGOUT_NOT_FOUND });
       // fetch user from server in hangout is newuser
       fetchUser({ search, dispatch });
-    }
+     }
 
+   }
+   else{
+    dispatch({ type: actionTypes.FETCH_HANGOUT_NOT_FOUND });
+    // fetch user from server in hangout is newuser
+    fetchUser({ search, dispatch });
    }
 
   } catch (error) {
@@ -49,12 +67,12 @@ export async function fetchHangout({ search, dispatch }) {
 }
   // fetch user from server in hangout is newuser
 export async function fetchUser({ search, dispatch }) {
-  debugger
+
   try {
     dispatch({ type: actionTypes.FETCH_USER_STARTED });
     const response = await fetch(`/users/find?search=${search}`);
     const { users } = await response.json();
-    debugger;
+
     dispatch({ type: actionTypes.FETCH_USER_SUCCESS, users });
   } catch (error) {
     dispatch({ type: actionTypes.FETCH_USER_FAILED, error });
@@ -66,3 +84,7 @@ export function initWSocket({ url, dispatch }) {
   dispatch({ type: actionTypes.SET_SOCKET, socket: new WebSocket(url) });
 }
 
+export function changeMessageText({text,dispatch}){
+dispatch({type:actionTypes.MESSAGE_TEXT_CHANGED,text})
+
+}

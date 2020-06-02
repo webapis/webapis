@@ -8,20 +8,31 @@ export const initState = {
   user: [],
   loading: false,
   error: null,
+  messageText: '',
 };
 export function reducer(state, action) {
   switch (action.type) {
+    case actionTypes.OFFER_STARTED:
+      return {
+        ...state,
+        hangouts: state.hangouts.map((g) => {
+          if (g.username === action.hangout.username) {
+            return action.hangout;
+          } else return g;
+        }),
+      };
+    case actionTypes.MESSAGE_TEXT_CHANGED:
+      return { ...state, messageText: action.text };
     case actionTypes.FETCH_USER_FAILED:
     case actionTypes.FETCH_HANGOUT_FAILED:
       return { ...state, loading: false, error: action.error };
     case actionTypes.FETCH_USER_STARTED:
       return { ...state, loading: true };
     case actionTypes.FETCH_USER_SUCCESS:
-      debugger;
       return {
         ...state,
         loading: false,
-        users: action.users.map(u=> ({...u,state:'INVITE'}))
+        users: action.users,
       };
     case actionTypes.FETCH_HANGOUT_STARTED:
       return { ...state, loading: true };
@@ -33,7 +44,9 @@ export function reducer(state, action) {
     case actionTypes.FILTER_HANGOUTS:
       return {
         ...state,
-        hangouts: state.hangouts.filter((g) => g.username.includes(state.search)),
+        hangouts: state.hangouts.filter((g) =>
+          g.username.includes(state.search)
+        ),
       };
     case actionTypes.SEARCHED_HANGOUT:
       return { ...state, search: action.search };
@@ -41,6 +54,19 @@ export function reducer(state, action) {
       return { ...state, hangouts: action.hangouts };
     case actionTypes.SET_SOCKET:
       return { ...state, socket: action.socket };
+    case actionTypes.SELECTED_USER:
+      if (state.hangouts) {
+        return {
+          ...state,
+          hangouts: [...state.hangouts, action.hangout],
+          hangout: action.hangout,
+        };
+      }
+      return {
+        ...state,
+        hangouts: [action.hangout],
+        hangout: action.hangout,
+      };
     case actionTypes.SELECTED_HANGOUT:
       return {
         ...state,
