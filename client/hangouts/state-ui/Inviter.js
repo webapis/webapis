@@ -11,7 +11,7 @@ const style = {
   },
 };
 
-export default function Inviter({ hangout }) {
+export default function Inviter({ hangout, onAccept,onDecline }) {
   return (
     <Layout id='inviter-ui'>
       <div style={style.root}>
@@ -24,10 +24,13 @@ export default function Inviter({ hangout }) {
 
         <div style={{ display: 'flex', padding: 8 }}>
           <Button
+          onClick={onDecline}
             title="Ignore"
             style={{ flex: 1, marginRight: 4, color: 'red' }}
           />
           <Button
+          onClick={onAccept}
+          data-testid='accept-btn'
             title="Accept"
             style={{ flex: 1, marginLeft: 4, color: 'green' }}
           />

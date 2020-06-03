@@ -43,7 +43,7 @@ const {socket}=socketContext
 }
 
 function handleAckhowledgements({ dispatch, acknowledgement, hangout,username }) {
-  ;
+  
   let updatedHangout = updateAcknowledgement({ hangout,acknowledgement });
   ;
   dispatch({

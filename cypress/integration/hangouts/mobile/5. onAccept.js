@@ -30,5 +30,6 @@ describe('OnAccept',()=>{
         cy.get('[data-testid=inviter-ui]')
 
         //accept invitation
+       // cy.get('[data-testid=accept-btn]').click()
     })
 })
