@@ -25,11 +25,11 @@ export function WSocketProvider(props) {
         const sock =new WebSocket(`${url}/?username=${username}`)
 
         sock.onopen=()=>{
-            debugger;
+            ;
             setOnline(true)
         }
         sock.onclose=()=>{
-            debugger;
+            ;
             setOnline(false)
         }
       setSocket(sock);

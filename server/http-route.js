@@ -4,6 +4,7 @@
 //import invitationOperation from './invitation';
 //import crudOperation from './crud/crud';
 import authOperation from './auth/index';
+import hangoutsOperation from './hangouts/http'
 import contactsOperation from './contacts';
 import usersOperation from './users';
 import seedOperation from './seed';
@@ -19,7 +20,7 @@ export default function httpRoute(client) {
     const seedRegex = /.*\/seed\/.*/;
     const contactsRegex = /.*\/contacts\/.*/;
     const usersRegex = /.*\/users\/.*/;
-    // const invitationRegex = /.*\/invitation\/.*/;
+   const hangoutsRegex = /.*\/hangouts\/.*/;
     req.auth = null;
 
     res.on('end', () => {
@@ -72,11 +73,13 @@ export default function httpRoute(client) {
               contactsOperation(req, res);
               break;
             case usersRegex.test(url):
+              debugger;
               usersOperation(req, res);
               break;
-            // case invitationRegex.test(url):
-            //   invitationOperation(req, res);
-            //   break;
+            case hangoutsRegex.test(url):
+              debugger;
+              hangoutsOperation(req, res);
+              break;
             default:
               serveStatic(req, res);
           }
@@ -99,11 +102,13 @@ export default function httpRoute(client) {
             contactsOperation(req, res);
             break;
           case usersRegex.test(url):
+           
             usersOperation(req, res);
             break;
-          // case invitationRegex.test(url):
-          //   invitationOperation(req, res);
-          //   break;
+            case hangoutsRegex.test(url):
+              debugger;
+              hangoutsOperation(req, res);
+              break;
           default:
             serveStatic(req, res);
         }

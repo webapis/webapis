@@ -33,7 +33,7 @@ export default function Mobile() {
   } = useHangouts();
   useEffect(() => {
     if (hangout) {
-      debugger;
+      ;
       setRoute(`/${hangout.state}`);
     }
   }, [hangout]);

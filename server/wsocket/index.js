@@ -1,4 +1,4 @@
-import hangoutsHandler from '../hangouts';
+import hangoutsHandler from '../hangouts/wsocket';
 import url from 'url';
 const jwt = require('jsonwebtoken');
 const cookie = require('cookie');
@@ -11,14 +11,14 @@ export default async function (server,client) {
   const wss = new WebSocket.Server({ server });
   wss.on('connection', async function connection(ws, request) {
 
-    debugger;
+    ;
     try {
       const token = cookie.parse(request.headers['cookie']);
-debugger;
+;
       let uname = url.parse(request.url, true).query.username;
       console.log('coonection open:', uname);
-debugger;
-      debugger;
+;
+      ;
       const decoded = await jwt.verify(token[uname], process.env.secret);
       const { username } = decoded;
       const user = await collection.findOne({username})
@@ -38,19 +38,19 @@ debugger;
         } catch (error) {
           const err = error;
 
-          debugger;
+          ;
           throw new Error(error);
         }
       });
       ws.on('close', function () {
         console.log('coonection closed:', username);
-        debugger;
+        ;
         delete connections[username];
       });
     } catch (error) {
       const err = error;
 
-      debugger;
+      ;
     }
   });
 }

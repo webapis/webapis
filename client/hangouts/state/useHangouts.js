@@ -26,7 +26,7 @@ export function useHangouts() {
   const handleSocket =useSocket({dispatch,hangout,username})
   function onSelectHangout(e) {
     const username = e.target.id;
-    debugger;
+    ;
     selectHangout({ dispatch, username });
   }
   function onSelectUser(e) {
@@ -39,7 +39,7 @@ export function useHangouts() {
     const updatedHangout = {username,email,
       message: { text: messageText, timestamp:  Date.now() },
     };
-    debugger;
+    ;
     socket.send(
       JSON.stringify({ ...updatedHangout, type: messageToServer.INVITE })
     );
@@ -75,21 +75,14 @@ export function useHangouts() {
     if (hangouts && hangouts.length > 0) {
       filterHangouts({ dispatch });
     }
-    fetchHangout({ dispatch, search });
+    fetchHangout({ dispatch, search,username });
   }
 
   function onMessageText(e) {
     changeMessageText({ dispatch, text: e.target.value });
   }
 
-  useEffect(()=>{
-    if(hangout){
-      debugger
-    }
-    else{
-      debugger;
-    }
-  },[hangout])
+  
 
   return {
     onMessageText,

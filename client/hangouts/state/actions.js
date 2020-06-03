@@ -11,19 +11,21 @@ export function selectHangout({ dispatch, username }) {
   dispatch({ type: actionTypes.SELECTED_HANGOUT, username });
 }
 
-export function selectUser({dispatch, user,username}){
+export function selectUser({ dispatch, user, username }) {
   // save selected user to hangouts
-  const hangout = {...user, state:'INVITE'}
-  const hangouts =JSON.parse(localStorage.getItem(`${username}-hangouts`))
- 
-  if(hangouts){
-    localStorage.setItem(`${username}-hangouts`, JSON.stringify([...hangouts,hangout]))
-  }
-  else{
-    localStorage.setItem(`${username}-hangouts`, JSON.stringify([hangout]))
+  const hangout = { ...user, state: 'INVITE' };
+  const hangouts = JSON.parse(localStorage.getItem(`${username}-hangouts`));
+
+  if (hangouts) {
+    localStorage.setItem(
+      `${username}-hangouts`,
+      JSON.stringify([...hangouts, hangout])
+    );
+  } else {
+    localStorage.setItem(`${username}-hangouts`, JSON.stringify([hangout]));
   }
 
-  dispatch({type:actionTypes.SELECTED_USER,hangout})
+  dispatch({ type: actionTypes.SELECTED_USER, hangout });
 }
 //search for hangout by typing into TextInput
 export function searchHangouts({ search, dispatch }) {
@@ -35,39 +37,36 @@ export function filterHangouts({ dispatch }) {
 }
 
 //fetch hangout from server if not found in local hangouts
-export async function fetchHangout({ search, dispatch }) {
-  
+export async function fetchHangout({ search, dispatch,username }) {
+  debugger;
   try {
     dispatch({ type: actionTypes.FETCH_HANGOUT_STARTED });
-    const response = await fetch(`/hangouts/find?search=${search}`);
-
-   if(response.ok){
-    const { hangouts } = await response.json();
-
-    if (hangouts.length > 0) {
-
-      dispatch({ type: actionTypes.FETCH_HANGOUT_SUCCESS, hangouts });
-    }  else{
+    const response = await fetch(`/hangouts/find?search=${search}&username=${username}`);
+    debugger;
+    if (response.ok) {
+      debugger;
+      const { hangouts } = await response.json();
+      debugger;
+      if (hangouts.length > 0) {
+        dispatch({ type: actionTypes.FETCH_HANGOUT_SUCCESS, hangouts });
+      } else {
+        dispatch({ type: actionTypes.FETCH_HANGOUT_NOT_FOUND });
+        // fetch user from server in hangout is newuser
+        fetchUser({ search, dispatch });
+      }
+    } else {
       dispatch({ type: actionTypes.FETCH_HANGOUT_NOT_FOUND });
       // fetch user from server in hangout is newuser
       fetchUser({ search, dispatch });
-     }
-
-   }
-   else{
-    dispatch({ type: actionTypes.FETCH_HANGOUT_NOT_FOUND });
-    // fetch user from server in hangout is newuser
-    fetchUser({ search, dispatch });
-   }
-
+    }
   } catch (error) {
-
+    const err = error;
+    debugger;
     dispatch({ type: actionTypes.FETCH_HANGOUT_FAILED, error });
   }
 }
-  // fetch user from server in hangout is newuser
+// fetch user from server in hangout is newuser
 export async function fetchUser({ search, dispatch }) {
-
   try {
     dispatch({ type: actionTypes.FETCH_USER_STARTED });
     const response = await fetch(`/users/find?search=${search}`);
@@ -79,12 +78,6 @@ export async function fetchUser({ search, dispatch }) {
   }
 }
 
-
-
-
-export function changeMessageText({text,dispatch}){
-dispatch({type:actionTypes.MESSAGE_TEXT_CHANGED,text})
-
+export function changeMessageText({ text, dispatch }) {
+  dispatch({ type: actionTypes.MESSAGE_TEXT_CHANGED, text });
 }
-
-
