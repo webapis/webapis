@@ -3,7 +3,6 @@ import { useEffect } from 'preact/hooks';
 import { lazy, Suspense } from 'preact/compat';
 import { Route, useRouteContext } from '../route/router';
 import { useHangouts } from './state/useHangouts';
-import {useSocket} from './state/useSocket'
 const Hangouts = lazy(() => import('./Hangout'));
 const Block = lazy(() => import('./state-ui/Block'));
 const Blocked = lazy(() => import('./state-ui/Blocked'));
@@ -15,7 +14,7 @@ const Inviter = lazy(() => import('./state-ui/Inviter'));
 
 export default function Mobile() {
   const [route, setRoute] = useRouteContext();
-  const sockethandler =useSocket()
+
   const {
     hangout,
     hangouts,
@@ -34,7 +33,7 @@ export default function Mobile() {
   } = useHangouts();
   useEffect(() => {
     if (hangout) {
-      
+      debugger;
       setRoute(`/${hangout.state}`);
     }
   }, [hangout]);
@@ -78,7 +77,7 @@ export default function Mobile() {
           <Invite hangout={hangout} onInvite={onInvite} onMessageText={onMessageText} messageText={messageText}/>
         </Suspense>
       </Route>
-      <Route path="/INVITEE">
+      <Route path="/INVITED">
         <Suspense fallback={<div>Loading...</div>}>
           <Invitee hangout={hangout} />
         </Suspense>

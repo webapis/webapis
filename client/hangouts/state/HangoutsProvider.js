@@ -7,6 +7,7 @@ import {
   useEffect,
 } from 'preact/hooks';
 import { reducer, initState } from './reducer';
+
 import { loadHangouts, filterHangouts,fetchHangout } from './actions';
 import { useAuthContext } from '../../auth/auth-context';
 const HangoutContext = createContext();
@@ -24,7 +25,6 @@ export function HangoutsProvider(props) {
   const { username } = authContext.state;
   const [state, dispatch] = useReducer(reducer, initState);
   const { hangout } = state;
-
 
   useEffect(() => {
     if (username) {

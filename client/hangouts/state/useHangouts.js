@@ -11,6 +11,7 @@ import {
   selectUser,
   changeMessageText,
 } from './actions';
+import {useSocket} from './useSocket'
 import { actionTypes } from './actionTypes';
 import { messageToServer, messageCategories } from './messageTypes';
 
@@ -22,7 +23,7 @@ export function useHangouts() {
   const [state, dispatch] = useHangoutContext();
 
   const { hangout, hangouts, search, users, messageText } = state;
-
+  const handleSocket =useSocket({dispatch,hangout,username})
   function onSelectHangout(e) {
     const username = e.target.id;
     debugger;
@@ -80,6 +81,16 @@ export function useHangouts() {
   function onMessageText(e) {
     changeMessageText({ dispatch, text: e.target.value });
   }
+
+  useEffect(()=>{
+    if(hangout){
+      debugger
+    }
+    else{
+      debugger;
+    }
+  },[hangout])
+
   return {
     onMessageText,
     messageText,

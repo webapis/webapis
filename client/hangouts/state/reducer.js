@@ -69,10 +69,13 @@ export function reducer(state, action) {
       };
     case actionTypes.HANGOUT_CHANGED_ITS_STATE:
     case actionTypes.ACKNOWLEDGEMENT_RECIEVED:
+      debugger;
       return {
         ...state,
+        hangout:action.hangout,
         hangouts: state.hangouts.map((g) => {
           if (g.username === action.hangout.username) {
+            debugger;
             return action.hangout;
           } else return g;
         }),

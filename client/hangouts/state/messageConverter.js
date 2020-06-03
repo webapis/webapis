@@ -3,9 +3,11 @@ export function hangoutToMessage({ hangout, type }) {
     return{ username: hangout.username, type, message: hangout.message }
 }
 
-export function messageToHangout({ message, hangout }) {
-  
-    return { ...hangout, state: message.type, message: message }
+export function updateAcknowledgement({ acknowledgement, hangout }) {
+  const {username,email}=hangout
+  const {type}=acknowledgement
+
+    return { username,email,state:type }
 }
 
 export function messageToNewHangout(msg) {

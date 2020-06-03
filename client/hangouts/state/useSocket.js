@@ -1,16 +1,16 @@
 import { useEffect } from 'preact/hooks';
 import { actionTypes } from './actionTypes';
-import { messageToHangout, messageToNewHangout } from './messageConverter';
-import { useHangoutContext } from './HangoutsProvider';
+import { updateAcknowledgement, messageToNewHangout } from './messageConverter';
 import { messagesFromServer, messageCategories } from './messageTypes';
 import { useWSocketContext } from '../../wsocket/WSocketProvider';
-export function useSocket() {
-  const [state, dispatch] = useHangoutContext();
-  const {hangout}=state
+
+export function useSocket({dispatch,hangout,username}) {
   const socketContext = useWSocketContext();
 const {socket}=socketContext
+
+
   useEffect(() => {
-    if (socket) {
+    if (socket && hangout) {
       socket.onmessage = (message) => {
         debugger
         const msg = JSON.parse(message.data);
@@ -18,9 +18,11 @@ const {socket}=socketContext
         switch (msg.category) {
           case messageCategories.ACKNOWLEDGEMENT:
             debugger;
-            handleAckhowledgements({ dispatch, msg, hangout });
+            handleAckhowledgements({ dispatch, acknowledgement:msg, hangout, username });
+            break;
           case messageCategories.PEER:
             handlePeerMessages({ dispatch, msg, hangout });
+            break;
           default:
             throw new Error('Message cateory is not defined');
         }
@@ -35,18 +37,20 @@ const {socket}=socketContext
         debugger;
       };
     }
-  }, [socket]);
+  }, [socket, hangout]);
 
   return null;
 }
 
-function handleAckhowledgements({ dispatch, msg, hangout }) {
+function handleAckhowledgements({ dispatch, acknowledgement, hangout,username }) {
   debugger;
-  let updatedHangout = messageToHangout({ hangout, message: msg });
+  let updatedHangout = updateAcknowledgement({ hangout,acknowledgement });
+  debugger;
   dispatch({
     type: actionTypes.ACKNOWLEDGEMENT_RECIEVED,
     hangout: updatedHangout,
   });
+  debugger;
   updateHangoutStateInLocalStorage(`${username}-hangouts`, updatedHangout);
 }
 
@@ -76,9 +80,11 @@ function handlePeerMessages({ dispatch, msg, hangout }) {
 }
 
 function updateHangoutStateInLocalStorage(key, hangout) {
-  const hangouts = localStorage.getItem(key);
+  debugger
+  const hangouts =JSON.parse( localStorage.getItem(key));
   const updated = hangouts.map((g) => {
     if (g.username === hangout.username) {
+      debugger
       return hangout;
     } else {
       return g;
