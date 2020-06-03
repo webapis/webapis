@@ -5,8 +5,7 @@ export async function inviteHandler({ collection, hangout, ws, connections }) {
     message:hangout.message,
     type: messagesFromServer.INVITER,
     username: ws.user.username,
-    email:ws.user.email,
-    category:messageCategories.PEER
+    email:ws.user.email
   };
 debugger;
 
@@ -19,11 +18,11 @@ debugger;
   );
   const updateTarget = await collection.updateOne(
     { username: hangout.username },
-    { $push: { hangouts: targetHangouts } }
+    { $push: { invitations: targetHangouts } }
   );
   const targetUserConnection = connections[hangout.username];
   if (targetUserConnection) {
-    targetUserConnection.send(JSON.stringify(targetHangouts));
+    targetUserConnection.send(JSON.stringify({...targetHangouts,   category:messageCategories.PEER}));
   }
   ws.send(JSON.stringify(sourceHangouts))
 } 

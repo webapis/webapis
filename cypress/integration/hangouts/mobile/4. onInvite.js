@@ -32,7 +32,7 @@ describe('onInvite', () => {
    cy.get('[data-testid=messageTextInput]').type('Lets hangchat');
   cy.get('[data-testid=oninvite-btn]').click();
    cy.get('[data-testid=invitee-ui]');
-    //4.retrieve new user from localStorage
+    //4.retrieve new user from localStorage and view state
     cy.visit('/')
     cy.wait(50);
     cy.get('[data-testid=menu]').click();
@@ -41,7 +41,7 @@ describe('onInvite', () => {
     cy.get('[data-testid=newuser]').click();
     cy.get('[data-testid=invitee-ui]');
 
-  //   //5.retrieve new user from server
+  //   //5.retrieve new user from server and view state
     cy.window()
     .its('localStorage')
     .invoke('removeItem', 'demo-hangouts')
