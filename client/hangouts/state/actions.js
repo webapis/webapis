@@ -38,15 +38,15 @@ export function filterHangouts({ dispatch }) {
 
 //fetch hangout from server if not found in local hangouts
 export async function fetchHangout({ search, dispatch,username }) {
-  debugger;
+  ;
   try {
     dispatch({ type: actionTypes.FETCH_HANGOUT_STARTED });
     const response = await fetch(`/hangouts/find?search=${search}&username=${username}`);
-    debugger;
+    ;
     if (response.ok) {
-      debugger;
+      ;
       const { hangouts } = await response.json();
-      debugger;
+      ;
       if (hangouts.length > 0) {
         dispatch({ type: actionTypes.FETCH_HANGOUT_SUCCESS, hangouts });
       } else {
@@ -61,7 +61,7 @@ export async function fetchHangout({ search, dispatch,username }) {
     }
   } catch (error) {
     const err = error;
-    debugger;
+    ;
     dispatch({ type: actionTypes.FETCH_HANGOUT_FAILED, error });
   }
 }

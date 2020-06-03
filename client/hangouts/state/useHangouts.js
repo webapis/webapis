@@ -46,9 +46,9 @@ export function useHangouts() {
     dispatch({ type: actionTypes.OFFER_STARTED });
   }
   function onAccept() {
-    const { username } = hangout;
+    const { username,email } = hangout;
     debugger;
-    socket.send(JSON.stringify({ username, type: messageToServer.ACCEPT }));
+    socket.send(JSON.stringify({ username,email, type: messageToServer.HANGCHAT }));
     dispatch({ type: actionTypes.ACCEPT_STARTED});
   }
   function onBlock() {

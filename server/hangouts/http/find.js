@@ -10,20 +10,20 @@ export default async function ({ req, res, collection }) {
     const decoded = await jwt.verify(token[uname], process.env.secret);
     const { username } = decoded;
     // finduser
-    let user = await collection.findOne({username});
+    let user = await collection.findOne({ username });
     // search for users hangouts
     let search = url.parse(req.url, true).query.search;
-    let hangouts =user && user.hangouts && user.hangouts.filter((g)=> g.username.includes(search))
-    let invitations =user && user.invitations && user.invitations.filter((g)=> g.username.includes(search))
+    let hangouts = user && user.hangouts && user.hangouts.filter((g) => g.username.includes(search))
+    let invitations = user && user.invitations && user.invitations.filter((g) => g.username.includes(search))
     let result = hangouts ? hangouts : null
-    if(!result){
-      result = invitations ? invitations :null
+    if (!result) {
+      result = invitations ? invitations.map(i => { return { username: i.username, email: i.email, state: i.state, message: i.message } }) : null
     }
-    debugger
+
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.write(
       JSON.stringify({
-        hangouts: result ? result :[]
+        hangouts: result ? result : []
       })
     );
     res.end();
@@ -36,3 +36,4 @@ export default async function ({ req, res, collection }) {
     res.end();
   }
 }
+//

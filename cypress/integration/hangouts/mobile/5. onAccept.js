@@ -30,6 +30,30 @@ describe('OnAccept',()=>{
         cy.get('[data-testid=inviter-ui]')
 
         //accept invitation
-       // cy.get('[data-testid=accept-btn]').click()
+        cy.get('[data-testid=accept-btn]').click()
+
+        // load accepted invitation from localStorage
+        cy.visit('/')
+        cy.wait(50);
+        cy.get('[data-testid=menu]').click();
+        cy.wait(50);
+        cy.get('[data-testid=hangouts]').click();
+        cy.get('[data-testid=search-input]').type('bero');
+        cy.get('[data-testid=search-btn]').click();
+        cy.get('[data-testid=bero]').click()
+        cy.get('[data-testid=hangchat-ui]')
+        // load accepted invitation from server
+        cy.window()
+        .its('localStorage')
+        .invoke('removeItem', 'demo-hangouts')
+        cy.visit('/')
+        cy.wait(50);
+        cy.get('[data-testid=menu]').click();
+        cy.wait(50);
+        cy.get('[data-testid=hangouts]').click();
+        cy.get('[data-testid=search-input]').type('bero');
+        cy.get('[data-testid=search-btn]').click();
+        cy.get('[data-testid=bero]').click()
+        cy.get('[data-testid=hangchat-ui]')
     })
 })

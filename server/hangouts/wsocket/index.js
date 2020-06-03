@@ -1,6 +1,7 @@
 
 import { initUsers } from './initUsers';
 import { inviteHandler } from './inviteHandler';
+import {acceptHandler} from './acceptHandler'
 import {messageToServer} from '../../../client/hangouts/state/messageTypes'
 export default async function hangouts({
   hangout,
@@ -18,7 +19,9 @@ debugger;
      inviteHandler({ collection, hangout,ws,connections });
     
       break;
-    case messageToServer.ACCEPT:
+    case messageToServer.HANGCHAT:
+      acceptHandler({ collection, hangout,ws,connections })
+      debugger;
       break;
     case messageToServer.BlOCK:
       break;

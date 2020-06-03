@@ -4,21 +4,21 @@ import { updateAcknowledgement, messageToNewHangout } from './messageConverter';
 import { messagesFromServer, messageCategories } from './messageTypes';
 import { useWSocketContext } from '../../wsocket/WSocketProvider';
 
-export function useSocket({dispatch,hangout,username}) {
+export function useSocket({ dispatch, hangout, username }) {
   const socketContext = useWSocketContext();
-const {socket}=socketContext
+  const { socket } = socketContext
 
 
   useEffect(() => {
     if (socket && hangout) {
       socket.onmessage = (message) => {
-        
+
         const msg = JSON.parse(message.data);
         ;
         switch (msg.category) {
           case messageCategories.ACKNOWLEDGEMENT:
-            ;
-            handleAckhowledgements({ dispatch, acknowledgement:msg, hangout, username });
+            debugger;
+            handleAckhowledgements({ dispatch, acknowledgement: msg, hangout, username });
             break;
           case messageCategories.PEER:
             handlePeerMessages({ dispatch, msg, hangout });
@@ -42,9 +42,9 @@ const {socket}=socketContext
   return null;
 }
 
-function handleAckhowledgements({ dispatch, acknowledgement, hangout,username }) {
-  
-  let updatedHangout = updateAcknowledgement({ hangout,acknowledgement });
+function handleAckhowledgements({ dispatch, acknowledgement, hangout, username }) {
+
+  let updatedHangout = updateAcknowledgement({ hangout, acknowledgement });
   ;
   dispatch({
     type: actionTypes.ACKNOWLEDGEMENT_RECIEVED,
@@ -80,17 +80,23 @@ function handlePeerMessages({ dispatch, msg, hangout }) {
 }
 
 function updateHangoutStateInLocalStorage(key, hangout) {
-  
-  const hangouts =JSON.parse( localStorage.getItem(key));
-  const updated = hangouts.map((g) => {
-    if (g.username === hangout.username) {
-      
-      return hangout;
-    } else {
-      return g;
-    }
-  });
-  localStorage.setItem(key, JSON.stringify(updated));
+
+  const hangouts = JSON.parse(localStorage.getItem(key));
+  if (hangouts) {
+    const updated = hangouts.map((g) => {
+      if (g.username === hangout.username) {
+
+        return hangout;
+      } else {
+        return g;
+      }
+    });
+    localStorage.setItem(key, JSON.stringify(updated));
+  }
+  else {
+    localStorage.setItem(key, JSON.stringify(hangout));
+  }
+
 }
 
 function addNewHangoutToLocalStorage(key, hangout) {

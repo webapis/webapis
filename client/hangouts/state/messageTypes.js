@@ -10,7 +10,7 @@ export const acknowledgmentTypes = {
 
 export const messagesFromServer = {
     BLOCKER: 'BLOCKER',
-    ACCEPTER: 'ACCEPTER',
+    HANGCHAT: 'HANGCHAT',
     UNBLOCKER: 'UNBLOCKER',
     INVITER: 'INVITER',
     DECLINER: 'DECLINER',
@@ -19,7 +19,7 @@ export const messagesFromServer = {
 }
 
 export const messageToServer = {
-    ACCEPT: 'ACCEPT',
+    HANGCHAT: 'HANGCHAT',
     DECLINE: 'DECLINE',
     INVITE: 'INVITE',
     BlOCK: 'BlOCK',
