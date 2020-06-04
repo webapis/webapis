@@ -1,54 +1,43 @@
-import {
-  messagesFromServer,
-  acknowledgmentTypes,
-  messageCategories,
-} from '../../../client/hangouts/state/messageTypes';
+import { hangoutStates } from '../hangoutStates'
 export async function inviteHandler({ collection, hangout, ws, connections }) {
-  const sourceHangouts = {
+  const invitee = {
     username: hangout.username,
-    type: acknowledgmentTypes.INVITEE,
-    category: messageCategories.ACKNOWLEDGEMENT,
+    email: hangout.email,
+    state: hangoutStates.INVITED,
+    message: hangout.message
   };
-  const targetHangouts = {
+  const inviter = {
     message: hangout.message,
     username: ws.user.username,
     email: ws.user.email,
+    state: hangoutStates.INVITER
   };
   debugger;
 
-  //push new contact to user's contact list
-  //push new contact to target user's contact list
-  //if target user is online send invitation
-  const updateSourceUser = await collection.updateOne(
+  // updateInviter
+  await collection.updateOne(
     { username: ws.user.username },
     {
       $push: {
-        hangouts: {
-          username: hangout.username,
-          email: hangout.email,
-          state: acknowledgmentTypes.INVITEE,
-        },
+        hangouts: invitee
       },
     }
   );
-  const updateTarget = await collection.updateOne(
+  //updateInvitee 
+  await collection.updateOne(
     { username: hangout.username },
     {
       $push: {
-        invitations: { ...targetHangouts, state: messagesFromServer.INVITER },
+        invitations: inviter,
       },
     }
   );
-  const targetUserConnection = connections[hangout.username];
-  if (targetUserConnection) {
-    targetUserConnection.send(
-      JSON.stringify({
-        ...targetHangouts,
-        category: messageCategories.PEER,
-        type: messagesFromServer.INVITER,
-      })
+  const inviteeConnection = connections[hangout.username];
+  if (inviteeConnection) {
+    inviteeConnection.send(
+      JSON.stringify(inviter)
     );
   }
-  ws.send(JSON.stringify(sourceHangouts));
+  ws.send(JSON.stringify(invitee));
 }
 //

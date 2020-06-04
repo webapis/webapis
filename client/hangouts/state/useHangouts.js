@@ -1,5 +1,4 @@
 import { h } from 'preact';
-import { useEffect, useState } from 'preact/hooks';
 import { useHangoutContext } from './HangoutsProvider';
 import { useAuthContext } from '../../auth/auth-context';
 import { useWSocketContext } from '../../wsocket/WSocketProvider';
@@ -10,10 +9,10 @@ import {
   fetchHangout,
   selectUser,
   changeMessageText,
+  startClientCommand
 } from './actions';
 import { useSocket } from './useSocket';
-import { actionTypes } from './actionTypes';
-import { messageToServer, messageCategories } from './messageTypes';
+import { clientCommands } from './clientCommands';
 
 export function useHangouts() {
   const socketContext = useWSocketContext();
@@ -26,7 +25,7 @@ export function useHangouts() {
   const handleSocket = useSocket({ dispatch, hangout, username });
   function onSelectHangout(e) {
     const username = e.target.id;
-    debugger;
+
     selectHangout({ dispatch, username });
   }
   function onSelectUser(e) {
@@ -34,6 +33,7 @@ export function useHangouts() {
     const user = users.find((u) => u.username === uname);
     selectUser({ dispatch, user, username });
   }
+
   function onInvite() {
     const { username, email } = hangout;
     const updatedHangout = {
@@ -42,32 +42,32 @@ export function useHangouts() {
       message: { text: messageText, timestamp: Date.now() },
     };
     socket.send(
-      JSON.stringify({ ...updatedHangout, type: messageToServer.INVITE })
+      JSON.stringify({ ...updatedHangout, command: clientCommands.INVITE })
     );
-    dispatch({ type: actionTypes.OFFER_STARTED });
+    startClientCommand({ dispatch })
   }
   function onAccept() {
-    const { username,email } = hangout;
+    const { username, email } = hangout;
     debugger;
-    socket.send(JSON.stringify({ username,email, type: messageToServer.HANGCHAT }));
-    dispatch({ type: actionTypes.ACCEPT_STARTED});
+    socket.send(JSON.stringify({ username, email, command: clientCommands.ACCEPT }));
+    startClientCommand({ dispatch })
   }
   function onBlock() {
-    socket.send(JSON.stringify({ ...hangout, type: messageToServer.BlOCK }));
-    dispatch({ type: actionTypes.BLOCK_STARTED, hangout });
+    socket.send(JSON.stringify({ ...hangout, command: clientCommands.BLOCK }));
+    startClientCommand({ dispatch })
   }
   function onUnblock() {
-    socket.send(JSON.stringify({ ...hangout, type: messageToServer.UNBLOCK }));
-    dispatch({ type: actionTypes.UNBLOCK_STARTED, hangout });
+    socket.send(JSON.stringify({ ...hangout, command: clientCommands.UNBLOCK }));
+    startClientCommand({ dispatch })
   }
   function onDecline() {
-    socket.send(JSON.stringify({ ...hangout, type: messageToServer.DECLINE }));
-    dispatch({ type: actionTypes.DECLINE_STARTED, hangout });
+    socket.send(JSON.stringify({ ...hangout, command: clientCommands.DECLINE }));
+    startClientCommand({ dispatch })
   }
 
   function onMessage() {
-    socket.send(JSON.stringify({ ...hangout, type: messageToServer.MESSAGE }));
-    dispatch({ type: actionTypes.MESSAGE_STARTED, hangout });
+    socket.send(JSON.stringify({ ...hangout, command: clientCommands.MESSAGE }));
+    startClientCommand({ dispatch })
   }
 
   function onSearch(e) {
@@ -105,15 +105,4 @@ export function useHangouts() {
   };
 }
 
-function updateLocalHangout({ hangout, username }) {
-  const localHangouts = JSON.parse(
-    localStorage.getItem(`${username}-hangouts`)
-  );
-  const updatedHangouts = localHangouts.map((lh) => {
-    if (lh.username === hangout.username) {
-      return hangout;
-    } else {
-      return lh;
-    }
-  });
-}
+

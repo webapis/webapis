@@ -2,7 +2,7 @@
 import { initUsers } from './initUsers';
 import { inviteHandler } from './inviteHandler';
 import {acceptHandler} from './acceptHandler'
-import {messageToServer} from '../../../client/hangouts/state/messageTypes'
+import {clientCommands} from '../../../client/hangouts/state/clientCommands'
 export default async function hangouts({
   hangout,
   ws,
@@ -13,23 +13,23 @@ export default async function hangouts({
   debugger;
  await initUsers({ collection,ws, hangout });
 debugger;
-  switch (hangout.type) {
-    case messageToServer.INVITE:
+  switch (hangout.command) {
+    case clientCommands.INVITE:
      debugger;
      inviteHandler({ collection, hangout,ws,connections });
     
       break;
-    case messageToServer.HANGCHAT:
+      case clientCommands.ACCEPT:
       acceptHandler({ collection, hangout,ws,connections })
       debugger;
       break;
-    case messageToServer.BlOCK:
+      case clientCommands.BLOCK:
       break;
-    case messageToServer.UNBLOCK:
+      case clientCommands.UNBLOCK:
       break;
-    case messageToServer.DECLINE:
+      case clientCommands.DECLINE:
       break;
-    case messageToServer.MESSAGE:
+      case clientCommands.MESSAGE:
 
     default:
       throw new Error('No message type is provided for switch statement');

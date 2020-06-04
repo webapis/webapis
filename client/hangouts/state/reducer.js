@@ -9,15 +9,10 @@ export const initState = {
   loading: false,
   error: null,
   messageText: '',
-  online:false
+  online: false
 };
 export function reducer(state, action) {
   switch (action.type) {
-    case actionTypes.OFFER_STARTED:
-      return {
-        ...state,
-       loading:true
-      };
     case actionTypes.MESSAGE_TEXT_CHANGED:
       return { ...state, messageText: action.text };
     case actionTypes.FETCH_USER_FAILED:
@@ -67,21 +62,19 @@ export function reducer(state, action) {
         ...state,
         hangout: state.hangouts.find((g) => g.username === action.username),
       };
-    case actionTypes.HANGOUT_CHANGED_ITS_STATE:
-    case actionTypes.ACKNOWLEDGEMENT_RECIEVED:
-      ;
+    case actionTypes.HANGOUT_STATE_CHANGED:
       return {
-        ...state,
-        hangout:action.hangout,
-        hangouts: state.hangouts.map((g) => {
+        ...state,hangout:action.hangout, hangouts: state.hangouts.map(g => {
           if (g.username === action.hangout.username) {
-            ;
-            return action.hangout;
-          } else return g;
-        }),
-      };
-    case actionTypes.OFFERER_RECIEVED:
-      return { ...state, hangouts: [...state.hangouts, action.hangout] };
+            return action.hangout
+          }
+          else {
+            return g
+          }
+        })
+      }
+    case actionTypes.NEW_HANGOUT_RECIEVED:
+      return { ...state, hangouts: [...state.hangouts,action.hangout] }
     default:
       return state;
   }

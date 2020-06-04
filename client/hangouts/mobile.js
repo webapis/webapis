@@ -33,7 +33,7 @@ export default function Mobile() {
   } = useHangouts();
   useEffect(() => {
     if (hangout) {
-      ;
+
       setRoute(`/${hangout.state}`);
     }
   }, [hangout]);
@@ -67,7 +67,12 @@ export default function Mobile() {
           <Configure hangout={hangout} />
         </Suspense>
       </Route>
-      <Route path="/HANGCHAT">
+      <Route path="/ACCEPTED">
+        <Suspense fallback={<div>Loading...</div>}>
+          <Hangchat />
+        </Suspense>
+      </Route>
+      <Route path="/ACCEPTER">
         <Suspense fallback={<div>Loading...</div>}>
           <Hangchat />
         </Suspense>
@@ -77,7 +82,7 @@ export default function Mobile() {
           <Invite hangout={hangout} onInvite={onInvite} onMessageText={onMessageText} messageText={messageText}/>
         </Suspense>
       </Route>
-      <Route path="/INVITEE">
+      <Route path="/INVITED">
         <Suspense fallback={<div>Loading...</div>}>
           <Invitee hangout={hangout} />
         </Suspense>

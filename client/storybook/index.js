@@ -10,6 +10,7 @@ import  Invitee  from '../hangouts/state-ui/Invitee';
 import  Inviter  from '../hangouts/state-ui/Inviter';
 import  Hangchat  from '../hangouts/state-ui/Hangchat';
 import  {Message } from '../hangouts/ui/Message';
+import {Messages} from '../hangouts/ui/Messages'
 import { OnlineStatus } from '../layout/icons/onlineStatus';
 import { ThemeProvider } from '../theme/theme-context';
 import { List, ListItem } from '../layout/NavList';
@@ -30,6 +31,7 @@ const message = {
   text: `Let's Chat on Hangout!`,
   timestamp: 1546308946119,
 };
+const messages =[message,message]
 render(
   <ThemeProvider
     initState={{
@@ -40,7 +42,7 @@ render(
       },
     }}
   >
-    <RouteProvider initialRoute="/online">
+    <RouteProvider initialRoute="/messages">
       <Navigation drawerContent={<DrawerContent />}>
         <Route path="/hangouts">
           <Hangout hangouts={hangouts} />
@@ -76,6 +78,9 @@ render(
           <OnlineStatus online/>
           <OnlineStatus />
           </div>
+        </Route>
+        <Route path="/messages">
+      <Messages messages={messages}/>
         </Route>
       </Navigation>
     </RouteProvider>

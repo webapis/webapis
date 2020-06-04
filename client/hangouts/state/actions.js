@@ -1,5 +1,4 @@
 import { actionTypes } from './actionTypes';
-import { messagesFromServer } from './messageTypes';
 
 //retrieves hangouts from localStorage
 export function loadHangouts({ username, dispatch }) {
@@ -8,7 +7,7 @@ export function loadHangouts({ username, dispatch }) {
 }
 //select hangout from List
 export function selectHangout({ dispatch, username }) {
-  debugger;
+
   dispatch({ type: actionTypes.SELECTED_HANGOUT, username });
 }
 
@@ -81,4 +80,8 @@ export async function fetchUser({ search, dispatch }) {
 
 export function changeMessageText({ text, dispatch }) {
   dispatch({ type: actionTypes.MESSAGE_TEXT_CHANGED, text });
+}
+
+export function startClientCommand({dispatch}){
+dispatch({type:actionTypes.CLIENT_COMMAND_STARTED})
 }

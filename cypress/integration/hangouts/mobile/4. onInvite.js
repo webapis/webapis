@@ -33,13 +33,13 @@ describe('onInvite', () => {
   cy.get('[data-testid=oninvite-btn]').click();
    cy.get('[data-testid=invitee-ui]');
     //4.retrieve new user from localStorage and view state
-    cy.visit('/')
+   cy.visit('/')
     cy.wait(50);
     cy.get('[data-testid=menu]').click();
     cy.wait(50);
-    cy.get('[data-testid=hangouts]').click();
-    cy.get('[data-testid=newuser]').click();
-    cy.get('[data-testid=invitee-ui]');
+     cy.get('[data-testid=hangouts]').click();
+     cy.get('[data-testid=newuser]').click();
+     cy.get('[data-testid=invitee-ui]');
 
   //   //5.retrieve new user from server and view state
     cy.window()

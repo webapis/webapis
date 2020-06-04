@@ -1,46 +1,39 @@
-import {
-  messagesFromServer,
-  acknowledgmentTypes,
-  messageCategories,
-} from '../../../client/hangouts/state/messageTypes';
+
+import { hangoutStates } from '../hangoutStates'
 export async function acceptHandler({ collection, hangout, ws, connections }) {
   debugger;
+
+  const { email, username } = hangout
+  const inviter = { username, email, state: hangoutStates.ACCEPTED }
+  const accepter = { username: ws.user.username, email: ws.user.email, state: hangoutStates.ACCEPTER }
   // insert hangout to accepter hangouts list
   await collection.updateOne(
     { username: ws.user.username },
     {
       $push: {
-        hangouts: {
-          username: hangout.username,
-          email: hangout.email,
-          state: hangout.type,
-        },
+        hangouts: inviter,
       },
     }
   );
-
-  // send acknowledgement to accepter
-  const acknowledgement = {
-    category: messageCategories.ACKNOWLEDGEMENT,
-    type: messagesFromServer.HANGCHAT,
-    username: hangout.username,
-    email: hangout.email,
-  };
-  ws.send(JSON.stringify(acknowledgement));
+  await collection.updateOne(
+    { username: ws.user.username },
+    {
+      $pull: {
+        invitations: { username },
+      },
+    }
+  );
+  ws.send(JSON.stringify(inviter));
   // update hangout state on inviters hangouts list
   await collection.update(
     { username: hangout.username, 'hangouts.username': ws.user.username },
-    { $set: { 'hangouts.$.state': 'HANGCHAT' } }
+    { $set: { 'hangouts.$.state': hangoutStates.ACCEPTER } }
   );
-  // send acknowledgement to inviter
-  const inviter = connections[hangout.username];
-  if (inviter) {
+
+  const inviterConnection = connections[hangout.username];
+  if (inviterConnection) {
     inviter.send(
-      JSON.parse({
-        type: messagesFromServer.HANGCHAT,
-        username: ws.user.username,
-        email: ws.user.email,
-      })
+      JSON.parse(accepter)
     );
   }
   // remote hangout from invitation
