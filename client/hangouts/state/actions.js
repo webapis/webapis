@@ -8,6 +8,7 @@ export function loadHangouts({ username, dispatch }) {
 }
 //select hangout from List
 export function selectHangout({ dispatch, username }) {
+  debugger;
   dispatch({ type: actionTypes.SELECTED_HANGOUT, username });
 }
 

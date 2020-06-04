@@ -2,9 +2,9 @@
 const seedLogin = require('./seedLogin');
 const seedDelete = require('./seedDelete');
 const seedUser = require('./seedUser');
-const seedHangouts =require('./seedHangouts')
-const deleteCollection =require('./deleteCollection')
-const insertInvitation =require('./insertInvitation')
+const seedHangouts = require('./seedHangouts');
+const deleteCollection = require('./deleteCollection');
+const insertInvitation = require('./insertInvitation');
 /// <reference types="cypress" />
 // ***********************************************************
 // This example plugins/index.js can be used to load plugins
@@ -36,15 +36,28 @@ module.exports = (on, config) => {
     'seed:delete': () => {
       return seedDelete();
     },
-    'seed:hangouts':()=>{
-      return seedHangouts()
+    'seed:hangouts': () => {
+      return seedHangouts();
     },
-    'seed:deleteCollection':({dbName,collectionName})=>{
-      return deleteCollection({dbName,collectionName})
+    'seed:deleteCollection': ({ dbName, collectionName }) => {
+      return deleteCollection({ dbName, collectionName });
     },
-    'seed:insertInvitation':({dbName,collectionName,user,invitation})=>{
-      return insertInvitation({dbName,collectionName,user,invitation})
-    }
-
+    'seed:insertInvitation': ({
+      dbName,
+      collectionName,
+      userInvited,
+      userInviting,
+      hangout,
+      invitation,
+    }) => {
+      return insertInvitation({
+        dbName,
+        collectionName,
+        userInviting,
+        userInvited,
+        hangout,
+        invitation,
+      });
+    },
   });
 };

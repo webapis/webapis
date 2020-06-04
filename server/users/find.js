@@ -4,13 +4,13 @@ export default async function ({ req, res, collection }) {
     let users = null;
     let search = url.parse(req.url, true).query.search;
     debugger;
-    users = await collection.find({ username: search }).toArray();
+    users = await collection.find({ username: search },{username:1,email:1}).toArray();
     
 
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.write(
       JSON.stringify({
-        users: users.map(user=> { return {username:user.username, email:user.email}}),
+        users
       })
     );
     res.end();

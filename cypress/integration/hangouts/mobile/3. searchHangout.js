@@ -41,7 +41,7 @@ describe('searchHangouts', () => {
 
   it('search from server FETCH_HANGOUT_SUCCESS', () => {
     cy.route({
-      url: '/hangouts/find?search=userfromserver',
+      url: '/hangouts/find?search=userfromserver&username=demo',
       response: {
         hangouts: [{ username: 'userfromserver', email: 'userfromserver@gmail.com' }],
       },
@@ -59,7 +59,7 @@ describe('searchHangouts', () => {
     });
 
     cy.route({
-      url: '/hangouts/find?search=newuser', response: {
+      url: '/hangouts/find?search=newuser&username=demo', response: {
         hangouts: [],
       }
     });

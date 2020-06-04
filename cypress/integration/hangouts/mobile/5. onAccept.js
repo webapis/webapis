@@ -2,11 +2,15 @@ describe('OnAccept',()=>{
     beforeEach(()=>{
         cy.task('seed:deleteCollection',{dbName:'auth',collectionName:'users'})
         cy.task('seed:deleteCollection',{dbName:'hangouts',collectionName:'users'})
-        const user ={username:'demo',email:'demo@gmail.com',password:'Dragonly_1999!'}
+        const userInvited ={username:'demo',email:'demo@gmail.com',password:'Dragonly_1999!'}
+        const userInviting ={username:'bero',email:'bero@gmail.com',password:'Dragonly_1999!'}
         const invitation ={username:'bero',email:'bero@gmail.com',state:'INVITER',caterogy:'PEER',message:{text:'Lets chat friend', timestamp:'1591180520432'}}
+        const hangout ={username:'demo',email:'demo@gmail.com',state:'INVITEE',message:{text:"lets hang out", timestamp:1234567865}}
         cy.task('seed:insertInvitation', {
-            user,
+            userInvited,
             invitation,
+            userInviting,
+            hangout, 
             dbName:'hangouts',
             collectionName:'users'
           });

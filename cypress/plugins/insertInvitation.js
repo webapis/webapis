@@ -7,8 +7,10 @@ const client = new MongoClient(url, {
 });
 
 module.exports = async function insertInvitation({
-  user,
+  userInviting,
+  userInvited,
   invitation,
+  hangout,
   collectionName,
   dbName,
 }) {
@@ -17,11 +19,16 @@ module.exports = async function insertInvitation({
     const database = clnt.db(dbName);
     const collection = database.collection(collectionName);
     await collection.deleteMany();
-    await collection.insertOne(user);
+    await collection.insertOne(userInvited);
+    await collection.insertOne(userInviting);
     console.log('insert user')
-   const result= await collection.updateOne(
-      { username: user.username },
+     await collection.updateOne(
+      { username: userInvited.username },
       { $push: { invitations: invitation } }
+    );
+       await collection.updateOne(
+      { username: userInviting.username },
+      { $push: { hangouts: hangout } }
     );
     return result;
   } catch (error) {

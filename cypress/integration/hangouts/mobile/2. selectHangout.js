@@ -64,7 +64,7 @@ describe('selectHangout', () => {
   });
   it('INVITEE state', () => {
     cy.get('[data-testid=inviteeuser]').click();
-    cy.get('[data-testid=invitee-ui]')
+   cy.get('[data-testid=invitee-ui]')
   });
   it('BLOCKED state', () => {
     cy.get('[data-testid=blockeduser]').click();

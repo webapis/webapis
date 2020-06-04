@@ -77,7 +77,7 @@ export default function Mobile() {
           <Invite hangout={hangout} onInvite={onInvite} onMessageText={onMessageText} messageText={messageText}/>
         </Suspense>
       </Route>
-      <Route path="/INVITED">
+      <Route path="/INVITEE">
         <Suspense fallback={<div>Loading...</div>}>
           <Invitee hangout={hangout} />
         </Suspense>

@@ -6,7 +6,7 @@ import {
 export async function inviteHandler({ collection, hangout, ws, connections }) {
   const sourceHangouts = {
     username: hangout.username,
-    type: acknowledgmentTypes.INVITED,
+    type: acknowledgmentTypes.INVITEE,
     category: messageCategories.ACKNOWLEDGEMENT,
   };
   const targetHangouts = {
@@ -26,7 +26,7 @@ export async function inviteHandler({ collection, hangout, ws, connections }) {
         hangouts: {
           username: hangout.username,
           email: hangout.email,
-          state: acknowledgmentTypes.INVITED,
+          state: acknowledgmentTypes.INVITEE,
         },
       },
     }

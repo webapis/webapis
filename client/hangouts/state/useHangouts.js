@@ -26,6 +26,7 @@ export function useHangouts() {
   const handleSocket = useSocket({ dispatch, hangout, username });
   function onSelectHangout(e) {
     const username = e.target.id;
+    debugger;
     selectHangout({ dispatch, username });
   }
   function onSelectUser(e) {
