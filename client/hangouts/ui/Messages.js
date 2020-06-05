@@ -20,7 +20,7 @@ export function Messages({ messages, username }) {
 
    
     <div style={styles.messageContainer} ref={scrollerRef}>
-      {floatMessages({ messages: sortMessages({ messages }), username }).map(
+      {messages && messages.length>0 && floatMessages({ messages: sortMessages({ messages }), username }).map(
         (m) => (
           <div style={{ display: 'flex' }}>
             {' '}
@@ -35,7 +35,7 @@ export function Messages({ messages, username }) {
   );
 }
 function floatMessages({ messages, username }) {
-  if (messages && username) {
+  if (messages && messages.length>0 && username) {
     return messages.map((msg) => {
       if (msg.username === username) {
         return { ...msg, float: 'right', username: 'me' };
@@ -44,13 +44,13 @@ function floatMessages({ messages, username }) {
       }
     });
   } else {
-    throw new Error('messages or username not provided');
+   return null;
   }
 }
 function sortMessages({ messages }) {
   if (messages) {
     return messages.sort();
   } else {
-    throw new Error('messages not provided for sortMessages');
+    return null
   }
 }

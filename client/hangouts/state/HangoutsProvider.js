@@ -8,7 +8,12 @@ import {
 } from 'preact/hooks';
 import { reducer, initState } from './reducer';
 
-import { loadHangouts, filterHangouts,fetchHangout } from './actions';
+import {
+  loadHangouts,
+  filterHangouts,
+  fetchHangout,
+  loadMessages,
+} from './actions';
 import { useAuthContext } from '../../auth/auth-context';
 const HangoutContext = createContext();
 export function useHangoutContext() {
@@ -31,8 +36,11 @@ export function HangoutsProvider(props) {
       loadHangouts({ username, dispatch });
     }
   }, [username]);
-
-
+  useEffect(() => {
+    if (hangout) {
+      loadMessages({ dispatch, hangout });
+    }
+  }, [hangout]);
 
   const value = useMemo(() => [state, dispatch], [state]);
   return <HangoutContext.Provider value={value} {...props} />;

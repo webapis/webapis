@@ -7,7 +7,6 @@ export function loadHangouts({ username, dispatch }) {
 }
 //select hangout from List
 export function selectHangout({ dispatch, username }) {
-
   dispatch({ type: actionTypes.SELECTED_HANGOUT, username });
 }
 
@@ -37,16 +36,14 @@ export function filterHangouts({ dispatch }) {
 }
 
 //fetch hangout from server if not found in local hangouts
-export async function fetchHangout({ search, dispatch,username }) {
-  ;
+export async function fetchHangout({ search, dispatch, username }) {
   try {
     dispatch({ type: actionTypes.FETCH_HANGOUT_STARTED });
-    const response = await fetch(`/hangouts/find?search=${search}&username=${username}`);
-    ;
+    const response = await fetch(
+      `/hangouts/find?search=${search}&username=${username}`
+    );
     if (response.ok) {
-      ;
       const { hangouts } = await response.json();
-      ;
       if (hangouts.length > 0) {
         dispatch({ type: actionTypes.FETCH_HANGOUT_SUCCESS, hangouts });
       } else {
@@ -61,7 +58,6 @@ export async function fetchHangout({ search, dispatch,username }) {
     }
   } catch (error) {
     const err = error;
-    ;
     dispatch({ type: actionTypes.FETCH_HANGOUT_FAILED, error });
   }
 }
@@ -82,6 +78,25 @@ export function changeMessageText({ text, dispatch }) {
   dispatch({ type: actionTypes.MESSAGE_TEXT_CHANGED, text });
 }
 
-export function startClientCommand({dispatch}){
-dispatch({type:actionTypes.CLIENT_COMMAND_STARTED})
+export function startClientCommand({ dispatch }) {
+  dispatch({ type: actionTypes.CLIENT_COMMAND_STARTED });
+}
+
+export function loadMessages({ hangout, dispatch }) {
+  const { username } = hangout;
+  const key = `${username}-messages`;
+  const messages = JSON.parse(localStorage.getItem(key));
+  dispatch({ type: actionTypes.LOADED_MESSAGES, messages });
+}
+
+export function saveMessage({ hangout, dispatch }) {
+  const { username } = hangout;
+  const key = `${username}-messages`;
+  const messages = JSON.parse(localStorage.getItem(key));
+  if (messages) {
+    localStorage.setItem(key, JSON.stringify([...messages, message]));
+  } else {
+    localStorage.setItem(key, JSON.stringify([message]));
+  }
+  dispatch({ type: actionTypes.SAVED_MESSAGE_LOCALLY, message });
 }

@@ -2,17 +2,25 @@ import { actionTypes } from './actionTypes';
 export const initState = {
   hangouts: [],
   hangout: null,
-
-  messages: [],
+  messages: null,
   search: '',
   user: [],
   loading: false,
   error: null,
   messageText: '',
-  online: false
+  online: false,
 };
 export function reducer(state, action) {
   switch (action.type) {
+    case actionTypes.SAVED_MESSAGE_LOCALLY:
+      if (state.messages) {
+        return { ...state, messages: [...state.messages, action.message] };
+      } else {
+        return { ...state, messages: [action.message] };
+      }
+
+    case actionTypes.LOADED_MESSAGES:
+      return { ...state, messages: action.messages };
     case actionTypes.MESSAGE_TEXT_CHANGED:
       return { ...state, messageText: action.text };
     case actionTypes.FETCH_USER_FAILED:
@@ -64,17 +72,18 @@ export function reducer(state, action) {
       };
     case actionTypes.HANGOUT_STATE_CHANGED:
       return {
-        ...state,hangout:action.hangout, hangouts: state.hangouts.map(g => {
+        ...state,
+        hangout: action.hangout,
+        hangouts: state.hangouts.map((g) => {
           if (g.username === action.hangout.username) {
-            return action.hangout
+            return action.hangout;
+          } else {
+            return g;
           }
-          else {
-            return g
-          }
-        })
-      }
+        }),
+      };
     case actionTypes.NEW_HANGOUT_RECIEVED:
-      return { ...state, hangouts: [...state.hangouts,action.hangout] }
+      return { ...state, hangouts: [...state.hangouts, action.hangout] };
     default:
       return state;
   }

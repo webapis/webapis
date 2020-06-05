@@ -10,6 +10,7 @@ import {
   selectUser,
   changeMessageText,
   startClientCommand,
+  saveMessage,
 } from './actions';
 import { useSocket } from './useSocket';
 import { clientCommands } from './clientCommands';
@@ -20,7 +21,7 @@ export function useHangouts() {
   const authContext = useAuthContext();
   const { username } = authContext.state;
   const [state, dispatch] = useHangoutContext();
-  const { hangout, hangouts, search, users, messageText } = state;
+  const { hangout, hangouts, search, users, messageText, messages } = state;
   const handleSocket = useSocket({ dispatch, hangout, username });
   function onSelectHangout(e) {
     const username = e.target.id;
@@ -74,6 +75,7 @@ export function useHangouts() {
       JSON.stringify({ ...hangout, command: clientCommands.MESSAGE })
     );
     startClientCommand({ dispatch });
+    saveMessage({ dispatch, hangout: { ...hangout, message } });
   }
 
   function onSearch(e) {

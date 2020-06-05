@@ -15,7 +15,6 @@ const Inviter = lazy(() => import('./state-ui/Inviter'));
 
 export default function Mobile() {
   const [route, setRoute] = useRouteContext();
-
   const {
     hangout,
     hangouts,
@@ -30,6 +29,7 @@ export default function Mobile() {
     search,
     onStartSearch,
     onMessageText,
+    onMessage,
     messageText,
     username,
     messages
