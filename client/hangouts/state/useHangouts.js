@@ -9,7 +9,7 @@ import {
   fetchHangout,
   selectUser,
   changeMessageText,
-  startClientCommand
+  startClientCommand,
 } from './actions';
 import { useSocket } from './useSocket';
 import { clientCommands } from './clientCommands';
@@ -20,12 +20,10 @@ export function useHangouts() {
   const authContext = useAuthContext();
   const { username } = authContext.state;
   const [state, dispatch] = useHangoutContext();
-
   const { hangout, hangouts, search, users, messageText } = state;
   const handleSocket = useSocket({ dispatch, hangout, username });
   function onSelectHangout(e) {
     const username = e.target.id;
-
     selectHangout({ dispatch, username });
   }
   function onSelectUser(e) {
@@ -44,30 +42,38 @@ export function useHangouts() {
     socket.send(
       JSON.stringify({ ...updatedHangout, command: clientCommands.INVITE })
     );
-    startClientCommand({ dispatch })
+    startClientCommand({ dispatch });
   }
   function onAccept() {
     const { username, email } = hangout;
     debugger;
-    socket.send(JSON.stringify({ username, email, command: clientCommands.ACCEPT }));
-    startClientCommand({ dispatch })
+    socket.send(
+      JSON.stringify({ username, email, command: clientCommands.ACCEPT })
+    );
+    startClientCommand({ dispatch });
   }
   function onBlock() {
     socket.send(JSON.stringify({ ...hangout, command: clientCommands.BLOCK }));
-    startClientCommand({ dispatch })
+    startClientCommand({ dispatch });
   }
   function onUnblock() {
-    socket.send(JSON.stringify({ ...hangout, command: clientCommands.UNBLOCK }));
-    startClientCommand({ dispatch })
+    socket.send(
+      JSON.stringify({ ...hangout, command: clientCommands.UNBLOCK })
+    );
+    startClientCommand({ dispatch });
   }
   function onDecline() {
-    socket.send(JSON.stringify({ ...hangout, command: clientCommands.DECLINE }));
-    startClientCommand({ dispatch })
+    socket.send(
+      JSON.stringify({ ...hangout, command: clientCommands.DECLINE })
+    );
+    startClientCommand({ dispatch });
   }
 
   function onMessage() {
-    socket.send(JSON.stringify({ ...hangout, command: clientCommands.MESSAGE }));
-    startClientCommand({ dispatch })
+    socket.send(
+      JSON.stringify({ ...hangout, command: clientCommands.MESSAGE })
+    );
+    startClientCommand({ dispatch });
   }
 
   function onSearch(e) {
@@ -102,7 +108,7 @@ export function useHangouts() {
     hangout,
     hangouts,
     users,
+    username,
+    messages,
   };
 }
-
-

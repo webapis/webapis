@@ -21,7 +21,9 @@ const style = {
   },
 };
 
-export function Message({ message, username, float = 'left' }) {
+export function Message(props) {
+  const { message } = props;
+  const { float, username } = message;
   const [days, setDays] = useState(0);
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
@@ -51,20 +53,22 @@ export function Message({ message, username, float = 'left' }) {
   }, []);
 
   return (
-    <div style={{ ...style.root, float }}>
-      <div style={style.message}>{message && message.text}</div>
-      <div style={style.log}>
-        <div style={style.username}>{username && username}:</div>
-        <div>
-          {minutes === 0 && <div>Now</div>}
-          {hours === 0 && minutes > 0 && <div>{minutes} minutes ago </div>}
-          {hours > 0 && days === 0 && (
-            <div>
-              {hours} hours {minutes} minutes ago{' '}
-            </div>
-          )}
-          {days <= 10 && days > 1 && <div>{days} days ago</div>}
-          {days > 10 && new Date(message.timestamp)}
+    <div style={{ width: '100%',marginBottom:3 }}>
+      <div style={{ ...style.root, float }}>
+        <div style={style.message}>{message && message.text}</div>
+        <div style={style.log}>
+          <div style={style.username}>{username && username}:</div>
+          <div>
+            {minutes === 0 && <div>Now</div>}
+            {hours === 0 && minutes > 0 && <div>{minutes} minutes ago </div>}
+            {hours > 0 && days === 0 && (
+              <div>
+                {hours} hours {minutes} minutes ago{' '}
+              </div>
+            )}
+            {days <= 10 && days > 1 && <div>{days} days ago</div>}
+            {days > 10 && new Date(message.timestamp)}
+          </div>
         </div>
       </div>
     </div>

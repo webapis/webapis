@@ -1,6 +1,6 @@
 import { h } from 'preact';
 
-const style = {
+const styles = {
   padding: 8,
   marginLeft: 16,
   marginRight: 16,
@@ -11,10 +11,10 @@ const style = {
 };
 
 export function TextInput(props) {
-  const { id, type = 'text' } = props;
+  const { id, type = 'text',style } = props;
   return (
     <div style={{ display: 'flex', width: '100%' }}>
-      <input  style={style} {...props} data-testid={id} type={type} />
+      <input  style={{...styles,...style}} {...props} data-testid={id} type={type} />
     </div>
   );
 }

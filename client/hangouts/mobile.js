@@ -2,6 +2,7 @@ import { h } from 'preact';
 import { useEffect } from 'preact/hooks';
 import { lazy, Suspense } from 'preact/compat';
 import { Route, useRouteContext } from '../route/router';
+
 import { useHangouts } from './state/useHangouts';
 const Hangouts = lazy(() => import('./Hangout'));
 const Block = lazy(() => import('./state-ui/Block'));
@@ -29,11 +30,12 @@ export default function Mobile() {
     search,
     onStartSearch,
     onMessageText,
-    messageText
+    messageText,
+    username,
+    messages
   } = useHangouts();
   useEffect(() => {
     if (hangout) {
-
       setRoute(`/${hangout.state}`);
     }
   }, [hangout]);
@@ -69,17 +71,32 @@ export default function Mobile() {
       </Route>
       <Route path="/ACCEPTED">
         <Suspense fallback={<div>Loading...</div>}>
-          <Hangchat />
+          <Hangchat
+            onMessageText={onMessageText}
+            onMessage={onMessage}
+            messages={messages}
+            username={username}
+          />
         </Suspense>
       </Route>
       <Route path="/ACCEPTER">
         <Suspense fallback={<div>Loading...</div>}>
-          <Hangchat />
+          <Hangchat
+            onMessageText={onMessageText}
+            onMessage={onMessage}
+            messages={messages}
+            username={username}
+          />
         </Suspense>
       </Route>
       <Route path="/INVITE">
         <Suspense fallback={<div>Loading...</div>}>
-          <Invite hangout={hangout} onInvite={onInvite} onMessageText={onMessageText} messageText={messageText}/>
+          <Invite
+            hangout={hangout}
+            onInvite={onInvite}
+            onMessageText={onMessageText}
+            messageText={messageText}
+          />
         </Suspense>
       </Route>
       <Route path="/INVITED">
