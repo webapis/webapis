@@ -69,7 +69,7 @@ export default function Mobile() {
           <Configure hangout={hangout} />
         </Suspense>
       </Route>
-      <Route path="/ACCEPTED">
+      <Route paths={["/ACCEPTED","/ACCEPTER","/MESSANGER","/MESSAGED"]}>
         <Suspense fallback={<div>Loading...</div>}>
           <Hangchat
             onMessageText={onMessageText}
@@ -79,16 +79,7 @@ export default function Mobile() {
           />
         </Suspense>
       </Route>
-      <Route path="/ACCEPTER">
-        <Suspense fallback={<div>Loading...</div>}>
-          <Hangchat
-            onMessageText={onMessageText}
-            onMessage={onMessage}
-            messages={messages}
-            username={username}
-          />
-        </Suspense>
-      </Route>
+    
       <Route path="/INVITE">
         <Suspense fallback={<div>Loading...</div>}>
           <Invite

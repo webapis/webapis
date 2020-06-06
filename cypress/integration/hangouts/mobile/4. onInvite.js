@@ -1,6 +1,6 @@
 describe('onInvite', () => {
   beforeEach(() => {
-   cy.task('seed:deleteCollection',{dbName:'auth',collectionName:'users'})
+    cy.task('seed:deleteCollection',{dbName:'auth',collectionName:'users'})
     cy.task('seed:deleteCollection',{dbName:'hangouts',collectionName:'users'})
     cy.task('seed:user', {
       username: 'newuser',

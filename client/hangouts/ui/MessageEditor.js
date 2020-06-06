@@ -13,9 +13,9 @@ const styles = {
 export function MessageEditor({ messageText, onMessageText, onMessage }) {
   return (
     <div style={styles.root}>
-      <TextInput onChange={onMessageText} value={messageText} />
+      <input type="text" onChange={onMessageText}  data-testid="message-input"/>
       <div>
-        <Button title="send" onClick={onMessage}/>
+        <Button title="send" onClick={onMessage} data-testid='send-btn'/>
       </div>
     </div>
   );

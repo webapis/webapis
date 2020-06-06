@@ -7,5 +7,6 @@ export const clientCommands = {
   BLOCK: 'BLOCK',
   UNBLOCK: 'UNBLOCK',
   MESSAGE: 'MESSAGE',
+  ONLINE:'ONLINE'
 };
 

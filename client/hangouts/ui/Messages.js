@@ -1,7 +1,7 @@
 import { h } from 'preact';
-import {useRef} from 'preact/hooks'
+import { useRef } from 'preact/hooks';
 import { Message } from './Message';
-import {MessageEditor} from './MessageEditor'
+import { MessageEditor } from './MessageEditor';
 const styles = {
   messageContainer: {
     width: '100%',
@@ -10,32 +10,38 @@ const styles = {
     overflow: 'auto',
   },
 };
-export function Messages({ messages, username }) {
-    const scrollerRef = useRef(null);
-    function onSend(){
-        scrollerRef.current.scrollTop = scrollerRef.current.scrollHeight;
-    }
+export function Messages({
+  messages,
+  username,
+  onMessage,
+  onMessageText,
+  messageText,
+}) {
+  const scrollerRef = useRef(null);
+  function onSend() {
+    onMessage();
+    scrollerRef.current.scrollTop = scrollerRef.current.scrollHeight;
+  }
   return (
-      <div>
-
-   
-    <div style={styles.messageContainer} ref={scrollerRef}>
-      {messages && messages.length>0 && floatMessages({ messages: sortMessages({ messages }), username }).map(
-        (m) => (
-          <div style={{ display: 'flex' }}>
-            {' '}
-            <Message message={m} />
-          </div>
-        )
-      )}
-      
+    <div>
+      <div style={styles.messageContainer} ref={scrollerRef}>
+        {messages &&
+          messages.length > 0 &&
+          floatMessages({ messages: sortMessages({ messages }), username }).map(
+            (m) => (
+              <div style={{ display: 'flex' }}>
+                {' '}
+                <Message message={m} />
+              </div>
+            )
+          )}
+      </div>
+      <MessageEditor onMessage={onSend} messageText={messageText}onMessageText={onMessageText} />
     </div>
-    <MessageEditor onMessage={onSend}/>
-       </div>
   );
 }
 function floatMessages({ messages, username }) {
-  if (messages && messages.length>0 && username) {
+  if (messages && messages.length > 0 && username) {
     return messages.map((msg) => {
       if (msg.username === username) {
         return { ...msg, float: 'right', username: 'me' };
@@ -44,13 +50,13 @@ function floatMessages({ messages, username }) {
       }
     });
   } else {
-   return null;
+    return null;
   }
 }
 function sortMessages({ messages }) {
   if (messages) {
     return messages.sort();
   } else {
-    return null
+    return null;
   }
 }

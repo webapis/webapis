@@ -106,7 +106,7 @@ export default function httpRoute(client) {
             usersOperation(req, res);
             break;
             case hangoutsRegex.test(url):
-              debugger;
+            
               hangoutsOperation(req, res);
               break;
           default:

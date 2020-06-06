@@ -15,6 +15,7 @@
 
 // Import commands.js using ES2015 syntax:
 import './commands'
+import './loginByEmail'
 Cypress.on('window:before:load', win => {
     delete win.fetch;
   });

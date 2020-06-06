@@ -57,6 +57,8 @@ Cypress.Commands.add('login', ({ username, email, password }) => {
         });
     });
 });
+
+
 Cypress.Commands.add('remoteLogin', ({ username, email, password }) => {
   cy.request({
     url: 'http://localhost:3000/seed/users',

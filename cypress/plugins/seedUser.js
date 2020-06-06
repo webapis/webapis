@@ -12,12 +12,7 @@ module.exports = async function seedUser({ email, username, password }) {
     const clnt = await client.connect();
     const database = clnt.db('auth');
     const collection = database.collection('users');
-    await collection.deleteMany();
-
     const { hash, salt, iterations } = passhash.hashPassword(password);
-
-    debugger;
-
     const result = await collection.insertOne({
       hash,
       salt,

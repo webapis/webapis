@@ -35,10 +35,11 @@ export function useHangouts() {
 
   function onInvite() {
     const { username, email } = hangout;
+    const message = { text: messageText, timestamp: Date.now() };
     const updatedHangout = {
       username,
       email,
-      message: { text: messageText, timestamp: Date.now() },
+      message,
     };
     socket.send(
       JSON.stringify({ ...updatedHangout, command: clientCommands.INVITE })
@@ -71,11 +72,19 @@ export function useHangouts() {
   }
 
   function onMessage() {
+    const { username, email } = hangout;
+    const message = { text: messageText, timestamp:  Date.now() };
+    const updatedHangout = {
+      username,
+      email,
+      message,
+    };
+ 
     socket.send(
-      JSON.stringify({ ...hangout, command: clientCommands.MESSAGE })
+      JSON.stringify({ ...updatedHangout, command: clientCommands.MESSAGE })
     );
     startClientCommand({ dispatch });
-    saveMessage({ dispatch, hangout: { ...hangout, message } });
+    saveMessage({ dispatch, hangout, message, target:username ,username:authContext.state.username});
   }
 
   function onSearch(e) {
@@ -90,7 +99,9 @@ export function useHangouts() {
   }
 
   function onMessageText(e) {
-    changeMessageText({ dispatch, text: e.target.value });
+    const text =e.target.value
+
+    changeMessageText({ dispatch, text});
   }
 
   return {

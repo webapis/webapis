@@ -2,29 +2,32 @@ import { useEffect } from 'preact/hooks';
 import { useWSocketContext } from '../../wsocket/WSocketProvider';
 import { hangoutStates } from '../../../server/hangouts/hangoutStates'
 import { actionTypes } from './actionTypes'
+import {clientCommands} from './clientCommands'
 export function useSocket({ dispatch, username }) {
   const socketContext = useWSocketContext();
-  const { socket } = socketContext
+  const { socket,online } = socketContext
 
 
   useEffect(() => {
-    if (socket) {
+    if (socket && username) {
       socket.onmessage = (message) => {
         const hangout = JSON.parse(message.data);
         debugger;
         handleHangoutState({ hangout, username, dispatch })
       };
       socket.onclose = () => {
-        ;
+        
       };
       socket.onerror = (error) => {
-        ;
+        
       };
+      
       socket.onopen = () => {
-        ;
+        debugger;
+       
       };
     }
-  }, [socket]);
+  }, [socket,username]);
 
   return null;
 
@@ -68,6 +71,10 @@ function handleHangoutState({ hangout, username, dispatch }) {
       break;
     default:
       throw new Error("hangoutState not defined")
+  }
+
+  function onOnline(){
+    socket.send(JSON.stringify({command:clientCommands.ONLINE}))
   }
 
 }

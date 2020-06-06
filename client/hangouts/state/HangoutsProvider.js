@@ -13,6 +13,7 @@ import {
   filterHangouts,
   fetchHangout,
   loadMessages,
+  saveMessage,
 } from './actions';
 import { useAuthContext } from '../../auth/auth-context';
 const HangoutContext = createContext();
@@ -38,7 +39,32 @@ export function HangoutsProvider(props) {
   }, [username]);
   useEffect(() => {
     if (hangout) {
+      //from local storage
       loadMessages({ dispatch, hangout });
+
+      //save hangout to localStorage
+      const key = `${username}-hangouts`;
+      const hangouts = JSON.parse(localStorage.getItem(key));
+      if (!hangouts) {
+        localStorage.setItem(key, JSON.stringify([hangout]));
+      } else {
+        const hangoutExist = hangouts.find(
+          (g) => g.username === hangout.username
+        );
+        if (hangoutExist) {
+          const updated = hangouts.map((g) => {
+            if (g.username === hangout.username) {
+              return hangout;
+            } else {
+              return g;
+            }
+          });
+          localStorage.setItem(key, JSON.stringify(updated));
+        } else {
+          localStorage.setItem(key, JSON.stringify([hangout]));
+       
+        }
+      }
     }
   }, [hangout]);
 

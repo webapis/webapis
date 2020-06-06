@@ -4,11 +4,13 @@ import { useContext, useState, useMemo } from 'preact/hooks';
 const RouteContext = createContext();
 
 export function Route(props) {
-  const { children, path } = props;
+  const { children, path, paths } = props;
 
   const [route] = useRouteContext();
 
-  if (route === path) {
+  if (path && route === path) {
+    return children;
+  } else if (paths && route === paths.find((p) => p === route)) {
     return children;
   }
   return null;

@@ -5,6 +5,7 @@ const seedUser = require('./seedUser');
 const seedHangouts = require('./seedHangouts');
 const deleteCollection = require('./deleteCollection');
 const insertInvitation = require('./insertInvitation');
+const seedOnMessage = require('./seedOnMessage');
 /// <reference types="cypress" />
 // ***********************************************************
 // This example plugins/index.js can be used to load plugins
@@ -57,6 +58,23 @@ module.exports = (on, config) => {
         userInvited,
         hangout,
         invitation,
+      });
+    },
+    'seed:onMessage': ({
+      userMessanger,
+      userMessangee,
+      messagerHangout,
+      messangeeHangout,
+      collectionName,
+      dbName,
+    }) => {
+      return seedOnMessage({
+        userMessanger,
+        userMessangee,
+        messagerHangout,
+        messangeeHangout,
+        collectionName,
+        dbName,
       });
     },
   });

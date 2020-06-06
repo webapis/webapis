@@ -11,8 +11,25 @@ const { MongoClient } = require('mongodb');
   const server = http.createServer(httpRoute(client));
 
   ws(server, client);
-
+  function shutDown() {
+    console.log('Received kill signal, shutting down gracefully');
+    server.close(() => {
+      console.log('Closed out remaining connections');
+      process.exit(0);
+    });
+  
+    setTimeout(() => {
+      console.error(
+        'Could not close connections in time, forcefully shutting down',
+      );
+      process.exit(1);
+    }, 10000);
+  }
+  
+  process.on('SIGTERM', shutDown);
+  process.on('SIGINT', shutDown);
   server.listen(3000, () => {
     console.log('processId', process.pid);
   });
 })();
+//
