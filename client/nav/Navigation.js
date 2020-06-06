@@ -20,7 +20,7 @@ const DesktopDrawer = lazy(() => import('./DesktopDrawer'));
 
 export default function Navigation(props) {
   const wsocketContext =useWSocketContext()
-  const {online}=wsocketContext
+  const {readyState}=wsocketContext[0]
   const [route, setRoute] = useState('');
   const { userName } = useUserName();
   const { width, height, orientation, device } = useMediaQuery();
@@ -43,6 +43,8 @@ export default function Navigation(props) {
       });
     }
   }, []);
+
+
   return (
     <AppShell>
       {route === '/phone' && open ? (
@@ -70,7 +72,7 @@ export default function Navigation(props) {
         {children}
         <NavItem>{userName}</NavItem>
         <NavItem>
-          <OnlineStatus online={online}/>
+          <OnlineStatus readyState={readyState}/>
         </NavItem>
       </AppBar>
     </AppShell>
