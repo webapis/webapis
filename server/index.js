@@ -28,7 +28,11 @@ const { MongoClient } = require('mongodb');
   
   process.on('SIGTERM', shutDown);
   process.on('SIGINT', shutDown);
-  server.listen(3000, () => {
+  server.listen(3000, (error) => {
+    if(error) {
+      process.exit(0);
+      throw error;
+  }
     console.log('processId', process.pid);
   });
 })();

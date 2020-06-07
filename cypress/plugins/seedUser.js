@@ -11,6 +11,7 @@ module.exports = async function seedUser({ email, username, password }) {
   try {
     const clnt = await client.connect();
     const database = clnt.db('auth');
+
     const collection = database.collection('users');
     const { hash, salt, iterations } = passhash.hashPassword(password);
     const result = await collection.insertOne({
@@ -23,6 +24,7 @@ module.exports = async function seedUser({ email, username, password }) {
 
     return result;
   } catch (error) {
+    console.log('seedUserError', error)
     return error;
   }
 };

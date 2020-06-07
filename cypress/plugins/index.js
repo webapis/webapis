@@ -4,8 +4,8 @@ const seedDelete = require('./seedDelete');
 const seedUser = require('./seedUser');
 const seedHangouts = require('./seedHangouts');
 const deleteCollection = require('./deleteCollection');
-const insertInvitation = require('./insertInvitation');
-const seedOnMessage = require('./seedOnMessage');
+const seedOnInvite = require('./seedOnInvite');
+const seedOnAccept = require('./seedOnAccept');
 /// <reference types="cypress" />
 // ***********************************************************
 // This example plugins/index.js can be used to load plugins
@@ -43,39 +43,11 @@ module.exports = (on, config) => {
     'seed:deleteCollection': ({ dbName, collectionName }) => {
       return deleteCollection({ dbName, collectionName });
     },
-    'seed:insertInvitation': ({
-      dbName,
-      collectionName,
-      userInvited,
-      userInviting,
-      hangout,
-      invitation,
-    }) => {
-      return insertInvitation({
-        dbName,
-        collectionName,
-        userInviting,
-        userInvited,
-        hangout,
-        invitation,
-      });
+    'seed:onInvite': () => {
+      return seedOnInvite();
     },
-    'seed:onMessage': ({
-      userMessanger,
-      userMessangee,
-      messagerHangout,
-      messangeeHangout,
-      collectionName,
-      dbName,
-    }) => {
-      return seedOnMessage({
-        userMessanger,
-        userMessangee,
-        messagerHangout,
-        messangeeHangout,
-        collectionName,
-        dbName,
-      });
+    'seed:onAccept': () => {
+      return seedOnAccept();
     },
   });
 };

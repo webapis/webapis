@@ -35,6 +35,7 @@ export default async function ({ req, res, collection }) {
         errors.push(httpStatus.emailorusernameNotValid);
       }
       if (errors.length > 0) {
+        
         res.statusCode = 400;
         res.writeHead(400, { 'Content-Type': 'application/json' });
         res.write(JSON.stringify({ errors }));
@@ -47,6 +48,7 @@ export default async function ({ req, res, collection }) {
             user = await collection.findOne({ email: emailorusername });
 
             if (user === null) {
+              
               // email is not registered 408  ----------------------------///Cookies
               errors.push(httpStatus.credentialInvalid);
               res.writeHead(400, { 'Content-Type': 'application/json' });
@@ -80,6 +82,7 @@ export default async function ({ req, res, collection }) {
                 );
                 res.end();
               } else {
+                
                 // invalid credential 401-------------------------------------
                 errors.push(httpStatus.credentialInvalid);
                 res.writeHead(400, { 'Content-Type': 'application/json' });
@@ -92,6 +95,7 @@ export default async function ({ req, res, collection }) {
             user = await collection.findOne({ username: emailorusername });
 
             if (!user) {
+              
               // username is not registered 411  ------------------------------
               errors.push(httpStatus.usernameIsNotRegistered);
               res.writeHead(400, { 'Content-Type': 'application/json' });
@@ -127,6 +131,7 @@ export default async function ({ req, res, collection }) {
 
                 res.end();
               } else {
+                
                 // invalid credential 401 ------------------------------------
                 errors.push(httpStatus.credentialInvalid);
                 res.writeHead(400, { 'Content-Type': 'application/json' });

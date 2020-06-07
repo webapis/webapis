@@ -2,11 +2,10 @@ import { useEffect } from 'preact/hooks';
 import { useWSocketContext } from '../../wsocket/WSocketProvider';
 import { hangoutStates } from '../../../server/hangouts/hangoutStates'
 import { actionTypes } from './actionTypes'
-import {clientCommands} from './clientCommands'
+import { clientCommands } from './clientCommands'
 export function useSocket({ dispatch, username }) {
   const socketContext = useWSocketContext();
-  const { socket,online } = socketContext
-
+  const { socket } = socketContext[0]
 
   useEffect(() => {
     if (socket && username) {
@@ -16,18 +15,18 @@ export function useSocket({ dispatch, username }) {
         handleHangoutState({ hangout, username, dispatch })
       };
       socket.onclose = () => {
-        
+
       };
       socket.onerror = (error) => {
-        
+
       };
-      
+
       socket.onopen = () => {
         debugger;
-       
+
       };
     }
-  }, [socket,username]);
+  }, [socket, username]);
 
   return null;
 
@@ -41,7 +40,7 @@ function handleHangoutState({ hangout, username, dispatch }) {
   debugger;
   let updatedState = null;
   switch (hangout.state) {
- 
+
     case hangoutStates.ACCEPTER:
     case hangoutStates.BLOCKED:
     case hangoutStates.BLOCKER:
@@ -52,16 +51,16 @@ function handleHangoutState({ hangout, username, dispatch }) {
     case hangoutStates.UNBLOCKED:
     case hangoutStates.UNBLOCKER:
     case hangoutStates.INVITED:
+    case hangoutStates.ACCEPTED:
       updatedState = hangouts.map(g => { if (g.username === target) { return hangout } else return g })
-      localStorage.setItem(key, JSON.stringify( updatedState))
-      debugger;
+      localStorage.setItem(key, JSON.stringify(updatedState))
+
       dispatch({ type: actionTypes.HANGOUT_STATE_CHANGED, hangout })
       break;
-      case hangoutStates.ACCEPTED:
     case hangoutStates.INVITER:
       if (hangouts) {
         debugger
-        localStorage.setItem(key,JSON.stringify(hangouts.push(hangout)))
+        localStorage.setItem(key, JSON.stringify(hangouts.push(hangout)))
       }
       else {
         debugger;
@@ -73,8 +72,8 @@ function handleHangoutState({ hangout, username, dispatch }) {
       throw new Error("hangoutState not defined")
   }
 
-  function onOnline(){
-    socket.send(JSON.stringify({command:clientCommands.ONLINE}))
+  function onOnline() {
+    socket.send(JSON.stringify({ command: clientCommands.ONLINE }))
   }
 
 }

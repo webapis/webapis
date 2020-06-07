@@ -1,9 +1,7 @@
 
 import { initUsers } from './initUsers';
-import { inviteHandler } from './inviteHandler';
-import {acceptHandler} from './acceptHandler'
-import {messageHandler} from './messageHandler'
-import {clientCommands} from '../../../client/hangouts/state/clientCommands'
+import { hangoutHandler } from './hangoutHandler'
+import { clientCommands } from '../../../client/hangouts/state/clientCommands'
 export default async function hangouts({
   hangout,
   ws,
@@ -12,36 +10,24 @@ export default async function hangouts({
 }) {
   const collection = await client.db('hangouts').collection('users');
 
- await initUsers({ collection,ws, hangout });
-
+  await initUsers({ collection, ws, hangout });
+debugger;
   switch (hangout.command) {
-    case clientCommands.ONLINE:
-      debugger;
-      break;
+    case clientCommands.ACCEPT:
+    case clientCommands.BLOCK:
+    case clientCommands.DECLINE:
     case clientCommands.INVITE:
-  
-     inviteHandler({ collection, hangout,ws,connections });
-    
+    case clientCommands.MESSAGE:
+    case clientCommands.UNBLOCK:
+      hangoutHandler({ collection, hangout, ws, connections })
       break;
-      case clientCommands.ACCEPT:
-      acceptHandler({ collection, hangout,ws,connections })
-      debugger;
+    case clientCommands.ONLINE:
       break;
-      case clientCommands.BLOCK:
-      break;
-      case clientCommands.UNBLOCK:
-      break;
-      case clientCommands.DECLINE:
-      break;
-      case clientCommands.MESSAGE:
-        debugger;
-        messageHandler({ collection, hangout,ws,connections })
- break;
     default:
       throw new Error('No message type is provided for switch statement');
   }
-} 
+}
 
 
-//
+////
 

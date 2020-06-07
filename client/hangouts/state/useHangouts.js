@@ -17,7 +17,8 @@ import { clientCommands } from './clientCommands';
 
 export function useHangouts() {
   const socketContext = useWSocketContext();
-  const { socket } = socketContext;
+  const {socket}=socketContext[0]
+ 
   const authContext = useAuthContext();
   const { username } = authContext.state;
   const [state, dispatch] = useHangoutContext();

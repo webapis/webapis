@@ -12,13 +12,14 @@ const style = {
 };
 
 export default function Inviter({ hangout, onAccept,onDecline }) {
+  const message ={...hangout.message,username:hangout.username}
   return (
     <Layout id='inviter-ui'>
       <div style={style.root}>
         <div style={{ flex: 1, marginTop: 16, marginLeft: 8 }}>
           <Message
-            message={hangout && hangout.message}
-            username={hangout && hangout.username}
+            message={message && message}
+         
           />
         </div>
 
