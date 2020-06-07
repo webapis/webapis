@@ -18,18 +18,14 @@ export default function Mobile() {
   const {
     hangout,
     hangouts,
-    onAccept,
-    onBlock,
-    onInvite,
+    onHangout,
     onSelectHangout,
     onSelectUser,
-    onUnblock,
     onSearch,
     users,
     search,
     onStartSearch,
     onMessageText,
-    onMessage,
     messageText,
     username,
     messages
@@ -56,12 +52,12 @@ export default function Mobile() {
       </Route>
       <Route path="/BLOCK">
         <Suspense fallback={<div>Loading...</div>}>
-          <Block hangout={hangout} onBlock={onBlock} />
+          <Block hangout={hangout} onBlock={onHangout} />
         </Suspense>
       </Route>
       <Route path="/BLOCKED">
         <Suspense fallback={<div>Loading...</div>}>
-          <Blocked hangout={hangout} onUnblock={onUnblock} />
+          <Blocked hangout={hangout} onUnblock={onHangout} />
         </Suspense>
       </Route>
       <Route path="/configure">
@@ -73,7 +69,7 @@ export default function Mobile() {
         <Suspense fallback={<div>Loading...</div>}>
           <Hangchat
             onMessageText={onMessageText}
-            onMessage={onMessage}
+            onMessage={onHangout}
             messages={messages}
             username={username}
           />
@@ -84,7 +80,7 @@ export default function Mobile() {
         <Suspense fallback={<div>Loading...</div>}>
           <Invite
             hangout={hangout}
-            onInvite={onInvite}
+            onInvite={onHangout}
             onMessageText={onMessageText}
             messageText={messageText}
           />
@@ -97,7 +93,7 @@ export default function Mobile() {
       </Route>
       <Route path="/INVITER">
         <Suspense fallback={<div>Loading...</div>}>
-          <Inviter hangout={hangout} onAccept={onAccept} />
+          <Inviter hangout={hangout} onAccept={onHangout} />
         </Suspense>
       </Route>
     </div>

@@ -1,6 +1,6 @@
 import { actionTypes } from './actionTypes';
 export const initState = {
-  hangouts: [],
+  hangouts: null,
   hangout: null,
   messages: null,
   search: '',
@@ -18,7 +18,6 @@ export function reducer(state, action) {
       } else {
         return { ...state, messages: [action.message] };
       }
-
     case actionTypes.LOADED_MESSAGES:
       return { ...state, messages: action.messages };
     case actionTypes.MESSAGE_TEXT_CHANGED:
@@ -38,7 +37,6 @@ export function reducer(state, action) {
       return { ...state, loading: true };
     case actionTypes.FETCH_HANGOUT_SUCCESS:
       return { ...state, loading: false, hangouts: action.hangouts };
-
     case actionTypes.HANGOUT_NOT_FOUND:
       return { ...state, loading: false };
     case actionTypes.FILTER_HANGOUTS:
@@ -70,21 +68,38 @@ export function reducer(state, action) {
         ...state,
         hangout: state.hangouts.find((g) => g.username === action.username),
       };
-    case actionTypes.HANGOUT_STATE_CHANGED:
+    case actionTypes.HANGOUT_RECIEVED:
       return {
         ...state,
         hangout: action.hangout,
-        hangouts: state.hangouts.map((g) => {
-          if (g.username === action.hangout.username) {
-            return action.hangout;
-          } else {
-            return g;
-          }
-        }),
+        hangouts: updateHangout({ hangouts: state.hangouts, hangout: action.hangout })
       };
-    case actionTypes.NEW_HANGOUT_RECIEVED:
-      return { ...state, hangouts: [...state.hangouts, action.hangout] };
+
     default:
       return state;
+  }
+}
+
+
+
+function updateHangout({ hangout, hangouts }) {
+
+  if (hangouts) {
+    const hangoutExists = hangouts.find(g => g.username === hangout.username)
+    if (hangoutExists) {
+      return hangouts.map(g => {
+        if (g.username === hangout.username) {
+          return hangout
+        }
+        else {
+          return g
+        }
+      })
+    } else {
+      return [hangouts, hangout]
+    }
+  }
+  else {
+    return [hangouts, hangout]
   }
 }

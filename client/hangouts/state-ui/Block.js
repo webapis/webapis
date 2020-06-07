@@ -30,7 +30,7 @@ export default function Block({ onCancel, onBlock, onReport }) {
       </div>
       <div style={{ display: 'flex', padding: 8 }}>
         <Button title="Cancel" style={style.btn} onClick={onCancel} />
-        <Button title="Block" style={style.btn} onClick={onBlock} />
+        <Button title="Block" style={style.btn} id="BLOCK" onClick={onBlock} />
       </div>
     </Layout>
   );

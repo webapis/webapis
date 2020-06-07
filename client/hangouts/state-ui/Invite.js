@@ -23,7 +23,7 @@ export default function Invite({ hangout, onInvite, onMessageText,messageText, v
       </Center>
       <TextInput id="messageTextInput" onChange={onMessageText} value={messageText} />
       <Center>
-        <Button title="Send Invite" onClick={onInvite} data-testid='oninvite-btn' />
+        <Button title="Send Invite" id="INVITE" onClick={onInvite} data-testid='oninvite-btn' />
       </Center>
     </Layout>
   );

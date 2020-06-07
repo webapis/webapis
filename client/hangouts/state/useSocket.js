@@ -2,6 +2,7 @@ import { useEffect } from 'preact/hooks';
 import { useWSocketContext } from '../../wsocket/WSocketProvider';
 import { hangoutStates } from '../../../server/hangouts/hangoutStates'
 import { actionTypes } from './actionTypes'
+import {updateLocalHangouts} from './updateLocalHangouts'
 import { clientCommands } from './clientCommands'
 export function useSocket({ dispatch, username }) {
   const socketContext = useWSocketContext();
@@ -12,7 +13,8 @@ export function useSocket({ dispatch, username }) {
       socket.onmessage = (message) => {
         const hangout = JSON.parse(message.data);
         debugger;
-        handleHangoutState({ hangout, username, dispatch })
+        updateLocalHangouts({hangout,username})
+        dispatch({type:actionTypes.HANGOUT_RECIEVED, hangout})
       };
       socket.onclose = () => {
 
@@ -32,51 +34,7 @@ export function useSocket({ dispatch, username }) {
 
 }
 
-function handleHangoutState({ hangout, username, dispatch }) {
-  const key = `${username}-hangouts`
-  debugger;
-  const target = hangout.username
-  const hangouts = JSON.parse(localStorage.getItem(key))
-  debugger;
-  let updatedState = null;
-  switch (hangout.state) {
 
-    case hangoutStates.ACCEPTER:
-    case hangoutStates.BLOCKED:
-    case hangoutStates.BLOCKER:
-    case hangoutStates.DECLINED:
-    case hangoutStates.DECLINER:
-    case hangoutStates.MESSAGED:
-    case hangoutStates.MESSANGER:
-    case hangoutStates.UNBLOCKED:
-    case hangoutStates.UNBLOCKER:
-    case hangoutStates.INVITED:
-    case hangoutStates.ACCEPTED:
-      updatedState = hangouts.map(g => { if (g.username === target) { return hangout } else return g })
-      localStorage.setItem(key, JSON.stringify(updatedState))
-
-      dispatch({ type: actionTypes.HANGOUT_STATE_CHANGED, hangout })
-      break;
-    case hangoutStates.INVITER:
-      if (hangouts) {
-        debugger
-        localStorage.setItem(key, JSON.stringify(hangouts.push(hangout)))
-      }
-      else {
-        debugger;
-        localStorage.setItem(key, JSON.stringify([hangout]))
-      }
-      dispatch({ type: actionTypes.NEW_HANGOUT_RECIEVED, hangout })
-      break;
-    default:
-      throw new Error("hangoutState not defined")
-  }
-
-  function onOnline() {
-    socket.send(JSON.stringify({ command: clientCommands.ONLINE }))
-  }
-
-}
 
 
 

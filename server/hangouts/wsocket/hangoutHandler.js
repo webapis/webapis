@@ -18,23 +18,25 @@ export async function hangoutHandler({ collection, hangout, ws, connections }) {
     };
     debugger;
     // update hangout on sender
-    await collection.updateOne(
+const senderHangoutUpdateResult=   await collection.updateOne(
       { username: ws.user.username, 'hangouts.username': username },
-      { $set: { 'hangouts.$': sender } }
+      { $set: { 'hangouts': [sender] } },{ upsert: true }
     );
-
+      debugger;
     // update hangout on target
-    await collection.updateOne(
+    const  targetHangoutUpdateResult=    await collection.updateOne(
       { username, 'hangouts.username': ws.user.username },
-      { $set: { 'hangouts.$': target } }
+      { $set: { 'hangouts': [target] } },{ upsert: true }
     );
-    //TARGET ONLINE: send state change
+    debugger;
+    //TARGET ONLINE: send state change//
     const targetOnline = connections[username];
     if (targetOnline) {
+      debugger;
       targetOnline.send(JSON.stringify(target));
     } else {
       //TARGET OFFLINE: push updated hangout undeliverded collection
-      await collection.updateOne(
+      const targetUndeliveredUpdateResult=    await collection.updateOne(
         { username },
         {
           $push: {
@@ -42,10 +44,13 @@ export async function hangoutHandler({ collection, hangout, ws, connections }) {
           },
         }
       );
+      debugger;
     }
     //send state change to sender
     ws.send(JSON.stringify(sender));
   } catch (error) {
+    const err=error
+    debugger;
     console.log('hangoutHandlerError', error);
   }
 }

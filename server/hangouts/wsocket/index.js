@@ -1,5 +1,4 @@
 
-import { initUsers } from './initUsers';
 import { hangoutHandler } from './hangoutHandler'
 import { clientCommands } from '../../../client/hangouts/state/clientCommands'
 export default async function hangouts({
@@ -8,9 +7,7 @@ export default async function hangouts({
   client,
   connections,
 }) {
-  const collection = await client.db('hangouts').collection('users');
-
-  await initUsers({ collection, ws, hangout });
+  const collection = await client.db('auth').collection('users');
 debugger;
   switch (hangout.command) {
     case clientCommands.ACCEPT:
