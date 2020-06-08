@@ -28,7 +28,10 @@ export function WSocketProvider(props) {
   useEffect(() => {
     if (username) {
       const sock = new WebSocket(`${url}/?username=${username}`);
-
+      sock.onmessage=(message)=>{
+        const msg =JSON.parse(message.data)
+        debugger;
+      }
       sock.onopen = () => {
         dispatch({ type: actionTypes.OPEN });
       };

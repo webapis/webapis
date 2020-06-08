@@ -58,7 +58,7 @@ export async function hangoutHandler({ collection, hangout, ws, connections }) {
         { username },
         {
           $push: {
-            undeliverded: target,
+            undelivered: target,
           },
         }
       );

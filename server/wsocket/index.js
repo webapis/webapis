@@ -1,4 +1,5 @@
 import hangoutsHandler from '../hangouts/wsocket';
+import {onLineStateChangeHandler} from '../hangouts/wsocket/onLineStateChangeHandler'
 import url from 'url';
 const jwt = require('jsonwebtoken');
 const cookie = require('cookie');
@@ -10,8 +11,6 @@ export default async function (server,client) {
   const collection = await client.db('auth').collection('users');
   const wss = new WebSocket.Server({ server });
   wss.on('connection', async function connection(ws, request) {
-
-    ;
     try {
       const token = cookie.parse(request.headers['cookie']);
 
@@ -21,6 +20,7 @@ export default async function (server,client) {
       const user = await collection.findOne({username})
       ws.user= user;
       connections[username] = ws; //
+      onLineStateChangeHandler({connections,ws,client})
       ws.on('message', function incoming(message) {
         console.log('recieved,', message);
         try {
@@ -44,4 +44,3 @@ export default async function (server,client) {
   });
 }
 
-//
