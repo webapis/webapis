@@ -9,6 +9,7 @@ export const initState = {
   error: null,
   messageText: '',
   online: false,
+  undelivered:[]
 };
 export function reducer(state, action) {
   switch (action.type) {

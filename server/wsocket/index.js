@@ -20,6 +20,7 @@ export default async function (server,client) {
       const user = await collection.findOne({username})
       ws.user= user;
       connections[username] = ws; //
+      debugger
       onLineStateChangeHandler({connections,ws,client})
       ws.on('message', function incoming(message) {
         console.log('recieved,', message);

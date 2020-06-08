@@ -1,6 +1,6 @@
 import { h, createContext } from 'preact';
-import { useContext } from 'preact/hooks';
-import accept_inv_img_png from './img/accept_invitation.png';
+import { useContext, useReducer,useMemo } from 'preact/hooks';
+import {reducer,initState} from './reducer'
 const AppContext = createContext();
 
 export function useAppContext() {
@@ -8,12 +8,14 @@ export function useAppContext() {
   if (!context) {
     throw new Error('useAppContext must be used with AppProvider');
   }
-  const { title, accept_inv_img } = context;
-  return { title, accept_inv_img };
+
+  return context
 }
 //
 export function AppProvider(props) {
-  const { title, accept_inv_img = accept_inv_img_png } = props;
+  const [state,dispatch]=useReducer(reducer,initState)
 
-  return <AppContext.Provider value={{ title, accept_inv_img }} {...props} />;
+
+const value = useMemo(() => [state, dispatch], [state]);
+  return <AppContext.Provider value={value} {...props} />;
 }

@@ -47,6 +47,8 @@ describe('onHangout', () => {
          cy.get('[data-testid=accept-btn]').click()
          cy.get('[data-testid=hangchat-ui]');
     })
+
+    
     it.only('onMessage', () => {
         cy.loginByEmail({
             email: 'demo@gmail.com',

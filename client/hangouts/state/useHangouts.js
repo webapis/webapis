@@ -14,7 +14,6 @@ import {
   saveMessage,
 } from './actions';
 import { useSocket } from './useSocket';
-import { clientCommands } from './clientCommands';
 
 export function useHangouts() {
   const socketContext = useWSocketContext();

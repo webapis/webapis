@@ -15,13 +15,15 @@ import { OtherContent } from './OtherContent';
 import { AppProvider } from '../app-context/app-context';
 import { Home } from './Home';
 import {WSocketProvider} from '../wsocket/WSocketProvider'
-import accept_inv_img from '../app-context/img/accept_invitation.png';
+import {HangoutsProvider} from '../hangouts/state/HangoutsProvider'
+
 const Hangouts = lazy(() => import('../hangouts'));
 const Group = lazy(() => import('../group/group'));
 render(
-  <AppProvider title='Webcom' accept_inv_img={accept_inv_img}>
+  <AppProvider title='Webcom'>
     <AuthProvider>
       <WSocketProvider url ="ws://localhost:3000/hangouts">
+        <HangoutsProvider>
       <RootRouteProvider initialRoute='/'>
         <FormProvider>
           <ThemeProvider
@@ -56,7 +58,7 @@ render(
 
             <RootRoute path='/hangouts'>
               <Suspense fallback={<div>loading...</div>}>
-                <Hangouts />
+                <Hangouts/>
               </Suspense>
             </RootRoute>
             <RootRoute path='/group'>
@@ -68,6 +70,7 @@ render(
           </ThemeProvider>
         </FormProvider>
       </RootRouteProvider>
+      </HangoutsProvider>
       </WSocketProvider>
     </AuthProvider>
   </AppProvider>,

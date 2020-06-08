@@ -12,7 +12,7 @@ const Hangchat = lazy(() => import('./state-ui/Hangchat'));
 const Invite = lazy(() => import('./state-ui/Invite'));
 const Invitee = lazy(() => import('./state-ui/Invitee'));
 const Inviter = lazy(() => import('./state-ui/Inviter'));
-
+const UnReadHangouts =lazy(() => import('./UnReadHangouts'));
 export default function Mobile() {
   const [route, setRoute] = useRouteContext();
   const {
@@ -94,6 +94,11 @@ export default function Mobile() {
       <Route path="/INVITER">
         <Suspense fallback={<div>Loading...</div>}>
           <Inviter hangout={hangout} onAccept={onHangout} />
+        </Suspense>
+      </Route>
+      <Route path="/UNREAD">
+        <Suspense fallback={<div>Loading...</div>}>
+          <UnReadHangouts  />
         </Suspense>
       </Route>
     </div>
