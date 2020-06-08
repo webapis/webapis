@@ -18,8 +18,8 @@ export function Messages({
   messageText,
 }) {
   const scrollerRef = useRef(null);
-  function onSend() {
-    onMessage();
+  function onSend(e) {
+    onMessage(e);
     scrollerRef.current.scrollTop = scrollerRef.current.scrollHeight;
   }
   return (

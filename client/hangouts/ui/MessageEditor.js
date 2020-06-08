@@ -15,7 +15,7 @@ export function MessageEditor({ messageText, onMessageText, onMessage }) {
     <div style={styles.root}>
       <input type="text" onChange={onMessageText}  data-testid="message-input"/>
       <div>
-        <Button title="send" onClick={onMessage} data-testid='send-btn'/>
+        <Button title="send" id='MESSAGE' onClick={onMessage} data-testid='send-btn'/>
       </div>
     </div>
   );

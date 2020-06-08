@@ -55,7 +55,7 @@ export function Message(props) {
   return (
     <div style={{ width: '100%',marginBottom:3 }}>
       <div style={{ ...style.root, float }}>
-        <div style={style.message}>{message && message.text}</div>
+        <div data-testid="message" style={style.message}>{message && message.text}</div>
         <div style={style.log}>
           <div style={style.username}>{username && username}:</div>
           <div>

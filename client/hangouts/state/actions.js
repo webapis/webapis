@@ -45,35 +45,15 @@ export async function fetchHangout({ search, dispatch, username }) {
     );
     if (response.ok) {
       const { hangouts } = await response.json();
-      if (hangouts.length > 0) {
         dispatch({ type: actionTypes.FETCH_HANGOUT_SUCCESS, hangouts });
-      } else {
-        dispatch({ type: actionTypes.FETCH_HANGOUT_NOT_FOUND });
-        // fetch user from server in hangout is newuser
-        fetchUser({ search, dispatch });
-      }
-    } else {
-      dispatch({ type: actionTypes.FETCH_HANGOUT_NOT_FOUND });
-      // fetch user from server in hangout is newuser
-      fetchUser({ search, dispatch });
-    }
+      
+    } 
   } catch (error) {
     const err = error;
     dispatch({ type: actionTypes.FETCH_HANGOUT_FAILED, error });
   }
 }
-// fetch user from server in hangout is newuser
-export async function fetchUser({ search, dispatch }) {
-  try {
-    dispatch({ type: actionTypes.FETCH_USER_STARTED });
-    const response = await fetch(`/users/find?search=${search}`);
-    const { users } = await response.json();
 
-    dispatch({ type: actionTypes.FETCH_USER_SUCCESS, users });
-  } catch (error) {
-    dispatch({ type: actionTypes.FETCH_USER_FAILED, error });
-  }
-}
 
 export function changeMessageText({ text, dispatch }) {
  

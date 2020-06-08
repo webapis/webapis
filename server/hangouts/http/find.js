@@ -12,34 +12,36 @@ export default async function ({ req, res, collection }) {
     const decoded = await jwt.verify(token[uname], process.env.secret);
     const { username } = decoded;
     // finduser
-    let user = await collection.findOne({username:{$regex: new RegExp(search+'\w*','i')}},{hash:0,iteration:0,salt:0});
+    let user = await collection.findOne({username});
+    debugger;
+    
     if (user && user.hangouts) {
-
+debugger;
       // search for users hangouts
-      const searchResult = hangoutUser.hangouts.filter((g) => g.username.includes(search))
-      if (searchResult) {
+        debugger;
         res.writeHead(200, { 'Content-Type': 'application/json' });
         res.write(
           JSON.stringify({
-            hangouts: searchResult
+            hangouts: user.hangouts
           })
         );
         res.end();
-      }
       
-    }else{
-      let users = await collection.find({username:{$regex: new RegExp(search+'\w*','i')}}).toArray()
-      debugger;
+    }
+    else{
+      debugger
+      let users = await collection.find({username:{$regex: new RegExp(search,'i')}}).project({salt:0,hash:0,iterations:0}).toArray();
       res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.write(
-          JSON.stringify({
-            hangouts: users.map(u=>{return{...u,state:'INVITE'}})
-          })
-        );
-        res.end();
+      res.write(
+        JSON.stringify({
+          hangouts: users && users.map(u=>{return {...u,state:'INVITE'}})
+        })
+      );
+      res.end();
+      debugger;
     }
   
-
+//
   } catch (error) {
     const err = error;
     debugger;
@@ -49,4 +51,3 @@ export default async function ({ req, res, collection }) {
     res.end();
   }
 }
-//
