@@ -1,13 +1,11 @@
 import { actionTypes } from './actionTypes'
-export const initState = {
-    hangoutInitialRoute: '/UNREAD'
-}
+
 export function reducer(state, action) {
     switch (action.type) {
-        case actionTypes.NAVIGATE_TO_HANGOUTS:
-            return { ...state, hangoutInitialRoute: '/hangouts' }
-        case actionTypes.NAVIGATE_TO_UNREAD_MESSAGES:
-            return { ...state, hangoutInitialRoute: '/unreadmessages' }
+        case actionTypes.APP_ROUTE_CHANGED:
+            return { ...state, route: action.route,featureRoute: action.featureRoute }
+        case actionTypes.FEATURE_ROUTE_CHANGED:
+            return { ...state, featureRoute: action.featureRoute,route:action.route }
         default:
             return state;
     }
