@@ -33,6 +33,7 @@ export function WSocketProvider(props) {
         debugger;
       }
       sock.onopen = () => {
+        debugger;
         dispatch({ type: actionTypes.OPEN });
       };
       sock.onclose = () => {

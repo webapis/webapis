@@ -26,7 +26,7 @@ export function useSocket({ dispatch, username }) {
   useEffect(() => {
     if (socket && username) {
       socket.onmessage = (message) => {
-        debugger;
+    debugger;
         const hangout = JSON.parse(message.data);
         updateLocalHangouts({ hangout, username });
         handleRoute({ hangout });
@@ -34,7 +34,7 @@ export function useSocket({ dispatch, username }) {
       };
       socket.onclose = () => {};
       socket.onerror = (error) => {};
-      socket.onopen = () => {};
+     // socket.onopen = () => {};
     }
   }, [socket, username]);
 

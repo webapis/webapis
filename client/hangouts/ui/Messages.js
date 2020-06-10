@@ -12,10 +12,10 @@ const styles = {
 };
 export function Messages({
   messages,
-  username,
   onMessage,
   onMessageText,
   messageText,
+  username,
 }) {
   const scrollerRef = useRef(null);
   function onSend(e) {
@@ -36,7 +36,11 @@ export function Messages({
             )
           )}
       </div>
-      <MessageEditor onMessage={onSend} messageText={messageText}onMessageText={onMessageText} />
+      <MessageEditor
+        onMessage={onSend}
+        messageText={messageText}
+        onMessageText={onMessageText}
+      />
     </div>
   );
 }

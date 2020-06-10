@@ -17,10 +17,11 @@ export default async function (server,client) {
       let uname = url.parse(request.url, true).query.username;
       const decoded = await jwt.verify(token[uname], process.env.secret);
       const { username } = decoded;
+      console.log(username,'conneted')
       const user = await collection.findOne({username})
       ws.user= user;
       connections[username] = ws; //
-      debugger
+      
       onLineStateChangeHandler({connections,ws,client})
       ws.on('message', function incoming(message) {
         console.log('recieved,', message);

@@ -13,8 +13,7 @@ const {onAppRoute} =useAppRoute()
     e.preventDefault();
     const { id } = e.target;
     if (userName) {
-     debugger;
-    //  setRootRoute(`/${id}`);
+
       onAppRoute({type:actionTypes.APP_ROUTE_CHANGED, featureRoute:'/hangouts',route:'/hangouts'})
     } else {
 

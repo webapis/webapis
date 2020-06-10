@@ -2,7 +2,7 @@ import { h } from 'preact';
 import { useHangoutContext } from './HangoutsProvider';
 import { useAuthContext } from '../../auth/auth-context';
 import { useWSocketContext } from '../../wsocket/WSocketProvider';
-import { updateLocalHangouts } from './updateLocalHangouts'
+import { updateLocalHangouts } from './updateLocalHangouts';
 import {
   selectHangout,
   searchHangouts,
@@ -17,7 +17,7 @@ import { useSocket } from './useSocket';
 
 export function useHangouts() {
   const socketContext = useWSocketContext();
-  const { socket } = socketContext[0]
+  const { socket } = socketContext[0];
   const authContext = useAuthContext();
   const { username } = authContext.state;
   const [state, dispatch] = useHangoutContext();
@@ -42,27 +42,32 @@ export function useHangouts() {
     fetchHangout({ dispatch, search, username });
   }
   function onMessageText(e) {
-    const text = e.target.value
+    const text = e.target.value;
     changeMessageText({ dispatch, text });
   }
   function onHangout(e) {
-  
-    const command = e.target.id
+    const command = e.target.id;
     const { username, email } = hangout;
-    let message = null
+    let message = null;
     if (messageText) {
-      message = { text: messageText, timestamp: Date.now() };
-      saveMessage({ dispatch, hangout, message, target: username, username: authContext.state.username });
+   
+      saveMessage({
+        dispatch,
+        message: {
+          target: username,
+          username: authContext.state.username,
+          text: messageText,
+          timestamp: Date.now(),
+        },
+      });
     }
     const updatedHangout = {
       username,
       email,
       message,
     };
-    socket.send(
-      JSON.stringify({ ...updatedHangout, command })
-    );
-    updateLocalHangouts({ hangout, username, devivered: 'pending' })
+    socket.send(JSON.stringify({ ...updatedHangout, command }));
+    updateLocalHangouts({ hangout, username, devivered: 'pending' });
   }
   return {
     onMessageText,
@@ -77,6 +82,6 @@ export function useHangouts() {
     users,
     username,
     messages,
-    onHangout
+    onHangout,
   };
 }

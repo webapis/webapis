@@ -1,6 +1,6 @@
 describe('onHangout', () => {
 
-    it.only('onInvite and onAccept', () => {
+    it('onInvite and onAccept', () => {
         const demo = {
             username: 'demo',
             email: 'demo@gmail.com',
@@ -20,7 +20,7 @@ describe('onHangout', () => {
             password: 'Dragonfly1977!!!',
         });
         cy.visit('/');
-        cy.wait(50);
+       cy.wait(50);
         cy.get('[data-testid=menu]').click();
         cy.wait(50);
         cy.get('[data-testid=hangouts]').click();
@@ -49,7 +49,7 @@ describe('onHangout', () => {
     })
 
     
-    it('onMessage', () => {
+    it.only('onMessage', () => {
         cy.loginByEmail({
             email: 'demo@gmail.com',
             password: 'Dragonfly1977!!!',

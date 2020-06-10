@@ -6,11 +6,7 @@ const AppRouteContext = createContext();
 
  function useAppRouteContext() {
   const context = useContext(AppRouteContext);
-  useEffect(()=>{
-    if(context){
-      debugger;
-    }
-  },[context])
+  
   if (!context) {
     throw new Error('useAppRouteContext must be used with AppRouteProvider');
   }
@@ -21,11 +17,7 @@ export function FeatureRoute(props) {
 
   const [state,dispatch] = useAppRouteContext();
 const {featureRoute}=state
-useEffect(()=>{
-  if(featureRoute){
-    debugger;
-  }
-},[featureRoute])
+
   if (path && featureRoute === path) {
 
     return children;
