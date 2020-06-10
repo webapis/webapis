@@ -1,8 +1,0 @@
-export const actionTypes ={
-    CONNECTING:'CONNECTING',
-    OPEN:'OPEN',
-    CLOSING:'CLOSING',
-    CLOSED:'CLOSED',
-    SOCKET_READY:'SOCKET_READY',
-    SOCKET_ERROR:'SOCKET_ERROR'
-}

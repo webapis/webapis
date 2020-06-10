@@ -20,7 +20,7 @@ describe('onHangout', () => {
             password: 'Dragonfly1977!!!',
         });
         cy.visit('/');
-        cy.wait(50);
+       cy.wait(50);
         cy.get('[data-testid=menu]').click();
         cy.wait(50);
         cy.get('[data-testid=hangouts]').click();

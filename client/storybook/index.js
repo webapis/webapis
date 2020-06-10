@@ -1,5 +1,5 @@
 import { h, render } from 'preact';
-import { RouteProvider, Route } from '../route/router';
+import { AppRouteProvider, AppRoute } from '../app-route/AppRouteProvider';
 import Navigation from './Navigation';
 import Hangout from '../hangouts/Hangout';
 import Block from '../hangouts/state-ui/Block';
@@ -32,7 +32,7 @@ const message = {
   text: `Let's Chat on Hangout!`,
   timestamp: 1591331767836,
 };
-
+//
 render(
   <ThemeProvider
     initState={{
@@ -43,48 +43,48 @@ render(
       },
     }}
   >
-    <RouteProvider initialRoute="/messages">
+    <AppRouteProvider initState={{ featureRoute: '/', route: '/message' }}>
       <Navigation drawerContent={<DrawerContent />}>
-        <Route path="/hangouts">
+        <AppRoute path="/hangouts">
           <Hangout hangouts={hangouts} />
-        </Route>
-        <Route path="/block">
+        </AppRoute>
+        <AppRoute path="/block">
           <Block hangout={hangout} />
-        </Route>
-        <Route path="/blocked">
+        </AppRoute>
+        <AppRoute path="/blocked">
           <Blocked hangout={hangout} />
-        </Route>
-        <Route path="/configure">
+        </AppRoute>
+        <AppRoute path="/configure">
           <Configure hangout={hangout} />
-        </Route>
-        <Route path="/invite">
+        </AppRoute>
+        <AppRoute path="/invite">
           <Invite hangout={hangout} />
-        </Route>
-        <Route path="/invitee">
+        </AppRoute>
+        <AppRoute path="/invitee">
           <Invitee hangout={hangout} />
-        </Route>
-        <Route path="/inviter">
+        </AppRoute>
+        <AppRoute path="/inviter">
           <Inviter hangout={hangout} />
-        </Route>
-        <Route path="/hangchat">
+        </AppRoute>
+        <AppRoute path="/hangchat">
           <Hangchat hangout={hangout} messages={messages} username="demo" />
-        </Route>
-        <Route path="/message">
+        </AppRoute>
+        <AppRoute path="/message">
           <div style={{ padding: 20, backgroundColor: '#eeeeeee' }}>
             <Message message={message} username={hangout.username} />
           </div>
-        </Route>
-        <Route path="/online">
+        </AppRoute>
+        <AppRoute path="/online">
           <div>
             <OnlineStatus online />
             <OnlineStatus />
           </div>
-        </Route>
-        <Route path="/messages">
+        </AppRoute>
+        <AppRoute path="/messages">
           <Hangchat hangout={hangout} messages={messages} username="demo" />
-        </Route>
+        </AppRoute>
       </Navigation>
-    </RouteProvider>
+    </AppRouteProvider>
   </ThemeProvider>,
   document.body
 );

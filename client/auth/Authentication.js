@@ -1,8 +1,8 @@
 import { h } from 'preact';
 import { useEffect } from 'preact/hooks';
 import { Suspense, lazy } from 'preact/compat';
-import { AuthRoute } from './auth-route-context';
 
+import {FeatureRoute} from '../app-route/AppRouteProvider'
 const Login = lazy(() => import('../auth/Login'));
 const ChangePassword = lazy(() => import('../auth/ChangePassword'));
 const ForgotPassword = lazy(() => import('../auth/ForgotPassword'));
@@ -12,39 +12,39 @@ const AuthFeedback = lazy(() => import('../auth/AuthFeedback'));
 export default function Authentication({ children }) {
   return (
     <div>
-      <AuthRoute path='/changepassword'>
+      <FeatureRoute path='/changepassword'>
         <Suspense fallback={<div>loading...</div>}>
           <ChangePassword />
         </Suspense>
-      </AuthRoute>
-      <AuthRoute path='/login'>
+      </FeatureRoute>
+      <FeatureRoute path='/login'>
         <Suspense fallback={<div>loading...</div>}>
           <Login />
         </Suspense>
-      </AuthRoute>
+      </FeatureRoute>
 
-      <AuthRoute path='/signup'>
+      <FeatureRoute path='/signup'>
         <Suspense fallback={<div>loading...</div>}>
           <Signup />
         </Suspense>
-      </AuthRoute>
+      </FeatureRoute>
 
-      <AuthRoute path='/forgotpassword'>
+      <FeatureRoute path='/forgotpassword'>
         <Suspense fallback={<div>loading...</div>}>
           <ForgotPassword />
         </Suspense>
-      </AuthRoute>
+      </FeatureRoute>
 
-      <AuthRoute path='/profile'>
+      <FeatureRoute path='/profile'>
         <Suspense fallback={<div>loading...</div>}>
           <Profile />
         </Suspense>
-      </AuthRoute>
-      <AuthRoute path='/authfeedback'>
+      </FeatureRoute>
+      <FeatureRoute path='/authfeedback'>
         <Suspense fallback={<div>loading...</div>}>
           <AuthFeedback />
         </Suspense>
-      </AuthRoute>
+      </FeatureRoute>
     </div>
   );
 }

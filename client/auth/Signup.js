@@ -11,16 +11,16 @@ import * as actions from './actions';
 import { Grid } from '../layout/Grid';
 import { Paper } from '../layout/Paper';
 import { useMediaQuery } from '../layout/useMediaQuery';
-import { useRootRouteContext } from '../route/root-router';
+import {useAppRoute} from '../app-route/AppRouteProvider'
 export default function Signup() {
   const { state, dispatch } = useAuthContext();
   const { dispatch: formDispatch } = useFormContext();
-  const [rootRoute, setRootRoute] = useRootRouteContext();
+  const {onAppRoute} = useAppRoute();
   const { device } = useMediaQuery();
   const { username, password, email } = state;
   useEffect(() => {
     if (state.token) {
-      setRootRoute('/');
+      onAppRoute({featureRoute: '/',route:'/'});
     }
   }, [state.token]);
 

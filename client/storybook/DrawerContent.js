@@ -1,11 +1,13 @@
 import { h } from 'preact';
 import { List, ListItem } from '../layout/NavList';
-import { useRouteContext } from '../route/router';
+
+import {useAppRoute} from '../app-route/AppRouteProvider'
 export function DrawerContent({ open }) {
-  const [route, setRoute] = useRouteContext();
+  const {onAppRoute}=useAppRoute()
+
   function handleRoute(e) {
     const { id } = e.target;
-    setRoute(`/${id}`);
+    onAppRoute({featureRoute:'/',route:`/${id}`})
   }
   return (
     <div>

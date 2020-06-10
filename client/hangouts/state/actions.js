@@ -7,7 +7,6 @@ export function loadHangouts({ username, dispatch }) {
 }
 //select hangout from List
 export function selectHangout({ dispatch, username }) {
-
   dispatch({ type: actionTypes.SELECTED_HANGOUT, username });
 }
 
@@ -45,18 +44,15 @@ export async function fetchHangout({ search, dispatch, username }) {
     );
     if (response.ok) {
       const { hangouts } = await response.json();
-        dispatch({ type: actionTypes.FETCH_HANGOUT_SUCCESS, hangouts });
-      
-    } 
+      dispatch({ type: actionTypes.FETCH_HANGOUT_SUCCESS, hangouts });
+    }
   } catch (error) {
     const err = error;
     dispatch({ type: actionTypes.FETCH_HANGOUT_FAILED, error });
   }
 }
 
-
 export function changeMessageText({ text, dispatch }) {
- 
   dispatch({ type: actionTypes.MESSAGE_TEXT_CHANGED, text });
 }
 
@@ -71,14 +67,15 @@ export function loadMessages({ hangout, dispatch }) {
   dispatch({ type: actionTypes.LOADED_MESSAGES, messages });
 }
 
-export function saveMessage({  dispatch, message,username,target }) {
- 
+export function saveMessage({ dispatch, message }) {
+
+  const { target } = message;
   const key = `${target}-messages`;
   const messages = JSON.parse(localStorage.getItem(key));
   if (messages) {
-    localStorage.setItem(key, JSON.stringify([...messages,{...message,username}]));
+    localStorage.setItem(key, JSON.stringify([...messages, message]));
   } else {
-    localStorage.setItem(key, JSON.stringify([{...message,username}]));
+    localStorage.setItem(key, JSON.stringify([message]));
   }
   dispatch({ type: actionTypes.SAVED_MESSAGE_LOCALLY, message });
 }
