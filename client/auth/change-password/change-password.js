@@ -3,7 +3,7 @@ import { h, render } from 'preact';
 import ChangePassword from '../ChangePassword';
 import { AuthProvider } from '../../auth/auth-context';
 import { FormProvider } from '../../form/form-context';
-import { RouteProvider, Route } from '../../route/router';
+import {AppRouteProvider,AppRoute} from '../../app-route/AppRouteProvider'
 import { ThemeProvider } from '../../theme/theme-context';
 import AuthFeedback, { LoginLink } from '../AuthFeedback';
 render(
@@ -19,16 +19,16 @@ render(
             },
           }}
         >
-          <RouteProvider initialRoute='/'>
+          <AppRouteProvider initState={{route:'/',featureRoute:'/'}}>
             <Route path='/'>
               <ChangePassword />
             </Route>
-            <Route path='/authfeedback'>
+            <AppRoute path='/authfeedback'>
               <AuthFeedback>
                 <LoginLink />
               </AuthFeedback>
-            </Route>
-          </RouteProvider>
+            </AppRoute>
+          </AppRouteProvider>
         </ThemeProvider>
       </AuthProvider>
     </FormProvider>

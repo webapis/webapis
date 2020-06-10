@@ -1,7 +1,5 @@
 import { h } from 'preact';
 import { Suspense, lazy } from 'preact/compat';
-import { RootRouteProvider, RootRoute } from '../route/root-router';
-import { RouteProvider, Route } from '../route/router';
 import Navigation, { NavItem } from '../nav/Navigation';
 import Authentication from '../auth/Authentication';
 import { ThemeProvider } from '../theme/theme-context';
