@@ -9,7 +9,6 @@ import { AuthProvider } from '../auth/auth-context';
 import { FormProvider } from '../form/form-context';
 import { OtherContent } from './OtherContent';
 import { Home } from './Home';
-import { WSocketProvider } from '../wsocket/WSocketProvider';
 import { HangoutsProvider } from '../hangouts/state/HangoutsProvider';
 import { AppRoute } from '../app-route/AppRouteProvider';
 const Hangouts = lazy(() => import('../hangouts'));
@@ -17,8 +16,8 @@ const Group = lazy(() => import('../group/group'));
 export function App() {
   return (
     <AuthProvider>
-      <WSocketProvider url="ws://localhost:3000/hangouts">
-        <HangoutsProvider>
+  
+        <HangoutsProvider socketUrl="ws://localhost:3000/hangouts">
           <FormProvider>
             <ThemeProvider
               initState={{
@@ -61,7 +60,7 @@ export function App() {
             </ThemeProvider>
           </FormProvider>
         </HangoutsProvider>
-      </WSocketProvider>
+  
     </AuthProvider>
   );
 }

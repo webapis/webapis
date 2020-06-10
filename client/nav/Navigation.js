@@ -2,7 +2,6 @@ import { h } from 'preact';
 import { Suspense, lazy } from 'preact/compat';
 import { useState, useEffect, useReducer } from 'preact/hooks';
 import { useThemeContext } from '../theme/theme-context';
-import {useWSocketContext} from '../wsocket/WSocketProvider'
 import {OnlineStatus} from '../layout/icons/onlineStatus'
 import './css/style.css';
 import { MenuWhite } from './icons/MenuWhite';
@@ -14,6 +13,7 @@ import { useAuthContext } from '../auth/auth-context';
 import { recoverLocalAuthState } from '../auth/actions';
 import {useAppRoute} from '../app-route/AppRouteProvider'
 import {actionTypes} from '../app-route/actionTypes'
+import {useHangouts} from '../hangouts/state/useHangouts'
 const PhoneDrawer = lazy(() => import('./PhoneDrawer'));
 const TabletDrawer = lazy(() => import('./TabletDrawer'));
 const LaptopDrawer = lazy(() => import('./LapTopDrawer'));
@@ -21,8 +21,7 @@ const DesktopDrawer = lazy(() => import('./DesktopDrawer'));
 
 export default function Navigation(props) {
 const {onAppRoute} =useAppRoute()
-  const wsocketContext =useWSocketContext()
-  const {readyState}=wsocketContext[0]
+ const {readyState}=useHangouts()
   const [route, setRoute] = useState('');
   const { userName } = useUserName();
   const { width, height, orientation, device } = useMediaQuery();

@@ -9,7 +9,9 @@ export const initState = {
   error: null,
   messageText: '',
   online: false,
-  undelivered:[]
+  undelivered: [],
+  socket: null,
+  readyState:0
 };
 export function reducer(state, action) {
   switch (action.type) {
@@ -73,34 +75,45 @@ export function reducer(state, action) {
       return {
         ...state,
         hangout: action.hangout,
-        hangouts: updateHangout({ hangouts: state.hangouts, hangout: action.hangout })
+        hangouts: updateHangout({
+          hangouts: state.hangouts,
+          hangout: action.hangout,
+        }),
       };
+    //SOCKET
 
+    case actionTypes.SOCKET_ERROR:
+      return { ...state, error: action.error };
+    case actionTypes.CONNECTING:
+      return { ...state, readyState: 0 };
+    case actionTypes.OPEN:
+      return { ...state, readyState: 1 };
+    case actionTypes.CLOSING:
+      return { ...state, readyState: 2 };
+    case actionTypes.CLOSED:
+      return { ...state, readyState: 3 };
+    case actionTypes.SOCKET_READY:
+      return { ...state, socket: action.socket };
     default:
       return state;
   }
 }
 
-
-
 function updateHangout({ hangout, hangouts }) {
-
   if (hangouts) {
-    const hangoutExists = hangouts.find(g => g.username === hangout.username)
+    const hangoutExists = hangouts.find((g) => g.username === hangout.username);
     if (hangoutExists) {
-      return hangouts.map(g => {
+      return hangouts.map((g) => {
         if (g.username === hangout.username) {
-          return hangout
+          return hangout;
+        } else {
+          return g;
         }
-        else {
-          return g
-        }
-      })
+      });
     } else {
-      return [hangouts, hangout]
+      return [hangouts, hangout];
     }
-  }
-  else {
-    return [hangouts, hangout]
+  } else {
+    return [hangouts, hangout];
   }
 }

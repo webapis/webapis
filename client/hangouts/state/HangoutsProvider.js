@@ -16,6 +16,7 @@ import {
   saveMessage,
 } from './actions';
 import { useAuthContext } from '../../auth/auth-context';
+import { useWebSocket } from './useWebSocket';
 const HangoutContext = createContext();
 export function useHangoutContext() {
   const context = useContext(HangoutContext);
@@ -27,11 +28,12 @@ export function useHangoutContext() {
 }
 
 export function HangoutsProvider(props) {
+  const { socketUrl } = props;
   const authContext = useAuthContext();
   const { username } = authContext.state;
   const [state, dispatch] = useReducer(reducer, initState);
   const { hangout } = state;
-
+  const websocketHandler = useWebSocket({ username, dispatch, socketUrl });
   useEffect(() => {
     if (username) {
       loadHangouts({ username, dispatch });
@@ -62,7 +64,6 @@ export function HangoutsProvider(props) {
           localStorage.setItem(key, JSON.stringify(updated));
         } else {
           localStorage.setItem(key, JSON.stringify([hangout]));
-       
         }
       }
     }

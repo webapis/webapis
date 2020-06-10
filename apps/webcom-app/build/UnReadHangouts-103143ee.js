@@ -1,0 +1,10 @@
+import { h } from './index-3d395169.js';
+
+function UnReadHangouts({
+  unreadhangouts
+}) {
+  return h("div", null, "UnreadHangouts");
+}
+
+export default UnReadHangouts;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVW5SZWFkSGFuZ291dHMtMTAzMTQzZWUuanMiLCJzb3VyY2VzIjpbIi4uLy4uLy4uL2NsaWVudC9oYW5nb3V0cy9VblJlYWRIYW5nb3V0cy5qcyJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBoIH0gZnJvbSAncHJlYWN0JztcbmV4cG9ydCBkZWZhdWx0IGZ1bmN0aW9uIFVuUmVhZEhhbmdvdXRzKHsgdW5yZWFkaGFuZ291dHMgfSkge1xuICByZXR1cm4gPGRpdj5VbnJlYWRIYW5nb3V0czwvZGl2Pjtcbn1cbiJdLCJuYW1lcyI6WyJVblJlYWRIYW5nb3V0cyIsInVucmVhZGhhbmdvdXRzIl0sIm1hcHBpbmdzIjoiOztBQUNlLFNBQVNBLGNBQVQsQ0FBd0I7QUFBRUMsRUFBQUE7QUFBRixDQUF4QixFQUE0QztBQUN6RCxTQUFPLGdDQUFQO0FBQ0Q7Ozs7In0=

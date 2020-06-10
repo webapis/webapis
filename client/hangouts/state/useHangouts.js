@@ -1,7 +1,7 @@
 import { h } from 'preact';
+import { useEffect } from 'preact/hooks';
 import { useHangoutContext } from './HangoutsProvider';
 import { useAuthContext } from '../../auth/auth-context';
-import { useWSocketContext } from '../../wsocket/WSocketProvider';
 import { updateLocalHangouts } from './updateLocalHangouts';
 import {
   selectHangout,
@@ -13,28 +13,41 @@ import {
   startClientCommand,
   saveMessage,
 } from './actions';
-import { useSocket } from './useSocket';
+
+import { useMessageRouter } from './useMessageRouter';
 
 export function useHangouts() {
-  const socketContext = useWSocketContext();
-  const { socket } = socketContext[0];
   const authContext = useAuthContext();
   const { username } = authContext.state;
   const [state, dispatch] = useHangoutContext();
-  const { hangout, hangouts, search, users, messageText, messages } = state;
-  const handleSocket = useSocket({ dispatch, hangout, username });
+  const {
+    hangout,
+    hangouts,
+    search,
+    users,
+    messageText,
+    messages,
+    message,
+    readyState,
+    socket
+  } = state;
+  const handleMessageRouter = useMessageRouter({ dispatch, message, username });
+
   function onSelectHangout(e) {
     const username = e.target.id;
     selectHangout({ dispatch, username });
   }
+
   function onSelectUser(e) {
     const uname = e.target.id;
     const user = users.find((u) => u.username === uname);
     selectUser({ dispatch, user, username });
   }
+
   function onSearch(e) {
     searchHangouts({ search: e.target.value, dispatch });
   }
+
   function onStartSearch(e) {
     if (hangouts && hangouts.length > 0) {
       filterHangouts({ dispatch });
@@ -50,7 +63,6 @@ export function useHangouts() {
     const { username, email } = hangout;
     let message = null;
     if (messageText) {
-   
       saveMessage({
         dispatch,
         message: {
@@ -83,5 +95,6 @@ export function useHangouts() {
     username,
     messages,
     onHangout,
+    readyState
   };
 }
