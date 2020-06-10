@@ -1,6 +1,6 @@
 describe('onHangout', () => {
 
-    it('onInvite and onAccept', () => {
+    it.only('onInvite and onAccept', () => {
         const demo = {
             username: 'demo',
             email: 'demo@gmail.com',
@@ -49,7 +49,7 @@ describe('onHangout', () => {
     })
 
     
-    it.only('onMessage', () => {
+    it('onMessage', () => {
         cy.loginByEmail({
             email: 'demo@gmail.com',
             password: 'Dragonfly1977!!!',

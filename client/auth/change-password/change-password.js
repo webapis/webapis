@@ -20,9 +20,9 @@ render(
           }}
         >
           <AppRouteProvider initState={{route:'/',featureRoute:'/'}}>
-            <Route path='/'>
+            <AppRoute path='/'>
               <ChangePassword />
-            </Route>
+            </AppRoute>
             <AppRoute path='/authfeedback'>
               <AuthFeedback>
                 <LoginLink />
