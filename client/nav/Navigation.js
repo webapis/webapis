@@ -12,13 +12,16 @@ import { useMediaQuery } from '../layout/useMediaQuery';
 import { useUserName } from '../auth/useUserName';
 import { useAuthContext } from '../auth/auth-context';
 import { recoverLocalAuthState } from '../auth/actions';
+import {useAppContext} from '../app-context/app-context'
+import {actionTypes} from '../app-context/actionTypes'
 const PhoneDrawer = lazy(() => import('./PhoneDrawer'));
 const TabletDrawer = lazy(() => import('./TabletDrawer'));
 const LaptopDrawer = lazy(() => import('./LapTopDrawer'));
 const DesktopDrawer = lazy(() => import('./DesktopDrawer'));
 
 export default function Navigation(props) {
-
+const appContext =useAppContext()
+const dispatchRoute =appContext[1]
   const wsocketContext =useWSocketContext()
   const {readyState}=wsocketContext[0]
   const [route, setRoute] = useState('');
@@ -44,7 +47,10 @@ export default function Navigation(props) {
     }
   }, []);
 
-
+function navToUnread (){
+  debugger;
+  dispatchRoute({type:actionTypes.APP_ROUTE_CHANGED, featureRoute:'/UNREAD',route:'/hangouts'})
+}
   return (
     <AppShell>
       {route === '/phone' && open ? (
@@ -71,6 +77,7 @@ export default function Navigation(props) {
         <MenuWhite onClick={toggleDrawer} device={device} id='menu' />
         {children}
         <NavItem>{userName}</NavItem>
+        <NavItem onClick={navToUnread}>Unread</NavItem>
         <NavItem>
           <OnlineStatus readyState={readyState}/>
         </NavItem>
@@ -81,5 +88,5 @@ export default function Navigation(props) {
 
 export function NavItem(props) {
   const { children } = props;
-  return <div className='nav-item'>{children}</div>;
+  return <div className='nav-item'{...props}>{children}</div>;
 }

@@ -33,7 +33,8 @@ export default function Mobile() {
   } = useHangouts();
   useEffect(() => {
     if (hangout) {
-      dispatch({ type:actionTypes.FEATURE_ROUTE_CHANGED,featureRoute:`/${hangout.state}`,route:'/hangouts'});
+     // dispatch({ type:actionTypes.FEATURE_ROUTE_CHANGED,featureRoute:`/${hangout.state}`,route:'/hangouts'});
+     // dispatch({type:actionTypes.APP_ROUTE_CHANGED, featureRoute:'/hangouts',route:'/hangouts'})
     }
   }, [hangout]);
   return (

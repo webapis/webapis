@@ -3,6 +3,8 @@ import { useEffect } from 'preact/hooks';
 import { List, ListItem } from '../layout/NavList';
 import { TextInput } from '../layout/TextInput';
 import { Button } from '../layout/Button';
+import {useAppContext}from '../app-context/app-context'
+import {actionTypes} from '../app-context/actionTypes'
 const style = {
   inputContainer: {
     display: 'flex',
@@ -19,12 +21,20 @@ export default function Hangout({
   hangouts,
   onSearch,
   onSelectHangout,
-  onSelectUser,
   search,
   users,
   onStartSearch,
 }) {
+  const [state,dispatch]=useAppContext()
+  function handleHangoutSelection(e){
+    const id =e.target.id
+    onSelectHangout(e)
+    const hangout = hangouts.find(g=> g.username===id)
+    debugger;
+    dispatch({type:actionTypes.APP_ROUTE_CHANGED, featureRoute:`/${hangout.state}`,route:'/hangouts'})
+  }
   return (
+ 
     <div>
       <div style={style.inputContainer}>
         <TextInput
@@ -47,22 +57,13 @@ export default function Hangout({
           hangouts.length > 0 &&
           hangouts.map((g) => {
             return (
-              <ListItem id={g.username} onClick={onSelectHangout}>
+              <ListItem id={g.username} onClick={handleHangoutSelection}>
                 {g.username}
               </ListItem>
             );
           })}
       </List>
-      <List id="users-list">
-        {users &&
-          users.map((g) => {
-            return (
-              <ListItem id={g.username} onClick={onSelectUser}>
-                {g.username}
-              </ListItem>
-            );
-          })}
-      </List>
+   
     </div>
   );
 }
