@@ -3,8 +3,8 @@ import { useEffect } from 'preact/hooks';
 import { List, ListItem } from '../layout/NavList';
 import { TextInput } from '../layout/TextInput';
 import { Button } from '../layout/Button';
-import {useAppContext}from '../app-context/app-context'
-import {actionTypes} from '../app-context/actionTypes'
+import {useAppRoute}from '../app-context/app-context'
+
 const style = {
   inputContainer: {
     display: 'flex',
@@ -25,13 +25,13 @@ export default function Hangout({
   users,
   onStartSearch,
 }) {
-  const [state,dispatch]=useAppContext()
+  const {onAppRoute}=useAppRoute()
   function handleHangoutSelection(e){
     const id =e.target.id
     onSelectHangout(e)
     const hangout = hangouts.find(g=> g.username===id)
     debugger;
-    dispatch({type:actionTypes.APP_ROUTE_CHANGED, featureRoute:`/${hangout.state}`,route:'/hangouts'})
+    onAppRoute({featureRoute:`/${hangout.state}`,route:'/hangouts'})
   }
   return (
  

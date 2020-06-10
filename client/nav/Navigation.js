@@ -12,7 +12,7 @@ import { useMediaQuery } from '../layout/useMediaQuery';
 import { useUserName } from '../auth/useUserName';
 import { useAuthContext } from '../auth/auth-context';
 import { recoverLocalAuthState } from '../auth/actions';
-import {useAppContext} from '../app-context/app-context'
+import {useAppRoute} from '../app-context/app-context'
 import {actionTypes} from '../app-context/actionTypes'
 const PhoneDrawer = lazy(() => import('./PhoneDrawer'));
 const TabletDrawer = lazy(() => import('./TabletDrawer'));
@@ -20,8 +20,7 @@ const LaptopDrawer = lazy(() => import('./LapTopDrawer'));
 const DesktopDrawer = lazy(() => import('./DesktopDrawer'));
 
 export default function Navigation(props) {
-const appContext =useAppContext()
-const dispatchRoute =appContext[1]
+const {onAppRoute} =useAppRoute()
   const wsocketContext =useWSocketContext()
   const {readyState}=wsocketContext[0]
   const [route, setRoute] = useState('');
@@ -49,7 +48,7 @@ const dispatchRoute =appContext[1]
 
 function navToUnread (){
   debugger;
-  dispatchRoute({type:actionTypes.APP_ROUTE_CHANGED, featureRoute:'/UNREAD',route:'/hangouts'})
+  onAppRoute({ featureRoute:'/UNREAD',route:'/hangouts'})
 }
   return (
     <AppShell>

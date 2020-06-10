@@ -1,6 +1,7 @@
 import { h, createContext } from 'preact';
 import { useContext, useReducer,useMemo,useEffect } from 'preact/hooks';
 import {reducer} from './reducer'
+import {actionTypes} from './actionTypes'
 const AppContext = createContext();
 
 export function useAppContext() {
@@ -32,6 +33,15 @@ useEffect(()=>{
     return children;
   }
   return null;
+}
+export function useAppRoute (){
+  const [state,dispatch]=useAppContext()
+
+  function onAppRoute({route,featureRoute}){
+    dispatch({type:actionTypes.APP_ROUTE_CHANGED, featureRoute,route})
+  }
+
+  return {onAppRoute}
 }
 
 export function AppRoute(props) {
