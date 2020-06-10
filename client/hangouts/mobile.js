@@ -1,8 +1,8 @@
 import { h } from 'preact';
 import { useEffect } from 'preact/hooks';
 import { lazy, Suspense } from 'preact/compat';
-import { FeatureRoute,useAppContext } from '../app-context/app-context';
-import {actionTypes} from '../app-context/actionTypes'
+import { FeatureRoute } from '../app-context/app-context';
+
 import { useHangouts } from './state/useHangouts';
 const Hangouts = lazy(() => import('./Hangout'));
 const Block = lazy(() => import('./state-ui/Block'));
@@ -14,7 +14,7 @@ const Invitee = lazy(() => import('./state-ui/Invitee'));
 const Inviter = lazy(() => import('./state-ui/Inviter'));
 const UnReadHangouts =lazy(() => import('./UnReadHangouts'));
 export default function Mobile() {
-  const [state,dispatch] = useAppContext();
+
   
   const {
     hangout,
@@ -31,12 +31,7 @@ export default function Mobile() {
     username,
     messages
   } = useHangouts();
-  useEffect(() => {
-    if (hangout) {
-     // dispatch({ type:actionTypes.FEATURE_ROUTE_CHANGED,featureRoute:`/${hangout.state}`,route:'/hangouts'});
-     // dispatch({type:actionTypes.APP_ROUTE_CHANGED, featureRoute:'/hangouts',route:'/hangouts'})
-    }
-  }, [hangout]);
+
   return (
     <div style={{ height: '85vh' }}>
       <FeatureRoute path="/hangouts">

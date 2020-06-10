@@ -13,12 +13,11 @@ import { OtherContent } from './OtherContent';
 import { Home } from './Home';
 import {WSocketProvider} from '../wsocket/WSocketProvider'
 import {HangoutsProvider} from '../hangouts/state/HangoutsProvider'
-import {useAppContext,AppRoute} from '../app-context/app-context'
+import {AppRoute} from '../app-context/app-context'
 const Hangouts = lazy(() => import('../hangouts'));
 const Group = lazy(() => import('../group/group'));
 export function App(){
-    const appContext=useAppContext()
-    const {initialRoute}=appContext[0]
+  
     return <AuthProvider>
     <WSocketProvider url ="ws://localhost:3000/hangouts">
       <HangoutsProvider>
@@ -56,7 +55,7 @@ export function App(){
 
           <AppRoute path='/hangouts'>
             <Suspense fallback={<div>loading...</div>}>
-              <Hangouts initialRoute={initialRoute}/>
+              <Hangouts />
             </Suspense>
           </AppRoute>
           <AppRoute path='/group'>

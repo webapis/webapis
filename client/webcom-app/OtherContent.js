@@ -2,12 +2,12 @@ import { h } from 'preact';
 import { List, ListItem } from '../layout/NavList';
 import { useUserName } from '../auth/useUserName';
 import { useRootRouteContext } from '../route/root-router';
-import {useAppContext} from '../app-context/app-context'
+import {useAppRoute} from '../app-context/app-context'
 import {actionTypes} from '../app-context/actionTypes'
 export function OtherContent() {
   const [rootRoute, setRootRoute] = useRootRouteContext();
-const appcontext =useAppContext()
-const dispatch=appcontext[1]
+const {onAppRoute} =useAppRoute()
+
   const { userName } = useUserName();
 
   function handleRoute(e) {
@@ -16,7 +16,7 @@ const dispatch=appcontext[1]
     if (userName) {
      debugger;
     //  setRootRoute(`/${id}`);
-      dispatch({type:actionTypes.APP_ROUTE_CHANGED, featureRoute:'/hangouts',route:'/hangouts'})
+      onAppRoute({type:actionTypes.APP_ROUTE_CHANGED, featureRoute:'/hangouts',route:'/hangouts'})
     } else {
       setRootRoute('/auth');
     }
