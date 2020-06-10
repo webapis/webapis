@@ -8,16 +8,14 @@ import { useAuthContext } from './auth-context';
 import {useFormContext} from '../form/form-context'
 import { useMediaQuery } from '../layout/useMediaQuery';
 import { useRouteContext } from '../route/router';
-import {useAuthRouteContext} from './auth-route-context'
-import {useRootRouteContext} from '../route/root-router'
+import {useAppRoute} from '../app-route/AppRouteProvider'
 import { Paper } from '../layout/Paper';
 import { Grid } from '../layout/Grid';
 import * as actions from './actions';
 
 export default function Login() {
-  const [route, setRoute] = useRouteContext();
-  const [rootRoute,setRootRoute]=useRootRouteContext()
-  const [authRoute,setAuthRoute]=useAuthRouteContext()
+  const {onAppRoute} = useAppRoute();
+
   const { device } = useMediaQuery();
   const {state, dispatch} = useAuthContext();
   const {dispatch:formDispatch}=useFormContext()
@@ -26,14 +24,15 @@ export default function Login() {
 
   useEffect(() => {
     if (state.token) {
-      setRootRoute('/');
+    
+      onAppRoute({featureRoute: '/',route:'/'});
     }
   }, [state.token]);
 
   function handleRoute(e) {
     e.preventDefault();
-    const { id } = e.target;
-    setAuthRoute(`/${id}`);
+   
+    onAppRoute({featureRoute: '/forgotpassword',route:'/auth'});
   }
 
   function handleChange(e) {

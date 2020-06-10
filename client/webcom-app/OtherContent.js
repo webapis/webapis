@@ -1,11 +1,10 @@
 import { h } from 'preact';
 import { List, ListItem } from '../layout/NavList';
 import { useUserName } from '../auth/useUserName';
-import { useRootRouteContext } from '../route/root-router';
 import {useAppRoute} from '../app-route/AppRouteProvider'
 import {actionTypes} from '../app-route/actionTypes'
 export function OtherContent() {
-  const [rootRoute, setRootRoute] = useRootRouteContext();
+
 const {onAppRoute} =useAppRoute()
 
   const { userName } = useUserName();
@@ -18,7 +17,8 @@ const {onAppRoute} =useAppRoute()
     //  setRootRoute(`/${id}`);
       onAppRoute({type:actionTypes.APP_ROUTE_CHANGED, featureRoute:'/hangouts',route:'/hangouts'})
     } else {
-      setRootRoute('/auth');
+
+      onAppRoute({type:actionTypes.APP_ROUTE_CHANGED, featureRoute:'/login',route:'/auth'})
     }
   }
   return (

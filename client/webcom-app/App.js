@@ -1,4 +1,4 @@
-import {h} from 'preact'
+import { h } from 'preact';
 import { Suspense, lazy } from 'preact/compat';
 import { RootRouteProvider, RootRoute } from '../route/root-router';
 import { RouteProvider, Route } from '../route/router';
@@ -11,63 +11,59 @@ import { AuthProvider } from '../auth/auth-context';
 import { FormProvider } from '../form/form-context';
 import { OtherContent } from './OtherContent';
 import { Home } from './Home';
-import {WSocketProvider} from '../wsocket/WSocketProvider'
-import {HangoutsProvider} from '../hangouts/state/HangoutsProvider'
-import {AppRoute} from '../app-route/AppRouteProvider'
+import { WSocketProvider } from '../wsocket/WSocketProvider';
+import { HangoutsProvider } from '../hangouts/state/HangoutsProvider';
+import { AppRoute } from '../app-route/AppRouteProvider';
 const Hangouts = lazy(() => import('../hangouts'));
 const Group = lazy(() => import('../group/group'));
-export function App(){
-  
-    return <AuthProvider>
-    <WSocketProvider url ="ws://localhost:3000/hangouts">
-      <HangoutsProvider>
-    <RootRouteProvider initialRoute='/'>
-      <FormProvider>
-        <ThemeProvider
-          initState={{
-            primary: {
-              background: '#6200EE',
-              color: '#ffffff',
-              fontFamily: 'Roboto, Helvetica, "Arial"',
-            },
-          }}
-        >
-          <Navigation
-            drawerContent={
-              <DrawerContent
-                authContent={<AuthContent />}
-                otherContent={<OtherContent />}
-              />
-            }
-          >
-            <NavItem>WEB COM</NavItem>
-           
-          </Navigation>
-          <AppRoute path='/auth'>
-            <RouteProvider initialRoute='/login'>
-              <Authentication />
-            </RouteProvider>
-          </AppRoute>
+export function App() {
+  return (
+    <AuthProvider>
+      <WSocketProvider url="ws://localhost:3000/hangouts">
+        <HangoutsProvider>
+          <FormProvider>
+            <ThemeProvider
+              initState={{
+                primary: {
+                  background: '#6200EE',
+                  color: '#ffffff',
+                  fontFamily: 'Roboto, Helvetica, "Arial"',
+                },
+              }}
+            >
+              <Navigation
+                drawerContent={
+                  <DrawerContent
+                    authContent={<AuthContent />}
+                    otherContent={<OtherContent />}
+                  />
+                }
+              >
+                <NavItem>WEB COM</NavItem>
+              </Navigation>
+              <AppRoute path="/auth">
+                <Authentication />
+              </AppRoute>
 
-          <AppRoute path='/'>
-            <Home />
-          </AppRoute>
+              <AppRoute path="/">
+                <Home />
+              </AppRoute>
 
-          <AppRoute path='/hangouts'>
-            <Suspense fallback={<div>loading...</div>}>
-              <Hangouts />
-            </Suspense>
-          </AppRoute>
-          <AppRoute path='/group'>
-            <Suspense fallback={<div>loading...</div>}>
-              <Group />
-            </Suspense>
-          </AppRoute>
-          {''}
-        </ThemeProvider>
-      </FormProvider>
-    </RootRouteProvider>
-    </HangoutsProvider>
-    </WSocketProvider>
-  </AuthProvider>
+              <AppRoute path="/hangouts">
+                <Suspense fallback={<div>loading...</div>}>
+                  <Hangouts />
+                </Suspense>
+              </AppRoute>
+              <AppRoute path="/group">
+                <Suspense fallback={<div>loading...</div>}>
+                  <Group />
+                </Suspense>
+              </AppRoute>
+              {''}
+            </ThemeProvider>
+          </FormProvider>
+        </HangoutsProvider>
+      </WSocketProvider>
+    </AuthProvider>
+  );
 }
