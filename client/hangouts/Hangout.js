@@ -3,7 +3,7 @@ import { useEffect } from 'preact/hooks';
 import { List, ListItem } from '../layout/NavList';
 import { TextInput } from '../layout/TextInput';
 import { Button } from '../layout/Button';
-import {useAppRoute}from '../app-context/app-context'
+import {useAppRoute}from '../app-route/AppRouteProvider'
 
 const style = {
   inputContainer: {

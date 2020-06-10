@@ -13,7 +13,7 @@ import { OtherContent } from './OtherContent';
 import { Home } from './Home';
 import {WSocketProvider} from '../wsocket/WSocketProvider'
 import {HangoutsProvider} from '../hangouts/state/HangoutsProvider'
-import {AppRoute} from '../app-context/app-context'
+import {AppRoute} from '../app-route/AppRouteProvider'
 const Hangouts = lazy(() => import('../hangouts'));
 const Group = lazy(() => import('../group/group'));
 export function App(){

@@ -1,7 +1,7 @@
 import { h } from 'preact';
 import { useEffect } from 'preact/hooks';
 import { lazy, Suspense } from 'preact/compat';
-import { FeatureRoute } from '../app-context/app-context';
+import { FeatureRoute } from '../app-route/AppRouteProvider';
 
 import { useHangouts } from './state/useHangouts';
 const Hangouts = lazy(() => import('./Hangout'));

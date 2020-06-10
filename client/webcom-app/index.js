@@ -1,10 +1,10 @@
 import 'whatwg-fetch';
 import { h, render } from 'preact';
-import { AppProvider } from '../app-context/app-context';
+import { AppRouteProvider } from '../app-route/AppRouteProvider';
 import {App} from './App'
 render(
-  <AppProvider title='Webcom' initState={{route:'/hangouts',featureRoute:'/hangouts'}}>
+  <AppRouteProvider title='Webcom' initState={{route:'/hangouts',featureRoute:'/hangouts'}}>
     <App/>
-  </AppProvider>,
+  </AppRouteProvider>,
   document.body
 );

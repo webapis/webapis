@@ -2,8 +2,8 @@ import { h } from 'preact';
 import { List, ListItem } from '../layout/NavList';
 import { useUserName } from '../auth/useUserName';
 import { useRootRouteContext } from '../route/root-router';
-import {useAppRoute} from '../app-context/app-context'
-import {actionTypes} from '../app-context/actionTypes'
+import {useAppRoute} from '../app-route/AppRouteProvider'
+import {actionTypes} from '../app-route/actionTypes'
 export function OtherContent() {
   const [rootRoute, setRootRoute] = useRootRouteContext();
 const {onAppRoute} =useAppRoute()

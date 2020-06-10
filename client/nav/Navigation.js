@@ -12,8 +12,8 @@ import { useMediaQuery } from '../layout/useMediaQuery';
 import { useUserName } from '../auth/useUserName';
 import { useAuthContext } from '../auth/auth-context';
 import { recoverLocalAuthState } from '../auth/actions';
-import {useAppRoute} from '../app-context/app-context'
-import {actionTypes} from '../app-context/actionTypes'
+import {useAppRoute} from '../app-route/AppRouteProvider'
+import {actionTypes} from '../app-route/actionTypes'
 const PhoneDrawer = lazy(() => import('./PhoneDrawer'));
 const TabletDrawer = lazy(() => import('./TabletDrawer'));
 const LaptopDrawer = lazy(() => import('./LapTopDrawer'));
