@@ -17,6 +17,7 @@ import { ThemeProvider } from '../theme/theme-context';
 import { List, ListItem } from '../layout/NavList';
 import { DrawerContent } from './DrawerContent';
 import { messages } from './fakeMessages';
+import {UnreadDemo} from './UreadDemo'
 const hangouts = [
   { username: 'userone' },
   { username: 'usertwo' },
@@ -43,7 +44,7 @@ render(
       },
     }}
   >
-    <AppRouteProvider initState={{ featureRoute: '/', route: '/message' }}>
+    <AppRouteProvider initState={{ featureRoute: '/', route: '/unread' }}>
       <Navigation drawerContent={<DrawerContent />}>
         <AppRoute path="/hangouts">
           <Hangout hangouts={hangouts} />
@@ -82,6 +83,9 @@ render(
         </AppRoute>
         <AppRoute path="/messages">
           <Hangchat hangout={hangout} messages={messages} username="demo" />
+        </AppRoute>
+        <AppRoute path="/unread">
+          <UnreadDemo/>
         </AppRoute>
       </Navigation>
     </AppRouteProvider>
