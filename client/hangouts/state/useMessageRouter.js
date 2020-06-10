@@ -19,13 +19,14 @@ export function useMessageRouter({ message, username, dispatch }) {
         break;
     }
   }
-
   useEffect(() => {
     if (message) {
+      
       const hangout = JSON.parse(message.data);
       updateLocalHangouts({ hangout, username });
       handleRoute({ hangout });
       dispatch({ type: actionTypes.HANGOUT_RECIEVED, hangout });
+   
     }
   }, [message]);
   return {};
