@@ -1,6 +1,5 @@
 import { h } from 'preact';
-import { useRootRouteContext } from '../route/root-router';
-import { useAuthRouteContext } from './auth-route-context';
+import {useAppRoute} from '../app-route/AppRouteProvider'
 import { List, ListItem } from '../layout/NavList';
 import userIcon from './icons/user64.png';
 import { logout } from '../auth/actions';
@@ -15,13 +14,12 @@ const style = {
 
 export function AuthContent() {
   const { state } = useAuthContext();
-  const [authRoute, setAuthRoute] = useAuthRouteContext();
-  const [rootRoute, setRootRoute] = useRootRouteContext();
+  const {onAppRoute} = useAppRoute();
+
   function handleRoute(e) {
     e.preventDefault();
     const { id } = e.target;
-    setRootRoute(`/auth`);
-    setAuthRoute(`/${id}`);
+    onAppRoute({featureRoute: `/${id}`,route:'/auth'});
   }
 
   return (
@@ -29,7 +27,7 @@ export function AuthContent() {
       {!state.username && <UnAuthedState handleRoute={handleRoute} />}
       {state.username && (
         <AuthedState
-          setRootRoute={setRootRoute}
+        onAppRoute={onAppRoute}
           handleRoute={handleRoute}
           userName={state.username}
         />
@@ -39,10 +37,10 @@ export function AuthContent() {
   );
 }
 
-export function AuthedState({ handleRoute, userName, setRootRoute }) {
+export function AuthedState({ handleRoute, userName ,onAppRoute}) {
   function handleLogOut() {
    
-    setRootRoute('/home');
+    onAppRoute({featureRoute:'/',route:'/home'});
     logout();
   }
 
