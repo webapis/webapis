@@ -8,7 +8,7 @@ export async function onLineStateChangeHandler({ client, ws, connections }) {
     if (user && user.undelivered) {
       debugger;
       ws.send(
-        JSON.stringify({ hangouts: user.undelivered, type: 'UNDELIVERED' })
+        JSON.stringify({ hangouts: user.undelivered, type: 'UNREAD_HANGOUTS' })//--
       );
       const removeUndeliveredResult = await collection.updateOne(
         { username: ws.user.username },

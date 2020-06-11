@@ -14,7 +14,7 @@ import {
   saveMessage,
 } from './actions';
 
-import { useMessageRouter } from './useMessageRouter';
+import { useSocketMessage } from './useSocketMessage';
 
 export function useHangouts() {
   const authContext = useAuthContext();
@@ -27,11 +27,16 @@ export function useHangouts() {
     users,
     messageText,
     messages,
-    message,
+    socketMessage,
     readyState,
-    socket
+    socket,
   } = state;
-  const handleMessageRouter = useMessageRouter({ dispatch, message, username });
+  const handleMessageRouter = useSocketMessage({
+    dispatch,
+    socketMessage,
+    username,
+    focusedHangout: hangout,
+  });
 
   function onSelectHangout(e) {
     const username = e.target.id;
@@ -95,6 +100,6 @@ export function useHangouts() {
     username,
     messages,
     onHangout,
-    readyState
+    readyState,
   };
 }

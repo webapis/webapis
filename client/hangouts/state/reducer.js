@@ -9,12 +9,14 @@ export const initState = {
   error: null,
   messageText: '',
   online: false,
-  undelivered: [],
   socket: null,
-  readyState:0
+  readyState:0,
+  socketMessage:null,
 };
 export function reducer(state, action) {
   switch (action.type) {
+    case actionTypes.SOCKET_MESSAGE_RECIEVED:
+      return {...state,socketMessage: action.socketMessage}
     case actionTypes.SAVED_MESSAGE_LOCALLY:
       if (state.messages) {
         return { ...state, messages: [...state.messages, action.message] };

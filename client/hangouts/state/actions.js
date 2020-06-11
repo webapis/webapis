@@ -68,7 +68,6 @@ export function loadMessages({ hangout, dispatch }) {
 }
 
 export function saveMessage({ dispatch, message }) {
-
   const { target } = message;
   const key = `${target}-messages`;
   const messages = JSON.parse(localStorage.getItem(key));
@@ -78,4 +77,33 @@ export function saveMessage({ dispatch, message }) {
     localStorage.setItem(key, JSON.stringify([message]));
   }
   dispatch({ type: actionTypes.SAVED_MESSAGE_LOCALLY, message });
+}
+
+export function reduceUnread({ unread, dispatch }) {
+  const reducedUnread = unreads.reduce((accumulator, current, index) => {
+    if (index === 0) {
+      return (accumulator = [{ ...current, messageCount: 1 }]);
+    } else {
+      const obj = accumulator.find(
+        (a) => a.username === current.username && current.state === 'MESSANGER'
+      );
+      if (obj) {
+        const index = accumulator.findIndex(
+          (a) => a.username === current.username
+        );
+        //if current exist inside accumilator map it to that object
+        accumulator.splice(index, 1, {
+          ...obj,
+          messageCount: ++obj.messageCount,
+        });
+      } else {
+        //if current exist inside accumilator map it to that object
+        accumulator.push({ ...current, messageCount: 1 });
+      }
+    }
+    return accumulator;
+  }, []);
+  //   console.log('reducerItems', reducerItems);
+
+  dispatch({ type: actionTypes.UNREAD_RECIEVED, unread: reducedUnread });
 }

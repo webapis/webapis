@@ -51,7 +51,7 @@ export async function hangoutHandler({ collection, hangout, ws, connections }) {
     const targetOnline = connections[username];
     if (targetOnline) {
       debugger;
-      targetOnline.send(JSON.stringify(target));
+      targetOnline.send(JSON.stringify({hangout:target,type:'HANGOUT'}));//-----------------
     } else {
       //TARGET OFFLINE: push updated hangout undeliverded collection
       const targetUndeliveredUpdateResult = await collection.updateOne(
@@ -65,7 +65,7 @@ export async function hangoutHandler({ collection, hangout, ws, connections }) {
       debugger;
     }
     //send state change to sender
-    ws.send(JSON.stringify(sender));
+    ws.send(JSON.stringify({hangout:sender,type:'ACKHOWLEDGEMENT'}));//---------------
   } catch (error) {
     const err = error;
     debugger;
