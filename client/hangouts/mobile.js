@@ -12,7 +12,7 @@ const Hangchat = lazy(() => import('./state-ui/Hangchat'));
 const Invite = lazy(() => import('./state-ui/Invite'));
 const Invitee = lazy(() => import('./state-ui/Invitee'));
 const Inviter = lazy(() => import('./state-ui/Inviter'));
-const UnReadMessages =lazy(() => import('./UnreadMessages'));
+const UnreadHangouts =lazy(() => import('./UnreadHangouts'));
 export default function Mobile() {
 
   
@@ -95,7 +95,7 @@ export default function Mobile() {
       </FeatureRoute>
       <FeatureRoute path="/UNREAD">
         <Suspense fallback={<div>Loading...</div>}>
-          <UnReadMessages  />
+          <UnreadHangouts  />
         </Suspense>
       </FeatureRoute>
     </div>

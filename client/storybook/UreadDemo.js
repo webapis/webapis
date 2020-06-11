@@ -1,6 +1,6 @@
 import { h } from 'preact';
-import Unread from '../hangouts/UnreadMessages';
-
+import Unread from '../hangouts/UnreadHangouts';
+import {reducerUnreadhangouts} from '../hangouts/state/reduceUnreadhangouts'
 const unreads = [
   {
     username: 'demo',
@@ -21,5 +21,5 @@ const unreads = [
 ];
 
 export function UnreadDemo() {
-  return <Unread unreads={unreads} />;
+  return <Unread unreadhangouts={reducerUnreadhangouts({unreadhangouts:unreads})} />;
 }

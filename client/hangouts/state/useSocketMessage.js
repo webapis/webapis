@@ -25,13 +25,18 @@ export function useSocketMessage({
         break;
     }
   }
+
+  function handleMessanger({hangout}){
+    if(hangout.state==='MESSANGER'){
+      
+    }
+  }
   useEffect(() => {
     if (socketMessage && focusedHangout && username) {
       debugger;
       if (socketMessage.type === 'ACKHOWLEDGEMENT') {
         const { hangout } = socketMessage;
         debugger;
-        // debugger;
         dispatch({
           type: actionTypes.ACKHOWLEDGEMENT_RECIEVED,
           hangout,

@@ -1,5 +1,5 @@
 import { actionTypes } from './actionTypes';
-
+import { reducerUnreadhangouts } from './reduceUnreadhangouts'
 //retrieves hangouts from localStorage
 export function loadHangouts({ username, dispatch }) {
   const hangouts = JSON.parse(localStorage.getItem(`${username}-hangouts`));
@@ -79,31 +79,6 @@ export function saveMessage({ dispatch, message }) {
   dispatch({ type: actionTypes.SAVED_MESSAGE_LOCALLY, message });
 }
 
-export function reduceUnread({ unread, dispatch }) {
-  const reducedUnread = unreads.reduce((accumulator, current, index) => {
-    if (index === 0) {
-      return (accumulator = [{ ...current, messageCount: 1 }]);
-    } else {
-      const obj = accumulator.find(
-        (a) => a.username === current.username && current.state === 'MESSANGER'
-      );
-      if (obj) {
-        const index = accumulator.findIndex(
-          (a) => a.username === current.username
-        );
-        //if current exist inside accumilator map it to that object
-        accumulator.splice(index, 1, {
-          ...obj,
-          messageCount: ++obj.messageCount,
-        });
-      } else {
-        //if current exist inside accumilator map it to that object
-        accumulator.push({ ...current, messageCount: 1 });
-      }
-    }
-    return accumulator;
-  }, []);
-  //   console.log('reducerItems', reducerItems);
-
-  dispatch({ type: actionTypes.UNREAD_RECIEVED, unread: reducedUnread });
+export function reduceUnread({ unreadhangouts, dispatch }) {
+ // dispatch({ type: actionTypes., unreadhangouts: reducerUnreadhangouts({ unreadhangouts }) });
 }
