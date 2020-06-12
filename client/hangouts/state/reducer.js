@@ -48,9 +48,7 @@ export function reducer(state, action) {
         ...state,
         hangout: state.hangouts.find((g) => g.username === action.username),
       };
-
     //SOCKET
-
     case actionTypes.SOCKET_ERROR:
       return { ...state, error: action.error };
     case actionTypes.CONNECTING:
