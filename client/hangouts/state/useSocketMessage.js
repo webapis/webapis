@@ -20,7 +20,7 @@ import {
 } from './actions/hangout-actions';
 export function useSocketMessage({
   socketMessage,
-  username,
+  name:username,
   dispatch,
   focusedHangout,
 }) {
@@ -31,7 +31,7 @@ export function useSocketMessage({
         saveInvited({
           dispatch,
           hangout,
-          username,
+          name:username,
           focusedHangout,
           onAppRoute,
         });
@@ -39,7 +39,7 @@ export function useSocketMessage({
         saveUnblovked({
           dispatch,
           hangout,
-          username,
+          name:username,
           focusedHangout,
           onAppRoute,
         });
@@ -47,7 +47,7 @@ export function useSocketMessage({
         saveDeclined({
           dispatch,
           hangout,
-          username,
+          name:username,
           focusedHangout,
           onAppRoute,
         });
@@ -55,7 +55,7 @@ export function useSocketMessage({
         saveBlocked({
           dispatch,
           hangout,
-          username,
+          name:username,
           focusedHangout,
           onAppRoute,
         });
@@ -63,17 +63,17 @@ export function useSocketMessage({
         saveAccepted({
           dispatch,
           hangout,
-          username,
+          name:username,
           focusedHangout,
           onAppRoute,
         });
 
         break;
       case hangoutStates.MESSAGED:
-        saveMessanged({
+        saveMessaged({
           dispatch,
           hangout,
-          username,
+          name:username,
           focusedHangout,
           onAppRoute,
         });
@@ -86,22 +86,22 @@ export function useSocketMessage({
   function handleHangout({ hangout }) {
     switch (hangout.state) {
       case hangoutStates.ACCEPTER:
-        saveAccepter({ dispatch, hangout, username, focusedHangout });
+        saveAccepter({ dispatch, hangout,  name:username, focusedHangout });
         break;
       case hangoutStates.BLOCKER:
-        saveBlocker({ dispatch, hangout, username, focusedHangout });
+        saveBlocker({ dispatch, hangout,  name:username, focusedHangout });
         break;
       case hangoutStates.DECLINER:
-        saveDecliner({ dispatch, hangout, username, focusedHangout });
+        saveDecliner({ dispatch, hangout,  name:username, focusedHangout });
         break;
       case hangoutStates.INVITER:
-        saveInviter({ dispatch, hangout, username, focusedHangout });
+        saveInviter({ dispatch, hangout,  name:username, focusedHangout });
         break;
       case hangoutStates.MESSANGER:
-        saveMessanger({ dispatch, hangout, username, focusedHangout });
+        saveMessanger({ dispatch, hangout,  name:username, focusedHangout });
         break;
       case hangoutStates.UNBLOCKER:
-        saveUnblocker({ dispatch, hangout, username, focusedHangout });
+        saveUnblocker({ dispatch, hangout,  name:username, focusedHangout });
         break;
       default:
         break;
