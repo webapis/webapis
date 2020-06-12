@@ -10,19 +10,17 @@ export const initState = {
   messageText: '',
   online: false,
   socket: null,
-  readyState:0,
-  socketMessage:null,
+  readyState: 0,
+  socketMessage: null,
 };
 export function reducer(state, action) {
   switch (action.type) {
+    case actionTypes.HANGOUTS_UPDATED:
+      return { ...state, hangouts: action.hangouts };
+    case actionTypes.MESSAGES_UPDATED:
+      return { ...state, messages: action.messages };
     case actionTypes.SOCKET_MESSAGE_RECIEVED:
-      return {...state,socketMessage: action.socketMessage}
-    case actionTypes.SAVED_MESSAGE_LOCALLY:
-      if (state.messages) {
-        return { ...state, messages: [...state.messages, action.message] };
-      } else {
-        return { ...state, messages: [action.message] };
-      }
+      return { ...state, socketMessage: action.socketMessage };
     case actionTypes.LOADED_MESSAGES:
       return { ...state, messages: action.messages };
     case actionTypes.MESSAGE_TEXT_CHANGED:
@@ -30,20 +28,10 @@ export function reducer(state, action) {
     case actionTypes.FETCH_USER_FAILED:
     case actionTypes.FETCH_HANGOUT_FAILED:
       return { ...state, loading: false, error: action.error };
-    case actionTypes.FETCH_USER_STARTED:
-      return { ...state, loading: true };
-    case actionTypes.FETCH_USER_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        users: action.users,
-      };
     case actionTypes.FETCH_HANGOUT_STARTED:
       return { ...state, loading: true };
     case actionTypes.FETCH_HANGOUT_SUCCESS:
       return { ...state, loading: false, hangouts: action.hangouts };
-    case actionTypes.HANGOUT_NOT_FOUND:
-      return { ...state, loading: false };
     case actionTypes.FILTER_HANGOUTS:
       return {
         ...state,
@@ -55,33 +43,12 @@ export function reducer(state, action) {
       return { ...state, search: action.search };
     case actionTypes.LOAD_HANGOUTS:
       return { ...state, hangouts: action.hangouts };
-    case actionTypes.SELECTED_USER:
-      if (state.hangouts) {
-        return {
-          ...state,
-          hangouts: [...state.hangouts, action.hangout],
-          hangout: action.hangout,
-        };
-      }
-      return {
-        ...state,
-        hangouts: [action.hangout],
-        hangout: action.hangout,
-      };
     case actionTypes.SELECTED_HANGOUT:
       return {
         ...state,
         hangout: state.hangouts.find((g) => g.username === action.username),
       };
-    case actionTypes.HANGOUT_RECIEVED:
-      return {
-        ...state,
-        hangout: action.hangout,
-        hangouts: updateHangout({
-          hangouts: state.hangouts,
-          hangout: action.hangout,
-        }),
-      };
+
     //SOCKET
 
     case actionTypes.SOCKET_ERROR:
@@ -98,24 +65,5 @@ export function reducer(state, action) {
       return { ...state, socket: action.socket };
     default:
       return state;
-  }
-}
-
-function updateHangout({ hangout, hangouts }) {
-  if (hangouts) {
-    const hangoutExists = hangouts.find((g) => g.username === hangout.username);
-    if (hangoutExists) {
-      return hangouts.map((g) => {
-        if (g.username === hangout.username) {
-          return hangout;
-        } else {
-          return g;
-        }
-      });
-    } else {
-      return [hangouts, hangout];
-    }
-  } else {
-    return [hangouts, hangout];
   }
 }

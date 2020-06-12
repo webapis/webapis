@@ -67,24 +67,14 @@ export function useHangouts() {
     const command = e.target.id;
     const { username, email } = hangout;
     let message = null;
-    if (messageText) {
-      saveMessage({
-        dispatch,
-        message: {
-          target: username,
-          username: authContext.state.username,
-          text: messageText,
-          timestamp: Date.now(),
-        },
-      });
-    }
+
     const updatedHangout = {
       username,
       email,
       message,
     };
     socket.send(JSON.stringify({ ...updatedHangout, command }));
-    updateLocalHangouts({ hangout, username, devivered: 'pending' });
+
   }
   return {
     onMessageText,
