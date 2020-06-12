@@ -3,6 +3,7 @@ import { useEffect } from 'preact/hooks';
 import { useHangoutContext } from './HangoutsProvider';
 import { useAuthContext } from '../../auth/auth-context';
 import { updateLocalHangouts } from './updateLocalHangouts';
+import { saveMessage } from '../state/actions/akn-actions/saveMessage';
 import {
   selectHangout,
   searchHangouts,
@@ -65,16 +66,26 @@ export function useHangouts() {
   }
   function onHangout(e) {
     const command = e.target.id;
-    const { username, email } = hangout;
-    let message = null;
-
-    const updatedHangout = {
-      username,
-      email,
-      message,
-    };
-    socket.send(JSON.stringify({ ...updatedHangout, command }));
-
+    const { username, email, state } = hangout;
+    const timestamp = Date.now();
+    saveMessage({
+      dispatch,
+      name: username,
+      hangout: {
+        username,
+        email,
+        state,
+        message: { text: messageText, timestamp },
+      },
+    });
+    socket.send(
+      JSON.stringify({
+        username,
+        email,
+        message: { text: messageText, timestamp },
+        command,
+      })
+    );
   }
   return {
     onMessageText,
