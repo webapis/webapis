@@ -11,8 +11,7 @@ import {
   fetchHangout,
   selectUser,
   changeMessageText,
-  startClientCommand,
-  saveMessage,
+  startClientCommand
 } from './actions';
 
 import { useSocketMessage } from './useSocketMessage';
@@ -66,13 +65,13 @@ export function useHangouts() {
   }
   function onHangout(e) {
     const command = e.target.id;
-    const { username, email, state } = hangout;
+    const { email, state } = hangout;
     const timestamp = Date.now();
     saveMessage({
       dispatch,
       name: username,
       hangout: {
-        username,
+        username: hangout.username,
         email,
         state,
         message: { text: messageText, timestamp },

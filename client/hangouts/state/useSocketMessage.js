@@ -115,6 +115,7 @@ export function useSocketMessage({
   }
   useEffect(() => {
     if (socketMessage && focusedHangout && username) {
+      debugger;
       switch (socketMessage.type) {
         case 'ACKHOWLEDGEMENT':
           handleAcknowledgement({ hangout: socketMessage.hangout });

@@ -6,6 +6,7 @@ export function saveMessaged({ dispatch, hangout, name }) {
   saveAckHangout({ dispatch, name, hangout });
 }
 export function saveInvited({ dispatch, hangout, name }) {
+  debugger;
   updateMessage({ dispatch, name, hangout });
   saveAckHangout({ dispatch, name, hangout });
 }
