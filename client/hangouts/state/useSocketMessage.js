@@ -9,7 +9,7 @@ import {
   saveBlocked,
   saveAccepted,
   saveMessaged,
-} from './actions/akn-actions';
+} from './actions/delivering-actions';
 import {
   saveAccepter,
   saveBlocker,
@@ -17,7 +17,7 @@ import {
   saveInviter,
   saveMessanger,
   saveUnblocker,
-} from './actions/hangout-actions';
+} from './actions/recieving-actions';
 export function useSocketMessage({
   socketMessage,
   name:username,
@@ -25,7 +25,7 @@ export function useSocketMessage({
   focusedHangout,
 }) {
   const { onAppRoute } = useAppRoute();
-  function handleAcknowledgement({ hangout }) {
+  function handleAcknowledgement({ hangout,offline }) {
     switch (hangout.state) {
       case hangoutStates.INVITED:
         saveInvited({
@@ -34,6 +34,7 @@ export function useSocketMessage({
           name:username,
           focusedHangout,
           onAppRoute,
+          offline
         });
       case hangoutStates.UNBLOCKED:
         saveUnblovked({
@@ -42,6 +43,7 @@ export function useSocketMessage({
           name:username,
           focusedHangout,
           onAppRoute,
+          offline
         });
       case hangoutStates.DECLINED:
         saveDeclined({
@@ -50,6 +52,7 @@ export function useSocketMessage({
           name:username,
           focusedHangout,
           onAppRoute,
+          offline
         });
       case hangoutStates.BLOCKED:
         saveBlocked({
@@ -58,6 +61,7 @@ export function useSocketMessage({
           name:username,
           focusedHangout,
           onAppRoute,
+          offline
         });
       case hangoutStates.ACCEPTED:
         saveAccepted({
@@ -66,6 +70,7 @@ export function useSocketMessage({
           name:username,
           focusedHangout,
           onAppRoute,
+          offline
         });
 
         break;
@@ -76,6 +81,7 @@ export function useSocketMessage({
           name:username,
           focusedHangout,
           onAppRoute,
+          offline
         });
         break;
       default:
@@ -118,13 +124,16 @@ export function useSocketMessage({
       debugger;
       switch (socketMessage.type) {
         case 'ACKHOWLEDGEMENT':
-          handleAcknowledgement({ hangout: socketMessage.hangout });
+          handleAcknowledgement({ hangout: socketMessage.hangout,offline:false });
           break;
         case 'HANGOUT':
           handleHangout({ hangout: socketMessage.hangout });
           break;
         case 'UNREAD_HANGOUTS':
           handleHangouts({ hangouts: socketMessage.hangouts });
+          break;
+        case 'OFFLINE_ACKN':
+          handleAcknowledgement({ hangout: socketMessage.hangout,offline:true });
           break;
         default:
           break;

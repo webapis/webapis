@@ -5,11 +5,12 @@ export async function hangoutHandler({ collection, hangout, ws, connections }) {
     const { senderState, targetState } = stateMapper({
       command: hangout.command,
     });
-    const { username, email, message } = hangout;
+    const { username, email, message,offline,timestamp } = hangout;
     const sender = {
       username,
       email,
       message,
+      timestamp,
       state: senderState,
     };
     debugger;
@@ -17,6 +18,7 @@ export async function hangoutHandler({ collection, hangout, ws, connections }) {
       username: ws.user.username,
       email: ws.user.email,
       message,
+      timestamp,
       state: targetState,
     };
     debugger;
@@ -65,7 +67,12 @@ export async function hangoutHandler({ collection, hangout, ws, connections }) {
       debugger;
     }
     //send state change to sender
-    ws.send(JSON.stringify({hangout:sender,type:'ACKHOWLEDGEMENT'}));//---------------
+ 
+    if(offline){
+      ws.send(JSON.stringify({hangout:sender,type:'OFFLINE_ACKN'}));//---------------
+    }else{
+      ws.send(JSON.stringify({hangout:sender,type:'ACKHOWLEDGEMENT'}));//---------------
+    }
   } catch (error) {
     const err = error;
     debugger;
