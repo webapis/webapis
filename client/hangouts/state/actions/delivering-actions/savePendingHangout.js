@@ -1,5 +1,6 @@
 import { actionTypes } from '../../actionTypes';
 export function savePendingHangout({ dispatch, name, hangout, online }) {
+
   const { username, message, state, email } = hangout;
   let hangoutKey = '';
   let messageKey = '';
@@ -11,13 +12,13 @@ export function savePendingHangout({ dispatch, name, hangout, online }) {
     messageKey = `${name}-${username}-offline-messages`;
   }
 
-  saveHangout({ hangoutKey, username, hangout });
+  saveHangout({ hangoutKey, username, hangout,dispatch });
   if (message) {
-    saveMessage({ messageKey, username, message });
+    saveMessage({ messageKey, username, message,dispatch });
   }
 }
 
-function saveHangout({ hangoutKey, username, hangout }) {
+function saveHangout({ hangoutKey, username, hangout,dispatch }) {
   const hangouts = JSON.parse(localStorage.getItem(hangoutKey));
   let updatedHangouts = null;
   if (hangouts) {
@@ -30,7 +31,7 @@ function saveHangout({ hangoutKey, username, hangout }) {
   dispatch({ type: actionTypes.HANGOUTS_UPDATED, hangouts: updatedHangouts });
 }
 
-function saveMessage({ messageKey, username, message }) {
+function saveMessage({ messageKey, username, message,dispatch }) {
   const messages = JSON.parse(localStorage.getItem(messageKey));
   let updatedMessages = null;
   if (messages) {

@@ -34,6 +34,7 @@ export async function hangoutHandler({ collection, hangout, ws, connections }) {
         { username },
         { $push: { hangouts: target } }
       );
+      debugger;
     } else {
       // update hangout on sender
       const senderHangoutUpdateResult = await collection.updateOne(
@@ -79,3 +80,4 @@ export async function hangoutHandler({ collection, hangout, ws, connections }) {
     console.log('hangoutHandlerError', error);
   }
 }
+//

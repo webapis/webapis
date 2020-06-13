@@ -13,12 +13,12 @@ export default async function ({ req, res, collection }) {
     const { username } = decoded;
     // finduser
     let user = await collection.findOne({username});
-    debugger;
+ 
     
     if (user && user.hangouts) {
-debugger;
+
       // search for users hangouts
-        debugger;
+   
         res.writeHead(200, { 'Content-Type': 'application/json' });
         res.write(
           JSON.stringify({
@@ -29,7 +29,7 @@ debugger;
       
     }
     else{
-      debugger
+
       let users = await collection.find({username:{$regex: new RegExp(search,'i')}}).project({salt:0,hash:0,iterations:0}).toArray();
       res.writeHead(200, { 'Content-Type': 'application/json' });
       res.write(
@@ -38,7 +38,7 @@ debugger;
         })
       );
       res.end();
-      debugger;
+    
     }
   
 //

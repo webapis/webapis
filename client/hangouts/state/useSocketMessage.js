@@ -20,7 +20,7 @@ import {
 } from './actions/recieving-actions';
 export function useSocketMessage({
   socketMessage,
-  name:username,
+  username,
   dispatch,
   focusedHangout,
 }) {
@@ -92,22 +92,22 @@ export function useSocketMessage({
   function handleHangout({ hangout }) {
     switch (hangout.state) {
       case hangoutStates.ACCEPTER:
-        saveAccepter({ dispatch, hangout,  name:username, focusedHangout });
+        saveAccepter({ dispatch, hangout,  name:username, focusedHangout,onAppRoute });
         break;
       case hangoutStates.BLOCKER:
-        saveBlocker({ dispatch, hangout,  name:username, focusedHangout });
+        saveBlocker({ dispatch, hangout,  name:username, focusedHangout,onAppRoute  });
         break;
       case hangoutStates.DECLINER:
-        saveDecliner({ dispatch, hangout,  name:username, focusedHangout });
+        saveDecliner({ dispatch, hangout,  name:username, focusedHangout,onAppRoute  });
         break;
       case hangoutStates.INVITER:
-        saveInviter({ dispatch, hangout,  name:username, focusedHangout });
+        saveInviter({ dispatch, hangout,  name:username, focusedHangout,onAppRoute  });
         break;
       case hangoutStates.MESSANGER:
-        saveMessanger({ dispatch, hangout,  name:username, focusedHangout });
+        saveMessanger({ dispatch, hangout,  name:username, focusedHangout,onAppRoute  });
         break;
       case hangoutStates.UNBLOCKER:
-        saveUnblocker({ dispatch, hangout,  name:username, focusedHangout });
+        saveUnblocker({ dispatch, hangout,  name:username, focusedHangout,onAppRoute  });
         break;
       default:
         break;
@@ -119,11 +119,13 @@ export function useSocketMessage({
       handleHangout({ hangout });
     });
   }
+
   useEffect(() => {
-    if (socketMessage && focusedHangout && username) {
-      debugger;
+    if (socketMessage  && username && focusedHangout) {
+    
       switch (socketMessage.type) {
         case 'ACKHOWLEDGEMENT':
+      
           handleAcknowledgement({ hangout: socketMessage.hangout,offline:false });
           break;
         case 'HANGOUT':
@@ -139,6 +141,6 @@ export function useSocketMessage({
           break;
       }
     }
-  }, [socketMessage, focusedHangout, username]);
+  }, [socketMessage, username,focusedHangout]);
   return {};
 }

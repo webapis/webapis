@@ -7,7 +7,7 @@ export function saveInviter({
   onAppRoute,
 }) {
   const { username, message, state, email } = hangout;
-
+debugger;
   saveRecievedHangout({ dispatch, hangout, name, onAppRoute, focusedHangout });
 }
 

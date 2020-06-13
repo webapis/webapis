@@ -1,17 +1,18 @@
 import { actionTypes } from '../../actionTypes';
-export function saveRecievedHangout(
+export function saveRecievedHangout({
   dispatch,
   hangout,
   name,
   focusedHangout,
   onAppRoute
-) {
+}) {
+  debugger;
   const { username, message } = hangout;
   const hangoutKey = `${name}-hangouts`;
 
   const hangouts = JSON.parse(localStorage.getItem(hangoutKey));
   const hangoutIndex = hangouts.findIndex((g) => g.username === username);
-  const updatedHangouts = null;
+  let updatedHangouts = null;
   if (hangouts) {
     if (focusedHangout.username === username) {
       updatedHangouts = hangouts.splice(hangoutIndex, 1, {
@@ -51,7 +52,7 @@ export function saveRecievedHangout(
     }
   }
   if (message) {
-    saveRecievedMessage({ dispatch, hangout, name });
+    saveRecievedMessage({ dispatch, hangout, name,focusedHangout });
   }
 }
 
@@ -66,7 +67,7 @@ export function saveRecievedMessage({
   // save message to localStorage
   const messageKey = `${name}-${username}-messages`;
   const messages = JSON.parse(localStorage.getItem(messageKey));
-  const updatedMessages = null;
+  let updatedMessages = null;
   if (messages) {
     if (focusedHangout.username === username) {
       updatedMessages = [...messages, { ...message, username, read: true }];

@@ -73,13 +73,15 @@ export function useHangouts() {
   function onHangout(e) {
     const command = e.target.id;
     const { email } = hangout;
+   
     const timestamp = Date.now();
     const online = true;
 
     if (socket && readyState === 1) {
+     
       socket.send(
         JSON.stringify({
-          username,
+          username:hangout.username,
           email,
           message: { text: messageText, timestamp },
           command,
@@ -87,6 +89,7 @@ export function useHangouts() {
         })
       );
     } else {
+     
       online = false;
     }
 

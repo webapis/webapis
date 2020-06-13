@@ -44,6 +44,7 @@ export async function fetchHangout({ search, dispatch, username }) {
     );
     if (response.ok) {
       const { hangouts } = await response.json();
+debugger;
       dispatch({ type: actionTypes.FETCH_HANGOUT_SUCCESS, hangouts });
     }
   } catch (error) {
