@@ -15,6 +15,9 @@ export const initState = {
 };
 export function reducer(state, action) {
   switch (action.type) {
+    case actionTypes.HANGOUT_UPDATED:
+    
+      return { ...state, hangout: action.hangout };
     case actionTypes.HANGOUTS_UPDATED:
       return { ...state, hangouts: action.hangouts };
     case actionTypes.MESSAGES_UPDATED:

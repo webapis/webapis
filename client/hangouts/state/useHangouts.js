@@ -3,7 +3,7 @@ import { useEffect } from 'preact/hooks';
 import { useHangoutContext } from './HangoutsProvider';
 import { useAuthContext } from '../../auth/auth-context';
 import { updateLocalHangouts } from './updateLocalHangouts';
-import { saveMessage } from '../state/actions/akn-actions/saveMessage';
+import { savePendingHangout } from './actions/delivering-actions/savePendingHangout';
 import {
   selectHangout,
   searchHangouts,
@@ -11,9 +11,9 @@ import {
   fetchHangout,
   selectUser,
   changeMessageText,
-  startClientCommand
+  startClientCommand,
 } from './actions';
-
+import {sendOfflineHangouts} from './actions/delivering-actions/sendOfflineHangouts'
 import { useSocketMessage } from './useSocketMessage';
 
 export function useHangouts() {
@@ -37,6 +37,13 @@ export function useHangouts() {
     username,
     focusedHangout: hangout,
   });
+
+
+  useEffect(()=>{
+    if(socket && readyState===1 && username){
+      sendOfflineHangouts({name:username,dispatch,socket})
+    }
+  },[socket,readyState,username])
 
   function onSelectHangout(e) {
     const username = e.target.id;
@@ -65,26 +72,40 @@ export function useHangouts() {
   }
   function onHangout(e) {
     const command = e.target.id;
-    const { email, state } = hangout;
+    const { email } = hangout;
+   
     const timestamp = Date.now();
-    saveMessage({
+    const online = true;
+
+    if (socket && readyState === 1) {
+     
+      socket.send(
+        JSON.stringify({
+          username:hangout.username,
+          email,
+          message: { text: messageText, timestamp },
+          command,
+          timestamp
+        })
+      );
+    } else {
+     
+      online = false;
+    }
+
+    savePendingHangout({
       dispatch,
       name: username,
       hangout: {
         username: hangout.username,
         email,
-        state,
-        message: { text: messageText, timestamp },
+        state:command,
+        message: { text: messageText, timestamp,delivered:false,username },
+        timestamp,
+        delivered:false
       },
+      online
     });
-    socket.send(
-      JSON.stringify({
-        username,
-        email,
-        message: { text: messageText, timestamp },
-        command,
-      })
-    );
   }
   return {
     onMessageText,

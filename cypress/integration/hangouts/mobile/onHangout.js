@@ -30,7 +30,9 @@ describe('onHangout', () => {
         cy.get('[data-testid=invite-ui]');
         cy.get('[data-testid=messageTextInput]').type('Lets chat on Hangout')
         cy.get('[data-testid=oninvite-btn]').click()
-        cy.get('[data-testid=invitee-ui]');
+        cy.get('[data-testid=invitee-ui]');//
+
+        //---
         cy.visit('/');
         cy.loginByEmail({
             email: 'bero@gmail.com',
@@ -43,9 +45,9 @@ describe('onHangout', () => {
          cy.get('[data-testid=hangouts]').click();
          cy.get('[data-testid=search-input]').type('demo');
          cy.get('[data-testid=search-btn]').click();
-         cy.get('[data-testid=demo]').click();
-         cy.get('[data-testid=accept-btn]').click()
-         cy.get('[data-testid=hangchat-ui]');
+        cy.get('[data-testid=demo]').click();
+       // cy.get('[data-testid=accept-btn]').click()
+       // cy.get('[data-testid=hangchat-ui]');
     })
 
     

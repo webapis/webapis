@@ -1,12 +1,12 @@
 export async function onLineStateChangeHandler({ client, ws, connections }) {
-  debugger;
+
   try {
     const collection = await client.db('auth').collection('users');
-    debugger;
+ 
     const user = await collection.findOne({ username: ws.user.username });
-    debugger;
+ 
     if (user && user.undelivered) {
-      debugger;
+      
       ws.send(
         JSON.stringify({ hangouts: user.undelivered, type: 'UNREAD_HANGOUTS' })//--
       );
@@ -21,5 +21,5 @@ export async function onLineStateChangeHandler({ client, ws, connections }) {
     debugger
     console.log('onLineStateChangeHandlerError', error);
   }
-  debugger;
+ 
 }

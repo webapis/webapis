@@ -12,15 +12,14 @@ const style = {
 };
 
 export default function Inviter({ hangout, onAccept, onDecline }) {
-  const message = { ...hangout.message, username: hangout.username }
+  debugger;
   return (
-    <Layout id='inviter-ui'>
+    <Layout id="inviter-ui">
       <div style={style.root}>
         <div style={{ flex: 1, marginTop: 16, marginLeft: 8 }}>
-          <Message
-            message={message && message}
-
-          />
+          {hangout && hangout.message && (
+            <Message message={hangout && hangout.message && hangout.message} />
+          )}
         </div>
 
         <div style={{ display: 'flex', padding: 8 }}>
@@ -33,7 +32,7 @@ export default function Inviter({ hangout, onAccept, onDecline }) {
           <Button
             id="ACCEPT"
             onClick={onAccept}
-            data-testid='accept-btn'
+            data-testid="accept-btn"
             title="Accept"
             style={{ flex: 1, marginLeft: 4, color: 'green' }}
           />
