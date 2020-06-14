@@ -30,6 +30,7 @@ export function useHangouts() {
     socketMessage,
     readyState,
     socket,
+    unreadhangouts
   } = state;
   // const handleMessageRouter = useSocketMessage({
   //   dispatch,
@@ -49,7 +50,9 @@ export function useHangouts() {
     const username = e.target.id;
     selectHangout({ dispatch, username });
   }
-
+  function onSelectUnread(e){
+    const username = e.target.id;
+  }
  
 
   function onSearch(e) {
@@ -105,6 +108,7 @@ export function useHangouts() {
     });
   }
   return {
+    onSelectUnread,
     onMessageText,
     messageText,
     onStartSearch,
@@ -118,6 +122,7 @@ export function useHangouts() {
     username,
     messages,
     onHangout,
+    unreadhangouts,
     readyState,
   };
 }

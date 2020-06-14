@@ -46,7 +46,7 @@ const {onAppRoute} =useAppRoute()
   }, []);
 
 function navToUnread (){
-  debugger;
+
   onAppRoute({ featureRoute:'/UNREAD',route:'/hangouts'})
 }
   return (
@@ -75,7 +75,7 @@ function navToUnread (){
         <MenuWhite onClick={toggleDrawer} device={device} id='menu' />
         {children}
         <NavItem>{userName}</NavItem>
-        <NavItem onClick={navToUnread}>Unread</NavItem>
+        <NavItem onClick={navToUnread} data-testid='nav-unreads'>Unread</NavItem>
         <NavItem>
           <OnlineStatus readyState={readyState}/>
         </NavItem>

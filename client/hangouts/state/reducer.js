@@ -2,6 +2,7 @@ import { actionTypes } from './actionTypes';
 export const initState = {
   hangouts: null,
   hangout: null,
+  unreadhangouts: null,
   messages: null,
   search: '',
   user: [],
@@ -15,13 +16,15 @@ export const initState = {
 };
 export function reducer(state, action) {
   switch (action.type) {
+    case actionTypes.UNREAD_HANGOUTS_UPDATED:
+      return { ...state, unreadhangouts: action.unreadhangouts }
     case actionTypes.HANGOUT_UPDATED:
-    
+
       return { ...state, hangout: action.hangout };
     case actionTypes.HANGOUTS_UPDATED:
       return { ...state, hangouts: action.hangouts };
     case actionTypes.MESSAGES_UPDATED:
- 
+
       return { ...state, messages: action.messages };
     case actionTypes.SOCKET_MESSAGE_RECIEVED:
       return { ...state, socketMessage: action.socketMessage };

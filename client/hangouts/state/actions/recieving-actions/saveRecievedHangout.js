@@ -4,18 +4,19 @@ export function saveRecievedHangout({
   hangout,
   name,
   focusedHangout,
-  onAppRoute
+  onAppRoute,
+  unread
 }) {
-debugger;
+
   const { username, message } = hangout;
   const hangoutKey = `${name}-hangouts`;
 
   const hangouts = JSON.parse(localStorage.getItem(hangoutKey));
 
- debugger;
+
 
   if (hangouts) {
-    debugger;
+  
     const hangoutIndex = hangouts.findIndex((g) => g.username === username);
     if (focusedHangout && focusedHangout.username === username) {
       hangouts.splice(hangoutIndex, 1, {
@@ -32,7 +33,7 @@ debugger;
     localStorage.setItem(hangoutKey, JSON.stringify(hangouts));
     dispatch({ type: actionTypes.HANGOUTS_UPDATED, hangouts });
   } else {
-    debugger;
+
     let updatedHangouts = null
     if (focusedHangout && focusedHangout.username === username) {
 
@@ -53,6 +54,22 @@ debugger;
     }
     localStorage.setItem(hangoutKey, JSON.stringify(updatedHangouts));
     dispatch({ type: actionTypes.HANGOUTS_UPDATED, updatedHangouts });
+    if(unread){
+      //update unread hangouts
+      let unreadhangoutsKey =`${name}-unread-hangouts`
+      let unreadhangouts = JSON.parse( localStorage.getItem(unreadhangoutsKey))
+      let updatedunreads=null
+      if(unreadhangouts){
+        updatedunreads = [unreadhangouts,hangout]
+        }
+        else{
+          updatedunreads = [hangout]
+        }
+        localStorage.setItem(unreadhangoutsKey,JSON.stringify(updatedunreads))
+        
+        dispatch({type:actionTypes.UNREAD_HANGOUTS_UPDATED,unreadhangouts:updatedunreads})
+
+    }
   }
 
   if (focusedHangout && focusedHangout.username === username) {
