@@ -13,7 +13,7 @@ export function savePendingHangout({ dispatch, name, hangout, online }) {
   }
 
   saveHangout({ hangoutKey, username, hangout,dispatch });
-  if (message) {
+  if (message && message.text !=="") {
     saveMessage({ messageKey, username, message,dispatch });
   }
 }
@@ -31,14 +31,17 @@ function saveHangout({ hangoutKey, username, hangout,dispatch }) {
   dispatch({ type: actionTypes.HANGOUTS_UPDATED, hangouts: updatedHangouts });
 }
 
-function saveMessage({ messageKey, username, message,dispatch }) {
+export function saveMessage({ messageKey, message,dispatch }) {
   const messages = JSON.parse(localStorage.getItem(messageKey));
-  let updatedMessages = null;
+  let updatedMessages = [];
   if (messages) {
+ 
     updatedMessages = [...messages, message];
   } else {
+
     updatedMessages = [message];
   }
+ 
   localStorage.setItem(messageKey, JSON.stringify(updatedMessages));
   dispatch({ type: actionTypes.MESSAGES_UPDATED, messages: updatedMessages });
 }

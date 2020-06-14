@@ -9,12 +9,12 @@ import {
   searchHangouts,
   filterHangouts,
   fetchHangout,
-  selectUser,
+
   changeMessageText,
   startClientCommand,
 } from './actions';
 import {sendOfflineHangouts} from './actions/delivering-actions/sendOfflineHangouts'
-import { useSocketMessage } from './useSocketMessage';
+//import { useSocketMessage } from './useSocketMessage';
 
 export function useHangouts() {
   const authContext = useAuthContext();
@@ -31,12 +31,12 @@ export function useHangouts() {
     readyState,
     socket,
   } = state;
-  const handleMessageRouter = useSocketMessage({
-    dispatch,
-    socketMessage,
-    username,
-    focusedHangout: hangout,
-  });
+  // const handleMessageRouter = useSocketMessage({
+  //   dispatch,
+  //   socketMessage,
+  //   username,
+  //   focusedHangout: hangout,
+  // });
 
 
   useEffect(()=>{
@@ -50,11 +50,7 @@ export function useHangouts() {
     selectHangout({ dispatch, username });
   }
 
-  function onSelectUser(e) {
-    const uname = e.target.id;
-    const user = users.find((u) => u.username === uname);
-    selectUser({ dispatch, user, username });
-  }
+ 
 
   function onSearch(e) {
     searchHangouts({ search: e.target.value, dispatch });
@@ -73,8 +69,9 @@ export function useHangouts() {
   function onHangout(e) {
     const command = e.target.id;
     const { email } = hangout;
-   
     const timestamp = Date.now();
+    const message= messageText !== ''? { text: messageText, timestamp } :null
+ 
     const online = true;
 
     if (socket && readyState === 1) {
@@ -83,7 +80,7 @@ export function useHangouts() {
         JSON.stringify({
           username:hangout.username,
           email,
-          message: { text: messageText, timestamp },
+          message,
           command,
           timestamp
         })
@@ -100,7 +97,7 @@ export function useHangouts() {
         username: hangout.username,
         email,
         state:command,
-        message: { text: messageText, timestamp,delivered:false,username },
+        message:  { text: messageText, timestamp,delivered:false,username },
         timestamp,
         delivered:false
       },
@@ -114,7 +111,7 @@ export function useHangouts() {
     onSearch,
     search,
     onSelectHangout,
-    onSelectUser,
+    dispatch,
     hangout,
     hangouts,
     users,

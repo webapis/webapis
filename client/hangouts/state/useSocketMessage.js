@@ -75,6 +75,7 @@ export function useSocketMessage({
 
         break;
       case hangoutStates.MESSAGED:
+       
         saveMessaged({
           dispatch,
           hangout,
@@ -121,26 +122,30 @@ export function useSocketMessage({
   }
 
   useEffect(() => {
-    if (socketMessage  && username && focusedHangout) {
+    if (socketMessage  && username) {
     
       switch (socketMessage.type) {
         case 'ACKHOWLEDGEMENT':
-      
+
           handleAcknowledgement({ hangout: socketMessage.hangout,offline:false });
           break;
         case 'HANGOUT':
+          debugger;
           handleHangout({ hangout: socketMessage.hangout });
           break;
         case 'UNREAD_HANGOUTS':
+          debugger;
           handleHangouts({ hangouts: socketMessage.hangouts });
           break;
         case 'OFFLINE_ACKN':
+          debugger;
           handleAcknowledgement({ hangout: socketMessage.hangout,offline:true });
           break;
         default:
           break;
       }
     }
-  }, [socketMessage, username,focusedHangout]);
+  }, [socketMessage]);
+
   return {};
 }

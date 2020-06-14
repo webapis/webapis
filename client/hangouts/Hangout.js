@@ -4,6 +4,7 @@ import { List, ListItem } from '../layout/NavList';
 import { TextInput } from '../layout/TextInput';
 import { Button } from '../layout/Button';
 import {useAppRoute}from '../app-route/AppRouteProvider'
+import {saveMessage}from './state/actions/delivering-actions/savePendingHangout'
 
 const style = {
   inputContainer: {
@@ -22,15 +23,16 @@ export default function Hangout({
   onSearch,
   onSelectHangout,
   search,
-  users,
+  username,
   onStartSearch,
+  dispatch
 }) {
   const {onAppRoute}=useAppRoute()
   function handleHangoutSelection(e){
     const id =e.target.id
     onSelectHangout(e)
     const hangout = hangouts.find(g=> g.username===id)
-    
+  
     onAppRoute({featureRoute:`/${hangout.state}`,route:'/hangouts'})
   }
   return (

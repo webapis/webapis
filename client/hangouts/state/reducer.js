@@ -21,6 +21,7 @@ export function reducer(state, action) {
     case actionTypes.HANGOUTS_UPDATED:
       return { ...state, hangouts: action.hangouts };
     case actionTypes.MESSAGES_UPDATED:
+ 
       return { ...state, messages: action.messages };
     case actionTypes.SOCKET_MESSAGE_RECIEVED:
       return { ...state, socketMessage: action.socketMessage };

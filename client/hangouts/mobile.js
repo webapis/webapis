@@ -14,8 +14,6 @@ const Invitee = lazy(() => import('./state-ui/Invitee'));
 const Inviter = lazy(() => import('./state-ui/Inviter'));
 const UnreadHangouts =lazy(() => import('./UnreadHangouts'));
 export default function Mobile() {
-
-  
   const {
     hangout,
     hangouts,
@@ -29,7 +27,8 @@ export default function Mobile() {
     onMessageText,
     messageText,
     username,
-    messages
+    messages,
+    dispatch
   } = useHangouts();
 
   return (
@@ -37,7 +36,8 @@ export default function Mobile() {
       <FeatureRoute path="/hangouts">
         <Suspense fallback={<div>Loading...</div>}>
           <Hangouts
-            users={users}
+          dispatch={dispatch}
+            username={username}
             search={search}
             hangouts={hangouts}
             onSelectHangout={onSelectHangout}

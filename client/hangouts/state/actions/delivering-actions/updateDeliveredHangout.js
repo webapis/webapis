@@ -1,6 +1,7 @@
 import { actionTypes } from '../../actionTypes';
 export function updateDeliveredHangout({ name, dispatch, hangout, offline,onAppRoute }) {
   const { username, message, timestamp } = hangout;
+
   const deliveredHangout = { ...hangout, delivered: true };
   const hangoutKey = `${name}-hangouts`;
   const hangouts = JSON.parse(localStorage.getItem(hangoutKey));
@@ -11,6 +12,7 @@ export function updateDeliveredHangout({ name, dispatch, hangout, offline,onAppR
   dispatch({ type: actionTypes.HANGOUTS_UPDATED, hangouts: updatedHangouts });
   dispatch({ type: actionTypes.HANGOUT_UPDATED, hangout: deliveredHangout });
   if (message) {
+ 
     updateDeliveredMessage({ dispatch, name, deliveredHangout });
   }
 
@@ -37,14 +39,16 @@ export function updateDeliveredHangout({ name, dispatch, hangout, offline,onAppR
 
 export function updateDeliveredMessage({ dispatch, name, deliveredHangout }) {
   const { username, message } = deliveredHangout;
+  const deliveredMessage ={...message,username:name,delivered:true}
   // save message to localStorage
   const messageKey = `${name}-${username}-messages`;
   const messages = JSON.parse(localStorage.getItem(messageKey));
   const hangoutIndex = messages.findIndex(
     (m) => m.timestamp === message.timestamp
   );
-  let updatedMessages = messages.splice(hangoutIndex, 1, deliveredHangout);
+ messages.splice(hangoutIndex, 1, deliveredMessage);
 
-  localStorage.setItem(messageKey, JSON.stringify(updatedMessages));
-  dispatch({ type: actionTypes.MESSAGES_UPDATED, messages: updatedMessages });
+  localStorage.setItem(messageKey, JSON.stringify(messages));
+ 
+  dispatch({ type: actionTypes.MESSAGES_UPDATED, messages });
 }

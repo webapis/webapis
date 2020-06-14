@@ -1,4 +1,5 @@
 import { h } from 'preact';
+import {useEffect} from 'preact/hooks'
 import { Button } from '../../layout/Button';
 import { Message } from '../ui/Message';
 import { Layout } from '../state-ui/Layout';
@@ -12,7 +13,7 @@ const style = {
 };
 
 export default function Inviter({ hangout, onAccept, onDecline }) {
-  debugger;
+
   return (
     <Layout id="inviter-ui">
       <div style={style.root}>

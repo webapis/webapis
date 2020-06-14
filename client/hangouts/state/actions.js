@@ -10,22 +10,7 @@ export function selectHangout({ dispatch, username }) {
   dispatch({ type: actionTypes.SELECTED_HANGOUT, username });
 }
 
-export function selectUser({ dispatch, user, username }) {
-  // save selected user to hangouts
-  const hangout = { ...user, state: 'INVITE' };
-  const hangouts = JSON.parse(localStorage.getItem(`${username}-hangouts`));
 
-  if (hangouts) {
-    localStorage.setItem(
-      `${username}-hangouts`,
-      JSON.stringify([...hangouts, hangout])
-    );
-  } else {
-    localStorage.setItem(`${username}-hangouts`, JSON.stringify([hangout]));
-  }
-
-  dispatch({ type: actionTypes.SELECTED_USER, hangout });
-}
 //search for hangout by typing into TextInput
 export function searchHangouts({ search, dispatch }) {
   dispatch({ type: actionTypes.SEARCHED_HANGOUT, search });
@@ -44,7 +29,7 @@ export async function fetchHangout({ search, dispatch, username }) {
     );
     if (response.ok) {
       const { hangouts } = await response.json();
-debugger;
+
       dispatch({ type: actionTypes.FETCH_HANGOUT_SUCCESS, hangouts });
     }
   } catch (error) {
@@ -61,9 +46,9 @@ export function startClientCommand({ dispatch }) {
   dispatch({ type: actionTypes.CLIENT_COMMAND_STARTED });
 }
 
-export function loadMessages({ hangout, dispatch }) {
-  const { username } = hangout;
-  const key = `${username}-messages`;
+export function loadMessages({ hangout, dispatch,username }) {
+  
+  const key = `${username}-${hangout.username}-messages`;
   const messages = JSON.parse(localStorage.getItem(key));
   dispatch({ type: actionTypes.LOADED_MESSAGES, messages });
 }

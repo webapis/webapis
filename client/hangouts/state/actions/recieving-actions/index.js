@@ -6,8 +6,8 @@ export function saveInviter({
   focusedHangout,
   onAppRoute,
 }) {
-  const { username, message, state, email } = hangout;
-debugger;
+
+  debugger;
   saveRecievedHangout({ dispatch, hangout, name, onAppRoute, focusedHangout });
 }
 
@@ -18,6 +18,7 @@ export function saveAccepter({
   focusedHangout,
   onAppRoute,
 }) {
+  debugger;
   saveRecievedHangout({ dispatch, hangout, name, onAppRoute, focusedHangout });
 }
 
@@ -28,6 +29,7 @@ export function saveBlocker({
   focusedHangout,
   onAppRoute,
 }) {
+  debugger;
   saveRecievedHangout({ dispatch, hangout, name, onAppRoute, focusedHangout });
 }
 
@@ -38,10 +40,13 @@ export function saveDecliner(
   focusedHangout,
   onAppRoute
 ) {
+  debugger;
   saveRecievedHangout({ dispatch, hangout, name, onAppRoute, focusedHangout });
 }
 
-export function saveMessanger({ dispatch, hangout, name, focusedHangout }) {
+export function saveMessanger({ dispatch, hangout, name, focusedHangout,onAppRoute }) {
+  debugger;
+  debugger;
   saveRecievedHangout({ dispatch, hangout, name, onAppRoute, focusedHangout });
 } // END saveMessanger
 
@@ -52,5 +57,6 @@ export function saveUnblocker({
   focusedHangout,
   onAppRoute,
 }) {
+  debugger;
   saveRecievedHangout({ dispatch, hangout, name, onAppRoute, focusedHangout });
 }
