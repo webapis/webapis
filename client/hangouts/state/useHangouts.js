@@ -2,21 +2,22 @@ import { h } from 'preact';
 import { useEffect } from 'preact/hooks';
 import { useHangoutContext } from './HangoutsProvider';
 import { useAuthContext } from '../../auth/auth-context';
+import {useAppRoute} from '../../app-route/AppRouteProvider'
 import { updateLocalHangouts } from './updateLocalHangouts';
 import { savePendingHangout } from './actions/delivering-actions/savePendingHangout';
 import {
   selectHangout,
+  selectUnread,
   searchHangouts,
   filterHangouts,
   fetchHangout,
-
   changeMessageText,
   startClientCommand,
 } from './actions';
-import {sendOfflineHangouts} from './actions/delivering-actions/sendOfflineHangouts'
-//import { useSocketMessage } from './useSocketMessage';
+import { sendOfflineHangouts } from './actions/delivering-actions/sendOfflineHangouts';
 
 export function useHangouts() {
+  const {onAppRoute} =useAppRoute()
   const authContext = useAuthContext();
   const { username } = authContext.state;
   const [state, dispatch] = useHangoutContext();
@@ -30,30 +31,28 @@ export function useHangouts() {
     socketMessage,
     readyState,
     socket,
-    unreadhangouts
+    unreadhangouts,
   } = state;
-  // const handleMessageRouter = useSocketMessage({
-  //   dispatch,
-  //   socketMessage,
-  //   username,
-  //   focusedHangout: hangout,
-  // });
 
-
-  useEffect(()=>{
-    if(socket && readyState===1 && username){
-      sendOfflineHangouts({name:username,dispatch,socket})
+  useEffect(() => {
+    if (socket && readyState === 1 && username) {
+      sendOfflineHangouts({ name: username, dispatch, socket });
     }
-  },[socket,readyState,username])
+  }, [socket, readyState, username]);
 
   function onSelectHangout(e) {
     const username = e.target.id;
     selectHangout({ dispatch, username });
+  
   }
-  function onSelectUnread(e){
+  function onSelectUnread(e) {
     const username = e.target.id;
+    selectUnread({ dispatch, username });
+    const hangout = hangouts.find(g=> g.username===username)
+  
+    onAppRoute({featureRoute:`/${hangout.state}`,route:'/hangouts'})
+    
   }
- 
 
   function onSearch(e) {
     searchHangouts({ search: e.target.value, dispatch });
@@ -73,23 +72,22 @@ export function useHangouts() {
     const command = e.target.id;
     const { email } = hangout;
     const timestamp = Date.now();
-    const message= messageText !== ''? { text: messageText, timestamp } :null
- 
+    const message =
+      messageText !== '' ? { text: messageText, timestamp } : null;
+
     const online = true;
 
     if (socket && readyState === 1) {
-     
       socket.send(
         JSON.stringify({
-          username:hangout.username,
+          username: hangout.username,
           email,
           message,
           command,
-          timestamp
+          timestamp,
         })
       );
     } else {
-     
       online = false;
     }
 
@@ -99,12 +97,12 @@ export function useHangouts() {
       hangout: {
         username: hangout.username,
         email,
-        state:command,
-        message:  { text: messageText, timestamp,delivered:false,username },
+        state: command,
+        message: { text: messageText, timestamp, delivered: false, username },
         timestamp,
-        delivered:false
+        delivered: false,
       },
-      online
+      online,
     });
   }
   return {

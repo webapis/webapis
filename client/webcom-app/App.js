@@ -15,6 +15,7 @@ const Hangouts = lazy(() => import('../hangouts'));
 const Group = lazy(() => import('../group/group'));
 export function App() {
   return (
+    <div style={{height:'100vh'}}>
     <AuthProvider>
   
         <HangoutsProvider socketUrl="wss://10.100.36.114:3000/hangouts">
@@ -62,5 +63,6 @@ export function App() {
         </HangoutsProvider>
   
     </AuthProvider>
+    </div>
   );
 }

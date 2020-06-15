@@ -34,7 +34,7 @@ export default function Mobile() {
   } = useHangouts();
 
   return (
-    <div style={{ height: '85vh' }}>
+    <div style={{ height: '100%',width:'100%' }}>
       <FeatureRoute path="/hangouts">
         <Suspense fallback={<div>Loading...</div>}>
           <Hangouts

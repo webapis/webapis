@@ -10,7 +10,9 @@ export function selectHangout({ dispatch, username }) {
   dispatch({ type: actionTypes.SELECTED_HANGOUT, username });
 }
 
-export function selectUnnread({dispatch}){}
+export function selectUnread({dispatch,username}){
+  dispatch({ type: actionTypes.SELECTED_HANGOUT, username });
+}
 
 //search for hangout by typing into TextInput
 export function searchHangouts({ search, dispatch }) {

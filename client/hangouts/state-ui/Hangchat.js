@@ -1,6 +1,9 @@
 import { h } from 'preact';
 import { Messages } from '../ui/Messages';
 import { Layout } from './Layout';
+
+
+
 export default function Hangchat({
   messages = [],
   onMessageText,
@@ -9,7 +12,7 @@ export default function Hangchat({
   username
 }) {
   return (
-    <Layout id="hangchat-ui">
+    <Layout id="hangchat-ui" >
       <Messages
         messages={messages}
         onMessage={onMessage}

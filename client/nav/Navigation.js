@@ -21,7 +21,7 @@ const DesktopDrawer = lazy(() => import('./DesktopDrawer'));
 
 export default function Navigation(props) {
 const {onAppRoute} =useAppRoute()
- const {readyState}=useHangouts()
+ const {readyState,unreadhangouts}=useHangouts()
   const [route, setRoute] = useState('');
   const { userName } = useUserName();
   const { width, height, orientation, device } = useMediaQuery();
@@ -75,7 +75,7 @@ function navToUnread (){
         <MenuWhite onClick={toggleDrawer} device={device} id='menu' />
         {children}
         <NavItem>{userName}</NavItem>
-        <NavItem onClick={navToUnread} data-testid='nav-unreads'>Unread</NavItem>
+      <NavItem onClick={navToUnread} data-testid='nav-unreads'>Unread:{unreadhangouts && unreadhangouts.length}</NavItem>
         <NavItem>
           <OnlineStatus readyState={readyState}/>
         </NavItem>

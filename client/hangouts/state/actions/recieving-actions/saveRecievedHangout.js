@@ -32,6 +32,7 @@ export function saveRecievedHangout({
     }
     localStorage.setItem(hangoutKey, JSON.stringify(hangouts));
     dispatch({ type: actionTypes.HANGOUTS_UPDATED, hangouts });
+
   } else {
 
     let updatedHangouts = null
@@ -54,7 +55,21 @@ export function saveRecievedHangout({
     }
     localStorage.setItem(hangoutKey, JSON.stringify(updatedHangouts));
     dispatch({ type: actionTypes.HANGOUTS_UPDATED, hangouts: updatedHangouts });
-    if(unread){
+  
+  }
+
+  if (focusedHangout && focusedHangout.username === username) {
+    dispatch({ type: actionTypes.SELECTED_HANGOUT, username: hangout.username });
+    if (hangout.state !== 'MESSANGER') {
+      onAppRoute({ featureRoute: `/${hangout.state}`, route: '/hangouts' });
+   }
+  }
+  if (message) {
+    saveRecievedMessage({ dispatch, hangout, name, focusedHangout });
+  }
+
+  if(unread){
+      debugger;
       //update unread hangouts
       let unreadhangoutsKey =`${name}-unread-hangouts`
       let unreadhangouts = JSON.parse( localStorage.getItem(unreadhangoutsKey))
@@ -69,20 +84,7 @@ export function saveRecievedHangout({
         
         dispatch({type:actionTypes.UNREAD_HANGOUTS_UPDATED,unreadhangouts:updatedunreads})
 
-    }
-  }
-
-  if (focusedHangout && focusedHangout.username === username) {
-    dispatch({ type: actionTypes.SELECTED_HANGOUT, username: hangout.username });
-    if (hangout.state !== 'MESSANGER') {
-      onAppRoute({ featureRoute: `/${hangout.state}`, route: '/hangouts' });
-   }
-  }
-  if (message) {
-    saveRecievedMessage({ dispatch, hangout, name, focusedHangout });
-  }
-}
-
+    }}
 export function saveRecievedMessage({
   dispatch,
   hangout,
@@ -96,16 +98,16 @@ export function saveRecievedMessage({
   const messages = JSON.parse(localStorage.getItem(messageKey));
   let updatedMessages = null;
   if (messages) {
-    debugger;
+  
     if (focusedHangout && focusedHangout.username === username) {
-    debugger;
+ 
       updatedMessages = [...messages, { ...message, username, read: true }];
     } else {
-  debugger;
+
       updatedMessages = [...messages, { ...message, username, read: false }];
     }
   } else {
-    debugger;
+ 
     if (focusedHangout && focusedHangout.username === username) {
 
       updatedMessages = [{ ...message, username, read: true }];
@@ -116,7 +118,7 @@ export function saveRecievedMessage({
   localStorage.setItem(messageKey, JSON.stringify(updatedMessages));
 
   if (focusedHangout && focusedHangout.username === username) {
-    debugger
+
     // sync message with reducer state
     dispatch({ type: actionTypes.MESSAGES_UPDATED, messages: updatedMessages });
   }

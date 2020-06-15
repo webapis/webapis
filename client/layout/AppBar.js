@@ -6,12 +6,12 @@ export function AppBar({ children }) {
     <div
       style={{
         ...theme.primary,
-        // position: 'fixed',
+         position: 'fixed',
         // left: 0,
-        // top: 0,
+         top: 0,
         minHeight: 64,
-        paddingLeft: 16,
-        paddingRight: 16,
+       // paddingLeft: 16,
+       // paddingRight: 16,
         width: '100%',
       }}
     >
