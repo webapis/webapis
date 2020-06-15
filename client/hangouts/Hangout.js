@@ -15,6 +15,7 @@ const style = {
     padding: 10,
     flex: 1,
     border: 'white',
+  
   },
 };
 
@@ -37,7 +38,7 @@ export default function Hangout({
   }
   return (
  
-    <div>
+    <div style={{  paddingTop:68}}>
       <div style={style.inputContainer}>
         <TextInput
           value={search}

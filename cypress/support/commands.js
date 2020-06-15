@@ -25,7 +25,7 @@
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 Cypress.Commands.add('login', ({ username, email, password }) => {
   cy.request({
-    url: 'http://localhost:3000/seed/users',
+    url: 'https://localhost:3000/seed/users',
     method: 'post',
     body: {
       username,
@@ -36,7 +36,7 @@ Cypress.Commands.add('login', ({ username, email, password }) => {
     .its('body')
     .then((body) => {
       cy.request({
-        url: 'http://localhost:3000/auth/login',
+        url: 'https://localhost:3000/auth/login',
         method: 'GET',
         headers: {
           'Conten-Type': 'application/json',
@@ -61,7 +61,7 @@ Cypress.Commands.add('login', ({ username, email, password }) => {
 
 Cypress.Commands.add('remoteLogin', ({ username, email, password }) => {
   cy.request({
-    url: 'http://localhost:3000/seed/users',
+    url: 'https://localhost:3000/seed/users',
     method: 'post',
     body: {
       username,
@@ -72,7 +72,7 @@ Cypress.Commands.add('remoteLogin', ({ username, email, password }) => {
     .its('body')
     .then((body) => {
       cy.request({
-        url: 'http://localhost:3000/auth/login',
+        url: 'https://localhost:3000/auth/login',
         method: 'GET',
         headers: {
           'Conten-Type': 'application/json',
@@ -93,7 +93,7 @@ Cypress.Commands.add('remoteLogin', ({ username, email, password }) => {
 
 Cypress.Commands.add('register', ({ username, email, password }) => {
   cy.request({
-    url: 'http://localhost:3000/seed/users',
+    url: 'https://localhost:3000/seed/users',
     method: 'post',
     body: {
       username,
@@ -105,7 +105,7 @@ Cypress.Commands.add('register', ({ username, email, password }) => {
 
 Cypress.Commands.add('forgotpassword', ({ email }) => {
   return cy.request({
-    url: 'http://localhost:3000/seed/requestpasschange',
+    url: 'https://localhost:3000/seed/requestpasschange',
     method: 'post',
     body: {
       email,

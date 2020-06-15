@@ -11,6 +11,7 @@ import { OtherContent } from './OtherContent';
 import { Home } from './Home';
 import { HangoutsProvider } from '../hangouts/state/HangoutsProvider';
 import { AppRoute } from '../app-route/AppRouteProvider';
+import './app.css'
 const Hangouts = lazy(() => import('../hangouts'));
 const Group = lazy(() => import('../group/group'));
 export function App() {
@@ -18,7 +19,7 @@ export function App() {
     <div style={{height:'100vh'}}>
     <AuthProvider>
   
-        <HangoutsProvider socketUrl="wss://10.100.36.114:3000/hangouts">
+        <HangoutsProvider socketUrl={`wss://${ip}:3000/hangouts`}>
           <FormProvider>
             <ThemeProvider
               initState={{

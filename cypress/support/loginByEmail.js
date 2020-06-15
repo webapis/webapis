@@ -1,7 +1,7 @@
 Cypress.Commands.add('loginByEmail', ({ email, password }) => {
 
         cy.request({
-          url: 'http://localhost:3000/auth/login',
+          url: 'https://localhost:3000/auth/login',
           method: 'GET',
           headers: {
             'Conten-Type': 'application/json',

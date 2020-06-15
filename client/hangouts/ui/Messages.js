@@ -6,6 +6,7 @@ const styles = {
   messageContainer: {
    // width: '100%',
    boxSizing: 'border-box',
+   padding:3,
      backgroundColor: 'orange',
     flex:15,
     overflowY: 'auto',
@@ -33,7 +34,7 @@ export function Messages({
     scrollerRef.current.scrollTop = scrollerRef.current.scrollHeight;
   }
   return (
-    <div style={{  boxSizing: 'border-box',width:'100%',height:'100%', backgroundColor:'yellow', display:'flex',flexDirection:'column'}}>
+    <div style={{  boxSizing: 'border-box',width:'100%',height:'100%', display:'flex',flexDirection:'column',paddingTop:68}}>
       <div style={styles.messageContainer} ref={scrollerRef}>
         {messages &&
           messages.length > 0 &&
@@ -46,7 +47,7 @@ export function Messages({
             )
           )}
       </div>
-      <div style={{flex:1, backgroundColor:'green'}}>
+      <div style={{flex:1}}>
       <MessageEditor
         onMessage={onSend}
         messageText={messageText}

@@ -69,13 +69,7 @@ export function HangoutsProvider(props) {
       }
     }
   }, [hangout,username]);
-useEffect(()=>{
-  if(!hangout){
-    const hang =hangout
-    debugger;
-  }
 
-},[hangout])
   const value = useMemo(() => [state, dispatch], [state]);
   return <HangoutContext.Provider value={value} {...props} />;
 }

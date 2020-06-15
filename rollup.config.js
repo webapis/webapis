@@ -35,6 +35,9 @@ const commonPlugins = [
   replace({
     api_url: JSON.stringify(process.env.api_url),
   }),
+  replace({
+    ip: JSON.stringify(process.env.ip),
+  }),
 ];
 
 export default [
