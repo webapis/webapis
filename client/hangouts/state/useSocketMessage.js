@@ -130,7 +130,7 @@ export function useSocketMessage({
           handleAcknowledgement({ hangout: socketMessage.hangout,offline:false });
           break;
         case 'HANGOUT':
-  
+          debugger;
           handleHangout({ hangout: socketMessage.hangout,unread:false });
           break;
         case 'UNREAD_HANGOUTS':
@@ -145,7 +145,7 @@ export function useSocketMessage({
           break;
       }
     }
-  }, [socketMessage]);
+  }, [socketMessage, username]);
 
   return {};
 }

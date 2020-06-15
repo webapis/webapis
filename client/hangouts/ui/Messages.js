@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import { useRef } from 'preact/hooks';
+import { useRef, useEffect } from 'preact/hooks';
 import { Message } from './Message';
 import { MessageEditor } from './MessageEditor';
 const styles = {
@@ -18,6 +18,13 @@ export function Messages({
   username,
 }) {
   const scrollerRef = useRef(null);
+
+  useEffect(() => {
+    if (messages) {
+      scrollerRef.current.scrollTop = scrollerRef.current.scrollHeight;
+    }
+  }, [messages]);
+
   function onSend(e) {
     onMessage(e);
     scrollerRef.current.scrollTop = scrollerRef.current.scrollHeight;
