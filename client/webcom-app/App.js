@@ -17,7 +17,7 @@ export function App() {
   return (
     <AuthProvider>
   
-        <HangoutsProvider socketUrl="ws://localhost:3000/hangouts">
+        <HangoutsProvider socketUrl="wss://10.100.36.114:3000/hangouts">
           <FormProvider>
             <ThemeProvider
               initState={{

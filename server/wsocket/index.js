@@ -10,7 +10,9 @@ let connections = {};
 export default async function (server,client) {
   const collection = await client.db('auth').collection('users');
   const wss = new WebSocket.Server({ server });
+  debugger;
   wss.on('connection', async function connection(ws, request) {
+    debugger;
     try {
       const token = cookie.parse(request.headers['cookie']);
 
@@ -40,6 +42,7 @@ export default async function (server,client) {
         delete connections[username];
       });
     } catch (error) {
+      debugger;
       const err = error;
 
     }

@@ -4,7 +4,7 @@ export default function Chat() {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    setSocket(new WebSocket('ws://localhost:3000/chat'));
+    setSocket(new WebSocket('wss://localhost:3000/chat'));
   }, []);
 
   useEffect(() => {
@@ -30,4 +30,3 @@ export default function Chat() {
     </div>
   );
 }
-//

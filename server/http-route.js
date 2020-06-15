@@ -13,6 +13,7 @@ import servePassReset from './serve-static/serve-pass-reset';
 
 export default function httpRoute(client) {
   return async function (req, res) {
+  
     const { url } = req;
     const authRegex = /.*\/auth\/.*/;
     const resetRegex = /.*\/reset\/.*/;
@@ -106,7 +107,7 @@ export default function httpRoute(client) {
             usersOperation(req, res);
             break;
             case hangoutsRegex.test(url):
-            
+            debugger;
               hangoutsOperation(req, res);
               break;
           default:
@@ -115,9 +116,10 @@ export default function httpRoute(client) {
 
         break;
       default:
+        debugger;
         throw new Error('No operation is provied');
     }
   };
 }
 
-
+//
