@@ -12,6 +12,7 @@ import {
   filterHangouts,
   fetchHangout,
   changeMessageText,
+
   startClientCommand,
 } from './actions';
 import { sendOfflineHangouts } from './actions/delivering-actions/sendOfflineHangouts';
@@ -43,7 +44,7 @@ export function useHangouts() {
 
   function onNavigation(e){
     const id =e.target.id
-    debugger;
+   
     onAppRoute({ featureRoute: `/${id}`, route: '/hangouts' });
   }
   
@@ -74,6 +75,7 @@ export function useHangouts() {
     changeMessageText({ dispatch, text });
   }
   function onHangout(e) {
+    changeMessageText({ text: '', dispatch });
     const command = e.target.id;
     const { email } = hangout;
     const timestamp = Date.now();
@@ -81,11 +83,14 @@ export function useHangouts() {
       messageText !== '' ? { text: messageText, timestamp } : null;
 
     const online = true;
-
+    let isBlocker =false
     if (socket && readyState === 1) {
+   
       if(hangout.state ==='BLOCKER'){
-        
+       
+        isBlocker=true
       }else{
+       
         socket.send(
           JSON.stringify({
             username: hangout.username,
@@ -95,7 +100,7 @@ export function useHangouts() {
             timestamp,
           })
         );
-
+      
       }
     
     } else {
@@ -112,11 +117,13 @@ export function useHangouts() {
         message: { text: messageText, timestamp, delivered: false, username },
         timestamp,
         delivered: false,
+        
       },
       online,
+      isBlocker
     });
 
-    changeMessageText({ text: '', dispatch });
+   
 
 
   }//end onHangout

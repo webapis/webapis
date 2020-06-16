@@ -1,5 +1,5 @@
 import { actionTypes } from '../../actionTypes';
-export function savePendingHangout({ dispatch, name, hangout, online }) {
+export function savePendingHangout({ dispatch, name, hangout, online,isBlocker }) {
 
   const { username, message, state, email } = hangout;
   let hangoutKey = '';
@@ -14,7 +14,7 @@ export function savePendingHangout({ dispatch, name, hangout, online }) {
 
   saveHangout({ hangoutKey, username, hangout,dispatch });
   if (message && message.text !=="") {
-    saveMessage({ messageKey, username, message,dispatch });
+    saveMessage({ messageKey, username, message,dispatch,isBlocker });
   }
 }
 
@@ -31,7 +31,7 @@ function saveHangout({ hangoutKey, username, hangout,dispatch }) {
   dispatch({ type: actionTypes.HANGOUTS_UPDATED, hangouts: updatedHangouts });
 }
 
-export function saveMessage({ messageKey, message,dispatch }) {
+export function saveMessage({ messageKey, message,dispatch,isBlocker }) {
   const messages = JSON.parse(localStorage.getItem(messageKey));
   let updatedMessages = [];
   if (messages) {
@@ -41,7 +41,19 @@ export function saveMessage({ messageKey, message,dispatch }) {
 
     updatedMessages = [message];
   }
+  if(isBlocker){
  
-  localStorage.setItem(messageKey, JSON.stringify(updatedMessages));
-  dispatch({ type: actionTypes.MESSAGES_UPDATED, messages: updatedMessages });
+    const blocker =[...updatedMessages,{text:'You can not send this message because you are blocked.'
+    ,timestamp: Date.now(),type:'blocker',username:message.username,float:'right'}]
+    localStorage.setItem(messageKey, JSON.stringify(blocker));
+    dispatch({ type: actionTypes.MESSAGES_UPDATED, messages: blocker });
+  
+  }
+  else{
+  
+    localStorage.setItem(messageKey, JSON.stringify(updatedMessages));
+    dispatch({ type: actionTypes.MESSAGES_UPDATED, messages: updatedMessages });
+  }
+ 
+
 }

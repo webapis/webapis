@@ -9,15 +9,16 @@ import Invite from '../hangouts/state-ui/Invite';
 import Invitee from '../hangouts/state-ui/Invitee';
 import Inviter from '../hangouts/state-ui/Inviter';
 import Hangchat from '../hangouts/state-ui/Hangchat';
-import { Message } from '../hangouts/ui/Message';
-import { Messages } from '../hangouts/ui/Messages';
-import { MessageEditor } from '../hangouts/ui/MessageEditor';
+import { Message } from '../hangouts/message-ui/Message';
+import { Messages } from '../hangouts/message-ui/Messages';
+import { MessageEditor } from '../hangouts/message-ui/MessageEditor';
 import { OnlineStatus } from '../layout/icons/onlineStatus';
 import { ThemeProvider } from '../theme/theme-context';
 import { List, ListItem } from '../layout/NavList';
 import { DrawerContent } from './DrawerContent';
 import { messages } from './fakeMessages';
 import {UnreadDemo} from './UreadDemo'
+import {BlockerMessageDemo } from './BlockerMessageDemo'
 const hangouts = [
   { username: 'userone' },
   { username: 'usertwo' },
@@ -44,7 +45,7 @@ render(
       },
     }}
   >
-    <AppRouteProvider initState={{ featureRoute: '/', route: '/unread' }}>
+    <AppRouteProvider initState={{ featureRoute: '/', route: '/blocker-message' }}>
       <Navigation drawerContent={<DrawerContent />}>
         <AppRoute path="/hangouts">
           <Hangout hangouts={hangouts} />
@@ -86,6 +87,9 @@ render(
         </AppRoute>
         <AppRoute path="/unread">
           <UnreadDemo/>
+        </AppRoute>
+        <AppRoute path="/blocker-message">
+          <BlockerMessageDemo/>
         </AppRoute>
       </Navigation>
     </AppRouteProvider>

@@ -197,8 +197,9 @@ describe('onHangout', () => {
      cy.get('[data-testid=nav-config]').click()
      cy.get('[data-testid=block-btn]').click()
      cy.get('[data-testid=block-btn]').click()
-     cy.get('[data-testid=blocked-ui]')
-     //test demo side
+     cy.get('[data-testid=hangchat-ui]')
+     cy.pause()
+     //demo tries to send a message despite but he is blocked
      cy.loginByEmail({
       email: 'demo@gmail.com',
       password: 'Dragonfly1977!!!',
@@ -210,9 +211,24 @@ describe('onHangout', () => {
     cy.get('[data-testid=hangouts]').click();
     cy.get('[data-testid=bero]').click();
     cy.get('[data-testid=hangchat-ui]');
-
-
-     })
+    cy.get('[data-testid=message-input]').type('So you are not x')
+    cy.get('[data-testid=send-btn]').click()
+    cy.get('[data-testid=blocker-message]').contains('You can not send this message because you are blocked.')
+  
+    //let make sure bero did not recieve any message
+    cy.visit('/');
+    cy.loginByEmail({
+      email: 'bero@gmail.com',
+      password: 'Dragonly_1999!',
+    });
+    cy.visit('/');
+    cy.wait(50);
+    cy.get('[data-testid=menu]').click();
+    cy.wait(50);
+    cy.get('[data-testid=hangouts]').click();
+    cy.get('[data-testid=demo]').click();
+  
+  })
  
  })
 

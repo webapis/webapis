@@ -55,7 +55,7 @@ export default function Mobile() {
           <Block hangout={hangout} onBlock={onHangout} />
         </Suspense>
       </FeatureRoute>
-      <FeatureRoute paths={['/BLOCKED', '/DECLINED']}>
+      <FeatureRoute paths={['/BLOCKEDP', '/DECLINED']}>
         <Suspense fallback={<div>Loading...</div>}>
           <Blocked hangout={hangout} onUnblock={onHangout} />
         </Suspense>
@@ -66,14 +66,16 @@ export default function Mobile() {
         </Suspense>
       </FeatureRoute>
       <FeatureRoute
-        paths={['/ACCEPTED', '/ACCEPTER', '/MESSANGER', '/MESSAGED','/BLOCKER']}
+        paths={['/ACCEPTED', '/ACCEPTER', '/MESSANGER', '/MESSAGED','/BLOCKER','/BLOCKED']}
       >
         <Suspense fallback={<div>Loading...</div>}>
           <Hangchat
+            hangout={hangout}
             onMessageText={onMessageText}
             onMessage={onHangout}
             messages={messages}
             username={username}
+            messageText={messageText}
           />
         </Suspense>
       </FeatureRoute>

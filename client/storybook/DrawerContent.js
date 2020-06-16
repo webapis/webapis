@@ -49,6 +49,9 @@ export function DrawerContent({ open }) {
         <ListItem id="unread" onClick={handleRoute}>
          Uread
         </ListItem>
+        <ListItem id="blocker-message" onClick={handleRoute}>
+         BlockerMessage
+        </ListItem>
       </List>
     </div>
   );

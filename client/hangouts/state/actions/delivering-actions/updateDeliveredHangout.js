@@ -1,5 +1,5 @@
 import { actionTypes } from '../../actionTypes';
-export function updateDeliveredHangout({ name, dispatch, hangout, offline,onAppRoute }) {
+export function updateDeliveredHangout({ name, dispatch, hangout, offline, onAppRoute }) {
   const { username, message, timestamp } = hangout;
 
   const deliveredHangout = { ...hangout, delivered: true };
@@ -12,8 +12,8 @@ export function updateDeliveredHangout({ name, dispatch, hangout, offline,onAppR
   dispatch({ type: actionTypes.HANGOUTS_UPDATED, hangouts: updatedHangouts });
   dispatch({ type: actionTypes.HANGOUT_UPDATED, hangout: deliveredHangout });
   if (message) {
- 
-    updateDeliveredMessage({ dispatch, name, deliveredHangout });
+
+    updateDeliveredMessage({ dispatch, name, deliveredHangout,hangout });
   }
 
   if (offline) {
@@ -39,16 +39,22 @@ export function updateDeliveredHangout({ name, dispatch, hangout, offline,onAppR
 
 export function updateDeliveredMessage({ dispatch, name, deliveredHangout }) {
   const { username, message } = deliveredHangout;
-  const deliveredMessage ={...message,username:name,delivered:true}
+ 
+  const deliveredMessage = { ...message, username: name, delivered: true }
+  const blockedMessage = { timestamp: message.timestamp, text: 'blocke by you', username: name, type: 'blocked' }
   // save message to localStorage
   const messageKey = `${name}-${username}-messages`;
   const messages = JSON.parse(localStorage.getItem(messageKey));
   const hangoutIndex = messages.findIndex(
     (m) => m.timestamp === message.timestamp
   );
- messages.splice(hangoutIndex, 1, deliveredMessage);
+  messages.splice(hangoutIndex, 1, deliveredMessage);
+  if(deliveredHangout.state==='BLOCKED'){
+    debugger;
+    messages.splice(hangoutIndex, 0, blockedMessage)
+  }
 
   localStorage.setItem(messageKey, JSON.stringify(messages));
- 
+
   dispatch({ type: actionTypes.MESSAGES_UPDATED, messages });
 }
