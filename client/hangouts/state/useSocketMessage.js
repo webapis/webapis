@@ -100,6 +100,7 @@ export function useSocketMessage({
         saveBlocker({ dispatch, hangout,  name:username, focusedHangout,onAppRoute,unread  });
         break;
       case hangoutStates.DECLINER:
+        
         saveDecliner({ dispatch, hangout,  name:username, focusedHangout,onAppRoute,unread  });
         break;
       case hangoutStates.INVITER:
@@ -118,6 +119,7 @@ export function useSocketMessage({
 
   function handleHangouts({ hangouts }) {
     hangouts.forEach((hangout) => {
+      
       handleHangout({ hangout,unread:true });
     });
   }

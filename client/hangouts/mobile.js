@@ -12,7 +12,7 @@ const Hangchat = lazy(() => import('./state-ui/Hangchat'));
 const Invite = lazy(() => import('./state-ui/Invite'));
 const Invitee = lazy(() => import('./state-ui/Invitee'));
 const Inviter = lazy(() => import('./state-ui/Inviter'));
-const UnreadHangouts =lazy(() => import('./UnreadHangouts'));
+const UnreadHangouts = lazy(() => import('./UnreadHangouts'));
 export default function Mobile() {
   const {
     hangout,
@@ -30,15 +30,16 @@ export default function Mobile() {
     messages,
     dispatch,
     unreadhangouts,
-    onSelectUnread
+    onNavigation,
+    onSelectUnread,
   } = useHangouts();
 
   return (
-    <div style={{ height: '100%',width:'100%' }}>
+    <div style={{ height: '100%', width: '100%' }}>
       <FeatureRoute path="/hangouts">
         <Suspense fallback={<div>Loading...</div>}>
           <Hangouts
-          dispatch={dispatch}
+            dispatch={dispatch}
             username={username}
             search={search}
             hangouts={hangouts}
@@ -49,22 +50,24 @@ export default function Mobile() {
           />
         </Suspense>
       </FeatureRoute>
-      <FeatureRoute path="/BLOCK">
+      <FeatureRoute path="/block">
         <Suspense fallback={<div>Loading...</div>}>
           <Block hangout={hangout} onBlock={onHangout} />
         </Suspense>
       </FeatureRoute>
-      <FeatureRoute path="/BLOCKED">
+      <FeatureRoute paths={['/BLOCKED', '/DECLINED']}>
         <Suspense fallback={<div>Loading...</div>}>
           <Blocked hangout={hangout} onUnblock={onHangout} />
         </Suspense>
       </FeatureRoute>
       <FeatureRoute path="/configure">
         <Suspense fallback={<div>Loading...</div>}>
-          <Configure hangout={hangout} />
+          <Configure hangout={hangout} onNavigation={onNavigation} />
         </Suspense>
       </FeatureRoute>
-      <FeatureRoute paths={["/ACCEPTED","/ACCEPTER","/MESSANGER","/MESSAGED"]}>
+      <FeatureRoute
+        paths={['/ACCEPTED', '/ACCEPTER', '/MESSANGER', '/MESSAGED','/BLOCKER']}
+      >
         <Suspense fallback={<div>Loading...</div>}>
           <Hangchat
             onMessageText={onMessageText}
@@ -74,7 +77,7 @@ export default function Mobile() {
           />
         </Suspense>
       </FeatureRoute>
-    
+
       <FeatureRoute path="/INVITE">
         <Suspense fallback={<div>Loading...</div>}>
           <Invite
@@ -85,19 +88,26 @@ export default function Mobile() {
           />
         </Suspense>
       </FeatureRoute>
-      <FeatureRoute path="/INVITED">
+      <FeatureRoute paths={['/INVITED', '/DECLINER']}>
         <Suspense fallback={<div>Loading...</div>}>
           <Invitee hangout={hangout} />
         </Suspense>
       </FeatureRoute>
       <FeatureRoute path="/INVITER">
         <Suspense fallback={<div>Loading...</div>}>
-          <Inviter hangout={hangout} onAccept={onHangout} />
+          <Inviter
+            hangout={hangout}
+            onAccept={onHangout}
+            onDecline={onHangout}
+          />
         </Suspense>
       </FeatureRoute>
       <FeatureRoute path="/UNREAD">
         <Suspense fallback={<div>Loading...</div>}>
-          <UnreadHangouts unreadhangouts={unreadhangouts} onSelectUnread={onSelectUnread} />
+          <UnreadHangouts
+            unreadhangouts={unreadhangouts}
+            onSelectUnread={onSelectUnread}
+          />
         </Suspense>
       </FeatureRoute>
     </div>

@@ -10,6 +10,8 @@ const style = {
     flexDirection: 'column',
     height: '100%',
     justifyContent: 'space-between',
+    boxSizing: 'border-box',
+    paddingTop:68
   },
   btn: {
     flex: 1,

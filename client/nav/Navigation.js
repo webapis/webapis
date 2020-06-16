@@ -2,7 +2,7 @@ import { h } from 'preact';
 import { Suspense, lazy } from 'preact/compat';
 import { useState, useEffect, useReducer } from 'preact/hooks';
 import { useThemeContext } from '../theme/theme-context';
-import {OnlineStatus} from '../layout/icons/onlineStatus'
+import { OnlineStatus } from '../layout/icons/onlineStatus';
 import './css/style.css';
 import { MenuWhite } from './icons/MenuWhite';
 import { AppShell } from '../layout/AppShell';
@@ -11,17 +11,18 @@ import { useMediaQuery } from '../layout/useMediaQuery';
 import { useUserName } from '../auth/useUserName';
 import { useAuthContext } from '../auth/auth-context';
 import { recoverLocalAuthState } from '../auth/actions';
-import {useAppRoute} from '../app-route/AppRouteProvider'
-import {actionTypes} from '../app-route/actionTypes'
-import {useHangouts} from '../hangouts/state/useHangouts'
+import { useAppRoute } from '../app-route/AppRouteProvider';
+import { actionTypes } from '../app-route/actionTypes';
+import { useHangouts } from '../hangouts/state/useHangouts';
+import {Settings} from '../layout/icons/Settıngs'
 const PhoneDrawer = lazy(() => import('./PhoneDrawer'));
 const TabletDrawer = lazy(() => import('./TabletDrawer'));
 const LaptopDrawer = lazy(() => import('./LapTopDrawer'));
 const DesktopDrawer = lazy(() => import('./DesktopDrawer'));
 
 export default function Navigation(props) {
-const {onAppRoute} =useAppRoute()
- const {readyState,unreadhangouts}=useHangouts()
+  const { onAppRoute } = useAppRoute();
+  const { readyState, unreadhangouts,onNavigation, hangout } = useHangouts();
   const [route, setRoute] = useState('');
   const { userName } = useUserName();
   const { width, height, orientation, device } = useMediaQuery();
@@ -37,7 +38,6 @@ const {onAppRoute} =useAppRoute()
   const { dispatch } = useAuthContext();
   useEffect(() => {
     if (localStorage.getItem('webcom')) {
-  
       recoverLocalAuthState({
         dispatch,
         user: JSON.parse(localStorage.getItem('webcom')),
@@ -45,10 +45,9 @@ const {onAppRoute} =useAppRoute()
     }
   }, []);
 
-function navToUnread (){
-
-  onAppRoute({ featureRoute:'/UNREAD',route:'/hangouts'})
-}
+  function navToUnread() {
+    onAppRoute({ featureRoute: '/UNREAD', route: '/hangouts' });
+  }
   return (
     <AppShell>
       {route === '/phone' && open ? (
@@ -72,13 +71,21 @@ function navToUnread (){
         </Suspense>
       ) : null}
       <AppBar>
-        <MenuWhite onClick={toggleDrawer} device={device} id='menu' />
+        <MenuWhite onClick={toggleDrawer} device={device} id="menu" />
         {children}
         <NavItem>{userName}</NavItem>
-      <NavItem onClick={navToUnread} data-testid='nav-unreads'>Unread:{unreadhangouts && unreadhangouts.length}</NavItem>
-        <NavItem>
-          <OnlineStatus readyState={readyState}/>
+        <NavItem onClick={navToUnread} data-testid="nav-unreads">
+          Unread:{unreadhangouts && unreadhangouts.length}
         </NavItem>
+        <NavItem>
+          <OnlineStatus readyState={readyState} />
+        </NavItem>
+        {hangout && 
+         <NavItem id="configure"  data-testid="nav-config" onClick={onNavigation}>
+         <Settings id="configure"  fill="white" width="30"  height="30"/>
+       </NavItem>
+        }
+       
       </AppBar>
     </AppShell>
   );
@@ -86,5 +93,9 @@ function navToUnread (){
 
 export function NavItem(props) {
   const { children } = props;
-  return <div className='nav-item'{...props}>{children}</div>;
+  return (
+    <div className="nav-item" {...props}>
+      {children}
+    </div>
+  );
 }

@@ -30,6 +30,7 @@ export default function Configure({
   onArchive,
   onNotification,
   onConversationHistory,
+  onNavigation,
   onOk,
 }) {
   return (
@@ -45,7 +46,7 @@ export default function Configure({
       <div style={style.btnContainer}>
         <IconButton title="Archive" Icon={Archive} onClick={onArchive} />
         <IconButton title="Delete" Icon={Delete} onClick={onDelete} />
-        <IconButton title="Block and Report" Icon={Block} onClick={onBlock} />
+        <IconButton id="block" title="Block" Icon={Block} onClick={onNavigation}  />
       </div>
       <div style={style.btnOk}>
         <Button onClick={onOk}>OK</Button>
@@ -54,11 +55,11 @@ export default function Configure({
   );
 }
 
-function IconButton({ Icon, title, onClick }) {
+function IconButton({ Icon, title, onClick,id }) {
   return (
     <div style={style.iconBtn}>
-      <button style={style.btn} onClick={onClick}>
-        <Icon />
+      <button id={id} style={style.btn} onClick={onClick} data-testid={`${id}-btn`}>
+        <Icon id={id}/>
       </button>
       <div>{title}</div>
     </div>

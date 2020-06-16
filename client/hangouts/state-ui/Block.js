@@ -14,6 +14,8 @@ const style = {
     flexDirection: 'column',
     height: '100%',
     justifyContent: 'space-between',
+    boxSizing: 'border-box',
+    paddingTop:68
   },
   btn: {
     flex: 1,
@@ -30,7 +32,7 @@ export default function Block({ onCancel, onBlock, onReport }) {
       </div>
       <div style={{ display: 'flex', padding: 8 }}>
         <Button title="Cancel" style={style.btn} onClick={onCancel} />
-        <Button title="Block" style={style.btn} id="BLOCK" onClick={onBlock} />
+        <Button title="Block" style={style.btn} id="BLOCK" onClick={onBlock} data-testid="block-btn" />
       </div>
     </Layout>
   );

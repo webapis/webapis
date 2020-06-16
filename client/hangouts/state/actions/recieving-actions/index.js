@@ -36,16 +36,17 @@ export function saveBlocker({
   saveRecievedHangout({ dispatch, hangout, name, onAppRoute, focusedHangout,  unread });
 }
 
-export function saveDecliner(
+export function saveDecliner({
   dispatch,
   hangout,
   name,
   focusedHangout,
   onAppRoute,
   unread
-) {
-  
+}) {
+  debugger;
   saveRecievedHangout({ dispatch, hangout, name, onAppRoute, focusedHangout,  unread });
+
 }
 
 export function saveMessanger({ dispatch, hangout, name, focusedHangout,onAppRoute,unread }) {

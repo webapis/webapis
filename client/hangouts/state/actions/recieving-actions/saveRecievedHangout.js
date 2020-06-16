@@ -8,6 +8,7 @@ export function saveRecievedHangout({
   unread,
 }) {
   const { username, message } = hangout;
+ 
   const hangoutKey = `${name}-hangouts`;
 
   const hangouts = JSON.parse(localStorage.getItem(hangoutKey));

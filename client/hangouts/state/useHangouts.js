@@ -2,7 +2,7 @@ import { h } from 'preact';
 import { useEffect } from 'preact/hooks';
 import { useHangoutContext } from './HangoutsProvider';
 import { useAuthContext } from '../../auth/auth-context';
-import {useAppRoute} from '../../app-route/AppRouteProvider'
+import { useAppRoute } from '../../app-route/AppRouteProvider';
 import { updateLocalHangouts } from './updateLocalHangouts';
 import { savePendingHangout } from './actions/delivering-actions/savePendingHangout';
 import {
@@ -15,9 +15,10 @@ import {
   startClientCommand,
 } from './actions';
 import { sendOfflineHangouts } from './actions/delivering-actions/sendOfflineHangouts';
+import { actionTypes } from '../../app-route/actionTypes';
 
 export function useHangouts() {
-  const {onAppRoute} =useAppRoute()
+  const { onAppRoute } = useAppRoute();
   const authContext = useAuthContext();
   const { username } = authContext.state;
   const [state, dispatch] = useHangoutContext();
@@ -40,18 +41,22 @@ export function useHangouts() {
     }
   }, [socket, readyState, username]);
 
+  function onNavigation(e){
+    const id =e.target.id
+    debugger;
+    onAppRoute({ featureRoute: `/${id}`, route: '/hangouts' });
+  }
+  
   function onSelectHangout(e) {
     const username = e.target.id;
     selectHangout({ dispatch, username });
-  
   }
   function onSelectUnread(e) {
     const username = e.target.id;
     selectUnread({ dispatch, username });
-    const hangout = hangouts.find(g=> g.username===username)
-  
-    onAppRoute({featureRoute:`/${hangout.state}`,route:'/hangouts'})
-    
+    const hangout = hangouts.find((g) => g.username === username);
+
+    onAppRoute({ featureRoute: `/${hangout.state}`, route: '/hangouts' });
   }
 
   function onSearch(e) {
@@ -78,15 +83,21 @@ export function useHangouts() {
     const online = true;
 
     if (socket && readyState === 1) {
-      socket.send(
-        JSON.stringify({
-          username: hangout.username,
-          email,
-          message,
-          command,
-          timestamp,
-        })
-      );
+      if(hangout.state ==='BLOCKER'){
+        
+      }else{
+        socket.send(
+          JSON.stringify({
+            username: hangout.username,
+            email,
+            message,
+            command,
+            timestamp,
+          })
+        );
+
+      }
+    
     } else {
       online = false;
     }
@@ -104,8 +115,13 @@ export function useHangouts() {
       },
       online,
     });
-  }
+
+    changeMessageText({ text: '', dispatch });
+
+
+  }//end onHangout
   return {
+    onNavigation,
     onSelectUnread,
     onMessageText,
     messageText,
