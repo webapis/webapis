@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import {useEffect} from 'preact/hooks'
+import { useEffect } from 'preact/hooks';
 import { Button } from '../../layout/Button';
 import { Message } from '../ui/Message';
 import { Layout } from '../state-ui/Layout';
@@ -7,23 +7,36 @@ const style = {
   root: {
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-between',
+    width: '100%',
     height: '100%',
+    paddingTop: 70,
+    boxSizing: 'border-box',
+    justifyContent: 'space-between',
+    paddingBottom:8,
+ 
   },
 };
 
 export default function Inviter({ hangout, onAccept, onDecline }) {
-
+  debugger;
   return (
     <Layout id="inviter-ui">
       <div style={style.root}>
-        <div style={{ flex: 1, marginTop: 16, marginLeft: 8 }}>
+        <div style={{ marginLeft: 8, display:'flex' }}>
           {hangout && hangout.message && (
-            <Message message={hangout && hangout.message && hangout.message} />
+            <Message
+              message={
+                hangout &&
+                hangout.message && {
+                  ...hangout.message,
+                  username: hangout.username,float:'left'
+                }
+              }
+            />
           )}
         </div>
 
-        <div style={{ display: 'flex', padding: 8 }}>
+        <div style={{ display: 'flex',paddingLeft:8,paddingRight:8 }}>
           <Button
             id="DECLINE"
             onClick={onDecline}

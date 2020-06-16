@@ -5,18 +5,14 @@ export function saveRecievedHangout({
   name,
   focusedHangout,
   onAppRoute,
-  unread
+  unread,
 }) {
-
   const { username, message } = hangout;
   const hangoutKey = `${name}-hangouts`;
 
   const hangouts = JSON.parse(localStorage.getItem(hangoutKey));
 
-
-
   if (hangouts) {
-  
     const hangoutIndex = hangouts.findIndex((g) => g.username === username);
     if (focusedHangout && focusedHangout.username === username) {
       hangouts.splice(hangoutIndex, 1, {
@@ -32,19 +28,15 @@ export function saveRecievedHangout({
     }
     localStorage.setItem(hangoutKey, JSON.stringify(hangouts));
     dispatch({ type: actionTypes.HANGOUTS_UPDATED, hangouts });
-
   } else {
-
-    let updatedHangouts = null
+    let updatedHangouts = null;
     if (focusedHangout && focusedHangout.username === username) {
-
       updatedHangouts = [
         {
           ...hangout,
           read: true,
         },
       ];
-
     } else {
       updatedHangouts = [
         {
@@ -55,36 +47,25 @@ export function saveRecievedHangout({
     }
     localStorage.setItem(hangoutKey, JSON.stringify(updatedHangouts));
     dispatch({ type: actionTypes.HANGOUTS_UPDATED, hangouts: updatedHangouts });
-  
   }
 
   if (focusedHangout && focusedHangout.username === username) {
-    dispatch({ type: actionTypes.SELECTED_HANGOUT, username: hangout.username });
+    dispatch({
+      type: actionTypes.SELECTED_HANGOUT,
+      username: hangout.username,
+    });
     if (hangout.state !== 'MESSANGER') {
       onAppRoute({ featureRoute: `/${hangout.state}`, route: '/hangouts' });
-   }
+    }
   }
   if (message) {
     saveRecievedMessage({ dispatch, hangout, name, focusedHangout });
   }
 
-  if(unread){
-      debugger;
-      //update unread hangouts
-      let unreadhangoutsKey =`${name}-unread-hangouts`
-      let unreadhangouts = JSON.parse( localStorage.getItem(unreadhangoutsKey))
-      let updatedunreads=null
-      if(unreadhangouts){
-        updatedunreads = [unreadhangouts,hangout]
-        }
-        else{
-          updatedunreads = [hangout]
-        }
-        localStorage.setItem(unreadhangoutsKey,JSON.stringify(updatedunreads))
-        
-        dispatch({type:actionTypes.UNREAD_HANGOUTS_UPDATED,unreadhangouts:updatedunreads})
-
-    }}
+  if (unread) {
+    saveUnreadHangout({ name, hangout,dispatch });
+  }
+}
 export function saveRecievedMessage({
   dispatch,
   hangout,
@@ -98,18 +79,13 @@ export function saveRecievedMessage({
   const messages = JSON.parse(localStorage.getItem(messageKey));
   let updatedMessages = null;
   if (messages) {
-  
     if (focusedHangout && focusedHangout.username === username) {
- 
       updatedMessages = [...messages, { ...message, username, read: true }];
     } else {
-
       updatedMessages = [...messages, { ...message, username, read: false }];
     }
   } else {
- 
     if (focusedHangout && focusedHangout.username === username) {
-
       updatedMessages = [{ ...message, username, read: true }];
     } else {
       updatedMessages = [{ ...message, username, read: false }];
@@ -118,8 +94,26 @@ export function saveRecievedMessage({
   localStorage.setItem(messageKey, JSON.stringify(updatedMessages));
 
   if (focusedHangout && focusedHangout.username === username) {
-
     // sync message with reducer state
     dispatch({ type: actionTypes.MESSAGES_UPDATED, messages: updatedMessages });
   }
+}
+
+function saveUnreadHangout({ name, hangout,dispatch }) {
+  
+  //update unread hangouts
+  let unreadhangoutsKey = `${name}-unread-hangouts`;
+  let unreadhangouts = JSON.parse(localStorage.getItem(unreadhangoutsKey));
+  let updatedunreads = null;
+  if (unreadhangouts) {
+    updatedunreads = [unreadhangouts, hangout];
+  } else {
+    updatedunreads = [hangout];
+  }
+  localStorage.setItem(unreadhangoutsKey, JSON.stringify(updatedunreads));
+
+  dispatch({
+    type: actionTypes.UNREAD_HANGOUTS_UPDATED,
+    unreadhangouts: updatedunreads,
+  });
 }

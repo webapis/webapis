@@ -17,7 +17,7 @@ export const initState = {
 export function reducer(state, action) {
   switch (action.type) {
     case actionTypes.UNREAD_HANGOUTS_UPDATED:
-      debugger;
+      
       return { ...state, unreadhangouts: action.unreadhangouts }
     case actionTypes.HANGOUT_UPDATED:
 

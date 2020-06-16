@@ -91,7 +91,7 @@ export function useSocketMessage({
   }
 
   function handleHangout({ hangout, unread }) {
-    debugger;
+    
     switch (hangout.state) {
       case hangoutStates.ACCEPTER:
         saveAccepter({ dispatch, hangout,  name:username, focusedHangout,onAppRoute,unread });
@@ -131,12 +131,12 @@ export function useSocketMessage({
           handleAcknowledgement({ hangout: socketMessage.hangout,offline:false });
           break;
         case 'HANGOUT':
-          debugger;
+          
           if(focusedHangout && focusedHangout.username ===socketMessage.hangout.username){
-           debugger;
+           
             handleHangout({ hangout: socketMessage.hangout,unread:false });
           }else{
-            debugger;
+            
             handleHangout({ hangout: socketMessage.hangout,unread:true });
           }
 
@@ -146,7 +146,7 @@ export function useSocketMessage({
           handleHangouts({ hangouts: socketMessage.hangouts });
           break;
         case 'OFFLINE_ACKN':
-          debugger;
+          
           handleAcknowledgement({ hangout: socketMessage.hangout,offline:true });
           break;
         default:
