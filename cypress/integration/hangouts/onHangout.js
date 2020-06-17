@@ -45,7 +45,7 @@ describe('onHangout', () => {
       cy.get('[data-testid=invitee-ui]');
 
       // //--- onAccept
-      cy.visit('/');
+     
       cy.loginByEmail({
         email: 'bero@gmail.com',
         password: 'Dragonly_1999!',
@@ -134,8 +134,8 @@ describe('onHangout', () => {
     });
   });
 
-  describe('onMessage and Block', () => {
-    it.only('onMessage and Block', () => {
+  describe('onMessage and Block and unBlock', () => {
+    it('onMessage and Block and unBlock', () => {
       //onInvite:demo
       cy.loginByEmail({
         email: 'demo@gmail.com',
