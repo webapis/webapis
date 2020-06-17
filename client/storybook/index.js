@@ -16,6 +16,7 @@ import { OnlineStatus } from '../layout/icons/onlineStatus';
 import { ThemeProvider } from '../theme/theme-context';
 import { List, ListItem } from '../layout/NavList';
 import { DrawerContent } from './DrawerContent';
+import {IconsDemo} from './IconsDemo'
 import { messages } from './fakeMessages';
 import {UnreadDemo} from './UreadDemo'
 import {BlockerMessageDemo } from './BlockerMessageDemo'
@@ -45,7 +46,7 @@ render(
       },
     }}
   >
-    <AppRouteProvider initState={{ featureRoute: '/', route: '/blocker-message' }}>
+    <AppRouteProvider initState={{ featureRoute: '/', route: '/icons' }}>
       <Navigation drawerContent={<DrawerContent />}>
         <AppRoute path="/hangouts">
           <Hangout hangouts={hangouts} />
@@ -90,6 +91,10 @@ render(
         </AppRoute>
         <AppRoute path="/blocker-message">
           <BlockerMessageDemo/>
+        </AppRoute>
+
+        <AppRoute path="/icons">
+          <IconsDemo/>
         </AppRoute>
       </Navigation>
     </AppRouteProvider>

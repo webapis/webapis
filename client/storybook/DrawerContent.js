@@ -52,6 +52,9 @@ export function DrawerContent({ open }) {
         <ListItem id="blocker-message" onClick={handleRoute}>
          BlockerMessage
         </ListItem>
+        <ListItem id="icons" onClick={handleRoute}>
+         Icons
+        </ListItem>
       </List>
     </div>
   );

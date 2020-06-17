@@ -14,7 +14,8 @@ import { recoverLocalAuthState } from '../auth/actions';
 import { useAppRoute } from '../app-route/AppRouteProvider';
 import { actionTypes } from '../app-route/actionTypes';
 import { useHangouts } from '../hangouts/state/useHangouts';
-import {Settings} from '../layout/icons/Settıngs'
+import { Settings } from '../layout/icons/Settıngs';
+import { Message } from '../layout/icons/Message';
 const PhoneDrawer = lazy(() => import('./PhoneDrawer'));
 const TabletDrawer = lazy(() => import('./TabletDrawer'));
 const LaptopDrawer = lazy(() => import('./LapTopDrawer'));
@@ -22,7 +23,7 @@ const DesktopDrawer = lazy(() => import('./DesktopDrawer'));
 
 export default function Navigation(props) {
   const { onAppRoute } = useAppRoute();
-  const { readyState, unreadhangouts,onNavigation, hangout } = useHangouts();
+  const { readyState, unreadhangouts, onNavigation, hangout } = useHangouts();
   const [route, setRoute] = useState('');
   const { userName } = useUserName();
   const { width, height, orientation, device } = useMediaQuery();
@@ -75,17 +76,20 @@ export default function Navigation(props) {
         {children}
         <NavItem>{userName}</NavItem>
         <NavItem onClick={navToUnread} data-testid="nav-unreads">
-          Unread:{unreadhangouts && unreadhangouts.length}
+          {unreadhangouts && <Message count={unreadhangouts.length} />}
         </NavItem>
         <NavItem>
           <OnlineStatus readyState={readyState} />
         </NavItem>
-        {hangout && 
-         <NavItem id="configure"  data-testid="nav-config" onClick={onNavigation}>
-         <Settings id="configure"  fill="white" width="30"  height="30"/>
-       </NavItem>
-        }
-       
+        {hangout && (
+          <NavItem
+            id="configure"
+            data-testid="nav-config"
+            onClick={onNavigation}
+          >
+            <Settings id="configure" fill="white" width="30" height="30" />
+          </NavItem>
+        )}
       </AppBar>
     </AppShell>
   );
