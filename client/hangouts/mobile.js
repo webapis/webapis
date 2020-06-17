@@ -66,7 +66,7 @@ export default function Mobile() {
         </Suspense>
       </FeatureRoute>
       <FeatureRoute
-        paths={['/ACCEPTED', '/ACCEPTER', '/MESSANGER', '/MESSAGED','/BLOCKER','/BLOCKED','/UNBLOCKED']}
+        paths={['/ACCEPTED', '/ACCEPTER', '/MESSANGER', '/MESSAGED','/BLOCKER','/BLOCKED','/UNBLOCKED','/UNBLOCKER']}
       >
         <Suspense fallback={<div>Loading...</div>}>
           <Hangchat
