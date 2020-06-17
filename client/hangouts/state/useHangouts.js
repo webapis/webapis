@@ -75,13 +75,14 @@ export function useHangouts() {
     changeMessageText({ dispatch, text });
   }
   function onHangout(e) {
+   
     changeMessageText({ text: '', dispatch });
     const command = e.target.id;
     const { email } = hangout;
     const timestamp = Date.now();
     const message =
       messageText !== '' ? { text: messageText, timestamp } : null;
-
+debugger;
     const online = true;
     let isBlocker =false
     if (socket && readyState === 1) {

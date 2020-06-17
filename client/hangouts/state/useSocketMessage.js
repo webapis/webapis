@@ -36,6 +36,7 @@ export function useSocketMessage({
           onAppRoute,
           offline
         });
+        break;
       case hangoutStates.UNBLOCKED:
         saveUnblovked({
           dispatch,
@@ -45,6 +46,7 @@ export function useSocketMessage({
           onAppRoute,
           offline
         });
+        break;
       case hangoutStates.DECLINED:
         saveDeclined({
           dispatch,
@@ -54,6 +56,7 @@ export function useSocketMessage({
           onAppRoute,
           offline
         });
+        break;
       case hangoutStates.BLOCKED:
         
         saveBlocked({
@@ -64,6 +67,7 @@ export function useSocketMessage({
           onAppRoute,
           offline
         });
+        break;
       case hangoutStates.ACCEPTED:
         saveAccepted({
           dispatch,
@@ -98,6 +102,7 @@ export function useSocketMessage({
         saveAccepter({ dispatch, hangout,  name:username, focusedHangout,onAppRoute,unread });
         break;
       case hangoutStates.BLOCKER:
+       
         saveBlocker({ dispatch, hangout,  name:username, focusedHangout,onAppRoute,unread  });
         break;
       case hangoutStates.DECLINER:
@@ -111,6 +116,7 @@ export function useSocketMessage({
         saveMessanger({ dispatch, hangout,  name:username, focusedHangout,onAppRoute,unread  });
         break;
       case hangoutStates.UNBLOCKER:
+        
         saveUnblocker({ dispatch, hangout,  name:username, focusedHangout,onAppRoute,unread  });
         break;
       default:
@@ -149,7 +155,7 @@ export function useSocketMessage({
           handleHangouts({ hangouts: socketMessage.hangouts });
           break;
         case 'OFFLINE_ACKN':
-          
+       
           handleAcknowledgement({ hangout: socketMessage.hangout,offline:true });
           break;
         default:

@@ -29,7 +29,7 @@ export default function Blocked({ hangout, onUnblock, onClose }) {
 
       <div style={{ display: 'flex', padding: 8 }}>
         <Button title="Close" style={style.btn} onClick={onClose} />
-        <Button title="Unblock" style={style.btn} onClick={onUnblock} />
+        <Button id='UNBLOCK' title="Unblock" style={style.btn} onClick={onUnblock} data-testid='unblock-btn'/>
       </div>
     </Layout>
   );

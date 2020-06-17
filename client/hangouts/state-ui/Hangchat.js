@@ -10,11 +10,13 @@ export default function Hangchat({
   onMessage,
   messageText,
   username,
-  hangout
+  hangout,
+  onNavigation
 }) {
   return (
     <Layout id="hangchat-ui" >
       <Messages
+      onNavigation={onNavigation}
         hangout={hangout}
         messages={messages}
         onMessage={onMessage}

@@ -15,7 +15,10 @@ export function updateDeliveredHangout({ name, dispatch, hangout, offline, onApp
 
     updateDeliveredMessage({ dispatch, name, deliveredHangout,hangout });
   }
-
+  if(hangout.state==='BLOCKED'){
+    debugger;
+    updateBockedState({dispatch,name,deliveredHangout})
+  }
   if (offline) {
     //remove offline hangout
     const offlineHangoutKey = `${name}-offline-hangouts`;
@@ -39,9 +42,9 @@ export function updateDeliveredHangout({ name, dispatch, hangout, offline, onApp
 
 export function updateDeliveredMessage({ dispatch, name, deliveredHangout }) {
   const { username, message } = deliveredHangout;
- 
+
   const deliveredMessage = { ...message, username: name, delivered: true }
-  const blockedMessage = { timestamp: message.timestamp, text: 'blocke by you', username: name, type: 'blocked' }
+
   // save message to localStorage
   const messageKey = `${name}-${username}-messages`;
   const messages = JSON.parse(localStorage.getItem(messageKey));
@@ -49,12 +52,21 @@ export function updateDeliveredMessage({ dispatch, name, deliveredHangout }) {
     (m) => m.timestamp === message.timestamp
   );
   messages.splice(hangoutIndex, 1, deliveredMessage);
-  if(deliveredHangout.state==='BLOCKED'){
-    debugger;
-    messages.splice(hangoutIndex, 0, blockedMessage)
-  }
+  
 
   localStorage.setItem(messageKey, JSON.stringify(messages));
 
   dispatch({ type: actionTypes.MESSAGES_UPDATED, messages });
+}
+
+export function updateBockedState({dispatch,deliveredHangout,name}){
+  debugger;
+  const { username } = deliveredHangout;
+  const blockedMessage = { timestamp:deliveredHangout.timestamp, text: 'you blocked this user', username: name, type: 'blocked' }
+  const messageKey = `${name}-${username}-messages`;
+  const messages = JSON.parse(localStorage.getItem(messageKey));
+  
+  localStorage.setItem(messageKey, JSON.stringify( [...messages,blockedMessage]));
+
+  dispatch({ type: actionTypes.MESSAGES_UPDATED, messages:[...messages,blockedMessage] });
 }

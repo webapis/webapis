@@ -46,7 +46,7 @@ export default function Configure({
       <div style={style.btnContainer}>
         <IconButton title="Archive" Icon={Archive} onClick={onArchive} />
         <IconButton title="Delete" Icon={Delete} onClick={onDelete} />
-        <IconButton id="block" title="Block" Icon={Block} onClick={onNavigation}  />
+        <IconButton id="bckui" title="Block" Icon={Block} onClick={onNavigation}  />
       </div>
       <div style={style.btnOk}>
         <Button onClick={onOk}>OK</Button>

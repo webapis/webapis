@@ -17,7 +17,7 @@ export function saveDeclined({ dispatch, hangout, name, offline,onAppRoute }) {
   updateDeliveredHangout({ dispatch, name, hangout, offline,onAppRoute });
 }
 export function saveBlocked({ dispatch, hangout, name, offline,onAppRoute }) {
-debugger
+debugger;
   updateDeliveredHangout({ dispatch, name, hangout, offline,onAppRoute });
 }
 export function saveUnblovked({ dispatch, hangout, name, offline,onAppRoute }) {

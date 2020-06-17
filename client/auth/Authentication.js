@@ -11,7 +11,7 @@ const Profile = lazy(() => import('../auth/Profile'));
 const AuthFeedback = lazy(() => import('../auth/AuthFeedback'));
 export default function Authentication({ children }) {
   return (
-    <div>
+    <div style={{paddingTop:68}}>
       <FeatureRoute path='/changepassword'>
         <Suspense fallback={<div>loading...</div>}>
           <ChangePassword />

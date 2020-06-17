@@ -6,6 +6,13 @@ const style = {
     fontSize: 16,
     textAlign: 'end'
 }
-export function BlockedMessage({ message }) {
-    return <div style={style} data-testid="blocked-message">{message.text}</div>
+export function BlockedMessage({ message,onNavigation }) {
+    function handleNavigation(e){
+        e.preventDefault()
+        onNavigation(e)
+    }
+    debugger;
+    return <div style={style} data-testid="blocked-message">{message.text}
+    <a id="UNBLOCK" data-testid="seemore-btn" href="/" onClick={handleNavigation}>see more</a>
+    </div>
 }

@@ -22,7 +22,8 @@ export function Messages({
   onMessageText,
   messageText,
   username,
-  hangout
+  hangout,
+  onNavigation
 }) {
   const scrollerRef = useRef(null);
 
@@ -47,7 +48,7 @@ export function Messages({
                 {' '}
                 {!m.type && <Message message={m} />}
                 {m.type && m.type === 'blocker' && <BlockerMessage message={m} />}
-                {m.type && m.type === 'blocked' && <BlockedMessage message={m} />}
+                {m.type && m.type === 'blocked' && <BlockedMessage message={m} onNavigation={onNavigation}/>}
               </div>
             )
           )}
