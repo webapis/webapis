@@ -82,7 +82,7 @@ export function useHangouts() {
     const timestamp = Date.now();
     const message =
       messageText !== '' ? { text: messageText, timestamp } : null;
-debugger;
+
     const online = true;
     let isBlocker =false
     if (socket && readyState === 1) {

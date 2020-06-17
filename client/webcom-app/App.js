@@ -5,65 +5,61 @@ import Authentication from '../auth/Authentication';
 import { ThemeProvider } from '../theme/theme-context';
 import { DrawerContent } from '../layout/DrawerContent';
 import { AuthContent } from '../auth/AuthContent';
-import { AuthProvider } from '../auth/auth-context';
 import { FormProvider } from '../form/form-context';
-import { OtherContent } from './OtherContent';
+import { HangoutDrawerContent } from '../hangouts/nav/HangoutDrawerContent';
 import { Home } from './Home';
-import { HangoutsProvider } from '../hangouts/state/HangoutsProvider';
+import { HangoutTopMenu } from '../hangouts/nav/HangoutTopMenu'
 import { AppRoute } from '../app-route/AppRouteProvider';
 import './app.css'
 const Hangouts = lazy(() => import('../hangouts'));
 const Group = lazy(() => import('../group/group'));
 export function App() {
   return (
-    <div style={{height:'100vh'}}>
-    <AuthProvider>
-  
-        <HangoutsProvider socketUrl={`wss://${ip}:3000/hangouts`}>
+    <div style={{ height: '100vh' }}>
+
+      <ThemeProvider
+        initState={{
+          primary: {
+            background: '#6200EE',
+            color: '#ffffff',
+            fontFamily: 'Roboto, Helvetica, "Arial"',
+          },
+        }}
+      >
+        <Navigation
+          drawerContent={
+            <DrawerContent
+              authContent={<AuthContent />}
+              otherContent={<HangoutDrawerContent />}
+            />
+          }
+        >
+       
+          <NavItem style={{ flex: 5 }}>WEB COM</NavItem>
+          <HangoutTopMenu />
+        </Navigation>
+        <AppRoute path="/auth">
           <FormProvider>
-            <ThemeProvider
-              initState={{
-                primary: {
-                  background: '#6200EE',
-                  color: '#ffffff',
-                  fontFamily: 'Roboto, Helvetica, "Arial"',
-                },
-              }}
-            >
-              <Navigation
-                drawerContent={
-                  <DrawerContent
-                    authContent={<AuthContent />}
-                    otherContent={<OtherContent />}
-                  />
-                }
-              >
-                <NavItem>WEB COM</NavItem>
-              </Navigation>
-              <AppRoute path="/auth">
-                <Authentication />
-              </AppRoute>
-
-              <AppRoute path="/">
-                <Home />
-              </AppRoute>
-
-              <AppRoute path="/hangouts">
-                <Suspense fallback={<div>loading...</div>}>
-                  <Hangouts />
-                </Suspense>
-              </AppRoute>
-              <AppRoute path="/group">
-                <Suspense fallback={<div>loading...</div>}>
-                  <Group />
-                </Suspense>
-              </AppRoute>
-              {''}
-            </ThemeProvider>
+            <Authentication />
           </FormProvider>
-        </HangoutsProvider>
-  
-    </AuthProvider>
+        </AppRoute>
+        <AppRoute path="/">
+          <Home />
+        </AppRoute>
+
+        <AppRoute path="/hangouts">
+          <Suspense fallback={<div>loading...</div>}>
+            <Hangouts />
+          </Suspense>
+        </AppRoute>
+        <AppRoute path="/group">
+          <Suspense fallback={<div>loading...</div>}>
+            <Group />
+          </Suspense>
+        </AppRoute>
+        {''}
+      </ThemeProvider>
+
     </div>
   );
 }

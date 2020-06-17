@@ -17,7 +17,7 @@ export function Message({ count=0 }) {
   return (
     <div style={{display:'flex', alignItems:'center'}}>
           <div>message:</div>
-      <div style={style.count}>{count}</div> 
+      <div style={style.count} data-testid="message-count">{count}</div> 
     </div>
   );
 }

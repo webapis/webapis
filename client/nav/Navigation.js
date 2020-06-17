@@ -2,30 +2,30 @@ import { h } from 'preact';
 import { Suspense, lazy } from 'preact/compat';
 import { useState, useEffect, useReducer } from 'preact/hooks';
 import { useThemeContext } from '../theme/theme-context';
-import { OnlineStatus } from '../layout/icons/onlineStatus';
+
 import './css/style.css';
 import { MenuWhite } from './icons/MenuWhite';
 import { AppShell } from '../layout/AppShell';
 import { AppBar } from '../layout/AppBar';
 import { useMediaQuery } from '../layout/useMediaQuery';
-import { useUserName } from '../auth/useUserName';
+
 import { useAuthContext } from '../auth/auth-context';
 import { recoverLocalAuthState } from '../auth/actions';
 import { useAppRoute } from '../app-route/AppRouteProvider';
 import { actionTypes } from '../app-route/actionTypes';
-import { useHangouts } from '../hangouts/state/useHangouts';
-import { Settings } from '../layout/icons/Settıngs';
-import { Message } from '../layout/icons/Message';
+
+
+
 const PhoneDrawer = lazy(() => import('./PhoneDrawer'));
 const TabletDrawer = lazy(() => import('./TabletDrawer'));
 const LaptopDrawer = lazy(() => import('./LapTopDrawer'));
 const DesktopDrawer = lazy(() => import('./DesktopDrawer'));
 
 export default function Navigation(props) {
-  const { onAppRoute } = useAppRoute();
-  const { readyState, unreadhangouts, onNavigation, hangout } = useHangouts();
+
+
   const [route, setRoute] = useState('');
-  const { userName } = useUserName();
+
   const { width, height, orientation, device } = useMediaQuery();
   const [open, setOpen] = useState(false);
   const { children, drawerContent } = props;
@@ -46,11 +46,9 @@ export default function Navigation(props) {
     }
   }, []);
 
-  function navToUnread() {
-    onAppRoute({ featureRoute: '/UNREAD', route: '/hangouts' });
-  }
+
   return (
-    <AppShell>
+    <div>
       {route === '/phone' && open ? (
         <Suspense fallback={<div>Loading...</div>}>
           <PhoneDrawer onClick={toggleDrawer}>{drawerContent}</PhoneDrawer>
@@ -74,24 +72,8 @@ export default function Navigation(props) {
       <AppBar>
         <MenuWhite onClick={toggleDrawer} device={device} id="menu" />
         {children}
-        <NavItem>{userName}</NavItem>
-        <NavItem onClick={navToUnread} data-testid="nav-unreads">
-          {unreadhangouts && <Message count={unreadhangouts.length} />}
-        </NavItem>
-        <NavItem>
-          <OnlineStatus readyState={readyState} />
-        </NavItem>
-        {hangout && (
-          <NavItem
-            id="configure"
-            data-testid="nav-config"
-            onClick={onNavigation}
-          >
-            <Settings id="configure" fill="white" width="30" height="30" />
-          </NavItem>
-        )}
       </AppBar>
-    </AppShell>
+    </div>
   );
 }
 

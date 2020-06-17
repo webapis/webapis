@@ -13,9 +13,10 @@ export function AppBar({ children }) {
        // paddingLeft: 16,
        // paddingRight: 16,
         width: '100%',
+        display:'flex'
       }}
     >
-      <div style={{ display: 'flex' }}>{children}</div>
+    {children}
     </div>
   );
 }

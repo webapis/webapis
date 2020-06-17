@@ -5,7 +5,6 @@ export default function LaptopDrawer(props) {
   const { open, onClick, children } = props;
   return (
     <div style={{ ...drawer, width: '20%' }} onClick={onClick}>
-   
       {children}
     </div>
   );
