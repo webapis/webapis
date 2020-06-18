@@ -43,8 +43,10 @@ export function useHangouts() {
   }, [socket, readyState, username]);
 
   function onNavigation(e){
-    const id =e.target.id
-   
+    e.stopPropagation()
+   // const id =e.target.id
+    const id =e.currentTarget.id
+   debugger;
     onAppRoute({ featureRoute: `/${id}`, route: '/hangouts' });
   }
   
