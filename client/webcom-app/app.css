@@ -22,3 +22,12 @@
   ::-webkit-scrollbar-thumb:hover {
     background: #555;
   }
+
+  @font-face{
+    font-family: "Roboto";
+    src: url('../theme/Roboto/Roboto-Regular.ttf');
+}
+
+html{
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+}
