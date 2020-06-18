@@ -25,9 +25,10 @@ export function HangoutTopMenu() {
         {unreadhangouts && <Message count={unreadhangouts.length} />}{' '}
       </NavItem>
       {hangout && (
-        <NavItem id="configure" data-testid="nav-config">
+        <NavItem  >
           <Settings
             id="configure"
+          
             fill="white"
             width="30"
             height="30"
@@ -38,3 +39,4 @@ export function HangoutTopMenu() {
     </div>
   );
 }
+//

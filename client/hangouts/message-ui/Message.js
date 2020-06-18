@@ -1,5 +1,7 @@
 import { h } from 'preact';
 import { useState, useEffect } from 'preact/hooks';
+import { useMediaQuery } from '../../layout/useMediaQuery';
+import './css/style.css';
 const style = {
   root: {
     borderColor: '#eeeeee',
@@ -19,8 +21,9 @@ const style = {
     color: '#737373',
     fontSize: 10,
   },
+  message: {},
 };
-
+//
 export function Message(props) {
   const { message } = props;
   const { float, username } = message;
@@ -28,7 +31,7 @@ export function Message(props) {
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
-
+  const { device } = useMediaQuery();
   function convertMS(ms) {
     var d, h, m, s;
     s = Math.floor(ms / 1000);
@@ -53,9 +56,15 @@ export function Message(props) {
   }, []);
 
   return (
-    <div style={{ width: '100%',marginBottom:3 }}>
+    <div style={{ width: '100%', marginBottom: 3 }}>
       <div style={{ ...style.root, float }}>
-        <div data-testid="message" style={style.message}>{message && message.text}</div>
+        <div
+          data-testid="message"
+          style={style.message}
+          className={`message-font-${device}-size`}
+        >
+          {message && message.text}
+        </div>
         <div style={style.log}>
           <div style={style.username}>{username && username}:</div>
           <div>
