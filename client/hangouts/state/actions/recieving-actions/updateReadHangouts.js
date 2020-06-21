@@ -21,7 +21,7 @@ debugger
 dispatch({type:actionTypes.UNREAD_HANGOUTS_UPDATED,unreadhangouts:updatedunread})
     debugger;
   }
-
+debugger;
   // set hangout to read
   const hangoutKey = `${name}-hangouts`;
   const hangouts = JSON.parse(localStorage.getItem(hangoutKey));

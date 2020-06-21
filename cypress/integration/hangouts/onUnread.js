@@ -112,21 +112,37 @@ describe('UNREAD_HANGOUTS', () => {
     email: 'bero@gmail.com',
     password: 'Dragonly_1999!',
   });
-cy.pause()
+//cy.pause()
   cy.visit('/');
  cy.wait(50)
- cy.get('[data-testid=nav-unreads]').contains(2)
- cy.wait(50)
- cy.get('[data-testid=nav-unreads]').click()
+ cy.get('[data-testid=nav-unreads]').contains(2).click()
+ //cy.wait(50)
+ //cy.get('[data-testid=nav-unreads]').click()
  cy.wait(50)
  cy.get('[data-testid=demo-select]').click();
  cy.wait(50)
- cy.get('[data-testid=nav-unreads]').contains(1)
+ cy.get('[data-testid=nav-unreads]').contains(1).click()
  cy.wait(50)
- cy.get('[data-testid=nav-unreads]').click()
+// cy.get('[data-testid=nav-unreads]').click()
  cy.wait(50)
  cy.get('[data-testid=riodin-select]').click();
- cy.wait(50)
- cy.get('[data-testid=nav-unreads]').contains(0)
+ cy.get('[data-testid=accept-btn]').click()
+// cy.get('[data-testid=message-input]').type('Hello riodin')
+// cy.get('[data-testid=send-btn]').click()
+// cy.wait(50)
+ //cy.get('[data-testid=nav-unreads]').contains(0).click()
+ //cy.wait(50)
+ //cy.get('[data-testid=riodin-select]').click();
+
+ cy.loginByEmail({
+  email: 'riodin@gmail.com',
+  password: 'Dragonly_1999!',
+});
+cy.visit('/');
+cy.wait(50);
+cy.get('[data-testid=menu]').click();
+cy.wait(50);
+cy.get('[data-testid=hangouts]').click();
+cy.get('[data-testid=bero]').click();
   })
 })

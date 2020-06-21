@@ -10,7 +10,7 @@ export function saveRecievedHangout({
 }) {
   debugger;
   const { username, message } = hangout;
- debugger;
+ 
   const hangoutKey = `${name}-hangouts`;
 
   const hangouts = JSON.parse(localStorage.getItem(hangoutKey));
@@ -92,19 +92,7 @@ else{
     saveRecievedMessage({ dispatch, hangout, name, focusedHangout });
   }
 
-  if (unread) {
-    debugger;
-    switch(hangout.state){
-      case hangoutStates.ACCEPTER:
-      case hangoutStates.INVITER:
-      case hangoutStates.MESSANGER:
-        saveUnreadHangout({ name, hangout,dispatch });
-        break;
-        default:
-          break;
-      }
 
-    }
  
 }
 export function saveRecievedMessage({
