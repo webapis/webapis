@@ -14,7 +14,8 @@ import {
   fetchHangout,
   loadMessages,
 } from './actions';
-import {useSocketMessage}from './useSocketMessage'
+import { updateReadHangouts } from './actions/recieving-actions/updateReadHangouts';
+import { useSocketMessage } from './useSocketMessage';
 import { useAuthContext } from '../../auth/auth-context';
 import { useWebSocket } from './useWebSocket';
 const HangoutContext = createContext();
@@ -32,9 +33,14 @@ export function HangoutsProvider(props) {
   const authContext = useAuthContext();
   const { username } = authContext.state;
   const [state, dispatch] = useReducer(reducer, initState);
-  const { hangout,socketMessage } = state;
+  const { hangout, socketMessage } = state;
   const websocketHandler = useWebSocket({ username, dispatch, socketUrl });
-  const handleUseSocketMessage =useSocketMessage({username,dispatch,socketMessage,   focusedHangout: hangout})
+  const handleUseSocketMessage = useSocketMessage({
+    username,
+    dispatch,
+    socketMessage,
+    focusedHangout: hangout,
+  });
   useEffect(() => {
     if (username) {
       loadHangouts({ username, dispatch });
@@ -42,8 +48,9 @@ export function HangoutsProvider(props) {
   }, [username]);
   useEffect(() => {
     if (hangout && username) {
+  
       //from local storage
-      loadMessages({ dispatch, hangout,username });
+      loadMessages({ dispatch, hangout, username });
 
       //save hangout to localStorage
       const key = `${username}-hangouts`;
@@ -67,8 +74,13 @@ export function HangoutsProvider(props) {
           localStorage.setItem(key, JSON.stringify([hangout]));
         }
       }
+      if (!hangout.read) {
+        debugger;
+       debugger;
+        updateReadHangouts({ dispatch, hangout, name: username });
+      }
     }
-  }, [hangout,username]);
+  }, [hangout, username]);
 
   const value = useMemo(() => [state, dispatch], [state]);
   return <HangoutContext.Provider value={value} {...props} />;

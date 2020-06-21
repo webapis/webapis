@@ -1,7 +1,7 @@
 import { h } from 'preact';
-import PersonAdd from '../../layout/icons/PersonAdd';
-import { TextInput } from '../../layout/TextInput';
-import { Button } from '../../layout/Button';
+import PersonAdd from '../../icons/PersonAdd';
+import { TextInput } from '../../components/TextInput';
+import { Button } from '../../components/Button';
 import { Center } from '../../layout/Center';
 import { Layout } from '../state-ui/Layout';
 const style = {

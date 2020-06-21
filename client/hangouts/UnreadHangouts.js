@@ -1,8 +1,8 @@
 import { h } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
-import { List, ListItem } from '../layout/NavList';
+import { List, ListItem } from '../components/list';
 import {reducerUnreadhangouts} from '../hangouts/state/reduceUnreadhangouts'
-export default function UnreadHangouts({ unreadhangouts,onSelectUnread }) {
+export default function UnreadHangouts({ unreadhangouts,onSelectUnread,onRemoveUnread }) {
 
   const [items,setItems] =useState([])
 useEffect(()=>{
@@ -22,7 +22,10 @@ if(unreadhangouts){
           items.length > 0 &&
           items.map((u) => {
        
-          return <ListItem onClick={onSelectUnread} id={u.username}>{u.username} messages: {u.messageCount}</ListItem>;
+          return  <div style={{display:'flex'}}>
+            <ListItem onClick={onSelectUnread} id={u.username} style={{flex:5}} data-testid={`${u.username}-select`}>{u.username} messages: {u.messageCount}</ListItem>
+            <ListItem onClick={onRemoveUnread} id={u.username} style={{color:'red'}} data-testid={`${u.username}-remove`}>x</ListItem>
+            </div>
           })}
       </List>
     </div>

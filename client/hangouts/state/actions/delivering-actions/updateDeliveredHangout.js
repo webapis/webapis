@@ -1,15 +1,15 @@
 import { actionTypes } from '../../actionTypes';
 export function updateDeliveredHangout({ name, dispatch, hangout, offline, onAppRoute }) {
   const { username, message, timestamp } = hangout;
-
+debugger;
   const deliveredHangout = { ...hangout, delivered: true };
   const hangoutKey = `${name}-hangouts`;
   const hangouts = JSON.parse(localStorage.getItem(hangoutKey));
   const hangoutIndex = hangouts.findIndex((g) => g.username === username);
   let updatedHangouts = null;
-  updatedHangouts = hangouts.splice(hangoutIndex, 1, deliveredHangout);
-  localStorage.setItem(hangoutKey, JSON.stringify(updatedHangouts));
-  dispatch({ type: actionTypes.HANGOUTS_UPDATED, hangouts: updatedHangouts });
+  hangouts.splice(hangoutIndex, 1, deliveredHangout);
+  localStorage.setItem(hangoutKey, JSON.stringify(hangouts));
+  dispatch({ type: actionTypes.HANGOUTS_UPDATED, hangouts });
   dispatch({ type: actionTypes.HANGOUT_UPDATED, hangout: deliveredHangout });
   if (message) {
 

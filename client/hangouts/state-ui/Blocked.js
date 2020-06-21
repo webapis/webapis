@@ -1,7 +1,7 @@
 import { h } from 'preact';
-import { Block } from '../../layout/icons/Block';
+import { Block } from '../../icons/Block';
 import { Center } from '../../layout/Center';
-import { Button } from '../../layout/Button';
+import { Button } from '../../components/Button';
 import { Layout } from './Layout';
 
 const style = {

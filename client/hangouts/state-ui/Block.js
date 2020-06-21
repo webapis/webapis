@@ -1,6 +1,6 @@
 import { h } from 'preact';
 import { Layout } from '../state-ui/Layout';
-import { Button } from '../../layout/Button';
+import { Button } from '../../components/Button';
 
 const style = {
   checkbox: { marginRight: 8 },

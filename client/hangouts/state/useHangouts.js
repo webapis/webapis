@@ -16,6 +16,7 @@ import {
   startClientCommand,
 } from './actions';
 import { sendOfflineHangouts } from './actions/delivering-actions/sendOfflineHangouts';
+import {removeHangoutFromUnread} from './actions/recieving-actions/removeHangoutFromUnread'
 import { actionTypes } from '../../app-route/actionTypes';
 
 export function useHangouts() {
@@ -42,6 +43,12 @@ export function useHangouts() {
     }
   }, [socket, readyState, username]);
 
+  function onRemoveUnread(e){
+    const id =e.currentTarget.id
+    const hangout = hangouts.find((g) => g.username === id);
+   debugger;
+    removeHangoutFromUnread({name:username,dispatch,hangout})
+  }
   function onNavigation(e){
     e.stopPropagation()
    // const id =e.target.id
@@ -56,6 +63,7 @@ export function useHangouts() {
   }
   function onSelectUnread(e) {
     const username = e.target.id;
+    debugger;
     selectUnread({ dispatch, username });
     const hangout = hangouts.find((g) => g.username === username);
 
@@ -148,5 +156,6 @@ export function useHangouts() {
     onHangout,
     unreadhangouts,
     readyState,
+    onRemoveUnread
   };
 }

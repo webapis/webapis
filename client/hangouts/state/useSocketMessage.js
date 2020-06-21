@@ -126,7 +126,6 @@ export function useSocketMessage({
 
   function handleHangouts({ hangouts }) {
     hangouts.forEach((hangout) => {
-      
       handleHangout({ hangout,unread:true });
     });
   }
