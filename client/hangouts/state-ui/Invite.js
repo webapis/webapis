@@ -1,9 +1,11 @@
 import { h } from 'preact';
+import {useEffect} from 'preact/hooks'
 import PersonAdd from '../../icons/PersonAdd';
 import { TextInput } from '../../components/TextInput';
 import { Button } from '../../components/Button';
 import { Center } from '../../layout/Center';
 import { Layout } from '../state-ui/Layout';
+
 const style = {
   layout: {
     display: 'flex',
@@ -13,6 +15,8 @@ const style = {
 };
 
 export default function Invite({ hangout, onInvite, onMessageText,messageText, value }) {
+
+  
   return (
     <Layout style={style.layout}id="invite-ui">
       <Center>

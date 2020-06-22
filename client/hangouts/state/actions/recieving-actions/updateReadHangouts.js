@@ -32,7 +32,7 @@ debugger;
   dispatch({ type: actionTypes.HANGOUTS_UPDATED, hangouts });
 
   if (message) {
-    // updateReadMesssages({ dispatch, hangout, name });
+     updateReadMesssages({ dispatch, hangout, name });
   }
 }
 

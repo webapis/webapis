@@ -84,7 +84,7 @@ else{
       type: actionTypes.SELECTED_HANGOUT,
       username: hangout.username,
     });
-    if (hangout.state !== 'MESSANGER') {
+    if (hangout.state !== 'MESSANGER' ||  hangout.state==='ACCEPTER') {
       onAppRoute({ featureRoute: `/${hangout.state}`, route: '/hangouts' });
     }
   }

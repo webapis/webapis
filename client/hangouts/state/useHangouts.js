@@ -85,7 +85,7 @@ export function useHangouts() {
     changeMessageText({ dispatch, text });
   }
   function onHangout(e) {
-   
+   debugger;
     changeMessageText({ text: '', dispatch });
     const command = e.target.id;
     const { email } = hangout;

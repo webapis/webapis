@@ -26,7 +26,7 @@ const style = {
 //
 export function Message(props) {
   const { message } = props;
-  const { float, username } = message;
+  const { float, username,timestamp } = message;
   const [days, setDays] = useState(0);
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
@@ -46,14 +46,21 @@ export function Message(props) {
     setMinutes(m);
     setSeconds(s);
   }
+
   useEffect(() => {
-    setTimeout(() => {
-      convertMS(Date.now() - message.timestamp);
-    }, 0);
-    setInterval(() => {
-      convertMS(Date.now() - message.timestamp);
-    }, 60000);
-  }, []);
+    if(timestamp){
+  
+      setTimeout(() => {
+        convertMS(Date.now() - timestamp);
+      }, 0);
+      setInterval(() => {
+        convertMS(Date.now() - timestamp);
+      }, 60000);
+      debugger;
+
+    }
+   
+  }, [timestamp]);
 
   return (
     <div style={{ width: '100%', marginBottom: 3 }}>
@@ -64,10 +71,11 @@ export function Message(props) {
           className={`message-font-${device}-size`}
         >
           {message && message.text}
+        
         </div>
         <div style={style.log}>
           <div style={style.username}>{username && username}:</div>
-          <div>
+          <div>{minutes}
             {minutes === 0 && <div>Now</div>}
             {hours === 0 && minutes > 0 && <div>{minutes} minutes ago </div>}
             {hours > 0 && days === 0 && (

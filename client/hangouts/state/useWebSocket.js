@@ -2,9 +2,11 @@ import { h } from 'preact';
 import { useEffect } from 'preact/hooks';
 import { actionTypes } from './actionTypes';
 
-export function useWebSocket({ socketUrl, username, dispatch }) {
+export function useWebSocket({ socketUrl, username, dispatch,token }) {
   useEffect(() => {
-    if (username) {
+    if (token) {
+      debugger
+      debugger;
       const sock = new WebSocket(`${socketUrl}/?username=${username}`);
       sock.onmessage = (message) => {
         const msg = JSON.parse(message.data);
@@ -24,5 +26,5 @@ export function useWebSocket({ socketUrl, username, dispatch }) {
       };
       dispatch({ type: actionTypes.SOCKET_READY, socket: sock });
     }
-  }, [username]);
+  }, [token]);
 }

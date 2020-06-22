@@ -1,7 +1,8 @@
 import { h } from 'preact';
+import {useEffect} from 'preact/hooks'
 import { Layout } from '../state-ui/Layout';
 import { Button } from '../../components/Button';
-
+import {resetHangout} from '../state/actions'
 const style = {
   checkbox: { marginRight: 8 },
   checkboxRoot: {
@@ -23,7 +24,13 @@ const style = {
   },
 };
 
-export default function Block({ onCancel, onBlock, onReport }) {
+export default function Block({ onCancel, onBlock, onReport,dispatch }) {
+
+  useEffect(()=>{
+    return ()=>{
+      resetHangout({dispatch})
+    }
+  },[])
   return (
     <Layout style={style.layout}>
       <div style={style.checkboxRoot}>

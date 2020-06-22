@@ -4,7 +4,7 @@ import { Button } from '../../components/Button';
 const styles = {
   root: {
     display: 'flex',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   input: {
     //margin:0

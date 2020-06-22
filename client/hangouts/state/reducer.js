@@ -16,6 +16,9 @@ export const initState = {
 };
 export function reducer(state, action) {
   switch (action.type) {
+    case actionTypes.CLEARED_HANGOUT:
+      debugger;
+      return {...state,hangout:null}
     case actionTypes.UNREAD_HANGOUTS_UPDATED:
      
       return { ...state, unreadhangouts: action.unreadhangouts }
@@ -25,7 +28,7 @@ export function reducer(state, action) {
     case actionTypes.HANGOUTS_UPDATED:
       return { ...state, hangouts: action.hangouts };
     case actionTypes.MESSAGES_UPDATED:
-
+debugger
       return { ...state, messages: action.messages };
     case actionTypes.SOCKET_MESSAGE_RECIEVED:
       return { ...state, socketMessage: action.socketMessage };

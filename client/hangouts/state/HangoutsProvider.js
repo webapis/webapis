@@ -31,12 +31,13 @@ export function useHangoutContext() {
 export function HangoutsProvider(props) {
   const { socketUrl } = props;
   const authContext = useAuthContext();
-  const { username } = authContext.state;
+  const { username,token } = authContext.state;
   const [state, dispatch] = useReducer(reducer, initState);
   const { hangout, socketMessage } = state;
-  const websocketHandler = useWebSocket({ username, dispatch, socketUrl });
+  const websocketHandler = useWebSocket({ username, dispatch, socketUrl,token });
   const handleUseSocketMessage = useSocketMessage({
     username,
+   
     dispatch,
     socketMessage,
     focusedHangout: hangout,
@@ -46,6 +47,12 @@ export function HangoutsProvider(props) {
       loadHangouts({ username, dispatch });
     }
   }, [username]);
+  useEffect(() => {
+    if (username && token) {
+      debugger;
+      loadHangouts({ username, dispatch });
+    }
+  }, []);
   useEffect(() => {
     if (hangout && username) {
   

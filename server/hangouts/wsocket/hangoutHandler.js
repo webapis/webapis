@@ -1,6 +1,7 @@
 import { stateMapper } from '../stateMapper';
 import { clientCommands } from '../../../client/hangouts/state/clientCommands';
 export async function hangoutHandler({ collection, hangout, ws, connections }) {
+  debugger;
   try {
     const { senderState, targetState } = stateMapper({
       command: hangout.command,

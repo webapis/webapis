@@ -91,6 +91,7 @@ export function authReducer(state, action) {
         ...state,
         username: action.user.username,
         email: action.user.email,
+        token:action.user.token
       };
     default:
       return state;

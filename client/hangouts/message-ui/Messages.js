@@ -38,7 +38,7 @@ export function Messages({
     scrollerRef.current.scrollTop = scrollerRef.current.scrollHeight;
   }
   return (
-    <div style={{ boxSizing: 'border-box', width: '100%', height: '100%', display: 'flex', flexDirection: 'column', paddingTop: 68 }}>
+    <div style={{ boxSizing: 'border-box', width: '100%', height: '100%', display: 'flex', flexDirection: 'column', paddingTop: 75 }}>
       <div style={styles.messageContainer} ref={scrollerRef}>
         {messages &&
           messages.length > 0 &&

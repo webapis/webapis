@@ -10,6 +10,10 @@ export function selectHangout({ dispatch, username }) {
   dispatch({ type: actionTypes.SELECTED_HANGOUT, username });
 }
 
+export function resetHangout({dispatch}){
+  dispatch({type:actionTypes.CLEARED_HANGOUT})
+} 
+
 export function selectUnread({dispatch,username}){
   dispatch({ type: actionTypes.SELECTED_HANGOUT, username });
 }

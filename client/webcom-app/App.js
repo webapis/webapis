@@ -7,7 +7,7 @@ import './css/app.css';
 
 export function App() {
   return (
-    <div style={{ height: '100vh' }}>
+    <div style={{ height: '95vh' }}>
      <AppNavigation/>
       <AppRoutes/>
       {''}

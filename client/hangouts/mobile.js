@@ -78,6 +78,7 @@ export default function Mobile() {
             messages={messages}
             username={username}
             messageText={messageText}
+            dispatch={dispatch}
           />
         </Suspense>
       </FeatureRoute>
