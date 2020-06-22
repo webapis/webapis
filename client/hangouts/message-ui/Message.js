@@ -75,7 +75,7 @@ export function Message(props) {
         </div>
         <div style={style.log}>
           <div style={style.username}>{username && username}:</div>
-          <div>{minutes}
+  <div>
             {minutes === 0 && <div>Now</div>}
             {hours === 0 && minutes > 0 && <div>{minutes} minutes ago </div>}
             {hours > 0 && days === 0 && (
@@ -84,7 +84,7 @@ export function Message(props) {
               </div>
             )}
             {days <= 10 && days > 1 && <div>{days} days ago</div>}
-            {days > 10 && new Date(message.timestamp)}
+          
           </div>
         </div>
       </div>

@@ -5,7 +5,7 @@ import { TextInput } from '../../components/TextInput';
 import { Button } from '../../components/Button';
 import { Center } from '../../layout/Center';
 import { Layout } from '../state-ui/Layout';
-
+import {resetHangout} from '../state/actions'
 const style = {
   layout: {
     display: 'flex',
@@ -13,7 +13,7 @@ const style = {
     justifyContent: 'center',
   },
 };
-
+//
 export default function Invite({ hangout, onInvite, onMessageText,messageText, value }) {
 
   

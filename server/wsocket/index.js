@@ -10,12 +10,12 @@ let connections = {};
 export default async function (server,client) {
   const collection = await client.db('auth').collection('users');
   const wss = new WebSocket.Server({ server });
-  debugger;
+ 
   wss.on('connection', async function connection(ws, request) {
-    debugger;
+   
     try {
       const token = cookie.parse(request.headers['cookie']);
-debugger;
+
       let uname = url.parse(request.url, true).query.username;
       const decoded = await jwt.verify(token[uname], process.env.secret);
       const { username } = decoded;
@@ -48,4 +48,4 @@ debugger;
     }
   });
 }
-
+//

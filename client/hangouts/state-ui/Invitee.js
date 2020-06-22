@@ -3,7 +3,7 @@ import {useEffect} from 'preact/hooks'
 import { Done } from '../../icons/Done';
 import { Center } from '../../layout/Center';
 import { Layout } from '../state-ui/Layout';
-import {resetHangout} from '../state/actions'
+
 const style = {
   layout: {
     display: 'flex',
@@ -13,13 +13,7 @@ const style = {
 };
 export default function Invitee({ hangout,dispatch }) {
 
-  useEffect(()=>{
-    return ()=>{
-      debugger;
 
-      resetHangout({dispatch})
-    }
-  },[])
   return (
     <Layout style={style.layout} id="invitee-ui">
       <Center>
