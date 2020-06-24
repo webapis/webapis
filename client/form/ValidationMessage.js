@@ -4,6 +4,7 @@ export function ValidationMessage({ validationTypes,name }) {
   const { state } = useFormContext();
   return validationTypes.map((validationName) => {
     if (state.validation[validationName]) {
+   
       const { message } = state.validation[validationName];
       return (
         <div

@@ -11,5 +11,7 @@ export default {
   INVALID_CREDENTIALS: 'invalid credentials provided',
   USERNAME_TAKEN: 'username is already taken',
   REGISTERED_EMAIL: 'email is already registered',
-  PASSWORDS_DO_NOT_MATCH: 'passwords do not match'
+  PASSWORDS_DO_NOT_MATCH: 'passwords do not match',
+  
+  ACCOUNT_ALREADY_EXISTS:'Account already exists for this username.'
 };

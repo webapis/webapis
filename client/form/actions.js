@@ -59,16 +59,17 @@ export function incInputCount() {
 
 
 export function serverValidation({ status = 0 }) {
-
+debugger
   switch (status) {
+    case 101:
     case httpStatus.credentialInvalid:
-    
       return {
         type: actionTypes.SERVER_VALIDATION,
         validationType: validationTypes.INVALID_CREDENTIALS,
         message: validationMessages.INVALID_CREDENTIALS,
         validationState: validationStates.INVALID,
       };
+    case 125:
     case httpStatus.emailInvalid:
       return {
         type: actionTypes.SERVER_VALIDATION,
@@ -90,6 +91,7 @@ export function serverValidation({ status = 0 }) {
         message: validationMessages.INVALID_USERNAME,
         validationState: validationStates.INVALID,
       };
+      case 203:
     case httpStatus.emailIsRegistered:
       return {
         type: actionTypes.SERVER_VALIDATION,
@@ -105,6 +107,7 @@ export function serverValidation({ status = 0 }) {
         message: validationMessages.EMAIL_NOT_REGISTERED,
         validationState: validationStates.INVALID,
       };
+    case 202:
     case httpStatus.usernameIsTaken:
       return {
         type: actionTypes.SERVER_VALIDATION,
@@ -119,6 +122,8 @@ export function serverValidation({ status = 0 }) {
         message: validationMessages.INVALID_EMPTY_STRING,
         validationState: validationStates.INVALID,
       };
+      case 200:
+      
     case httpStatus.emailorusernameNotValid:
       return {
         type: actionTypes.SERVER_VALIDATION,

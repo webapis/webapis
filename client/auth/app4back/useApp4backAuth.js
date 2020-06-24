@@ -5,9 +5,11 @@ export function useApp4backAuth(){
 const {state,dispatch}= useAuthContext()
 const {dispatch:formDispatch}= useFormContext()
     function signup(){
-        actions.signUp({state,dispatch})
+        actions.signUp({state,dispatch,formDispatch})
     }
-    function login (){}
+    function login (){
+        actions.login({state,dispatch,formDispatch})
+    }
     function changepassword(){}
     function forgotpassword(){}
 

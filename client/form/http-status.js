@@ -1,4 +1,5 @@
 export default {
+  accountAlreadyExits:202,
   //login
   credentialInvalid: '401',
   //signup

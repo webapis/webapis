@@ -2,7 +2,7 @@ import { h } from 'preact';
 import { Suspense, lazy } from 'preact/compat';
 import { AppRoute } from '../app-route/AppRouteProvider';
 import { Home } from './Home';
-import NodeAuthentication from '../auth/NodeAuthentication';
+import NodeAuthentication from '../auth/App4backAuthentication';
 import { FormProvider } from '../form/form-context';
 const Hangouts = lazy(() => import('../hangouts'));
 const Group = lazy(() => import('../group/group'));

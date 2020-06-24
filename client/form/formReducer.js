@@ -18,7 +18,7 @@ export function formReducer(state, action) {
           },
         },
       };
-
+debugger;
       return nextState;
     case actionTypes.CLIENT_VALIDATION:
       nextState = {
