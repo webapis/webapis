@@ -8,7 +8,8 @@
     "build": "rollup -c",
     "test": "echo \"Error: no test specified\" && exit 1",
     "webcom:client": "cross-env appName=webcom-app rollup -c -w ",
-    "webcom:server": "concurrently \"cross-env appName=webcom-app nodemon --exec babel-node server/index.js\" \" cross-env appName=webcom-app rollup -c -w \" "
+    "webcom:server": "concurrently \"cross-env appName=webcom-app nodemon --exec babel-node server/index.js\" \" cross-env appName=webcom-app rollup -c -w \" ",
+    "webparse:client": "cross-env appName=webparse-app rollup -c -w "
   },
   "keywords": [],
   "author": "",
@@ -45,6 +46,7 @@
     "mongodb": "^3.5.6",
     "node-static": "^0.7.11",
     "nodemailer": "^6.4.6",
+    "parse": "^2.13.0",
     "preact": "^10.4.0",
     "puppeteer-core": "^3.2.0",
     "ws": "^7.3.0"

@@ -12,16 +12,14 @@ import { useMediaQuery } from '../layout/useMediaQuery';
 import { Paper } from '../layout/Paper';
 import { Grid } from '../layout/Grid';
 import {useAppRoute} from '../app-route/AppRouteProvider'
-export default function RequestPassChange() {
+export default function RequestPassChange({forgotPassword}) {
   const {onAppRoute}= useAppRoute();
   const { device } = useMediaQuery();
   const { dispatch, state } = useAuthContext();
   const { dispatch: formDispatch } = useFormContext();
   const { email } = state;
 
-  function handleForgotPassword() {
-    dispatch(actions.forgotPassword({ dispatch, state, formDispatch }));
-  }
+ 
   function handleChange(e) {
     const { name, value } = e.target;
     dispatch(actions.valueChanged({ propName: name, value, dispatch, state }));
@@ -53,7 +51,7 @@ export default function RequestPassChange() {
           <Button
             className='btn'
             type='button'
-            onClick={handleForgotPassword}
+            onClick={forgotPassword}
             id='requestpasschange-btn'
             title='Send'
           />

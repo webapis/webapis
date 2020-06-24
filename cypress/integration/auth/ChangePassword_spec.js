@@ -4,7 +4,7 @@ describe('ChangePassword', () => {
   describe('STATE:User was logged in', () => {
     beforeEach(() => {
       cy.server();
-      cy.visit('/');
+    
 
       const username = 'demo';
       const email = 'demo@gmail.com';
@@ -18,7 +18,8 @@ describe('ChangePassword', () => {
           'webcom',
           JSON.stringify({ username, email, token })
         );
-      cy.wait(500);
+      cy.wait(50);
+      cy.visit('/');
       cy.get('[data-testid=menu]').click();
 
       cy.get('[data-testid=changepassword]').click();

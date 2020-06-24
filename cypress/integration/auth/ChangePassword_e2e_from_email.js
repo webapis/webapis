@@ -22,7 +22,7 @@ describe('ChangePassword_e2e_from_email link', () => {
     // //  cy.get('[data-testid=change-pass-btn]').click();
     //   });
       cy.visit(
-        `http://localhost:3000/reset/changepassword.html?token=123`
+        `https://localhost:3000/reset/changepassword.html?token=123`
       );
     cy.get('[data-testid=password]').type('Dragonfly1977_!')
     cy.wait(100)

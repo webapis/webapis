@@ -17,7 +17,7 @@ describe('CHANGE PASSWORD', () => {
         email: 'demo@gmail.com',
         password: 'Dragonfly1977_!',
       });
-      cy.visit('http://localhost:3000');
+      cy.visit('/');
       cy.get('[data-testid=menu]').click();
       cy.wait(50)
       cy.get('[data-testid=changepassword]').click();

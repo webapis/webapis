@@ -72,7 +72,7 @@ export function AuthedState({ handleRoute, userName ,onAppRoute}) {
       </div>
       <div style={{ marginBottom: 8 }}>Welcome, {userName}</div>
       <List>
-        <ListItem onClick={handleRoute} id='changepassword'>
+        <ListItem onClick={handleRoute} id='changepassword'data-testid='changepassword'>
           Change Password
         </ListItem>
       </List>

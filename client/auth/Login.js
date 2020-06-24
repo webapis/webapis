@@ -12,7 +12,7 @@ import { Paper } from '../layout/Paper';
 import { Grid } from '../layout/Grid';
 import * as actions from './actions';
 
-export default function Login() {
+export default function Login({login}) {
   const {onAppRoute} = useAppRoute();
 
   const { device } = useMediaQuery();
@@ -45,15 +45,7 @@ export default function Login() {
       })
     );
   }
-  function handleLogin() {
-    dispatch(
-      actions.login({
-        dispatch,
-        state,
-        formDispatch
-      })
-    );
-  }
+ 
 
   return (
 
@@ -96,7 +88,7 @@ export default function Login() {
             type='button'
             id='login-btn'
             data-testid='login-btn'
-            onClick={handleLogin}
+            onClick={login}
             title='LOGIN'
           />
           <a href='/' onClick={handleRoute} id='forgotpassword' data-testid='forgotpassword'>

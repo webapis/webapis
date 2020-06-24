@@ -12,9 +12,8 @@ import { Grid } from '../layout/Grid';
 import { Paper } from '../layout/Paper';
 import { useMediaQuery } from '../layout/useMediaQuery';
 import {useAppRoute} from '../app-route/AppRouteProvider'
-export default function Signup() {
-  const { state, dispatch } = useAuthContext();
-  const { dispatch: formDispatch } = useFormContext();
+export default function Signup({signup}) {
+  const {state,dispatch}=useAuthContext()
   const {onAppRoute} = useAppRoute();
   const { device } = useMediaQuery();
   const { username, password, email } = state;
@@ -24,15 +23,7 @@ export default function Signup() {
     }
   }, [state.token]);
 
-  function handleSignup() {
-    dispatch(
-      actions.signup({
-        dispatch,
-        state,
-        formDispatch,
-      })
-    );
-  }
+ 
   function handleChange(e) {
     const { name, value } = e.target;
     dispatch(
@@ -84,7 +75,7 @@ export default function Signup() {
           <Button
             className='btn'
             type='button'
-            onClick={handleSignup}
+            onClick={signup}
             id='signup-btn'
             title='Signup'
           />

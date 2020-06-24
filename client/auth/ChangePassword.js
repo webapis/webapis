@@ -13,7 +13,7 @@ import { Paper } from '../layout/Paper';
 import { Grid } from '../layout/Grid';
 import {useAppRoute} from '../app-route/AppRouteProvider'
 import { useUserName } from './useUserName';
-export default function ChangePassword() {
+export default function ChangePassword({changePassword}) {
   const { state, dispatch } = useAuthContext();
   const { dispatch: formDispatch } = useFormContext();
   const { token } = useUserName();
@@ -48,16 +48,7 @@ export default function ChangePassword() {
       })
     );
   }
-  function handleChangePass() {
-    dispatch(
-      actions.changePassword({
-        dispatch,
-        state,
-        token,
-        formDispatch,
-      })
-    );
-  }
+ 
   return (
     <Grid width={device === 'phone' ? 100 : 25}>
       <Paper>
@@ -84,7 +75,7 @@ export default function ChangePassword() {
             type='button'
             id='change-pass-btn'
             data-testid='change-pass-btn'
-            onClick={handleChangePass}
+            onClick={changePassword}
             title='Change'
           />
         </Form>

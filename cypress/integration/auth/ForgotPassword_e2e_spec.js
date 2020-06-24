@@ -31,7 +31,7 @@ describe('ForgotPassword e2e', () => {
   it('Successfull password change request submission', () => {
  
     cy.request({
-      url: 'http://localhost:3000/seed/users',
+      url: 'https://localhost:3000/seed/users',
       method: 'post',
       body: {
         username:'webapis',

@@ -1,7 +1,7 @@
 import validationMessages from '../../../client/form/validationMessages';
 describe('Signup e2e', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:3000');
+    cy.visit('/');
     cy.wait(50);
     cy.get('[data-testid=menu]').click();
 
