@@ -8,7 +8,10 @@ const fs = require('fs');
 const url = 'mongodb://127.0.0.1:27017';
 const { MongoClient } = require('mongodb');
 // parse
-parseServer()
+if(process.env.PREACT_APP_BACK==="PREACT_APP_PARSE"){
+  parseServer()
+}
+
 const options = {
   key: fs.readFileSync('key.pem'),
   cert: fs.readFileSync('cert.pem'),

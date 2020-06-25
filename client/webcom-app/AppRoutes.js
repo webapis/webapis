@@ -3,6 +3,7 @@ import { Suspense, lazy } from 'preact/compat';
 import { AppRoute } from '../app-route/AppRouteProvider';
 import { Home } from './Home';
 import ParseAuthentication from '../auth/ParseAuthentication';
+import NodeAuthentication from '../auth/NodeAuthentication';
 import { FormProvider } from '../form/form-context';
 const Hangouts = lazy(() => import('../hangouts'));
 const Group = lazy(() => import('../group/group'));
@@ -12,7 +13,8 @@ export function AppRoutes() {
     <div style={{ height: '100%' }}>
       <AppRoute path="/auth">
         <FormProvider>
-          <ParseAuthentication />
+          {PREACT_APP_BACK ==='PREACT_APP_PARSE' && <ParseAuthentication/>}
+          {PREACT_APP_BACK ==='PREACT_APP_NODEJS' && <NodeAuthentication/>}
         </FormProvider>
       </AppRoute>
       <AppRoute path="/">

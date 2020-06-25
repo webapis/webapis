@@ -33,11 +33,12 @@ const commonPlugins = [
   }),
   production && terser(),
   replace({
-    api_url: JSON.stringify(process.env.api_url),
+    PREACT_APP_BACK: process.env.PREACT_APP_BACK ? `${JSON.stringify(process.env.PREACT_APP_BACK)}`:'PREACT_APP_PARSE',
   }),
   replace({
     ip: JSON.stringify(process.env.ip),
   }),
+ 
 ];
 
 export default [

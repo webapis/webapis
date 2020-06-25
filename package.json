@@ -8,7 +8,8 @@
     "build": "rollup -c",
     "test": "echo \"Error: no test specified\" && exit 1",
     "webcom:client": "cross-env appName=webcom-app rollup -c -w ",
-    "webcom:server": "concurrently \"cross-env appName=webcom-app nodemon --exec babel-node server/index.js\" \" cross-env appName=webcom-app rollup -c -w \" \" parse-dashboard --config dashboard-config.json \" ",
+    "webcom:node": "concurrently \"cross-env appName=webcom-app PREACT_APP_BACK=PREACT_APP_NODEJS nodemon --exec babel-node server/index.js\" \" cross-env appName=webcom-app PREACT_APP_BACK=PREACT_APP_NODEJS rollup -c -w \" ",
+    "webcom:parse": "concurrently \"cross-env appName=webcom-app PREACT_APP_BACK='PREACT_APP_PARSE'  nodemon --exec babel-node server/index.js\" \" cross-env appName=webcom-app PREACT_APP_BACK=PREACT_APP_PARSE rollup -c -w \" \" parse-dashboard --config dashboard-config.json \" ",
     "webparse:client": "cross-env appName=webparse-app rollup -c -w "
   },
   "keywords": [],
