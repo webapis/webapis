@@ -1,13 +1,14 @@
 require('dotenv').config();
 import httpRoute from './http-route';
 //import http from 'http';
-
 import ws from './wsocket';
+import {parseServer} from './parse'
 const https = require('https');
 const fs = require('fs');
 const url = 'mongodb://127.0.0.1:27017';
 const { MongoClient } = require('mongodb');
-
+// parse
+parseServer()
 const options = {
   key: fs.readFileSync('key.pem'),
   cert: fs.readFileSync('cert.pem'),
@@ -18,6 +19,7 @@ const options = {
   await client.connect();
   // const server = http.createServer(httpRoute(client));
   const server = https.createServer(options, httpRoute(client));
+
   ws(server, client);
   function shutDown() {
     console.log('Received kill signal, shutting down gracefully');

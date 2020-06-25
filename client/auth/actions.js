@@ -11,10 +11,15 @@ export function valueChanged({ propName, value }) {
   };
 }
 
+
+
 export function logout() {
   window.localStorage.removeItem('webcom');
   return { type: actionTypes.LOGOUT_SUCCESS };
 }
+
+
+
 
 export function getTokenFromUrl({ token }) {
   return {

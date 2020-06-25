@@ -106,7 +106,7 @@ export default [
       htmlTemplate({
         template: 'config/rollup/html-template/index.html',
         target: `client/storybook/build/index.html`,
-        attrs: ['type="module"'],
+        attrs: ['type="module"']
       }),
       serve({
         contentBase: `client/storybook/build/`,
