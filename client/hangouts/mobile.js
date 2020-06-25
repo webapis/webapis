@@ -1,5 +1,4 @@
 import { h } from 'preact';
-import { useEffect } from 'preact/hooks';
 import { lazy, Suspense } from 'preact/compat';
 import { FeatureRoute } from '../app-route/AppRouteProvider';
 
@@ -21,7 +20,7 @@ export default function Mobile() {
     onSelectHangout,
     onSelectUser,
     onSearch,
-    users,
+
     search,
     onStartSearch,
     onMessageText,

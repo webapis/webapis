@@ -139,12 +139,12 @@ export function useSocketMessage({
           handleAcknowledgement({ hangout: socketMessage.hangout,offline:false });
           break;
         case 'HANGOUT':
-debugger;
+
           if(focusedHangout && focusedHangout.username ===socketMessage.hangout.username){
-       debugger;
+   
             handleHangout({ hangout: socketMessage.hangout,unread:false });
           }else{
-        debugger;
+       
             handleHangout({ hangout: socketMessage.hangout,unread:true });
           }
 

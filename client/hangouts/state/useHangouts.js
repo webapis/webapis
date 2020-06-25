@@ -3,7 +3,6 @@ import { useEffect } from 'preact/hooks';
 import { useHangoutContext } from './HangoutsProvider';
 import { useAuthContext } from '../../auth/auth-context';
 import { useAppRoute } from '../../app-route/AppRouteProvider';
-import { updateLocalHangouts } from './updateLocalHangouts';
 import { savePendingHangout } from './actions/delivering-actions/savePendingHangout';
 import {
   selectHangout,
@@ -12,12 +11,10 @@ import {
   filterHangouts,
   fetchHangout,
   changeMessageText,
-
-  startClientCommand,
 } from './actions';
 import { sendOfflineHangouts } from './actions/delivering-actions/sendOfflineHangouts';
 import {removeHangoutFromUnread} from './actions/recieving-actions/removeHangoutFromUnread'
-import { actionTypes } from '../../app-route/actionTypes';
+
 
 export function useHangouts() {
   const { onAppRoute } = useAppRoute();
@@ -31,7 +28,6 @@ export function useHangouts() {
     users,
     messageText,
     messages,
-    socketMessage,
     readyState,
     socket,
     unreadhangouts,
@@ -46,14 +42,14 @@ export function useHangouts() {
   function onRemoveUnread(e){
     const id =e.currentTarget.id
     const hangout = hangouts.find((g) => g.username === id);
-   debugger;
+   
     removeHangoutFromUnread({name:username,dispatch,hangout})
   }
   function onNavigation(e){
     e.stopPropagation()
    // const id =e.target.id
     const id =e.currentTarget.id
-   debugger;
+   
     onAppRoute({ featureRoute: `/${id}`, route: '/hangouts' });
   }
   
@@ -63,7 +59,7 @@ export function useHangouts() {
   }
   function onSelectUnread(e) {
     const username = e.target.id;
-    debugger;
+    
     selectUnread({ dispatch, username });
     const hangout = hangouts.find((g) => g.username === username);
 
@@ -74,7 +70,7 @@ export function useHangouts() {
     searchHangouts({ search: e.target.value, dispatch });
   }
 
-  function onStartSearch(e) {
+  function onStartSearch() {
     if (hangouts && hangouts.length > 0) {
       filterHangouts({ dispatch });
     }
@@ -85,7 +81,7 @@ export function useHangouts() {
     changeMessageText({ dispatch, text });
   }
   function onHangout(e) {
-   debugger;
+   
     changeMessageText({ text: '', dispatch });
     const command = e.target.id;
     const { email } = hangout;
@@ -93,7 +89,7 @@ export function useHangouts() {
     const message =
       messageText !== '' ? { text: messageText, timestamp } : null;
 
-    const online = true;
+    let online = true;
     let isBlocker =false
     if (socket && readyState === 1) {
    

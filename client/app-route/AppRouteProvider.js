@@ -1,5 +1,5 @@
 import { h, createContext } from 'preact';
-import { useContext, useReducer,useMemo,useEffect } from 'preact/hooks';
+import { useContext, useReducer,useMemo } from 'preact/hooks';
 import {reducer} from './reducer'
 import {actionTypes} from './actionTypes'
 const AppRouteContext = createContext();

@@ -1,7 +1,7 @@
 import { h, createContext } from 'preact';
 import {
   useContext,
-  useState,
+ 
   useMemo,
   useReducer,
   useEffect,
@@ -10,8 +10,7 @@ import { reducer, initState } from './reducer';
 
 import {
   loadHangouts,
-  filterHangouts,
-  fetchHangout,
+
   loadMessages,
 } from './actions';
 import { updateReadHangouts } from './actions/recieving-actions/updateReadHangouts';
@@ -49,7 +48,7 @@ export function HangoutsProvider(props) {
   }, [username]);
   useEffect(() => {
     if (username && token) {
-      debugger;
+     
       loadHangouts({ username, dispatch });
     }
   }, []);
@@ -82,8 +81,8 @@ export function HangoutsProvider(props) {
         }
       }
       if (!hangout.read) {
-        debugger;
-       debugger;
+     
+     
         updateReadHangouts({ dispatch, hangout, name: username });
       }
     }

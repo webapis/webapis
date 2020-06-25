@@ -5,8 +5,7 @@ import { actionTypes } from './actionTypes';
 export function useWebSocket({ socketUrl, username, dispatch,token }) {
   useEffect(() => {
     if (token) {
-      debugger
-      debugger;
+  
       const sock = new WebSocket(`${socketUrl}/?username=${username}`);
       sock.onmessage = (message) => {
         const msg = JSON.parse(message.data);
