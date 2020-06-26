@@ -26,12 +26,12 @@ export function AuthDrawerContent() {
 
   return (
     <div style={{ paddingTop: 10 }}>
-      {!state.username && <UnAuthedState handleRoute={handleRoute} />}
-      {state.username && (
+      {!state.user && <UnAuthedState handleRoute={handleRoute} />}
+      {state.user && (
         <AuthedState
         onAppRoute={onAppRoute}
           handleRoute={handleRoute}
-          userName={state.username}
+          userName={state.user.username}
         />
       )}
       <hr style={{ height: 1 }} />

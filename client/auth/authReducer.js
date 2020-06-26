@@ -13,6 +13,7 @@ export const initState = {
   isLoggedIn: false,
   isPasswordChanged: false,
   authFeedback: null,
+  user:null
 };
 
 export function authReducer(state, action) {
@@ -31,9 +32,7 @@ export function authReducer(state, action) {
         ...state,
         success: true,
         loading: false,
-        token: action.token,
-        username: action.username,
-        email: action.email,
+        user:action.user,
         isLoggedIn: true,
         password: '',
         successMessage: 'Welcome, ',
@@ -48,9 +47,7 @@ export function authReducer(state, action) {
         loading: false,
         success: true,
         isLoggedIn: true,
-        token: action.token,
-        username: action.username,
-        email: action.email,
+       user:action.user,
         password: '',
         successMessage: 'Welcome',
       };
@@ -63,9 +60,7 @@ export function authReducer(state, action) {
         ...state,
         success: true,
         loading: false,
-        token: action.token,
-        username: action.username,
-        email: action.email,
+        user:action.user,
         isPasswordChanged: true,
         authFeedback: action.message,
       };
@@ -89,9 +84,7 @@ export function authReducer(state, action) {
     case actionTypes.RECOVER_LOCAL_AUTH_STATE:
       return {
         ...state,
-        username: action.user.username,
-        email: action.user.email,
-        token:action.user.token
+    user:action.user
       };
     default:
       return state;

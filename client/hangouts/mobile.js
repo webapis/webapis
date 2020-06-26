@@ -12,7 +12,8 @@ const Invite = lazy(() => import('./state-ui/Invite'));
 const Invitee = lazy(() => import('./state-ui/Invitee'));
 const Inviter = lazy(() => import('./state-ui/Inviter'));
 const UnreadHangouts = lazy(() => import('./UnreadHangouts'));
-export default function Mobile() {
+export default function Mobile(props) {
+  const {fetchHangout}=props
   const {
     hangout,
     hangouts,
@@ -22,7 +23,8 @@ export default function Mobile() {
     onSearch,
 
     search,
-    onStartSearch,
+    onSearchInput,
+    onFetchHangouts,
     onMessageText,
     messageText,
     username,
@@ -32,7 +34,7 @@ export default function Mobile() {
     onNavigation,
     onSelectUnread,
     onRemoveUnread
-  } = useHangouts();
+  } = useHangouts({fetchHangout});
 
   return (
     <div style={{ height: '100%', width: '100%' }}>
@@ -45,8 +47,8 @@ export default function Mobile() {
             hangouts={hangouts}
             onSelectHangout={onSelectHangout}
             onSelectUser={onSelectUser}
-            onSearch={onSearch}
-            onStartSearch={onStartSearch}
+            onSearchInput={onSearchInput}
+            onFetchHangouts={onFetchHangouts}
           />
         </Suspense>
       </FeatureRoute>

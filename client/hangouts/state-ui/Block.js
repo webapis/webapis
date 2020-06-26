@@ -24,13 +24,9 @@ const style = {
   },
 };
 
-export default function Block({ onCancel, onBlock, onReport,dispatch }) {
+export default function Block({ onCancel, onBlock, onReport }) {
 
-  useEffect(()=>{
-    return ()=>{
-      resetHangout({dispatch})
-    }
-  },[])
+ 
   return (
     <Layout style={style.layout}>
       <div style={style.checkboxRoot}>

@@ -20,14 +20,14 @@ const style = {
   },
 };
 
-export default function Blocked({ hangout, onUnblock, onClose,dispatch }) {
+export default function Blocked({ hangout, onUnblock, onClose }) {
 
-  useEffect(()=>{
-    return ()=>{
+  // useEffect(()=>{
+  //   return ()=>{
 
-      resetHangout({dispatch})
-    }
-  },[])
+  //     resetHangout({dispatch})
+  //   }
+  // },[])
   return (
     <Layout style={style.layout} id="blocked-ui">
       <Center style={{ flexDirection: 'column', alignItems: 'center' }}>

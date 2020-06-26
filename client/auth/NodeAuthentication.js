@@ -12,6 +12,11 @@ const Profile = lazy(() => import('./Profile'));
 const AuthFeedback = lazy(() => import('./AuthFeedback'));
 export default function NodeAuthentication({ children }) {
   const {signup,login,changePassword,forgotPassword}=useNodeAuth()
+
+
+   
+
+
   return (
     <div style={{paddingTop:68}}>
       <FeatureRoute path='/changepassword'>

@@ -20,7 +20,7 @@ export default function Hangchat({
     return ()=>{
       debugger;
       console.log('hangout cleared')
-      resetHangout({dispatch})
+     // resetHangout({dispatch})
     }
   },[])
   return (

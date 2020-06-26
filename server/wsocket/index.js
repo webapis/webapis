@@ -8,22 +8,27 @@ const WebSocket = require('ws');
 export const wsocket = new EventEmitter();
 let connections = {};
 export default async function (server,client) {
+
   const collection = await client.db('auth').collection('users');
   const wss = new WebSocket.Server({ server });
  
   wss.on('connection', async function connection(ws, request) {
-   
+ //
     try {
+ 
       const token = cookie.parse(request.headers['cookie']);
 
       let uname = url.parse(request.url, true).query.username;
+     
       const decoded = await jwt.verify(token[uname], process.env.secret);
+    
       const { username } = decoded;
       console.log(username,'conneted')
       const user = await collection.findOne({username})
+    
       ws.user= user;
       connections[username] = ws; 
-      
+      //
       onLineStateChangeHandler({connections,ws,client})
       ws.on('message', function incoming(message) {
         console.log('recieved,', message);
@@ -34,6 +39,7 @@ export default async function (server,client) {
           }
         } catch (error) {
           const err = error;
+          debugger;
           throw new Error(error);
         }
       });
@@ -42,9 +48,9 @@ export default async function (server,client) {
         delete connections[username];
       });
     } catch (error) {
-      debugger;
+     
       const err = error;
-
+      debugger;
     }
   });
 }

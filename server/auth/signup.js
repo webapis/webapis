@@ -70,6 +70,7 @@ export default async function ({ req, res, collection }) {
 
         const  {hash,salt,iterations}= passhash.hashPassword(password)
         
+        
         debugger;
 
         const result = await collection.insertOne({

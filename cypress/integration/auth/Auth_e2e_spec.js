@@ -27,16 +27,17 @@ describe('Authentication fitures', () => {
     cy.get('[data-testid=menu]').click();
     cy.get('[data-testid=logout]').click();
 
-    cy.wait(1000); //login
-    cy.get('[data-testid=menu]').click();
-    cy.get('[data-testid=login]').click();
-    cy.get('[data-testid=emailOrUsername]')
-      .type('testuser@gmail.com')
-      .get('[data-testid=password]')
-      .type('TestPassword2020_!')
-      .get('[data-testid=login-btn]')
-      .click();
+     cy.wait(1000); //login
+     cy.get('[data-testid=menu]').click();
+     cy.get('[data-testid=login]').click();
+     cy.get('[data-testid=emailOrUsername]')
+       .type('testuser@gmail.com')
+       .get('[data-testid=password]')
+       .type('TestPassword2020_!')
+       .get('[data-testid=login-btn]')
+       .click();
     cy.get('[data-testid=home]');
+
     cy.wait(1000); //changepasssword
     cy.get('[data-testid=menu]').click();
     cy.get('[data-testid=changepassword]').click();
@@ -68,5 +69,6 @@ describe('Authentication fitures', () => {
     cy.get('[data-testid=email]').type('webapis.github@gmail.com');
     cy.get('[data-testid=requestpasschange-btn]').click();
     cy.get('[data-testid =auth-feedback]');
+
   });
 });

@@ -1,9 +1,9 @@
-import { useEffect } from 'preact/hooks';
+
 import { useFormContext } from './form-context';
 import { useAuthContext } from '../auth/auth-context';
 import { isClientValidationType } from './constraintValidators';
 import * as actions from './actions';
-export function useClientValidation({ validationTypes, value, name }) {
+export function useClientValidation({ validationTypes, name }) {
   const { state, dispatch } = useFormContext();
   const { state: auth } = useAuthContext();
 

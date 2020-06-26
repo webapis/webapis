@@ -7,19 +7,20 @@ import { savePendingHangout } from './actions/delivering-actions/savePendingHang
 import {
   selectHangout,
   selectUnread,
-  searchHangouts,
+  
   filterHangouts,
   fetchHangout,
   changeMessageText,
 } from './actions';
 import { sendOfflineHangouts } from './actions/delivering-actions/sendOfflineHangouts';
 import {removeHangoutFromUnread} from './actions/recieving-actions/removeHangoutFromUnread'
+import {actionTypes} from './actionTypes';
 
 
 export function useHangouts() {
   const { onAppRoute } = useAppRoute();
   const authContext = useAuthContext();
-  const { username } = authContext.state;
+  const  username  = authContext.state.user &&authContext.state.user.username;
   const [state, dispatch] = useHangoutContext();
   const {
     hangout,
@@ -29,15 +30,15 @@ export function useHangouts() {
     messageText,
     messages,
     readyState,
-    socket,
+  
     unreadhangouts,
   } = state;
 
   useEffect(() => {
-    if (socket && readyState === 1 && username) {
-      sendOfflineHangouts({ name: username, dispatch, socket });
+    if ( readyState === 1 && username) {
+      sendOfflineHangouts({ name: username, dispatch });
     }
-  }, [socket, readyState, username]);
+  }, [readyState, username]);
 
   function onRemoveUnread(e){
     const id =e.currentTarget.id
@@ -55,7 +56,8 @@ export function useHangouts() {
   
   function onSelectHangout(e) {
     const username = e.target.id;
-    selectHangout({ dispatch, username });
+    const hangout = hangouts.find((g) => g.username === username)
+    dispatch({type:actionTypes.SELECTED_HANGOUT, hangout })
   }
   function onSelectUnread(e) {
     const username = e.target.id;
@@ -66,22 +68,22 @@ export function useHangouts() {
     onAppRoute({ featureRoute: `/${hangout.state}`, route: '/hangouts' });
   }
 
-  function onSearch(e) {
-    searchHangouts({ search: e.target.value, dispatch });
+  function onSearchInput(e) {
+    dispatch({type:actionTypes.SEARCH_INPUT_CHANGE, search: e.target.value });
   }
 
-  function onStartSearch() {
-    if (hangouts && hangouts.length > 0) {
-      filterHangouts({ dispatch });
-    }
-    fetchHangout({ dispatch, search, username });
+  function onFetchHangouts(){
+
+    dispatch({type:actionTypes.FETCH_HANGOUT_STARTED})
   }
+
+ 
   function onMessageText(e) {
     const text = e.target.value;
     changeMessageText({ dispatch, text });
   }
   function onHangout(e) {
-   
+    debugger;
     changeMessageText({ text: '', dispatch });
     const command = e.target.id;
     const { email } = hangout;
@@ -91,29 +93,29 @@ export function useHangouts() {
 
     let online = true;
     let isBlocker =false
-    if (socket && readyState === 1) {
-   
+    debugger;
+    if (readyState === 1) {
+      debugger;
       if(hangout.state ==='BLOCKER'){
-       
+       debugger;
         isBlocker=true
       }else{
-       
-        socket.send(
-          JSON.stringify({
-            username: hangout.username,
-            email,
-            message,
-            command,
-            timestamp,
-          })
-        );
-      
-      }
+   debugger;
     
+      }
+      const pendingHangout= {
+        username: hangout.username,
+        email,
+        message,
+        command,
+        timestamp,
+      }
+      dispatch({type:actionTypes.SENDING_HANGOUT_STARTED, pendingHangout})
     } else {
       online = false;
     }
-
+   
+ 
     savePendingHangout({
       dispatch,
       name: username,
@@ -124,23 +126,19 @@ export function useHangouts() {
         message: { text: messageText, timestamp, delivered: false, username },
         timestamp,
         delivered: false,
-        
       },
       online,
       isBlocker
     });
-
-   
-
-
   }//end onHangout
   return {
+    state,
     onNavigation,
     onSelectUnread,
     onMessageText,
     messageText,
-    onStartSearch,
-    onSearch,
+    onSearchInput,
+    onFetchHangouts,
     search,
     onSelectHangout,
     dispatch,

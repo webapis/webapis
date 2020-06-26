@@ -2,6 +2,7 @@ import { actionTypes } from './actionTypes';
 import { reducerUnreadhangouts } from './reduceUnreadhangouts';
 //retrieves hangouts from localStorage
 export function loadHangouts({ username, dispatch }) {
+  debugger;
   const hangouts = JSON.parse(localStorage.getItem(`${username}-hangouts`));
   dispatch({ type: actionTypes.LOAD_HANGOUTS, hangouts });
 }
@@ -19,9 +20,9 @@ export function selectUnread({dispatch,username}){
 }
 
 //search for hangout by typing into TextInput
-export function searchHangouts({ search, dispatch }) {
-  dispatch({ type: actionTypes.SEARCHED_HANGOUT, search });
-}
+// export function searchHangouts({ search, dispatch }) {
+//   dispatch({ type: actionTypes.SEARCHED_HANGOUT, search });
+// }
 //filter hangout after search state change
 export function filterHangouts({ dispatch }) {
   dispatch({ type: actionTypes.FILTER_HANGOUTS });

@@ -22,11 +22,11 @@ export default function Login({login}) {
   const { emailorusername, password, error } =state;
 
   useEffect(() => {
-    if (state.token) {
+    if (state.user&& state.user.token) {
     
       onAppRoute({featureRoute: '/',route:'/'});
     }
-  }, [state.token]);
+  }, [state.user]);
 
   function handleRoute(e) {
     e.preventDefault();

@@ -16,7 +16,7 @@ module.exports = {
         "no-unused-vars": [
             "error",
             {
-                "varsIgnorePattern": "^h$"
+              //  "varsIgnorePattern": "^h$"
             }
         ],
     }

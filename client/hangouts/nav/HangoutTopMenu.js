@@ -9,7 +9,7 @@ import { useAppRoute } from '../../app-route/AppRouteProvider';
 
 export function HangoutTopMenu() {
   const { onAppRoute } = useAppRoute();
-  const { userName } = useUserName();
+  const { username } = useUserName();
   const { readyState, unreadhangouts, onNavigation, hangout } = useHangouts();
 
   function navToUnread() {
@@ -17,7 +17,7 @@ export function HangoutTopMenu() {
   }
   return (
     <div style={{ display: 'flex' }}>
-      <NavItem>{userName}</NavItem>
+      <NavItem>{username}</NavItem>
       <NavItem>
         <OnlineStatus readyState={readyState} />
       </NavItem>

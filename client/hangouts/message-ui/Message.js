@@ -56,7 +56,7 @@ export function Message(props) {
       setInterval(() => {
         convertMS(Date.now() - timestamp);
       }, 60000);
-      debugger;
+ 
 
     }
    

@@ -18,10 +18,10 @@ export default function Signup({signup}) {
   const { device } = useMediaQuery();
   const { username, password, email } = state;
   useEffect(() => {
-    if (state.token) {
+    if (state.user && state.user.token) {
       onAppRoute({featureRoute: '/',route:'/'});
     }
-  }, [state.token]);
+  }, [state.user]);
 
  
   function handleChange(e) {

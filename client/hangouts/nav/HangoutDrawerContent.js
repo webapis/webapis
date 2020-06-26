@@ -7,12 +7,12 @@ export function HangoutDrawerContent() {
 
 const {onAppRoute} =useAppRoute()
 
-  const { userName } = useUserName();
+  const { username } = useUserName();
 
   function handleRoute(e) {
     e.preventDefault();
     const { id } = e.target;
-    if (userName) {
+    if (username) {
 
       onAppRoute({type:actionTypes.APP_ROUTE_CHANGED, featureRoute:'/hangouts',route:'/hangouts'})
     } else {

@@ -8,9 +8,9 @@ export function saveRecievedHangout({
   onAppRoute,
   unread,
 }) {
-  debugger;
+
   const { username, message } = hangout;
- debugger;
+
   const hangoutKey = `${name}-hangouts`;
 
   const hangouts = JSON.parse(localStorage.getItem(hangoutKey));
@@ -57,7 +57,7 @@ else{
 }
 
 }else{
-  debugger;
+
   let updatedHangouts = null;
   if (focusedHangout && focusedHangout.username === username) {
     updatedHangouts = [
@@ -93,7 +93,7 @@ else{
   }
 
   if (unread) {
-    debugger;
+
     switch(hangout.state){
       case hangoutStates.ACCEPTER:
       case hangoutStates.INVITER:

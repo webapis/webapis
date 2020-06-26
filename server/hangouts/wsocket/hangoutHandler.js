@@ -14,7 +14,7 @@ export async function hangoutHandler({ collection, hangout, ws, connections }) {
       timestamp,
       state: senderState,
     };
-
+//
     const target = {
       username: ws.user.username,
       email: ws.user.email,
@@ -74,6 +74,7 @@ export async function hangoutHandler({ collection, hangout, ws, connections }) {
 
       ws.send(JSON.stringify({hangout:sender,type:'OFFLINE_ACKN'}));//---------------
     }else{
+      debugger;
       ws.send(JSON.stringify({hangout:sender,type:'ACKHOWLEDGEMENT'}));//---------------
     }
   } catch (error) {

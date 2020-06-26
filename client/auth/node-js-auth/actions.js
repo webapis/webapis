@@ -31,7 +31,7 @@ export async function login({ dispatch, state, formDispatch }) {
  
       const { token, username, email } = result;
 
-      dispatch({ type: actionTypes.LOGIN_SUCCESS, token, username, email });
+      dispatch({ type: actionTypes.LOGIN_SUCCESS, user:{token,username,email} });
       window.localStorage.setItem(
         'webcom',
         JSON.stringify({
@@ -76,7 +76,7 @@ export async function signup({ dispatch, formDispatch, state }) {
     if (response.status === 200) {
       const { token, username, email } = result;
 
-      dispatch({ type: actionTypes.SIGNUP_SUCCESS, token, username, email });
+      dispatch({ type: actionTypes.SIGNUP_SUCCESS, user:{token,username,email} });
 
       window.localStorage.setItem(
         'webcom',
@@ -109,7 +109,8 @@ export async function signup({ dispatch, formDispatch, state }) {
 export async function changePassword({ dispatch, state, formDispatch }) {
   dispatch({ type: actionTypes.CHANGE_PASSWORD_STARTED });
   try {
-    const { confirm, password,token } = state;
+    const { confirm, password } = state;
+    const {token}=state.user
     debugger;
     const response = await fetch(`/auth/changepass`, {
       method: 'put',
@@ -126,9 +127,7 @@ export async function changePassword({ dispatch, state, formDispatch }) {
       debugger;
       dispatch({
         type: actionTypes.CHANGE_PASSWORD_SUCCESS,
-        token,
-        username,
-        email,
+        user:{token,username,email},
         message: `Password changed successfully.`,
       });
 

@@ -1,22 +1,20 @@
 import { h, createContext } from 'preact';
 import {
   useContext,
- 
   useMemo,
   useReducer,
   useEffect,
 } from 'preact/hooks';
 import { reducer, initState } from './reducer';
+import {useMessage} from './useMessage'
 
 import {
   loadHangouts,
-
-  loadMessages,
+  loadMessages, 
 } from './actions';
+import {useUserName} from '../../auth/useUserName'
 import { updateReadHangouts } from './actions/recieving-actions/updateReadHangouts';
-import { useSocketMessage } from './useSocketMessage';
-import { useAuthContext } from '../../auth/auth-context';
-import { useWebSocket } from './useWebSocket';
+
 const HangoutContext = createContext();
 export function useHangoutContext() {
   const context = useContext(HangoutContext);
@@ -28,19 +26,11 @@ export function useHangoutContext() {
 }
 
 export function HangoutsProvider(props) {
-  const { socketUrl } = props;
-  const authContext = useAuthContext();
-  const { username,token } = authContext.state;
+ const {username,token}=useUserName()
+
   const [state, dispatch] = useReducer(reducer, initState);
-  const { hangout, socketMessage } = state;
-  const websocketHandler = useWebSocket({ username, dispatch, socketUrl,token });
-  const handleUseSocketMessage = useSocketMessage({
-    username,
-   
-    dispatch,
-    socketMessage,
-    focusedHangout: hangout,
-  });
+  const { hangout,message } = state;
+  const handleMessage =useMessage({message,username,dispatch,focusedHangout:hangout})
   useEffect(() => {
     if (username) {
       loadHangouts({ username, dispatch });

@@ -13,14 +13,21 @@ export const initState = {
   socket: null,
   readyState: 0,
   socketMessage: null,
+  fetchHangouts: false,
+  pendingHangout:null,
+  message: null
 };
 export function reducer(state, action) {
   switch (action.type) {
+    case actionTypes.SENDING_HANGOUT_FULLFILLED:
+      return {...state,pendingHangout:null}
+    case actionTypes.SENDING_HANGOUT_STARTED:
+      return {...state, pendingHangout:action.pendingHangout}
     case actionTypes.CLEARED_HANGOUT:
-      debugger;
-      return {...state,hangout:null}
-    case actionTypes.UNREAD_HANGOUTS_UPDATED:
      
+      return { ...state, hangout: null }
+    case actionTypes.UNREAD_HANGOUTS_UPDATED:
+
       return { ...state, unreadhangouts: action.unreadhangouts }
     case actionTypes.HANGOUT_UPDATED:
 
@@ -28,21 +35,22 @@ export function reducer(state, action) {
     case actionTypes.HANGOUTS_UPDATED:
       return { ...state, hangouts: action.hangouts };
     case actionTypes.MESSAGES_UPDATED:
-debugger
+     
       return { ...state, messages: action.messages };
-    case actionTypes.SOCKET_MESSAGE_RECIEVED:
-      return { ...state, socketMessage: action.socketMessage };
+    case actionTypes.SERVER_MESSAGE_RECIEVED:
+  
+      return { ...state, message: action.message };
     case actionTypes.LOADED_MESSAGES:
       return { ...state, messages: action.messages };
     case actionTypes.MESSAGE_TEXT_CHANGED:
       return { ...state, messageText: action.text };
     case actionTypes.FETCH_USER_FAILED:
     case actionTypes.FETCH_HANGOUT_FAILED:
-      return { ...state, loading: false, error: action.error };
+      return { ...state, loading: false, error: action.error, fetchHangouts: false };
     case actionTypes.FETCH_HANGOUT_STARTED:
-      return { ...state, loading: true };
+      return { ...state, loading: true, fetchHangouts: true };
     case actionTypes.FETCH_HANGOUT_SUCCESS:
-      return { ...state, loading: false, hangouts: action.hangouts };
+      return { ...state, loading: false, hangouts: action.hangouts, fetchHangouts: false };
     case actionTypes.FILTER_HANGOUTS:
       return {
         ...state,
@@ -50,14 +58,15 @@ debugger
           g.username.includes(state.search)
         ),
       };
-    case actionTypes.SEARCHED_HANGOUT:
+    case actionTypes.SEARCH_INPUT_CHANGE:
       return { ...state, search: action.search };
     case actionTypes.LOAD_HANGOUTS:
       return { ...state, hangouts: action.hangouts };
     case actionTypes.SELECTED_HANGOUT:
+      debugger;
       return {
         ...state,
-        hangout: state.hangouts.find((g) => g.username === action.username),
+        hangout: action.hangout,
       };
     //SOCKET
     case actionTypes.SOCKET_ERROR:

@@ -1,15 +1,15 @@
 import { actionTypes } from '../../actionTypes';
 export function savePendingHangout({ dispatch, name, hangout, online,isBlocker }) {
-debugger;
-  const { username, message, state, email } = hangout;
+
+  const { username, message } = hangout;
   let hangoutKey = '';
   let messageKey = '';
   if (online) {
-    debugger;
+    
     hangoutKey = `${name}-hangouts`;
     messageKey = `${name}-${username}-messages`;
   } else {
-    debugger;
+    
     hangoutKey = `${name}-offline-hangouts`;
     messageKey = `${name}-${username}-offline-messages`;
   }
@@ -24,13 +24,13 @@ function saveHangout({ hangoutKey, username, hangout,dispatch }) {
   const hangouts = JSON.parse(localStorage.getItem(hangoutKey));
   let updatedHangouts = null;
   if (hangouts) {
-    debugger;
+    
     const hangoutIndex = hangouts.findIndex((g) => g.username === username);
      hangouts.splice(hangoutIndex, 1, hangout);
      localStorage.setItem(hangoutKey, JSON.stringify(hangouts));
      dispatch({ type: actionTypes.HANGOUTS_UPDATED, hangouts });
   } else {
-    debugger;
+    
     updatedHangouts = [hangout];
     localStorage.setItem(hangoutKey, JSON.stringify(updatedHangouts));
     dispatch({ type: actionTypes.HANGOUTS_UPDATED, hangouts: updatedHangouts });

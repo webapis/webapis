@@ -1,8 +1,6 @@
 import { h } from 'preact';
 import {useEffect} from 'preact/hooks'
-import { Suspense, lazy } from 'preact/compat';
 import { NavItem } from '../nav/NavItem';
-import { DrawerContent } from '../components/DrawerContent';
 import { AuthDrawerContent } from '../auth/AuthDrawerContent';
 import { HangoutDrawerContent } from '../hangouts/nav/HangoutDrawerContent';
 import { HangoutTopMenu } from '../hangouts/nav/HangoutTopMenu';
@@ -17,9 +15,12 @@ export function AppNavigation() {
 
     useEffect(() => {
         if (localStorage.getItem('webcom')) {
+         
+       const user =JSON.parse(localStorage.getItem('webcom'))
+    
           recoverLocalAuthState({
             dispatch,
-            user: JSON.parse(localStorage.getItem('webcom')),
+            user
           });
         }
       }, []);

@@ -1,7 +1,7 @@
 import { actionTypes } from '../../actionTypes';
 export function updateDeliveredHangout({ name, dispatch, hangout, offline, onAppRoute }) {
   const { username, message, timestamp } = hangout;
-debugger;
+
   const deliveredHangout = { ...hangout, delivered: true };
   const hangoutKey = `${name}-hangouts`;
   const hangouts = JSON.parse(localStorage.getItem(hangoutKey));
