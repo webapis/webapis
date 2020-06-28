@@ -28,6 +28,7 @@
     "nodemon": "^2.0.3",
     "rollup": "^2.10.9",
     "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-copy": "^3.3.0",
     "rollup-plugin-delete": "^1.2.0",
     "rollup-plugin-generate-html-template": "^1.6.1",
     "rollup-plugin-gzip": "^2.4.0",

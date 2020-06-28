@@ -94,7 +94,7 @@ export function useHangouts() {
     let online = true;
     let isBlocker =false
     debugger;
-    if (readyState === 1) {
+  //  if (readyState === 1) {
       debugger;
       if(hangout.state ==='BLOCKER'){
        debugger;
@@ -111,9 +111,9 @@ export function useHangouts() {
         timestamp,
       }
       dispatch({type:actionTypes.SENDING_HANGOUT_STARTED, pendingHangout})
-    } else {
-      online = false;
-    }
+    // } else {
+    //   online = false;
+    // }
    
  
     savePendingHangout({

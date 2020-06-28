@@ -31,7 +31,7 @@ export default function Hangout({
     const id = e.target.id
     onSelectHangout(e)
     const hangout = hangouts.find(g => g.username === id)
-
+debugger;
     onAppRoute({ featureRoute: `/${hangout.state}`, route: '/hangouts' })
   }
 

@@ -23,9 +23,9 @@
   background: #555;
 }
 
-@font-face {
+@font-face{
   font-family: "Roboto";
-  src: url("../theme/Roboto/Roboto-Regular.ttf");
+  src: url('../../../assets/fonts/Roboto/Roboto-Regular.ttf');
 }
 
 html {

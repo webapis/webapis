@@ -1,0 +1,1 @@
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-06-28T06:28:59.067Z"}

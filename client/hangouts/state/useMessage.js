@@ -136,7 +136,7 @@ export function useMessage({
  
       switch (message.type) {
         case 'ACKHOWLEDGEMENT':
-
+debugger;
           handleAcknowledgement({ hangout: message.hangout,offline:false });
           break;
         case 'HANGOUT':

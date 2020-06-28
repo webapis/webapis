@@ -9,10 +9,11 @@ import htmlTemplate from 'rollup-plugin-generate-html-template';
 import del from 'rollup-plugin-delete';
 import { terser } from 'rollup-plugin-terser';
 import replace from 'rollup-plugin-replace';
+import copy from 'rollup-plugin-copy';
 const production = !process.env.ROLLUP_WATCH;
-
 const commonPlugins = [
   image(),
+  copy({targets:[{src:'assets',dest:`apps/${process.env.appName}/build`}]}),
   postcss({
     extensions: ['.css'],
     plugins: [],

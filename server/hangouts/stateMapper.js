@@ -27,11 +27,7 @@ export function stateMapper({ command }) {
                 senderState: hangoutStates.MESSAGED,
                 targetState: hangoutStates.MESSANGER
             }
-        case clientCommands.BLOCK:
-            return {
-                senderState: hangoutStates.BLOCKED,
-                targetState: hangoutStates.BLOCKER
-            }
+   
         case clientCommands.UNBLOCK:
             return {
                 senderState: hangoutStates.UNBLOCKED,
