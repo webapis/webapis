@@ -13,7 +13,8 @@ import copy from 'rollup-plugin-copy';
 const production = !process.env.ROLLUP_WATCH;
 const commonPlugins = [
   image(),
-  copy({targets:[{src:'assets',dest:`apps/${process.env.appName}/build`}]}),
+  copy({targets:[{src:'assets/libs/parse.min.js',dest:`apps/${process.env.appName}/build`},
+  {src:'assets/fonts/Roboto/Roboto-Regular.ttf',dest:`apps/${process.env.appName}/build`}]}),
   postcss({
     extensions: ['.css'],
     plugins: [],
