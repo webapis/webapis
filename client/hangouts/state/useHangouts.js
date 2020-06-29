@@ -62,9 +62,9 @@ export function useHangouts() {
   function onSelectUnread(e) {
     const username = e.target.id;
     
-    selectUnread({ dispatch, username });
+ 
     const hangout = hangouts.find((g) => g.username === username);
-
+    selectUnread({ dispatch, hangout });
     onAppRoute({ featureRoute: `/${hangout.state}`, route: '/hangouts' });
   }
 

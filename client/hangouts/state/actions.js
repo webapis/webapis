@@ -7,16 +7,16 @@ export function loadHangouts({ username, dispatch }) {
   dispatch({ type: actionTypes.LOAD_HANGOUTS, hangouts });
 }
 //select hangout from List
-export function selectHangout({ dispatch, username }) {
-  dispatch({ type: actionTypes.SELECTED_HANGOUT, username });
+export function selectHangout({ dispatch, hangout }) {
+  dispatch({ type: actionTypes.SELECTED_HANGOUT, hangout });
 }
 
 export function resetHangout({dispatch}){
   dispatch({type:actionTypes.CLEARED_HANGOUT})
 } 
 
-export function selectUnread({dispatch,username}){
-  dispatch({ type: actionTypes.SELECTED_HANGOUT, username });
+export function selectUnread({dispatch,hangout}){
+  dispatch({ type: actionTypes.SELECTED_HANGOUT, hangout });
 }
 
 //search for hangout by typing into TextInput
