@@ -4,13 +4,14 @@ import { Message } from './Message';
 import { MessageEditor } from './MessageEditor';
 import { BlockerMessage } from './BlockerMessage'
 import {BlockedMessage} from './BlockedMessage'
+import {useMediaQuery} from '../../layout/useMediaQuery'
 const styles = {
   messageContainer: {
     // width: '100%',
     boxSizing: 'border-box',
     padding: 3,
   //  backgroundColor: 'orange',
-    flex: 15,
+    flex: 3,
     overflowY: 'auto',
     overflowX: "hidden"
 
@@ -26,6 +27,7 @@ export function Messages({
   onNavigation
 }) {
   const scrollerRef = useRef(null);
+const {device}=useMediaQuery()
 
   useEffect(() => {
     if (messages) {
@@ -38,9 +40,9 @@ export function Messages({
     scrollerRef.current.scrollTop = scrollerRef.current.scrollHeight;
   }
   return (
-    <div style={{ boxSizing: 'border-box', width: '100%', height: '100%', display: 'flex', flexDirection: 'column', paddingTop: 75 }}>
-      <div style={styles.messageContainer} ref={scrollerRef}>
-        {messages &&
+    <div style={{ boxSizing: 'border-box', width: '100%', height: '100vh', display: 'flex', flexDirection: 'column', paddingTop: 75 }}>
+      <div style={{...styles.messageContainer,flex: device==='phone'?4:2}} ref={scrollerRef}>
+        {messages &&  
           messages.length > 0 &&
           floatMessages({ messages: sortMessages({ messages }), username }).map(
             (m) => (
@@ -53,7 +55,7 @@ export function Messages({
             )
           )}
       </div>
-      <div style={{ flex: 1 }}>
+      <div style={{flex:1}}>
         <MessageEditor
           hangout={hangout}
           onMessage={onSend}

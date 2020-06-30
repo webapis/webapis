@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import {useEffect} from 'preact/hooks'
+import {useEffect,useState} from 'preact/hooks'
 import { NavItem } from '../nav/NavItem';
 import { AuthDrawerContent } from '../auth/AuthDrawerContent';
 import  HangoutDrawerContent  from '../hangouts/nav/HangoutDrawerContent';
@@ -9,32 +9,48 @@ import { recoverLocalAuthState } from '../auth/actions';
 import Drawer from '../nav/Drawer';
 import { AppBar } from '../nav/AppBar';
 import { Menu } from '../nav/Menu';
-export function AppNavigation() {
-    const { dispatch } = useAuthContext();
+import {AppRoutes} from './AppRoutes'
 
 
-    useEffect(() => {
-        if (localStorage.getItem('webcom')) {
-         
-       const user =JSON.parse(localStorage.getItem('webcom'))
-    
-          recoverLocalAuthState({
-            dispatch,
-            user
-          });
-        }
-      }, []);
+export  function AppNavigation() {
+  const [drawerIsOpen,setDrawerState]=useState(false)
+
+  
+  const { dispatch } = useAuthContext();
+
+
+  useEffect(() => {
+      if (localStorage.getItem('webcom')) {
+       
+     const user =JSON.parse(localStorage.getItem('webcom'))
+        recoverLocalAuthState({
+          dispatch,
+          user
+        });
+      }
+    }, []);
+  function toggleDrawer(){
+
+      setDrawerState(prev=>!prev)
+  }
+
   return (
-    <div>
-      <AppBar>
-        <Menu />
-        <NavItem style={{ flex: 5 }}>WEB COM</NavItem>
-        <HangoutTopMenu />
-      </AppBar>
-      <Drawer>
-        <AuthDrawerContent />
-        <HangoutDrawerContent />
-      </Drawer>
-    </div>
-  );
+      <div style={{display:'flex',width:'100%',height:'100%'}}>
+        {drawerIsOpen &&  <Drawer  style={{position:'absolute'}} toggleDrawer={toggleDrawer}>
+
+              <AuthDrawerContent  toggleDrawer={toggleDrawer} />
+              <HangoutDrawerContent  toggleDrawer={toggleDrawer} />
+          </Drawer> }
+          <div style={{flex:1}} >
+          <AppBar >
+              <Menu onClick={toggleDrawer} />
+              <NavItem style={{ flex: 5 }}>WEB COM</NavItem>
+             <HangoutTopMenu />
+          </AppBar>
+         
+          <AppRoutes/>
+      
+          </div>
+      </div>
+  )
 }

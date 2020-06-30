@@ -25,7 +25,7 @@
 
 @font-face{
   font-family: "Roboto";
-  src: url('../../../assets/fonts/Roboto/Roboto-Regular.ttf');
+  src: url('./Roboto-Regular.ttf');
 }
 
 html {

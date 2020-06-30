@@ -1,27 +1,32 @@
 
 import { h } from 'preact';
-import {useAppRoute} from '../app-route/AppRouteProvider'
-import  List,{ ListItem } from '../components/list';
+import { useAppRoute } from '../app-route/AppRouteProvider'
+import List, { ListItem } from '../components/list';
 import userIcon from './icons/user64.png';
 import { logout } from './actions';
 import { useAuthContext } from './auth-context';
+import { useMediaQuery } from '../layout/useMediaQuery'
 const style = {
   grid: {
     display: 'grid',
     gridTemplateColumns: 'auto 5% auto',
     justifyItems: 'center',
-    padding:16
+    padding: 16
   },
 };
 
-export function AuthDrawerContent() {
+export function AuthDrawerContent({ toggleDrawer }) {
+  const { device } = useMediaQuery()
   const { state } = useAuthContext();
-  const {onAppRoute} = useAppRoute();
+  const { onAppRoute } = useAppRoute();
 
   function handleRoute(e) {
     e.preventDefault();
     const { id } = e.target;
-    onAppRoute({featureRoute: `/${id}`,route:'/auth'});
+    onAppRoute({ featureRoute: `/${id}`, route: '/auth' });
+    if (device === 'phone') {
+      toggleDrawer()
+    }
   }
 
   return (
@@ -29,7 +34,7 @@ export function AuthDrawerContent() {
       {!state.user && <UnAuthedState handleRoute={handleRoute} />}
       {state.user && (
         <AuthedState
-        onAppRoute={onAppRoute}
+          onAppRoute={onAppRoute}
           handleRoute={handleRoute}
           userName={state.user.username}
         />
@@ -39,10 +44,10 @@ export function AuthDrawerContent() {
   );
 }
 
-export function AuthedState({ handleRoute, userName ,onAppRoute}) {
+export function AuthedState({ handleRoute, userName, onAppRoute }) {
   function handleLogOut() {
-   
-    onAppRoute({featureRoute:'/',route:'/home'});
+
+    onAppRoute({ featureRoute: '/', route: '/home' });
     logout();
   }
 
@@ -72,7 +77,7 @@ export function AuthedState({ handleRoute, userName ,onAppRoute}) {
       </div>
       <div style={{ marginBottom: 8 }}>Welcome, {userName}</div>
       <List>
-        <ListItem onClick={handleRoute} id='changepassword'data-testid='changepassword'>
+        <ListItem onClick={handleRoute} id='changepassword' data-testid='changepassword'>
           Change Password
         </ListItem>
       </List>

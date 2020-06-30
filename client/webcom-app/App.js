@@ -7,7 +7,7 @@ export function App() {
   return (
     <div style={{ height: '95vh' }}>
      <AppNavigation/>
-      <AppRoutes/>
+
       {''}
     </div>
   );

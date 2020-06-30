@@ -3,14 +3,14 @@ import List,{ListItem } from '../components/list';
 import Accordions,{Accordion} from '../components/accordion'
 import {useAppRoute} from '../app-route/AppRouteProvider'
 import {useMediaQuery} from '../layout/useMediaQuery'
-export default function StorybookDrawerContent({toggleDrawer,drawerIsOpen }) {
+export default function StorybookDrawerContent({toggleDrawer }) {
   const {onAppRoute}=useAppRoute()
 
   const {device}=useMediaQuery()
   function handleRoute(e) {
     const { id } = e.target;
     onAppRoute({featureRoute:'/',route:`/${id}`})
-    if(drawerIsOpen && device==='phone'){
+    if( device==='phone'){
       toggleDrawer()
     }
 

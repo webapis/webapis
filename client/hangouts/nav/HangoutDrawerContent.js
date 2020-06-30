@@ -3,8 +3,9 @@ import List, { ListItem } from '../../components/list/index';
 import { useUserName } from '../../auth/useUserName';
 import {useAppRoute} from '../../app-route/AppRouteProvider'
 import {actionTypes} from '../../app-route/actionTypes'
-export default function HangoutDrawerContent() {
-
+import {useMediaQuery} from '../../layout/useMediaQuery'
+export default function HangoutDrawerContent({toggleDrawer}) {
+const {device}=useMediaQuery()
 const {onAppRoute} =useAppRoute()
 
   const { username } = useUserName();
@@ -15,9 +16,14 @@ const {onAppRoute} =useAppRoute()
     if (username) {
 
       onAppRoute({type:actionTypes.APP_ROUTE_CHANGED, featureRoute:'/hangouts',route:'/hangouts'})
+    
     } else {
 
       onAppRoute({type:actionTypes.APP_ROUTE_CHANGED, featureRoute:'/login',route:'/auth'})
+    }
+
+    if(device==='phone'){
+      toggleDrawer()
     }
   }
   return (

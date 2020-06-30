@@ -8,19 +8,14 @@ export default function Drawer(props) {
   const [pinned,setPinned]=useState(false)
   const { width, height, orientation, device } = useMediaQuery();
   const { open, onClick, children,style } = props;
- 
-  
     return (
       <div
        style={{...drawer,position: device==="phone" ? 'fixed':'relative'}}
         className={`drawer-${device}-width`}
-    
       >
-
         <div>
         {children}
         </div>
-      
       </div>
     );
   return null;

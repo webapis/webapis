@@ -10,7 +10,7 @@ const Hangouts = lazy(() => import('../hangouts'));
 
 export function AppRoutes() {
   return (
-    <div style={{ height: '100%' }}>
+    <div style={{ height: '100%',backgroundColor:'yellow' }}>
       <AppRoute path="/auth">
         <FormProvider>
           {PREACT_APP_BACK ==='PREACT_APP_PARSE' && <ParseAuthentication/>}

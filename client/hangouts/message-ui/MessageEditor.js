@@ -4,7 +4,11 @@ import { Button } from '../../components/Button';
 const styles = {
   root: {
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
+   // position:'fixed',
+    width:'100%',
+    // bottom:10,
+    // right:10,
   },
   input: {
     //margin:0
@@ -15,11 +19,11 @@ const styles = {
     marginBottom: 8,
     boxSizing: 'border-box',
     flex: 1,
-    
+    width:'100%'
   },
   btn:{
     padding: 8,
-
+    marginLeft: 16,
     marginRight: 16,
     marginTop: 8,
     marginBottom: 8,
@@ -30,10 +34,12 @@ const styles = {
 export function MessageEditor({ messageText, onMessageText, onMessage,hangout }) {
   return (
     <div style={styles.root}>
-     
-      <input style={styles.input} disabled={hangout &&hangout.state==='BLOCKED'}  type="text" onChange={onMessageText}  data-testid="message-input" value={messageText}/>
+     <div style={{flex:1}}>
+     <input style={styles.input} disabled={hangout &&hangout.state==='BLOCKED'}  type="text" onChange={onMessageText}  data-testid="message-input" value={messageText}/>
+     </div>
+   
       
-      <div>
+      <div style={{marginLeft:3}}>
         <Button disabled={hangout &&hangout.state==='BLOCKED'}  style={styles.btn}  title="send" id='MESSAGE' onClick={onMessage} data-testid='send-btn'/>
       </div>
     </div>

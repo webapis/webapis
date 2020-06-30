@@ -14,7 +14,9 @@ const production = !process.env.ROLLUP_WATCH;
 const commonPlugins = [
   image(),
   copy({targets:[{src:'assets/libs/parse.min.js',dest:`apps/${process.env.appName}/build`},
-  {src:'assets/fonts/Roboto/Roboto-Regular.ttf',dest:`apps/${process.env.appName}/build`}]}),
+  {src:'assets/fonts/Roboto/Roboto-Regular.ttf',dest:`apps/${process.env.appName}/build`},
+  {src:'assets/manifest/**',dest:`apps/${process.env.appName}/build`}
+]}),
   postcss({
     extensions: ['.css'],
     plugins: [],
