@@ -1,4 +1,5 @@
 import { h } from 'preact';
+import {useEffect} from 'preact/hooks'
 import { Messages } from '../message-ui/Messages';
 import { Layout } from './Layout';
 
@@ -14,6 +15,10 @@ export default function Hangchat({
   dispatch
 }) {
 
+  useEffect(()=>{
+    document.title=hangout.username
+
+  },[])
 
   return (
     <Layout id="hangchat-ui" >

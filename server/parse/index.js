@@ -17,8 +17,7 @@ export function parseServer(){
           classNames: ['Hangout','HangoutUser']
         }
        });
-     
- 
+    
        var port = 1337;
        let httpServer = require('https').createServer( options,app);
     

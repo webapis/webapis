@@ -38,7 +38,7 @@ debugger;
 
   return (
 
-    <div style={{ paddingTop: 68 }}>
+    <div >
       <div style={style.inputContainer}>
         <TextInput
           value={search}

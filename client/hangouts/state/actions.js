@@ -7,6 +7,8 @@ export function loadHangouts({ username, dispatch }) {
 }
 //select hangout from List
 export function selectHangout({ dispatch, hangout }) {
+
+ 
   dispatch({ type: actionTypes.SELECTED_HANGOUT, hangout });
 }
 
@@ -15,6 +17,7 @@ export function resetHangout({dispatch}){
 } 
 
 export function selectUnread({dispatch,hangout}){
+
   dispatch({ type: actionTypes.SELECTED_HANGOUT, hangout });
 }
 

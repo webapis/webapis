@@ -40,7 +40,7 @@ const {device}=useMediaQuery()
     scrollerRef.current.scrollTop = scrollerRef.current.scrollHeight;
   }
   return (
-    <div style={{ boxSizing: 'border-box', width: '100%', height: '100vh', display: 'flex', flexDirection: 'column', paddingTop: 75 }}>
+    <div style={{ boxSizing: 'border-box', width: '100%', height: '100%', display: 'flex', flexDirection: 'column'}}>
       <div style={{...styles.messageContainer,flex: device==='phone'?4:2}} ref={scrollerRef}>
         {messages &&  
           messages.length > 0 &&
