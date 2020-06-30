@@ -1,9 +1,9 @@
 import { h } from 'preact';
-import { List, ListItem } from '../../components/list';
+import List, { ListItem } from '../../components/list/index';
 import { useUserName } from '../../auth/useUserName';
 import {useAppRoute} from '../../app-route/AppRouteProvider'
 import {actionTypes} from '../../app-route/actionTypes'
-export function HangoutDrawerContent() {
+export default function HangoutDrawerContent() {
 
 const {onAppRoute} =useAppRoute()
 

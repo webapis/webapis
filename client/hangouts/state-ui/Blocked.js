@@ -1,10 +1,10 @@
 import { h } from 'preact';
-import {useEffect} from 'preact/hooks'
+
 import { Block } from '../../icons/Block';
 import { Center } from '../../layout/Center';
 import { Button } from '../../components/Button';
 import { Layout } from './Layout';
-import {resetHangout} from '../state/actions'
+
 const style = {
   layout: {
     display: 'flex',
@@ -22,12 +22,7 @@ const style = {
 
 export default function Blocked({ hangout, onUnblock, onClose }) {
 
-  // useEffect(()=>{
-  //   return ()=>{
 
-  //     resetHangout({dispatch})
-  //   }
-  // },[])
   return (
     <Layout style={style.layout} id="blocked-ui">
       <Center style={{ flexDirection: 'column', alignItems: 'center' }}>

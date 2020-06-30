@@ -5,10 +5,9 @@ import { useAuthContext } from '../../auth/auth-context';
 import { useAppRoute } from '../../app-route/AppRouteProvider';
 import { savePendingHangout } from './actions/delivering-actions/savePendingHangout';
 import {
-  selectHangout,
+
   selectUnread,
   
-  filterHangouts,
   fetchHangout,
   changeMessageText,
 } from './actions';
@@ -83,7 +82,7 @@ export function useHangouts() {
     changeMessageText({ dispatch, text });
   }
   function onHangout(e) {
-    debugger;
+    
     changeMessageText({ text: '', dispatch });
     const command = e.target.id;
     const { email } = hangout;
@@ -93,15 +92,12 @@ export function useHangouts() {
 
     let online = true;
     let isBlocker =false
-    debugger;
-  //  if (readyState === 1) {
-      debugger;
-      if(hangout.state ==='BLOCKER'){
-       debugger;
-        isBlocker=true
-      }else{
-   debugger;
     
+  //  if (readyState === 1) {
+      
+      if(hangout.state ==='BLOCKER'){
+       
+        isBlocker=true
       }
       const pendingHangout= {
         username: hangout.username,

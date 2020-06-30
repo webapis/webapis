@@ -1,5 +1,5 @@
-import { clientCommands } from '../../clientCommands';
-export function sendOfflineHangouts({ dispatch, socket, name }) {
+
+export function sendOfflineHangouts({ socket, name }) {
   const offlineHangoutKey = `${name}-offline-hangouts`;
   const offlineHangouts = JSON.parse(localStorage.getItem(offlineHangoutKey));
   if (offlineHangouts) {

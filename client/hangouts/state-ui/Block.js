@@ -1,8 +1,8 @@
 import { h } from 'preact';
-import {useEffect} from 'preact/hooks'
+
 import { Layout } from '../state-ui/Layout';
 import { Button } from '../../components/Button';
-import {resetHangout} from '../state/actions'
+
 const style = {
   checkbox: { marginRight: 8 },
   checkboxRoot: {

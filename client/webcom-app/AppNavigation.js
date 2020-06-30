@@ -2,7 +2,7 @@ import { h } from 'preact';
 import {useEffect} from 'preact/hooks'
 import { NavItem } from '../nav/NavItem';
 import { AuthDrawerContent } from '../auth/AuthDrawerContent';
-import { HangoutDrawerContent } from '../hangouts/nav/HangoutDrawerContent';
+import  HangoutDrawerContent  from '../hangouts/nav/HangoutDrawerContent';
 import { HangoutTopMenu } from '../hangouts/nav/HangoutTopMenu';
 import { useAuthContext } from '../auth/auth-context';
 import { recoverLocalAuthState } from '../auth/actions';

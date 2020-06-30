@@ -19,6 +19,8 @@ export const initState = {
 };
 export function reducer(state, action) {
   switch (action.type) {
+    case actionTypes.ERROR_RECIEVED:
+      return{...state,error:action.error}
     case actionTypes.SENDING_HANGOUT_FULLFILLED:
       return {...state,pendingHangout:null}
     case actionTypes.SENDING_HANGOUT_STARTED:
@@ -63,7 +65,7 @@ export function reducer(state, action) {
     case actionTypes.LOAD_HANGOUTS:
       return { ...state, hangouts: action.hangouts };
     case actionTypes.SELECTED_HANGOUT:
-      debugger;
+    
       return {
         ...state,
         hangout: action.hangout,

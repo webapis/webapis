@@ -1,22 +1,26 @@
 
 import { h } from 'preact';
-import { useEffect } from 'preact/hooks';
+import { useEffect,useState } from 'preact/hooks';
 import { drawer } from './style';
 import { useMediaQuery } from '../layout/useMediaQuery';
 import { useNavigation } from './NavProvider';
 export default function Drawer(props) {
+  const [pinned,setPinned]=useState(false)
   const { width, height, orientation, device } = useMediaQuery();
-  const { open, onClick, children } = props;
-  const { drawerOpen, toggleDrawer } = useNavigation();
-
-  if (drawerOpen)
+  const { open, onClick, children,style } = props;
+ 
+  
     return (
       <div
-        style={{ ...drawer }}
+       style={{...drawer,position: device==="phone" ? 'fixed':'relative'}}
         className={`drawer-${device}-width`}
-        onClick={toggleDrawer}
+    
       >
+
+        <div>
         {children}
+        </div>
+      
       </div>
     );
   return null;

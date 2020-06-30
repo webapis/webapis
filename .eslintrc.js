@@ -4,7 +4,7 @@ module.exports = {
         "node":true,
         "es2020": true
     },
-    "extends": "eslint:recommended",
+    "extends": ["eslint:recommended","preact"],
     "parserOptions": {
         "ecmaVersion": 11,
         "sourceType": "module",
@@ -13,11 +13,12 @@ module.exports = {
         }
     },
     "rules": {
-        "no-unused-vars": [
-            "error",
-            {
-              //  "varsIgnorePattern": "^h$"
-            }
-        ],
+        "no-unused-vars": 1,
+      
+    },
+    "globals": {
+        "Parse": false,
+        "ip":false,
+        "PREACT_APP_BACK":false,
     }
 };

@@ -1,8 +1,7 @@
 import { actionTypes } from './actionTypes';
-import { reducerUnreadhangouts } from './reduceUnreadhangouts';
 //retrieves hangouts from localStorage
 export function loadHangouts({ username, dispatch }) {
-  debugger;
+
   const hangouts = JSON.parse(localStorage.getItem(`${username}-hangouts`));
   dispatch({ type: actionTypes.LOAD_HANGOUTS, hangouts });
 }
@@ -41,7 +40,6 @@ export async function fetchHangout({ search, dispatch, username }) {
       dispatch({ type: actionTypes.FETCH_HANGOUT_SUCCESS, hangouts });
     }
   } catch (error) {
-    const err = error;
     dispatch({ type: actionTypes.FETCH_HANGOUT_FAILED, error });
   }
 }
@@ -61,9 +59,7 @@ export function loadMessages({ hangout, dispatch,username }) {
   dispatch({ type: actionTypes.LOADED_MESSAGES, messages });
 }
 
-export function reduceUnread({ unreadhangouts, dispatch }) {
-  // dispatch({ type: actionTypes., unreadhangouts: reducerUnreadhangouts({ unreadhangouts }) });
-}
+
 
 
 

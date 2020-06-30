@@ -4,7 +4,7 @@ import './css/style.css';
 
 
 
- function List(props) {
+ export default function List(props) {
   return (
     <div className="list" {...props}/>
   );
@@ -18,4 +18,4 @@ import './css/style.css';
   );
 }
 
-export {List,ListItem}
+export {ListItem}

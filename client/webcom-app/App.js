@@ -1,6 +1,4 @@
 import { h } from 'preact';
-import { Suspense, lazy } from 'preact/compat';
-
 import {AppNavigation} from './AppNavigation'
 import {AppRoutes} from './AppRoutes'
 import './css/app.css';

@@ -1,6 +1,6 @@
 import { h } from 'preact';
 
-import { List, ListItem } from '../components/list';
+import List,{ ListItem } from '../components/list';
 import { TextInput } from '../components/TextInput';
 import { Button } from '../components/Button';
 import { useAppRoute } from '../app-route/AppRouteProvider'

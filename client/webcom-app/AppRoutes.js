@@ -6,7 +6,7 @@ import ParseAuthentication from '../auth/ParseAuthentication';
 import NodeAuthentication from '../auth/NodeAuthentication';
 import { FormProvider } from '../form/form-context';
 const Hangouts = lazy(() => import('../hangouts'));
-const Group = lazy(() => import('../group/group'));
+
 
 export function AppRoutes() {
   return (
@@ -26,11 +26,7 @@ export function AppRoutes() {
           <Hangouts />
         </Suspense>
       </AppRoute>
-      <AppRoute path="/group">
-        <Suspense fallback={<div>loading...</div>}>
-          <Group />
-        </Suspense>
-      </AppRoute>
+  
     </div>
   );
 }

@@ -255,3 +255,28 @@
 {"level":"info","message":"Parse LiveQuery Server starts running","timestamp":"2020-06-29T03:12:15.136Z"}
 {"level":"info","message":"Parse LiveQuery Server starts running","timestamp":"2020-06-29T03:12:51.084Z"}
 {"level":"info","message":"Parse LiveQuery Server starts running","timestamp":"2020-06-29T03:13:21.564Z"}
+{"level":"info","message":"Create new client: bf83f27c-628b-4e44-9a33-c58542892ce4","timestamp":"2020-06-29T04:36:59.006Z"}
+{"level":"info","message":"Parse LiveQuery Server starts running","timestamp":"2020-06-29T05:20:07.978Z"}
+{"level":"info","message":"Create new client: dc1b92df-2a73-4aa8-9683-2a20771a93a6","timestamp":"2020-06-29T05:20:46.275Z"}
+{"level":"info","message":"Parse LiveQuery Server starts running","timestamp":"2020-06-29T05:21:45.852Z"}
+{"level":"info","message":"Create new client: 79fef14c-1a38-4d30-b8ba-022d366d39a4","timestamp":"2020-06-29T05:22:07.788Z"}
+{"level":"info","message":"Parse LiveQuery Server starts running","timestamp":"2020-06-29T05:24:42.622Z"}
+{"level":"info","message":"Create new client: 61381a4e-4e2b-42d8-9740-52e78c92793b","timestamp":"2020-06-29T05:24:49.765Z"}
+{"level":"info","message":"Parse LiveQuery Server starts running","timestamp":"2020-06-29T05:35:54.531Z"}
+{"level":"info","message":"Create new client: dd26cce4-5253-4f44-b3ba-c3590771f50c","timestamp":"2020-06-29T05:36:03.796Z"}
+{"level":"info","message":"Parse LiveQuery Server starts running","timestamp":"2020-06-29T05:48:42.577Z"}
+{"level":"info","message":"Create new client: 4c7b6d35-ac14-4bae-88f6-34e7fe8438ee","timestamp":"2020-06-29T05:48:52.784Z"}
+{"level":"info","message":"Client disconnect: 4c7b6d35-ac14-4bae-88f6-34e7fe8438ee","timestamp":"2020-06-29T06:01:10.888Z"}
+{"level":"info","message":"Create new client: 7fbdfeb0-6526-455d-ace8-f7de72901de6","timestamp":"2020-06-29T06:01:11.234Z"}
+{"level":"info","message":"Create new client: 9c4e5541-5754-4683-83ad-043e0f16de27","timestamp":"2020-06-29T06:01:48.042Z"}
+{"message":"Invalid session token","code":209,"level":"error","stack":"Error: Invalid session token\n    at Object.getAuthForSessionToken (C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\Auth.js:105:11)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-06-29T06:01:59.227Z"}
+{"level":"info","message":"Client disconnect: 9c4e5541-5754-4683-83ad-043e0f16de27","timestamp":"2020-06-29T06:02:15.021Z"}
+{"level":"info","message":"Create new client: 4966606f-fdd0-4fb0-95aa-0ca6d8f90fef","timestamp":"2020-06-29T06:02:15.629Z"}
+{"level":"info","message":"Client disconnect: 4966606f-fdd0-4fb0-95aa-0ca6d8f90fef","timestamp":"2020-06-29T06:02:48.042Z"}
+{"level":"info","message":"Client disconnect: 7fbdfeb0-6526-455d-ace8-f7de72901de6","timestamp":"2020-06-29T06:03:16.668Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-06-29T06:03:42.164Z"}
+{"level":"info","message":"Create new client: f42c378a-7ffd-4e21-ac8e-55c57736a7d3","timestamp":"2020-06-29T06:04:41.651Z"}
+{"level":"info","message":"Create new client: f94b7eec-ae4d-4137-8580-1ee98397a96c","timestamp":"2020-06-29T06:05:12.085Z"}
+{"level":"info","message":"Client disconnect: f42c378a-7ffd-4e21-ac8e-55c57736a7d3","timestamp":"2020-06-29T06:21:01.231Z"}
+{"level":"info","message":"Create new client: bd88aca3-d6d4-49af-98ba-cf021e38253e","timestamp":"2020-06-29T06:33:58.315Z"}
+{"level":"info","message":"Client disconnect: f94b7eec-ae4d-4137-8580-1ee98397a96c","timestamp":"2020-06-29T06:34:20.493Z"}
