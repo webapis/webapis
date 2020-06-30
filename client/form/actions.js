@@ -70,6 +70,7 @@ debugger
         validationState: validationStates.INVALID,
       };
     case 125:
+      case -3:
     case httpStatus.emailInvalid:
       return {
         type: actionTypes.SERVER_VALIDATION,
@@ -78,6 +79,7 @@ debugger
         validationState: validationStates.INVALID,
       };
     case httpStatus.passwordInvalid:
+      case  -4:
       return {
         type: actionTypes.SERVER_VALIDATION,
         validationType: validationTypes.PASSWORD_FORMAT_VALIDATION,
@@ -100,7 +102,7 @@ debugger
         validationState: validationStates.INVALID,
       };
     case httpStatus.emailIsNotRegistered:
-    
+ 
       return {
         type: actionTypes.SERVER_VALIDATION,
         validationType: validationTypes.EMAIL_NOT_REGISTERED,
@@ -116,6 +118,8 @@ debugger
         validationState: validationStates.INVALID,
       };
     case httpStatus.emptyStringNotValid:
+      case -1:
+      case 201:
       return {
         type: actionTypes.SERVER_VALIDATION,
         validationType: validationTypes.EMPTY_STRING_VALIDATION,

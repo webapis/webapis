@@ -1,7 +1,7 @@
 {
     "apps": [
       {
-        "serverURL": "https://192.168.43.49:1337/parse",
+        "serverURL": "https://localhost:1337/parse",
         "appId": "zttpnqTr8refktBWNekZhZxSxwPaAAnElQ9k7CuA",
         "masterKey": "1xxoXAIV3bZeYDBii6Ob8g2fz6ugUXjHKwX1LhDb",
         "appName": "webapis"

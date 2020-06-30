@@ -49,7 +49,7 @@ export default function Signup({signup}) {
             validationTypes={[
               validationTypes.USERNAME_FORMAT_VALIDATION,
               validationTypes.USERNAME_TAKEN,
-      
+              validationTypes.EMPTY_STRING_VALIDATION,
             ]}
           />
           <Input
@@ -62,6 +62,7 @@ export default function Signup({signup}) {
             validationTypes={[
               validationTypes.EMAIL_FORMAT_VALIDATION,
               validationTypes.REGISTERED_EMAIL,
+             
             ]}
           />
           <Input

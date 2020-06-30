@@ -8,6 +8,15 @@ Parse.serverURL = `https://${ip}:1337/parse`
 export async function signUp({dispatch,state,formDispatch}) {
   try {
     const {username,password,email}=state
+    if(email===''){
+      formDispatch(serverValidation({status:-3}))
+      throw new Error('Email cannot be emty')
+    }
+    else   if(password===''){
+      formDispatch(serverValidation({status:-4}))
+      throw new Error('Password cannot be emty')
+    }
+    debugger
     dispatch({type:actionTypes.SIGNUP_STARTED})
     // Create a new instance of the user class
     var user = new Parse.User();
@@ -21,6 +30,7 @@ export async function signUp({dispatch,state,formDispatch}) {
         token :success.get('sessionToken'),
         username,
         email,
+        objectId:success.id
       })
     );
     const HangoutUser = Parse.Object.extend("HangoutUser");
@@ -31,6 +41,7 @@ export async function signUp({dispatch,state,formDispatch}) {
     await  hangoutUser.save()
     dispatch({type:actionTypes.SIGNUP_SUCCESS,user:{username,email,token:success.get('sessionToken')}})
   } catch (error) {
+    debugger
     formDispatch(serverValidation({status:error.code}))
   }
   
@@ -41,7 +52,7 @@ export async function signUp({dispatch,state,formDispatch}) {
 export function login({dispatch,state,formDispatch}) {
     const { emailorusername, password}= state
     dispatch({type:actionTypes.LOGIN_STARTED})
-    
+      debugger
     // Create a new instance of the user class
        Parse.User.logIn(emailorusername, password).then(function(user) {
         let username = user.get("username")
@@ -53,15 +64,16 @@ export function login({dispatch,state,formDispatch}) {
               token,
               username,
               email,
+              objectId:user.id
             })
           );
         dispatch({type:actionTypes.LOGIN_SUCCESS,user:{username,email,token}})
             console.log('User created successful with name: ' + user.get("username") + ' and email: ' + user.get("email"));
     }).catch(function(error){
        
-        
+        debugger;
         formDispatch(serverValidation({status:error.code}))
-        dispatch({type:actionTypes})
+
     });
 }
 
