@@ -1,0 +1,292 @@
+{"level":"info","message":"Client disconnect: bcbca5b3-c550-488a-afb6-acffb0b09410","timestamp":"2020-07-01T07:50:00.773Z"}
+{"level":"info","message":"Create new client: 43f6ca5b-caf4-4edc-b48c-2371312da644","timestamp":"2020-07-01T07:50:15.378Z"}
+{"level":"info","message":"Client disconnect: 43f6ca5b-caf4-4edc-b48c-2371312da644","timestamp":"2020-07-01T07:50:17.278Z"}
+{"level":"info","message":"Create new client: cdffb45b-1641-4ffb-97f1-687ef517d7ac","timestamp":"2020-07-01T07:50:18.032Z"}
+{"level":"info","message":"Client disconnect: cdffb45b-1641-4ffb-97f1-687ef517d7ac","timestamp":"2020-07-01T07:50:18.953Z"}
+{"level":"info","message":"Create new client: c6eac925-e417-4b29-940b-b4e3dbfad4a0","timestamp":"2020-07-01T07:50:19.477Z"}
+{"level":"info","message":"Client disconnect: c6eac925-e417-4b29-940b-b4e3dbfad4a0","timestamp":"2020-07-01T07:50:42.239Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T07:50:43.033Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T07:50:45.939Z"}
+{"level":"info","message":"Create new client: 6499945a-8a16-4162-a81d-9fb8cb605ef0","timestamp":"2020-07-01T07:51:20.244Z"}
+{"level":"info","message":"Client disconnect: 6499945a-8a16-4162-a81d-9fb8cb605ef0","timestamp":"2020-07-01T07:51:22.220Z"}
+{"level":"info","message":"Create new client: 3f4507cf-2b7e-4dbb-99aa-63cbde737821","timestamp":"2020-07-01T07:51:22.432Z"}
+{"level":"info","message":"Client disconnect: 3f4507cf-2b7e-4dbb-99aa-63cbde737821","timestamp":"2020-07-01T07:51:23.910Z"}
+{"level":"info","message":"Create new client: f58b9197-a488-4c97-a08b-78f6ee529356","timestamp":"2020-07-01T07:51:24.553Z"}
+{"level":"info","message":"Client disconnect: f58b9197-a488-4c97-a08b-78f6ee529356","timestamp":"2020-07-01T07:52:42.653Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T07:52:43.330Z"}
+{"level":"info","message":"Create new client: a8df304f-5c10-427b-b4d3-84a0e3f6f5a6","timestamp":"2020-07-01T07:53:14.749Z"}
+{"level":"info","message":"Client disconnect: a8df304f-5c10-427b-b4d3-84a0e3f6f5a6","timestamp":"2020-07-01T07:53:16.820Z"}
+{"level":"info","message":"Create new client: c4269800-54a2-42b4-bd16-e283d00eb95f","timestamp":"2020-07-01T07:53:17.064Z"}
+{"level":"info","message":"Client disconnect: c4269800-54a2-42b4-bd16-e283d00eb95f","timestamp":"2020-07-01T07:53:17.991Z"}
+{"level":"info","message":"Create new client: 2dacb187-38e5-4b76-a065-8566979c7521","timestamp":"2020-07-01T07:53:18.625Z"}
+{"level":"info","message":"Client disconnect: 2dacb187-38e5-4b76-a065-8566979c7521","timestamp":"2020-07-01T07:58:04.432Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T07:58:05.154Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T07:58:06.076Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T07:58:21.010Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T07:58:30.703Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T07:58:54.787Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T07:58:59.868Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T08:00:28.531Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T08:01:00.903Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T08:01:03.245Z"}
+{"level":"info","message":"Create new client: 5a7a6516-a86a-4f0c-8ad2-28a2b97f31a1","timestamp":"2020-07-01T08:01:25.826Z"}
+{"level":"info","message":"Client disconnect: 5a7a6516-a86a-4f0c-8ad2-28a2b97f31a1","timestamp":"2020-07-01T08:01:28.194Z"}
+{"level":"info","message":"Create new client: cadb6764-394c-487e-9555-ab7706988c02","timestamp":"2020-07-01T08:01:28.576Z"}
+{"level":"info","message":"Client disconnect: cadb6764-394c-487e-9555-ab7706988c02","timestamp":"2020-07-01T08:02:24.876Z"}
+{"level":"info","message":"Create new client: 43a16fd1-7f83-4eb0-99df-d5975b4aa7eb","timestamp":"2020-07-01T08:02:26.410Z"}
+{"level":"info","message":"Client disconnect: 43a16fd1-7f83-4eb0-99df-d5975b4aa7eb","timestamp":"2020-07-01T08:02:28.484Z"}
+{"level":"info","message":"Create new client: f087a1ea-bf86-4d32-be25-982148f528aa","timestamp":"2020-07-01T08:02:28.776Z"}
+{"level":"info","message":"Client disconnect: f087a1ea-bf86-4d32-be25-982148f528aa","timestamp":"2020-07-01T08:03:16.299Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T08:03:16.894Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T08:03:18.039Z"}
+{"level":"info","message":"Create new client: dfae0785-2db1-4d90-9712-aeb2861d754c","timestamp":"2020-07-01T08:03:53.364Z"}
+{"level":"info","message":"Client disconnect: dfae0785-2db1-4d90-9712-aeb2861d754c","timestamp":"2020-07-01T08:03:55.866Z"}
+{"level":"info","message":"Create new client: 44cce368-a097-48b6-9ef0-a23a5abc8f47","timestamp":"2020-07-01T08:03:56.700Z"}
+{"level":"info","message":"Parse LiveQuery Server starts running","timestamp":"2020-07-01T08:04:50.500Z"}
+{"level":"info","message":"Create new client: ec89dafa-e4c4-434f-beff-e9abddd772d4","timestamp":"2020-07-01T08:04:55.195Z"}
+{"level":"info","message":"Client disconnect: ec89dafa-e4c4-434f-beff-e9abddd772d4","timestamp":"2020-07-01T08:05:10.519Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T08:05:11.397Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T08:05:13.159Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T08:05:38.086Z"}
+{"level":"info","message":"Create new client: ee80783b-e08c-4ded-b44a-2a798935c2e5","timestamp":"2020-07-01T08:06:11.954Z"}
+{"level":"info","message":"Client disconnect: ee80783b-e08c-4ded-b44a-2a798935c2e5","timestamp":"2020-07-01T08:06:14.472Z"}
+{"level":"info","message":"Create new client: 8e784380-d7c2-43e8-bc2c-40309c5c518a","timestamp":"2020-07-01T08:06:15.908Z"}
+{"level":"info","message":"Client disconnect: 8e784380-d7c2-43e8-bc2c-40309c5c518a","timestamp":"2020-07-01T08:06:16.909Z"}
+{"level":"info","message":"Create new client: 27143b2e-d376-4aba-bf9a-453c59cf6421","timestamp":"2020-07-01T08:06:18.164Z"}
+{"level":"info","message":"Client disconnect: 27143b2e-d376-4aba-bf9a-453c59cf6421","timestamp":"2020-07-01T08:06:20.900Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T08:06:21.499Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T08:06:22.707Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T08:07:41.393Z"}
+{"level":"info","message":"Create new client: c23776b1-6c19-4bb5-a9db-76fa72625e10","timestamp":"2020-07-01T08:08:04.538Z"}
+{"level":"info","message":"Client disconnect: c23776b1-6c19-4bb5-a9db-76fa72625e10","timestamp":"2020-07-01T08:08:06.714Z"}
+{"level":"info","message":"Create new client: 15c4f6ce-374a-4c8f-8ea4-50c178ecb8b4","timestamp":"2020-07-01T08:08:06.999Z"}
+{"level":"info","message":"Client disconnect: 15c4f6ce-374a-4c8f-8ea4-50c178ecb8b4","timestamp":"2020-07-01T08:08:41.407Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T08:08:42.068Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T08:08:45.875Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T08:08:51.246Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T08:08:53.081Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T08:08:56.957Z"}
+{"level":"info","message":"Create new client: bce6bdf6-751a-4e40-9843-1d3a14ddcf67","timestamp":"2020-07-01T08:09:21.895Z"}
+{"level":"info","message":"Client disconnect: bce6bdf6-751a-4e40-9843-1d3a14ddcf67","timestamp":"2020-07-01T08:09:24.058Z"}
+{"level":"info","message":"Create new client: 29e06e88-8597-4b82-8dd5-9a8b1071c83a","timestamp":"2020-07-01T08:09:24.335Z"}
+{"level":"info","message":"Client disconnect: 29e06e88-8597-4b82-8dd5-9a8b1071c83a","timestamp":"2020-07-01T08:09:55.068Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T08:10:04.722Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T08:11:45.294Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T08:12:22.777Z"}
+{"level":"info","message":"Create new client: 384cc72d-5521-427f-a137-05a6b5d5d38e","timestamp":"2020-07-01T08:12:49.431Z"}
+{"level":"info","message":"Client disconnect: 384cc72d-5521-427f-a137-05a6b5d5d38e","timestamp":"2020-07-01T08:12:51.734Z"}
+{"level":"info","message":"Create new client: 1bc4ced9-c5e9-4a47-83db-76f59d3c688e","timestamp":"2020-07-01T08:12:52.461Z"}
+{"level":"info","message":"Client disconnect: 1bc4ced9-c5e9-4a47-83db-76f59d3c688e","timestamp":"2020-07-01T08:14:05.116Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T08:14:15.414Z"}
+{"level":"info","message":"Create new client: f1d044d2-4146-4b75-95b7-773a928fab96","timestamp":"2020-07-01T08:14:56.504Z"}
+{"level":"info","message":"Client disconnect: f1d044d2-4146-4b75-95b7-773a928fab96","timestamp":"2020-07-01T08:14:58.712Z"}
+{"level":"info","message":"Create new client: d5787b73-d1f7-4ca1-a831-b0e41c7a7b38","timestamp":"2020-07-01T08:14:59.038Z"}
+{"level":"info","message":"Client disconnect: d5787b73-d1f7-4ca1-a831-b0e41c7a7b38","timestamp":"2020-07-01T08:15:55.198Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T08:15:55.579Z"}
+{"level":"info","message":"Create new client: bcafdd2e-6ee3-4576-a439-1c848f15c64e","timestamp":"2020-07-01T08:16:18.607Z"}
+{"level":"info","message":"Client disconnect: bcafdd2e-6ee3-4576-a439-1c848f15c64e","timestamp":"2020-07-01T08:16:45.206Z"}
+{"level":"info","message":"Create new client: 2e43e69e-9712-4e25-9365-96e300ad0a1f","timestamp":"2020-07-01T08:16:47.594Z"}
+{"level":"info","message":"Client disconnect: 2e43e69e-9712-4e25-9365-96e300ad0a1f","timestamp":"2020-07-01T08:21:39.379Z"}
+{"level":"info","message":"Parse LiveQuery Server starts running","timestamp":"2020-07-01T08:22:17.033Z"}
+{"level":"info","message":"Create new client: d0d18b76-3ef8-43ff-a207-a62941a655f3","timestamp":"2020-07-01T08:22:36.270Z"}
+{"level":"info","message":"Client disconnect: d0d18b76-3ef8-43ff-a207-a62941a655f3","timestamp":"2020-07-01T08:23:37.155Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T08:23:38.368Z"}
+{"level":"info","message":"Create new client: 5d2a8ff9-1619-47b7-b110-eb0b5c746471","timestamp":"2020-07-01T08:23:58.975Z"}
+{"level":"info","message":"Client disconnect: 5d2a8ff9-1619-47b7-b110-eb0b5c746471","timestamp":"2020-07-01T08:24:07.750Z"}
+{"level":"info","message":"Create new client: f6e397a4-9078-4431-9718-677d336a7acc","timestamp":"2020-07-01T08:24:08.030Z"}
+{"level":"info","message":"Client disconnect: f6e397a4-9078-4431-9718-677d336a7acc","timestamp":"2020-07-01T08:24:34.079Z"}
+{"level":"info","message":"Create new client: 1f098b19-878b-43ae-a394-40d3cbb06007","timestamp":"2020-07-01T08:24:37.222Z"}
+{"level":"info","message":"Client disconnect: 1f098b19-878b-43ae-a394-40d3cbb06007","timestamp":"2020-07-01T08:24:40.001Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T08:24:40.811Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T08:24:58.434Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T08:25:04.191Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T08:25:07.228Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T08:25:08.066Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T08:25:10.334Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T08:25:14.933Z"}
+{"level":"info","message":"Create new client: b4bb6264-0067-4539-bc39-2929bdb1cc87","timestamp":"2020-07-01T08:25:51.328Z"}
+{"level":"info","message":"Client disconnect: b4bb6264-0067-4539-bc39-2929bdb1cc87","timestamp":"2020-07-01T08:25:53.486Z"}
+{"level":"info","message":"Create new client: 3c23e517-22b1-4088-ac4d-b6d19737e560","timestamp":"2020-07-01T08:25:54.223Z"}
+{"level":"info","message":"Client disconnect: 3c23e517-22b1-4088-ac4d-b6d19737e560","timestamp":"2020-07-01T08:25:55.311Z"}
+{"level":"info","message":"Create new client: 1e2bb195-ee4e-4e0c-9db9-a5c40a3b683b","timestamp":"2020-07-01T08:25:55.841Z"}
+{"level":"info","message":"Client disconnect: 1e2bb195-ee4e-4e0c-9db9-a5c40a3b683b","timestamp":"2020-07-01T08:26:17.999Z"}
+{"level":"info","message":"Create new client: d5a5cf91-0a88-4a69-9590-81b2ea4be8dc","timestamp":"2020-07-01T08:26:20.951Z"}
+{"level":"info","message":"Client disconnect: d5a5cf91-0a88-4a69-9590-81b2ea4be8dc","timestamp":"2020-07-01T08:26:22.215Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T08:26:22.802Z"}
+{"level":"info","message":"Create new client: f1a5a727-ab6c-4b1d-b1c0-7cd31e8a91cc","timestamp":"2020-07-01T08:26:42.574Z"}
+{"level":"info","message":"Client disconnect: f1a5a727-ab6c-4b1d-b1c0-7cd31e8a91cc","timestamp":"2020-07-01T08:26:44.686Z"}
+{"level":"info","message":"Create new client: 0b3c63fe-25a2-4c8d-ba1e-ae4259b17fce","timestamp":"2020-07-01T08:26:44.954Z"}
+{"level":"info","message":"Client disconnect: 0b3c63fe-25a2-4c8d-ba1e-ae4259b17fce","timestamp":"2020-07-01T08:26:45.914Z"}
+{"level":"info","message":"Create new client: 3b99864a-38d0-40ac-8301-75a60b2d2a34","timestamp":"2020-07-01T08:26:46.563Z"}
+{"level":"info","message":"Client disconnect: 3b99864a-38d0-40ac-8301-75a60b2d2a34","timestamp":"2020-07-01T08:58:09.210Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T08:58:21.511Z"}
+{"level":"info","message":"Parse LiveQuery Server starts running","timestamp":"2020-07-01T08:59:02.414Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T08:59:10.751Z"}
+{"level":"info","message":"Create new client: 240ddd5c-a180-44ae-b160-32c8c8f9827f","timestamp":"2020-07-01T08:59:36.050Z"}
+{"level":"info","message":"Client disconnect: 240ddd5c-a180-44ae-b160-32c8c8f9827f","timestamp":"2020-07-01T08:59:38.223Z"}
+{"level":"info","message":"Create new client: c593bb68-281d-4d8f-81d5-f1b9c4ebe806","timestamp":"2020-07-01T08:59:38.961Z"}
+{"level":"info","message":"Client disconnect: c593bb68-281d-4d8f-81d5-f1b9c4ebe806","timestamp":"2020-07-01T08:59:40.132Z"}
+{"level":"info","message":"Create new client: 727fb795-b762-4e0d-adeb-6d88c92e54f9","timestamp":"2020-07-01T08:59:40.737Z"}
+{"level":"info","message":"Client disconnect: 727fb795-b762-4e0d-adeb-6d88c92e54f9","timestamp":"2020-07-01T09:00:38.281Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T09:00:39.408Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T09:00:43.362Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T09:01:07.678Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T09:01:12.145Z"}
+{"level":"info","message":"Create new client: cd3658de-22a3-46bf-91d7-90985e43c14c","timestamp":"2020-07-01T09:01:38.931Z"}
+{"level":"info","message":"Client disconnect: cd3658de-22a3-46bf-91d7-90985e43c14c","timestamp":"2020-07-01T09:01:41.005Z"}
+{"level":"info","message":"Create new client: a10a61c9-022d-41a4-a814-f26e3f6856e6","timestamp":"2020-07-01T09:01:41.873Z"}
+{"level":"info","message":"Client disconnect: a10a61c9-022d-41a4-a814-f26e3f6856e6","timestamp":"2020-07-01T09:01:42.912Z"}
+{"level":"info","message":"Create new client: 801ee072-6d17-4c54-8858-c75f6e8e4087","timestamp":"2020-07-01T09:01:43.420Z"}
+{"level":"info","message":"Client disconnect: 801ee072-6d17-4c54-8858-c75f6e8e4087","timestamp":"2020-07-01T09:02:00.597Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T09:02:01.194Z"}
+{"level":"info","message":"Create new client: 0a2c1407-9c06-43dd-af34-151c88515969","timestamp":"2020-07-01T09:02:33.305Z"}
+{"level":"info","message":"Client disconnect: 0a2c1407-9c06-43dd-af34-151c88515969","timestamp":"2020-07-01T09:02:35.465Z"}
+{"level":"info","message":"Create new client: 464c2b07-a726-46c0-bc20-86486d6f86a8","timestamp":"2020-07-01T09:02:35.686Z"}
+{"level":"info","message":"Client disconnect: 464c2b07-a726-46c0-bc20-86486d6f86a8","timestamp":"2020-07-01T09:02:37.268Z"}
+{"level":"info","message":"Create new client: f4633f43-3efd-4a4b-96d5-ae475613d489","timestamp":"2020-07-01T09:02:37.855Z"}
+{"level":"info","message":"Client disconnect: f4633f43-3efd-4a4b-96d5-ae475613d489","timestamp":"2020-07-01T09:03:32.468Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T09:03:33.764Z"}
+{"level":"info","message":"Create new client: 0a7cdf84-f4d2-49b5-885f-4d39ba9b7e63","timestamp":"2020-07-01T09:04:14.071Z"}
+{"level":"info","message":"Client disconnect: 0a7cdf84-f4d2-49b5-885f-4d39ba9b7e63","timestamp":"2020-07-01T09:04:16.133Z"}
+{"level":"info","message":"Create new client: 40306887-0bf5-42c6-a5a4-9fd224d955b6","timestamp":"2020-07-01T09:04:16.878Z"}
+{"level":"info","message":"Client disconnect: 40306887-0bf5-42c6-a5a4-9fd224d955b6","timestamp":"2020-07-01T09:04:17.891Z"}
+{"level":"info","message":"Create new client: f446d854-b007-47d0-8be9-c3b2c6dd8d3a","timestamp":"2020-07-01T09:04:18.621Z"}
+{"level":"info","message":"Client disconnect: f446d854-b007-47d0-8be9-c3b2c6dd8d3a","timestamp":"2020-07-01T09:04:52.203Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T09:04:52.807Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T09:04:54.128Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T09:04:57.389Z"}
+{"level":"info","message":"Create new client: d6af46a2-eaca-4de0-b456-05758ba121be","timestamp":"2020-07-01T09:05:33.483Z"}
+{"level":"info","message":"Client disconnect: d6af46a2-eaca-4de0-b456-05758ba121be","timestamp":"2020-07-01T09:05:35.525Z"}
+{"level":"info","message":"Create new client: 2a402bfe-1954-4397-9c7f-788b25135e99","timestamp":"2020-07-01T09:05:36.311Z"}
+{"level":"info","message":"Client disconnect: 2a402bfe-1954-4397-9c7f-788b25135e99","timestamp":"2020-07-01T09:05:37.299Z"}
+{"level":"info","message":"Create new client: 7cff6d05-b97b-4c0e-98a4-c0db0fe51976","timestamp":"2020-07-01T09:05:37.834Z"}
+{"level":"info","message":"Client disconnect: 7cff6d05-b97b-4c0e-98a4-c0db0fe51976","timestamp":"2020-07-01T09:07:59.241Z"}
+{"level":"info","message":"Create new client: 064ac080-a727-4e22-ab58-4af87d18413c","timestamp":"2020-07-01T09:08:00.961Z"}
+{"level":"info","message":"Client disconnect: 064ac080-a727-4e22-ab58-4af87d18413c","timestamp":"2020-07-01T09:08:02.659Z"}
+{"level":"info","message":"Create new client: 91d2780a-4739-4447-8d8e-b9a9e97ba611","timestamp":"2020-07-01T09:08:03.483Z"}
+{"level":"info","message":"Client disconnect: 91d2780a-4739-4447-8d8e-b9a9e97ba611","timestamp":"2020-07-01T09:08:04.457Z"}
+{"level":"info","message":"Create new client: addbb253-c8d3-44a1-b74d-bc619c85afd6","timestamp":"2020-07-01T09:08:04.987Z"}
+{"level":"info","message":"Client disconnect: addbb253-c8d3-44a1-b74d-bc619c85afd6","timestamp":"2020-07-01T09:08:52.167Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T09:08:52.889Z"}
+{"level":"info","message":"Create new client: 2eb8d715-154f-4d1c-9004-d4671ff4da23","timestamp":"2020-07-01T09:09:30.773Z"}
+{"level":"info","message":"Client disconnect: 2eb8d715-154f-4d1c-9004-d4671ff4da23","timestamp":"2020-07-01T09:09:32.816Z"}
+{"level":"info","message":"Create new client: 25e84d93-c568-4514-836d-988f3409f1bb","timestamp":"2020-07-01T09:09:33.018Z"}
+{"level":"info","message":"Client disconnect: 25e84d93-c568-4514-836d-988f3409f1bb","timestamp":"2020-07-01T09:09:34.152Z"}
+{"level":"info","message":"Create new client: 3aa0a27d-bd5c-4e93-a805-692cb4aa663c","timestamp":"2020-07-01T09:09:34.728Z"}
+{"level":"info","message":"Client disconnect: 3aa0a27d-bd5c-4e93-a805-692cb4aa663c","timestamp":"2020-07-01T09:10:23.738Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T09:10:25.735Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T09:10:37.017Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T09:10:41.677Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T09:10:51.513Z"}
+{"level":"info","message":"Create new client: 093d21bc-a7df-426a-a875-4d45657871f0","timestamp":"2020-07-01T09:11:13.482Z"}
+{"level":"info","message":"Client disconnect: 093d21bc-a7df-426a-a875-4d45657871f0","timestamp":"2020-07-01T09:11:15.434Z"}
+{"level":"info","message":"Create new client: d34b5e74-975a-49d1-812a-4dba3a5d4709","timestamp":"2020-07-01T09:11:16.169Z"}
+{"level":"info","message":"Client disconnect: d34b5e74-975a-49d1-812a-4dba3a5d4709","timestamp":"2020-07-01T09:11:17.222Z"}
+{"level":"info","message":"Create new client: bea1f430-a055-4102-bafc-f5a0b8b82fbb","timestamp":"2020-07-01T09:11:17.990Z"}
+{"level":"info","message":"Client disconnect: bea1f430-a055-4102-bafc-f5a0b8b82fbb","timestamp":"2020-07-01T09:11:24.995Z"}
+{"level":"info","message":"Create new client: cd1eb889-91fa-45a4-b776-e2609ea1571a","timestamp":"2020-07-01T09:11:25.844Z"}
+{"level":"info","message":"Client disconnect: cd1eb889-91fa-45a4-b776-e2609ea1571a","timestamp":"2020-07-01T09:13:35.198Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T09:13:35.865Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T09:13:36.988Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T09:13:42.314Z"}
+{"level":"info","message":"Create new client: 553b86bf-5cd1-46ad-8776-f2baab4dea66","timestamp":"2020-07-01T09:14:05.585Z"}
+{"level":"info","message":"Client disconnect: 553b86bf-5cd1-46ad-8776-f2baab4dea66","timestamp":"2020-07-01T09:14:07.782Z"}
+{"level":"info","message":"Create new client: 0fc1fe7b-7581-45ff-9b64-d46731b15679","timestamp":"2020-07-01T09:14:08.556Z"}
+{"level":"info","message":"Client disconnect: 0fc1fe7b-7581-45ff-9b64-d46731b15679","timestamp":"2020-07-01T09:14:09.576Z"}
+{"level":"info","message":"Create new client: 6c32a1fe-15b9-4938-bc97-8cd136369b7e","timestamp":"2020-07-01T09:14:10.813Z"}
+{"level":"info","message":"Client disconnect: 6c32a1fe-15b9-4938-bc97-8cd136369b7e","timestamp":"2020-07-01T09:14:14.132Z"}
+{"level":"info","message":"Create new client: cc51daa2-a048-4e61-b6f6-22641c48fe3a","timestamp":"2020-07-01T09:14:14.949Z"}
+{"level":"info","message":"Client disconnect: cc51daa2-a048-4e61-b6f6-22641c48fe3a","timestamp":"2020-07-01T09:28:16.690Z"}
+{"level":"info","message":"Create new client: 27e2355b-7627-4b1a-9035-6a7f560fdc5c","timestamp":"2020-07-01T11:51:26.146Z"}
+{"level":"info","message":"Client disconnect: 27e2355b-7627-4b1a-9035-6a7f560fdc5c","timestamp":"2020-07-01T12:46:37.759Z"}
+{"level":"info","message":"Create new client: ef54697f-b38d-46f5-92b1-cacbf362b0fc","timestamp":"2020-07-01T12:46:39.516Z"}
+{"level":"info","message":"Client disconnect: ef54697f-b38d-46f5-92b1-cacbf362b0fc","timestamp":"2020-07-01T12:47:45.500Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T12:47:46.150Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T12:48:01.937Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T12:48:04.044Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T12:48:11.722Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T12:48:30.910Z"}
+{"level":"info","message":"Create new client: 6067456f-f659-40ab-92db-a156d679f2be","timestamp":"2020-07-01T12:48:59.961Z"}
+{"level":"info","message":"Client disconnect: 6067456f-f659-40ab-92db-a156d679f2be","timestamp":"2020-07-01T12:53:11.688Z"}
+{"level":"info","message":"Create new client: 6d887e30-6de7-4b2b-817b-a0fa1ae9dea3","timestamp":"2020-07-01T12:53:15.566Z"}
+{"level":"info","message":"Client disconnect: 6d887e30-6de7-4b2b-817b-a0fa1ae9dea3","timestamp":"2020-07-01T12:55:17.955Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T12:55:19.280Z"}
+{"level":"info","message":"Create new client: 3798c97a-f02a-4006-8d2a-929df76c2df8","timestamp":"2020-07-01T12:55:36.233Z"}
+{"level":"info","message":"Client disconnect: 3798c97a-f02a-4006-8d2a-929df76c2df8","timestamp":"2020-07-01T12:56:12.090Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T12:56:12.717Z"}
+{"level":"info","message":"Create new client: e4ceae15-8e76-4432-8d6c-bf579ebe0056","timestamp":"2020-07-01T12:56:35.950Z"}
+{"level":"info","message":"Client disconnect: e4ceae15-8e76-4432-8d6c-bf579ebe0056","timestamp":"2020-07-01T12:57:41.986Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T12:57:42.745Z"}
+{"level":"info","message":"Create new client: 2fa0b020-6825-4dca-8005-09b00bd9cc42","timestamp":"2020-07-01T12:58:20.727Z"}
+{"level":"info","message":"Client disconnect: 2fa0b020-6825-4dca-8005-09b00bd9cc42","timestamp":"2020-07-01T13:01:28.321Z"}
+{"level":"info","message":"Create new client: 84f10aa0-4c8d-44fa-93aa-74d527229e73","timestamp":"2020-07-01T13:01:30.656Z"}
+{"level":"info","message":"Client disconnect: 84f10aa0-4c8d-44fa-93aa-74d527229e73","timestamp":"2020-07-01T13:05:19.153Z"}
+{"level":"info","message":"Create new client: dcffeadf-9617-430d-b2f1-77d847f875a8","timestamp":"2020-07-01T13:05:20.948Z"}
+{"level":"info","message":"Client disconnect: dcffeadf-9617-430d-b2f1-77d847f875a8","timestamp":"2020-07-01T13:07:27.768Z"}
+{"level":"info","message":"Create new client: 31d103f7-267b-4595-9f9f-e90df9036412","timestamp":"2020-07-01T13:07:40.428Z"}
+{"level":"info","message":"Client disconnect: 31d103f7-267b-4595-9f9f-e90df9036412","timestamp":"2020-07-01T13:08:48.506Z"}
+{"level":"info","message":"Create new client: e5a0aa40-555c-4a83-b141-e47b4eef77da","timestamp":"2020-07-01T13:08:54.205Z"}
+{"level":"info","message":"Client disconnect: e5a0aa40-555c-4a83-b141-e47b4eef77da","timestamp":"2020-07-01T13:09:34.495Z"}
+{"level":"info","message":"Create new client: bb5d2e2a-c3d1-44bd-832a-5840653452e1","timestamp":"2020-07-01T13:09:54.200Z"}
+{"level":"info","message":"Client disconnect: bb5d2e2a-c3d1-44bd-832a-5840653452e1","timestamp":"2020-07-01T13:10:17.127Z"}
+{"level":"info","message":"Create new client: 26832626-ee11-4652-9619-b12c4a082f0e","timestamp":"2020-07-01T13:10:19.343Z"}
+{"level":"info","message":"Client disconnect: 26832626-ee11-4652-9619-b12c4a082f0e","timestamp":"2020-07-01T13:11:09.260Z"}
+{"level":"info","message":"Create new client: 4adaa570-6fec-43e8-9743-d6e82b4c0760","timestamp":"2020-07-01T13:11:11.142Z"}
+{"level":"info","message":"Client disconnect: 4adaa570-6fec-43e8-9743-d6e82b4c0760","timestamp":"2020-07-01T13:13:16.039Z"}
+{"level":"info","message":"Parse LiveQuery Server starts running","timestamp":"2020-07-01T13:15:35.399Z"}
+{"level":"info","message":"Create new client: e344bea1-e0ee-451b-b750-7c4129005dc9","timestamp":"2020-07-01T13:19:48.089Z"}
+{"level":"info","message":"Create new client: 7815f17b-8d6f-4d89-9a02-539bbf301609","timestamp":"2020-07-01T13:20:23.150Z"}
+{"level":"info","message":"Client disconnect: 7815f17b-8d6f-4d89-9a02-539bbf301609","timestamp":"2020-07-01T13:20:27.752Z"}
+{"message":"Invalid session token","code":209,"level":"error","stack":"Error: Invalid session token\n    at Object.getAuthForSessionToken (C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\Auth.js:105:11)\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T13:21:01.814Z"}
+{"message":"Invalid session token","code":209,"level":"error","stack":"Error: Invalid session token\n    at Object.getAuthForSessionToken (C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\Auth.js:105:11)\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T13:21:06.222Z"}
+{"message":"Invalid session token","code":209,"level":"error","stack":"Error: Invalid session token\n    at Object.getAuthForSessionToken (C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\Auth.js:105:11)\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T13:21:42.367Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T13:23:02.588Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T13:26:29.812Z"}
+{"level":"info","message":"Create new client: 85a81a3c-3448-49e2-9bd1-7d5eb346ea60","timestamp":"2020-07-01T13:28:23.921Z"}
+{"level":"info","message":"Client disconnect: 85a81a3c-3448-49e2-9bd1-7d5eb346ea60","timestamp":"2020-07-01T13:32:15.729Z"}
+{"level":"info","message":"Create new client: c338b44a-e02e-4e0d-ad88-34763012e819","timestamp":"2020-07-01T13:32:15.953Z"}
+{"level":"info","message":"Client disconnect: c338b44a-e02e-4e0d-ad88-34763012e819","timestamp":"2020-07-01T13:33:58.456Z"}
+{"level":"info","message":"Create new client: 6f19bf75-f42c-43e0-9704-8c8fcff05944","timestamp":"2020-07-01T13:34:03.696Z"}
+{"level":"info","message":"Client disconnect: 6f19bf75-f42c-43e0-9704-8c8fcff05944","timestamp":"2020-07-01T13:34:21.473Z"}
+{"level":"info","message":"Create new client: 4466540f-a774-47f6-b66a-ec56ba0c91bb","timestamp":"2020-07-01T13:34:21.782Z"}
+{"level":"info","message":"Client disconnect: 4466540f-a774-47f6-b66a-ec56ba0c91bb","timestamp":"2020-07-01T13:45:28.957Z"}
+{"level":"info","message":"Create new client: 251350db-f6c7-4816-89e8-b3a750897e1f","timestamp":"2020-07-01T13:49:19.637Z"}
+{"level":"info","message":"Client disconnect: 251350db-f6c7-4816-89e8-b3a750897e1f","timestamp":"2020-07-01T13:49:26.976Z"}
+{"level":"info","message":"Create new client: 4a1ce64f-97d0-4b01-8c6a-a3349e16203b","timestamp":"2020-07-01T13:49:43.701Z"}
+{"level":"info","message":"Client disconnect: 4a1ce64f-97d0-4b01-8c6a-a3349e16203b","timestamp":"2020-07-01T13:51:11.406Z"}
+{"level":"info","message":"Create new client: 36e8da5c-f03d-4507-91f0-e0bdbd916c93","timestamp":"2020-07-01T13:52:21.131Z"}
+{"level":"info","message":"Client disconnect: 36e8da5c-f03d-4507-91f0-e0bdbd916c93","timestamp":"2020-07-01T13:53:42.373Z"}
+{"level":"info","message":"Create new client: ca0ba469-da4c-4e8d-8f67-c3c39760d3a5","timestamp":"2020-07-01T13:53:42.654Z"}
+{"level":"info","message":"Client disconnect: ca0ba469-da4c-4e8d-8f67-c3c39760d3a5","timestamp":"2020-07-01T13:53:59.528Z"}
+{"level":"info","message":"Create new client: c4a9f08c-c820-498b-aaa2-bf4ec294fcbe","timestamp":"2020-07-01T13:54:21.833Z"}
+{"level":"info","message":"Client disconnect: c4a9f08c-c820-498b-aaa2-bf4ec294fcbe","timestamp":"2020-07-01T13:54:25.000Z"}
+{"level":"info","message":"Create new client: 4ed417e8-513c-4039-8baa-f90d6ea644e6","timestamp":"2020-07-01T13:54:49.553Z"}
+{"level":"info","message":"Client disconnect: 4ed417e8-513c-4039-8baa-f90d6ea644e6","timestamp":"2020-07-01T14:23:54.074Z"}
+{"level":"info","message":"Create new client: 9fa5a61f-ed0b-44e7-a366-714b7c1beaa8","timestamp":"2020-07-01T14:23:54.303Z"}
+{"level":"info","message":"Client disconnect: 9fa5a61f-ed0b-44e7-a366-714b7c1beaa8","timestamp":"2020-07-01T14:26:41.234Z"}
+{"level":"info","message":"Create new client: 23b9e322-6d22-4106-8849-0064fda0def1","timestamp":"2020-07-01T14:26:41.542Z"}
+{"level":"info","message":"Client disconnect: 23b9e322-6d22-4106-8849-0064fda0def1","timestamp":"2020-07-01T14:26:48.638Z"}
+{"level":"info","message":"Create new client: c65e353d-4da8-491a-ba48-c883a52dbbfb","timestamp":"2020-07-01T14:26:48.866Z"}
+{"level":"info","message":"Client disconnect: c65e353d-4da8-491a-ba48-c883a52dbbfb","timestamp":"2020-07-01T14:29:10.007Z"}
+{"level":"info","message":"Create new client: e787ac47-4f4b-46fc-8013-96fd1b7c837e","timestamp":"2020-07-01T14:29:10.395Z"}
+{"level":"info","message":"Client disconnect: e787ac47-4f4b-46fc-8013-96fd1b7c837e","timestamp":"2020-07-01T14:29:12.690Z"}
+{"level":"info","message":"Create new client: d2d6d53b-cd08-4def-8f77-74b5ee5e08d4","timestamp":"2020-07-01T14:29:12.910Z"}
+{"level":"info","message":"Client disconnect: d2d6d53b-cd08-4def-8f77-74b5ee5e08d4","timestamp":"2020-07-01T14:37:19.897Z"}
+{"level":"info","message":"Create new client: 90e55335-9e2a-40cf-88ec-98770e55d342","timestamp":"2020-07-01T14:37:20.131Z"}
+{"level":"info","message":"Client disconnect: 90e55335-9e2a-40cf-88ec-98770e55d342","timestamp":"2020-07-01T14:37:49.366Z"}
+{"level":"info","message":"Create new client: f9db922f-4908-4064-8d9b-37bdd22e61c9","timestamp":"2020-07-01T14:37:49.612Z"}
+{"level":"info","message":"Client disconnect: f9db922f-4908-4064-8d9b-37bdd22e61c9","timestamp":"2020-07-01T14:38:19.944Z"}
+{"level":"info","message":"Create new client: f7a0ad8b-987b-4c1d-8384-177f72b08966","timestamp":"2020-07-01T14:38:20.184Z"}
+{"level":"info","message":"Client disconnect: f7a0ad8b-987b-4c1d-8384-177f72b08966","timestamp":"2020-07-01T14:50:35.662Z"}
+{"level":"info","message":"Client disconnect: e344bea1-e0ee-451b-b750-7c4129005dc9","timestamp":"2020-07-01T14:50:35.698Z"}
+{"level":"info","message":"Create new client: ab7af6bd-796e-4cf7-b14e-378f5699f54a","timestamp":"2020-07-01T16:34:55.266Z"}
+{"level":"info","message":"Parse LiveQuery Server starts running","timestamp":"2020-07-01T16:41:05.767Z"}
+{"level":"info","message":"Create new client: be39f735-27c3-4e3c-81ac-5325f8eb3aca","timestamp":"2020-07-01T16:41:15.922Z"}
+{"level":"info","message":"Parse LiveQuery Server starts running","timestamp":"2020-07-01T16:42:11.299Z"}
+{"level":"info","message":"Create new client: 35e4c5df-8c31-4963-825b-634de228afdc","timestamp":"2020-07-01T16:42:18.689Z"}
+{"level":"info","message":"Parse LiveQuery Server starts running","timestamp":"2020-07-01T16:44:00.887Z"}
+{"level":"info","message":"Create new client: 0bf5a56e-c30e-4412-bd95-63533968e037","timestamp":"2020-07-01T16:44:01.115Z"}
+{"level":"info","message":"Parse LiveQuery Server starts running","timestamp":"2020-07-01T16:46:30.307Z"}
+{"level":"info","message":"Create new client: 35eeefaf-0253-4564-9638-c2aba4fde6e8","timestamp":"2020-07-01T16:46:35.544Z"}
+{"level":"info","message":"Parse LiveQuery Server starts running","timestamp":"2020-07-01T16:51:19.044Z"}
+{"level":"info","message":"Create new client: ff850fcf-d5ed-4d2d-b997-d64df2092880","timestamp":"2020-07-01T16:51:24.516Z"}

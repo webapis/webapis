@@ -4,28 +4,31 @@ export function useUserName() {
   const [userName, setUsername] = useState(null);
   const [token, setToken] = useState(null);
   const [email, setEmail] = useState('');
+  const [objectId, setObjectId] = useState(null);
   const { state } = useAuthContext();
   useEffect(() => {
   
     if (window.localStorage.getItem('webcom')) {
 
-      const { username, token, email } = JSON.parse(
+      const { username, token, email,objectId } = JSON.parse(
         window.localStorage.getItem('webcom')
       );
       setUsername(username);
       setToken(token);
       setEmail(email);
+      setObjectId(objectId)
     }
   }, []);
 
   useEffect(() => {
     if (state.user && state.user.token) {
   
-      const { username, email, token } =state.user;
+      const { username, email, token,objectId } =state.user;
   
       setUsername(username);
       setToken(token);
       setEmail(email);
+      setObjectId(objectId)
     }
   }, [state.user]);
 

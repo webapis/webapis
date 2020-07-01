@@ -1,20 +1,22 @@
 import { actionTypes } from '../actionTypes'
-export async function fetchHangouts({ search, dispatch }) {
+export async function fetchHangouts({ search, dispatch,userId }) {
 
     try {
         // search Hangout
-        const user = Parse.User.current();
+     
         const query = new Parse.Query("Hangout");
-        query.equalTo('userid',user.id)
+        query.equalTo('userid',userId)
         query.equalTo('username',search)
         let searchResult = await query.find();
         
         if(searchResult.length>0){
+        
             let mappedHanouts = searchResult.map(s=>{return {username:s.attributes.username, email:s.attributes.email,state:s.attributes.state}})
                             
              dispatch({ type: actionTypes.FETCH_HANGOUT_SUCCESS, hangouts:mappedHanouts })
         }  
         else{
+      
             // search HangoutUser
             const HangoutUser = Parse.Object.extend("HangoutUser");
             const query = new Parse.Query(HangoutUser);
@@ -25,7 +27,7 @@ export async function fetchHangouts({ search, dispatch }) {
             
         }
     } catch (error) {
-        
+        debugger;
         dispatch({type:actionTypes.ERROR_RECIEVED,error})
     }
 

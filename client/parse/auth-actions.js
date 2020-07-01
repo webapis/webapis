@@ -1,10 +1,6 @@
 import actionTypes from '../auth/actionTypes';
 import {serverValidation} from '../form/actions'
-Parse.initialize("zttpnqTr8refktBWNekZhZxSxwPaAAnElQ9k7CuA","Q7SHSFLG618izbySMpAsFAqgnOLaYgxNlwfFhOAr"); //PASTE HERE YOUR Back4App APPLICATION ID AND YOUR JavaScript KEY
-Parse.serverURL = `https://${ip}:1337/parse`
-//Parse.liveQueryServerURL = `https://${ip}:1337/parse`
-//Parse.serverURL = 'https://parseapi.back4app.com/'
-//Parse.liveQueryServerURL = `wss://webapis.back4app.io`
+
 export async function signUp({dispatch,state,formDispatch}) {
   try {
     const {username,password,email}=state
@@ -33,13 +29,14 @@ export async function signUp({dispatch,state,formDispatch}) {
         objectId:success.id
       })
     );
+   
     const HangoutUser = Parse.Object.extend("HangoutUser");
     const hangoutUser = new HangoutUser();
     hangoutUser.set('username',username)
     hangoutUser.set('email',email)
     hangoutUser.set('userid',success.id)
     await  hangoutUser.save()
-    dispatch({type:actionTypes.SIGNUP_SUCCESS,user:{username,email,token:success.get('sessionToken')}})
+    dispatch({type:actionTypes.SIGNUP_SUCCESS,user:{username,email,token:success.get('sessionToken'),objectId:success.id}})
   } catch (error) {
     debugger
     formDispatch(serverValidation({status:error.code}))
@@ -67,7 +64,8 @@ export function login({dispatch,state,formDispatch}) {
               objectId:user.id
             })
           );
-        dispatch({type:actionTypes.LOGIN_SUCCESS,user:{username,email,token}})
+      
+        dispatch({type:actionTypes.LOGIN_SUCCESS,user:{username,email,token,objectId:user.id}})
             console.log('User created successful with name: ' + user.get("username") + ' and email: ' + user.get("email"));
     }).catch(function(error){
        
