@@ -1,6 +1,7 @@
 import { h } from 'preact';
 import { TextInput } from '../../components/TextInput';
 import { Button } from '../../components/Button';
+import AsyncButton from '../../components/async-button'
 const styles = {
   root: {
     display: 'flex',
@@ -31,7 +32,7 @@ const styles = {
     flex: 1,
   }
 };
-export function MessageEditor({ messageText, onMessageText, onMessage,hangout }) {
+export function MessageEditor({ loading,messageText, onMessageText, onMessage,hangout }) {
   return (
     <div style={styles.root}>
      <div style={{flex:1}}>
@@ -40,7 +41,9 @@ export function MessageEditor({ messageText, onMessageText, onMessage,hangout })
    
       
       <div style={{marginLeft:3}}>
-        <Button disabled={hangout &&hangout.state==='BLOCKED'}  style={styles.btn}  title="send" id='MESSAGE' onClick={onMessage} data-testid='send-btn'/>
+        <AsyncButton loading={loading} disabled={hangout &&hangout.state==='BLOCKED'}  style={styles.btn}   id='MESSAGE' onClick={onMessage} data-testid='send-btn'>
+SENT
+        </AsyncButton>
       </div>
     </div>
   );

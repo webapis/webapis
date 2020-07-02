@@ -2,6 +2,7 @@ import { h } from 'preact';
 import { useEffect } from 'preact/hooks';
 import Input from '../form/Input';
 import Button from '../form/Button';
+import AsyncButton from '../components/async-button'
 import Form from '../form/Form';
 import validationTypes from '../form/validationTypes';
 import { useAuthContext } from './auth-context';
@@ -19,7 +20,7 @@ export default function Login({login}) {
   const {state, dispatch} = useAuthContext();
   const {dispatch:formDispatch}=useFormContext()
 
-  const { emailorusername, password, error } =state;
+  const { emailorusername, password, error,loading } =state;
 
   useEffect(() => {
     if (state.user&& state.user.token) {
@@ -84,13 +85,15 @@ export default function Login({login}) {
             ]}
           />
 
-          <Button
+          <AsyncButton
             type='button'
             id='login-btn'
             data-testid='login-btn'
             onClick={login}
-            title='LOGIN'
-          />
+            loading={loading}
+          >
+            LOGIN
+          </AsyncButton>
           <a href='/' onClick={handleRoute} id='forgotpassword' data-testid='forgotpassword'>
             Forgot Password!
           </a>

@@ -59,16 +59,16 @@ describe('onHangout', () => {
    
       cy.get('[data-testid=messageTextInput]').type('Lets chat on Hangout');
    
-      // cy.get('[data-testid=oninvite-btn]').click();
-      // cy.get('[data-testid=invitee-ui]');
+       cy.get('[data-testid=oninvite-btn]').click();
+      cy.get('[data-testid=invitee-ui]');
     
-      // cy.visit('/');
-      // cy.wait(50);
-      // cy.get('[data-testid=menu]').click();
-      // cy.get('[data-testid=hangouts]').click();
-      // cy.get('[data-testid=bero]').click();
-      // cy.get('[data-testid=invitee-ui]');
-
+      cy.visit('/');
+      cy.wait(50);
+      cy.get('[data-testid=menu]').click();
+      cy.get('[data-testid=hangouts]').click();
+      cy.get('[data-testid=bero]').click();
+      cy.get('[data-testid=invitee-ui]');
+      
        //--- onAccept
       if(Cypress.env('back')==="node"){
         cy.loginByEmail({
@@ -79,27 +79,27 @@ describe('onHangout', () => {
   
 
 
-      // if(Cypress.env('back')==="parse"){
-      //   cy.loginParse({email:'bero@gmail.com', password:'Dragonfly2020_!'})
-      // }
-      // cy.visit('/');
-      // cy.wait(50);
-      // cy.get('[data-testid=menu]').click();
-      // cy.wait(50);
-      // cy.get('[data-testid=hangouts]').click();
+      if(Cypress.env('back')==="parse"){
+        cy.loginParse({email:'bero@gmail.com', password:'Dragonfly2020_!'})
+      }
+      cy.visit('/');
+      cy.wait(50);
+      cy.get('[data-testid=menu]').click();
+      cy.wait(50);
+      cy.get('[data-testid=hangouts]').click();
    
-      // cy.get('[data-testid=search-input]').type('demo');
+      cy.get('[data-testid=search-input]').type('demo');
     
-      // cy.get('[data-testid=search-btn]').click();
+      cy.get('[data-testid=search-btn]').click();
     
-      // cy.get('[data-testid=demo]').click();
+      cy.get('[data-testid=demo]').click();
     
-      // cy.get('[data-testid=accept-btn]').click();
-      // cy.get('[data-testid=hangchat-ui]');
-      // // bero sends message
-      // cy.get('[data-testid=message-input]').type('Ok demo lets chat!');
-      // cy.get('[data-testid=send-btn]').click();
-      // cy.get('[data-testid=message]').contains('Ok demo lets chat!');
+      cy.get('[data-testid=accept-btn]').click();
+      cy.get('[data-testid=hangchat-ui]');
+      // bero sends message
+      cy.get('[data-testid=message-input]').type('Ok demo lets chat!');
+      cy.get('[data-testid=send-btn]').click();
+      cy.get('[data-testid=message]').contains('Ok demo lets chat!');
 
     
       // demo recieves the message
@@ -109,20 +109,20 @@ describe('onHangout', () => {
           password: 'Dragonfly1977!!!',
         });
       }
-      // if(Cypress.env('back')==="parse"){
-      //   cy.loginParse({email:'demo@gmail.com', password:'Dragonfly2020_!'})
-      // }
-      // cy.visit('/');
-      // cy.wait(50);
-      // cy.get('[data-testid=menu]').click();
-      // cy.wait(50);
-      // cy.get('[data-testid=hangouts]').click();
-      // cy.get('[data-testid=bero]').click();
-      // cy.pause()
-      // cy.get('[data-testid=message]').contains('Ok demo lets chat!');
+      if(Cypress.env('back')==="parse"){
+        cy.loginParse({email:'demo@gmail.com', password:'Dragonfly2020_!'})
+      }
+      cy.visit('/');
+      cy.wait(50);
+      cy.get('[data-testid=menu]').click();
+      cy.wait(50);
+      cy.get('[data-testid=hangouts]').click();
+      cy.get('[data-testid=bero]').click();
+    
+      cy.get('[data-testid=message]').contains('Ok demo lets chat!');
 
-      //cy.deleteUserParse({username:'demo'})
-    //  cy.deleteUserParse({username:'bero'})
+      cy.deleteUserParse({username:'demo'})
+     cy.deleteUserParse({username:'bero'})
     });
   });
 

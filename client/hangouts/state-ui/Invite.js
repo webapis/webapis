@@ -5,7 +5,7 @@ import { TextInput } from '../../components/TextInput';
 import { Button } from '../../components/Button';
 import { Center } from '../../layout/Center';
 import { Layout } from '../state-ui/Layout';
-import {resetHangout} from '../state/actions'
+import AsyncButton from '../../components/async-button'
 const style = {
   layout: {
     display: 'flex',
@@ -14,7 +14,7 @@ const style = {
   },
 };
 //
-export default function Invite({ hangout, onInvite, onMessageText,messageText, value }) {
+export default function Invite({ hangout, onInvite, onMessageText,messageText, loading }) {
 
   
   return (
@@ -27,7 +27,9 @@ export default function Invite({ hangout, onInvite, onMessageText,messageText, v
       </Center>
       <TextInput id="messageTextInput" onChange={onMessageText} value={messageText} />
       <Center>
-        <Button title="Send Invite" id="INVITE" onClick={onInvite} data-testid='oninvite-btn' />
+        <AsyncButton loading={loading}  id="INVITE" onClick={onInvite} data-testid='oninvite-btn' >
+          SEND INVITE
+        </AsyncButton>
       </Center>
     </Layout>
   );

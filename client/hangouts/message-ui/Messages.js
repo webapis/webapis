@@ -24,7 +24,8 @@ export function Messages({
   messageText,
   username,
   hangout,
-  onNavigation
+  onNavigation,
+  loading
 }) {
   const scrollerRef = useRef(null);
 const {device}=useMediaQuery()
@@ -57,6 +58,7 @@ const {device}=useMediaQuery()
       </div>
       <div style={{flex:1}}>
         <MessageEditor
+         loading={loading}
           hangout={hangout}
           onMessage={onSend}
           messageText={messageText}

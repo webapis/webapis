@@ -2,6 +2,7 @@ import { h } from 'preact';
 import { Button } from '../../components/Button';
 import { Message } from '../message-ui/Message';
 import { Layout } from '../state-ui/Layout';
+import AsyncButton from '../../components/async-button'
 const style = {
   root: {
     display: 'flex',
@@ -16,7 +17,7 @@ const style = {
   },
 };
 
-export default function Inviter({ hangout, onAccept, onDecline }) {
+export default function Inviter({ hangout, onAccept, onDecline,loading }) {
  
   return (
     <Layout id="inviter-ui">
@@ -43,13 +44,15 @@ export default function Inviter({ hangout, onAccept, onDecline }) {
             title="Decline"
             style={{ flex: 1, marginRight: 4, color: 'red' }}
           />
-          <Button
+          <AsyncButton
             id="ACCEPT"
             onClick={onAccept}
             data-testid="accept-btn"
-            title="Accept"
             style={{ flex: 1, marginLeft: 4, color: 'green' }}
-          />
+            loading={loading}
+          >
+            ACCEPT
+          </AsyncButton>
         </div>
       </div>
     </Layout>

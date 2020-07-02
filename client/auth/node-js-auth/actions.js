@@ -42,7 +42,7 @@ export async function login({ dispatch, state, formDispatch }) {
       );
     } else if (response.status === 400) {
       const { errors } = result;
-     
+      dispatch({type:actionTypes.LOGIN_FAILED})
       errors.forEach((error) => {
         formDispatch(
           serverValidation({
@@ -89,6 +89,7 @@ export async function signup({ dispatch, formDispatch, state }) {
     } else if (response.status === 400) {
       debugger;
       const { errors } = result;
+      
       errors.forEach((error) => {
         formDispatch(
           serverValidation({
@@ -96,6 +97,7 @@ export async function signup({ dispatch, formDispatch, state }) {
           })
         );
       });
+      dispatch({type:actionTypes.SIGNUP_FAILED})
     } else {
       throw new Error('Signup failed');
     }

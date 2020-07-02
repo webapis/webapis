@@ -15,6 +15,7 @@ const UnreadHangouts = lazy(() => import('./UnreadHangouts'));
 export default function Mobile(props) {
   const {fetchHangout}=props
   const {
+    state,
     hangout,
     hangouts,
     onHangout,
@@ -35,7 +36,7 @@ export default function Mobile(props) {
     onSelectUnread,
     onRemoveUnread
   } = useHangouts({fetchHangout});
-
+const {loading}=state
   return (
     <div style={{ height: '100%', width: '100%' }}>
       <FeatureRoute path="/hangouts">
@@ -72,6 +73,7 @@ export default function Mobile(props) {
       >
         <Suspense fallback={<div>Loading...</div>}>
           <Hangchat
+          loading={loading}
           onNavigation={onNavigation}
             hangout={hangout}
             onMessageText={onMessageText}
@@ -87,6 +89,7 @@ export default function Mobile(props) {
       <FeatureRoute path="/INVITE">
         <Suspense fallback={<div>Loading...</div>}>
           <Invite
+          loading={loading}
             hangout={hangout}
             onInvite={onHangout}
             onMessageText={onMessageText}
@@ -96,12 +99,13 @@ export default function Mobile(props) {
       </FeatureRoute>
       <FeatureRoute paths={['/INVITED', '/DECLINER']}>
         <Suspense fallback={<div>Loading...</div>}>
-          <Invitee hangout={hangout} />
+          <Invitee hangout={hangout} loading={loading}/>
         </Suspense>
       </FeatureRoute>
       <FeatureRoute path="/INVITER">
         <Suspense fallback={<div>Loading...</div>}>
           <Inviter
+          loading={loading}
             hangout={hangout}
             onAccept={onHangout}
             onDecline={onHangout}

@@ -64,10 +64,17 @@ export default function StorybookDrawerContent({toggleDrawer }) {
         </ListItem>
         </List>
         </Accordion>
-        <Accordion title="Icons" id="0">
+        <Accordion title="Icons" id="1">
           <List>
           <ListItem id="icons" onClick={handleRoute}>
          Icons
+        </ListItem>
+          </List>
+        </Accordion>
+        <Accordion title="Components" id="2">
+        <List>
+          <ListItem id="asyncbutton" onClick={handleRoute}>
+         AsyncButton
         </ListItem>
           </List>
         </Accordion>

@@ -290,3 +290,375 @@
 {"level":"info","message":"Create new client: 35eeefaf-0253-4564-9638-c2aba4fde6e8","timestamp":"2020-07-01T16:46:35.544Z"}
 {"level":"info","message":"Parse LiveQuery Server starts running","timestamp":"2020-07-01T16:51:19.044Z"}
 {"level":"info","message":"Create new client: ff850fcf-d5ed-4d2d-b997-d64df2092880","timestamp":"2020-07-01T16:51:24.516Z"}
+{"level":"info","message":"Parse LiveQuery Server starts running","timestamp":"2020-07-01T16:52:47.459Z"}
+{"level":"info","message":"Create new client: 525927f0-6690-40e4-a764-1e4c672d0d46","timestamp":"2020-07-01T16:52:52.662Z"}
+{"level":"info","message":"Create new client: f3932d93-63b2-4c33-a545-57569110228d","timestamp":"2020-07-01T16:57:44.729Z"}
+{"level":"info","message":"Client disconnect: f3932d93-63b2-4c33-a545-57569110228d","timestamp":"2020-07-01T16:58:01.394Z"}
+{"level":"info","message":"Create new client: 4a809fcc-4751-4ad6-8382-db5403aee895","timestamp":"2020-07-01T16:58:21.182Z"}
+{"level":"info","message":"Client disconnect: 4a809fcc-4751-4ad6-8382-db5403aee895","timestamp":"2020-07-01T16:58:23.174Z"}
+{"level":"info","message":"Create new client: 43fa541b-f57d-42ec-b8f2-13af58d6823e","timestamp":"2020-07-01T16:58:40.635Z"}
+{"level":"info","message":"Client disconnect: 43fa541b-f57d-42ec-b8f2-13af58d6823e","timestamp":"2020-07-01T16:59:23.802Z"}
+{"level":"info","message":"Create new client: a36828fe-b24b-4a76-8667-aa164433f9ad","timestamp":"2020-07-01T16:59:24.536Z"}
+{"level":"info","message":"Create new client: 2607378f-ec32-41fe-b80e-2673bbbbed41","timestamp":"2020-07-01T16:59:24.550Z"}
+{"level":"info","message":"Client disconnect: a36828fe-b24b-4a76-8667-aa164433f9ad","timestamp":"2020-07-01T17:03:40.277Z"}
+{"level":"info","message":"Client disconnect: 2607378f-ec32-41fe-b80e-2673bbbbed41","timestamp":"2020-07-01T17:03:40.279Z"}
+{"level":"info","message":"Create new client: 165011fb-214e-4cf8-b1b1-de6f77d26138","timestamp":"2020-07-01T17:03:40.568Z"}
+{"level":"info","message":"Create new client: 6e83699c-1ae4-49b3-a0f9-88cfad268805","timestamp":"2020-07-01T17:03:40.580Z"}
+{"level":"info","message":"Client disconnect: 165011fb-214e-4cf8-b1b1-de6f77d26138","timestamp":"2020-07-01T17:04:55.718Z"}
+{"level":"info","message":"Client disconnect: 6e83699c-1ae4-49b3-a0f9-88cfad268805","timestamp":"2020-07-01T17:04:55.720Z"}
+{"level":"info","message":"Create new client: a1f7a695-0cf7-4986-983b-ddc14c8fd0c7","timestamp":"2020-07-01T17:04:56.061Z"}
+{"level":"info","message":"Create new client: 1a798ea8-13ed-4e1f-8c6a-743f9d3a8af3","timestamp":"2020-07-01T17:04:56.071Z"}
+{"level":"info","message":"Client disconnect: a1f7a695-0cf7-4986-983b-ddc14c8fd0c7","timestamp":"2020-07-01T17:11:30.386Z"}
+{"level":"info","message":"Client disconnect: 1a798ea8-13ed-4e1f-8c6a-743f9d3a8af3","timestamp":"2020-07-01T17:11:30.388Z"}
+{"level":"info","message":"Create new client: 600963c2-7023-41d2-a418-0f8b9209772e","timestamp":"2020-07-01T17:11:51.150Z"}
+{"level":"info","message":"Create new client: 326734d0-b8e0-4b0e-b195-527d5cac437c","timestamp":"2020-07-01T17:11:51.171Z"}
+{"level":"info","message":"Client disconnect: 600963c2-7023-41d2-a418-0f8b9209772e","timestamp":"2020-07-01T17:15:11.358Z"}
+{"level":"info","message":"Client disconnect: 326734d0-b8e0-4b0e-b195-527d5cac437c","timestamp":"2020-07-01T17:15:11.359Z"}
+{"level":"info","message":"Create new client: d3c9fc44-076b-443b-8ea7-13bb933d0f85","timestamp":"2020-07-01T17:15:39.127Z"}
+{"level":"info","message":"Create new client: 32a843d5-ecff-46d3-8c7c-6052dac9cb52","timestamp":"2020-07-01T17:15:39.148Z"}
+{"level":"info","message":"Client disconnect: d3c9fc44-076b-443b-8ea7-13bb933d0f85","timestamp":"2020-07-01T17:19:18.780Z"}
+{"level":"info","message":"Client disconnect: 32a843d5-ecff-46d3-8c7c-6052dac9cb52","timestamp":"2020-07-01T17:19:18.782Z"}
+{"level":"info","message":"Create new client: 7ae3199f-46c6-4947-a5ff-cdbaccbae29d","timestamp":"2020-07-01T17:19:19.042Z"}
+{"level":"info","message":"Create new client: 91b92b44-e9bd-4711-92d5-fcfe2d9d8f82","timestamp":"2020-07-01T17:19:19.058Z"}
+{"level":"info","message":"Client disconnect: 7ae3199f-46c6-4947-a5ff-cdbaccbae29d","timestamp":"2020-07-01T17:20:43.505Z"}
+{"level":"info","message":"Client disconnect: 91b92b44-e9bd-4711-92d5-fcfe2d9d8f82","timestamp":"2020-07-01T17:20:43.507Z"}
+{"level":"info","message":"Create new client: 4c5cc926-bff3-438a-bc3b-4f99e6420c6a","timestamp":"2020-07-01T17:20:43.762Z"}
+{"level":"info","message":"Create new client: 1eb74001-6eec-448d-9548-6f20dfeda06a","timestamp":"2020-07-01T17:20:43.781Z"}
+{"level":"info","message":"Client disconnect: 4c5cc926-bff3-438a-bc3b-4f99e6420c6a","timestamp":"2020-07-01T17:23:06.105Z"}
+{"level":"info","message":"Client disconnect: 1eb74001-6eec-448d-9548-6f20dfeda06a","timestamp":"2020-07-01T17:23:06.106Z"}
+{"level":"info","message":"Create new client: 5469a441-caff-43f6-bf08-d3591409f107","timestamp":"2020-07-01T17:23:24.705Z"}
+{"level":"info","message":"Create new client: 3ad44370-def8-40c5-8eef-6ab720fdaced","timestamp":"2020-07-01T17:23:24.737Z"}
+{"level":"info","message":"Client disconnect: 5469a441-caff-43f6-bf08-d3591409f107","timestamp":"2020-07-01T17:23:40.990Z"}
+{"level":"info","message":"Client disconnect: 3ad44370-def8-40c5-8eef-6ab720fdaced","timestamp":"2020-07-01T17:23:40.992Z"}
+{"level":"info","message":"Create new client: d8e6acb5-bac0-472f-b5f3-86d8bc14510f","timestamp":"2020-07-01T17:23:55.392Z"}
+{"level":"info","message":"Create new client: c17fe9d1-c8dc-4fac-9074-51aa8a83d4b6","timestamp":"2020-07-01T17:23:55.413Z"}
+{"level":"info","message":"Client disconnect: d8e6acb5-bac0-472f-b5f3-86d8bc14510f","timestamp":"2020-07-01T17:25:44.726Z"}
+{"level":"info","message":"Client disconnect: c17fe9d1-c8dc-4fac-9074-51aa8a83d4b6","timestamp":"2020-07-01T17:25:44.727Z"}
+{"level":"info","message":"Create new client: 1ba71a4f-4f5d-482f-af1e-3ff786917f36","timestamp":"2020-07-01T17:26:00.580Z"}
+{"level":"info","message":"Create new client: e6608229-8e5d-4dcd-8415-0577f7832515","timestamp":"2020-07-01T17:26:00.600Z"}
+{"level":"info","message":"Client disconnect: 1ba71a4f-4f5d-482f-af1e-3ff786917f36","timestamp":"2020-07-01T17:28:13.032Z"}
+{"level":"info","message":"Client disconnect: e6608229-8e5d-4dcd-8415-0577f7832515","timestamp":"2020-07-01T17:28:13.033Z"}
+{"level":"info","message":"Create new client: 1709d097-e8d5-4ff8-8ef3-a8dc8418f912","timestamp":"2020-07-01T17:28:33.856Z"}
+{"level":"info","message":"Create new client: 514c8e93-df17-4108-8a34-b4f75c088523","timestamp":"2020-07-01T17:28:33.875Z"}
+{"level":"info","message":"Client disconnect: 1709d097-e8d5-4ff8-8ef3-a8dc8418f912","timestamp":"2020-07-01T17:30:07.828Z"}
+{"level":"info","message":"Client disconnect: 514c8e93-df17-4108-8a34-b4f75c088523","timestamp":"2020-07-01T17:30:07.829Z"}
+{"level":"info","message":"Create new client: 798db36e-93d4-47c1-a802-5b0d25b65a21","timestamp":"2020-07-01T17:30:08.101Z"}
+{"level":"info","message":"Create new client: 2362448c-85c3-4f6d-9f50-ad4b3b74762d","timestamp":"2020-07-01T17:30:08.118Z"}
+{"level":"info","message":"Client disconnect: 798db36e-93d4-47c1-a802-5b0d25b65a21","timestamp":"2020-07-01T17:30:16.694Z"}
+{"level":"info","message":"Client disconnect: 2362448c-85c3-4f6d-9f50-ad4b3b74762d","timestamp":"2020-07-01T17:30:16.696Z"}
+{"level":"info","message":"Create new client: fee3eaae-29a5-4dbd-97fa-cea4a5f7705a","timestamp":"2020-07-01T17:30:41.612Z"}
+{"level":"info","message":"Create new client: 9d48c7ce-2aa3-475c-89ca-a544be8cb788","timestamp":"2020-07-01T17:30:41.631Z"}
+{"level":"info","message":"Client disconnect: fee3eaae-29a5-4dbd-97fa-cea4a5f7705a","timestamp":"2020-07-01T17:31:48.586Z"}
+{"level":"info","message":"Client disconnect: 9d48c7ce-2aa3-475c-89ca-a544be8cb788","timestamp":"2020-07-01T17:31:48.587Z"}
+{"level":"info","message":"Create new client: 6cee37a4-a00b-4551-8474-5f9b79475645","timestamp":"2020-07-01T17:31:59.996Z"}
+{"level":"info","message":"Create new client: 0c471ab4-5e88-458c-a019-789673982e69","timestamp":"2020-07-01T17:32:00.013Z"}
+{"message":"Object not found.","code":101,"level":"error","stack":"Error: Object not found.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\Adapters\\Storage\\Mongo\\MongoStorageAdapter.js:534:19\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T17:32:00.162Z"}
+{"level":"info","message":"Client disconnect: 6cee37a4-a00b-4551-8474-5f9b79475645","timestamp":"2020-07-01T17:32:38.119Z"}
+{"level":"info","message":"Client disconnect: 0c471ab4-5e88-458c-a019-789673982e69","timestamp":"2020-07-01T17:32:38.120Z"}
+{"level":"info","message":"Create new client: b35f7b2c-34c9-44b3-8d11-c788d59585d9","timestamp":"2020-07-01T17:32:48.543Z"}
+{"level":"info","message":"Create new client: 433d0c43-b001-4163-8efc-62380da6db99","timestamp":"2020-07-01T17:32:48.563Z"}
+{"message":"Object not found.","code":101,"level":"error","stack":"Error: Object not found.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\Adapters\\Storage\\Mongo\\MongoStorageAdapter.js:534:19\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T17:32:48.658Z"}
+{"message":"Object not found.","code":101,"level":"error","stack":"Error: Object not found.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\Adapters\\Storage\\Mongo\\MongoStorageAdapter.js:534:19\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T17:32:48.666Z"}
+{"level":"info","message":"Client disconnect: 433d0c43-b001-4163-8efc-62380da6db99","timestamp":"2020-07-01T18:01:31.909Z"}
+{"level":"info","message":"Client disconnect: b35f7b2c-34c9-44b3-8d11-c788d59585d9","timestamp":"2020-07-01T18:01:31.912Z"}
+{"level":"info","message":"Client disconnect: 525927f0-6690-40e4-a764-1e4c672d0d46","timestamp":"2020-07-01T18:01:31.917Z"}
+{"level":"info","message":"Create new client: 486c60ee-47a6-47f7-a4d6-e5af37f37caa","timestamp":"2020-07-01T18:07:19.378Z"}
+{"level":"info","message":"Create new client: 10f134b5-1d1b-41b9-8b91-1d4f1dc0102c","timestamp":"2020-07-01T18:07:20.726Z"}
+{"level":"info","message":"Create new client: 4d47a01f-9818-4823-8914-d19736833b66","timestamp":"2020-07-01T18:07:33.314Z"}
+{"level":"info","message":"Create new client: 31214b5e-e07a-4a5e-85e9-0a033d28f8ac","timestamp":"2020-07-01T19:38:50.573Z"}
+{"level":"info","message":"Create new client: 0a4c017e-40fa-40fb-ad5e-2bfc45c3ac85","timestamp":"2020-07-01T19:38:50.592Z"}
+{"level":"info","message":"Client disconnect: 31214b5e-e07a-4a5e-85e9-0a033d28f8ac","timestamp":"2020-07-01T19:38:54.088Z"}
+{"level":"info","message":"Client disconnect: 0a4c017e-40fa-40fb-ad5e-2bfc45c3ac85","timestamp":"2020-07-01T19:38:54.089Z"}
+{"level":"info","message":"Create new client: a0bb83a9-aadd-4527-baa6-0333bb73fe76","timestamp":"2020-07-01T19:40:03.853Z"}
+{"level":"info","message":"Create new client: 5fb5b2b5-d7da-49f6-b782-0da016d9e2dd","timestamp":"2020-07-01T19:40:03.867Z"}
+{"level":"info","message":"Client disconnect: a0bb83a9-aadd-4527-baa6-0333bb73fe76","timestamp":"2020-07-01T19:40:45.417Z"}
+{"level":"info","message":"Client disconnect: 5fb5b2b5-d7da-49f6-b782-0da016d9e2dd","timestamp":"2020-07-01T19:40:45.417Z"}
+{"level":"info","message":"Create new client: 5bfdfa2a-6dac-4592-8def-568e96d043e4","timestamp":"2020-07-01T19:40:45.691Z"}
+{"level":"info","message":"Create new client: 96ec76cc-aaed-4097-b14b-74c11a66fc78","timestamp":"2020-07-01T19:40:45.710Z"}
+{"level":"info","message":"Client disconnect: 5bfdfa2a-6dac-4592-8def-568e96d043e4","timestamp":"2020-07-01T19:40:47.762Z"}
+{"level":"info","message":"Client disconnect: 96ec76cc-aaed-4097-b14b-74c11a66fc78","timestamp":"2020-07-01T19:40:47.763Z"}
+{"level":"info","message":"Create new client: f52e650a-786c-45fd-854c-ff37ff5cedf3","timestamp":"2020-07-01T19:41:03.834Z"}
+{"level":"info","message":"Create new client: 103ab5ec-33a7-4fd2-936f-2f10941d54d3","timestamp":"2020-07-01T19:41:03.850Z"}
+{"level":"info","message":"Client disconnect: f52e650a-786c-45fd-854c-ff37ff5cedf3","timestamp":"2020-07-01T19:42:12.758Z"}
+{"level":"info","message":"Client disconnect: 103ab5ec-33a7-4fd2-936f-2f10941d54d3","timestamp":"2020-07-01T19:42:12.758Z"}
+{"level":"info","message":"Create new client: 9c2c6e28-37b8-4131-8081-ee2279ba6edd","timestamp":"2020-07-01T19:42:12.992Z"}
+{"level":"info","message":"Create new client: ee8ef876-f5e3-4ba4-bb73-1427cfa9ca3a","timestamp":"2020-07-01T19:42:13.011Z"}
+{"level":"info","message":"Client disconnect: 9c2c6e28-37b8-4131-8081-ee2279ba6edd","timestamp":"2020-07-01T19:42:15.430Z"}
+{"level":"info","message":"Client disconnect: ee8ef876-f5e3-4ba4-bb73-1427cfa9ca3a","timestamp":"2020-07-01T19:42:15.432Z"}
+{"level":"info","message":"Create new client: 95689307-b7df-47b4-a3e1-d88f0033c8e9","timestamp":"2020-07-01T19:42:41.428Z"}
+{"level":"info","message":"Create new client: 1d46c25f-f072-4369-af52-b82f16897ffb","timestamp":"2020-07-01T19:42:41.444Z"}
+{"level":"info","message":"Client disconnect: 95689307-b7df-47b4-a3e1-d88f0033c8e9","timestamp":"2020-07-01T19:43:35.647Z"}
+{"level":"info","message":"Client disconnect: 1d46c25f-f072-4369-af52-b82f16897ffb","timestamp":"2020-07-01T19:43:35.648Z"}
+{"level":"info","message":"Create new client: 4dd43dff-3afc-4505-8785-2225ed64ea7c","timestamp":"2020-07-01T19:43:35.892Z"}
+{"level":"info","message":"Create new client: 0a118e4a-b337-4bd5-b9a6-b0c4cc67685e","timestamp":"2020-07-01T19:43:35.908Z"}
+{"level":"info","message":"Client disconnect: 4dd43dff-3afc-4505-8785-2225ed64ea7c","timestamp":"2020-07-01T19:43:38.073Z"}
+{"level":"info","message":"Client disconnect: 0a118e4a-b337-4bd5-b9a6-b0c4cc67685e","timestamp":"2020-07-01T19:43:38.077Z"}
+{"level":"info","message":"Create new client: f7384a79-b726-45cd-81ff-3b21d58b2c39","timestamp":"2020-07-01T19:43:51.639Z"}
+{"level":"info","message":"Create new client: 06d6fa89-c7ec-489d-9373-cc6e46514154","timestamp":"2020-07-01T19:43:51.664Z"}
+{"level":"info","message":"Client disconnect: f7384a79-b726-45cd-81ff-3b21d58b2c39","timestamp":"2020-07-01T19:48:10.780Z"}
+{"level":"info","message":"Client disconnect: 06d6fa89-c7ec-489d-9373-cc6e46514154","timestamp":"2020-07-01T19:48:10.781Z"}
+{"level":"info","message":"Create new client: 41df549f-4896-44bd-8ba4-f7aae9af2bcd","timestamp":"2020-07-01T19:48:23.935Z"}
+{"level":"info","message":"Create new client: 9ab07871-cd8b-4ac4-b50b-02a0669aaa03","timestamp":"2020-07-01T19:48:23.971Z"}
+{"message":"Object not found.","code":101,"level":"error","stack":"Error: Object not found.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\Adapters\\Storage\\Mongo\\MongoStorageAdapter.js:534:19\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T19:48:24.028Z"}
+{"level":"info","message":"Client disconnect: 41df549f-4896-44bd-8ba4-f7aae9af2bcd","timestamp":"2020-07-01T19:53:12.795Z"}
+{"level":"info","message":"Client disconnect: 9ab07871-cd8b-4ac4-b50b-02a0669aaa03","timestamp":"2020-07-01T19:53:12.796Z"}
+{"level":"info","message":"Create new client: e540722f-ba51-4eb4-b3f4-4b0100915205","timestamp":"2020-07-01T19:53:14.317Z"}
+{"level":"info","message":"Create new client: 7cf7eac9-d45d-4627-bce6-0c7c42c01640","timestamp":"2020-07-01T19:53:14.335Z"}
+{"level":"info","message":"Client disconnect: e540722f-ba51-4eb4-b3f4-4b0100915205","timestamp":"2020-07-01T19:53:30.989Z"}
+{"level":"info","message":"Client disconnect: 7cf7eac9-d45d-4627-bce6-0c7c42c01640","timestamp":"2020-07-01T19:53:30.990Z"}
+{"level":"info","message":"Create new client: 4544a6af-9d21-44cf-af7b-e5c8f614dda7","timestamp":"2020-07-01T19:53:31.231Z"}
+{"level":"info","message":"Create new client: 6bccb758-4aba-42c5-9bea-7e613ad6eef9","timestamp":"2020-07-01T19:53:31.246Z"}
+{"level":"info","message":"Client disconnect: 4544a6af-9d21-44cf-af7b-e5c8f614dda7","timestamp":"2020-07-01T19:53:36.910Z"}
+{"level":"info","message":"Client disconnect: 6bccb758-4aba-42c5-9bea-7e613ad6eef9","timestamp":"2020-07-01T19:53:36.912Z"}
+{"level":"info","message":"Create new client: 2d9594f7-6b90-4968-b076-825b1af00721","timestamp":"2020-07-01T19:53:37.100Z"}
+{"level":"info","message":"Create new client: 051d4a2f-9966-40e6-9aa0-4cfb6ce584a5","timestamp":"2020-07-01T19:53:37.120Z"}
+{"level":"info","message":"Client disconnect: 2d9594f7-6b90-4968-b076-825b1af00721","timestamp":"2020-07-01T19:54:19.472Z"}
+{"level":"info","message":"Client disconnect: 051d4a2f-9966-40e6-9aa0-4cfb6ce584a5","timestamp":"2020-07-01T19:54:19.474Z"}
+{"level":"info","message":"Create new client: fccafb40-8fe1-4b80-9286-459c62b74cfa","timestamp":"2020-07-01T19:54:19.833Z"}
+{"level":"info","message":"Create new client: 0d89dbe7-a9f9-4da4-823c-64bf9eca04b9","timestamp":"2020-07-01T19:54:19.854Z"}
+{"level":"info","message":"Client disconnect: fccafb40-8fe1-4b80-9286-459c62b74cfa","timestamp":"2020-07-01T19:54:23.337Z"}
+{"level":"info","message":"Client disconnect: 0d89dbe7-a9f9-4da4-823c-64bf9eca04b9","timestamp":"2020-07-01T19:54:23.338Z"}
+{"level":"info","message":"Create new client: 4b2900bf-0aea-4c79-a1a8-c1eb9277de66","timestamp":"2020-07-01T19:54:23.561Z"}
+{"level":"info","message":"Create new client: e7386da4-2d5c-4ee8-a978-b123d28056c7","timestamp":"2020-07-01T19:54:23.576Z"}
+{"level":"info","message":"Client disconnect: 4b2900bf-0aea-4c79-a1a8-c1eb9277de66","timestamp":"2020-07-01T19:54:34.279Z"}
+{"level":"info","message":"Client disconnect: e7386da4-2d5c-4ee8-a978-b123d28056c7","timestamp":"2020-07-01T19:54:34.283Z"}
+{"level":"info","message":"Create new client: 6d3691bb-5fbe-4566-84c9-5d29393b7b68","timestamp":"2020-07-01T19:54:34.630Z"}
+{"level":"info","message":"Create new client: 8b86745d-cc8d-4e4d-8372-ac49002b1def","timestamp":"2020-07-01T19:54:34.646Z"}
+{"level":"info","message":"Parse LiveQuery Server starts running","timestamp":"2020-07-01T19:59:11.760Z"}
+{"level":"info","message":"Create new client: e7f96626-1dcb-4eb7-8871-b2db831bea3a","timestamp":"2020-07-01T19:59:15.645Z"}
+{"message":"Invalid session token","code":209,"level":"error","stack":"Error: Invalid session token\n    at Object.getAuthForSessionToken (C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\Auth.js:105:11)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T19:59:15.761Z"}
+{"level":"info","message":"Create new client: 7195f58d-76ba-4135-8aee-4e3e0fc0b0b7","timestamp":"2020-07-01T19:59:17.633Z"}
+{"level":"info","message":"Create new client: 4ab82452-7daa-4b4f-9396-7a5e94625cdd","timestamp":"2020-07-01T19:59:20.671Z"}
+{"message":"Invalid session token","code":209,"level":"error","stack":"Error: Invalid session token\n    at Object.getAuthForSessionToken (C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\Auth.js:105:11)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T19:59:20.688Z"}
+{"level":"info","message":"Create new client: 465d76c5-8860-4080-b425-d059b0fffbf2","timestamp":"2020-07-01T19:59:28.551Z"}
+{"level":"info","message":"Create new client: d2a57f37-6232-451b-abc1-4b08c9d7000e","timestamp":"2020-07-01T19:59:28.608Z"}
+{"message":"Invalid session token","code":209,"level":"error","stack":"Error: Invalid session token\n    at Object.getAuthForSessionToken (C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\Auth.js:105:11)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T19:59:28.675Z"}
+{"message":"Invalid session token","code":209,"level":"error","stack":"Error: Invalid session token\n    at Object.getAuthForSessionToken (C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\Auth.js:105:11)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T19:59:28.710Z"}
+{"level":"info","message":"Client disconnect: 465d76c5-8860-4080-b425-d059b0fffbf2","timestamp":"2020-07-01T19:59:31.590Z"}
+{"level":"info","message":"Client disconnect: d2a57f37-6232-451b-abc1-4b08c9d7000e","timestamp":"2020-07-01T19:59:31.594Z"}
+{"level":"info","message":"Create new client: d8f10ed8-555f-42d6-bd69-ec3ed27256c9","timestamp":"2020-07-01T19:59:37.635Z"}
+{"level":"info","message":"Create new client: b82b1362-87ce-4bcd-b934-ef1da1cbb381","timestamp":"2020-07-01T19:59:46.011Z"}
+{"message":"Invalid username/password.","code":101,"level":"error","stack":"Error: Invalid username/password.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\Routers\\UsersRouter.js:88:19\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-01T19:59:59.522Z"}
+{"level":"info","message":"Client disconnect: d8f10ed8-555f-42d6-bd69-ec3ed27256c9","timestamp":"2020-07-01T20:00:59.205Z"}
+{"level":"info","message":"Client disconnect: 4ab82452-7daa-4b4f-9396-7a5e94625cdd","timestamp":"2020-07-01T20:00:59.207Z"}
+{"level":"info","message":"Client disconnect: 7195f58d-76ba-4135-8aee-4e3e0fc0b0b7","timestamp":"2020-07-01T20:00:59.209Z"}
+{"level":"info","message":"Client disconnect: e7f96626-1dcb-4eb7-8871-b2db831bea3a","timestamp":"2020-07-01T20:00:59.210Z"}
+{"level":"info","message":"Client disconnect: b82b1362-87ce-4bcd-b934-ef1da1cbb381","timestamp":"2020-07-01T20:00:59.215Z"}
+{"level":"info","message":"Create new client: e461aeb5-506d-4623-802e-da8dd7d5b404","timestamp":"2020-07-02T04:09:49.621Z"}
+{"level":"info","message":"Create new client: 23e15b18-94ed-4ba5-8b4e-78b910b4dcc1","timestamp":"2020-07-02T04:09:49.624Z"}
+{"message":"Invalid session token","code":209,"level":"error","stack":"Error: Invalid session token\n    at Object.getAuthForSessionToken (C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\Auth.js:105:11)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-02T04:09:49.667Z"}
+{"level":"info","message":"Create new client: e4229f13-c43b-4fc1-b7e3-5d13583bb2d0","timestamp":"2020-07-02T04:09:50.071Z"}
+{"level":"info","message":"Create new client: c5f511e5-5d6b-4f84-8f16-43f4ffa6a28f","timestamp":"2020-07-02T04:09:54.365Z"}
+{"level":"info","message":"Create new client: ca776ca9-1468-4c71-ac28-bfd082417a4c","timestamp":"2020-07-02T04:10:02.364Z"}
+{"message":"Invalid session token","code":209,"level":"error","stack":"Error: Invalid session token\n    at Object.getAuthForSessionToken (C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\Auth.js:105:11)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-02T04:10:02.386Z"}
+{"level":"info","message":"Parse LiveQuery Server starts running","timestamp":"2020-07-02T04:12:22.615Z"}
+{"level":"info","message":"Create new client: a0da271a-cffc-4a74-813e-458f86a0c0ed","timestamp":"2020-07-02T04:12:23.020Z"}
+{"level":"info","message":"Create new client: bc36ded1-179d-4eb5-97a8-b83d87177a5d","timestamp":"2020-07-02T04:12:23.066Z"}
+{"level":"info","message":"Create new client: ed2f9f1a-cec0-455a-b7d1-3bc190483ae7","timestamp":"2020-07-02T04:12:24.322Z"}
+{"message":"Invalid session token","code":209,"level":"error","stack":"Error: Invalid session token\n    at Object.getAuthForSessionToken (C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\Auth.js:105:11)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-02T04:12:24.392Z"}
+{"level":"info","message":"Create new client: 2c982cd8-36c4-4217-8e8b-24aa20de3070","timestamp":"2020-07-02T04:12:32.331Z"}
+{"message":"Invalid session token","code":209,"level":"error","stack":"Error: Invalid session token\n    at Object.getAuthForSessionToken (C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\Auth.js:105:11)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-02T04:12:32.390Z"}
+{"level":"info","message":"Create new client: 192e5df1-1e78-4e02-a5f3-82e002148194","timestamp":"2020-07-02T04:12:34.511Z"}
+{"level":"info","message":"Client disconnect: 192e5df1-1e78-4e02-a5f3-82e002148194","timestamp":"2020-07-02T04:13:17.081Z"}
+{"level":"info","message":"Create new client: 89602e4a-61a1-4aec-a25b-824e13478207","timestamp":"2020-07-02T04:13:22.698Z"}
+{"level":"info","message":"Create new client: e7bd7102-7edc-4ada-9b7c-3431f9b5a70a","timestamp":"2020-07-02T04:13:22.700Z"}
+{"level":"info","message":"Client disconnect: e7bd7102-7edc-4ada-9b7c-3431f9b5a70a","timestamp":"2020-07-02T04:16:47.002Z"}
+{"level":"info","message":"Client disconnect: 89602e4a-61a1-4aec-a25b-824e13478207","timestamp":"2020-07-02T04:16:47.003Z"}
+{"level":"info","message":"Create new client: 8d9777b8-3dc3-4749-80a1-dc978d1e29dd","timestamp":"2020-07-02T04:16:50.581Z"}
+{"level":"info","message":"Create new client: 23e38284-88ad-40ea-be63-d5201f77f331","timestamp":"2020-07-02T04:16:50.582Z"}
+{"level":"info","message":"Client disconnect: 8d9777b8-3dc3-4749-80a1-dc978d1e29dd","timestamp":"2020-07-02T04:17:42.370Z"}
+{"level":"info","message":"Client disconnect: 23e38284-88ad-40ea-be63-d5201f77f331","timestamp":"2020-07-02T04:17:42.371Z"}
+{"level":"info","message":"Create new client: 7928f594-ccd7-4c5c-b824-d8003ffde58c","timestamp":"2020-07-02T04:17:44.368Z"}
+{"level":"info","message":"Create new client: 8c23f825-cbe1-437c-bd32-e926090abede","timestamp":"2020-07-02T04:17:44.371Z"}
+{"level":"info","message":"Client disconnect: 8c23f825-cbe1-437c-bd32-e926090abede","timestamp":"2020-07-02T04:17:46.787Z"}
+{"level":"info","message":"Client disconnect: 7928f594-ccd7-4c5c-b824-d8003ffde58c","timestamp":"2020-07-02T04:17:46.788Z"}
+{"level":"info","message":"Create new client: 62eb68b4-b5c9-4827-8f3f-7c7a13adeb50","timestamp":"2020-07-02T04:17:47.092Z"}
+{"level":"info","message":"Create new client: 1e870923-c56d-47ca-a1ab-f31db5e8d486","timestamp":"2020-07-02T04:17:47.425Z"}
+{"level":"info","message":"Client disconnect: 62eb68b4-b5c9-4827-8f3f-7c7a13adeb50","timestamp":"2020-07-02T04:18:30.377Z"}
+{"level":"info","message":"Client disconnect: 1e870923-c56d-47ca-a1ab-f31db5e8d486","timestamp":"2020-07-02T04:18:30.378Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-02T04:18:31.021Z"}
+{"level":"info","message":"Create new client: 30a1899c-171b-4d8b-ac79-5a63d570c9f0","timestamp":"2020-07-02T04:19:22.297Z"}
+{"level":"info","message":"Create new client: cdc5e60a-024e-4b30-8d00-2cec2080d46e","timestamp":"2020-07-02T04:19:22.300Z"}
+{"level":"info","message":"Client disconnect: 30a1899c-171b-4d8b-ac79-5a63d570c9f0","timestamp":"2020-07-02T04:19:24.123Z"}
+{"level":"info","message":"Client disconnect: cdc5e60a-024e-4b30-8d00-2cec2080d46e","timestamp":"2020-07-02T04:19:24.125Z"}
+{"level":"info","message":"Create new client: 7a4f085d-c0da-4725-86e7-affc900f83f3","timestamp":"2020-07-02T04:19:30.199Z"}
+{"level":"info","message":"Create new client: e3eb28f1-df03-4be9-acc6-2fee0bcac133","timestamp":"2020-07-02T04:19:30.500Z"}
+{"level":"info","message":"Client disconnect: 7a4f085d-c0da-4725-86e7-affc900f83f3","timestamp":"2020-07-02T04:19:31.416Z"}
+{"level":"info","message":"Client disconnect: e3eb28f1-df03-4be9-acc6-2fee0bcac133","timestamp":"2020-07-02T04:19:31.420Z"}
+{"level":"info","message":"Create new client: 8e49d160-85f8-4f09-829a-588d56f4f480","timestamp":"2020-07-02T04:19:32.096Z"}
+{"level":"info","message":"Create new client: 46eb6d50-20dc-48a5-9f3a-34bdbdfefc20","timestamp":"2020-07-02T04:19:32.137Z"}
+{"message":"Object not found.","code":101,"level":"error","stack":"Error: Object not found.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\Adapters\\Storage\\Mongo\\MongoStorageAdapter.js:534:19\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-02T04:19:32.602Z"}
+{"level":"info","message":"Client disconnect: 8e49d160-85f8-4f09-829a-588d56f4f480","timestamp":"2020-07-02T04:20:06.026Z"}
+{"level":"info","message":"Client disconnect: 46eb6d50-20dc-48a5-9f3a-34bdbdfefc20","timestamp":"2020-07-02T04:20:06.027Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-02T04:20:06.685Z"}
+{"level":"info","message":"Create new client: 1c1153a4-9ffc-4d24-a4f2-b55af61176e7","timestamp":"2020-07-02T04:20:39.744Z"}
+{"level":"info","message":"Create new client: 6b9af1ad-25fd-47b0-87bb-b86563208793","timestamp":"2020-07-02T04:20:39.748Z"}
+{"level":"info","message":"Client disconnect: 1c1153a4-9ffc-4d24-a4f2-b55af61176e7","timestamp":"2020-07-02T04:20:41.625Z"}
+{"level":"info","message":"Client disconnect: 6b9af1ad-25fd-47b0-87bb-b86563208793","timestamp":"2020-07-02T04:20:41.630Z"}
+{"level":"info","message":"Create new client: bfb6dafa-3b62-40da-9f25-cb57e602fe11","timestamp":"2020-07-02T04:20:41.944Z"}
+{"level":"info","message":"Create new client: 3069f53c-c5f5-4463-9f5e-9aef1c6bdc57","timestamp":"2020-07-02T04:20:42.475Z"}
+{"level":"info","message":"Client disconnect: bfb6dafa-3b62-40da-9f25-cb57e602fe11","timestamp":"2020-07-02T04:20:43.447Z"}
+{"level":"info","message":"Client disconnect: 3069f53c-c5f5-4463-9f5e-9aef1c6bdc57","timestamp":"2020-07-02T04:20:43.450Z"}
+{"level":"info","message":"Create new client: f16a91f9-e9df-4d0c-86bd-394ab1a3ce7f","timestamp":"2020-07-02T04:20:44.310Z"}
+{"level":"info","message":"Create new client: 862ca2d5-e1c6-48fb-8304-1c68b72f113d","timestamp":"2020-07-02T04:20:44.311Z"}
+{"message":"Object not found.","code":101,"level":"error","stack":"Error: Object not found.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\Adapters\\Storage\\Mongo\\MongoStorageAdapter.js:534:19\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-02T04:20:44.719Z"}
+{"level":"info","message":"Client disconnect: 862ca2d5-e1c6-48fb-8304-1c68b72f113d","timestamp":"2020-07-02T04:21:53.196Z"}
+{"level":"info","message":"Client disconnect: f16a91f9-e9df-4d0c-86bd-394ab1a3ce7f","timestamp":"2020-07-02T04:21:53.203Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-02T04:21:54.373Z"}
+{"level":"info","message":"Create new client: 1629d819-8f93-413f-bd13-f037b089c948","timestamp":"2020-07-02T04:22:28.514Z"}
+{"level":"info","message":"Create new client: cfc30b50-69c9-42f1-b4c2-92313e160f25","timestamp":"2020-07-02T04:22:28.518Z"}
+{"level":"info","message":"Client disconnect: 1629d819-8f93-413f-bd13-f037b089c948","timestamp":"2020-07-02T04:22:31.030Z"}
+{"level":"info","message":"Client disconnect: cfc30b50-69c9-42f1-b4c2-92313e160f25","timestamp":"2020-07-02T04:22:31.032Z"}
+{"level":"info","message":"Create new client: 3f337349-a56d-4227-a9c3-1d077dd15a93","timestamp":"2020-07-02T04:22:31.846Z"}
+{"level":"info","message":"Create new client: 7183ca05-826f-4d7d-96f3-fe945a34be65","timestamp":"2020-07-02T04:22:32.171Z"}
+{"level":"info","message":"Client disconnect: 3f337349-a56d-4227-a9c3-1d077dd15a93","timestamp":"2020-07-02T04:22:32.994Z"}
+{"level":"info","message":"Client disconnect: 7183ca05-826f-4d7d-96f3-fe945a34be65","timestamp":"2020-07-02T04:22:32.996Z"}
+{"level":"info","message":"Create new client: 197593ad-75b8-4a9b-89f5-e3ea5a6e59eb","timestamp":"2020-07-02T04:22:34.153Z"}
+{"level":"info","message":"Create new client: c0445a1d-6f9d-4cd7-a370-6b1c4af9610e","timestamp":"2020-07-02T04:22:34.154Z"}
+{"message":"Object not found.","code":101,"level":"error","stack":"Error: Object not found.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\Adapters\\Storage\\Mongo\\MongoStorageAdapter.js:534:19\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-02T04:22:34.727Z"}
+{"level":"info","message":"Client disconnect: 197593ad-75b8-4a9b-89f5-e3ea5a6e59eb","timestamp":"2020-07-02T04:22:38.683Z"}
+{"level":"info","message":"Client disconnect: c0445a1d-6f9d-4cd7-a370-6b1c4af9610e","timestamp":"2020-07-02T04:22:38.684Z"}
+{"level":"info","message":"Create new client: b23ebd58-6afb-4994-ab0c-63e62e1b8056","timestamp":"2020-07-02T04:22:39.038Z"}
+{"level":"info","message":"Create new client: dd7a633a-21fe-422b-8ea9-ebcd69637153","timestamp":"2020-07-02T04:22:39.617Z"}
+{"level":"info","message":"Client disconnect: b23ebd58-6afb-4994-ab0c-63e62e1b8056","timestamp":"2020-07-02T04:23:02.555Z"}
+{"level":"info","message":"Client disconnect: dd7a633a-21fe-422b-8ea9-ebcd69637153","timestamp":"2020-07-02T04:23:02.559Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-02T04:23:03.311Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-02T04:23:06.345Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-02T04:38:13.604Z"}
+{"level":"info","message":"Create new client: 6bb675d9-53f5-4057-9cf6-3cce920a74d3","timestamp":"2020-07-02T04:38:39.198Z"}
+{"level":"info","message":"Create new client: 8deaef8e-ed47-4b3a-a7cb-88bac5b2f3ff","timestamp":"2020-07-02T04:38:39.199Z"}
+{"level":"info","message":"Client disconnect: 6bb675d9-53f5-4057-9cf6-3cce920a74d3","timestamp":"2020-07-02T04:38:41.287Z"}
+{"level":"info","message":"Client disconnect: 8deaef8e-ed47-4b3a-a7cb-88bac5b2f3ff","timestamp":"2020-07-02T04:38:41.288Z"}
+{"level":"info","message":"Create new client: 77ef4b5f-78ee-4f4d-806c-199faeddb9cc","timestamp":"2020-07-02T04:38:41.504Z"}
+{"level":"info","message":"Create new client: 1144eac4-dd51-4b7e-a017-cfed2c16bf1c","timestamp":"2020-07-02T04:38:41.814Z"}
+{"level":"info","message":"Client disconnect: 77ef4b5f-78ee-4f4d-806c-199faeddb9cc","timestamp":"2020-07-02T04:38:43.087Z"}
+{"level":"info","message":"Client disconnect: 1144eac4-dd51-4b7e-a017-cfed2c16bf1c","timestamp":"2020-07-02T04:38:43.088Z"}
+{"level":"info","message":"Create new client: 1b1ad9d3-c0c2-4214-ab44-b3fbe89ca0fd","timestamp":"2020-07-02T04:38:43.790Z"}
+{"level":"info","message":"Create new client: c1926bca-1030-4fbd-bf5f-30e6513a1196","timestamp":"2020-07-02T04:38:43.792Z"}
+{"message":"Object not found.","code":101,"level":"error","stack":"Error: Object not found.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\Adapters\\Storage\\Mongo\\MongoStorageAdapter.js:534:19\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-02T04:38:44.277Z"}
+{"level":"info","message":"Client disconnect: c1926bca-1030-4fbd-bf5f-30e6513a1196","timestamp":"2020-07-02T04:38:48.152Z"}
+{"level":"info","message":"Client disconnect: 1b1ad9d3-c0c2-4214-ab44-b3fbe89ca0fd","timestamp":"2020-07-02T04:38:48.153Z"}
+{"level":"info","message":"Create new client: cf0c9542-379c-4248-8826-7d9a346aa453","timestamp":"2020-07-02T04:38:48.439Z"}
+{"level":"info","message":"Create new client: 31932a95-e75e-49f3-b843-36268307cdb0","timestamp":"2020-07-02T04:38:48.829Z"}
+{"level":"info","message":"Client disconnect: cf0c9542-379c-4248-8826-7d9a346aa453","timestamp":"2020-07-02T04:39:04.326Z"}
+{"level":"info","message":"Client disconnect: 31932a95-e75e-49f3-b843-36268307cdb0","timestamp":"2020-07-02T04:39:04.330Z"}
+{"level":"info","message":"Create new client: 1cdc6609-1fc1-4191-a294-2c427478ae56","timestamp":"2020-07-02T04:39:06.930Z"}
+{"level":"info","message":"Create new client: 2fec0e20-a78e-443e-94fd-2e3a570c8f2b","timestamp":"2020-07-02T04:39:06.931Z"}
+{"level":"info","message":"Client disconnect: 2fec0e20-a78e-443e-94fd-2e3a570c8f2b","timestamp":"2020-07-02T04:39:09.536Z"}
+{"level":"info","message":"Client disconnect: 1cdc6609-1fc1-4191-a294-2c427478ae56","timestamp":"2020-07-02T04:39:09.537Z"}
+{"level":"info","message":"Create new client: de91953b-15e4-49dc-afca-deb27f223d91","timestamp":"2020-07-02T04:39:10.364Z"}
+{"level":"info","message":"Create new client: 5004bf28-a63c-483d-8edd-4ac6d8589f03","timestamp":"2020-07-02T04:39:10.687Z"}
+{"level":"info","message":"Client disconnect: de91953b-15e4-49dc-afca-deb27f223d91","timestamp":"2020-07-02T04:39:11.551Z"}
+{"level":"info","message":"Client disconnect: 5004bf28-a63c-483d-8edd-4ac6d8589f03","timestamp":"2020-07-02T04:39:11.562Z"}
+{"level":"info","message":"Create new client: 2ed0da02-5eb7-4d39-a230-0cf5c40b16bf","timestamp":"2020-07-02T04:39:12.116Z"}
+{"level":"info","message":"Create new client: 3b7343ec-150b-48ae-970d-766a2a4ac97e","timestamp":"2020-07-02T04:39:12.117Z"}
+{"message":"Object not found.","code":101,"level":"error","stack":"Error: Object not found.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\Adapters\\Storage\\Mongo\\MongoStorageAdapter.js:534:19\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-02T04:39:12.430Z"}
+{"level":"info","message":"Client disconnect: 2ed0da02-5eb7-4d39-a230-0cf5c40b16bf","timestamp":"2020-07-02T04:39:16.374Z"}
+{"level":"info","message":"Client disconnect: 3b7343ec-150b-48ae-970d-766a2a4ac97e","timestamp":"2020-07-02T04:39:16.376Z"}
+{"level":"info","message":"Create new client: 53e23af9-6196-4b71-ada3-edbed74fc70a","timestamp":"2020-07-02T04:39:16.903Z"}
+{"level":"info","message":"Create new client: 58b5bf31-95a6-4107-88eb-2748594352fc","timestamp":"2020-07-02T04:39:17.379Z"}
+{"level":"info","message":"Client disconnect: 53e23af9-6196-4b71-ada3-edbed74fc70a","timestamp":"2020-07-02T04:39:39.691Z"}
+{"level":"info","message":"Client disconnect: 58b5bf31-95a6-4107-88eb-2748594352fc","timestamp":"2020-07-02T04:39:39.693Z"}
+{"level":"info","message":"Create new client: 0e143367-91b0-4f5e-a765-2162e209c6d0","timestamp":"2020-07-02T04:39:41.776Z"}
+{"level":"info","message":"Create new client: ec2457f0-238d-48ef-ada5-47118fdfae68","timestamp":"2020-07-02T04:39:41.796Z"}
+{"level":"info","message":"Client disconnect: 0e143367-91b0-4f5e-a765-2162e209c6d0","timestamp":"2020-07-02T04:39:43.830Z"}
+{"level":"info","message":"Client disconnect: ec2457f0-238d-48ef-ada5-47118fdfae68","timestamp":"2020-07-02T04:39:43.832Z"}
+{"level":"info","message":"Create new client: 69d0c46f-022b-4942-ba91-256ab7c9f2bb","timestamp":"2020-07-02T04:39:44.576Z"}
+{"level":"info","message":"Create new client: 3901abae-49f7-4724-bf80-f5b128a03a49","timestamp":"2020-07-02T04:39:44.961Z"}
+{"level":"info","message":"Client disconnect: 69d0c46f-022b-4942-ba91-256ab7c9f2bb","timestamp":"2020-07-02T04:39:45.852Z"}
+{"level":"info","message":"Client disconnect: 3901abae-49f7-4724-bf80-f5b128a03a49","timestamp":"2020-07-02T04:39:45.857Z"}
+{"level":"info","message":"Create new client: 83c15c2e-5425-47fa-935b-192c6c7737b4","timestamp":"2020-07-02T04:39:46.947Z"}
+{"level":"info","message":"Create new client: f29f719f-8725-4a4a-8877-367740b857a5","timestamp":"2020-07-02T04:39:47.000Z"}
+{"message":"Object not found.","code":101,"level":"error","stack":"Error: Object not found.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\Adapters\\Storage\\Mongo\\MongoStorageAdapter.js:534:19\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-02T04:39:47.460Z"}
+{"level":"info","message":"Client disconnect: 83c15c2e-5425-47fa-935b-192c6c7737b4","timestamp":"2020-07-02T04:39:51.146Z"}
+{"level":"info","message":"Client disconnect: f29f719f-8725-4a4a-8877-367740b857a5","timestamp":"2020-07-02T04:39:51.147Z"}
+{"level":"info","message":"Create new client: 6a3b904f-b1f3-4fea-b21f-fc67487dc058","timestamp":"2020-07-02T04:39:51.490Z"}
+{"level":"info","message":"Create new client: 5ebac203-fc8e-4829-91b2-1d35f3dbc7eb","timestamp":"2020-07-02T04:39:52.060Z"}
+{"level":"info","message":"Client disconnect: 6a3b904f-b1f3-4fea-b21f-fc67487dc058","timestamp":"2020-07-02T04:42:16.021Z"}
+{"level":"info","message":"Client disconnect: 5ebac203-fc8e-4829-91b2-1d35f3dbc7eb","timestamp":"2020-07-02T04:42:16.027Z"}
+{"level":"info","message":"Create new client: 887187d8-21e2-4af4-9e05-22eae048ea80","timestamp":"2020-07-02T04:42:17.552Z"}
+{"level":"info","message":"Create new client: d0b2d7f3-838f-4f9f-b6f5-a19333ea770a","timestamp":"2020-07-02T04:42:17.568Z"}
+{"level":"info","message":"Client disconnect: 887187d8-21e2-4af4-9e05-22eae048ea80","timestamp":"2020-07-02T04:42:20.149Z"}
+{"level":"info","message":"Client disconnect: d0b2d7f3-838f-4f9f-b6f5-a19333ea770a","timestamp":"2020-07-02T04:42:20.151Z"}
+{"level":"info","message":"Create new client: 35f29581-54ac-47ac-bfaa-73b580dabd8f","timestamp":"2020-07-02T04:42:20.454Z"}
+{"level":"info","message":"Create new client: ddad41ae-40d4-4193-acfa-952921e4dad8","timestamp":"2020-07-02T04:42:20.978Z"}
+{"level":"info","message":"Client disconnect: 35f29581-54ac-47ac-bfaa-73b580dabd8f","timestamp":"2020-07-02T04:42:21.917Z"}
+{"level":"info","message":"Client disconnect: ddad41ae-40d4-4193-acfa-952921e4dad8","timestamp":"2020-07-02T04:42:21.922Z"}
+{"level":"info","message":"Create new client: 6fdbaf45-339c-40ab-a913-b90b25f2f4df","timestamp":"2020-07-02T04:42:22.553Z"}
+{"level":"info","message":"Create new client: a1dbd12a-ffcc-47de-829f-b86874f0b303","timestamp":"2020-07-02T04:42:22.556Z"}
+{"message":"Object not found.","code":101,"level":"error","stack":"Error: Object not found.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\Adapters\\Storage\\Mongo\\MongoStorageAdapter.js:534:19\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-02T04:42:23.362Z"}
+{"level":"info","message":"Client disconnect: 6fdbaf45-339c-40ab-a913-b90b25f2f4df","timestamp":"2020-07-02T04:42:27.270Z"}
+{"level":"info","message":"Client disconnect: a1dbd12a-ffcc-47de-829f-b86874f0b303","timestamp":"2020-07-02T04:42:27.271Z"}
+{"level":"info","message":"Create new client: ba0668ca-2d28-4950-99fe-2ab04b7aefbe","timestamp":"2020-07-02T04:42:27.666Z"}
+{"level":"info","message":"Create new client: bc315211-24c8-4bb3-b62e-f24123451ed3","timestamp":"2020-07-02T04:42:28.287Z"}
+{"level":"info","message":"Client disconnect: a0da271a-cffc-4a74-813e-458f86a0c0ed","timestamp":"2020-07-02T04:43:49.834Z"}
+{"level":"info","message":"Client disconnect: bc36ded1-179d-4eb5-97a8-b83d87177a5d","timestamp":"2020-07-02T04:43:49.834Z"}
+{"level":"info","message":"Parse LiveQuery Server starts running","timestamp":"2020-07-02T04:44:30.178Z"}
+{"level":"info","message":"Create new client: e20ac54d-ef69-4807-9730-d2cb6320e7fd","timestamp":"2020-07-02T04:44:30.394Z"}
+{"level":"info","message":"Create new client: 41eb440e-02ea-4b5e-b959-0db90a2eae2b","timestamp":"2020-07-02T04:44:32.923Z"}
+{"level":"info","message":"Create new client: f5a60bc2-ee3f-4ee9-bd1b-ba7098f17406","timestamp":"2020-07-02T04:44:35.369Z"}
+{"message":"Invalid session token","code":209,"level":"error","stack":"Error: Invalid session token\n    at Object.getAuthForSessionToken (C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\Auth.js:105:11)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-02T04:44:35.455Z"}
+{"level":"info","message":"Create new client: 9692c4ee-fefc-4bc4-b48e-aa51932883d5","timestamp":"2020-07-02T04:44:40.362Z"}
+{"message":"Invalid session token","code":209,"level":"error","stack":"Error: Invalid session token\n    at Object.getAuthForSessionToken (C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\Auth.js:105:11)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-02T04:44:40.378Z"}
+{"level":"info","message":"Create new client: e77c078f-8f82-4ef6-b67a-9c477c09a85d","timestamp":"2020-07-02T04:48:02.401Z"}
+{"level":"info","message":"Create new client: c7de22e8-d641-4e2e-82f2-d766e5b26644","timestamp":"2020-07-02T04:48:02.420Z"}
+{"message":"Invalid session token","code":209,"level":"error","stack":"Error: Invalid session token\n    at Object.getAuthForSessionToken (C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\Auth.js:105:11)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-02T04:48:37.939Z"}
+{"message":"Invalid session token","code":209,"level":"error","stack":"Error: Invalid session token\n    at Object.getAuthForSessionToken (C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\Auth.js:105:11)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-02T04:49:31.735Z"}
+{"level":"info","message":"Create new client: 006e2e1c-6093-4f55-886f-25f8f6053b75","timestamp":"2020-07-02T04:50:49.459Z"}
+{"level":"info","message":"Create new client: 7c513c19-a7b0-4098-8135-e9067bbd131a","timestamp":"2020-07-02T04:50:49.487Z"}
+{"level":"info","message":"Client disconnect: 006e2e1c-6093-4f55-886f-25f8f6053b75","timestamp":"2020-07-02T04:53:04.334Z"}
+{"level":"info","message":"Client disconnect: 7c513c19-a7b0-4098-8135-e9067bbd131a","timestamp":"2020-07-02T04:53:04.336Z"}
+{"level":"info","message":"Client disconnect: e77c078f-8f82-4ef6-b67a-9c477c09a85d","timestamp":"2020-07-02T04:57:49.290Z"}
+{"level":"info","message":"Client disconnect: c7de22e8-d641-4e2e-82f2-d766e5b26644","timestamp":"2020-07-02T04:57:49.291Z"}
+{"level":"info","message":"Create new client: f1af8deb-752d-4158-b157-4d820629437e","timestamp":"2020-07-02T04:57:49.526Z"}
+{"level":"info","message":"Create new client: 5b489c1d-4815-4439-8171-cd0f878f1662","timestamp":"2020-07-02T04:57:49.546Z"}
+{"message":"Object not found.","code":101,"level":"error","stack":"Error: Object not found.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\Adapters\\Storage\\Mongo\\MongoStorageAdapter.js:534:19\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-02T04:57:49.705Z"}
+{"level":"info","message":"Client disconnect: f5a60bc2-ee3f-4ee9-bd1b-ba7098f17406","timestamp":"2020-07-02T05:03:13.898Z"}
+{"level":"info","message":"Client disconnect: 9692c4ee-fefc-4bc4-b48e-aa51932883d5","timestamp":"2020-07-02T05:03:13.901Z"}
+{"level":"info","message":"Client disconnect: 5b489c1d-4815-4439-8171-cd0f878f1662","timestamp":"2020-07-02T05:03:18.660Z"}
+{"level":"info","message":"Client disconnect: f1af8deb-752d-4158-b157-4d820629437e","timestamp":"2020-07-02T05:03:18.662Z"}
+{"level":"info","message":"Create new client: ddd91998-9ef4-4e2e-a04e-e55c084bbdcd","timestamp":"2020-07-02T05:03:32.321Z"}
+{"level":"info","message":"Create new client: a38d6788-4974-4028-ab0f-3e914b655d80","timestamp":"2020-07-02T05:03:32.339Z"}
+{"level":"info","message":"Create new client: 4f517052-98c1-4743-aaa4-8234b4d388de","timestamp":"2020-07-02T05:04:04.042Z"}
+{"level":"info","message":"Create new client: 8a78fbd4-158a-4d94-8d12-be96faf85506","timestamp":"2020-07-02T05:04:04.073Z"}
+{"message":"Object not found.","code":101,"level":"error","stack":"Error: Object not found.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\Adapters\\Storage\\Mongo\\MongoStorageAdapter.js:534:19\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-02T05:04:04.316Z"}
+{"message":"Object not found.","code":101,"level":"error","stack":"Error: Object not found.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\Adapters\\Storage\\Mongo\\MongoStorageAdapter.js:534:19\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-02T05:04:04.318Z"}
+{"level":"info","message":"Client disconnect: 4f517052-98c1-4743-aaa4-8234b4d388de","timestamp":"2020-07-02T05:04:06.587Z"}
+{"level":"info","message":"Client disconnect: 8a78fbd4-158a-4d94-8d12-be96faf85506","timestamp":"2020-07-02T05:04:06.590Z"}
+{"level":"info","message":"Create new client: 1747dee0-1ca5-4141-8118-67d32b35eebc","timestamp":"2020-07-02T05:04:07.419Z"}
+{"level":"info","message":"Create new client: 843fec95-2250-4f85-93d6-133d01a022ca","timestamp":"2020-07-02T05:04:07.448Z"}
+{"level":"info","message":"Client disconnect: 1747dee0-1ca5-4141-8118-67d32b35eebc","timestamp":"2020-07-02T05:07:04.728Z"}
+{"level":"info","message":"Client disconnect: 843fec95-2250-4f85-93d6-133d01a022ca","timestamp":"2020-07-02T05:07:04.733Z"}
+{"level":"info","message":"Create new client: 7e850dfd-8e72-458d-b51d-8e939bda2ce5","timestamp":"2020-07-02T05:07:05.499Z"}
+{"level":"info","message":"Create new client: 4831eaf4-f51a-4767-b5be-6eabe6ac5016","timestamp":"2020-07-02T05:07:05.539Z"}
+{"level":"info","message":"Client disconnect: 7e850dfd-8e72-458d-b51d-8e939bda2ce5","timestamp":"2020-07-02T05:07:09.089Z"}
+{"level":"info","message":"Client disconnect: 4831eaf4-f51a-4767-b5be-6eabe6ac5016","timestamp":"2020-07-02T05:07:09.092Z"}
+{"level":"info","message":"Create new client: 678fdd97-5ad6-498a-b706-f53c6c78efb1","timestamp":"2020-07-02T05:07:09.835Z"}
+{"level":"info","message":"Create new client: 048cc561-45db-4eef-af55-963eda6aa4f4","timestamp":"2020-07-02T05:07:09.868Z"}
+{"level":"info","message":"Client disconnect: 678fdd97-5ad6-498a-b706-f53c6c78efb1","timestamp":"2020-07-02T05:09:37.361Z"}
+{"level":"info","message":"Client disconnect: 048cc561-45db-4eef-af55-963eda6aa4f4","timestamp":"2020-07-02T05:09:37.363Z"}
+{"level":"info","message":"Create new client: a6f94503-bc9d-483b-a07b-7c63f83f6e48","timestamp":"2020-07-02T05:09:38.091Z"}
+{"level":"info","message":"Create new client: c20736b5-c658-4135-b3d6-5847f1e27156","timestamp":"2020-07-02T05:09:38.131Z"}
+{"level":"info","message":"Client disconnect: ddd91998-9ef4-4e2e-a04e-e55c084bbdcd","timestamp":"2020-07-02T05:09:48.284Z"}
+{"level":"info","message":"Client disconnect: a38d6788-4974-4028-ab0f-3e914b655d80","timestamp":"2020-07-02T05:09:48.286Z"}
+{"level":"info","message":"Create new client: 6aa00799-ce3b-49d4-9605-dd4f29d5b03a","timestamp":"2020-07-02T05:09:48.528Z"}
+{"level":"info","message":"Create new client: 2b5ab31a-432c-48aa-bd0d-193854c21ed9","timestamp":"2020-07-02T05:09:48.546Z"}
+{"message":"Object not found.","code":101,"level":"error","stack":"Error: Object not found.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\Adapters\\Storage\\Mongo\\MongoStorageAdapter.js:534:19\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-02T05:09:48.633Z"}
+{"level":"info","message":"Client disconnect: a6f94503-bc9d-483b-a07b-7c63f83f6e48","timestamp":"2020-07-02T05:09:50.785Z"}
+{"level":"info","message":"Client disconnect: c20736b5-c658-4135-b3d6-5847f1e27156","timestamp":"2020-07-02T05:09:50.788Z"}
+{"level":"info","message":"Create new client: 496a02d6-10ed-4995-8eea-fc0ed5ab1d1c","timestamp":"2020-07-02T05:09:51.797Z"}
+{"level":"info","message":"Create new client: 9a3737a0-a4bb-44a0-af95-92c661b13345","timestamp":"2020-07-02T05:09:51.831Z"}
+{"level":"info","message":"Client disconnect: 496a02d6-10ed-4995-8eea-fc0ed5ab1d1c","timestamp":"2020-07-02T05:10:13.297Z"}
+{"level":"info","message":"Client disconnect: 9a3737a0-a4bb-44a0-af95-92c661b13345","timestamp":"2020-07-02T05:10:13.300Z"}
+{"level":"info","message":"Create new client: a87d3e21-dd5c-4f7d-b379-d966c247b641","timestamp":"2020-07-02T05:10:14.357Z"}
+{"level":"info","message":"Create new client: a6a6e3c3-88bb-4098-a6f8-f925fe5ea463","timestamp":"2020-07-02T05:10:14.401Z"}
+{"level":"info","message":"Client disconnect: 6aa00799-ce3b-49d4-9605-dd4f29d5b03a","timestamp":"2020-07-02T05:10:31.831Z"}
+{"level":"info","message":"Client disconnect: 2b5ab31a-432c-48aa-bd0d-193854c21ed9","timestamp":"2020-07-02T05:10:31.835Z"}
+{"level":"info","message":"Create new client: 0e9d460c-88b7-4447-b8d6-329b564e5f11","timestamp":"2020-07-02T05:11:51.945Z"}
+{"level":"info","message":"Create new client: 884b9517-25de-4d99-af19-52f18807413d","timestamp":"2020-07-02T05:11:51.960Z"}
+{"level":"info","message":"Client disconnect: 0e9d460c-88b7-4447-b8d6-329b564e5f11","timestamp":"2020-07-02T05:12:21.688Z"}
+{"level":"info","message":"Client disconnect: 884b9517-25de-4d99-af19-52f18807413d","timestamp":"2020-07-02T05:12:21.689Z"}
+{"message":"Invalid username/password.","code":101,"level":"error","stack":"Error: Invalid username/password.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\Routers\\UsersRouter.js:88:19\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-02T05:13:01.856Z"}
+{"level":"info","message":"Client disconnect: e20ac54d-ef69-4807-9730-d2cb6320e7fd","timestamp":"2020-07-02T05:15:25.075Z"}
+{"level":"info","message":"Client disconnect: 41eb440e-02ea-4b5e-b959-0db90a2eae2b","timestamp":"2020-07-02T05:15:25.078Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-02T05:15:40.944Z"}

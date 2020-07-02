@@ -10,7 +10,7 @@ describe('Signup', () => {
     cy.get('[data-testid=signup]').click();
   });
 
-  it.only('invalid username, email, password (client side validation)', () => {
+  it('invalid username, email, password (client side validation)', () => {
     cy.signup({
       username: '123',
       email: 'tkmghouse',
@@ -80,6 +80,7 @@ describe('Signup', () => {
   });
   it.only('emailIsRegistered 403 server', () => {
     cy.route({
+      delay:3000,
       url: '/auth/signup',
       method: 'post',
       status: 400,
@@ -130,6 +131,7 @@ describe('Signup', () => {
   it('signup success', () => {
     cy.server();
     cy.route({
+      delay:3000,
       method: 'post',
       url: '/auth/signup',
       response: {

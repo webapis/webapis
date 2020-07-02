@@ -4,6 +4,7 @@ import './css/style.css';
 import Form from '../form/Form';
 import Input from '../form/Input';
 import Button from '../form/Button';
+import AsyncButton from '../components/async-button'
 import validationTypes from '../form/validationTypes';
 import { useAuthContext } from './auth-context';
 import { useFormContext } from '../form/form-context';
@@ -16,7 +17,7 @@ export default function Signup({signup}) {
   const {state,dispatch}=useAuthContext()
   const {onAppRoute} = useAppRoute();
   const { device } = useMediaQuery();
-  const { username, password, email } = state;
+  const { username, password, email,loading,error } = state;
   useEffect(() => {
     if (state.user && state.user.token) {
       onAppRoute({featureRoute: '/',route:'/'});
@@ -38,7 +39,7 @@ export default function Signup({signup}) {
   return (
     <Grid width={device === 'phone' ? 100 : 25}>
       <Paper>
-        <Form formTitle='Sign up'>
+        <Form formTitle='Sign up' error={error}>
           <Input
             value={username}
             onChange={handleChange}
@@ -74,13 +75,16 @@ export default function Signup({signup}) {
             name='password'
             validationTypes={[validationTypes.PASSWORD_FORMAT_VALIDATION]}
           />
-          <Button
+          <AsyncButton
             className='btn'
             type='button'
             onClick={signup}
             id='signup-btn'
-            title='Signup'
-          />
+            data-testid="signup-btn"
+            loading={loading}
+          >
+            SIGNUP
+          </AsyncButton>
         </Form>
       </Paper>
     </Grid>

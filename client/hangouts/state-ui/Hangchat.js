@@ -5,6 +5,7 @@ import { Layout } from './Layout';
 
 
 export default function Hangchat({
+  loading,
   messages = [],
   onMessageText,
   onMessage,
@@ -23,6 +24,7 @@ export default function Hangchat({
   return (
     <Layout id="hangchat-ui" >
       <Messages
+      loading={loading}
       onNavigation={onNavigation}
         hangout={hangout}
         messages={messages}
