@@ -119,7 +119,7 @@ export default [
       },
     ],
     plugins: [
-      del({ targets: `client/storybook/build/*` }),
+     // del({ targets: `client/storybook/build/*` }),
       ...commonPlugins,
       htmlTemplate({
         template: 'config/rollup/html-template/index.html',

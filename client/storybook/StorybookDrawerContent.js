@@ -3,6 +3,7 @@ import List,{ListItem } from 'controls/list';
 import Accordions,{Accordion} from 'controls/accordion'
 import {useAppRoute} from 'components/app-route'
 import {useMediaQuery} from 'components/layout/useMediaQuery'
+import AuthDemoDrawer from './authentication/drawer'
 export default function StorybookDrawerContent({toggleDrawer }) {
   const {onAppRoute}=useAppRoute()
 
@@ -16,7 +17,7 @@ export default function StorybookDrawerContent({toggleDrawer }) {
 
   }
   return (
-    <Accordions  selectedId='0'>
+    <Accordions  selectedId='0' name="storybook">
       <div style={{padding:3}}>
       <Accordion id="0" title="Hangout" >
       <List>
@@ -77,11 +78,7 @@ export default function StorybookDrawerContent({toggleDrawer }) {
           </List>
         </Accordion>
         <Accordion title="Authentication" id="3">
-        <List>
-          <ListItem id="login" onClick={handleRoute}>
-            Login
-        </ListItem>
-          </List>
+        <AuthDemoDrawer />
         </Accordion>
         </div>
     </Accordions>

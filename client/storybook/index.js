@@ -21,7 +21,7 @@ const message = {
 //
 render(
   <StorybookProviders>
-  <StorybookNaviation/>
+  <StorybookNaviation name='storybook'/>
 
   </StorybookProviders>,
   document.body

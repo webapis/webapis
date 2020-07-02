@@ -60,7 +60,7 @@
   "nodemonConfig": {
     "ignore": [
       "client/*",
-      "apps",
+      "builds",
       "cypress/*"
     ]
   }

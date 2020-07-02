@@ -18,8 +18,9 @@ export default function AppProviders({ children }) {
       }}
     >
       <AppRouteProvider
+       //
         title="Webcom"
-        initState={{ route: '/', featureRoute: '/hangouts' }}
+        initState={{ route: '/', featureRoute: '/hangouts',name:'storybook' }}
       >
     
               {children}
