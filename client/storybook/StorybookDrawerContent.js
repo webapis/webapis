@@ -18,8 +18,6 @@ export default function StorybookDrawerContent({toggleDrawer }) {
   return (
     <Accordions  selectedId='0'>
       <div style={{padding:3}}>
-
-    
       <Accordion id="0" title="Hangout" >
       <List>
         <ListItem id="hangouts" onClick={handleRoute}>
@@ -75,6 +73,13 @@ export default function StorybookDrawerContent({toggleDrawer }) {
         <List>
           <ListItem id="asyncbutton" onClick={handleRoute}>
          AsyncButton
+        </ListItem>
+          </List>
+        </Accordion>
+        <Accordion title="Authentication" id="3">
+        <List>
+          <ListItem id="login" onClick={handleRoute}>
+            Login
         </ListItem>
           </List>
         </Accordion>

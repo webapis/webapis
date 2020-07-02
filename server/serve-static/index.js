@@ -37,11 +37,11 @@ export default function serveStatic(request, response) {
  let normailzie= ''
  if (filePath === '/index.html') {
   
-   normailzie = path.normalize(__dirname+`../../../apps/${process.env.appName}/build/index.html`)
+   normailzie = path.normalize(__dirname+`../../../builds/${process.env.appName}/build/index.html`)
 
 }
 else{
-   normailzie = path.normalize(__dirname+`../../../apps/${process.env.appName}/build/${request.url}`)
+   normailzie = path.normalize(__dirname+`../../../builds/${process.env.appName}/build/${request.url}`)
 
 }
 
