@@ -1,6 +1,6 @@
 import { hangoutHandler } from './hangoutHandler';
 import { onLineStateChangeHandler } from './onLineStateChangeHandler';
-import { clientCommands } from '../../../client/hangouts/state/clientCommands';
+import { clientCommands } from '../../../client/features/hangouts/state/clientCommands';
 export default async function hangouts({ hangout, ws, client, connections }) {
   const collection = await client.db('auth').collection('users');
 

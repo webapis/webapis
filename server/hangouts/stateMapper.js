@@ -1,5 +1,5 @@
 import { hangoutStates } from './hangoutStates'
-import { clientCommands } from '../../client/hangouts/state/clientCommands'
+import { clientCommands } from '../../client/features/hangouts/state/clientCommands'
 export function stateMapper({ command }) {
     switch (command) {
         case clientCommands.ACCEPT:

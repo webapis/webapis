@@ -1,4 +1,4 @@
-import validationMessages from '../../../../client/form/validationMessages';
+import validationMessages from '../../../../client/auth/validation/validationMessages';
 
 describe('CHANGE PASSWORD', () => {
   // beforeEach(() => {

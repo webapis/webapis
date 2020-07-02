@@ -1,5 +1,5 @@
 import { stateMapper } from '../stateMapper';
-import { clientCommands } from '../../../client/hangouts/state/clientCommands';
+import { clientCommands } from '../../../client/features/hangouts/state/clientCommands';
 export async function hangoutHandler({ collection, hangout, ws, connections }) {
   debugger;
   try {

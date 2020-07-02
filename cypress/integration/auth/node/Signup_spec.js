@@ -1,4 +1,4 @@
-import validationMessages from '../../../../client/form/validationMessages';
+import validationMessages from '../../../../client/features/authentication/validation/validationMessages';
 
 describe('Signup', () => {
   beforeEach(() => {
