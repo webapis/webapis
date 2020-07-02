@@ -1,11 +1,9 @@
 import { h } from 'preact';
-import {useEffect} from 'preact/hooks'
-import PersonAdd from '../../icons/PersonAdd';
-import { TextInput } from '../../components/TextInput';
-import { Button } from '../../components/Button';
-import { Center } from '../../layout/Center';
-import { Layout } from '../state-ui/Layout';
-import AsyncButton from '../../components/async-button'
+import PersonAdd from 'icons/PersonAdd';
+import  TextInput  from 'controls/text-input';
+import { Center } from 'components/layout/Center';
+import  Layout  from './Layout';
+import AsyncButton from 'controls/async-button'
 const style = {
   layout: {
     display: 'flex',

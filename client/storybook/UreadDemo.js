@@ -1,6 +1,6 @@
 import { h } from 'preact';
-import Unread from '../hangouts/UnreadHangouts';
-import {reducerUnreadhangouts} from '../hangouts/state/reduceUnreadhangouts'
+import Unread from 'features/hangouts/ui-components/UnreadHangouts';
+import {reducerUnreadhangouts} from 'features/hangouts/state/reduceUnreadhangouts'
 const unreads = [
   {
     username: 'demo',

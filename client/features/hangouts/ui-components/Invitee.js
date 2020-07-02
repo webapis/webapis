@@ -1,8 +1,7 @@
 import { h } from 'preact';
-import {useEffect} from 'preact/hooks'
-import { Done } from '../../icons/Done';
-import { Center } from '../../layout/Center';
-import { Layout } from '../state-ui/Layout';
+import { Done } from 'icons/Done';
+import { Center } from 'components/layout/Center';
+import  Layout  from './Layout';
 
 const style = {
   layout: {

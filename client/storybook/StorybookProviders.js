@@ -1,9 +1,9 @@
 /* eslint-disable no-undef */
 import { h } from 'preact';
-import { AppRouteProvider } from '../app-route/AppRouteProvider';
+import  AppRouteProvider  from 'components/app-route';
 
-import { ThemeProvider } from '../theme/theme-context';
-import { NavProvider } from '../nav/NavProvider';
+import  ThemeProvider from 'components/theme/theme-context';
+
 
 
 export default function AppProviders({ children }) {
@@ -21,10 +21,10 @@ export default function AppProviders({ children }) {
         title="Webcom"
         initState={{ route: '/', featureRoute: '/hangouts' }}
       >
-          <NavProvider>
+    
               {children}
        
-          </NavProvider>
+         
       </AppRouteProvider>
     </ThemeProvider>
   );

@@ -2,7 +2,7 @@ import { h } from 'preact';
 import { useEffect } from 'preact/hooks';
 import { Suspense, lazy } from 'preact/compat';
 
-import {FeatureRoute} from 'components/app-route/AppRouteProvider'
+import {FeatureRoute} from 'components/app-route'
 import {useNodeAuth} from './services/node-js-auth/useNodeAuth'
 const Login = lazy(() => import('./ui-components/Login'));
 const ChangePassword = lazy(() => import('./ui-components/ChangePassword'));

@@ -5,7 +5,7 @@ import { Settings } from 'icons/Settings';
 import { OnlineStatus } from 'icons/onlineStatus';
 import { useHangouts } from '../../state/useHangouts';
 import { useUserName } from 'features/authentication/state/useUserName';
-import { useAppRoute } from 'components/app-route/AppRouteProvider';
+import { useAppRoute } from 'components/app-route';
 
 export function HangoutTopMenu() {
   const { onAppRoute } = useAppRoute();

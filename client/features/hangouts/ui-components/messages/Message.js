@@ -1,6 +1,6 @@
 import { h } from 'preact';
 import { useState, useEffect } from 'preact/hooks';
-import { useMediaQuery } from '../../layout/useMediaQuery';
+import { useMediaQuery } from 'components/layout/useMediaQuery';
 import './css/style.css';
 const style = {
   root: {

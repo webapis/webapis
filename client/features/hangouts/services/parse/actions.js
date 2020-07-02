@@ -1,4 +1,4 @@
-import { actionTypes } from '../actionTypes'
+import { actionTypes } from '../../state/actionTypes'
 export async function fetchHangouts({ search, dispatch,userId }) {
 
     try {

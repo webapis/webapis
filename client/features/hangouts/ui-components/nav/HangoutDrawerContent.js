@@ -1,7 +1,7 @@
 import { h } from 'preact';
 import List, { ListItem } from 'controls/list';
 import { useUserName } from 'features/authentication/state/useUserName';
-import {useAppRoute} from 'components/app-route/AppRouteProvider'
+import {useAppRoute} from 'components/app-route'
 import {actionTypes} from 'components/app-route/actionTypes'
 import {useMediaQuery} from 'components/layout/useMediaQuery'
 export default function HangoutDrawerContent({toggleDrawer}) {

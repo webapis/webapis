@@ -1,5 +1,5 @@
 import {h} from 'preact'
-import AsyncButton  from '../../components/async-button'
+import AsyncButton  from 'controls/async-button'
 
 export default  function AsyncButtonDemo(){
 

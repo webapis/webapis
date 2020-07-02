@@ -1,22 +1,19 @@
 import { h } from 'preact';
 import { useEffect } from 'preact/hooks';
-import Input from '../form/Input';
-import Form from '../form/Form';
-import Button from '../form/Button';
-import validationTypes from '../form/validationTypes';
+import TextInput from 'controls/text-input';
+
+import Button from 'controls/button';
 import './css/style.css';
 import { useAuthContext } from '../state/auth-context';
-import { useFormContext } from '../form/form-context';
 import * as actions from '../state/actions';
-import { useMediaQuery } from '../layout/useMediaQuery';
-import { Paper } from '../layout/Paper';
-import { Grid } from '../layout/Grid';
-import {useAppRoute} from '../app-route/AppRouteProvider'
+import { useMediaQuery } from 'components/layout/useMediaQuery';
+import { Paper } from 'components/layout/Paper';
+import { Grid } from 'components/layout/Grid';
+import {useAppRoute} from 'components/app-route'
 export default function RequestPassChange({forgotPassword}) {
   const {onAppRoute}= useAppRoute();
   const { device } = useMediaQuery();
   const { dispatch, state } = useAuthContext();
-  const { dispatch: formDispatch } = useFormContext();
   const { email } = state;
 
  
@@ -35,27 +32,29 @@ export default function RequestPassChange({forgotPassword}) {
   return (
     <Grid width={device === 'phone' ? 100 : 25}>
       <Paper>
-        <Form formTitle='Forgot Password'>
-          <Input
+     
+          <TextInput
             value={email}
             placeholder='email'
             name='email'
             onChange={handleChange}
             type='email'
             id='email'
-            validationTypes={[
-              validationTypes.EMAIL_FORMAT_VALIDATION,
-              validationTypes.EMAIL_NOT_REGISTERED,
-            ]}
+            // validationTypes={[
+            //   validationTypes.EMAIL_FORMAT_VALIDATION,
+            //   validationTypes.EMAIL_NOT_REGISTERED,
+            // ]}
           />
           <Button
             className='btn'
             type='button'
             onClick={forgotPassword}
-            id='requestpasschange-btn'
-            title='Send'
-          />
-        </Form>
+  
+            data-testid="requestpasschange-btn"
+          >
+            SEND
+          </Button>
+    
       </Paper>
     </Grid>
   );

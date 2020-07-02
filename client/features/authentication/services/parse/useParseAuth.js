@@ -1,5 +1,5 @@
-import {useAuthContext} from '../auth/auth-context'
-import {useFormContext} from '../form/form-context'
+import {useAuthContext} from '../../state/auth-context'
+
 import * as actions from './auth-actions'
 export function useParseAuth(){
 const {state,dispatch}= useAuthContext()

@@ -1,9 +1,9 @@
 import { h } from 'preact';
-import { Layout } from '../state-ui/Layout';
-import { Delete } from '../../icons/Delete';
-import { Archive } from '../../icons/Archive';
-import { Block } from '../../icons/Block';
-import { Button } from '../../components/Button';
+import  Layout  from './Layout';
+import { Delete } from 'icons/Delete';
+import { Archive } from 'icons/Archive';
+import { Block } from  'icons/Block';
+import  Button  from 'controls/button';
 const style = {
   iconBtn: { display: 'flex', alignItems: 'center', margin: 8 },
   btn: { marginRight: 8 },

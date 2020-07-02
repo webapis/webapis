@@ -1,5 +1,5 @@
 import {h} from 'preact'
-import {BlockerMessage} from '../hangouts/message-ui/BlockerMessage'
+import {BlockerMessage} from 'features/hangouts/ui-components/messages/BlockerMessage'
 
 const message ={text:'You can not send message because you are blocked',
 timestamp:12323,

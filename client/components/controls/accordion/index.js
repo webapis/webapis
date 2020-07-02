@@ -2,7 +2,7 @@ import { h,createContext } from 'preact'
 import {useReducer,useMemo,useContext,useState} from 'preact/hooks'
 import reducer,{initState} from './reducer'
 import actionTypes from './actionTypes'
-import List, {ListItem} from '../../components/list'
+import List, {ListItem} from 'controls/list'
 
 const AccordionContext =createContext()
 

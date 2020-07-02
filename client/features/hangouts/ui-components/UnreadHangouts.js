@@ -1,7 +1,7 @@
 import { h } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
-import List,{ ListItem } from '../components/list';
-import {reducerUnreadhangouts} from '../hangouts/state/reduceUnreadhangouts'
+import List,{ ListItem } from 'controls/list';
+import {reducerUnreadhangouts} from 'features/hangouts/state/reduceUnreadhangouts'
 export default function UnreadHangouts({ unreadhangouts,onSelectUnread,onRemoveUnread }) {
 
   const [items,setItems] =useState([])

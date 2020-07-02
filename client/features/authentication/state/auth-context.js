@@ -18,7 +18,7 @@ function useAuthContext() {
   };
 }
 
-function AuthProvider(props) {
+export default function AuthProvider(props) {
   const { children } = props;
   const [state, dispatch] = useReducer(authReducer, initState);
   const value = useMemo(() => [state, dispatch], [state]);
@@ -29,4 +29,4 @@ function AuthProvider(props) {
   );
 }
 
-export { useAuthContext, AuthProvider };
+export { useAuthContext };

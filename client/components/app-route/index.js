@@ -48,7 +48,7 @@ const {route}=state
   }
   return null;
 }
-export function AppRouteProvider(props) {
+export default function AppRouteProvider(props) {
   const {initState}=props
   const [state,dispatch]=useReducer(reducer,initState)
 

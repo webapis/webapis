@@ -1,8 +1,8 @@
 import { h } from 'preact';
 
-import { Layout } from '../state-ui/Layout';
-import { Button } from '../../components/Button';
-
+import  Layout  from './Layout';
+import  Button  from 'controls/button';
+import AsyncButton from 'controls/async-button'
 const style = {
   checkbox: { marginRight: 8 },
   checkboxRoot: {
@@ -34,8 +34,8 @@ export default function Block({ onCancel, onBlock, onReport }) {
         <label>Report</label>
       </div>
       <div style={{ display: 'flex', padding: 8 }}>
-        <Button title="Cancel" style={style.btn} onClick={onCancel} />
-        <Button title="Block" style={style.btn} id="BLOCK" onClick={onBlock} data-testid="block-btn" />
+        <Button data-testid='cancel-btn' style={style.btn} onClick={onCancel} >CANCEL</Button>
+        <AsyncButton title="Block" style={style.btn} id="BLOCK" onClick={onBlock} data-testid="block-btn" >BLOCK</AsyncButton>
       </div>
     </Layout>
   );

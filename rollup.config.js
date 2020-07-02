@@ -19,7 +19,8 @@ const commonPlugins = [
       { find: 'controls', replacement: path.resolve(__dirname + '/client/components/controls') },
       { find: 'features', replacement: path.resolve(__dirname + '/client/features') },
       { find: 'components', replacement: path.resolve(__dirname + '/client/components') },
-      { find: 'icons', replacement: path.resolve(__dirname + '/client/components/icons') }
+      { find: 'icons', replacement: path.resolve(__dirname + '/client/components/icons') },
+      { find: 'server', replacement: path.resolve(__dirname + '/server') }
     ]
   }),
   image(),
@@ -84,7 +85,7 @@ export default [
     ],
   },
   {
-    input: `client/authentication/change-password/change-password.js`,
+    input: `client/features/authentication/change-password/change-password.js`,
     output: [
       {
         dir: `builds/${process.env.appName}/build`,

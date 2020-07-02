@@ -1,6 +1,6 @@
 
 import { h } from 'preact';
-import { useAppRoute } from 'components/app-route/AppRouteProvider'
+import { useAppRoute } from 'components/app-route'
 import List, { ListItem } from 'controls/list';
 import userIcon from '../icons/user64.png';
 import { logout } from '../state/actions';

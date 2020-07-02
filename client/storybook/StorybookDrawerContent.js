@@ -1,8 +1,8 @@
 import { h } from 'preact';
-import List,{ListItem } from '../components/list';
-import Accordions,{Accordion} from '../components/accordion'
-import {useAppRoute} from '../app-route/AppRouteProvider'
-import {useMediaQuery} from '../layout/useMediaQuery'
+import List,{ListItem } from 'controls/list';
+import Accordions,{Accordion} from 'controls/accordion'
+import {useAppRoute} from 'components/app-route'
+import {useMediaQuery} from 'components/layout/useMediaQuery'
 export default function StorybookDrawerContent({toggleDrawer }) {
   const {onAppRoute}=useAppRoute()
 

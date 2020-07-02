@@ -4,7 +4,7 @@ import { Message } from './Message';
 import { MessageEditor } from './MessageEditor';
 import { BlockerMessage } from './BlockerMessage'
 import {BlockedMessage} from './BlockedMessage'
-import {useMediaQuery} from '../../layout/useMediaQuery'
+import {useMediaQuery} from 'components/layout/useMediaQuery'
 const styles = {
   messageContainer: {
     // width: '100%',
@@ -17,7 +17,7 @@ const styles = {
 
   },
 };
-export function Messages({
+export default function Messages({
   messages,
   onMessage,
   onMessageText,

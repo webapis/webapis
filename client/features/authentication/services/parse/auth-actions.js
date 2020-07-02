@@ -1,5 +1,5 @@
-import actionTypes from '../auth/actionTypes';
-import {serverValidation} from '../form/actions'
+import actionTypes from '../../state/actionTypes';
+
 
 export async function signUp({dispatch,state,formDispatch}) {
   try {
@@ -9,7 +9,7 @@ export async function signUp({dispatch,state,formDispatch}) {
       throw new Error('Email cannot be emty')
     }
     else   if(password===''){
-      formDispatch(serverValidation({status:-4}))
+     // formDispatch(serverValidation({status:-4}))
       throw new Error('Password cannot be emty')
     }
     debugger
@@ -39,7 +39,7 @@ export async function signUp({dispatch,state,formDispatch}) {
     dispatch({type:actionTypes.SIGNUP_SUCCESS,user:{username,email,token:success.get('sessionToken'),objectId:success.id}})
   } catch (error) {
     debugger
-    formDispatch(serverValidation({status:error.code}))
+   // formDispatch(serverValidation({status:error.code}))
   }
   
 }
@@ -70,7 +70,7 @@ export function login({dispatch,state,formDispatch}) {
     }).catch(function(error){
        
         debugger;
-        formDispatch(serverValidation({status:error.code}))
+       // formDispatch(serverValidation({status:error.code}))
 
     });
 }
@@ -89,7 +89,7 @@ export function forgotPassword({dispatch, state, formDispatch}) {
           });
       console.log("Password reset request was sent successfully");
     }).catch(function(error) {
-      formDispatch(serverValidation({status:error.code}))
+     // formDispatch(serverValidation({status:error.code}))
         
       console.log("The login failed with error: " + error.code + " " + error.message);
     });

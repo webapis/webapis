@@ -1,9 +1,9 @@
 import { h } from 'preact'
 import { useEffect,useState } from 'preact/hooks'
-import { useHangouts } from '../useHangouts'
+import { useHangouts } from '../../state/useHangouts'
 import  * as actions from './actions'
-import { actionTypes } from '../actionTypes'
-import {useUserName} from '../../../auth/useUserName'
+import { actionTypes } from '../../state/actionTypes'
+import {useUserName} from 'features/authentication/state/useUserName'
 export function WebSocketContainer(props) {
     const {username,token}=useUserName()
     const [socket,setSocket]=useState()

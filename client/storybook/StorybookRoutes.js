@@ -1,19 +1,16 @@
 import {h} from 'preact'
-import { AppRouteProvider, AppRoute } from '../app-route/AppRouteProvider';
-import Navigation from './Navigation';
-import Hangout from '../hangouts/Hangout';
-import Block from '../hangouts/state-ui/Block';
-import Blocked from '../hangouts/state-ui/Blocked';
-import Configure from '../hangouts/state-ui/Configure';
-import Invite from '../hangouts/state-ui/Invite';
-import Invitee from '../hangouts/state-ui/Invitee';
-import Inviter from '../hangouts/state-ui/Inviter';
-import Hangchat from '../hangouts/state-ui/Hangchat';
-import { Message } from '../hangouts/message-ui/Message';
-import { Messages } from '../hangouts/message-ui/Messages';
-import { MessageEditor } from '../hangouts/message-ui/MessageEditor';
-import { OnlineStatus } from '../icons/onlineStatus';
-import List,{ ListItem } from '../components/list';
+import { AppRoute } from 'components/app-route';
+
+import Hangout from 'features/hangouts/ui-components/Hangout';
+import Block from 'features/hangouts/ui-components/Block';
+import Blocked from 'features/hangouts/ui-components/Blocked';
+import Configure from 'features/hangouts/ui-components/Configure';
+import Invite from 'features/hangouts/ui-components/Invite';
+import Invitee from 'features/hangouts/ui-components/Invitee';
+import Inviter from 'features/hangouts/ui-components/Inviter';
+import Hangchat from 'features/hangouts/ui-components/Hangchat';
+import { Message } from 'features/hangouts/ui-components/messages/Message';
+import { OnlineStatus } from 'icons/onlineStatus';
 import {IconsDemo} from './IconsDemo'
 import { messages } from './fakeMessages';
 import {UnreadDemo} from './UreadDemo'

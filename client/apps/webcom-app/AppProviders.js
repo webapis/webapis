@@ -1,9 +1,9 @@
 /* eslint-disable no-undef */
 import { h } from 'preact';
-import { AppRouteProvider } from '../../components/app-route/AppRouteProvider';
+import  AppRouteProvider  from 'components/app-route';
 import  HangoutAdapter  from 'features/hangouts/state/HangoutAdapter';
-import {HangoutsProvider} from 'features/hangouts/state/HangoutsProvider'
-import { AuthProvider } from 'features/authentication/state/auth-context';
+import HangoutsProvider  from 'features/hangouts/state/HangoutsProvider'
+import  AuthProvider  from 'features/authentication/state/auth-context';
 import  ThemeProvider  from '../../components/theme/theme-context';
 import  NavigationProvider  from '../../components/controls/navigation/NavigationProvider';
 

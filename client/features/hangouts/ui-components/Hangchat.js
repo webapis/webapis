@@ -1,7 +1,7 @@
 import { h } from 'preact';
 import {useEffect} from 'preact/hooks'
-import { Messages } from '../message-ui/Messages';
-import { Layout } from './Layout';
+import  Messages  from './messages';
+import Layout  from './Layout';
 
 
 export default function Hangchat({
@@ -13,7 +13,7 @@ export default function Hangchat({
   username,
   hangout,
   onNavigation,
-  dispatch
+
 }) {
 
   useEffect(()=>{

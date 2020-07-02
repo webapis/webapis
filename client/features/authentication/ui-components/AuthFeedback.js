@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import { useAuthContext } from '../auth/auth-context';
+import { useAuthContext } from '../state/auth-context';
 export default function AuthFeedback({ message, children }) {
   const { state } = useAuthContext();
 

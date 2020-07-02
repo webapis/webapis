@@ -2,15 +2,15 @@ import { h } from 'preact';
 import { useEffect } from 'preact/hooks';
 import './css/style.css';
 
-import AsyncButton from '../components/async-button'
+import AsyncButton from 'controls/async-button'
 import { useAuthContext } from '../state/auth-context';
 
 import * as actions from '../state/actions';
-import { Grid } from '../layout/Grid';
-import { Paper } from '../layout/Paper';
-import { useMediaQuery } from '../layout/useMediaQuery';
-import {useAppRoute} from '../app-route/AppRouteProvider'
-import TextInput from '../components/text-input'
+import { Grid } from 'components/layout/Grid';
+import { Paper } from 'components/layout/Paper';
+import { useMediaQuery } from 'components/layout/useMediaQuery';
+import {useAppRoute} from 'components/app-route'
+import TextInput from 'controls/text-input'
 export default function Signup({signup}) {
   const {state,dispatch}=useAuthContext()
   const {onAppRoute} = useAppRoute();

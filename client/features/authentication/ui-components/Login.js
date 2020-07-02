@@ -1,16 +1,12 @@
 import { h } from 'preact';
 import { useEffect } from 'preact/hooks';
-import Input from '../form/Input';
-import Button from '../form/Button';
-import AsyncButton from '../components/async-button'
-import Form from '../form/Form';
-import validationTypes from '../form/validationTypes';
+import TextInput from 'controls/text-input';
+import AsyncButton from 'controls/async-button'
 import { useAuthContext } from '../state/auth-context';
-import {useFormContext} from '../form/form-context'
-import { useMediaQuery } from '../layout/useMediaQuery';
-import {useAppRoute} from '../app-route/AppRouteProvider'
-import { Paper } from '../layout/Paper';
-import { Grid } from '../layout/Grid';
+import { useMediaQuery } from 'components/layout/useMediaQuery';
+import {useAppRoute} from 'components/app-route'
+import { Paper } from 'components/layout/Paper';
+import { Grid } from 'components/layout/Grid';
 import * as actions from '../state/actions';
 
 export default function Login({login}) {
@@ -54,8 +50,8 @@ export default function Login({login}) {
  
     <Grid width={device === 'phone' ? 100 :50}>
       <Paper>
-        <Form formTitle='Login' error={error}>
-          <Input
+      
+          <TextInput
             value={emailorusername}
             onChange={handleChange}
             name='emailorusername'
@@ -63,15 +59,15 @@ export default function Login({login}) {
             placeholder='Enter email or username'
             id='emailOrUsername'
             data-testid='emailOrUsername'
-            validationTypes={[
-              validationTypes.USERNAME_OR_EMAIL_FORMAT_VALIDATION,
-              validationTypes.INVALID_CREDENTIALS,
-              validationTypes.EMAIL_NOT_REGISTERED,
-              validationTypes.USERNAME_NOT_REGISTERED,
-            ]}
+            // validationTypes={[
+            //   validationTypes.USERNAME_OR_EMAIL_FORMAT_VALIDATION,
+            //   validationTypes.INVALID_CREDENTIALS,
+            //   validationTypes.EMAIL_NOT_REGISTERED,
+            //   validationTypes.USERNAME_NOT_REGISTERED,
+            // ]}
           />
 
-          <Input
+          <TextInput
             value={password}
             onChange={handleChange}
             name='password'
@@ -79,10 +75,10 @@ export default function Login({login}) {
             placeholder='enter password'
             id='password'
             data-testid='password'
-            validationTypes={[
-              validationTypes.EMPTY_STRING_VALIDATION,
-              validationTypes.INVALID_CREDENTIALS,
-            ]}
+            // validationTypes={[
+            //   validationTypes.EMPTY_STRING_VALIDATION,
+            //   validationTypes.INVALID_CREDENTIALS,
+            // ]}
           />
 
           <AsyncButton
@@ -97,7 +93,7 @@ export default function Login({login}) {
           <a href='/' onClick={handleRoute} id='forgotpassword' data-testid='forgotpassword'>
             Forgot Password!
           </a>
-        </Form>
+  
       </Paper>
     </Grid>
   );

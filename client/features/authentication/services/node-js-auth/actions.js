@@ -1,6 +1,5 @@
-import actionTypes from '../actionTypes';
-import { serverValidation } from '../../form/actions';
-import httpStatus from '../../form/http-status';
+import actionTypes from '../../state/actionTypes';
+//import { serverValidation } from '../../form/actions';
 export function valueChanged({ propName, value }) {
 
   return {
@@ -44,11 +43,11 @@ export async function login({ dispatch, state, formDispatch }) {
       const { errors } = result;
       dispatch({type:actionTypes.LOGIN_FAILED})
       errors.forEach((error) => {
-        formDispatch(
-          serverValidation({
-            status: error,
-          })
-        );
+        // formDispatch(
+        //   serverValidation({
+        //     status: error,
+        //   })
+        // );
       });
     } else {
    
@@ -91,11 +90,11 @@ export async function signup({ dispatch, formDispatch, state }) {
       const { errors } = result;
       
       errors.forEach((error) => {
-        formDispatch(
-          serverValidation({
-            status: error,
-          })
-        );
+        // formDispatch(
+        //   serverValidation({
+        //     status: error,
+        //   })
+        // );
       });
       dispatch({type:actionTypes.SIGNUP_FAILED})
     } else {
@@ -145,11 +144,11 @@ export async function changePassword({ dispatch, state, formDispatch }) {
       const { errors } = result;
       debugger;
       errors.forEach((error) => {
-        formDispatch(
-          serverValidation({
-            status: error,
-          })
-        );
+        // formDispatch(
+        //   serverValidation({
+        //     status: error,
+        //   })
+        // );
       });
     } else if (response.status === 500) {
       const { error } = result;
@@ -193,11 +192,11 @@ export async function forgotPassword({ dispatch, state, formDispatch }) {
       debugger;
       const { errors } = result;
       errors.forEach((error) => {
-        formDispatch(
-          serverValidation({
-            status: error,
-          })
-        );
+        // formDispatch(
+        //   serverValidation({
+        //     status: error,
+        //   })
+        // );
       });
     } else if (response.status === 500) {
       const result = await response.json();

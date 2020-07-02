@@ -1,14 +1,14 @@
 import { h } from 'preact';
 import { useEffect } from 'preact/hooks';
 import { useHangoutContext } from './HangoutsProvider';
-import { useAuthContext } from '../../auth/auth-context';
-import { useAppRoute } from '../../app-route/AppRouteProvider';
+import { useAuthContext } from 'features/authentication/state/auth-context';
+import { useAppRoute } from 'components/app-route';
 import { savePendingHangout } from './actions/delivering-actions/savePendingHangout';
 import {
 
   selectUnread,
   
-  fetchHangout,
+
   changeMessageText,
 } from './actions';
 import { sendOfflineHangouts } from './actions/delivering-actions/sendOfflineHangouts';

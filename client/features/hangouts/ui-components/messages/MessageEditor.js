@@ -1,7 +1,6 @@
 import { h } from 'preact';
-import { TextInput } from '../../components/TextInput';
-import { Button } from '../../components/Button';
-import AsyncButton from '../../components/async-button'
+import  TextInput  from 'controls/text-input';
+import AsyncButton from 'controls/async-button'
 const styles = {
   root: {
     display: 'flex',
@@ -36,7 +35,7 @@ export function MessageEditor({ loading,messageText, onMessageText, onMessage,ha
   return (
     <div style={styles.root}>
      <div style={{flex:1}}>
-     <input style={styles.input} disabled={hangout &&hangout.state==='BLOCKED'}  type="text" onChange={onMessageText}  data-testid="message-input" value={messageText}/>
+     <TextInput style={styles.input} disabled={hangout &&hangout.state==='BLOCKED'}  type="text" onChange={onMessageText}  data-testid="message-input" value={messageText}/>
      </div>
    
       

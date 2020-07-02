@@ -25,7 +25,7 @@ export function useHangoutContext() {
   return context;
 }
 
-export function HangoutsProvider(props) {
+export default function HangoutsProvider(props) {
  const {username,token}=useUserName()
 
   const [state, dispatch] = useReducer(reducer, initState);

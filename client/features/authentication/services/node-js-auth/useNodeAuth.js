@@ -1,6 +1,5 @@
 import * as actions from './actions'
-import { useAuthContext } from '../auth-context'
-import { useFormContext } from '../../form/form-context'
+import { useAuthContext } from '../../state/auth-context'
 export function useNodeAuth() {
     const { state, dispatch } = useAuthContext()
     const { dispatch: formDispatch } = useFormContext()

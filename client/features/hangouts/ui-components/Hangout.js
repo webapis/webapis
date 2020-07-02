@@ -1,9 +1,9 @@
 import { h } from 'preact';
 
 import List,{ ListItem } from 'controls/list';
-import { TextInput } from 'controls/text-input';
-import { Button } from 'controls/button';
-import { useAppRoute } from 'components/app-route/AppRouteProvider'
+import  TextInput  from 'controls/text-input';
+import  Button  from 'controls/button';
+import { useAppRoute } from 'components/app-route'
 
 
 const style = {

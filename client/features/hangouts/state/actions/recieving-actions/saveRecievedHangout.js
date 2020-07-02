@@ -1,5 +1,5 @@
 import { actionTypes } from '../../actionTypes';
-import {hangoutStates}  from '../../../../../server/hangouts/hangoutStates'
+import {hangoutStates}  from 'server/hangouts/hangoutStates'
 export function saveRecievedHangout({
   dispatch,
   hangout,

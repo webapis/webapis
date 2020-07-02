@@ -10,7 +10,7 @@ const styles = {
   flex: 1,
 };
 
-export function TextInput(props) {
+export default function TextInput(props) {
 
   return (
     <div  >

@@ -1,7 +1,7 @@
 import { h } from 'preact';
 import { useEffect } from 'preact/hooks';
-import { useAppRoute } from '../../app-route/AppRouteProvider';
-import { hangoutStates } from '../../../server/hangouts/hangoutStates';
+import { useAppRoute } from 'components/app-route';
+import { hangoutStates } from 'server/hangouts/hangoutStates';
 import {
   saveInvited,
   saveUnblovked,
