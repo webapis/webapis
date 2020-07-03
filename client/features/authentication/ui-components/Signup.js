@@ -1,6 +1,6 @@
 import { h } from 'preact';
 import { useEffect } from 'preact/hooks';
-import './css/style.css';
+//import './css/style.css';
 
 import AsyncButton from 'controls/async-button'
 import { useAuthContext } from '../state/auth-context';

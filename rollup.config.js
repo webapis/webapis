@@ -24,16 +24,13 @@ const commonPlugins = [
     ]
   }),
   image(),
-  copy({
-    targets: [{ src: 'assets/libs/parse.min.js', dest: `builds/${process.env.appName}/build` },
-    { src: 'assets/fonts/Roboto/Roboto-Regular.ttf', dest: `builds/${process.env.appName}/build` },
-    { src: 'assets/manifest/**', dest: `builds/${process.env.appName}/build` }
-    ]
-  }),
+ 
+
   postcss({
-    extensions: ['.css'],
+    extensions: ['.css','.scss'],
     plugins: [],
   }),
+  
   resolve(),
   babel({
     babelrc: false,
@@ -71,6 +68,12 @@ export default [
     plugins: [
       del({ targets: `builds/${process.env.appName}/build/*` }),
       ...commonPlugins,
+      copy({
+        targets: [{ src: 'assets/libs/parse.min.js', dest: `builds/${process.env.appName}/build` },
+        { src: 'assets/fonts/Roboto/Roboto-Regular.ttf', dest: `builds/${process.env.appName}/build` },
+        { src: 'assets/manifest/**', dest: `builds/${process.env.appName}/build` }
+        ]
+      }),
       htmlTemplate({
         template: 'config/rollup/html-template/index.html',
         target: `builds/${process.env.appName}/build/index.html`,
@@ -95,6 +98,12 @@ export default [
     ],
     plugins: [
       ...commonPlugins,
+      copy({
+        targets: [{ src: 'assets/libs/parse.min.js', dest: `builds/${process.env.appName}/build` },
+        { src: 'assets/fonts/Roboto/Roboto-Regular.ttf', dest: `builds/${process.env.appName}/build` },
+        { src: 'assets/manifest/**', dest: `builds/${process.env.appName}/build` }
+        ]
+      }),
       htmlTemplate({
         template: 'config/rollup/html-template/changepassword.html',
         target: `builds/${process.env.appName}/build/changepassword.html`,
@@ -119,8 +128,14 @@ export default [
       },
     ],
     plugins: [
-     // del({ targets: `client/storybook/build/*` }),
+      del({ targets: `client/storybook/build/*` }),
       ...commonPlugins,
+      copy({
+        targets: [{ src: 'assets/libs/parse.min.js', dest: `client/storybook/build` },
+        { src: 'assets/fonts/Roboto/Roboto-Regular.ttf', dest: `client/storybook/build` },
+        { src: 'assets/manifest/**', dest: `client/storybook/build` }
+        ]
+      }),
       htmlTemplate({
         template: 'config/rollup/html-template/index.html',
         target: `client/storybook/build/index.html`,

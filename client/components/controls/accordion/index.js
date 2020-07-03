@@ -12,7 +12,7 @@ const [state,dispatch] =useReducer(reducer,{...initState,selectedId,name})
   useEffect(()=>{
     if(name && localStorage.getItem(`accordion-${name}`)){
       const {selectedId}= JSON.parse(localStorage.getItem(`accordion-${name}`))
-     debugger;
+    
       dispatch({type:actionTypes.ACCORDION_SELECTED,selectedId})
     }
   },[])
@@ -29,10 +29,10 @@ const {selectedId, name}=state
 
 useEffect(()=>{
   if(selectedId===id){
-    debugger;
+
     setVisible(true)
   }
-  debugger;
+
 },[])
 
   function selectAccordion (e){

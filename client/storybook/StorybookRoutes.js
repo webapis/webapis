@@ -15,6 +15,7 @@ import { messages } from './fakeMessages';
 import { UnreadDemo } from './UreadDemo'
 import { BlockerMessageDemo } from './BlockerMessageDemo'
 import AsyncButtonDemo from './components/AsyncButtonDemo'
+import TextInputDemo from './components/text-input'
 import AuthDemoRoutes from './authentication/route'
 const hangouts = [
   { username: 'userone' },
@@ -86,6 +87,9 @@ export default function StorybookRoutes() {
       </AppRoute>
       <AppRoute path="/asyncbutton">
         <AsyncButtonDemo />
+      </AppRoute>
+      <AppRoute path="/text-input">
+        <TextInputDemo />
       </AppRoute>
       <AuthDemoRoutes/>
     </div>

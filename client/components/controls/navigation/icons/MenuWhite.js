@@ -1,6 +1,5 @@
 import { h } from 'preact';
 
-import '../css/style.css';
 export function MenuWhite({ onClick, id }) {
   return (
     <svg

@@ -1,6 +1,7 @@
 import { h } from 'preact'
 import { useEffect, useState } from 'preact/hooks'
-import './css/style.css'
+import {MDCRipple} from '@material/ripple';
+import './style.scss'
 const style = {
     circle: {
         backgroundColor: 'green',
@@ -53,10 +54,18 @@ function ProgressBar() {
 }
 
 export default function AsyncButton(props) {
+    useEffect(()=>{
+     //  const btn = new MDCButton(document.querySelector('.mdc-button'));
+     new MDCRipple(document.querySelector('.mdc-button'));
+    },[])
     const {loading}=props
     if (loading) {
         return <ProgressBar />
     }
     else
-    return <button  className="btn" {...props}/>
+    return <button className="mdc-button">
+    <div className="mdc-button__ripple"></div>
+    
+    <span className="mdc-button__label">AsyncButton</span>
+  </button>
 }

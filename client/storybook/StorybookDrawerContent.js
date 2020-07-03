@@ -75,6 +75,9 @@ export default function StorybookDrawerContent({toggleDrawer }) {
           <ListItem id="asyncbutton" onClick={handleRoute}>
          AsyncButton
         </ListItem>
+        <ListItem id="text-input" onClick={handleRoute}>
+         TextInput
+        </ListItem>
           </List>
         </Accordion>
         <Accordion title="Authentication" id="3">

@@ -1,6 +1,6 @@
 import { h } from 'preact';
 import { useEffect } from 'preact/hooks';
-import './css/style.css';
+//import './css/style.scss';
 import TextInput from 'controls/text-input';
 
 import Button from 'controls/button';
