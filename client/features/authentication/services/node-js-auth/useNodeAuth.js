@@ -2,16 +2,15 @@ import * as actions from './actions'
 import { useAuthContext } from '../../state/auth-context'
 export function useNodeAuth() {
     const { state, dispatch } = useAuthContext()
-    const { dispatch: formDispatch } = useFormContext()
     function login() {
-        actions.login({ dispatch, state, formDispatch })
+        actions.login({ dispatch, state })
     }
 
     function signup() {
-        actions.signup({ dispatch, formDispatch, state })
+        actions.signup({ dispatch, state })
     }
     function forgotPassword() {
-        actions.forgotPassword({ dispatch, state, formDispatch })
+        actions.forgotPassword({ dispatch, state })
     }
 
     function changePassword() {

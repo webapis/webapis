@@ -65,7 +65,8 @@ export default function AsyncButton(props) {
     else
     return <button className="mdc-button">
     <div className="mdc-button__ripple"></div>
-    
+    <i class="material-icons mdc-button__icon" aria-hidden="true" >face</i
+  >
     <span className="mdc-button__label">AsyncButton</span>
   </button>
 }
