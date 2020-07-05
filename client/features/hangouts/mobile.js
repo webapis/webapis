@@ -39,7 +39,7 @@ export default function Mobile(props) {
 const {loading}=state
   return (
     <div style={{ height: '100%', width: '100%' }}>
-      <FeatureRoute path="/hangouts">
+      <FeatureRoute path="/hangout">
         <Suspense fallback={<div>Loading...</div>}>
           <Hangouts
             dispatch={dispatch}

@@ -2,7 +2,7 @@ import { h } from 'preact';
 
 import { Block } from 'icons/Block';
 import { Center } from 'components/layout/Center';
-import  AsyncButton  from 'controls/async-button';
+import  Button  from 'controls/button';
 import  Layout  from './Layout';
 
 const style = {
@@ -31,8 +31,8 @@ export default function Blocked({ hangout, onUnblock, onClose }) {
       </Center>
 
       <div style={{ display: 'flex', padding: 8 }}>
-        <AsyncButton data-testid='close-btn' style={style.btn} onClick={onClose} >CLOSE</AsyncButton>
-        <AsyncButton id='UNBLOCK'  style={style.btn} onClick={onUnblock} data-testid='unblock-btn'>UNBLOCK</AsyncButton>
+        <Button data-testid='close-btn' style={style.btn} onClick={onClose} >CLOSE</Button>
+        <Button id='UNBLOCK'  style={style.btn} onClick={onUnblock} data-testid='unblock-btn'>UNBLOCK</Button>
       </div>
     </Layout>
   );

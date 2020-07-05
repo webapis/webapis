@@ -1,61 +1,48 @@
 import { h } from 'preact';
-import { useEffect } from 'preact/hooks';
+
 import TextInput from 'controls/text-input';
 
 import Button from 'controls/button';
-//import './css/style.css';
-import { useAuthContext } from '../state/auth-context';
-import * as actions from '../state/actions';
-import { useMediaQuery } from 'components/layout/useMediaQuery';
-import { Paper } from 'components/layout/Paper';
-import { Grid } from 'components/layout/Grid';
-import {useAppRoute} from 'components/app-route'
-export default function RequestPassChange({forgotPassword}) {
-  const {onAppRoute}= useAppRoute();
-  const { device } = useMediaQuery();
-  const { dispatch, state } = useAuthContext();
-  const { email } = state;
 
- 
-  function handleChange(e) {
-    const { name, value } = e.target;
-    dispatch(actions.valueChanged({ propName: name, value, dispatch, state }));
-  }
+export default function RequestPassChange(props) {
+  const { email, validation, onRequestPasswordChange, loading, onChange } = props
 
-  useEffect(() => {
-    if (state.authFeedback) {
-      debugger;
-      onAppRoute({featureRoute: '/authfeedback',route:'/auth'});
-    }
-  }, [state.authFeedback]);
 
   return (
-    <Grid width={device === 'phone' ? 100 : 25}>
-      <Paper>
-     
-          <TextInput
-            value={email}
-            placeholder='email'
-            name='email'
-            onChange={handleChange}
-            type='email'
-            id='email'
-            // validationTypes={[
-            //   validationTypes.EMAIL_FORMAT_VALIDATION,
-            //   validationTypes.EMAIL_NOT_REGISTERED,
-            // ]}
-          />
-          <Button
-            className='btn'
-            type='button'
-            onClick={forgotPassword}
-  
-            data-testid="requestpasschange-btn"
-          >
-            SEND
-          </Button>
-    
-      </Paper>
-    </Grid>
+
+    <div className="col-md-4 border mx-auto rounded" style={{ margin: 15, padding: 16 }}>
+      {loading && <div className="progress" style="height: 5px;">
+        <div className="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+      </div>}
+      <TextInput
+        label="Email"
+        value={email}
+        placeholder='email'
+        name='email'
+        onChange={onChange}
+        type='email'
+        id='email'
+        isValid={validation && validation['email'].isValid}
+        message={validation && validation['email'].message}
+
+      // validationTypes={[
+      //   validationTypes.EMAIL_FORMAT_VALIDATION,
+      //   validationTypes.EMAIL_NOT_REGISTERED,
+      // ]}
+      />
+      <Button
+
+        type='button'
+        onClick={onRequestPasswordChange}
+        data-testid="requestpasschange-btn"
+        title="Request password change"
+        loading={loading}
+        bg="primary"
+
+      />
+
+
+
+    </div>
   );
 }

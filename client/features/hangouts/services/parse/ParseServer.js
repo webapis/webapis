@@ -4,7 +4,7 @@ import { useHangouts } from '../../state/useHangouts'
 import * as actions from './actions'
 import { stateMapper } from 'server/hangouts/stateMapper'
 import { clientCommands } from 'features/hangouts/state/clientCommands'
-import { useAuthContext } from 'features/authentication/state/auth-context'
+import { useAuthContext } from 'features/authentication'
 import { actionTypes } from '../../state/actionTypes'
 export function ParseServer(props) {
     const { children } = props

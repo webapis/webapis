@@ -3,6 +3,11 @@ import TextInput from 'controls/text-input'
 
 export default function TextInputStates() {
     return <div>
-        <TextInput valid={false} />
+        <div>
+            <h5>Validation</h5>
+        <TextInput isValid={true} />
+        <TextInput isValid={false} />
+        </div>
+       
     </div>
 }

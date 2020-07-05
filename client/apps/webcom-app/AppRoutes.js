@@ -2,19 +2,17 @@ import { h } from 'preact';
 import { Suspense, lazy } from 'preact/compat';
 import { AppRoute } from 'components/app-route';
 import { Home } from './Home';
-import ParseAuthentication from 'features/authentication/ParseAuthentication';
-import NodeAuthentication from 'features/authentication/NodeAuthentication';
+import {AuthFatureRoutes} from 'features/authentication'
 
 const Hangouts = lazy(() => import('features/hangouts/ui-components/Hangout'));
 
 
 export function AppRoutes() {
   return (
-    <div style={{ height: '100%',backgroundColor:'yellow' }}>
+    <div style={{ height: '100%'}}>
       <AppRoute path="/auth">
 
-          {PREACT_APP_BACK ==='PREACT_APP_PARSE' && <ParseAuthentication/>}
-          {PREACT_APP_BACK ==='PREACT_APP_NODEJS' && <NodeAuthentication/>}
+    <AuthFatureRoutes/>
    
       </AppRoute>
       <AppRoute path="/">

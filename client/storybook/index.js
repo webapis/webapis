@@ -1,28 +1,34 @@
 import { h, render } from 'preact';
-
-import StorybookNaviation from './StorybookNavigation'
-import StorybookRoutes from './StorybookRoutes'
 import StorybookProviders from './StorybookProviders'
-const hangouts = [
-  { username: 'userone' },
-  { username: 'usertwo' },
-  { username: 'userthree' },
-];
-const hangout = {
-  username: 'testuser',
-  email: 'test@gmail.com',
-  message: { text: `Let's chat on Hangout!`, timestamp: 1590820782921 },
-};
-const message = {
-  username: 'breno',
-  text: `Let's Chat on Hangout!`,
-  timestamp: 1591331767836,
-};
-//
+import StorybookRoutes from './StorybookRoutes'
+import Navbar, { NavBarNav, NavItem, NavLink, NavBarCollapse } from 'components/nav-bar'
+import NavDropdown, { DropdownMenu, DropdownItem } from 'components/nav-bar/nav-dropdown'
+
 render(
   <StorybookProviders>
-  <StorybookNaviation name='storybook'/>
+    <Navbar brand="Storybook" bg="dark">
+      <NavBarCollapse>
+        <NavBarNav>
+          <NavDropdown title="Components">
+            <DropdownMenu>
+              <DropdownItem id="button">Buttons</DropdownItem>
+              <DropdownItem id="text-input">TextInput</DropdownItem>
+            </DropdownMenu>
+          </NavDropdown>
+          <NavDropdown title="Authentication">
+            <DropdownMenu>
+              <DropdownItem id="login">Login</DropdownItem>
+              <DropdownItem id="signup">Signup</DropdownItem>
+              <DropdownItem id="change-password">Change Password</DropdownItem>
+              <DropdownItem id="forgot-password">Forgot Password</DropdownItem>
+            </DropdownMenu>
+          </NavDropdown>
+        </NavBarNav>
+      </NavBarCollapse>
+    </Navbar>
+    <StorybookRoutes />
+  </StorybookProviders>
 
-  </StorybookProviders>,
+  ,
   document.body
 );

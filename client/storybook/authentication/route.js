@@ -6,18 +6,18 @@ import ChangePasswordStates from './states/change-password.states'
 import ForgotPasswordStates from './states/forgot-password.states'
 export default function AuthDemoRoutes() {
 
-    return (<div>
-        <AppRoute path="/login-states">
+    return [
+        <AppRoute path="/login">
             <LoginStates />
-        </AppRoute>
-        <AppRoute path="/signup-states">
+        </AppRoute>,
+        <AppRoute path="/signup">
             <SignUpStates />
-        </AppRoute>
-        <AppRoute path="/change-password-states">
+        </AppRoute>,
+        <AppRoute path="/change-password">
             <ChangePasswordStates />
-        </AppRoute>
-        <AppRoute path="/forgot-password-states">
+        </AppRoute>,
+        <AppRoute path="/forgot-password">
             <ForgotPasswordStates />
         </AppRoute>
-    </div>)
+    ]
 }

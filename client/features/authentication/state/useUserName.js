@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'preact/hooks';
-import { useAuthContext } from './auth-context';
+import { useAuthContext } from './AuthProvider';
 export function useUserName() {
   const [userName, setUsername] = useState(null);
   const [token, setToken] = useState(null);

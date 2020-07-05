@@ -14,9 +14,8 @@ import { IconsDemo } from './IconsDemo'
 import { messages } from './fakeMessages';
 import { UnreadDemo } from './UreadDemo'
 import { BlockerMessageDemo } from './BlockerMessageDemo'
-import AsyncButtonDemo from './components/AsyncButtonDemo'
-import TextInputDemo from './components/text-input'
 import AuthDemoRoutes from './authentication/route'
+import ComponentsRoutes from './components/route'
 const hangouts = [
   { username: 'userone' },
   { username: 'usertwo' },
@@ -36,7 +35,7 @@ const message = {
 
 export default function StorybookRoutes() {
   return (
-    <div style={{ height: '80vh' }}>
+    <div style={{ height: '100vh'}}>
       <AppRoute path="/hangouts">
         <Hangout hangouts={hangouts} />
       </AppRoute>
@@ -85,13 +84,8 @@ export default function StorybookRoutes() {
       <AppRoute path="/icons">
         <IconsDemo />
       </AppRoute>
-      <AppRoute path="/asyncbutton">
-        <AsyncButtonDemo />
-      </AppRoute>
-      <AppRoute path="/text-input">
-        <TextInputDemo />
-      </AppRoute>
       <AuthDemoRoutes/>
+      <ComponentsRoutes/>
     </div>
 
   )

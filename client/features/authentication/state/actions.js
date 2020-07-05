@@ -1,15 +1,6 @@
 import actionTypes from './actionTypes';
 
-export function valueChanged({ propName, value }) {
 
-  return {
-    type: actionTypes.VALUE_CHANGED,
-    payload: {
-      propName,
-      value,
-    },
-  };
-}
 
 
 

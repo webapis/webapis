@@ -3,7 +3,7 @@ import PersonAdd from 'icons/PersonAdd';
 import  TextInput  from 'controls/text-input';
 import { Center } from 'components/layout/Center';
 import  Layout  from './Layout';
-import AsyncButton from 'controls/async-button'
+import Button from 'controls/button'
 const style = {
   layout: {
     display: 'flex',
@@ -25,9 +25,9 @@ export default function Invite({ hangout, onInvite, onMessageText,messageText, l
       </Center>
       <TextInput id="messageTextInput" onChange={onMessageText} value={messageText} />
       <Center>
-        <AsyncButton loading={loading}  id="INVITE" onClick={onInvite} data-testid='oninvite-btn' >
+        <Button loading={loading}  id="INVITE" onClick={onInvite} data-testid='oninvite-btn' >
           SEND INVITE
-        </AsyncButton>
+        </Button>
       </Center>
     </Layout>
   );

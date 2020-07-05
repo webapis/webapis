@@ -13,7 +13,7 @@ const AuthFeedback = lazy(() => import('./ui-components/AuthFeedback'));
 export default function ParseAuthentication({ children }) {
   const {signup,login,changePassword,forgotPassword}=useParseAuth()
   return (
-    <div style={{paddingTop:68}}>
+    <div >
       <FeatureRoute path='/changepassword'>
         <Suspense fallback={<div>loading...</div>}>
           <ChangePassword changePassword={changePassword} />

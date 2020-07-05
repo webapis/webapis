@@ -1,50 +1,26 @@
 import { h } from 'preact';
 import { useEffect } from 'preact/hooks';
-//import './css/style.css';
 
-import AsyncButton from 'controls/async-button'
-import { useAuthContext } from '../state/auth-context';
 
-import * as actions from '../state/actions';
-import { Grid } from 'components/layout/Grid';
-import { Paper } from 'components/layout/Paper';
-import { useMediaQuery } from 'components/layout/useMediaQuery';
-import {useAppRoute} from 'components/app-route'
+import Button from 'controls/button'
 import TextInput from 'controls/text-input'
-export default function Signup({signup}) {
-  const {state,dispatch}=useAuthContext()
-  const {onAppRoute} = useAppRoute();
-  const { device } = useMediaQuery();
-  const { username, password, email,loading,error } = state;
-  useEffect(() => {
-    if (state.user && state.user.token) {
-      onAppRoute({featureRoute: '/',route:'/'});
-    }
-  }, [state.user]);
-
- 
-  function handleChange(e) {
-    const { name, value } = e.target;
-    dispatch(
-      actions.valueChanged({
-        propName: name,
-        value,
-        dispatch,
-        state,
-      })
-    );
-  }
+export default function Signup(props) {
+  const { username, password, email,loading,onSignup,onChange,validation } = props;
   return (
-    <Grid >
-      <Paper>
-
+<div className="col-md-4 border mx-auto rounded" style={{margin:15, padding:16}}>
+{loading &&  <div className="progress" style="height: 5px;">
+  <div className="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+</div>}
           <TextInput
+            label="Username"
             value={username}
-            onChange={handleChange}
+            onChange={onChange}
             type='text'
             data-testid='username'
             name='username'
             placeholder='username'
+            isValid={validation && validation['username'].isValid}
+            message={validation && validation['username'].message}
             // validationTypes={[
             //   validationTypes.USERNAME_FORMAT_VALIDATION,
             //   validationTypes.USERNAME_TAKEN,
@@ -52,12 +28,15 @@ export default function Signup({signup}) {
             // ]}
           />
           <TextInput
-            onChange={handleChange}
+            label="Email"
+            onChange={onChange}
             value={email}
             placeholder='email'
             type='email'
             data-testid='email'
             name='email'
+            isValid={validation && validation['email'].isValid}
+            message={validation && validation['email'].message}
             // validationTypes={[
             //   validationTypes.EMAIL_FORMAT_VALIDATION,
             //   validationTypes.REGISTERED_EMAIL,
@@ -65,26 +44,30 @@ export default function Signup({signup}) {
             // ]}
           />
           <TextInput
-            onChange={handleChange}
+            label="Password"
+            onChange={onChange}
             value={password}
             placeholder='password'
             type='password'
             data-testid='password'
             name='password'
+            isValid={validation && validation['password'].isValid}
+            message={validation && validation['password'].message}
             // validationTypes={[validationTypes.PASSWORD_FORMAT_VALIDATION]}
           />
-          <AsyncButton
-            className='btn'
+          <Button
+          
             type='button'
-            onClick={signup}
+            onClick={onSignup}
             id='signup-btn'
             data-testid="signup-btn"
             loading={loading}
-          >
-            SIGNUP
-          </AsyncButton>
+            title="Signup"
+            bg="primary"
+          />
+         
+          
   
-      </Paper>
-    </Grid>
+          </div>
   );
 }

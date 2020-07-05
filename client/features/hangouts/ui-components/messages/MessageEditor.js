@@ -1,6 +1,6 @@
 import { h } from 'preact';
 import  TextInput  from 'controls/text-input';
-import AsyncButton from 'controls/async-button'
+import Button from 'controls/button'
 const styles = {
   root: {
     display: 'flex',
@@ -40,9 +40,9 @@ export function MessageEditor({ loading,messageText, onMessageText, onMessage,ha
    
       
       <div style={{marginLeft:3}}>
-        <AsyncButton loading={loading} disabled={hangout &&hangout.state==='BLOCKED'}  style={styles.btn}   id='MESSAGE' onClick={onMessage} data-testid='send-btn'>
+        <Button loading={loading} disabled={hangout &&hangout.state==='BLOCKED'}  style={styles.btn}   id='MESSAGE' onClick={onMessage} data-testid='send-btn'>
 SENT
-        </AsyncButton>
+        </Button>
       </div>
     </div>
   );

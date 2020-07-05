@@ -71,7 +71,10 @@ export default [
       copy({
         targets: [{ src: 'assets/libs/parse.min.js', dest: `builds/${process.env.appName}/build` },
         { src: 'assets/fonts/Roboto/Roboto-Regular.ttf', dest: `builds/${process.env.appName}/build` },
-        { src: 'assets/manifest/**', dest: `builds/${process.env.appName}/build` }
+        { src: 'assets/manifest/**', dest: `builds/${process.env.appName}/build` },
+        { src: 'node_modules/bootstrap/dist/css/bootstrap.min.css', dest: `builds/${process.env.appName}/build` },
+        { src: 'node_modules/bootstrap/dist/js/bootstrap.min.js', dest: `builds/${process.env.appName}/build` },
+        { src: 'node_modules/jquery/dist/jquery.min.js', dest: `builds/${process.env.appName}/build` },
         ]
       }),
       htmlTemplate({
@@ -101,7 +104,10 @@ export default [
       copy({
         targets: [{ src: 'assets/libs/parse.min.js', dest: `builds/${process.env.appName}/build` },
         { src: 'assets/fonts/Roboto/Roboto-Regular.ttf', dest: `builds/${process.env.appName}/build` },
-        { src: 'assets/manifest/**', dest: `builds/${process.env.appName}/build` }
+        { src: 'assets/manifest/**', dest: `builds/${process.env.appName}/build` },
+        { src: 'node_modules/bootstrap/dist/css/bootstrap.min.css', dest: `builds/${process.env.appName}/build` },
+        { src: 'node_modules/bootstrap/dist/js/bootstrap.min.js', dest: `builds/${process.env.appName}/build` },
+        { src: 'node_modules/jquery/dist/jquery.min.js', dest: `builds/${process.env.appName}/build` },
         ]
       }),
       htmlTemplate({
@@ -133,7 +139,10 @@ export default [
       copy({
         targets: [{ src: 'assets/libs/parse.min.js', dest: `client/storybook/build` },
         { src: 'assets/fonts/Roboto/Roboto-Regular.ttf', dest: `client/storybook/build` },
-        { src: 'assets/manifest/**', dest: `client/storybook/build` }
+        { src: 'assets/manifest/**', dest: `client/storybook/build` },
+        { src: 'node_modules/bootstrap/dist/css/bootstrap.min.css', dest: `client/storybook/build` },
+        { src: 'node_modules/bootstrap/dist/js/bootstrap.min.js', dest: `client/storybook/build` },
+        { src: 'node_modules/jquery/dist/jquery.min.js', dest: `client/storybook/build` },
         ]
       }),
       htmlTemplate({

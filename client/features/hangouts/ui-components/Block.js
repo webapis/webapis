@@ -2,7 +2,6 @@ import { h } from 'preact';
 
 import  Layout  from './Layout';
 import  Button  from 'controls/button';
-import AsyncButton from 'controls/async-button'
 const style = {
   checkbox: { marginRight: 8 },
   checkboxRoot: {
@@ -35,7 +34,7 @@ export default function Block({ onCancel, onBlock, onReport }) {
       </div>
       <div style={{ display: 'flex', padding: 8 }}>
         <Button data-testid='cancel-btn' style={style.btn} onClick={onCancel} >CANCEL</Button>
-        <AsyncButton title="Block" style={style.btn} id="BLOCK" onClick={onBlock} data-testid="block-btn" >BLOCK</AsyncButton>
+        <Button title="Block" style={style.btn} id="BLOCK" onClick={onBlock} data-testid="block-btn" >BLOCK</Button>
       </div>
     </Layout>
   );

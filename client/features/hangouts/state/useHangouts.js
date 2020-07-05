@@ -1,7 +1,7 @@
 import { h } from 'preact';
 import { useEffect } from 'preact/hooks';
 import { useHangoutContext } from './HangoutsProvider';
-import { useAuthContext } from 'features/authentication/state/auth-context';
+import { useAuthContext } from 'features/authentication';
 import { useAppRoute } from 'components/app-route';
 import { savePendingHangout } from './actions/delivering-actions/savePendingHangout';
 import {

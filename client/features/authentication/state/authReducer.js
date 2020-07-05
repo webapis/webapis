@@ -1,5 +1,9 @@
 import actionTypes from './actionTypes';
 export const initState = {
+  login:false,
+  signup:false,
+  changePassword:false,
+  requestPassChange:false,
   email: '',
   password: '',
   success: false,
@@ -10,8 +14,6 @@ export const initState = {
   current: '',
   emailorusername: '',
   token: null,
-  isLoggedIn: false,
-  isPasswordChanged: false,
   authFeedback: null,
   user:null
 };
@@ -21,12 +23,12 @@ export function authReducer(state, action) {
     case actionTypes.VALUE_CHANGED:
       const nextState = {
         ...state,
-        [action.payload.propName]: action.payload.value,
+        [action.name]: action.value,
       };
   
       return nextState;
     case actionTypes.LOGIN_STARTED:
-      return { ...state, loading: true };
+      return { ...state, loading: true,login:true };
     case actionTypes.LOGIN_SUCCESS:
       return {
         ...state,
@@ -40,12 +42,12 @@ export function authReducer(state, action) {
     case actionTypes.LOGIN_FAILED:
       return { ...state, loading: false, error: action.payload.error };
     case actionTypes.SIGNUP_STARTED:
-      return { ...state, loading: true };
+      return { ...state, loading: true,signup:true };
     case actionTypes.SIGNUP_SUCCESS:
       return {
         ...state,
         loading: false,
-        success: true,
+      
         isLoggedIn: true,
        user:action.user,
         password: '',
@@ -54,7 +56,7 @@ export function authReducer(state, action) {
     case actionTypes.SIGNUP_FAILED:
       return { ...state, loading: false, error: action.payload.error };
     case actionTypes.CHANGE_PASSWORD_STARTED:
-      return { ...state, loading: true };
+      return { ...state, loading: true,changePassword:true };
     case actionTypes.CHANGE_PASSWORD_SUCCESS:
       return {
         ...state,
@@ -67,7 +69,7 @@ export function authReducer(state, action) {
     case actionTypes.CHANGE_PASSWORD_FAILED:
       return { ...state, loading: false, error: action.error };
     case actionTypes.REQUEST_PASS_CHANGE_STARTED:
-      return { ...state, loading: true };
+      return { ...state, loading: true,requestPassChange:true };
     case actionTypes.REQUEST_PASS_CHANGE_SUCCESS:
       return {
         ...state,
@@ -79,7 +81,7 @@ export function authReducer(state, action) {
       return { ...state, loading: false, error: action.payload.error };
     case actionTypes.GOT_TOKEN_FROM_URL:
       return { ...state, token: action.token };
-    case actionTypes.LOGOUT_SUCCESS:
+    case actionTypes.LOGOUT:
       return { ...initState };
     case actionTypes.RECOVER_LOCAL_AUTH_STATE:
       return {

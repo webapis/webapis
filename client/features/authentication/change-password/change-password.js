@@ -1,7 +1,7 @@
 import 'whatwg-fetch';
 import { h, render } from 'preact';
 import ChangePassword from '../ui-components/ChangePassword';
-import  AuthProvider  from 'features/authentication/state/auth-context';
+import  AuthProvider  from 'features/authentication';
 
 import AppRouteProvider,{ AppRoute} from 'components/app-route'
 import  ThemeProvider  from 'components/theme/theme-context';

@@ -4,10 +4,8 @@ describe('Signup', () => {
   beforeEach(() => {
     cy.server();
     cy.visit('/');
-    cy.wait(50);
-    cy.get('[data-testid=menu]').click();
-    cy.wait(50);
-    cy.get('[data-testid=signup]').click();
+
+    cy.get('[data-testid=signup-link]').click();
   });
 
   it('invalid username, email, password (client side validation)', () => {
