@@ -1,8 +1,9 @@
 import { h } from 'preact'
 import {useAppRoute} from 'components/app-route'
-export default function NavDropdown({ title,children }) {
-    return <li className="nav-item dropdown">
-        <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+export default function NavDropdown(props) {
+    const {title,children}=props
+    return <li className="nav-item dropdown" >
+        <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"{...props}>
             {title}
         </a>
         {children}

@@ -74,6 +74,7 @@ export default [
         { src: 'assets/manifest/**', dest: `builds/${process.env.appName}/build` },
         { src: 'node_modules/bootstrap/dist/css/bootstrap.min.css', dest: `builds/${process.env.appName}/build` },
         { src: 'node_modules/bootstrap/dist/js/bootstrap.min.js', dest: `builds/${process.env.appName}/build` },
+      //  { src: 'node_modules/bootstrap/js/dist/util.js', dest: `builds/${process.env.appName}/build` },
         { src: 'node_modules/jquery/dist/jquery.min.js', dest: `builds/${process.env.appName}/build` },
         ]
       }),
@@ -107,6 +108,7 @@ export default [
         { src: 'assets/manifest/**', dest: `builds/${process.env.appName}/build` },
         { src: 'node_modules/bootstrap/dist/css/bootstrap.min.css', dest: `builds/${process.env.appName}/build` },
         { src: 'node_modules/bootstrap/dist/js/bootstrap.min.js', dest: `builds/${process.env.appName}/build` },
+     //   { src: 'node_modules/bootstrap/js/dist/util.js', dest: `builds/${process.env.appName}/build` },
         { src: 'node_modules/jquery/dist/jquery.min.js', dest: `builds/${process.env.appName}/build` },
         ]
       }),
@@ -142,6 +144,7 @@ export default [
         { src: 'assets/manifest/**', dest: `client/storybook/build` },
         { src: 'node_modules/bootstrap/dist/css/bootstrap.min.css', dest: `client/storybook/build` },
         { src: 'node_modules/bootstrap/dist/js/bootstrap.min.js', dest: `client/storybook/build` },
+       // { src: 'node_modules/bootstrap/js/dist/util.js', dest:`client/storybook/build`  },
         { src: 'node_modules/jquery/dist/jquery.min.js', dest: `client/storybook/build` },
         ]
       }),

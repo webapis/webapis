@@ -40,8 +40,8 @@ export function NavLink(props) {
     function handleRoute(e) {
         e.preventDefault()
         const { id } = e.target;
-        debugger;
+    
         onAppRoute({featureRoute:`/${id}`,route:appRoute})
       }
-    return <a className="nav-link" href="#" {...props} onClick={handleRoute} />
+    return <a className="nav-link" href="#" onClick={handleRoute}  {...props}/>
 }

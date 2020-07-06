@@ -1,15 +1,13 @@
-import validationMessages from '../../../../client/auth/validation/validationMessages';
-import authMessages from '../../../../client/auth/authMessages';
+import validationMessages from '../../../../client/features/authentication/validation/validationMessages';
+
 
 describe('Login', () => {
   beforeEach(() => {
     cy.server();
-    cy.viewport('iphone-5');
     cy.visit('/');
-    cy.wait(50);
-    cy.get('[data-testid=menu]').click();
 
-    cy.get('[data-testid=login]').click();
+
+    cy.get('[data-testid=login-link]').click();
   });
 
   it('invalid usernameoremail and password client', () => {
@@ -18,7 +16,7 @@ describe('Login', () => {
       status: 400,
       response: { errors: ['401'] },
     }).as('loginInvalidCreden401');
-    cy.get('[data-testid=emailOrUsername]')
+    cy.get('[data-testid=emailorusername]')
       .type('1232343')
       .blur()
       .get('[data-testid=message-emailorusername]')
@@ -36,7 +34,7 @@ describe('Login', () => {
       status: 400,
       response: { errors: ['410'] },
     }).as('emailorusernameNotValid');
-    cy.get('[data-testid=emailOrUsername]')
+    cy.get('[data-testid=emailorusername]')
       .focus()
       .blur()
       .get('[data-testid=message-emailorusername]')
@@ -49,7 +47,7 @@ describe('Login', () => {
       response: { errors: ['401'] },
     }).as('invalidcredentials');
 
-    cy.get('[data-testid=emailOrUsername]')
+    cy.get('[data-testid=emailorusername]')
       .type('tkm.house.old@gmail.com')
       .get('[data-testid=password]')
       .type('DragondFFFly!')
@@ -69,7 +67,7 @@ describe('Login', () => {
       status: 400,
       response: { errors: ['410'] },
     }).as('emailorusernameNotValid');
-    cy.get('[data-testid=emailOrUsername]')
+    cy.get('[data-testid=emailorusername]')
       .type('2333')
       .get('[data-testid=password]')
       .type('DragondFFFly!')
@@ -85,7 +83,7 @@ describe('Login', () => {
       status: 400,
       response: { errors: ['409'] },
     });
-    cy.get('[data-testid=emailOrUsername]')
+    cy.get('[data-testid=emailorusername]')
       .type('tkm.house.old@gmail.com')
       .get('[data-testid=password]');
     cy.get('[data-testid=login-btn]').click();
@@ -99,7 +97,7 @@ describe('Login', () => {
       status: 400,
       response: { errors: ['408'] },
     }).as('emailIsNotRegistered');
-    cy.get('[data-testid=emailOrUsername]')
+    cy.get('[data-testid=emailorusername]')
       .type('tkm.house.temp@gmail.com')
       .get('[data-testid=password]')
       .type('DragonProp!')
@@ -116,7 +114,7 @@ describe('Login', () => {
       status: 400,
       response: { errors: ['411'] },
     }).as('usernameIsNotRegistered');
-    cy.get('[data-testid=emailOrUsername]')
+    cy.get('[data-testid=emailorusername]')
       .type('tkmhousenew')
       .get('[data-testid=password]')
       .type('DragonNotRegis')
@@ -126,7 +124,22 @@ describe('Login', () => {
       validationMessages.USERNAME_NOT_REGISTERED
     );
   });
-
+  it('Server error 500', () => {
+    cy.route({
+      url: '/auth/login',
+      status: 500,
+      response: { error: {message:'Server is down'} },
+    }).as('usernameIsNotRegistered');
+    cy.get('[data-testid=emailorusername]')
+      .type('tkmhousenew')
+      .get('[data-testid=password]')
+      .type('DragonNotRegis')
+      .get('[data-testid=login-btn]')
+      .click();
+    cy.get('[data-testid=alert]').contains(
+      'Server is down'
+    );
+  });
   it('Login Success', () => {
     cy.server();
     cy.route({
@@ -139,12 +152,13 @@ describe('Login', () => {
       },
     }).as('loginSuccess');
 
-    cy.get('[data-testid=emailOrUsername]')
+    cy.get('[data-testid=emailorusername]')
       .type('testuser@gmail.com')
       .get('[data-testid=password]')
       .type('DragondFFFly!2324.')
       .get('[data-testid=login-btn]')
       .click();
+      cy.get('[data-testid=profile-link]')
     cy.wait('@loginSuccess').then((xhr) => {
       expect(xhr.request.headers['authorization']).to.equal(
         'Basic dGVzdHVzZXJAZ21haWwuY29tOkRyYWdvbmRGRkZseSEyMzI0Lg=='

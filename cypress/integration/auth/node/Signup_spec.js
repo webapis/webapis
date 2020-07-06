@@ -76,7 +76,7 @@ describe('Signup', () => {
       validationMessages.USERNAME_TAKEN
     );
   });
-  it.only('emailIsRegistered 403 server', () => {
+  it('emailIsRegistered 403 server', () => {
     cy.route({
       delay:3000,
       url: '/auth/signup',
@@ -125,7 +125,25 @@ describe('Signup', () => {
       validationMessages.INVALID_EMAIL
     );
   });
+  it('Server error 500', () => {
+    cy.server();
+    cy.route({
+      url: '/auth/signup',
+      status: 500,
+      method: 'post',
+      response: { error: {message:'Server is unavailable'} },
+    }).as('serverError');
 
+    cy.signup({
+      username: 'testuser',
+      email: 'test@gmail.com',
+      password: 'Dragon2020_!!',
+      click: true,
+      client: false,
+      type: true,
+    });
+    cy.get('[data-testid=alert]').contains('Server is unavailable')
+  });
   it('signup success', () => {
     cy.server();
     cy.route({

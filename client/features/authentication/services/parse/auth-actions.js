@@ -1,5 +1,5 @@
 import actionTypes from '../../state/actionTypes';
-
+import serverValidation from '../../validation/serverErrorActions'
 
 export async function signUp({dispatch,state,formDispatch}) {
   try {
@@ -21,7 +21,7 @@ export async function signUp({dispatch,state,formDispatch}) {
     user.set("email", email);
     let success = await user.signUp()
     window.localStorage.setItem(
-      'webcom',
+      username,
       JSON.stringify({
         token :success.get('sessionToken'),
         username,

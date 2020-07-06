@@ -13,6 +13,8 @@ render(
             <DropdownMenu>
               <DropdownItem id="button">Buttons</DropdownItem>
               <DropdownItem id="text-input">TextInput</DropdownItem>
+              <DropdownItem id="toast">Toast</DropdownItem>
+              <DropdownItem id="alert">Alert</DropdownItem>
             </DropdownMenu>
           </NavDropdown>
           <NavDropdown title="Authentication">

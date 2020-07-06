@@ -6,12 +6,12 @@ export default {
   USERNAME_NOT_REGISTERED: 'username is not registered',
   INVALID_USERNAME:
     'only Letters a-z or A-Z and the Symbols - and _ are allowed',
-  INVALID_EMPTY_STRING: 'empty string is not allowed',
+  INVALID_EMPTY_STRING: 'Required field',
   INVALID_USERNAME_OR_EMAIL: 'email or username is not valid',
   INVALID_CREDENTIALS: 'invalid credentials provided',
   USERNAME_TAKEN: 'username is already taken',
   REGISTERED_EMAIL: 'email is already registered',
   PASSWORDS_DO_NOT_MATCH: 'passwords do not match',
-  
-  ACCOUNT_ALREADY_EXISTS:'Account already exists for this username.'
+  ACCOUNT_ALREADY_EXISTS:'Account already exists for this username.',
+  REQUIRED_FIELD:'Required field'
 };

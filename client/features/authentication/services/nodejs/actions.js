@@ -1,57 +1,10 @@
 import actionTypes from '../../state/actionTypes';
-//import { serverValidation } from '../../form/actions';
+import serverValidation from '../../validation/serverErrorActions'
 
 
-export async function login({ dispatch, state, formDispatch }) {
-  try {
-    const { emailorusername, password } = state;
-    dispatch({ type: actionTypes.LOGIN_STARTED });
-    const response = await fetch(`/auth/login`, {
-      headers: {
-        'Conten-Type': 'application/json',
-        'Access-Control-Allow-Headers': '*',
-        Authorization: `Basic ${btoa(`${emailorusername}:${password}`)}`,
-      },
-      method: 'GET',
-    });
-
-    const result = await response.json();
-
-    if (response.status === 200) {
+export async function signup({ dispatch, state }) {
  
-      const { token, username, email } = result;
 
-      dispatch({ type: actionTypes.LOGIN_SUCCESS, user:{token,username,email} });
-      window.localStorage.setItem(
-        'webcom',
-        JSON.stringify({
-          token,
-          username,
-          email,
-        })
-      );
-    } else if (response.status === 400) {
-      const { errors } = result;
-      dispatch({type:actionTypes.LOGIN_FAILED})
-      errors.forEach((error) => {
-        // formDispatch(
-        //   serverValidation({
-        //     status: error,
-        //   })
-        // );
-      });
-    } else {
-   
-      throw new Error('Login failed');
-    }
-  } catch (error) {
-    debugger;
-    dispatch({ type: actionTypes.LOGIN_FAILED, payload: { error } });
-  }
-}
-
-export async function signup({ dispatch, formDispatch, state }) {
-  dispatch({ type: actionTypes.SIGNUP_STARTED });
   const { email, password, username } = state;
   try {
     const response = await fetch(`/auth/signup`, {
@@ -81,25 +34,75 @@ export async function signup({ dispatch, formDispatch, state }) {
       const { errors } = result;
       
       errors.forEach((error) => {
-        // formDispatch(
-        //   serverValidation({
-        //     status: error,
-        //   })
-        // );
+        serverValidation({status:error,dispatch})
       });
       dispatch({type:actionTypes.SIGNUP_FAILED})
-    } else {
-      throw new Error('Signup failed');
+    } else if(response.status === 500){
+      const { error } = result;
+      dispatch({ type: actionTypes.SERVER_ERROR_RECIEVED,error });
+      dispatch({type:actionTypes.SIGNUP_FAILED})
     }
   } catch (error) {
     const err = error;
     debugger;
-    dispatch({ type: actionTypes.SIGNUP_FAILED, payload: { error } });
+    dispatch({ type: actionTypes.SERVER_ERROR_RECIEVED,error });
+    dispatch({type:actionTypes.SIGNUP_FAILED})
   }
 }
 
-export async function changePassword({ dispatch, state, formDispatch }) {
-  dispatch({ type: actionTypes.CHANGE_PASSWORD_STARTED });
+
+
+
+export async function login({ dispatch, state, formDispatch }) {
+  try {
+    const { emailorusername, password } = state;
+ 
+    const response = await fetch(`/auth/login`, {
+      headers: {
+        'Conten-Type': 'application/json',
+        'Access-Control-Allow-Headers': '*',
+        Authorization: `Basic ${btoa(`${emailorusername}:${password}`)}`,
+      },
+      method: 'GET',
+    });
+
+    const result = await response.json();
+
+    if (response.status === 200) {
+      debugger;
+      const { token, username, email } = result;
+
+      dispatch({ type: actionTypes.LOGIN_SUCCESS, user:{token,username,email} });
+      window.localStorage.setItem(
+        'webcom',
+        JSON.stringify({
+          token,
+          username,
+          email,
+        })
+      );
+    } else if (response.status === 400) {
+      debugger;
+      const { errors } = result;
+     
+      errors.forEach((error) => {
+        debugger;
+        serverValidation({status:error,dispatch})
+      });
+      dispatch({type:actionTypes.LOGIN_FAILED})
+    } else if(response.status === 500){
+      const { error } = result;
+      dispatch({ type: actionTypes.SERVER_ERROR_RECIEVED,error });
+        dispatch({type:actionTypes.LOGIN_FAILED})
+    }
+  } catch (error) {
+    debugger;
+    dispatch({ type: actionTypes.SERVER_ERROR_RECIEVED,error });
+    dispatch({type:actionTypes.LOGIN_FAILED})
+  }
+}
+export async function changePassword({ dispatch, state }) {
+ 
   try {
     const { confirm, password } = state;
     const {token}=state.user
@@ -120,7 +123,7 @@ export async function changePassword({ dispatch, state, formDispatch }) {
       dispatch({
         type: actionTypes.CHANGE_PASSWORD_SUCCESS,
         user:{token,username,email},
-        message: `Password changed successfully.`,
+        
       });
 
       window.localStorage.setItem(
@@ -135,34 +138,30 @@ export async function changePassword({ dispatch, state, formDispatch }) {
       const { errors } = result;
       debugger;
       errors.forEach((error) => {
-        // formDispatch(
-        //   serverValidation({
-        //     status: error,
-        //   })
-        // );
+        serverValidation({status:error,dispatch})
       });
-    } else if (response.status === 500) {
-      const { error } = result;
-
       dispatch({
-        type: actionTypes.CHANGE_PASSWORD_FAILED,
-        error,
+        type: actionTypes.CHANGE_PASSWORD_FAILED
       });
-    } else {
-      throw new Error('Changing password failed');
+    }  else if(response.status === 500){
+      const { error } = result;
+      dispatch({ type: actionTypes.SERVER_ERROR_RECIEVED,error });
+      dispatch({
+        type: actionTypes.CHANGE_PASSWORD_FAILED
+      });
     }
   } catch (error) {
+    dispatch({ type: actionTypes.SERVER_ERROR_RECIEVED,error });
     dispatch({
-      type: actionTypes.CHANGE_PASSWORD_FAILED,
-      payload: { error },
+      type: actionTypes.CHANGE_PASSWORD_FAILED
     });
   }
 }
 
-export async function forgotPassword({ dispatch, state, formDispatch }) {
+export async function forgotPassword({ dispatch, state }) {
   debugger;
   try {
-    dispatch({ type: actionTypes.REQUEST_PASS_CHANGE_STARTED });
+  
     const { email } = state;
     const response = await fetch(`/auth/requestpasschange`, {
       method: 'post',
@@ -175,38 +174,31 @@ export async function forgotPassword({ dispatch, state, formDispatch }) {
       debugger;
       dispatch({
         type: actionTypes.REQUEST_PASS_CHANGE_SUCCESS,
-        token: result.token,
-        message: `A link for password change  has been sent to, ${email}! `,
+        token: result.token
       });
     } else if (response.status === 400) {
       const result = await response.json();
       debugger;
       const { errors } = result;
       errors.forEach((error) => {
-        // formDispatch(
-        //   serverValidation({
-        //     status: error,
-        //   })
-        // );
+        serverValidation({status:error,dispatch})
       });
-    } else if (response.status === 500) {
-      const result = await response.json();
-      debugger;
-      const { error } = result;
-      debugger;
       dispatch({
-        type: actionTypes.REQUEST_PASS_CHANGE_FAILED,
-        error,
+        type: actionTypes.REQUEST_PASS_CHANGE_FAILED
       });
-    } else {
-      throw new Error('Changing password failed');
+    }else if(response.status === 500) {
+      const { error} = result;
+      dispatch({ type: actionTypes.SERVER_ERROR_RECIEVED,error });
+      dispatch({
+        type: actionTypes.REQUEST_PASS_CHANGE_FAILED
+      });
     }
   } catch (error) {
     const err = error;
     debugger;
+    dispatch({ type: actionTypes.SERVER_ERROR_RECIEVED,error });
     dispatch({
-      type: actionTypes.REQUEST_PASS_CHANGE_FAILED,
-      payload: { error },
+      type: actionTypes.REQUEST_PASS_CHANGE_FAILED
     });
   }
 }

@@ -1,11 +1,9 @@
 import { h } from 'preact';
-
 import TextInput from 'controls/text-input';
-
 import Button from 'controls/button';
-
+import Alert from 'controls/alert'
 export default function RequestPassChange(props) {
-  const { email, validation, onRequestPasswordChange, loading, onChange } = props
+  const { email, validation, onRequestPasswordChange, loading, onChange,error } = props
 
 
   return (
@@ -14,6 +12,7 @@ export default function RequestPassChange(props) {
       {loading && <div className="progress" style="height: 5px;">
         <div className="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
       </div>}
+      {error && <Alert alert="danger" message={error.message}/>}
       <TextInput
         label="Email"
         value={email}
@@ -25,10 +24,7 @@ export default function RequestPassChange(props) {
         isValid={validation && validation['email'].isValid}
         message={validation && validation['email'].message}
 
-      // validationTypes={[
-      //   validationTypes.EMAIL_FORMAT_VALIDATION,
-      //   validationTypes.EMAIL_NOT_REGISTERED,
-      // ]}
+    
       />
       <Button
 

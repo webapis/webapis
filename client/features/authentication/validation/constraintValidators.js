@@ -1,5 +1,4 @@
-import validationState from './validationStates';
-import validationTypes from './validationTypes';
+
 import validationMessages from './validationMessages';
 import { emailRegex, passwordRegex, usernameRegex } from './validationRegex';
 export function validateEmailConstraint({ email }) {
@@ -7,68 +6,47 @@ export function validateEmailConstraint({ email }) {
 
   if (emailConstraint.test(email)) {
     return {
-      validationType: validationTypes.EMAIL_FORMAT_VALIDATION,
-      validationState: validationState.VALID,
+      isValid: true,
       message: '',
     };
   } else {
     return {
-      validationType: validationTypes.EMAIL_FORMAT_VALIDATION,
-      validationState: validationState.INVALID,
+      isValid: false,
       message: validationMessages.INVALID_EMAIL,
     };
   }
 }
 
-export function isClientValidationType({ validationType }) {
-  switch (validationType) {
-    case validationTypes.PASSWORD_FORMAT_VALIDATION:
-      return true;
-    case validationTypes.EMAIL_FORMAT_VALIDATION:
-      return true;
-    case validationTypes.USERNAME_OR_EMAIL_FORMAT_VALIDATION:
-      return true;
-    case validationTypes.EMPTY_STRING_VALIDATION:
-      return true;
-    case validationTypes.PASSWORDS_MATCH_VALIDATION:
-      return true;
-    case validationTypes.USERNAME_FORMAT_VALIDATION:
-      return true;
-    default:
-      return false;
-  }
-}
+
 export function validatePasswordConstraint({ password }) {
   const passwordConstraint = new RegExp(passwordRegex);
   if (passwordConstraint.test(password)) {
     return {
-      validationType: validationTypes.PASSWORD_FORMAT_VALIDATION,
-      validationState: validationState.VALID,
+      isValid: true,
       message: '',
     };
   }
-  if (!passwordConstraint.test(password)) {
+else{
     return {
-      validationType: validationTypes.PASSWORD_FORMAT_VALIDATION,
-      validationState: validationState.INVALID,
+     
+      isValid: false,
       message: validationMessages.INVALID_PASSWORD,
     };
-  }
-}
+  
+}}
 
 export function validateUserNameConstraint({ username }) {
   const usernameConstraint = new RegExp(usernameRegex);
-
   if (usernameConstraint.test(username)) {
     return {
-      validationType: validationTypes.USERNAME_FORMAT_VALIDATION,
-      validationState: validationState.VALID,
+    
+      isValid: true,
       message: '',
     };
   } else {
     return {
-      validationType: validationTypes.USERNAME_FORMAT_VALIDATION,
-      validationState: validationState.INVALID,
+
+      isValid: false,
       message: validationMessages.INVALID_USERNAME,
     };
   }
@@ -80,40 +58,25 @@ export function validateEmailOrUsername({ value }) {
 
   if (emailConstraint.test(value)) {
     return {
-      validationType: validationTypes.USERNAME_OR_EMAIL_FORMAT_VALIDATION,
-      validationState: validationState.VALID,
+  
+      isValid: true,
       message: '',
     };
   } else if (usernameConstraint.test(value)) {
     return {
-      validationType: validationTypes.USERNAME_OR_EMAIL_FORMAT_VALIDATION,
-      validationState: validationState.VALID,
+
+      isValid: true,
       message: '',
     };
   } else {
     return {
-      validationType: validationTypes.USERNAME_OR_EMAIL_FORMAT_VALIDATION,
-      validationState: validationState.INVALID,
+      isValid: false,
       message: validationMessages.INVALID_USERNAME_OR_EMAIL,
     };
   }
 }
 
-export function validateEmptyString({ value }) {
-  if (value.length === 0) {
-    return {
-      validationType: validationTypes.EMPTY_STRING_VALIDATION,
-      validationState: validationState.INVALID,
-      message: validationMessages.INVALID_EMPTY_STRING,
-    };
-  } else {
-    return {
-      validationType: validationTypes.EMPTY_STRING_VALIDATION,
-      validationState: validationState.VALID,
-      message: '',
-    };
-  }
-}
+
 
 export function validatePasswordMatch({ auth }) {
 
@@ -121,15 +84,14 @@ export function validatePasswordMatch({ auth }) {
 
   if (password === '' || password !== confirm) {
     return {
-      validationState: validationState.INVALID,
       message: validationMessages.PASSWORDS_DO_NOT_MATCH,
-      validationType: validationTypes.PASSWORDS_MATCH_VALIDATION,
+      isValid: false,
     };
   } else {
     return {
-      validationState: validationState.VALID,
+      isValid: true,
       message: '',
-      validationType: validationTypes.PASSWORDS_MATCH_VALIDATION,
+   
     };
   }
 }

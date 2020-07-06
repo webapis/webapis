@@ -22,7 +22,7 @@ export function useUserName() {
 
   useEffect(() => {
     if (state.user && state.user.token) {
-  
+  debugger;
       const { username, email, token,objectId } =state.user;
   
       setUsername(username);
@@ -32,5 +32,13 @@ export function useUserName() {
     }
   }, [state.user]);
 
+useEffect(()=>{
+  if(state && state.user===null){
+    setUsername(null);
+    setToken(null);
+    setEmail(null);
+    setObjectId(null)
+  }
+},[state])
   return { username: userName, token, email };
 }

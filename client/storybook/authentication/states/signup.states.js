@@ -23,5 +23,11 @@ export default function SignupStates() {
                 <Signup username="testuser" email="test@gmail.com" password="123456789" validation={validationSuccess}loading />
             </span>
         </div>
+        <div className="row" >
+            <span className="col-md-12">
+                <h5 className="text-center">Signing Sever error</h5>
+                <Signup username="testuser" email="test@gmail.com" password="123456789" validation={validationSuccess} error={{message:'Server is unavailable'}} />
+            </span>
+        </div>
     </div>
 }
