@@ -1,21 +1,8 @@
 import { h } from "preact";
 
 import List, { ListItem } from "controls/list";
-import TextInput from "controls/text-input";
-import Button from "controls/button";
-import { useAppRoute } from "components/app-route";
 
-const style = {
-  inputContainer: {
-    display: "flex",
-    border: "#737373 solid 1px",
-  },
-  input: {
-    padding: 10,
-    flex: 1,
-    border: "white",
-  },
-};
+import { useAppRoute } from "components/app-route";
 
 export default function Hangout({
   hangouts,

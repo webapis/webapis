@@ -17,11 +17,6 @@ const style = {
     justifyContent: "space-between",
     height: "100%",
   },
-  btnOk: {
-    margin: 8,
-    display: "flex",
-    justifyContent: "flex-end",
-  },
 };
 
 export default function Configure({
