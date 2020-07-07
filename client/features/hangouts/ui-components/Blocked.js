@@ -2,8 +2,8 @@ import { h } from 'preact';
 
 import { Block } from 'icons/Block';
 import { Center } from 'components/layout/Center';
-import  Button  from 'controls/button';
-import  Layout  from './Layout';
+import Button from 'controls/button';
+import Layout from './Layout';
 
 const style = {
   layout: {
@@ -12,12 +12,9 @@ const style = {
     height: '100%',
     justifyContent: 'space-between',
     boxSizing: 'border-box',
-    paddingTop:68
-  },
-  btn: {
-    flex: 1,
-    marginRight: 4,
-  },
+    paddingTop: 68
+  }
+
 };
 
 export default function Blocked({ hangout, onUnblock, onClose }) {
@@ -29,10 +26,13 @@ export default function Blocked({ hangout, onUnblock, onClose }) {
         <Block width="60" height="70" color="red" />
         <b>{hangout && hangout.username}</b> is blocked
       </Center>
-
-      <div style={{ display: 'flex', padding: 8 }}>
-        <Button data-testid='close-btn' style={style.btn} onClick={onClose} >CLOSE</Button>
-        <Button id='UNBLOCK'  style={style.btn} onClick={onUnblock} data-testid='unblock-btn'>UNBLOCK</Button>
+      <div className="row">
+        <div className="col">
+          <Button data-testid='close-btn' onClick={onClose} title="CLOSE" bg="secondary" block outline />
+        </div>
+        <div className="col">
+          <Button id='UNBLOCK' onClick={onUnblock} data-testid='unblock-btn' title="UNBLOCK" bg="primary" block />
+        </div>
       </div>
     </Layout>
   );

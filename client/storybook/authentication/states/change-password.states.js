@@ -7,28 +7,19 @@ export default function ChangePasswordStates() {
     <div className="row" >
       <span className="col-md-12">
         <h5 className="text-center"> ChangePassword Validation Success</h5>
-
         <ChangePassword password="123456789" confirm="123456789" validation={validationSuccess}  />
-
-
       </span>
     </div>
     <div className="row" >
       <span className="col-md-12">
         <h5 className="text-center">ChangePassword Validation Error</h5>
-
         <ChangePassword validation={validationError}  />
-
-
       </span>
     </div>
     <div className="row" >
       <span className="col-md-12">
         <h5 className="text-center">ChangePassword in progress</h5>
-
         <ChangePassword password="123456789" confirm="123456789" validation={validationSuccess} loading />
-
-
       </span>
     </div>
     <div className="row" >

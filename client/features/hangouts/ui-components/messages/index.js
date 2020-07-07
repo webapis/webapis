@@ -1,7 +1,7 @@
 import { h } from 'preact';
 import { useRef, useEffect } from 'preact/hooks';
-import { Message } from './Message';
-import { MessageEditor } from './MessageEditor';
+import  Message  from './Message';
+import  MessageEditor  from './MessageEditor';
 import { BlockerMessage } from './BlockerMessage'
 import {BlockedMessage} from './BlockedMessage'
 import {useMediaQuery} from 'components/layout/useMediaQuery'
@@ -56,7 +56,7 @@ const {device}=useMediaQuery()
             )
           )}
       </div>
-      <div style={{flex:1}}>
+     
         <MessageEditor
          loading={loading}
           hangout={hangout}
@@ -64,7 +64,7 @@ const {device}=useMediaQuery()
           messageText={messageText}
           onMessageText={onMessageText}
         />
-      </div>
+     
 
     </div>
   );

@@ -1,8 +1,8 @@
 import { h } from 'preact';
 
-import List,{ ListItem } from 'controls/list';
-import  TextInput  from 'controls/text-input';
-import  Button  from 'controls/button';
+import List, { ListItem } from 'controls/list';
+import TextInput from 'controls/text-input';
+import Button from 'controls/button';
 import { useAppRoute } from 'components/app-route'
 
 
@@ -39,22 +39,13 @@ export default function Hangout({
   return (
 
     <div >
-      <div style={style.inputContainer}>
-        <TextInput
-          value={search}
-          id="search-input"
-          type="search"
-          onChange={onSearchInput}
-          style={style.input}
-        />
-        <Button
-          data-testid="search-btn"
-          disabled={!search}
-          title="search"
-          onClick={onFetchHangouts}
-        />
-      </div>
 
+      <div class="input-group mb-3">
+        <input value={search} id="search-input" onChange={onSearchInput} type="text" className="form-control" aria-label="Recipient's username" aria-describedby="button-addon2" />
+        <div className="input-group-append">
+          <button className="btn btn-outline-secondary" type="button" id="button-addon2" onClick={onFetchHangouts} data-testid="search-btn" disabled={!search}>Search</button>
+        </div>
+      </div>
       <List id="hangouts-list">
         {hangouts &&
           hangouts.length > 0 &&

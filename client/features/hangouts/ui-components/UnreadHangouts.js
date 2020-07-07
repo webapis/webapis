@@ -16,7 +16,7 @@ if(unreadhangouts){
 },[unreadhangouts])
 
   return (
-    <div data-testid='unreadhangouts' style={{paddingTop:68}}>
+    <div data-testid='unreadhangouts' >
       <List>
         {items &&
           items.length > 0 &&

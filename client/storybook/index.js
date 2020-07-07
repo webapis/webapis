@@ -25,6 +25,19 @@ render(
               <DropdownItem id="forgot-password">Forgot Password</DropdownItem>
             </DropdownMenu>
           </NavDropdown>
+          <NavDropdown title="Hangout">
+            <DropdownMenu>
+              <DropdownItem id="block">Block</DropdownItem>
+              <DropdownItem id="blocked">Blocked</DropdownItem>
+              <DropdownItem id="configure">Configure</DropdownItem>
+              <DropdownItem id="hangchat">Hangchat</DropdownItem>
+              <DropdownItem id="hangout">Hangout</DropdownItem>
+              <DropdownItem id="invite">Invite</DropdownItem>
+              <DropdownItem id="invitee">Invitee</DropdownItem>
+              <DropdownItem id="inviter">Inviter</DropdownItem>
+              <DropdownItem id="unreadhangouts">UnreadHangouts</DropdownItem>
+            </DropdownMenu>
+          </NavDropdown>
         </NavBarNav>
       </NavBarCollapse>
     </Navbar>

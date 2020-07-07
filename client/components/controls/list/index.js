@@ -5,7 +5,7 @@ import { h } from 'preact';
 
  export default function List(props) {
   return (
-    <div className="list" {...props}/>
+    <div className="list-group" {...props}/>
   );
 }
 
@@ -13,7 +13,7 @@ import { h } from 'preact';
  function ListItem(props) {
 
   return (
-    <div className="list-item" {...props} />
+    <button type="button" className="list-group-item list-group-item-action" {...props}/>
   );
 }
 

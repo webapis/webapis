@@ -29,6 +29,8 @@ export const initState = {
 
 export function authReducer(state, action) {
   switch (action.type) {
+    case actionTypes.SET_ERROR_TO_NULL:
+      return{...state,error:null}
     case actionTypes.SERVER_ERROR_RECIEVED:
       return {...state, error:action.error}
     case actionTypes.CONSTRAINT_VALIDATION:

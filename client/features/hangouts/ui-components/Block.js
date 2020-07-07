@@ -1,5 +1,4 @@
 import { h } from 'preact';
-
 import  Layout  from './Layout';
 import  Button  from 'controls/button';
 const style = {
@@ -32,9 +31,18 @@ export default function Block({ onCancel, onBlock, onReport }) {
         <input type="checkbox" style={style.checkbox} onChange={onReport} />
         <label>Report</label>
       </div>
-      <div style={{ display: 'flex', padding: 8 }}>
-        <Button data-testid='cancel-btn' style={style.btn} onClick={onCancel} >CANCEL</Button>
-        <Button title="Block" style={style.btn} id="BLOCK" onClick={onBlock} data-testid="block-btn" >BLOCK</Button>
+      <div className="row">
+        <div className="col">
+        <Button data-testid='cancel-btn'  onClick={onCancel} title="Cancel" bg="secondary" outline block/>
+        </div>
+       
+  
+  <div className="col">
+  <Button id="BLOCK" onClick={onBlock} data-testid="block-btn"  title="Block" bg="primary" block/>
+  </div>
+     
+
+
       </div>
     </Layout>
   );

@@ -1,6 +1,5 @@
 import { h } from 'preact';
-
-import { Message } from './messages/Message';
+import  Message  from './messages/Message';
 import Layout  from './Layout';
 import Button from 'controls/button'
 const style = {
@@ -36,25 +35,33 @@ export default function Inviter({ hangout, onAccept, onDecline,loading }) {
           )}
         </div>
 
-        <div style={{ display: 'flex',paddingLeft:8,paddingRight:8 }}>
+        <div className="row">
+          <div className="col">
           <Button
             id="DECLINE"
             onClick={onDecline}
             data-testid="decline-btn"
             title="Decline"
-            style={{ flex: 1, marginRight: 4, color: 'red' }}
-          >
-            DECLINE
-          </Button>
-          <Button
+            block
+            bg="danger"
+            outline
+          />
+          </div>
+     
+         <div className="col">
+         <Button
             id="ACCEPT"
             onClick={onAccept}
             data-testid="accept-btn"
-            style={{ flex: 1, marginLeft: 4, color: 'green' }}
             loading={loading}
-          >
-            ACCEPT
-          </Button>
+            title="Accept"
+            bg="primary"
+
+            block
+          />
+         </div>
+         
+       
         </div>
       </div>
     </Layout>

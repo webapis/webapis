@@ -48,8 +48,8 @@ export default function Configure({
         <IconButton title="Delete" Icon={Delete} onClick={onDelete} />
         <IconButton id="bckui" title="Block" Icon={Block} onClick={onNavigation}  />
       </div>
-      <div style={style.btnOk}>
-        <Button onClick={onOk}>OK</Button>
+      <div>
+        <Button onClick={onOk} title="OK" bg="primary" />
       </div>
     </Layout>
   );

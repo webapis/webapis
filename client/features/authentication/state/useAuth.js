@@ -75,6 +75,7 @@ export function useAuth() {
     function onFocus(e) {
         const { name } = e.target
         dispatch({ type: actionTypes.CONSTRAINT_VALIDATION, name, isValid: undefined, message: '' })
+        dispatch({type:actionTypes.SET_ERROR_TO_NULL})
     }
 
     return { state, onFocus, onLoginBlur, onSignupBlur, onChangePassBlur, onRequestPassChangeBlur, dispatch, onLogin, onSignup, onRequestPasswordChange, onPasswordChange, onChange, onSignOut }

@@ -24,7 +24,7 @@ const style = {
   message: {},
 };
 //
-export function Message(props) {
+export default function Message(props) {
   const { message } = props;
   const { float, username,timestamp } = message;
   const [days, setDays] = useState(0);
