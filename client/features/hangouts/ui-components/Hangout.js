@@ -1,7 +1,5 @@
 import { h } from "preact";
-
 import List, { ListItem } from "controls/list";
-
 import { useAppRoute } from "components/app-route";
 
 export default function Hangout({
