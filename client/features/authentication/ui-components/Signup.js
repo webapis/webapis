@@ -20,7 +20,7 @@ export default function Signup(props) {
         type='text'
         data-testid='username'
         name='username'
-        placeholder='username'
+  
         isValid={validation && validation['username'].isValid}
         message={validation && validation['username'].message}
 
@@ -31,7 +31,7 @@ export default function Signup(props) {
         label="Email"
         onChange={onChange}
         value={email}
-        placeholder='email'
+     
         type='email'
         data-testid='email'
         name='email'
@@ -45,7 +45,7 @@ export default function Signup(props) {
         label="Password"
         onChange={onChange}
         value={password}
-        placeholder='password'
+     
         type='password'
         data-testid='password'
         name='password'

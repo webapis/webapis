@@ -20,7 +20,7 @@ export default function Login(props) {
         label="Email or username"
         name='emailorusername'
         type='text'
-        placeholder='Enter email or username'
+     
         id='emailorusername'
         data-testid='emailorusername'
         message={validation && validation['emailorusername'].message}
@@ -36,7 +36,7 @@ export default function Login(props) {
         onChange={onChange}
         name='password'
         type='password'
-        placeholder='enter password'
+     
         id='password'
         data-testid='password'
         message={validation && validation['password'].message}

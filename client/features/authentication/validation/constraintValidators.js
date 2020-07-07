@@ -95,3 +95,18 @@ export function validatePasswordMatch({ auth }) {
     };
   }
 }
+
+
+export function validateEmptyString ({value}){
+  if(value.length===0){
+    return {
+      message: validationMessages.REQUIRED_FIELD,
+      isValid: false,
+    };
+  }else{
+    return {
+      message:'',
+      isValid: true,
+    };
+  }
+}

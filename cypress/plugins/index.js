@@ -6,6 +6,7 @@ const seedHangouts = require('./seedHangouts');
 const deleteCollection = require('./deleteCollection');
 const seedOnInvite = require('./seedOnInvite');
 const seedOnAccept = require('./seedOnAccept');
+const dropDatabase =require('./dropDatabase')
 /// <reference types="cypress" />
 // ***********************************************************
 // This example plugins/index.js can be used to load plugins
@@ -48,6 +49,9 @@ module.exports = (on, config) => {
     },
     'seed:onAccept': () => {
       return seedOnAccept();
+    },
+    'seed:dropDatabase': ({dbName}) => {
+      return dropDatabase({dbName});
     },
   });
 };

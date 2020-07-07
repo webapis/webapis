@@ -8,7 +8,7 @@ export default function ChangePasswordStates() {
       <span className="col-md-12">
         <h5 className="text-center"> ChangePassword Validation Success</h5>
 
-        <ChangePassword password="123456789" confirm="123456789" validation={validationSuccess} />
+        <ChangePassword password="123456789" confirm="123456789" validation={validationSuccess}  />
 
 
       </span>
@@ -17,7 +17,7 @@ export default function ChangePasswordStates() {
       <span className="col-md-12">
         <h5 className="text-center">ChangePassword Validation Error</h5>
 
-        <ChangePassword validation={validationError} />
+        <ChangePassword validation={validationError}  />
 
 
       </span>

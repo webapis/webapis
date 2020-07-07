@@ -16,7 +16,7 @@ export default function RequestPassChange(props) {
       <TextInput
         label="Email"
         value={email}
-        placeholder='email'
+     
         name='email'
         onChange={onChange}
         type='email'

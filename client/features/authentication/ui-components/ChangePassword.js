@@ -4,7 +4,7 @@ import Button from 'controls/button';
 import Alert from 'controls/alert'
 
 export default function ChangePassword(props) {
-  const { password, confirm, validation, onChange, onPasswordChange, loading } = props;
+  const { password, confirm, validation, onChange, onPasswordChange, loading,error } = props;
 
   // useEffect(() => {
   //   let url = new URL(window.location.href);
@@ -27,7 +27,7 @@ export default function ChangePassword(props) {
         type='password'
         id='password'
         name='password'
-        placeholder='Enter new password'
+       
         onChange={onChange}
         isValid={validation && validation['password'].isValid}
         message={validation && validation['password'].message}
@@ -39,7 +39,7 @@ export default function ChangePassword(props) {
         type='password'
         id='confirm'
         name='confirm'
-        placeholder='Confirm new password'
+       
         onChange={onChange}
         isValid={validation && validation['confirm'].isValid}
         message={validation && validation['confirm'].message}

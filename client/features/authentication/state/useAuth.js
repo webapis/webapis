@@ -48,7 +48,7 @@ export function useAuth() {
     function onSignupBlur(e) {
         const { email, username, password } = state
         const { name } = e.target
-        debugger
+     
         switch (name) {
             case 'password':
 

@@ -2,7 +2,7 @@ import deviceType from '../../../client/layout/deviceType';
 describe('onHangout', () => {
   beforeEach(() => {
  
-    cy.log('process',Cypress.env('back'))
+  
     if(Cypress.env('back')==="node"){
       const demo = {
         username: 'demo',

@@ -15,7 +15,6 @@ export function AppNavigation() {
           <NavItem>
             {username && <NavLink id="hangout" appRoute="/hangouts">Hangouts</NavLink>}
           </NavItem>
-
         </NavBarNav>
         <Nav horizontalAlignment="justify-content-end">
           {!username && <NavItem>
