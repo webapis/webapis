@@ -16,10 +16,6 @@ const style = {
     boxSizing: "border-box",
     paddingTop: 68,
   },
-  btn: {
-    flex: 1,
-    marginRight: 4,
-  },
 };
 
 export default function Block({ onCancel, onBlock, onReport }) {
