@@ -1,4 +1,4 @@
-import { h } from 'preact';
+import { h } from "preact";
 export function AppShell({ children }) {
-  return <div >{children}</div>;
+  return <div>{children}</div>;
 }

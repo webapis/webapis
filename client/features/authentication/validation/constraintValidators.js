@@ -1,13 +1,12 @@
-
-import validationMessages from './validationMessages';
-import { emailRegex, passwordRegex, usernameRegex } from './validationRegex';
+import validationMessages from "./validationMessages";
+import { emailRegex, passwordRegex, usernameRegex } from "./validationRegex";
 export function validateEmailConstraint({ email }) {
   const emailConstraint = new RegExp(emailRegex);
 
   if (emailConstraint.test(email)) {
     return {
       isValid: true,
-      message: '',
+      message: "",
     };
   } else {
     return {
@@ -17,35 +16,30 @@ export function validateEmailConstraint({ email }) {
   }
 }
 
-
 export function validatePasswordConstraint({ password }) {
   const passwordConstraint = new RegExp(passwordRegex);
   if (passwordConstraint.test(password)) {
     return {
       isValid: true,
-      message: '',
+      message: "",
     };
-  }
-else{
+  } else {
     return {
-     
       isValid: false,
       message: validationMessages.INVALID_PASSWORD,
     };
-  
-}}
+  }
+}
 
 export function validateUserNameConstraint({ username }) {
   const usernameConstraint = new RegExp(usernameRegex);
   if (usernameConstraint.test(username)) {
     return {
-    
       isValid: true,
-      message: '',
+      message: "",
     };
   } else {
     return {
-
       isValid: false,
       message: validationMessages.INVALID_USERNAME,
     };
@@ -58,15 +52,13 @@ export function validateEmailOrUsername({ value }) {
 
   if (emailConstraint.test(value)) {
     return {
-  
       isValid: true,
-      message: '',
+      message: "",
     };
   } else if (usernameConstraint.test(value)) {
     return {
-
       isValid: true,
-      message: '',
+      message: "",
     };
   } else {
     return {
@@ -76,13 +68,10 @@ export function validateEmailOrUsername({ value }) {
   }
 }
 
-
-
 export function validatePasswordMatch({ auth }) {
+  const { password, confirm } = auth;
 
-  const { password, confirm } =auth;
-
-  if (password === '' || password !== confirm) {
+  if (password === "" || password !== confirm) {
     return {
       message: validationMessages.PASSWORDS_DO_NOT_MATCH,
       isValid: false,
@@ -90,22 +79,20 @@ export function validatePasswordMatch({ auth }) {
   } else {
     return {
       isValid: true,
-      message: '',
-   
+      message: "",
     };
   }
 }
 
-
-export function validateEmptyString ({value}){
-  if(value.length===0){
+export function validateEmptyString({ value }) {
+  if (value.length === 0) {
     return {
       message: validationMessages.REQUIRED_FIELD,
       isValid: false,
     };
-  }else{
+  } else {
     return {
-      message:'',
+      message: "",
       isValid: true,
     };
   }

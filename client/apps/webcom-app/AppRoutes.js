@@ -1,19 +1,16 @@
-import { h } from 'preact';
-import { Suspense, lazy } from 'preact/compat';
-import { AppRoute } from 'components/app-route';
-import { Home } from './Home';
-import {AuthFatureRoutes} from 'features/authentication'
+import { h } from "preact";
+import { Suspense, lazy } from "preact/compat";
+import { AppRoute } from "components/app-route";
+import { Home } from "./Home";
+import { AuthFatureRoutes } from "features/authentication";
 
-const Hangouts = lazy(() => import('features/hangouts/ui-components/Hangout'));
-
+const Hangouts = lazy(() => import("features/hangouts/ui-components/Hangout"));
 
 export function AppRoutes() {
   return (
-    <div style={{ height: '100%'}}>
+    <div style={{ height: "100%" }}>
       <AppRoute path="/auth">
-
-    <AuthFatureRoutes/>
-   
+        <AuthFatureRoutes />
       </AppRoute>
       <AppRoute path="/">
         <Home />
@@ -24,7 +21,6 @@ export function AppRoutes() {
           <Hangouts />
         </Suspense>
       </AppRoute>
-  
     </div>
   );
 }

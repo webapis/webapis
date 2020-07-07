@@ -1,11 +1,11 @@
-import { h } from 'preact';
+import { h } from "preact";
 export function Center({ children, style }) {
   return (
     <div
       style={{
-        display: 'flex',
-        justifyContent: 'center',
-        textAlign: 'center',
+        display: "flex",
+        justifyContent: "center",
+        textAlign: "center",
         ...style,
       }}
     >

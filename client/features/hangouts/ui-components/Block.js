@@ -1,20 +1,20 @@
-import { h } from 'preact';
-import  Layout  from './Layout';
-import  Button  from 'controls/button';
+import { h } from "preact";
+import Layout from "./Layout";
+import Button from "controls/button";
 const style = {
   checkbox: { marginRight: 8 },
   checkboxRoot: {
-    display: 'flex',
-    alignItems: 'center',
+    display: "flex",
+    alignItems: "center",
     padding: 16,
   },
   layout: {
-    display: 'flex',
-    flexDirection: 'column',
-    height: '100%',
-    justifyContent: 'space-between',
-    boxSizing: 'border-box',
-    paddingTop:68
+    display: "flex",
+    flexDirection: "column",
+    height: "100%",
+    justifyContent: "space-between",
+    boxSizing: "border-box",
+    paddingTop: 68,
   },
   btn: {
     flex: 1,
@@ -23,8 +23,6 @@ const style = {
 };
 
 export default function Block({ onCancel, onBlock, onReport }) {
-
- 
   return (
     <Layout style={style.layout}>
       <div style={style.checkboxRoot}>
@@ -33,16 +31,26 @@ export default function Block({ onCancel, onBlock, onReport }) {
       </div>
       <div className="row">
         <div className="col">
-        <Button data-testid='cancel-btn'  onClick={onCancel} title="Cancel" bg="secondary" outline block/>
+          <Button
+            data-testid="cancel-btn"
+            onClick={onCancel}
+            title="Cancel"
+            bg="secondary"
+            outline
+            block
+          />
         </div>
-       
-  
-  <div className="col">
-  <Button id="BLOCK" onClick={onBlock} data-testid="block-btn"  title="Block" bg="primary" block/>
-  </div>
-     
 
-
+        <div className="col">
+          <Button
+            id="BLOCK"
+            onClick={onBlock}
+            data-testid="block-btn"
+            title="Block"
+            bg="primary"
+            block
+          />
+        </div>
       </div>
     </Layout>
   );

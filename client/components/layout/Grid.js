@@ -1,11 +1,11 @@
-import { h } from 'preact';
+import { h } from "preact";
 
 export function Grid(props) {
   const { children, width } = props;
   return (
     <div
       style={{
-        display: 'grid',
+        display: "grid",
         gridTemplateColumns: `auto ${width}% auto`,
       }}
     >

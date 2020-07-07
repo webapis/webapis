@@ -1,4 +1,4 @@
-export const actionTypes ={
-    APP_ROUTE_CHANGED:'APP_ROUTE_CHANGED',
+export const actionTypes = {
+  APP_ROUTE_CHANGED: "APP_ROUTE_CHANGED",
   //  FEATURE_ROUTE_CHANGED:'FEATURE_ROUTE_CHANGED'
-}
+};

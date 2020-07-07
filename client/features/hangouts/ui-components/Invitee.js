@@ -1,18 +1,16 @@
-import { h } from 'preact';
-import { Done } from 'icons/Done';
-import { Center } from 'components/layout/Center';
-import  Layout  from './Layout';
+import { h } from "preact";
+import { Done } from "icons/Done";
+import { Center } from "components/layout/Center";
+import Layout from "./Layout";
 
 const style = {
   layout: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
   },
 };
-export default function Invitee({ hangout,dispatch }) {
-
-
+export default function Invitee({ hangout, dispatch }) {
   return (
     <Layout style={style.layout} id="invitee-ui">
       <Center>

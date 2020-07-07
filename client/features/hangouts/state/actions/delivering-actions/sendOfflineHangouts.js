@@ -1,4 +1,3 @@
-
 export function sendOfflineHangouts({ socket, name }) {
   const offlineHangoutKey = `${name}-offline-hangouts`;
   const offlineHangouts = JSON.parse(localStorage.getItem(offlineHangoutKey));

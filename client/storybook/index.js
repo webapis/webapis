@@ -1,8 +1,16 @@
-import { h, render } from 'preact';
-import StorybookProviders from './StorybookProviders'
-import StorybookRoutes from './StorybookRoutes'
-import Navbar, { NavBarNav, NavItem, NavLink, NavBarCollapse } from 'components/nav-bar'
-import NavDropdown, { DropdownMenu, DropdownItem } from 'components/nav-bar/nav-dropdown'
+import { h, render } from "preact";
+import StorybookProviders from "./StorybookProviders";
+import StorybookRoutes from "./StorybookRoutes";
+import Navbar, {
+  NavBarNav,
+  NavItem,
+  NavLink,
+  NavBarCollapse,
+} from "components/nav-bar";
+import NavDropdown, {
+  DropdownMenu,
+  DropdownItem,
+} from "components/nav-bar/nav-dropdown";
 
 render(
   <StorybookProviders>
@@ -42,8 +50,7 @@ render(
       </NavBarCollapse>
     </Navbar>
     <StorybookRoutes />
-  </StorybookProviders>
+  </StorybookProviders>,
 
-  ,
   document.body
 );

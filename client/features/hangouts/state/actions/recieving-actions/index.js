@@ -1,15 +1,20 @@
-import { saveRecievedHangout } from './saveRecievedHangout';
+import { saveRecievedHangout } from "./saveRecievedHangout";
 export function saveInviter({
   dispatch,
   hangout,
   name,
   focusedHangout,
   onAppRoute,
-  unread
+  unread,
 }) {
-
-
-  saveRecievedHangout({ dispatch, hangout, name, onAppRoute, focusedHangout,  unread });
+  saveRecievedHangout({
+    dispatch,
+    hangout,
+    name,
+    onAppRoute,
+    focusedHangout,
+    unread,
+  });
 }
 
 export function saveAccepter({
@@ -18,10 +23,16 @@ export function saveAccepter({
   name,
   focusedHangout,
   onAppRoute,
-  unread
+  unread,
 }) {
- 
-  saveRecievedHangout({ dispatch, hangout, name, onAppRoute, focusedHangout,  unread });
+  saveRecievedHangout({
+    dispatch,
+    hangout,
+    name,
+    onAppRoute,
+    focusedHangout,
+    unread,
+  });
 }
 
 export function saveBlocker({
@@ -30,10 +41,16 @@ export function saveBlocker({
   name,
   focusedHangout,
   onAppRoute,
-  unread
+  unread,
 }) {
-  
-  saveRecievedHangout({ dispatch, hangout, name, onAppRoute, focusedHangout,  unread });
+  saveRecievedHangout({
+    dispatch,
+    hangout,
+    name,
+    onAppRoute,
+    focusedHangout,
+    unread,
+  });
 }
 
 export function saveDecliner({
@@ -42,17 +59,34 @@ export function saveDecliner({
   name,
   focusedHangout,
   onAppRoute,
-  unread
+  unread,
 }) {
-
-  saveRecievedHangout({ dispatch, hangout, name, onAppRoute, focusedHangout,  unread });
-
+  saveRecievedHangout({
+    dispatch,
+    hangout,
+    name,
+    onAppRoute,
+    focusedHangout,
+    unread,
+  });
 }
 
-export function saveMessanger({ dispatch, hangout, name, focusedHangout,onAppRoute,unread }) {
-
-
-  saveRecievedHangout({ dispatch, hangout, name, onAppRoute, focusedHangout,  unread });
+export function saveMessanger({
+  dispatch,
+  hangout,
+  name,
+  focusedHangout,
+  onAppRoute,
+  unread,
+}) {
+  saveRecievedHangout({
+    dispatch,
+    hangout,
+    name,
+    onAppRoute,
+    focusedHangout,
+    unread,
+  });
 } // END saveMessanger
 
 export function saveUnblocker({
@@ -61,8 +95,14 @@ export function saveUnblocker({
   name,
   focusedHangout,
   onAppRoute,
-  unread
+  unread,
 }) {
-  
-  saveRecievedHangout({ dispatch, hangout, name, onAppRoute, focusedHangout,  unread });
+  saveRecievedHangout({
+    dispatch,
+    hangout,
+    name,
+    onAppRoute,
+    focusedHangout,
+    unread,
+  });
 }

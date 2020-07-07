@@ -1,14 +1,13 @@
-import { h } from 'preact';
-import { AppNavigation } from './AppNavigation'
-import { AppRoutes } from './AppRoutes'
-
+import { h } from "preact";
+import { AppNavigation } from "./AppNavigation";
+import { AppRoutes } from "./AppRoutes";
 
 export function App() {
   return (
-    <div >
+    <div>
       <AppNavigation />
       <AppRoutes />
-      {''}
+      {""}
     </div>
   );
 }

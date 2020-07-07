@@ -1,10 +1,10 @@
-import { h } from 'preact'
-import { AppRoute } from 'components/app-route';
-import { OnlineStatus } from 'icons/onlineStatus';
-import { IconsDemo } from './IconsDemo'
-import AuthDemoRoutes from './authentication/route'
-import ComponentsRoutes from './components/route'
-import HangoutRoutes from './hangout/route'
+import { h } from "preact";
+import { AppRoute } from "components/app-route";
+import { OnlineStatus } from "icons/onlineStatus";
+import { IconsDemo } from "./IconsDemo";
+import AuthDemoRoutes from "./authentication/route";
+import ComponentsRoutes from "./components/route";
+import HangoutRoutes from "./hangout/route";
 
 // const hangouts = [
 //   { username: 'userone' },
@@ -25,23 +25,20 @@ import HangoutRoutes from './hangout/route'
 
 export default function StorybookRoutes() {
   return (
-    <div style={{ height: '85vh'}}>
+    <div style={{ height: "85vh" }}>
       <AppRoute path="/online">
         <div>
           <OnlineStatus online />
           <OnlineStatus />
         </div>
       </AppRoute>
-  
-    
 
       <AppRoute path="/icons">
         <IconsDemo />
       </AppRoute>
-      <AuthDemoRoutes/>
-      <ComponentsRoutes/>
-      <HangoutRoutes/>
+      <AuthDemoRoutes />
+      <ComponentsRoutes />
+      <HangoutRoutes />
     </div>
-
-  )
+  );
 }

@@ -1,23 +1,19 @@
-import { actionTypes } from './actionTypes';
+import { actionTypes } from "./actionTypes";
 //retrieves hangouts from localStorage
 export function loadHangouts({ username, dispatch }) {
-
   const hangouts = JSON.parse(localStorage.getItem(`${username}-hangouts`));
   dispatch({ type: actionTypes.LOAD_HANGOUTS, hangouts });
 }
 //select hangout from List
 export function selectHangout({ dispatch, hangout }) {
-
- 
   dispatch({ type: actionTypes.SELECTED_HANGOUT, hangout });
 }
 
-export function resetHangout({dispatch}){
-  dispatch({type:actionTypes.CLEARED_HANGOUT})
-} 
+export function resetHangout({ dispatch }) {
+  dispatch({ type: actionTypes.CLEARED_HANGOUT });
+}
 
-export function selectUnread({dispatch,hangout}){
-
+export function selectUnread({ dispatch, hangout }) {
   dispatch({ type: actionTypes.SELECTED_HANGOUT, hangout });
 }
 
@@ -55,21 +51,10 @@ export function startClientCommand({ dispatch }) {
   dispatch({ type: actionTypes.CLIENT_COMMAND_STARTED });
 }
 
-export function loadMessages({ hangout, dispatch,username }) {
-  
+export function loadMessages({ hangout, dispatch, username }) {
   const key = `${username}-${hangout.username}-messages`;
   const messages = JSON.parse(localStorage.getItem(key));
   dispatch({ type: actionTypes.LOADED_MESSAGES, messages });
 }
 
-
-
-
-
-
-
 //END saveInviter
-
-
-
-

@@ -1,4 +1,4 @@
-import { h } from 'preact';
+import { h } from "preact";
 
 export default function Profile() {
   return <div>Profile</div>;

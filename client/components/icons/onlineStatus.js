@@ -1,9 +1,9 @@
-import { h } from 'preact';
+import { h } from "preact";
 const style = {
   width: 15,
   height: 15,
 
-  border: 'white 2px solid',
+  border: "white 2px solid",
 };
 export function OnlineStatus({ readyState }) {
   if (readyState === 1) {
@@ -19,7 +19,7 @@ export function OnlineStatus({ readyState }) {
 export function IsOnline() {
   return (
     <div
-      style={{ ...style, backgroundColor: 'green' }}
+      style={{ ...style, backgroundColor: "green" }}
       data-testid="online"
     ></div>
   );
@@ -28,7 +28,7 @@ export function IsOnline() {
 export function IsOffline() {
   return (
     <div
-      style={{ ...style, backgroundColor: 'red' }}
+      style={{ ...style, backgroundColor: "red" }}
       data-testid="offline"
     ></div>
   );
@@ -37,7 +37,7 @@ export function IsOffline() {
 export function Connecting() {
   return (
     <div
-      style={{ ...style, backgroundColor: 'orange' }}
+      style={{ ...style, backgroundColor: "orange" }}
       data-testid="connecting"
     ></div>
   );
@@ -46,7 +46,7 @@ export function Connecting() {
 export function Closing() {
   return (
     <div
-      style={{ ...style, backgroundColor: 'pink' }}
+      style={{ ...style, backgroundColor: "pink" }}
       data-testid="closing"
     ></div>
   );

@@ -1,5 +1,11 @@
-import { actionTypes } from '../../actionTypes';
-export function updateDeliveredHangout({ name, dispatch, hangout, offline, onAppRoute }) {
+import { actionTypes } from "../../actionTypes";
+export function updateDeliveredHangout({
+  name,
+  dispatch,
+  hangout,
+  offline,
+  onAppRoute,
+}) {
   const { username, message, timestamp } = hangout;
 
   const deliveredHangout = { ...hangout, delivered: true };
@@ -12,12 +18,11 @@ export function updateDeliveredHangout({ name, dispatch, hangout, offline, onApp
   dispatch({ type: actionTypes.HANGOUTS_UPDATED, hangouts });
   dispatch({ type: actionTypes.HANGOUT_UPDATED, hangout: deliveredHangout });
   if (message) {
-
-    updateDeliveredMessage({ dispatch, name, deliveredHangout,hangout });
+    updateDeliveredMessage({ dispatch, name, deliveredHangout, hangout });
   }
-  if(hangout.state==='BLOCKED'){
+  if (hangout.state === "BLOCKED") {
     debugger;
-    updateBockedState({dispatch,name,deliveredHangout})
+    updateBockedState({ dispatch, name, deliveredHangout });
   }
   if (offline) {
     //remove offline hangout
@@ -35,15 +40,15 @@ export function updateDeliveredHangout({ name, dispatch, hangout, offline, onApp
     }
   }
 
-  if (hangout.state !== 'MESSANGER') {
-    onAppRoute({ featureRoute: `/${hangout.state}`, route: '/hangouts' });
+  if (hangout.state !== "MESSANGER") {
+    onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
   }
 }
 
 export function updateDeliveredMessage({ dispatch, name, deliveredHangout }) {
   const { username, message } = deliveredHangout;
 
-  const deliveredMessage = { ...message, username: name, delivered: true }
+  const deliveredMessage = { ...message, username: name, delivered: true };
 
   // save message to localStorage
   const messageKey = `${name}-${username}-messages`;
@@ -52,21 +57,31 @@ export function updateDeliveredMessage({ dispatch, name, deliveredHangout }) {
     (m) => m.timestamp === message.timestamp
   );
   messages.splice(hangoutIndex, 1, deliveredMessage);
-  
 
   localStorage.setItem(messageKey, JSON.stringify(messages));
 
   dispatch({ type: actionTypes.MESSAGES_UPDATED, messages });
 }
 
-export function updateBockedState({dispatch,deliveredHangout,name}){
+export function updateBockedState({ dispatch, deliveredHangout, name }) {
   debugger;
   const { username } = deliveredHangout;
-  const blockedMessage = { timestamp:deliveredHangout.timestamp, text: 'you blocked this user', username: name, type: 'blocked' }
+  const blockedMessage = {
+    timestamp: deliveredHangout.timestamp,
+    text: "you blocked this user",
+    username: name,
+    type: "blocked",
+  };
   const messageKey = `${name}-${username}-messages`;
   const messages = JSON.parse(localStorage.getItem(messageKey));
-  
-  localStorage.setItem(messageKey, JSON.stringify( [...messages,blockedMessage]));
 
-  dispatch({ type: actionTypes.MESSAGES_UPDATED, messages:[...messages,blockedMessage] });
+  localStorage.setItem(
+    messageKey,
+    JSON.stringify([...messages, blockedMessage])
+  );
+
+  dispatch({
+    type: actionTypes.MESSAGES_UPDATED,
+    messages: [...messages, blockedMessage],
+  });
 }

@@ -1,8 +1,7 @@
-import actionTypes from './actionTypes';
-
+import actionTypes from "./actionTypes";
 
 export function logout() {
-  window.localStorage.removeItem('webcom');
+  window.localStorage.removeItem("webcom");
   return { type: actionTypes.LOGOUT_SUCCESS };
 }
 

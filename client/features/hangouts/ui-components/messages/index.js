@@ -1,20 +1,19 @@
-import { h } from 'preact';
-import { useRef, useEffect } from 'preact/hooks';
-import  Message  from './Message';
-import  MessageEditor  from './MessageEditor';
-import { BlockerMessage } from './BlockerMessage'
-import {BlockedMessage} from './BlockedMessage'
-import {useMediaQuery} from 'components/layout/useMediaQuery'
+import { h } from "preact";
+import { useRef, useEffect } from "preact/hooks";
+import Message from "./Message";
+import MessageEditor from "./MessageEditor";
+import { BlockerMessage } from "./BlockerMessage";
+import { BlockedMessage } from "./BlockedMessage";
+import { useMediaQuery } from "components/layout/useMediaQuery";
 const styles = {
   messageContainer: {
     // width: '100%',
-    boxSizing: 'border-box',
+    boxSizing: "border-box",
     padding: 3,
-  //  backgroundColor: 'orange',
+    //  backgroundColor: 'orange',
     flex: 3,
-    overflowY: 'auto',
-    overflowX: "hidden"
-
+    overflowY: "auto",
+    overflowX: "hidden",
   },
 };
 export default function Messages({
@@ -25,10 +24,10 @@ export default function Messages({
   username,
   hangout,
   onNavigation,
-  loading
+  loading,
 }) {
   const scrollerRef = useRef(null);
-const {device}=useMediaQuery()
+  const { device } = useMediaQuery();
 
   useEffect(() => {
     if (messages) {
@@ -41,31 +40,44 @@ const {device}=useMediaQuery()
     scrollerRef.current.scrollTop = scrollerRef.current.scrollHeight;
   }
   return (
-    <div style={{ boxSizing: 'border-box', width: '100%', height: '100%', display: 'flex', flexDirection: 'column'}}>
-      <div style={{...styles.messageContainer,flex: device==='phone'?4:2}} ref={scrollerRef}>
-        {messages &&  
+    <div
+      style={{
+        boxSizing: "border-box",
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
+      <div
+        style={{ ...styles.messageContainer, flex: device === "phone" ? 4 : 2 }}
+        ref={scrollerRef}
+      >
+        {messages &&
           messages.length > 0 &&
           floatMessages({ messages: sortMessages({ messages }), username }).map(
             (m) => (
-              <div style={{ display: 'flex' }}>
-                {' '}
+              <div style={{ display: "flex" }}>
+                {" "}
                 {!m.type && <Message message={m} />}
-                {m.type && m.type === 'blocker' && <BlockerMessage message={m} />}
-                {m.type && m.type === 'blocked' && <BlockedMessage message={m} onNavigation={onNavigation}/>}
+                {m.type && m.type === "blocker" && (
+                  <BlockerMessage message={m} />
+                )}
+                {m.type && m.type === "blocked" && (
+                  <BlockedMessage message={m} onNavigation={onNavigation} />
+                )}
               </div>
             )
           )}
       </div>
-     
-        <MessageEditor
-         loading={loading}
-          hangout={hangout}
-          onMessage={onSend}
-          messageText={messageText}
-          onMessageText={onMessageText}
-        />
-     
 
+      <MessageEditor
+        loading={loading}
+        hangout={hangout}
+        onMessage={onSend}
+        messageText={messageText}
+        onMessageText={onMessageText}
+      />
     </div>
   );
 }
@@ -73,9 +85,9 @@ function floatMessages({ messages, username }) {
   if (messages && messages.length > 0 && username) {
     return messages.map((msg) => {
       if (msg.username === username) {
-        return { ...msg, float: 'right', username: 'me' };
+        return { ...msg, float: "right", username: "me" };
       } else {
-        return { ...msg, float: 'left' };
+        return { ...msg, float: "left" };
       }
     });
   } else {

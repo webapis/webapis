@@ -179,3 +179,44 @@
 {"level":"info","message":"Create new client: 08570655-14a0-4247-9920-3d09d79d50a5","timestamp":"2020-07-07T14:12:16.027Z"}
 {"level":"info","message":"Client disconnect: 55d64bd1-4e83-40e4-9d54-3d88fcf5a3ff","timestamp":"2020-07-07T14:12:19.898Z"}
 {"level":"info","message":"Client disconnect: 068ea7d3-347c-4932-8ea3-3406d856c731","timestamp":"2020-07-07T14:12:19.899Z"}
+{"level":"info","message":"Client disconnect: 08570655-14a0-4247-9920-3d09d79d50a5","timestamp":"2020-07-07T14:24:05.865Z"}
+{"level":"info","message":"Client disconnect: 9ce116bb-b52d-4f48-af00-fe8406d19ece","timestamp":"2020-07-07T14:24:05.868Z"}
+{"level":"info","message":"Create new client: 325fa328-4aa9-4150-9900-8e3ea211f9b6","timestamp":"2020-07-07T14:53:43.055Z"}
+{"level":"info","message":"Create new client: c2e0b468-bda0-4e7a-9070-d945e8b9d361","timestamp":"2020-07-07T14:53:43.086Z"}
+{"message":"Invalid username/password.","code":101,"level":"error","stack":"Error: Invalid username/password.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\Routers\\UsersRouter.js:113:19","timestamp":"2020-07-07T14:54:02.991Z"}
+{"level":"info","message":"Create new client: 5cb844dc-07b1-4060-b93d-68e150a66c38","timestamp":"2020-07-07T14:54:13.006Z"}
+{"level":"info","message":"Create new client: dfa87110-71c9-4787-b2e0-8b6dfd40dae1","timestamp":"2020-07-07T14:54:13.039Z"}
+{"level":"info","message":"Client disconnect: 5cb844dc-07b1-4060-b93d-68e150a66c38","timestamp":"2020-07-07T15:03:32.949Z"}
+{"level":"info","message":"Client disconnect: dfa87110-71c9-4787-b2e0-8b6dfd40dae1","timestamp":"2020-07-07T15:03:32.952Z"}
+{"message":"Invalid username/password.","code":101,"level":"error","stack":"Error: Invalid username/password.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\Routers\\UsersRouter.js:113:19","timestamp":"2020-07-07T15:04:13.692Z"}
+{"level":"info","message":"Create new client: 11b4c46e-0084-405f-ae19-2e3db84da5e2","timestamp":"2020-07-07T15:04:24.412Z"}
+{"level":"info","message":"Create new client: 5c7594ef-a956-4a43-b740-2970b3a42523","timestamp":"2020-07-07T15:04:24.450Z"}
+{"level":"info","message":"Client disconnect: 11b4c46e-0084-405f-ae19-2e3db84da5e2","timestamp":"2020-07-07T15:04:36.112Z"}
+{"level":"info","message":"Client disconnect: 5c7594ef-a956-4a43-b740-2970b3a42523","timestamp":"2020-07-07T15:04:36.115Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-07T15:08:50.557Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-07T15:11:27.958Z"}
+{"message":"Account already exists for this username.","code":202,"level":"error","stack":"Error: Account already exists for this username.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:727:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-07T15:12:49.801Z"}
+{"message":"Account already exists for this email address.","code":203,"level":"error","stack":"Error: Account already exists for this email address.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\RestWrite.js:775:15\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)","timestamp":"2020-07-07T15:13:02.591Z"}
+{"level":"info","message":"Create new client: 81a33621-d2fb-4167-a247-866c39e9ce02","timestamp":"2020-07-07T15:13:12.565Z"}
+{"level":"info","message":"Create new client: 94eb2d27-fa9d-460c-acc5-a9e8659f3665","timestamp":"2020-07-07T15:13:12.604Z"}
+{"level":"info","message":"Client disconnect: 81a33621-d2fb-4167-a247-866c39e9ce02","timestamp":"2020-07-07T15:18:28.075Z"}
+{"level":"info","message":"Client disconnect: 94eb2d27-fa9d-460c-acc5-a9e8659f3665","timestamp":"2020-07-07T15:18:28.080Z"}
+{"message":"Invalid username/password.","code":101,"level":"error","stack":"Error: Invalid username/password.\n    at C:\\Users\\user\\webapis\\node_modules\\parse-server\\src\\Routers\\UsersRouter.js:113:19","timestamp":"2020-07-07T15:20:05.190Z"}
+{"level":"info","message":"Create new client: d262f611-bb07-4984-b68f-c0d1807792c8","timestamp":"2020-07-07T15:20:33.173Z"}
+{"level":"info","message":"Create new client: 36a67840-289b-4db4-aa01-ba39e3ae92ee","timestamp":"2020-07-07T15:20:33.218Z"}
+{"level":"info","message":"Client disconnect: 325fa328-4aa9-4150-9900-8e3ea211f9b6","timestamp":"2020-07-07T15:38:03.473Z"}
+{"level":"info","message":"Client disconnect: c2e0b468-bda0-4e7a-9070-d945e8b9d361","timestamp":"2020-07-07T15:38:03.476Z"}
+{"level":"info","message":"Client disconnect: d262f611-bb07-4984-b68f-c0d1807792c8","timestamp":"2020-07-07T15:39:35.118Z"}
+{"level":"info","message":"Client disconnect: 36a67840-289b-4db4-aa01-ba39e3ae92ee","timestamp":"2020-07-07T15:39:35.121Z"}
+{"level":"info","message":"Create new client: a6724baf-47f9-4817-96bb-f36d73b97cd7","timestamp":"2020-07-07T15:40:05.373Z"}
+{"level":"info","message":"Create new client: edd700d0-1dbf-45ef-aa43-deef4e426471","timestamp":"2020-07-07T15:40:05.438Z"}
+{"level":"info","message":"Client disconnect: a6724baf-47f9-4817-96bb-f36d73b97cd7","timestamp":"2020-07-07T15:40:08.004Z"}
+{"level":"info","message":"Client disconnect: edd700d0-1dbf-45ef-aa43-deef4e426471","timestamp":"2020-07-07T15:40:08.007Z"}
+{"level":"info","message":"Create new client: c8952096-87f7-4256-9348-0934e0a551a4","timestamp":"2020-07-07T15:40:43.541Z"}
+{"level":"info","message":"Create new client: cce89ab1-c5c2-411a-add4-dab2ae9ae475","timestamp":"2020-07-07T15:40:43.565Z"}
+{"level":"info","message":"Client disconnect: c8952096-87f7-4256-9348-0934e0a551a4","timestamp":"2020-07-07T15:40:56.947Z"}
+{"level":"info","message":"Client disconnect: cce89ab1-c5c2-411a-add4-dab2ae9ae475","timestamp":"2020-07-07T15:40:56.950Z"}
+{"level":"info","message":"Create new client: 460fea04-dee3-4609-9edd-041efc31e316","timestamp":"2020-07-07T15:41:24.933Z"}
+{"level":"info","message":"Create new client: 4f7c4be6-269f-478d-b39a-d13a288f3093","timestamp":"2020-07-07T15:41:24.948Z"}
+{"level":"info","message":"Client disconnect: 460fea04-dee3-4609-9edd-041efc31e316","timestamp":"2020-07-07T15:41:28.206Z"}
+{"level":"info","message":"Client disconnect: 4f7c4be6-269f-478d-b39a-d13a288f3093","timestamp":"2020-07-07T15:41:28.211Z"}

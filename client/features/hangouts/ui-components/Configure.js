@@ -1,26 +1,26 @@
-import { h } from 'preact';
-import  Layout  from './Layout';
-import { Delete } from 'icons/Delete';
-import { Archive } from 'icons/Archive';
-import { Block } from  'icons/Block';
-import  Button  from 'controls/button';
+import { h } from "preact";
+import Layout from "./Layout";
+import { Delete } from "icons/Delete";
+import { Archive } from "icons/Archive";
+import { Block } from "icons/Block";
+import Button from "controls/button";
 const style = {
-  iconBtn: { display: 'flex', alignItems: 'center', margin: 8 },
+  iconBtn: { display: "flex", alignItems: "center", margin: 8 },
   btn: { marginRight: 8 },
   btnContainer: {
-    display: 'flex',
-    flexDirection: 'column',
+    display: "flex",
+    flexDirection: "column",
   },
   layout: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    height: '100%',
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    height: "100%",
   },
   btnOk: {
     margin: 8,
-    display: 'flex',
-    justifyContent: 'flex-end',
+    display: "flex",
+    justifyContent: "flex-end",
   },
 };
 
@@ -46,7 +46,12 @@ export default function Configure({
       <div style={style.btnContainer}>
         <IconButton title="Archive" Icon={Archive} onClick={onArchive} />
         <IconButton title="Delete" Icon={Delete} onClick={onDelete} />
-        <IconButton id="bckui" title="Block" Icon={Block} onClick={onNavigation}  />
+        <IconButton
+          id="bckui"
+          title="Block"
+          Icon={Block}
+          onClick={onNavigation}
+        />
       </div>
       <div>
         <Button onClick={onOk} title="OK" bg="primary" />
@@ -55,11 +60,16 @@ export default function Configure({
   );
 }
 
-function IconButton({ Icon, title, onClick,id }) {
+function IconButton({ Icon, title, onClick, id }) {
   return (
     <div style={style.iconBtn}>
-      <button id={id} style={style.btn} onClick={onClick} data-testid={`${id}-btn`}>
-        <Icon id={id}/>
+      <button
+        id={id}
+        style={style.btn}
+        onClick={onClick}
+        data-testid={`${id}-btn`}
+      >
+        <Icon id={id} />
       </button>
       <div>{title}</div>
     </div>

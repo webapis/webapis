@@ -1,4 +1,4 @@
-import { h } from 'preact';
+import { h } from "preact";
 
 const style = {
   boxShadow: `0px 3px 3px -2px rgba(0, 0, 0, 0.2),

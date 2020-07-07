@@ -1,13 +1,13 @@
-import { h, createContext } from 'preact';
-import { useReducer, useContext, useState, useMemo } from 'preact/hooks';
-import { authReducer, initState } from './authReducer';
-import AuthAdapter from './AuthAdapter'
+import { h, createContext } from "preact";
+import { useReducer, useContext, useState, useMemo } from "preact/hooks";
+import { authReducer, initState } from "./authReducer";
+import AuthAdapter from "./AuthAdapter";
 const AuthContext = createContext();
 
 export function useAuthContext() {
   const context = useContext(AuthContext);
   if (!context) {
-    throw new Error('useAuthContext must be used with AppProvider');
+    throw new Error("useAuthContext must be used with AppProvider");
   }
 
   const [state, dispatch] = context;
@@ -18,8 +18,6 @@ export function useAuthContext() {
   };
 }
 
-
-
 export default function AuthProvider(props) {
   const { children } = props;
   const [state, dispatch] = useReducer(authReducer, initState);
@@ -27,10 +25,8 @@ export default function AuthProvider(props) {
   return (
     <AuthContext.Provider value={value} {...props}>
       <AuthAdapter state={state} dispatch={dispatch}>
-      {children}
+        {children}
       </AuthAdapter>
     </AuthContext.Provider>
   );
 }
-
-

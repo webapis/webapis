@@ -1,5 +1,5 @@
-import { h, createContext } from 'preact';
-import { useContext, useState, useMemo } from 'preact/hooks';
+import { h, createContext } from "preact";
+import { useContext, useState, useMemo } from "preact/hooks";
 
 const NavContext = createContext();
 
@@ -7,7 +7,7 @@ function useNavContext() {
   const context = useContext(NavContext);
 
   if (!context) {
-    throw new Error('useNavContext must be used with NavProvider');
+    throw new Error("useNavContext must be used with NavProvider");
   }
 
   return context;
@@ -15,9 +15,9 @@ function useNavContext() {
 
 export function useNavigation() {
   const [drawerOpen, setDrawerOpen] = useNavContext();
-    function toggleDrawer(){
-        setDrawerOpen(prev=>!prev)
-    }
+  function toggleDrawer() {
+    setDrawerOpen((prev) => !prev);
+  }
   return { drawerOpen, toggleDrawer };
 }
 

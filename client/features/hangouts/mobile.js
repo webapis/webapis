@@ -1,19 +1,19 @@
-import { h } from 'preact';
-import { lazy, Suspense } from 'preact/compat';
-import { FeatureRoute } from '../app-route/AppRouteProvider';
+import { h } from "preact";
+import { lazy, Suspense } from "preact/compat";
+import { FeatureRoute } from "../app-route/AppRouteProvider";
 
-import { useHangouts } from './state/useHangouts';
-const Hangouts = lazy(() => import('./Hangout'));
-const Block = lazy(() => import('./state-ui/Block'));
-const Blocked = lazy(() => import('./state-ui/Blocked'));
-const Configure = lazy(() => import('./state-ui/Configure'));
-const Hangchat = lazy(() => import('./state-ui/Hangchat'));
-const Invite = lazy(() => import('./state-ui/Invite'));
-const Invitee = lazy(() => import('./state-ui/Invitee'));
-const Inviter = lazy(() => import('./state-ui/Inviter'));
-const UnreadHangouts = lazy(() => import('./UnreadHangouts'));
+import { useHangouts } from "./state/useHangouts";
+const Hangouts = lazy(() => import("./Hangout"));
+const Block = lazy(() => import("./state-ui/Block"));
+const Blocked = lazy(() => import("./state-ui/Blocked"));
+const Configure = lazy(() => import("./state-ui/Configure"));
+const Hangchat = lazy(() => import("./state-ui/Hangchat"));
+const Invite = lazy(() => import("./state-ui/Invite"));
+const Invitee = lazy(() => import("./state-ui/Invitee"));
+const Inviter = lazy(() => import("./state-ui/Inviter"));
+const UnreadHangouts = lazy(() => import("./UnreadHangouts"));
 export default function Mobile(props) {
-  const {fetchHangout}=props
+  const { fetchHangout } = props;
   const {
     state,
     hangout,
@@ -34,11 +34,11 @@ export default function Mobile(props) {
     unreadhangouts,
     onNavigation,
     onSelectUnread,
-    onRemoveUnread
-  } = useHangouts({fetchHangout});
-const {loading}=state
+    onRemoveUnread,
+  } = useHangouts({ fetchHangout });
+  const { loading } = state;
   return (
-    <div style={{ height: '100%', width: '100%' }}>
+    <div style={{ height: "100%", width: "100%" }}>
       <FeatureRoute path="/hangout">
         <Suspense fallback={<div>Loading...</div>}>
           <Hangouts
@@ -58,7 +58,7 @@ const {loading}=state
           <Block hangout={hangout} onBlock={onHangout} />
         </Suspense>
       </FeatureRoute>
-      <FeatureRoute paths={['/UNBLOCK', '/DECLINED']}>
+      <FeatureRoute paths={["/UNBLOCK", "/DECLINED"]}>
         <Suspense fallback={<div>Loading...</div>}>
           <Blocked hangout={hangout} onUnblock={onHangout} />
         </Suspense>
@@ -69,12 +69,21 @@ const {loading}=state
         </Suspense>
       </FeatureRoute>
       <FeatureRoute
-        paths={['/ACCEPTED', '/ACCEPTER', '/MESSANGER', '/MESSAGED','/BLOCKER','/BLOCKED','/UNBLOCKED','/UNBLOCKER']}
+        paths={[
+          "/ACCEPTED",
+          "/ACCEPTER",
+          "/MESSANGER",
+          "/MESSAGED",
+          "/BLOCKER",
+          "/BLOCKED",
+          "/UNBLOCKED",
+          "/UNBLOCKER",
+        ]}
       >
         <Suspense fallback={<div>Loading...</div>}>
           <Hangchat
-          loading={loading}
-          onNavigation={onNavigation}
+            loading={loading}
+            onNavigation={onNavigation}
             hangout={hangout}
             onMessageText={onMessageText}
             onMessage={onHangout}
@@ -89,7 +98,7 @@ const {loading}=state
       <FeatureRoute path="/INVITE">
         <Suspense fallback={<div>Loading...</div>}>
           <Invite
-          loading={loading}
+            loading={loading}
             hangout={hangout}
             onInvite={onHangout}
             onMessageText={onMessageText}
@@ -97,15 +106,15 @@ const {loading}=state
           />
         </Suspense>
       </FeatureRoute>
-      <FeatureRoute paths={['/INVITED', '/DECLINER']}>
+      <FeatureRoute paths={["/INVITED", "/DECLINER"]}>
         <Suspense fallback={<div>Loading...</div>}>
-          <Invitee hangout={hangout} loading={loading}/>
+          <Invitee hangout={hangout} loading={loading} />
         </Suspense>
       </FeatureRoute>
       <FeatureRoute path="/INVITER">
         <Suspense fallback={<div>Loading...</div>}>
           <Inviter
-          loading={loading}
+            loading={loading}
             hangout={hangout}
             onAccept={onHangout}
             onDecline={onHangout}

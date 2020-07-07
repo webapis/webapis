@@ -1,28 +1,28 @@
-import actionTypes from '../../state/actionTypes';
-import serverValidation from '../../validation/serverErrorActions'
-
+import actionTypes from "../../state/actionTypes";
+import serverValidation from "../../validation/serverErrorActions";
 
 export async function signup({ dispatch, state }) {
- 
-
   const { email, password, username } = state;
   try {
     const response = await fetch(`/auth/signup`, {
       body: JSON.stringify({ password, email, username }),
       headers: {
-        ContentType: 'application/json',
-        Accept: 'application/json',
+        ContentType: "application/json",
+        Accept: "application/json",
       },
-      method: 'POST',
+      method: "POST",
     });
     const result = await response.json();
     if (response.status === 200) {
       const { token, username, email } = result;
 
-      dispatch({ type: actionTypes.SIGNUP_SUCCESS, user:{token,username,email} });
+      dispatch({
+        type: actionTypes.SIGNUP_SUCCESS,
+        user: { token, username, email },
+      });
 
       window.localStorage.setItem(
-        'webcom',
+        "webcom",
         JSON.stringify({
           token,
           username,
@@ -32,38 +32,35 @@ export async function signup({ dispatch, state }) {
     } else if (response.status === 400) {
       debugger;
       const { errors } = result;
-      
+
       errors.forEach((error) => {
-        serverValidation({status:error,dispatch})
+        serverValidation({ status: error, dispatch });
       });
-      dispatch({type:actionTypes.SIGNUP_FAILED})
-    } else if(response.status === 500){
+      dispatch({ type: actionTypes.SIGNUP_FAILED });
+    } else if (response.status === 500) {
       const { error } = result;
-      dispatch({ type: actionTypes.SERVER_ERROR_RECIEVED,error });
-      dispatch({type:actionTypes.SIGNUP_FAILED})
+      dispatch({ type: actionTypes.SERVER_ERROR_RECIEVED, error });
+      dispatch({ type: actionTypes.SIGNUP_FAILED });
     }
   } catch (error) {
     const err = error;
     debugger;
-    dispatch({ type: actionTypes.SERVER_ERROR_RECIEVED,error });
-    dispatch({type:actionTypes.SIGNUP_FAILED})
+    dispatch({ type: actionTypes.SERVER_ERROR_RECIEVED, error });
+    dispatch({ type: actionTypes.SIGNUP_FAILED });
   }
 }
-
-
-
 
 export async function login({ dispatch, state, formDispatch }) {
   try {
     const { emailorusername, password } = state;
- 
+
     const response = await fetch(`/auth/login`, {
       headers: {
-        'Conten-Type': 'application/json',
-        'Access-Control-Allow-Headers': '*',
+        "Conten-Type": "application/json",
+        "Access-Control-Allow-Headers": "*",
         Authorization: `Basic ${btoa(`${emailorusername}:${password}`)}`,
       },
-      method: 'GET',
+      method: "GET",
     });
 
     const result = await response.json();
@@ -72,9 +69,12 @@ export async function login({ dispatch, state, formDispatch }) {
       debugger;
       const { token, username, email } = result;
 
-      dispatch({ type: actionTypes.LOGIN_SUCCESS, user:{token,username,email} });
+      dispatch({
+        type: actionTypes.LOGIN_SUCCESS,
+        user: { token, username, email },
+      });
       window.localStorage.setItem(
-        'webcom',
+        "webcom",
         JSON.stringify({
           token,
           username,
@@ -84,31 +84,30 @@ export async function login({ dispatch, state, formDispatch }) {
     } else if (response.status === 400) {
       debugger;
       const { errors } = result;
-     
+
       errors.forEach((error) => {
         debugger;
-        serverValidation({status:error,dispatch})
+        serverValidation({ status: error, dispatch });
       });
-      dispatch({type:actionTypes.LOGIN_FAILED})
-    } else if(response.status === 500){
+      dispatch({ type: actionTypes.LOGIN_FAILED });
+    } else if (response.status === 500) {
       const { error } = result;
-      dispatch({ type: actionTypes.SERVER_ERROR_RECIEVED,error });
-        dispatch({type:actionTypes.LOGIN_FAILED})
+      dispatch({ type: actionTypes.SERVER_ERROR_RECIEVED, error });
+      dispatch({ type: actionTypes.LOGIN_FAILED });
     }
   } catch (error) {
     debugger;
-    dispatch({ type: actionTypes.SERVER_ERROR_RECIEVED,error });
-    dispatch({type:actionTypes.LOGIN_FAILED})
+    dispatch({ type: actionTypes.SERVER_ERROR_RECIEVED, error });
+    dispatch({ type: actionTypes.LOGIN_FAILED });
   }
 }
 export async function changePassword({ dispatch, state }) {
- 
   try {
     const { confirm, password } = state;
-    const {token}=state.user
+    const { token } = state.user;
     debugger;
     const response = await fetch(`/auth/changepass`, {
-      method: 'put',
+      method: "put",
       body: JSON.stringify({
         confirm,
         password,
@@ -122,12 +121,11 @@ export async function changePassword({ dispatch, state }) {
       debugger;
       dispatch({
         type: actionTypes.CHANGE_PASSWORD_SUCCESS,
-        user:{token,username,email},
-        
+        user: { token, username, email },
       });
 
       window.localStorage.setItem(
-        'webcom',
+        "webcom",
         JSON.stringify({
           token,
           username,
@@ -138,22 +136,22 @@ export async function changePassword({ dispatch, state }) {
       const { errors } = result;
       debugger;
       errors.forEach((error) => {
-        serverValidation({status:error,dispatch})
+        serverValidation({ status: error, dispatch });
       });
       dispatch({
-        type: actionTypes.CHANGE_PASSWORD_FAILED
+        type: actionTypes.CHANGE_PASSWORD_FAILED,
       });
-    }  else if(response.status === 500){
+    } else if (response.status === 500) {
       const { error } = result;
-      dispatch({ type: actionTypes.SERVER_ERROR_RECIEVED,error });
+      dispatch({ type: actionTypes.SERVER_ERROR_RECIEVED, error });
       dispatch({
-        type: actionTypes.CHANGE_PASSWORD_FAILED
+        type: actionTypes.CHANGE_PASSWORD_FAILED,
       });
     }
   } catch (error) {
-    dispatch({ type: actionTypes.SERVER_ERROR_RECIEVED,error });
+    dispatch({ type: actionTypes.SERVER_ERROR_RECIEVED, error });
     dispatch({
-      type: actionTypes.CHANGE_PASSWORD_FAILED
+      type: actionTypes.CHANGE_PASSWORD_FAILED,
     });
   }
 }
@@ -161,10 +159,9 @@ export async function changePassword({ dispatch, state }) {
 export async function forgotPassword({ dispatch, state }) {
   debugger;
   try {
-  
     const { email } = state;
     const response = await fetch(`/auth/requestpasschange`, {
-      method: 'post',
+      method: "post",
       body: JSON.stringify({ email }),
     });
     debugger;
@@ -174,35 +171,31 @@ export async function forgotPassword({ dispatch, state }) {
       debugger;
       dispatch({
         type: actionTypes.REQUEST_PASS_CHANGE_SUCCESS,
-        token: result.token
+        token: result.token,
       });
     } else if (response.status === 400) {
       const result = await response.json();
       debugger;
       const { errors } = result;
       errors.forEach((error) => {
-        serverValidation({status:error,dispatch})
+        serverValidation({ status: error, dispatch });
       });
       dispatch({
-        type: actionTypes.REQUEST_PASS_CHANGE_FAILED
+        type: actionTypes.REQUEST_PASS_CHANGE_FAILED,
       });
-    }else if(response.status === 500) {
-      const { error} = result;
-      dispatch({ type: actionTypes.SERVER_ERROR_RECIEVED,error });
+    } else if (response.status === 500) {
+      const { error } = result;
+      dispatch({ type: actionTypes.SERVER_ERROR_RECIEVED, error });
       dispatch({
-        type: actionTypes.REQUEST_PASS_CHANGE_FAILED
+        type: actionTypes.REQUEST_PASS_CHANGE_FAILED,
       });
     }
   } catch (error) {
     const err = error;
     debugger;
-    dispatch({ type: actionTypes.SERVER_ERROR_RECIEVED,error });
+    dispatch({ type: actionTypes.SERVER_ERROR_RECIEVED, error });
     dispatch({
-      type: actionTypes.REQUEST_PASS_CHANGE_FAILED
+      type: actionTypes.REQUEST_PASS_CHANGE_FAILED,
     });
   }
 }
-
-
-
-

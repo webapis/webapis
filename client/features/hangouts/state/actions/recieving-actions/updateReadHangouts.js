@@ -1,4 +1,4 @@
-import { actionTypes } from '../../actionTypes';
+import { actionTypes } from "../../actionTypes";
 export function updateReadHangouts({ dispatch, name, hangout }) {
   const { username, message } = hangout;
 
@@ -6,11 +6,9 @@ export function updateReadHangouts({ dispatch, name, hangout }) {
   let unreadhangoutsKey = `${name}-unread-hangouts`;
   const unreadhangouts = JSON.parse(localStorage.getItem(unreadhangoutsKey));
 
-  if (unreadhangouts&& unreadhangouts.length>0) {
-    
-    let updatedunread = unreadhangouts.map(u => {
+  if (unreadhangouts && unreadhangouts.length > 0) {
+    let updatedunread = unreadhangouts.map((u) => {
       if (u.username === username) {
-        
         return { ...u, read: true };
       } else {
         return u;
@@ -18,8 +16,10 @@ export function updateReadHangouts({ dispatch, name, hangout }) {
     });
 
     localStorage.setItem(unreadhangoutsKey, JSON.stringify(updatedunread));
-dispatch({type:actionTypes.UNREAD_HANGOUTS_UPDATED,unreadhangouts:updatedunread})
-    
+    dispatch({
+      type: actionTypes.UNREAD_HANGOUTS_UPDATED,
+      unreadhangouts: updatedunread,
+    });
   }
 
   // set hangout to read
@@ -32,7 +32,7 @@ dispatch({type:actionTypes.UNREAD_HANGOUTS_UPDATED,unreadhangouts:updatedunread}
   dispatch({ type: actionTypes.HANGOUTS_UPDATED, hangouts });
 
   if (message) {
-     updateReadMesssages({ dispatch, hangout, name });
+    updateReadMesssages({ dispatch, hangout, name });
   }
 }
 
