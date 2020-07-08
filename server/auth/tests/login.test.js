@@ -4,7 +4,7 @@ import httpRoute from '../../http-route';
 const request = require('supertest');
 describe('login.test.js', () => {
   it('empty useroremail and password 410,409', (done) => {
-    debugger;
+    
     request(httpRoute)
       .get('/auth/login/')
       .set('Accept', 'application/json')

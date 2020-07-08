@@ -34,7 +34,7 @@ export function stateMapper({ command }) {
                 targetState: hangoutStates.UNBLOCKER
             }
         default:
-            debugger;
+            
             throw new Error('clientCommand type not specified')
     }
 }

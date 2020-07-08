@@ -31,6 +31,7 @@ export default function Invite({
         id="messageTextInput"
         onChange={onMessageText}
         value={messageText}
+        data-testid="messageTextInput"
       />
       <Center>
         <Button

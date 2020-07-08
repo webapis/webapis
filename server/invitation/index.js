@@ -11,22 +11,22 @@ export default function (req, res) {
   const database = req.client.db('auth');
   const collection = database.collection(collectionName);
   req.collection = collection;
-  debugger;
+  
   switch (true) {
     case url.includes('/findOne'):
-      debugger;
+      
       findOne({ req, res, collection });
       break;
     case url.includes('/updateOne'):
-      debugger;
+      
       updateOne({ req, res, collection });
       break;
     case url.includes('/insertOne'):
-      debugger;
+      
       insertOne({ req, res, collection });
       break;
     case url.includes('/find'):
-      debugger;
+      
       find({ req, res, collection });
       break;
 

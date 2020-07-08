@@ -27,6 +27,7 @@ export function useHangouts() {
   } = state;
 
   useEffect(() => {
+
     if (readyState === 1 && username) {
       sendOfflineHangouts({ name: username, dispatch });
     }
@@ -47,9 +48,17 @@ export function useHangouts() {
   }
 
   function onSelectHangout(e) {
-    const username = e.target.id;
-    const hangout = hangouts.find((g) => g.username === username);
+    const id = e.target.id;
+
+    const hangout = hangouts.find((g) => g.username === id);
+    
+  debugger;  //4.
+
     dispatch({ type: actionTypes.SELECTED_HANGOUT, hangout });
+
+  onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
+
+ 
   }
   function onSelectUnread(e) {
     const username = e.target.id;
@@ -60,10 +69,12 @@ export function useHangouts() {
   }
 
   function onSearchInput(e) {
+  
     dispatch({ type: actionTypes.SEARCH_INPUT_CHANGE, search: e.target.value });
   }
 
   function onFetchHangouts() {
+    debugger; //1
     dispatch({ type: actionTypes.FETCH_HANGOUT_STARTED });
   }
 
@@ -72,6 +83,7 @@ export function useHangouts() {
     changeMessageText({ dispatch, text });
   }
   function onHangout(e) {
+debugger; //5
     changeMessageText({ text: "", dispatch });
     const command = e.target.id;
     const { email } = hangout;

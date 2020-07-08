@@ -1,11 +1,10 @@
 import { h } from "preact";
 import { AppRoute } from "components/app-route";
 import { OnlineStatus } from "icons/onlineStatus";
-import { IconsDemo } from "./IconsDemo";
 import AuthDemoRoutes from "./authentication/route";
 import ComponentsRoutes from "./components/route";
 import HangoutRoutes from "./hangout/route";
-
+import BootstrapIcons from './icons'
 // const hangouts = [
 //   { username: 'userone' },
 //   { username: 'usertwo' },
@@ -33,8 +32,9 @@ export default function StorybookRoutes() {
         </div>
       </AppRoute>
 
+
       <AppRoute path="/icons">
-        <IconsDemo />
+        <BootstrapIcons />
       </AppRoute>
       <AuthDemoRoutes />
       <ComponentsRoutes />

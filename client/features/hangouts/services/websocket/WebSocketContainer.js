@@ -27,7 +27,6 @@ export function WebSocketContainer(props) {
         dispatch({ type: actionTypes.CLOSED });
       };
       sock.onerror = (error) => {
-        debugger;
         dispatch({ type: actionTypes.SOCKET_ERROR, error });
       };
       dispatch({ type: actionTypes.SOCKET_READY, socket: sock });
@@ -37,6 +36,7 @@ export function WebSocketContainer(props) {
 
   useEffect(() => {
     if (fetchHangouts) {
+      debugger; //2.
       actions.fetchHangouts({ dispatch, search, username });
     }
   }, [fetchHangouts]);

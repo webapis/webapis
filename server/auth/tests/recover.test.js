@@ -5,7 +5,7 @@ const request = require('supertest');
 
 describe('Recover', () => {
   it(' empty email emailInvalid:407', (done) => {
-    debugger;
+    
     request(httpRoute)
       .post('/auth/requestpasschange')
       .send({ email: '' })
@@ -14,7 +14,7 @@ describe('Recover', () => {
       .end(done); //
   });
   it('email is not registered emailIsNotRegistered:408', (done) => {
-    debugger;
+    
     global.findOne = null;
     request(httpRoute)
       .post('/auth/requestpasschange')
@@ -24,7 +24,7 @@ describe('Recover', () => {
       .end(done); //
   });
   it('request password change accepted', (done) => {
-    debugger;
+    
     global.findOne = { password: '123', _id: '123' }; //mongodb
     global.sign = 'test'; //jwt
     process.env.email = 'webapis.github@gmail.com';

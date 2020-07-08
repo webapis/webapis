@@ -24,7 +24,6 @@ const commonPlugins = [
     ]
   }),
   image(),
- 
 
   postcss({
     extensions: ['.css','.scss'],
@@ -51,8 +50,7 @@ const commonPlugins = [
   }),
   replace({
     ip: JSON.stringify(process.env.ip),
-  }),
-
+  })
 ];
 
 export default [

@@ -8,7 +8,7 @@ export function saveRecievedHangout({
   onAppRoute,
   unread,
 }) {
-  debugger;
+  
   const { username, message } = hangout;
 
   const hangoutKey = `${name}-hangouts`;
@@ -60,7 +60,7 @@ export function saveRecievedHangout({
       });
     }
   } else {
-    debugger;
+    
     let updatedHangouts = null;
     if (focusedHangout && focusedHangout.username === username) {
       updatedHangouts = [

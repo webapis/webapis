@@ -15,21 +15,21 @@ export default async function (server,client) {
   wss.on('connection', async function connection(ws, request) {
  //
     try {
- debugger;
+ 
       const token = cookie.parse(request.headers['cookie']);
-debugger;
+
       let uname = url.parse(request.url, true).query.username;
-     debugger;
+     
       const decoded = await jwt.verify(token[uname], process.env.secret);
-    debugger;
+    
       const { username } = decoded;
-      debugger;
+      
       console.log(username,'conneted')
       const user = await collection.findOne({username})
-    debugger;
+    
       ws.user= user;
       connections[username] = ws; 
-      debugger;
+      
       onLineStateChangeHandler({connections,ws,client})
       ws.on('message', function incoming(message) {
         console.log('recieved,', message);
@@ -40,7 +40,7 @@ debugger;
           }
         } catch (error) {
           const err = error;
-          debugger;
+          
           throw new Error(error);
         }
       });
@@ -51,7 +51,7 @@ debugger;
     } catch (error) {
      
       const err = error;
-      debugger;
+      
     }
   });
 }

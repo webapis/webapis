@@ -12,7 +12,6 @@ export default function ParseAuthService({ children, state, dispatch }) {
 
   useEffect(() => {
     if (signup) {
-      debugger;
       actions.signup({ dispatch, state });
     }
   }, [signup]);

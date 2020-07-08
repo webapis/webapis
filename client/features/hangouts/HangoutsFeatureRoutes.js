@@ -1,18 +1,18 @@
 import { h } from "preact";
 import { lazy, Suspense } from "preact/compat";
-import { FeatureRoute } from "../app-route/AppRouteProvider";
+import { FeatureRoute } from "components/app-route";
 
 import { useHangouts } from "./state/useHangouts";
-const Hangouts = lazy(() => import("./Hangout"));
-const Block = lazy(() => import("./state-ui/Block"));
-const Blocked = lazy(() => import("./state-ui/Blocked"));
-const Configure = lazy(() => import("./state-ui/Configure"));
-const Hangchat = lazy(() => import("./state-ui/Hangchat"));
-const Invite = lazy(() => import("./state-ui/Invite"));
-const Invitee = lazy(() => import("./state-ui/Invitee"));
-const Inviter = lazy(() => import("./state-ui/Inviter"));
-const UnreadHangouts = lazy(() => import("./UnreadHangouts"));
-export default function Mobile(props) {
+const Hangouts = lazy(() => import("./ui-components/Hangout"));
+const Block = lazy(() => import("./ui-components/Block"));
+const Blocked = lazy(() => import("./ui-components/Blocked"));
+const Configure = lazy(() => import("./ui-components/Configure"));
+const Hangchat = lazy(() => import("./ui-components/Hangchat"));
+const Invite = lazy(() => import("./ui-components/Invite"));
+const Invitee = lazy(() => import("./ui-components/Invitee"));
+const Inviter = lazy(() => import("./ui-components/Inviter"));
+const UnreadHangouts = lazy(() => import("./ui-components/UnreadHangouts"));
+export default function HangoutsFeatureRoutes(props) {
   const { fetchHangout } = props;
   const {
     state,
@@ -21,8 +21,6 @@ export default function Mobile(props) {
     onHangout,
     onSelectHangout,
     onSelectUser,
-    onSearch,
-
     search,
     onSearchInput,
     onFetchHangouts,
@@ -40,7 +38,7 @@ export default function Mobile(props) {
   return (
     <div style={{ height: "100%", width: "100%" }}>
       <FeatureRoute path="/hangout">
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Loading />}>
           <Hangouts
             dispatch={dispatch}
             username={username}
@@ -54,17 +52,17 @@ export default function Mobile(props) {
         </Suspense>
       </FeatureRoute>
       <FeatureRoute path="/bckui">
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Loading />}>
           <Block hangout={hangout} onBlock={onHangout} />
         </Suspense>
       </FeatureRoute>
       <FeatureRoute paths={["/UNBLOCK", "/DECLINED"]}>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Loading />}>
           <Blocked hangout={hangout} onUnblock={onHangout} />
         </Suspense>
       </FeatureRoute>
       <FeatureRoute path="/configure">
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Loading />}>
           <Configure hangout={hangout} onNavigation={onNavigation} />
         </Suspense>
       </FeatureRoute>
@@ -80,7 +78,7 @@ export default function Mobile(props) {
           "/UNBLOCKER",
         ]}
       >
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Loading />}>
           <Hangchat
             loading={loading}
             onNavigation={onNavigation}
@@ -96,7 +94,7 @@ export default function Mobile(props) {
       </FeatureRoute>
 
       <FeatureRoute path="/INVITE">
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Loading />}>
           <Invite
             loading={loading}
             hangout={hangout}
@@ -107,12 +105,12 @@ export default function Mobile(props) {
         </Suspense>
       </FeatureRoute>
       <FeatureRoute paths={["/INVITED", "/DECLINER"]}>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Loading />}>
           <Invitee hangout={hangout} loading={loading} />
         </Suspense>
       </FeatureRoute>
       <FeatureRoute path="/INVITER">
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Loading />}>
           <Inviter
             loading={loading}
             hangout={hangout}
@@ -122,7 +120,7 @@ export default function Mobile(props) {
         </Suspense>
       </FeatureRoute>
       <FeatureRoute path="/UNREAD">
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Loading />}>
           <UnreadHangouts
             unreadhangouts={unreadhangouts}
             onSelectUnread={onSelectUnread}
@@ -132,4 +130,8 @@ export default function Mobile(props) {
       </FeatureRoute>
     </div>
   );
+}
+
+function Loading() {
+  return <div data-testid="loading">Loading</div>;
 }

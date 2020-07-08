@@ -14,11 +14,14 @@ export default function Hangchat({
   onNavigation,
 }) {
   useEffect(() => {
-    document.title = hangout.username;
-  }, []);
+    if(hangout){
+      document.title = hangout.username;
+    }
+   
+  }, [hangout]);
 
   return (
-    <Layout id="hangchat-ui">
+    <Layout id="hangchat-ui" onNavigation={onNavigation}>
       <Messages
         loading={loading}
         onNavigation={onNavigation}

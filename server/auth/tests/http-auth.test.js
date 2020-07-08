@@ -49,7 +49,7 @@ describe('http-auth', () => {
 
   describe('getCredentials', () => {
     it('return credentials', () => {
-      debugger;
+      
       const req = {
         headers: { authorization: 'Basic dGttaG91c2U6ZHJhZ29uZmx5' },
       };
@@ -61,7 +61,7 @@ describe('http-auth', () => {
   });
   describe('getToken', () => {
     it('returns token', () => {
-      debugger;
+      
       const req = {
         headers: { authorization: 'Bearer dGttaG91c2U6ZHJhZ29uZmx5' },
       };
@@ -70,13 +70,13 @@ describe('http-auth', () => {
   });
 
   it('Authentication header exists', (done) => {
-    debugger;
+    
     request(httpRoute)
       .get('/auth/login')
       .set('Authorization', 'Basic  username:password')
       .expect((res) => {
         let result = res;
-        debugger;
+        
       })
       .end(done);
   });

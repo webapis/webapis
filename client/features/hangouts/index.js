@@ -1,6 +1,4 @@
 import { h } from "preact";
-import Mobile from "./mobile";
-
-export default function (props) {
-  return <Mobile {...props} />;
-}
+import HangoutsFeatureRoutes from "./HangoutsFeatureRoutes";
+import { useHangouts } from "./state/useHangouts";
+export { HangoutsFeatureRoutes, useHangouts };

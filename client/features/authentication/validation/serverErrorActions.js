@@ -2,7 +2,6 @@ import httpStatus from "./http-status";
 import validationMessages from "./validationMessages";
 import actionTypes from "../state/actionTypes";
 export default function serverValidation({ status = 0, dispatch }) {
-  debugger;
   switch (status) {
     case 101:
     case 200:

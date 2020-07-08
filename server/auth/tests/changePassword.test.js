@@ -26,7 +26,7 @@ describe('changePassword', () => {
 
   describe('with emailorusername and password', () => {
     it('usernameoremail, current,password,confirm is empty', (done) => {
-      debugger;
+      
 
       request(httpRoute)
         .put('/auth/changepass/')
@@ -43,7 +43,7 @@ describe('changePassword', () => {
     });
   });
   it('invalid credentials (email does not exist)', (done) => {
-    debugger;
+    
     global.findOne = null;
 
     request(httpRoute)
@@ -60,7 +60,7 @@ describe('changePassword', () => {
       .end(done);
   });
   it('invalid credentials (username does not exist)', (done) => {
-    debugger;
+    
     global.findOne = null;
 
     request(httpRoute)
@@ -95,7 +95,7 @@ describe('changePassword', () => {
   });
 
   it('confirm do not match', (done) => {
-    debugger;
+    
     global.findOne = { password: '' };
     global.compare = true;
     global.findOneAndUpdate = { value: { email: '' } };
@@ -113,7 +113,7 @@ describe('changePassword', () => {
       .end(done);
   });
   it('success password change', (done) => {
-    debugger;
+    
     global.findOne = { password: '' };
     global.compare = true;
     global.findOneAndUpdate = { value: { email: '' } };

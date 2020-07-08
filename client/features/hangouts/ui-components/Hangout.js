@@ -9,15 +9,9 @@ export default function Hangout({
   onSelectHangout,
   search,
 }) {
-  const { onAppRoute } = useAppRoute();
-  function handleHangoutSelection(e) {
-    const id = e.target.id;
-    onSelectHangout(e);
-    const hangout = hangouts.find((g) => g.username === id);
 
-    onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
-  }
-
+  
+  
   return (
     <div>
       <div class="input-group mb-3">
@@ -29,6 +23,7 @@ export default function Hangout({
           className="form-control"
           aria-label="Recipient's username"
           aria-describedby="button-addon2"
+          data-testid="search-input"
         />
         <div className="input-group-append">
           <button
@@ -51,7 +46,7 @@ export default function Hangout({
               <ListItem
                 id={g.username}
                 data-testid={g.username}
-                onClick={handleHangoutSelection}
+                onClick={onSelectHangout}
               >
                 {g.username}
               </ListItem>

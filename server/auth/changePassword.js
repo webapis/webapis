@@ -51,7 +51,7 @@ export default async function changePassword({ req, res, collection }) {
       
       let { id } = decoded;
 
-      debugger;
+      
       const {salt,hash,iterations}=passhash.hashPassword(password)
 
       const result = await collection.findOneAndUpdate(

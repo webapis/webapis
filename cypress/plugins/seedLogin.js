@@ -9,16 +9,16 @@ const client = new MongoClient(url, {
 
 module.exports = async function seedLogin({ email, username, password }) {
   console.log('logindata seeded');
-  debugger;
+  
   try {
     const clnt = await client.connect();
     const database = clnt.db('auth');
     const collection = database.collection('users');
     const deleteResult = await collection.deleteMany();
-    debugger;
+    
     const  {hash,salt,iterations}= passhash.hashPassword(password)
         
-        debugger;
+        
 
         const result = await collection.insertOne({
           hash,
@@ -31,6 +31,6 @@ module.exports = async function seedLogin({ email, username, password }) {
     return result;
   } catch (error) {
     let err = error;
-    debugger;
+    
   }
 };

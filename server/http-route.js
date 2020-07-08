@@ -74,11 +74,11 @@ export default function httpRoute(client) {
               contactsOperation(req, res);
               break;
             case usersRegex.test(url):
-              debugger;
+              
               usersOperation(req, res);
               break;
             case hangoutsRegex.test(url):
-              debugger;
+              
               hangoutsOperation(req, res);
               break;
             default:
@@ -116,7 +116,7 @@ export default function httpRoute(client) {
 
         break;
       default:
-        debugger;
+        
         throw new Error('No operation is provied');
     }
   };

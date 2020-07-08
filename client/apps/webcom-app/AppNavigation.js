@@ -8,14 +8,14 @@ import Navbar, {
 import Nav from "components/nav";
 import { useUserName } from "features/authentication/state/useUserName";
 import { useAuth } from "features/authentication";
-import NavDropdown, {
-  DropdownMenu,
-  DropdownItem,
-} from "components/nav-bar/nav-dropdown";
+import { useHangouts } from "features/hangouts";
+import GearIcon from "icons/bootstrap/GearIcon";
 
 export function AppNavigation() {
   const { username } = useUserName();
   const { onSignOut } = useAuth();
+  const { state, onNavigation } = useHangouts();
+  const { hangout } = state;
   return (
     <div>
       <Navbar brand="Webcom" bg="dark">
@@ -23,7 +23,11 @@ export function AppNavigation() {
           <NavBarNav>
             <NavItem>
               {username && (
-                <NavLink id="hangout" appRoute="/hangouts">
+                <NavLink
+                  id="hangout"
+                  appRoute="/hangouts"
+                  data-testid="hangouts"
+                >
                   Hangouts
                 </NavLink>
               )}
@@ -65,6 +69,18 @@ export function AppNavigation() {
                 >
                   Sign out
                 </NavLink>
+              )}
+            </NavItem>
+            <NavItem>
+              {hangout && (
+                <button
+                  className="btn"
+                  data-testid="nav-config"
+                  id="configure"
+                  onClick={onNavigation}
+                >
+                  <GearIcon color="white" />
+                </button>
               )}
             </NavItem>
           </Nav>

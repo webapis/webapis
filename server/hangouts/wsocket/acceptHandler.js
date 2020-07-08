@@ -1,7 +1,7 @@
 
 import { hangoutStates } from '../hangoutStates'
 export async function acceptHandler({ collection, hangout, ws, connections }) {
-  debugger;
+  
 
   const { email, username } = hangout
   const accepted = {

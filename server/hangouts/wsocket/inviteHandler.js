@@ -16,7 +16,7 @@ try {
     email: ws.user.email,
     state: hangoutStates.INVITER
   };
-  debugger;
+  
 
   // push hangout to inviter
   await collection.updateOne(

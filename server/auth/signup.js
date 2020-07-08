@@ -71,7 +71,7 @@ export default async function ({ req, res, collection }) {
         const  {hash,salt,iterations}= passhash.hashPassword(password)
         
         
-        debugger;
+        
 
         const result = await collection.insertOne({
           hash,
@@ -100,7 +100,7 @@ export default async function ({ req, res, collection }) {
   } catch (error) {
 
     const err =error
-    debugger;
+    
 
     res.writeHead(500, { 'Content-Type': 'application/json' });
     res.write(JSON.stringify({ error }));

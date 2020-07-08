@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "cypress:open": "npx cypress open back=parse",
-    "build": "rollup -c",
+    "build": "cross-env appName=webcom-app rollup -c",
     "test": "echo \"Error: no test specified\" && exit 1",
     "webcom:client": "cross-env appName=webcom-app rollup -c -w ",
     "webcom:node": "concurrently \"cross-env appName=webcom-app PREACT_APP_BACK=PREACT_APP_NODEJS nodemon --exec babel-node server/index.js\" \" cross-env appName=webcom-app PREACT_APP_BACK=PREACT_APP_NODEJS rollup -c -w \" ",
@@ -22,6 +22,7 @@
     "@babel/preset-env": "^7.9.5",
     "@rollup/plugin-image": "^2.0.4",
     "@rollup/plugin-node-resolve": "^7.1.3",
+    "@rollup/plugin-strip": "^1.3.3",
     "babel-loader": "^8.1.0",
     "babel-polyfill": "^6.26.0",
     "eslint-config-preact": "^1.1.1",

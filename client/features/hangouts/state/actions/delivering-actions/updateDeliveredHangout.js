@@ -21,7 +21,7 @@ export function updateDeliveredHangout({
     updateDeliveredMessage({ dispatch, name, deliveredHangout, hangout });
   }
   if (hangout.state === "BLOCKED") {
-    debugger;
+    
     updateBockedState({ dispatch, name, deliveredHangout });
   }
   if (offline) {
@@ -64,7 +64,7 @@ export function updateDeliveredMessage({ dispatch, name, deliveredHangout }) {
 }
 
 export function updateBockedState({ dispatch, deliveredHangout, name }) {
-  debugger;
+  
   const { username } = deliveredHangout;
   const blockedMessage = {
     timestamp: deliveredHangout.timestamp,

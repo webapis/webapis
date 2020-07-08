@@ -8,12 +8,12 @@ export async function fetchHangouts({ search, dispatch, username }) {
     );
     if (response.ok) {
       const { hangouts } = await response.json();
-
+      debugger; //3.
       dispatch({ type: actionTypes.FETCH_HANGOUT_SUCCESS, hangouts });
     }
   } catch (error) {
     const err = error;
-    debugger;
+
     dispatch({ type: actionTypes.FETCH_HANGOUT_FAILED, error });
   }
 }

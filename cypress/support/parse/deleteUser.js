@@ -7,7 +7,7 @@ Cypress.Commands.add('deleteUserParse',({username})=>{
     cy.window().its('localStorage').invoke('getItem',username).then(result=>{
  
         const {objectId,token}= JSON.parse(result)
-    debugger;
+    
 
     cy.request({method:'DELETE',url:`https://localhost:1337/parse/users/${objectId}`, headers:{
         ...headers,
@@ -20,7 +20,7 @@ Cypress.Commands.add('deleteUserParse',({username})=>{
             // delete HangoutUser
             cy.request({method:'DELETE',url:`https://localhost:1337/parse/classes/HangoutUser/${objectId}`,headers})
 
-            debugger;
+            
         })
 
         //fetch Hangout

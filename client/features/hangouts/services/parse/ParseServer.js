@@ -37,19 +37,18 @@ export function ParseServer(props) {
         if (unreadhangouts) {
           unreadhangouts.forEach((h) => {
             const unreadhangout = h.attributes;
-            debugger;
+
             handleHangout({ hangout: unreadhangout });
             removeUnreadHangout({ hangout: unreadhangout, objectId: h.id });
           });
         }
-        debugger;
+
         console.log("socket connection established");
       });
     }
   }, [user]);
 
   function handleHangout({ hangout }) {
-    debugger;
     switch (hangout.state) {
       case "INVITED":
       case "ACCEPTED":
@@ -57,7 +56,6 @@ export function ParseServer(props) {
       case "MESSAGED":
       case "DECLINED":
       case "UNBLOCKED":
-        debugger;
         dispatch({
           type: actionTypes.SERVER_MESSAGE_RECIEVED,
           message: { hangout, type: "ACKHOWLEDGEMENT" },
@@ -76,15 +74,12 @@ export function ParseServer(props) {
     }
   }
   async function removeUnreadHangout({ hangout, objectId }) {
-    debugger;
     try {
       let UnreadHangout = Parse.Object.extend("UnreadHangout");
       let query = new Parse.Query(UnreadHangout);
       let unreadhangout = await query.get(objectId);
       await unreadhangout.destroy();
-      debugger;
     } catch (error) {
-      debugger;
       dispatch({ type: actionTypes.ERROR_RECIEVED, error });
     }
   }
@@ -94,27 +89,20 @@ export function ParseServer(props) {
     query.equalTo("userid", user.objectId);
     let subscription = await query.subscribe();
     subscription.on("create", (object) => {
-      debugger;
       const hangout = object.attributes;
-      debugger;
+
       handleHangout({ hangout });
     });
     subscription.on("update", (object) => {
-      debugger;
       const hangout = object.attributes;
-      debugger;
+
       handleHangout({ hangout });
     });
-    subscription.on("enter", (object) => {
-      debugger;
-    });
+    subscription.on("enter", (object) => {});
     subscription.on("leave", (object) => {
-      debugger;
       const { hangouts } = object.attributes;
       const hangout = hangouts[0].attributes;
       handleHangout({ hangout });
-
-      debugger;
     });
   }
 
@@ -123,35 +111,28 @@ export function ParseServer(props) {
     query.equalTo("userid", user.objectId);
     let subscription = await query.subscribe();
     subscription.on("create", (object) => {
-      debugger;
       const hangout = object.attributes;
-      debugger;
+
       handleHangout({ hangout });
       removeUnreadHangout({ hangout });
     });
     subscription.on("update", (object) => {
-      debugger;
       const hangout = object.attributes;
-      debugger;
+
       handleHangout({ hangout });
       removeUnreadHangout({ hangout });
     });
-    subscription.on("enter", (object) => {
-      debugger;
-    });
+    subscription.on("enter", (object) => {});
     subscription.on("leave", (object) => {
-      debugger;
       const { hangouts } = object.attributes;
       const hangout = hangouts[0].attributes;
       handleHangout({ hangout });
       removeUnreadHangout({ hangout });
-      debugger;
     });
   }
 
   async function sendHangout() {
     try {
-      debugger;
       const { senderState, targetState } = stateMapper({
         command: pendingHangout.command,
       });
@@ -162,13 +143,12 @@ export function ParseServer(props) {
       let senderQuery = new Parse.Query(SenderUser);
       senderQuery.equalTo("username", user.username);
       let senderUser = await senderQuery.first();
-      debugger;
 
       const TargetUser = Parse.Object.extend("HangoutUser");
       let targetQuery = new Parse.Query(TargetUser);
       targetQuery.equalTo("username", username);
       let targetUser = await targetQuery.first();
-      debugger;
+
       //HANGOUT
       const sender = new Hangout();
       sender.set("username", username);
@@ -186,15 +166,12 @@ export function ParseServer(props) {
       target.set("state", targetState);
       target.set("userid", targetUser.attributes.userid);
 
-      debugger;
       if (pendingHangout.command === clientCommands.INVITE) {
-        debugger;
         senderUser.addUnique("hangouts", sender);
         targetUser.addUnique("hangouts", target);
         sender.set("owner", senderUser);
         target.set("owner", targetUser);
       } else {
-        debugger;
         let targetQuery = new Parse.Query("Hangout");
         targetQuery.equalTo("userid", targetUser.attributes.userid);
         let targetHangout = await targetQuery.first();
@@ -202,7 +179,6 @@ export function ParseServer(props) {
         targetHangout.set("timestamp", timestamp);
         targetHangout.set("state", targetState);
         // targetHangout.save()
-        debugger;
 
         let senderQuery = new Parse.Query("Hangout");
         senderQuery.equalTo("userid", user.objectId);
@@ -211,7 +187,6 @@ export function ParseServer(props) {
         senderHangout.set("timestamp", timestamp);
         senderHangout.set("state", senderState);
         senderHangout.save();
-        debugger;
       }
       //UNREADHANGOUT
       const UnreadHangout = Parse.Object.extend("UnreadHangout");
@@ -227,10 +202,7 @@ export function ParseServer(props) {
       //SAVE HANGOUTUSER
       senderUser.save();
       targetUser.save();
-      debugger;
-    } catch (error) {
-      debugger;
-    }
+    } catch (error) {}
   }
 
   return children;

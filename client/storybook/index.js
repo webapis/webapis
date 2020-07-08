@@ -21,7 +21,7 @@ render(
             <DropdownMenu>
               <DropdownItem id="button">Buttons</DropdownItem>
               <DropdownItem id="text-input">TextInput</DropdownItem>
-              <DropdownItem id="toast">Toast</DropdownItem>
+              <DropdownItem id="icons">Icons</DropdownItem>
               <DropdownItem id="alert">Alert</DropdownItem>
             </DropdownMenu>
           </NavDropdown>

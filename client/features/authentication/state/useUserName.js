@@ -1,11 +1,12 @@
 import { useEffect, useState } from "preact/hooks";
 import { useAuthContext } from "./AuthProvider";
+import actionTypes from "./actionTypes";
 export function useUserName() {
   const [userName, setUsername] = useState(null);
   const [token, setToken] = useState(null);
   const [email, setEmail] = useState("");
   const [objectId, setObjectId] = useState(null);
-  const { state } = useAuthContext();
+  const { state, dispatch } = useAuthContext();
   useEffect(() => {
     if (window.localStorage.getItem("webcom")) {
       const { username, token, email, objectId } = JSON.parse(
@@ -15,12 +16,15 @@ export function useUserName() {
       setToken(token);
       setEmail(email);
       setObjectId(objectId);
+      dispatch({
+        type: actionTypes.RECOVER_LOCAL_AUTH_STATE,
+        user: { username, token, email, objectId },
+      });
     }
   }, []);
 
   useEffect(() => {
     if (state.user && state.user.token) {
-      debugger;
       const { username, email, token, objectId } = state.user;
 
       setUsername(username);
@@ -38,5 +42,6 @@ export function useUserName() {
       setObjectId(null);
     }
   }, [state]);
+
   return { username: userName, token, email };
 }

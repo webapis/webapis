@@ -30,7 +30,6 @@ export async function signup({ dispatch, state }) {
         })
       );
     } else if (response.status === 400) {
-      debugger;
       const { errors } = result;
 
       errors.forEach((error) => {
@@ -44,7 +43,7 @@ export async function signup({ dispatch, state }) {
     }
   } catch (error) {
     const err = error;
-    debugger;
+
     dispatch({ type: actionTypes.SERVER_ERROR_RECIEVED, error });
     dispatch({ type: actionTypes.SIGNUP_FAILED });
   }
@@ -66,7 +65,6 @@ export async function login({ dispatch, state, formDispatch }) {
     const result = await response.json();
 
     if (response.status === 200) {
-      debugger;
       const { token, username, email } = result;
 
       dispatch({
@@ -82,11 +80,9 @@ export async function login({ dispatch, state, formDispatch }) {
         })
       );
     } else if (response.status === 400) {
-      debugger;
       const { errors } = result;
 
       errors.forEach((error) => {
-        debugger;
         serverValidation({ status: error, dispatch });
       });
       dispatch({ type: actionTypes.LOGIN_FAILED });
@@ -96,7 +92,6 @@ export async function login({ dispatch, state, formDispatch }) {
       dispatch({ type: actionTypes.LOGIN_FAILED });
     }
   } catch (error) {
-    debugger;
     dispatch({ type: actionTypes.SERVER_ERROR_RECIEVED, error });
     dispatch({ type: actionTypes.LOGIN_FAILED });
   }
@@ -105,7 +100,7 @@ export async function changePassword({ dispatch, state }) {
   try {
     const { confirm, password } = state;
     const { token } = state.user;
-    debugger;
+
     const response = await fetch(`/auth/changepass`, {
       method: "put",
       body: JSON.stringify({
@@ -118,7 +113,7 @@ export async function changePassword({ dispatch, state }) {
     const result = await response.json();
     if (response.status === 200) {
       const { token, username, email } = result;
-      debugger;
+
       dispatch({
         type: actionTypes.CHANGE_PASSWORD_SUCCESS,
         user: { token, username, email },
@@ -134,7 +129,7 @@ export async function changePassword({ dispatch, state }) {
       );
     } else if (response.status === 400) {
       const { errors } = result;
-      debugger;
+
       errors.forEach((error) => {
         serverValidation({ status: error, dispatch });
       });
@@ -157,25 +152,23 @@ export async function changePassword({ dispatch, state }) {
 }
 
 export async function forgotPassword({ dispatch, state }) {
-  debugger;
   try {
     const { email } = state;
     const response = await fetch(`/auth/requestpasschange`, {
       method: "post",
       body: JSON.stringify({ email }),
     });
-    debugger;
 
     if (response.status === 200) {
       const result = await response.json();
-      debugger;
+
       dispatch({
         type: actionTypes.REQUEST_PASS_CHANGE_SUCCESS,
         token: result.token,
       });
     } else if (response.status === 400) {
       const result = await response.json();
-      debugger;
+
       const { errors } = result;
       errors.forEach((error) => {
         serverValidation({ status: error, dispatch });
@@ -192,7 +185,7 @@ export async function forgotPassword({ dispatch, state }) {
     }
   } catch (error) {
     const err = error;
-    debugger;
+
     dispatch({ type: actionTypes.SERVER_ERROR_RECIEVED, error });
     dispatch({
       type: actionTypes.REQUEST_PASS_CHANGE_FAILED,

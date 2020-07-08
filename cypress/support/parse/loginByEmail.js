@@ -20,7 +20,7 @@ for (var k in params) {
         }
     }).then(response=>{
         const {sessionToken,objectId,email,username}=response.body
-        debugger;
+        
         cy.window().its('localStorage').invoke('setItem','webcom',JSON.stringify({username,email,token:sessionToken,objectId}))
         cy.window().its('localStorage').invoke('setItem',username,JSON.stringify({username,email,token:sessionToken,objectId}))
     })

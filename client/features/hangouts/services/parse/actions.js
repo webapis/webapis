@@ -40,7 +40,6 @@ export async function fetchHangouts({ search, dispatch, userId }) {
       });
     }
   } catch (error) {
-    debugger;
     dispatch({ type: actionTypes.ERROR_RECIEVED, error });
   }
 }

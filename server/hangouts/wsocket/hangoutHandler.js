@@ -1,7 +1,7 @@
 import { stateMapper } from '../stateMapper';
 import { clientCommands } from '../../../client/features/hangouts/state/clientCommands';
 export async function hangoutHandler({ collection, hangout, ws, connections }) {
-  debugger;
+  
   try {
     const { senderState, targetState } = stateMapper({
       command: hangout.command,
@@ -74,12 +74,12 @@ export async function hangoutHandler({ collection, hangout, ws, connections }) {
 
       ws.send(JSON.stringify({hangout:sender,type:'OFFLINE_ACKN'}));//---------------
     }else{
-      debugger;
+      
       ws.send(JSON.stringify({hangout:sender,type:'ACKHOWLEDGEMENT'}));//---------------
     }
   } catch (error) {
     const err = error;
-    debugger;
+    
     console.log('hangoutHandlerError', error);
   }
 }

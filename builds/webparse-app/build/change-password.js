@@ -1115,7 +1115,7 @@ function validatePasswordMatch({
     password,
     confirm
   } = auth;
-  debugger;
+  
 
   if (password === '' || password !== confirm) {
     return {

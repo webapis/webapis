@@ -3,7 +3,6 @@ import serverValidation from "../../validation/serverErrorActions";
 import * as cv from "../../validation/constraintValidators";
 //
 export async function signup({ dispatch, state }) {
-  debugger;
   const { username, password, email } = state;
   if (
     username &&
@@ -14,7 +13,6 @@ export async function signup({ dispatch, state }) {
     cv.validatePasswordConstraint({ password })
   ) {
     try {
-      debugger;
       // Create a new instance of the user class
       var user = new Parse.User();
       user.set("username", username);
@@ -47,13 +45,11 @@ export async function signup({ dispatch, state }) {
         },
       });
     } catch (error) {
-      debugger;
       serverValidation({ status: error.code, dispatch });
       dispatch({ type: actionTypes.SERVER_ERROR_RECIEVED, error });
       dispatch({ type: actionTypes.SIGNUP_FAILED });
     }
   } else {
-    debugger;
     dispatch({
       type: actionTypes.CONSTRAINT_VALIDATION,
       name: "username",
@@ -77,7 +73,6 @@ export function login({ dispatch, state }) {
   const { emailorusername, password } = state;
 
   if (emailorusername && password) {
-    debugger;
     // Create a new instance of the user class
     Parse.User.logIn(emailorusername, password)
       .then(function (user) {
@@ -106,7 +101,6 @@ export function login({ dispatch, state }) {
         );
       })
       .catch(function (error) {
-        debugger;
         serverValidation({ status: error.code, dispatch });
         dispatch({ type: actionTypes.SERVER_ERROR_RECIEVED, error });
         dispatch({ type: actionTypes.LOGIN_FAILED });

@@ -8,14 +8,14 @@ export async function messageHandler({ collection, hangout, ws, connections }) {
       message,
       state: hangoutStates.MESSAGED,
     };
-    debugger;
+    
     const messanger = {
       username: ws.user.username,
       email: ws.user.email,
       message,
       state: hangoutStates.MESSANGER,
     };
-    debugger;
+    
     // update hangout on messanger
     await collection.updateOne(
       { username: ws.user.username, 'hangouts.username': username },

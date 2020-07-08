@@ -4,11 +4,13 @@ import { AppRoute } from "components/app-route";
 import { Home } from "./Home";
 import { AuthFatureRoutes } from "features/authentication";
 
-const Hangouts = lazy(() => import("features/hangouts/ui-components/Hangout"));
+const HangoutsFeatureRoutes = lazy(() =>
+  import("features/hangouts/HangoutsFeatureRoutes")
+);
 
 export function AppRoutes() {
   return (
-    <div style={{ height: "100%" }}>
+    <div style={{ height: "85vh" }}>
       <AppRoute path="/auth">
         <AuthFatureRoutes />
       </AppRoute>
@@ -18,7 +20,7 @@ export function AppRoutes() {
 
       <AppRoute path="/hangouts">
         <Suspense fallback={<div>loading...</div>}>
-          <Hangouts />
+          <HangoutsFeatureRoutes />
         </Suspense>
       </AppRoute>
     </div>

@@ -6,3 +6,5 @@ yarn-error.log
 .env
 debug.log
 coverage
+builds/
+build/

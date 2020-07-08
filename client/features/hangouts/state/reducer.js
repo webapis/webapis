@@ -26,10 +26,12 @@ export function reducer(state, action) {
     case actionTypes.SENDING_HANGOUT_STARTED:
       return { ...state, pendingHangout: action.pendingHangout };
     case actionTypes.CLEARED_HANGOUT:
+  
       return { ...state, hangout: null };
     case actionTypes.UNREAD_HANGOUTS_UPDATED:
       return { ...state, unreadhangouts: action.unreadhangouts };
     case actionTypes.HANGOUT_UPDATED:
+     
       return { ...state, hangout: action.hangout };
     case actionTypes.HANGOUTS_UPDATED:
       return { ...state, hangouts: action.hangouts };
@@ -66,10 +68,15 @@ export function reducer(state, action) {
         ),
       };
     case actionTypes.SEARCH_INPUT_CHANGE:
+      
       return { ...state, search: action.search };
     case actionTypes.LOAD_HANGOUTS:
       return { ...state, hangouts: action.hangouts };
     case actionTypes.SELECTED_HANGOUT:
+      if(action.hangout===undefined){
+        debugger;
+      }
+    
       return {
         ...state,
         hangout: action.hangout,
