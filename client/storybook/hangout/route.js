@@ -10,6 +10,8 @@ import Invitee from "features/hangouts/ui-components/Invitee";
 import Inviter from "features/hangouts/ui-components/Inviter";
 import UnreadHangouts from "features/hangouts/ui-components/UnreadHangouts";
 import Message from "features/hangouts/ui-components/messages/Message";
+import HangoutFilter from "features/hangouts/ui-components/HangoutFilter";
+import HangoutSearch from "features/hangouts/ui-components/HangoutSearch";
 const hangouts = [
   { username: "userone" },
   { username: "usertwo" },
@@ -63,6 +65,12 @@ export default function HangoutRoutes() {
     </AppRoute>,
     <AppRoute path="/messages">
       <Hangchat hangout={hangout} messages={messages} username="demo" />
+    </AppRoute>,
+    <AppRoute path="/search">
+      <HangoutSearch />
+    </AppRoute>,
+    <AppRoute path="/filter">
+      <HangoutFilter />
     </AppRoute>,
   ];
 }

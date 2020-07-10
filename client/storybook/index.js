@@ -44,6 +44,8 @@ render(
               <DropdownItem id="invitee">Invitee</DropdownItem>
               <DropdownItem id="inviter">Inviter</DropdownItem>
               <DropdownItem id="unreadhangouts">UnreadHangouts</DropdownItem>
+              <DropdownItem id="search">Hangout Search</DropdownItem>
+              <DropdownItem id="filter">Hangout Filter</DropdownItem>
             </DropdownMenu>
           </NavDropdown>
         </NavBarNav>

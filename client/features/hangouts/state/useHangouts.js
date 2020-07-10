@@ -1,12 +1,11 @@
 import { h } from "preact";
-import { useEffect } from "preact/hooks";
 import { useHangoutContext } from "./HangoutsProvider";
 import { useAuthContext } from "features/authentication";
 import { useAppRoute } from "components/app-route";
 import { savePendingHangout } from "./actions/delivering-actions/savePendingHangout";
-import { selectUnread, changeMessageText } from "./actions";
-import { sendOfflineHangouts } from "./actions/delivering-actions/sendOfflineHangouts";
-import { removeHangoutFromUnread } from "./actions/recieving-actions/removeHangoutFromUnread";
+import { changeMessageText } from "./actions";
+import saveSentInvitation from "./local-storage/local/saveSentInvitation";
+import { savePendingAccept } from "./local-storage/remote/saveRecievedInvitation";
 import { actionTypes } from "./actionTypes";
 
 export function useHangouts() {
@@ -14,68 +13,11 @@ export function useHangouts() {
   const authContext = useAuthContext();
   const username = authContext.state.user && authContext.state.user.username;
   const [state, dispatch] = useHangoutContext();
-  const {
-    hangout,
-    hangouts,
-    search,
-    users,
-    messageText,
-    messages,
-    readyState,
-
-    unreadhangouts,
-  } = state;
-
-  useEffect(() => {
-
-    if (readyState === 1 && username) {
-      sendOfflineHangouts({ name: username, dispatch });
-    }
-  }, [readyState, username]);
-
-  function onRemoveUnread(e) {
-    const id = e.currentTarget.id;
-    const hangout = hangouts.find((g) => g.username === id);
-
-    removeHangoutFromUnread({ name: username, dispatch, hangout });
-  }
+  const { hangout, hangouts, messageText, messages, readyState } = state;
   function onNavigation(e) {
     e.stopPropagation();
-    // const id =e.target.id
     const id = e.currentTarget.id;
-
     onAppRoute({ featureRoute: `/${id}`, route: "/hangouts" });
-  }
-
-  function onSelectHangout(e) {
-    const id = e.target.id;
-
-    const hangout = hangouts.find((g) => g.username === id);
-    
-  debugger;  //4.
-
-    dispatch({ type: actionTypes.SELECTED_HANGOUT, hangout });
-
-  onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
-
- 
-  }
-  function onSelectUnread(e) {
-    const username = e.target.id;
-
-    const hangout = hangouts.find((g) => g.username === username);
-    selectUnread({ dispatch, hangout });
-    onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
-  }
-
-  function onSearchInput(e) {
-  
-    dispatch({ type: actionTypes.SEARCH_INPUT_CHANGE, search: e.target.value });
-  }
-
-  function onFetchHangouts() {
-    debugger; //1
-    dispatch({ type: actionTypes.FETCH_HANGOUT_STARTED });
   }
 
   function onMessageText(e) {
@@ -83,34 +25,21 @@ export function useHangouts() {
     changeMessageText({ dispatch, text });
   }
   function onHangout(e) {
-debugger; //5
+    //5
     changeMessageText({ text: "", dispatch });
     const command = e.target.id;
     const { email } = hangout;
     const timestamp = Date.now();
     const message =
       messageText !== "" ? { text: messageText, timestamp } : null;
-
-    let online = true;
-    let isBlocker = false;
-
-    //  if (readyState === 1) {
-
-    if (hangout.state === "BLOCKER") {
-      isBlocker = true;
-    }
     const pendingHangout = {
       username: hangout.username,
       email,
-      message,
+      message: { text: messageText, timestamp, username },
       command,
       timestamp,
     };
     dispatch({ type: actionTypes.SENDING_HANGOUT_STARTED, pendingHangout });
-    // } else {
-    //   online = false;
-    // }
-
     savePendingHangout({
       dispatch,
       name: username,
@@ -122,29 +51,63 @@ debugger; //5
         timestamp,
         delivered: false,
       },
-      online,
-      isBlocker,
     });
   } //end onHangout
+
+  function onInvite() {
+    const { email } = hangout;
+    const timestamp = Date.now();
+    const message =
+      messageText !== "" ? { text: messageText, timestamp } : null;
+    const invitation = {
+      username: hangout.username,
+      email,
+      message,
+      command: "INVITE",
+      timestamp,
+    };
+    saveSentInvitation({ hangout: invitation, name: username, dispatch });
+    dispatch({
+      type: actionTypes.SENDING_HANGOUT_STARTED,
+      pendingHangout: invitation,
+    });
+  }
+  function onAccept() {
+    const { email } = hangout;
+    const timestamp = Date.now();
+    const accept = {
+      username: hangout.username,
+      email,
+      message: null,
+      command: "ACCEPT",
+      timestamp,
+    };
+    savePendingAccept({ name: username, dispatch, hangout: accept });
+    dispatch({
+      type: actionTypes.SENDING_HANGOUT_STARTED,
+      pendingHangout: accept,
+    });
+  }
+  function onDecline() {}
+  function onBlock() {}
+  function onUnblock() {}
+  function onMessage() {}
   return {
+    onInvite,
+    onAccept,
+    onDecline,
+    onBlock,
+    onUnblock,
+    onMessage,
     state,
     onNavigation,
-    onSelectUnread,
     onMessageText,
     messageText,
-    onSearchInput,
-    onFetchHangouts,
-    search,
-    onSelectHangout,
     dispatch,
     hangout,
     hangouts,
-    users,
     username,
     messages,
-    onHangout,
-    unreadhangouts,
     readyState,
-    onRemoveUnread,
   };
 }

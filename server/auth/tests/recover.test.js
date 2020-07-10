@@ -1,40 +1,37 @@
-require('babel-polyfill');
+require("babel-polyfill");
 
-import httpRoute from '../../http-route';
-const request = require('supertest');
+import httpRoute from "../../http-route";
+const request = require("supertest");
 
-describe('Recover', () => {
-  it(' empty email emailInvalid:407', (done) => {
-    
+describe("Recover", () => {
+  it(" empty email emailInvalid:407", (done) => {
     request(httpRoute)
-      .post('/auth/requestpasschange')
-      .send({ email: '' })
-      .set('Accept', 'application/json')
-      .expect(400, { errors: ['407'] })
+      .post("/auth/requestpasschange")
+      .send({ email: "" })
+      .set("Accept", "application/json")
+      .expect(400, { errors: ["407"] })
       .end(done); //
   });
-  it('email is not registered emailIsNotRegistered:408', (done) => {
-    
+  it("email is not registered emailIsNotRegistered:408", (done) => {
     global.findOne = null;
     request(httpRoute)
-      .post('/auth/requestpasschange')
-      .send({ email: 'test@gmail.com' })
-      .set('Accept', 'application/json')
-      .expect(400, { errors: ['408'] })
+      .post("/auth/requestpasschange")
+      .send({ email: "test@gmail.com" })
+      .set("Accept", "application/json")
+      .expect(400, { errors: ["408"] })
       .end(done); //
   });
-  it('request password change accepted', (done) => {
-    
-    global.findOne = { password: '123', _id: '123' }; //mongodb
-    global.sign = 'test'; //jwt
-    process.env.email = 'webapis.github@gmail.com';
-    process.env.password = 'Dragonfly1977!';
-    process.env.secret = 'testsecret';
-    process.env.resetUrl = 'http://localhost:3000/auth/changepath';
+  it("request password change accepted", (done) => {
+    global.findOne = { password: "123", _id: "123" }; //mongodb
+    global.sign = "test"; //jwt
+    process.env.email = "webapis.github@gmail.com";
+    process.env.password = "Dragonfly1977!";
+    process.env.secret = "testsecret";
+    process.env.resetUrl = "http://localhost:3000/auth/changepath";
     request(httpRoute)
-      .post('/auth/requestpasschange')
-      .send({ email: 'test@gmail.com' })
-      .set('Accept', 'application/json')
+      .post("/auth/requestpasschange")
+      .send({ email: "test@gmail.com" })
+      .set("Accept", "application/json")
       .expect(200)
       .end(done); //
   });

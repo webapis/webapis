@@ -1,5 +1,5 @@
 import { actionTypes } from "../../state/actionTypes";
-export async function fetchHangouts({ search, dispatch, userId }) {
+export async function searchHangouts({ search, dispatch, userId }) {
   try {
     // search Hangout
 

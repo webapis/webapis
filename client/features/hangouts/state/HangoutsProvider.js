@@ -28,48 +28,6 @@ export default function HangoutsProvider(props) {
     dispatch,
     focusedHangout: hangout,
   });
-  useEffect(() => {
-    if (username) {
-      loadHangouts({ username, dispatch });
-    }
-  }, [username]);
-  useEffect(() => {
-    if (username && token) {
-      loadHangouts({ username, dispatch });
-    }
-  }, []);
-  useEffect(() => {
-    if (hangout && username) {
-      //from local storage
-      loadMessages({ dispatch, hangout, username });
-
-      //save hangout to localStorage
-      const key = `${username}-hangouts`;
-      const hangouts = JSON.parse(localStorage.getItem(key));
-      if (!hangouts) {
-        localStorage.setItem(key, JSON.stringify([hangout]));
-      } else {
-        const hangoutExist = hangouts.find(
-          (g) => g.username === hangout.username
-        );
-        if (hangoutExist) {
-          const updated = hangouts.map((g) => {
-            if (g.username === hangout.username) {
-              return hangout;
-            } else {
-              return g;
-            }
-          });
-          localStorage.setItem(key, JSON.stringify(updated));
-        } else {
-          localStorage.setItem(key, JSON.stringify([hangout]));
-        }
-      }
-      if (!hangout.read) {
-        updateReadHangouts({ dispatch, hangout, name: username });
-      }
-    }
-  }, [hangout, username]);
 
   const value = useMemo(() => [state, dispatch], [state]);
   return <HangoutContext.Provider value={value} {...props} />;

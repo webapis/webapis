@@ -4,7 +4,7 @@ import { OnlineStatus } from "icons/onlineStatus";
 import AuthDemoRoutes from "./authentication/route";
 import ComponentsRoutes from "./components/route";
 import HangoutRoutes from "./hangout/route";
-import BootstrapIcons from './icons'
+import BootstrapIcons from "./icons";
 // const hangouts = [
 //   { username: 'userone' },
 //   { username: 'usertwo' },
@@ -31,7 +31,6 @@ export default function StorybookRoutes() {
           <OnlineStatus />
         </div>
       </AppRoute>
-
 
       <AppRoute path="/icons">
         <BootstrapIcons />

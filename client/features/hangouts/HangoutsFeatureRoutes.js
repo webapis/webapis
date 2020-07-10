@@ -1,9 +1,10 @@
 import { h } from "preact";
 import { lazy, Suspense } from "preact/compat";
-import { FeatureRoute } from "components/app-route";
+import { FeatureRoute, useAppRoute } from "components/app-route";
 
 import { useHangouts } from "./state/useHangouts";
-const Hangouts = lazy(() => import("./ui-components/Hangout"));
+import useSearch from "./state/useSearch";
+import useFilter from "./state/useFilter";
 const Block = lazy(() => import("./ui-components/Block"));
 const Blocked = lazy(() => import("./ui-components/Blocked"));
 const Configure = lazy(() => import("./ui-components/Configure"));
@@ -11,19 +12,20 @@ const Hangchat = lazy(() => import("./ui-components/Hangchat"));
 const Invite = lazy(() => import("./ui-components/Invite"));
 const Invitee = lazy(() => import("./ui-components/Invitee"));
 const Inviter = lazy(() => import("./ui-components/Inviter"));
+const Search = lazy(() => import("./ui-components/Search"));
+const Filter = lazy(() => import("./ui-components/Filter"));
 const UnreadHangouts = lazy(() => import("./ui-components/UnreadHangouts"));
 export default function HangoutsFeatureRoutes(props) {
-  const { fetchHangout } = props;
+  const { onAppRoute } = useAppRoute();
   const {
     state,
     hangout,
-    hangouts,
-    onHangout,
-    onSelectHangout,
-    onSelectUser,
-    search,
-    onSearchInput,
-    onFetchHangouts,
+    onInvite,
+    onAccept,
+    onDecline,
+    onBlock,
+    onUnblock,
+    onMessage,
     onMessageText,
     messageText,
     username,
@@ -33,103 +35,122 @@ export default function HangoutsFeatureRoutes(props) {
     onNavigation,
     onSelectUnread,
     onRemoveUnread,
-  } = useHangouts({ fetchHangout });
+  } = useHangouts();
+  const {
+    search,
+    onSearchInput,
+    searchResult,
+    onSearch,
+    onSearchSelect,
+  } = useSearch({ state, dispatch, onAppRoute });
+  const { filter, filterResult, onFilterSelect, onFilterInput } = useFilter({
+    dispatch,
+    state,
+    onAppRoute,
+    username,
+  });
   const { loading } = state;
-  return (
-    <div style={{ height: "100%", width: "100%" }}>
-      <FeatureRoute path="/hangout">
-        <Suspense fallback={<Loading />}>
-          <Hangouts
-            dispatch={dispatch}
-            username={username}
-            search={search}
-            hangouts={hangouts}
-            onSelectHangout={onSelectHangout}
-            onSelectUser={onSelectUser}
-            onSearchInput={onSearchInput}
-            onFetchHangouts={onFetchHangouts}
-          />
-        </Suspense>
-      </FeatureRoute>
-      <FeatureRoute path="/bckui">
-        <Suspense fallback={<Loading />}>
-          <Block hangout={hangout} onBlock={onHangout} />
-        </Suspense>
-      </FeatureRoute>
-      <FeatureRoute paths={["/UNBLOCK", "/DECLINED"]}>
-        <Suspense fallback={<Loading />}>
-          <Blocked hangout={hangout} onUnblock={onHangout} />
-        </Suspense>
-      </FeatureRoute>
-      <FeatureRoute path="/configure">
-        <Suspense fallback={<Loading />}>
-          <Configure hangout={hangout} onNavigation={onNavigation} />
-        </Suspense>
-      </FeatureRoute>
-      <FeatureRoute
-        paths={[
-          "/ACCEPTED",
-          "/ACCEPTER",
-          "/MESSANGER",
-          "/MESSAGED",
-          "/BLOCKER",
-          "/BLOCKED",
-          "/UNBLOCKED",
-          "/UNBLOCKER",
-        ]}
-      >
-        <Suspense fallback={<Loading />}>
-          <Hangchat
-            loading={loading}
-            onNavigation={onNavigation}
-            hangout={hangout}
-            onMessageText={onMessageText}
-            onMessage={onHangout}
-            messages={messages}
-            username={username}
-            messageText={messageText}
-            dispatch={dispatch}
-          />
-        </Suspense>
-      </FeatureRoute>
+  return [
+    <FeatureRoute path="/bckui">
+      <Suspense fallback={<Loading />}>
+        <Block hangout={hangout} onBlock={onBlock} />
+      </Suspense>
+    </FeatureRoute>,
+    <FeatureRoute paths={["/UNBLOCK", "/DECLINED"]}>
+      <Suspense fallback={<Loading />}>
+        <Blocked hangout={hangout} onUnblock={onUnblock} />
+      </Suspense>
+    </FeatureRoute>,
+    <FeatureRoute path="/configure">
+      <Suspense fallback={<Loading />}>
+        <Configure hangout={hangout} onNavigation={onNavigation} />
+      </Suspense>
+    </FeatureRoute>,
+    <FeatureRoute
+      paths={[
+        "/ACCEPTED",
+        "/ACCEPTER",
+        "/MESSANGER",
+        "/MESSAGED",
+        "/BLOCKER",
+        "/BLOCKED",
+        "/UNBLOCKED",
+        "/UNBLOCKER",
+      ]}
+    >
+      <Suspense fallback={<Loading />}>
+        <Hangchat
+          loading={loading}
+          onNavigation={onNavigation}
+          hangout={hangout}
+          onMessageText={onMessageText}
+          onMessage={onMessage}
+          messages={messages}
+          username={username}
+          messageText={messageText}
+          dispatch={dispatch}
+        />
+      </Suspense>
+    </FeatureRoute>,
 
-      <FeatureRoute path="/INVITE">
-        <Suspense fallback={<Loading />}>
-          <Invite
-            loading={loading}
-            hangout={hangout}
-            onInvite={onHangout}
-            onMessageText={onMessageText}
-            messageText={messageText}
-          />
-        </Suspense>
-      </FeatureRoute>
-      <FeatureRoute paths={["/INVITED", "/DECLINER"]}>
-        <Suspense fallback={<Loading />}>
-          <Invitee hangout={hangout} loading={loading} />
-        </Suspense>
-      </FeatureRoute>
-      <FeatureRoute path="/INVITER">
-        <Suspense fallback={<Loading />}>
-          <Inviter
-            loading={loading}
-            hangout={hangout}
-            onAccept={onHangout}
-            onDecline={onHangout}
-          />
-        </Suspense>
-      </FeatureRoute>
-      <FeatureRoute path="/UNREAD">
-        <Suspense fallback={<Loading />}>
-          <UnreadHangouts
-            unreadhangouts={unreadhangouts}
-            onSelectUnread={onSelectUnread}
-            onRemoveUnread={onRemoveUnread}
-          />
-        </Suspense>
-      </FeatureRoute>
-    </div>
-  );
+    <FeatureRoute path="/INVITE">
+      <Suspense fallback={<Loading />}>
+        <Invite
+          loading={loading}
+          hangout={hangout}
+          onInvite={onInvite}
+          onMessageText={onMessageText}
+          messageText={messageText}
+        />
+      </Suspense>
+    </FeatureRoute>,
+    <FeatureRoute paths={["/INVITED", "/DECLINER"]}>
+      <Suspense fallback={<Loading />}>
+        <Invitee hangout={hangout} loading={loading} />
+      </Suspense>
+    </FeatureRoute>,
+    <FeatureRoute path="/INVITER">
+      <Suspense fallback={<Loading />}>
+        <Inviter
+          loading={loading}
+          hangout={hangout}
+          onAccept={onAccept}
+          onDecline={onDecline}
+        />
+      </Suspense>
+    </FeatureRoute>,
+    <FeatureRoute path="/UNREAD">
+      <Suspense fallback={<Loading />}>
+        <UnreadHangouts
+          unreadhangouts={null}
+          onSelectUnread={null}
+          onRemoveUnread={null}
+        />
+      </Suspense>
+    </FeatureRoute>,
+    <FeatureRoute path="/search">
+      <Suspense fallback={<Loading />}>
+        <Search
+          onSearchSelect={onSearchSelect}
+          searchResult={searchResult}
+          onSearch={onSearch}
+          onSearchInput={onSearchInput}
+          search={search}
+        />
+      </Suspense>
+    </FeatureRoute>,
+    <FeatureRoute path="/filter">
+      <Suspense fallback={<Loading />}>
+        <Filter
+          onNavigation={onNavigation}
+          filter={filter}
+          onFilterInput={onFilterInput}
+          filterResult={filterResult}
+          onFilterSelect={onFilterSelect}
+        />
+      </Suspense>
+    </FeatureRoute>,
+  ];
 }
 
 function Loading() {

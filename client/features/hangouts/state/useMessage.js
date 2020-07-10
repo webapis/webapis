@@ -18,18 +18,20 @@ import {
   saveMessanger,
   saveUnblocker,
 } from "./actions/recieving-actions";
+import { updateDeliveredInvitation } from "./local-storage/local/saveSentInvitation";
+import saveRecievedInvitation, {
+  updateDeliveredAccept,
+} from "./local-storage/remote/saveRecievedInvitation";
 export function useMessage({ message, username, dispatch, focusedHangout }) {
   const { onAppRoute } = useAppRoute();
   function handleAcknowledgement({ hangout, offline }) {
     switch (hangout.state) {
       case hangoutStates.INVITED:
-        saveInvited({
+        updateDeliveredInvitation({
           dispatch,
           hangout,
           name: username,
-          focusedHangout,
           onAppRoute,
-          offline,
         });
         break;
       case hangoutStates.UNBLOCKED:
@@ -63,13 +65,11 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
         });
         break;
       case hangoutStates.ACCEPTED:
-        saveAccepted({
+        updateDeliveredAccept({
           dispatch,
           hangout,
           name: username,
-          focusedHangout,
           onAppRoute,
-          offline,
         });
 
         break;
@@ -121,13 +121,10 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
         });
         break;
       case hangoutStates.INVITER:
-        saveInviter({
+        saveRecievedInvitation({
           dispatch,
           hangout,
           name: username,
-          focusedHangout,
-          onAppRoute,
-          unread,
         });
         break;
       case hangoutStates.MESSANGER:

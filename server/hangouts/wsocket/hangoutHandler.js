@@ -1,12 +1,11 @@
-import { stateMapper } from '../stateMapper';
-import { clientCommands } from '../../../client/features/hangouts/state/clientCommands';
+import { stateMapper } from "../stateMapper";
+import { clientCommands } from "../../../client/features/hangouts/state/clientCommands";
 export async function hangoutHandler({ collection, hangout, ws, connections }) {
-  
   try {
     const { senderState, targetState } = stateMapper({
       command: hangout.command,
     });
-    const { username, email, message,offline,timestamp } = hangout;
+    const { username, email, message, offline, timestamp } = hangout;
     const sender = {
       username,
       email,
@@ -14,7 +13,7 @@ export async function hangoutHandler({ collection, hangout, ws, connections }) {
       timestamp,
       state: senderState,
     };
-//
+    //
     const target = {
       username: ws.user.username,
       email: ws.user.email,
@@ -24,38 +23,34 @@ export async function hangoutHandler({ collection, hangout, ws, connections }) {
     };
 
     if (hangout.command === clientCommands.INVITE) {
-  
       const senderHangoutPushResult = await collection.updateOne(
         { username: ws.user.username },
         { $push: { hangouts: sender } }
       );
-   
+
       // update hangout on target
       const targetHangoutPushResult = await collection.updateOne(
         { username },
         { $push: { hangouts: target } }
       );
- 
     } else {
       // update hangout on sender
       const senderHangoutUpdateResult = await collection.updateOne(
-        { username: ws.user.username, 'hangouts.username': username },
-        { $set: { 'hangouts.$': sender } }
+        { username: ws.user.username, "hangouts.username": username },
+        { $set: { "hangouts.$": sender } }
       );
-  
+
       // update hangout on target
       const targetHangoutUpdateResult = await collection.updateOne(
-        { username, 'hangouts.username': ws.user.username },
-        { $set: { 'hangouts.$': target } }
+        { username, "hangouts.username": ws.user.username },
+        { $set: { "hangouts.$": target } }
       );
     }
 
- 
     //TARGET ONLINE: send state change//
     const targetOnline = connections[username];
     if (targetOnline) {
-  
-      targetOnline.send(JSON.stringify({hangout:target,type:'HANGOUT'}));//-----------------
+      targetOnline.send(JSON.stringify({ hangout: target, type: "HANGOUT" })); //-----------------
     } else {
       //TARGET OFFLINE: push updated hangout undeliverded collection
       const targetUndeliveredUpdateResult = await collection.updateOne(
@@ -66,20 +61,17 @@ export async function hangoutHandler({ collection, hangout, ws, connections }) {
           },
         }
       );
- 
     }
     //send state change to sender
- 
-    if(offline){
 
-      ws.send(JSON.stringify({hangout:sender,type:'OFFLINE_ACKN'}));//---------------
-    }else{
-      
-      ws.send(JSON.stringify({hangout:sender,type:'ACKHOWLEDGEMENT'}));//---------------
+    if (offline) {
+      ws.send(JSON.stringify({ hangout: sender, type: "OFFLINE_ACKN" })); //---------------
+    } else {
+      ws.send(JSON.stringify({ hangout: sender, type: "ACKHOWLEDGEMENT" })); //---------------
     }
   } catch (error) {
     const err = error;
-    
-    console.log('hangoutHandlerError', error);
+
+    console.log("hangoutHandlerError", error);
   }
 }

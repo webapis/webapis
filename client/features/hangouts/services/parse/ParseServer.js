@@ -11,13 +11,13 @@ export function ParseServer(props) {
   const { state, dispatch } = useHangouts();
   const authContext = useAuthContext();
   const { user } = authContext.state;
-  const { fetchHangouts, search, pendingHangout } = state;
+  const { searchHangouts, search, pendingHangout } = state;
 
   useEffect(() => {
-    if (fetchHangouts) {
-      actions.fetchHangouts({ dispatch, search, userId: user.objectId });
+    if (searchHangouts) {
+      actions.searchHangouts({ dispatch, search, userId: user.objectId });
     }
-  }, [fetchHangouts]);
+  }, [searchHangouts]);
 
   useEffect(() => {
     if (pendingHangout) {

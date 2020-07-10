@@ -10,7 +10,8 @@ import { useUserName } from "features/authentication/state/useUserName";
 import { useAuth } from "features/authentication";
 import { useHangouts } from "features/hangouts";
 import GearIcon from "icons/bootstrap/GearIcon";
-
+import PersonPlusIcon from "icons/bootstrap/PersonPlusIcon";
+import { FeatureRoute } from "components/app-route";
 export function AppNavigation() {
   const { username } = useUserName();
   const { onSignOut } = useAuth();
@@ -24,9 +25,9 @@ export function AppNavigation() {
             <NavItem>
               {username && (
                 <NavLink
-                  id="hangout"
+                  id="filter"
                   appRoute="/hangouts"
-                  data-testid="hangouts"
+                  data-testid="hangouts-link"
                 >
                   Hangouts
                 </NavLink>
@@ -82,6 +83,18 @@ export function AppNavigation() {
                   <GearIcon color="white" />
                 </button>
               )}
+            </NavItem>
+            <NavItem>
+              <FeatureRoute path="/filter">
+                <button
+                  className="btn"
+                  data-testid="search-link"
+                  id="search"
+                  onClick={onNavigation}
+                >
+                  <PersonPlusIcon width="1.5em" height="1.5em" />
+                </button>
+              </FeatureRoute>
             </NavItem>
           </Nav>
         </NavBarCollapse>

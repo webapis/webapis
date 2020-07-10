@@ -14,10 +14,9 @@ export default function Hangchat({
   onNavigation,
 }) {
   useEffect(() => {
-    if(hangout){
+    if (hangout) {
       document.title = hangout.username;
     }
-   
   }, [hangout]);
 
   return (

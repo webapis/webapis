@@ -11,7 +11,7 @@ export function BlockedMessage({ message, onNavigation }) {
     e.preventDefault();
     onNavigation(e);
   }
-  
+
   return (
     <div style={style} data-testid="blocked-message">
       {message.text}

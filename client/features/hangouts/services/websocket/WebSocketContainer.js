@@ -10,7 +10,7 @@ export function WebSocketContainer(props) {
 
   const { children, socketUrl } = props;
   const { dispatch, state } = useHangouts();
-  const { fetchHangouts, search, pendingHangout } = state;
+  const { searchHangouts, search, pendingHangout } = state;
 
   useEffect(() => {
     if (username) {
@@ -35,19 +35,19 @@ export function WebSocketContainer(props) {
   }, [username]);
 
   useEffect(() => {
-    if (fetchHangouts) {
-      debugger; //2.
-      actions.fetchHangouts({ dispatch, search, username });
+    if (searchHangouts) {
+      //2.
+      actions.searchHangouts({ dispatch, search, username });
     }
-  }, [fetchHangouts]);
+  }, [searchHangouts]);
 
   useEffect(() => {
     if (pendingHangout) {
-      sendHangout();
+      sendPendingHangout();
     }
   }, [pendingHangout]);
 
-  function sendHangout() {
+  function sendPendingHangout() {
     socket.send(JSON.stringify(pendingHangout));
 
     dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
