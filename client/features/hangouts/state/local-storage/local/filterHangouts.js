@@ -1,7 +1,7 @@
 import { actionTypes } from "../../actionTypes";
 export default function filterHangouts({ filter, dispatch, name }) {
   const hangoutKey = `${name}-hangouts`;
-  const localHangouts = localStorage.getItem(hangoutKey);
+  const localHangouts = JSON.parse(localStorage.getItem(hangoutKey));
 
   if (localHangouts && localHangouts.length > 0) {
     let filteredHangouts = localHangouts.filter((f) =>

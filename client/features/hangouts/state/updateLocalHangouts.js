@@ -11,11 +11,8 @@ export function updateLocalHangouts({ hangout, username }) {
           return g;
         }
       });
-      localStorage.setItem(key, JSON.stringify(updatedHangout));
     } else {
-      localStorage.setItem(key, JSON.stringify([hangouts, hangout]));
     }
   } else {
-    localStorage.setItem(key, JSON.stringify([hangout]));
   }
 }

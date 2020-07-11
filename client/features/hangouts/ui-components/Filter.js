@@ -1,20 +1,27 @@
 import { h } from "preact";
 import { useEffect } from "preact/hooks";
 import List, { ListItem } from "controls/list";
-import TextInput from "controls/text-input";
 
 import PersonPlusFill from "icons/bootstrap/PersonPlusFill";
 export default function Filter({
+  onLoadHangout,
   filter,
   filterResult = [],
   onFilterSelect,
   onFilterInput,
   onNavigation,
 }) {
-  useEffect(() => {}, [filterResult]);
+  useEffect(() => {
+    onLoadHangout();
+  }, []);
   return (
     <div style={{ height: "100%", display: "flex", flexDirection: "column" }}>
-      <input className="form-control" value={filter} onChange={onFilterInput} />
+      <input
+        className="form-control"
+        value={filter}
+        onChange={onFilterInput}
+        data-testid="filter-input"
+      />
       <div>
         <List>
           {filterResult.length > 0 &&

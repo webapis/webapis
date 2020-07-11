@@ -5,6 +5,7 @@ import { FeatureRoute, useAppRoute } from "components/app-route";
 import { useHangouts } from "./state/useHangouts";
 import useSearch from "./state/useSearch";
 import useFilter from "./state/useFilter";
+import useUnread from "./state/useUnread";
 const Block = lazy(() => import("./ui-components/Block"));
 const Blocked = lazy(() => import("./ui-components/Blocked"));
 const Configure = lazy(() => import("./ui-components/Configure"));
@@ -31,10 +32,7 @@ export default function HangoutsFeatureRoutes(props) {
     username,
     messages,
     dispatch,
-    unreadhangouts,
     onNavigation,
-    onSelectUnread,
-    onRemoveUnread,
   } = useHangouts();
   const {
     search,
@@ -43,11 +41,22 @@ export default function HangoutsFeatureRoutes(props) {
     onSearch,
     onSearchSelect,
   } = useSearch({ state, dispatch, onAppRoute });
-  const { filter, filterResult, onFilterSelect, onFilterInput } = useFilter({
+  const {
+    filter,
+    filterResult,
+    onFilterSelect,
+    onFilterInput,
+    onLoadHangout,
+  } = useFilter({
     dispatch,
     state,
     onAppRoute,
     username,
+  });
+  const { unreadhangouts, onUnreadSelect, onUnreadRemove } = useUnread({
+    state,
+    dispatch,
+    onAppRoute,
   });
   const { loading } = state;
   return [
@@ -119,12 +128,12 @@ export default function HangoutsFeatureRoutes(props) {
         />
       </Suspense>
     </FeatureRoute>,
-    <FeatureRoute path="/UNREAD">
+    <FeatureRoute path="/unread">
       <Suspense fallback={<Loading />}>
         <UnreadHangouts
-          unreadhangouts={null}
-          onSelectUnread={null}
-          onRemoveUnread={null}
+          unreadhangouts={unreadhangouts}
+          onUnreadSelect={onUnreadSelect}
+          onUnreadRemove={onUnreadRemove}
         />
       </Suspense>
     </FeatureRoute>,
@@ -142,6 +151,7 @@ export default function HangoutsFeatureRoutes(props) {
     <FeatureRoute path="/filter">
       <Suspense fallback={<Loading />}>
         <Filter
+          onLoadHangout={onLoadHangout}
           onNavigation={onNavigation}
           filter={filter}
           onFilterInput={onFilterInput}

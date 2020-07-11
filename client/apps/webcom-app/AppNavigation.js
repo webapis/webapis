@@ -16,7 +16,7 @@ export function AppNavigation() {
   const { username } = useUserName();
   const { onSignOut } = useAuth();
   const { state, onNavigation } = useHangouts();
-  const { hangout } = state;
+  const { hangout, unreadhangouts } = state;
   return (
     <div>
       <Navbar brand="Webcom" bg="dark">
@@ -35,6 +35,21 @@ export function AppNavigation() {
             </NavItem>
           </NavBarNav>
           <Nav horizontalAlignment="justify-content-end">
+            {username && (
+              <button
+                id="unread"
+                appRoute="/unread"
+                onClick={onNavigation}
+                data-testid="unread-link"
+                type="button"
+                class="btn btn-dark"
+              >
+                messages{" "}
+                <span class="badge badge-light" data-testid="message-count">
+                  {unreadhangouts ? unreadhangouts.length : 0}
+                </span>
+              </button>
+            )}
             {!username && (
               <NavItem>
                 <NavLink id="login" appRoute="/auth" data-testid="login-link">

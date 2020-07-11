@@ -66,33 +66,14 @@ describe("onHangout", () => {
           const { state } = hangout[0];
           expect(state).to.deep.equal("INVITED");
         });
-      cy.visit("/");
+      cy.get("[data-testid=signout-link]").click();
+      // cy.visit("/");
 
-      cy.get("[data-testid=hangouts-link]").click();
-      cy.get("[data-testid=bero]").click();
-      cy.get("[data-testid=invitee-ui]");
+      // cy.get("[data-testid=hangouts-link]").click();
+      // cy.get("[data-testid=bero]").click();
+      // cy.get("[data-testid=invitee-ui]");
 
       //--- onAccept
-      if (Cypress.env("back") === "node") {
-        cy.loginByEmail({
-          email: "bero@gmail.com",
-          password: "Dragonly_1999!",
-        });
-      }
-
-      if (Cypress.env("back") === "parse") {
-        cy.loginParse({ email: "bero@gmail.com", password: "Dragonfly2020_!" });
-      }
-      cy.visit("/");
-
-      cy.window()
-        .its("localStorage")
-        .invoke("getItem", "bero-hangouts")
-        .then((result) => {
-          cy.get("[data-testid=hangouts-link]").click();
-          debugger;
-          // cy.get("[data-testid=filter-input]").type("demo");
-        });
 
       // cy.get("[data-testid=demo]").click();
 
@@ -124,6 +105,24 @@ describe("onHangout", () => {
       //   cy.deleteUserParse({ username: "demo" });
       //   cy.deleteUserParse({ username: "bero" });
       // }
+    });
+
+    it.only("onAccept", () => {
+      if (Cypress.env("back") === "node") {
+        cy.loginByEmail({
+          email: "bero@gmail.com",
+          password: "Dragonly_1999!",
+        });
+      }
+
+      if (Cypress.env("back") === "parse") {
+        cy.loginParse({ email: "bero@gmail.com", password: "Dragonfly2020_!" });
+      }
+
+      cy.visit("/");
+      cy.pause();
+      cy.get("[data-testid=hangouts-link]").click();
+      cy.get("[data-testid=filter-input]").type("demo");
     });
   });
 

@@ -6,13 +6,8 @@ export default function useFilter({ state, dispatch, onAppRoute, username }) {
   const { filter, filterResult } = state;
 
   useEffect(() => {
-    if (username) {
-      loadHangouts({ dispatch, name: username });
-    }
-  }, [username]);
-
-  useEffect(() => {
     if (filter.length > 0) {
+      //
       filterHangouts({ filter, dispatch, name: username });
     }
   }, [filter]);
@@ -20,7 +15,7 @@ export default function useFilter({ state, dispatch, onAppRoute, username }) {
   function onFilterInput(e) {
     dispatch({
       type: actionTypes.FILTER_INPUT_CHANGED,
-      search: e.target.value,
+      filter: e.target.value,
     });
   }
 
@@ -32,5 +27,9 @@ export default function useFilter({ state, dispatch, onAppRoute, username }) {
     onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
   }
 
-  return { filter, filterResult, onFilterSelect, onFilterInput };
+  function onLoadHangout() {
+    loadHangouts({ dispatch, name: username });
+  }
+
+  return { filter, filterResult, onFilterSelect, onFilterInput, onLoadHangout };
 }

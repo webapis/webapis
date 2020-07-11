@@ -2,6 +2,7 @@ import { stateMapper } from "../stateMapper";
 import { clientCommands } from "../../../client/features/hangouts/state/clientCommands";
 export async function hangoutHandler({ collection, hangout, ws, connections }) {
   try {
+    debugger;
     const { senderState, targetState } = stateMapper({
       command: hangout.command,
     });
@@ -50,8 +51,10 @@ export async function hangoutHandler({ collection, hangout, ws, connections }) {
     //TARGET ONLINE: send state change//
     const targetOnline = connections[username];
     if (targetOnline) {
+      debugger;
       targetOnline.send(JSON.stringify({ hangout: target, type: "HANGOUT" })); //-----------------
     } else {
+      debugger; //
       //TARGET OFFLINE: push updated hangout undeliverded collection
       const targetUndeliveredUpdateResult = await collection.updateOne(
         { username },

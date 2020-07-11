@@ -1,45 +1,31 @@
 import { h } from "preact";
-import { useEffect, useState } from "preact/hooks";
-import List, { ListItem } from "controls/list";
-import { reducerUnreadhangouts } from "features/hangouts/state/reduceUnreadhangouts";
 export default function UnreadHangouts({
   unreadhangouts,
-  onSelectUnread,
-  onRemoveUnread,
+  onUnreadSelect,
+  onUnreadRemove,
 }) {
-  const [items, setItems] = useState([]);
-  useEffect(() => {
-    if (unreadhangouts) {
-      const reduced = reducerUnreadhangouts({ unreadhangouts });
-
-      setItems(reduced);
-    }
-  }, [unreadhangouts]);
-
   return (
-    <div data-testid="unreadhangouts" className="list-group">
-      {items &&
-        items.length > 0 &&
-        items.map((u) => {
+    <ul class="list-group">
+      {unreadhangouts.length > 0 &&
+        unreadhangouts.map((u) => {
           return (
             <li
-              className="list-group-item d-flex justify-content-between align-items-center"
-              onClick={onSelectUnread}
-              id={u.username}
-              data-testid={`${u.username}-select`}
+              data-testid={u.username}
+              onClick={() => onUnreadSelect({ hangout: u })}
+              className="list-group-item d-flex justify-content-between align-items-center list-group-item-action"
             >
-              {u.username} messages: {u.messageCount}
+              {u.username}
               <span
-                className="badge badge-danger badge-pill"
-                onClick={onRemoveUnread}
-                id={u.username}
-                data-testid={`${u.username}-remove`}
+                onClick={() => {
+                  onUnreadRemove({ hangout: u });
+                }}
+                className="btn badge badge-danger badge-pill"
               >
-                x
+                X
               </span>
             </li>
           );
         })}
-    </div>
+    </ul>
   );
 }

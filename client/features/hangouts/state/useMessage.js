@@ -2,22 +2,22 @@ import { h } from "preact";
 import { useEffect } from "preact/hooks";
 import { useAppRoute } from "components/app-route";
 import { hangoutStates } from "server/hangouts/hangoutStates";
-import {
-  saveInvited,
-  saveUnblovked,
-  saveDeclined,
-  saveBlocked,
-  saveAccepted,
-  saveMessaged,
-} from "./actions/delivering-actions";
-import {
-  saveAccepter,
-  saveBlocker,
-  saveDecliner,
-  saveInviter,
-  saveMessanger,
-  saveUnblocker,
-} from "./actions/recieving-actions";
+// import {
+//   saveInvited,
+//   saveUnblovked,
+//   saveDeclined,
+//   saveBlocked,
+//   saveAccepted,
+//   saveMessaged,
+// } from "./actions/delivering-actions";
+// import {
+//   saveAccepter,
+//   saveBlocker,
+//   saveDecliner,
+//   saveInviter,
+//   saveMessanger,
+//   saveUnblocker,
+// } from "./actions/recieving-actions";
 import { updateDeliveredInvitation } from "./local-storage/local/saveSentInvitation";
 import saveRecievedInvitation, {
   updateDeliveredAccept,
@@ -45,24 +45,24 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
         });
         break;
       case hangoutStates.DECLINED:
-        saveDeclined({
-          dispatch,
-          hangout,
-          name: username,
-          focusedHangout,
-          onAppRoute,
-          offline,
-        });
+        // saveDeclined({
+        //   dispatch,
+        //   hangout,
+        //   name: username,
+        //   focusedHangout,
+        //   onAppRoute,
+        //   offline,
+        // });
         break;
       case hangoutStates.BLOCKED:
-        saveBlocked({
-          dispatch,
-          hangout,
-          name: username,
-          focusedHangout,
-          onAppRoute,
-          offline,
-        });
+        // saveBlocked({
+        //   dispatch,
+        //   hangout,
+        //   name: username,
+        //   focusedHangout,
+        //   onAppRoute,
+        //   offline,
+        // });
         break;
       case hangoutStates.ACCEPTED:
         updateDeliveredAccept({
@@ -74,51 +74,51 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
 
         break;
       case hangoutStates.MESSAGED:
-        saveMessaged({
-          dispatch,
-          hangout,
-          name: username,
-          focusedHangout,
-          onAppRoute,
-          offline,
-        });
+        // saveMessaged({
+        //   dispatch,
+        //   hangout,
+        //   name: username,
+        //   focusedHangout,
+        //   onAppRoute,
+        //   offline,
+        // });
         break;
       default:
         break;
     }
   }
 
-  function handleHangout({ hangout, unread }) {
+  function onHangout({ hangout, unread }) {
     switch (hangout.state) {
       case hangoutStates.ACCEPTER:
-        saveAccepter({
-          dispatch,
-          hangout,
-          name: username,
-          focusedHangout,
-          onAppRoute,
-          unread,
-        });
+        // saveAccepter({
+        //   dispatch,
+        //   hangout,
+        //   name: username,
+        //   focusedHangout,
+        //   onAppRoute,
+        //   unread,
+        // });
         break;
       case hangoutStates.BLOCKER:
-        saveBlocker({
-          dispatch,
-          hangout,
-          name: username,
-          focusedHangout,
-          onAppRoute,
-          unread,
-        });
+        // saveBlocker({
+        //   dispatch,
+        //   hangout,
+        //   name: username,
+        //   focusedHangout,
+        //   onAppRoute,
+        //   unread,
+        // });
         break;
       case hangoutStates.DECLINER:
-        saveDecliner({
-          dispatch,
-          hangout,
-          name: username,
-          focusedHangout,
-          onAppRoute,
-          unread,
-        });
+        // saveDecliner({
+        //   dispatch,
+        //   hangout,
+        //   name: username,
+        //   focusedHangout,
+        //   onAppRoute,
+        //   unread,
+        // });
         break;
       case hangoutStates.INVITER:
         saveRecievedInvitation({
@@ -128,24 +128,24 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
         });
         break;
       case hangoutStates.MESSANGER:
-        saveMessanger({
-          dispatch,
-          hangout,
-          name: username,
-          focusedHangout,
-          onAppRoute,
-          unread,
-        });
+        // saveMessanger({
+        //   dispatch,
+        //   hangout,
+        //   name: username,
+        //   focusedHangout,
+        //   onAppRoute,
+        //   unread,
+        // });
         break;
       case hangoutStates.UNBLOCKER:
-        saveUnblocker({
-          dispatch,
-          hangout,
-          name: username,
-          focusedHangout,
-          onAppRoute,
-          unread,
-        });
+        // saveUnblocker({
+        //   dispatch,
+        //   hangout,
+        //   name: username,
+        //   focusedHangout,
+        //   onAppRoute,
+        //   unread,
+        // });
         break;
       default:
         break;
@@ -154,7 +154,7 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
 
   function handleHangouts({ hangouts }) {
     hangouts.forEach((hangout) => {
-      handleHangout({ hangout, unread: true });
+      onHangout({ hangout, unread: true });
     });
   }
 
@@ -169,13 +169,13 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
             focusedHangout &&
             focusedHangout.username === message.hangout.username
           ) {
-            handleHangout({ hangout: message.hangout, unread: false });
+            onHangout({ hangout: message.hangout, unread: false });
           } else {
-            handleHangout({ hangout: message.hangout, unread: true });
+            onHangout({ hangout: message.hangout, unread: true });
           }
-
           break;
         case "UNREAD_HANGOUTS":
+          debugger;
           handleHangouts({ hangouts: message.hangouts });
           break;
         case "OFFLINE_ACKN":

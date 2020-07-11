@@ -4,14 +4,13 @@ import Block from "features/hangouts/ui-components/Block";
 import Blocked from "features/hangouts/ui-components/Blocked";
 import Configure from "features/hangouts/ui-components/Configure";
 import Hangchat from "features/hangouts/ui-components/Hangchat";
-import Hangout from "features/hangouts/ui-components/Hangout";
 import Invite from "features/hangouts/ui-components/Invite";
 import Invitee from "features/hangouts/ui-components/Invitee";
 import Inviter from "features/hangouts/ui-components/Inviter";
 import UnreadHangouts from "features/hangouts/ui-components/UnreadHangouts";
 import Message from "features/hangouts/ui-components/messages/Message";
-import HangoutFilter from "features/hangouts/ui-components/HangoutFilter";
-import HangoutSearch from "features/hangouts/ui-components/HangoutSearch";
+import HangoutFilter from "features/hangouts/ui-components/Filter";
+import HangoutSearch from "features/hangouts/ui-components/Search";
 const hangouts = [
   { username: "userone" },
   { username: "usertwo" },
@@ -42,9 +41,6 @@ export default function HangoutRoutes() {
     </AppRoute>,
     <AppRoute path="/hangchat">
       <Hangchat hangout={hangout} messages={messages} username="demo" />
-    </AppRoute>,
-    <AppRoute path="/hangout">
-      <Hangout hangouts={hangouts} />
     </AppRoute>,
     <AppRoute path="/invite">
       <Invite hangouts={hangouts} />

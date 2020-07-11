@@ -2,11 +2,8 @@ import { h, createContext } from "preact";
 import { useContext, useMemo, useReducer, useEffect } from "preact/hooks";
 import { reducer, initState } from "./reducer";
 import { useMessage } from "./useMessage";
-
-import { loadHangouts, loadMessages } from "./actions";
 import { useUserName } from "features/authentication/state/useUserName";
-import { updateReadHangouts } from "./actions/recieving-actions/updateReadHangouts";
-
+import { actionTypes } from "./actionTypes";
 const HangoutContext = createContext();
 export function useHangoutContext() {
   const context = useContext(HangoutContext);
@@ -28,6 +25,14 @@ export default function HangoutsProvider(props) {
     dispatch,
     focusedHangout: hangout,
   });
+
+  useEffect(() => {
+    const hangoutKey = `${username}-unread-hangouts`;
+    const unreadhangouts = JSON.parse(localStorage.getItem(hangoutKey));
+    if (unreadhangouts && unreadhangouts.length > 0) {
+      dispatch({ type: actionTypes.UNREAD_HANGOUTS_UPDATED, unreadhangouts });
+    }
+  }, []);
 
   const value = useMemo(() => [state, dispatch], [state]);
   return <HangoutContext.Provider value={value} {...props} />;

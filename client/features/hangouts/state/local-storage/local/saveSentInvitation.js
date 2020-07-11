@@ -2,7 +2,7 @@ import { actionTypes } from "../../actionTypes";
 export default function saveSentInvitation({ hangout, dispatch, name }) {
   const { message, username } = hangout;
   const hangoutKey = `${name}-hangouts`;
-  const localHangouts = localStorage.getItem(hangoutKey);
+  let localHangouts = localStorage.getItem(hangoutKey);
   const inviteHangout = { ...hangout, dState: "pending" };
 
   if (localHangouts && localHangouts.length > 0) {
@@ -40,9 +40,9 @@ export function updateDeliveredInvitation({
   const { username, message } = hangout;
 
   const hangoutKey = `${name}-hangouts`;
-  const localHangouts = JSON.parse(localStorage.getItem(hangoutKey));
+  let localHangouts = JSON.parse(localStorage.getItem(hangoutKey));
   const invitedHangout = { ...hangout, dState: "delivered" };
-  const hangoutIndex = localHangouts.findIndex((l) => l.username === username);
+  let hangoutIndex = localHangouts.findIndex((l) => l.username === username);
   localHangouts.splice(hangoutIndex, 1, invitedHangout);
   localStorage.setItem(hangoutKey, JSON.stringify(localHangouts));
 
@@ -55,8 +55,8 @@ export function updateDeliveredInvitation({
 
   const messageKey = `${name}-${username}-messages`;
   const deliveredMessage = { ...message, username, state: "delivered" };
-  const localMessages = JSON.parse(localStorage.getItem(messageKey));
-  const messageIndex = localMessages.findIndex(
+  let localMessages = JSON.parse(localStorage.getItem(messageKey));
+  let messageIndex = localMessages.findIndex(
     (l) => l.timestamp === message.timestamp
   );
   localMessages.splice(messageIndex, 1, deliveredMessage);

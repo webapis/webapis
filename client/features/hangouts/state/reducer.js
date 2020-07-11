@@ -2,7 +2,7 @@ import { actionTypes } from "./actionTypes";
 export const initState = {
   hangouts: null,
   hangout: null,
-  unreadhangouts: null,
+  unreadhangouts: [],
   messages: null,
 
   loading: false,
@@ -76,9 +76,6 @@ export function reducer(state, action) {
     case actionTypes.LOADED_HANGOUTS:
       return { ...state, filterResult: action.hangouts };
     case actionTypes.SELECTED_HANGOUT:
-      if (action.hangout === undefined) {
-      }
-
       return {
         ...state,
         hangout: action.hangout,
