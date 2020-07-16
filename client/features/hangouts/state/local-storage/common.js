@@ -121,13 +121,34 @@ export function updateRecievedMessage({
 
 export function updateHangout({ dispatch, name, hangout }) {
   const { username } = hangout;
+  debugger;
   const hangoutKey = `${name}-hangouts`;
-  const recievedAccepter = { ...hangout };
   let localHangouts = JSON.parse(localStorage.getItem(hangoutKey));
+  let hangoutIndex = localHangouts.findIndex((l) => l.username === username);
+  localHangouts.splice(hangoutIndex, 1, hangout);
+  localStorage.setItem(hangoutKey, JSON.stringify(localHangouts));
+  dispatch({ type: actionTypes.HANGOUTS_UPDATED, hangouts: localHangouts });
+  dispatch({ type: actionTypes.HANGOUT_UPDATED, hangout });
+}
+
+export function saveHangout({ hangout, dispatch, name }) {
+  const hangoutKey = `${name}-hangouts`;
+  let localHangouts = localStorage.getItem(hangoutKey);
+  const inviteHangout = { ...hangout };
+
   if (localHangouts && localHangouts.length > 0) {
-    let hangoutIndex = localHangouts.findIndex((f) => f.username === username);
-    localHangouts.splice(hangoutIndex, 1, recievedAccepter);
-    localStorage.setItem(hangoutKey, JSON.stringify(localHangouts));
-    dispatch({ type: actionTypes.HANGOUTS_UPDATED, hangouts: localHangouts });
+    localStorage.setItem(
+      hangoutKey,
+      JSON.stringify([...localHangouts, hangout])
+    );
+    dispatch({
+      type: actionTypes.HANGOUTS_UPDATED,
+      hangouts: [...localHangouts, hangout],
+    });
+    dispatch({ type: actionTypes.HANGOUT_UPDATED, hangout: hangout });
+  } else {
+    localStorage.setItem(hangoutKey, JSON.stringify([hangout]));
+    dispatch({ type: actionTypes.HANGOUTS_UPDATED, hangouts: [hangout] });
+    dispatch({ type: actionTypes.HANGOUT_UPDATED, hangout });
   }
 }

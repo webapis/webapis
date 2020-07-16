@@ -2,10 +2,7 @@ import { h } from "preact";
 import { useEffect } from "preact/hooks";
 import { useAppRoute } from "components/app-route";
 import { hangoutStates } from "server/hangouts/hangoutStates";
-
-import { updateDeliveredInvite } from "./local-storage/onInvite";
-
-import { updateDeliveredAccept } from "./local-storage/onAccept";
+import { actionTypes } from "./actionTypes";
 import {
   updateUnread,
   updateSentMessage,
@@ -17,14 +14,6 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
   const { onAppRoute } = useAppRoute();
   function handleAcknowledgement({ hangout, offline }) {
     switch (hangout.state) {
-      case hangoutStates.INVITED:
-        updateDeliveredInvite({
-          dispatch,
-          hangout,
-          name: username,
-          onAppRoute,
-        });
-        break;
       case hangoutStates.UNBLOCKED:
         saveUnblovked({
           dispatch,
@@ -35,9 +24,26 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
           offline,
         });
         break;
+      case hangoutStates.INVITED:
+        debugger;
+        updateHangout({ dispatch, hangout, name: username });
+        updateSentMessage({ hangout, name: username, dispatch });
+        dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
+        onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
+        break;
       case hangoutStates.DECLINED:
+        debugger;
         updateUnread({ dispatch, hangout, name: username });
         updateSentMessage({ hangout, name: username, dispatch });
+        dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
+        onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
+        break;
+      case hangoutStates.ACCEPTED:
+        debugger;
+        updateUnread({ dispatch, hangout, name: username });
+        updateHangout({ dispatch, hangout, name: username });
+        updateSentMessage({ hangout, name: username, dispatch });
+        dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
         onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
         break;
       case hangoutStates.BLOCKED:
@@ -50,33 +56,26 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
         //   offline,
         // });
         break;
-      case hangoutStates.ACCEPTED:
-        updateDeliveredAccept({
-          dispatch,
+
+      case hangoutStates.MESSAGED:
+        updateHangout({ dispatch, name: username, hangout });
+        updateSentMessage({
           hangout,
           name: username,
-          onAppRoute,
+          dispatch,
+          dState: "delivered",
         });
-
-        break;
-      case hangoutStates.MESSAGED:
-        // saveMessaged({
-        //   dispatch,
-        //   hangout,
-        //   name: username,
-        //   focusedHangout,
-        //   onAppRoute,
-        //   offline,
-        // });
+        dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
         break;
       default:
         break;
     }
   }
 
-  function onHangout({ hangout, unread }) {
+  function onHangout({ hangout }) {
     switch (hangout.state) {
       case hangoutStates.ACCEPTER:
+        debugger;
         updateHangout({ dispatch, name: username, hangout });
         saveRecievedMessage({
           hangout,
@@ -114,14 +113,18 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
         });
         break;
       case hangoutStates.MESSANGER:
-        // saveMessanger({
-        //   dispatch,
-        //   hangout,
-        //   name: username,
-        //   focusedHangout,
-        //   onAppRoute,
-        //   unread,
-        // });
+        updateHangout({ dispatch, name: username, hangout });
+        saveUnread({
+          dispatch,
+          hangout,
+          name: username,
+        });
+        saveRecievedMessage({
+          hangout,
+          dispatch,
+          name: username,
+          dState: "unread",
+        });
         break;
       case hangoutStates.UNBLOCKER:
         // saveUnblocker({

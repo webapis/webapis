@@ -53,7 +53,11 @@ export async function hangoutHandler({ collection, hangout, ws, connections }) {
           { username: ws.user.username },
           { $pull: { unreads: { timestamp, username } } }
         );
-        debugger;
+        // UPDATE HANGOUT ON TARGET
+        await collection.updateOne(
+          { username, "hangouts.username": ws.user.username },
+          { $set: { "hangouts.$": target } }
+        );
       }
     }
 

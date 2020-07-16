@@ -26,6 +26,7 @@ export default function HangoutsProvider(props) {
     focusedHangout: hangout,
   });
 
+  useEffect(() => {}, [hangout]);
   useEffect(() => {
     const unreadhangoutKey = `${username}-unread-hangouts`;
     const unreadhangouts = JSON.parse(localStorage.getItem(unreadhangoutKey));

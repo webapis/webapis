@@ -59,7 +59,11 @@ module.exports = async function onHangoutSeed({
           { username: senderUsername },
           { $pull: { unreads: { timestamp, username } } }
         );
-
+        // UPDATE HANGOUT ON TARGET
+        await collection.updateOne(
+          { username, "hangouts.username": senderUsername },
+          { $set: { "hangouts.$": target } }
+        );
         debugger;
       }
     }

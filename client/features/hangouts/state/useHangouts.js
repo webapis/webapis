@@ -2,11 +2,14 @@ import { h } from "preact";
 import { useHangoutContext } from "./HangoutsProvider";
 import { useAuthContext } from "features/authentication";
 import { useAppRoute } from "components/app-route";
-//import { savePendingHangout } from "./actions/delivering-actions/savePendingHangout";
 import { changeMessageText } from "./actions";
-import savePendingInvite from "./local-storage/onInvite";
-import { savePendingAccept } from "./local-storage/onAccept";
-import { updateUnread, saveSentMessage } from "./local-storage/common";
+
+import {
+  updateUnread,
+  saveSentMessage,
+  saveHangout,
+  updateHangout,
+} from "./local-storage/common";
 import { actionTypes } from "./actionTypes";
 
 export function useHangouts() {
@@ -25,35 +28,6 @@ export function useHangouts() {
     const text = e.target.value;
     changeMessageText({ dispatch, text });
   }
-  // function onHangout(e) {
-  //   //5
-  //   changeMessageText({ text: "", dispatch });
-  //   const command = e.target.id;
-  //   const { email } = hangout;
-  //   const timestamp = Date.now();
-  //   const message =
-  //     messageText !== "" ? { text: messageText, timestamp } : null;
-  //   const pendingHangout = {
-  //     username: hangout.username,
-  //     email,
-  //     message: { text: messageText, timestamp, username },
-  //     command,
-  //     timestamp,
-  //   };
-  //   dispatch({ type: actionTypes.SENDING_HANGOUT_STARTED, pendingHangout });
-  //   savePendingHangout({
-  //     dispatch,
-  //     name: username,
-  //     hangout: {
-  //       username: hangout.username,
-  //       email,
-  //       state: command,
-  //       message: { text: messageText, timestamp, delivered: false, username },
-  //       timestamp,
-  //       delivered: false,
-  //     },
-  //   });
-  // } //end onHangout
 
   function onInvite() {
     const { email } = hangout;
@@ -67,7 +41,13 @@ export function useHangouts() {
       command: "INVITE",
       timestamp,
     };
-    savePendingInvite({ hangout: invitation, name: username, dispatch });
+    saveHangout({ hangout: invitation, name: username, dispatch });
+    saveSentMessage({
+      hangout: invitation,
+      dispatch,
+      name: username,
+      dState: "pending",
+    });
     dispatch({
       type: actionTypes.SENDING_HANGOUT_STARTED,
       pendingHangout: invitation,
@@ -76,7 +56,7 @@ export function useHangouts() {
   function onAccept() {
     try {
       const { email, timestamp } = hangout;
-
+      debugger;
       const accept = {
         username: hangout.username,
         email,
@@ -84,8 +64,15 @@ export function useHangouts() {
         command: "ACCEPT",
         timestamp,
       };
-
-      savePendingAccept({ name: username, dispatch, hangout: accept });
+      debugger;
+      saveHangout({ hangout: accept, name: username, dispatch });
+      saveSentMessage({
+        hangout: accept,
+        dispatch,
+        name: username,
+        dState: "pending",
+      });
+      updateUnread({ dispatch, hangout: accept, name: username });
       dispatch({
         type: actionTypes.SENDING_HANGOUT_STARTED,
         pendingHangout: accept,
@@ -106,8 +93,13 @@ export function useHangouts() {
         timestamp,
       };
 
-      updateUnread({ dispatch, hangout, name: username });
-      saveSentMessage({ hangout, name: username, dispatch, dState: "pending" });
+      updateUnread({ dispatch, hangout: decline, name: username });
+      saveSentMessage({
+        hangout: decline,
+        name: username,
+        dispatch,
+        dState: "pending",
+      });
       dispatch({
         type: actionTypes.SENDING_HANGOUT_STARTED,
         pendingHangout: decline,
@@ -116,9 +108,30 @@ export function useHangouts() {
       console.error(error);
     }
   }
+
+  function onMessage() {
+    const { email } = hangout;
+    const timestamp = Date.now();
+    debugger;
+    const message =
+      messageText !== "" ? { text: messageText, timestamp } : null;
+    const messaging = {
+      username: hangout.username,
+      email,
+      message,
+      command: "MESSAGE",
+      timestamp,
+    };
+    updateHangout({ hangout: messaging, name: username, dispatch });
+    saveSentMessage({ hangout, dispatch, name: username, dState: "pending" });
+    dispatch({
+      type: actionTypes.SENDING_HANGOUT_STARTED,
+      pendingHangout: messaging,
+    });
+  }
   function onBlock() {}
   function onUnblock() {}
-  function onMessage() {}
+
   return {
     onInvite,
     onAccept,
