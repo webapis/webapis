@@ -1,7 +1,0 @@
-#message-scroller {
-  overflow-anchor: none;
-}
-
-#message-anchor {
-  overflow-anchor: auto;
-}

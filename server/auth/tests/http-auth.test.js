@@ -1,84 +1,79 @@
-require('babel-polyfill');
-import request from 'supertest';
-import httpRoute from '../../http-route';
+require("babel-polyfill");
+import request from "supertest";
+import httpRoute from "../../http-route";
 import {
   containsHttpAuthHeader,
   getCredentials,
   getAuthType,
   getToken,
-} from '../http-auth';
-describe('http-auth', () => {
-  describe('containsHttpAuthHeader', () => {
-    it('containsHttpAuthHeader Basic', () => {
+} from "../http-auth";
+describe("http-auth", () => {
+  describe("containsHttpAuthHeader", () => {
+    it("containsHttpAuthHeader Basic", () => {
       const req = {
-        headers: { authorization: 'Basic  emailorusername:password' },
+        headers: { authorization: "Basic  emailorusername:password" },
       };
       expect(containsHttpAuthHeader(req)).toBe(true);
     });
 
-    it('containsHttpAuthHeader Basic', () => {
+    it("containsHttpAuthHeader Basic", () => {
       const req = {
-        headers: { authorization: 'Bearer  emailorusername:password' },
+        headers: { authorization: "Bearer  emailorusername:password" },
       };
       expect(containsHttpAuthHeader(req)).toBe(true);
     });
-    it('containsHttpAuthHeader Empty', () => {
-      const req = { headers: { authorization: '  emailorusername:password' } };
+    it("containsHttpAuthHeader Empty", () => {
+      const req = { headers: { authorization: "  emailorusername:password" } };
       expect(containsHttpAuthHeader(req)).toBe(false);
     });
   });
 
-  describe('getAuthType', () => {
-    it('Bearer', () => {
+  describe("getAuthType", () => {
+    it("Bearer", () => {
       const req = {
-        headers: { authorization: 'Bearer  emailorusername:password' },
+        headers: { authorization: "Bearer  emailorusername:password" },
       };
-      expect(getAuthType(req)).toBe('Bearer');
+      expect(getAuthType(req)).toBe("Bearer");
     });
-    it('Basic', () => {
+    it("Basic", () => {
       const req = {
-        headers: { authorization: 'Basic  emailorusername:password' },
+        headers: { authorization: "Basic  emailorusername:password" },
       };
-      expect(getAuthType(req)).toBe('Basic');
+      expect(getAuthType(req)).toBe("Basic");
     });
-    it('Null', () => {
-      const req = { headers: { authorization: '  emailorusername:password' } };
+    it("Null", () => {
+      const req = { headers: { authorization: "  emailorusername:password" } };
       expect(getAuthType(req)).toBe(null);
     });
   });
 
-  describe('getCredentials', () => {
-    it('return credentials', () => {
-      debugger;
+  describe("getCredentials", () => {
+    it("return credentials", () => {
       const req = {
-        headers: { authorization: 'Basic dGttaG91c2U6ZHJhZ29uZmx5' },
+        headers: { authorization: "Basic dGttaG91c2U6ZHJhZ29uZmx5" },
       };
       expect(getCredentials(req)).toMatchObject({
-        emailorusername: 'tkmhouse',
-        password: 'dragonfly',
+        emailorusername: "tkmhouse",
+        password: "dragonfly",
       });
     });
   });
-  describe('getToken', () => {
-    it('returns token', () => {
-      debugger;
+  describe("getToken", () => {
+    it("returns token", () => {
       const req = {
-        headers: { authorization: 'Bearer dGttaG91c2U6ZHJhZ29uZmx5' },
+        headers: { authorization: "Bearer dGttaG91c2U6ZHJhZ29uZmx5" },
       };
-      expect(getToken(req)).toBe('dGttaG91c2U6ZHJhZ29uZmx5');
+      expect(getToken(req)).toBe("dGttaG91c2U6ZHJhZ29uZmx5");
     });
   });
 
-  it('Authentication header exists', (done) => {
-    debugger;
+  it("Authentication header exists", (done) => {
     request(httpRoute)
-      .get('/auth/login')
-      .set('Authorization', 'Basic  username:password')
+      .get("/auth/login")
+      .set("Authorization", "Basic  username:password")
       .expect((res) => {
         let result = res;
-        debugger;
       })
       .end(done);
   });
-
 });

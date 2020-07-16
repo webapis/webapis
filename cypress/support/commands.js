@@ -23,76 +23,73 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
-Cypress.Commands.add('login', ({ username, email, password }) => {
+Cypress.Commands.add("login", ({ username, email, password }) => {
   cy.request({
-    url: 'http://localhost:3000/seed/users',
-    method: 'post',
+    url: "https://localhost:3000/seed/users",
+    method: "post",
     body: {
       username,
       email,
       password,
     },
   })
-    .its('body')
+    .its("body")
     .then((body) => {
       cy.request({
-        url: 'http://localhost:3000/auth/login',
-        method: 'GET',
+        url: "https://localhost:3000/auth/login",
+        method: "GET",
         headers: {
-          'Conten-Type': 'application/json',
-          'Access-Control-Allow-Headers': '*',
+          "Conten-Type": "application/json",
+          "Access-Control-Allow-Headers": "*",
           Authorization: `Basic ${btoa(`${body.email}:${body.password}`)}`,
         },
       })
-        .its('body')
+        .its("body")
         .then((body) => {
           const { email, username, token } = body;
           cy.window()
-            .its('localStorage')
+            .its("localStorage")
             .invoke(
-              'setItem',
-              'webcom',
+              "setItem",
+              "webcom",
               JSON.stringify({ username, email, token })
             );
         });
     });
 });
-Cypress.Commands.add('remoteLogin', ({ username, email, password }) => {
+
+Cypress.Commands.add("remoteLogin", ({ username, email, password }) => {
   cy.request({
-    url: 'http://localhost:3000/seed/users',
-    method: 'post',
+    url: "https://localhost:3000/seed/users",
+    method: "post",
     body: {
       username,
       email,
       password,
     },
   })
-    .its('body')
+    .its("body")
     .then((body) => {
       cy.request({
-        url: 'http://localhost:3000/auth/login',
-        method: 'GET',
+        url: "https://localhost:3000/auth/login",
+        method: "GET",
         headers: {
-          'Conten-Type': 'application/json',
-          'Access-Control-Allow-Headers': '*',
+          "Conten-Type": "application/json",
+          "Access-Control-Allow-Headers": "*",
           Authorization: `Basic ${btoa(`${body.email}:${body.password}`)}`,
         },
       })
-        .its('body')
+        .its("body")
         .then((body) => {
           const { email, username, token } = body;
-
-        
         });
     });
-
- 
 });
 
-Cypress.Commands.add('register', ({ username, email, password }) => {
+Cypress.Commands.add("register", ({ username, email, password }) => {
   cy.request({
-    url: 'http://localhost:3000/seed/users',
-    method: 'post',
+    url: "https://localhost:3000/seed/users",
+    method: "post",
     body: {
       username,
       email,
@@ -101,10 +98,10 @@ Cypress.Commands.add('register', ({ username, email, password }) => {
   });
 });
 
-Cypress.Commands.add('forgotpassword', ({ email }) => {
+Cypress.Commands.add("forgotpassword", ({ email }) => {
   return cy.request({
-    url: 'http://localhost:3000/seed/requestpasschange',
-    method: 'post',
+    url: "https://localhost:3000/seed/requestpasschange",
+    method: "post",
     body: {
       email,
     },
@@ -112,37 +109,37 @@ Cypress.Commands.add('forgotpassword', ({ email }) => {
 });
 
 Cypress.Commands.add(
-  'signup',
+  "signup",
   ({ username, password, email, click, client = false, type = true }) => {
     if (client && type) {
-      cy.get('[data-testid=username]')
+      cy.get("[data-testid=username]")
         .type(`${username}`)
         .blur()
-        .get('[data-testid=email]')
+        .get("[data-testid=email]")
         .type(`${email}`)
         .blur()
-        .get('[data-testid=password]')
+        .get("[data-testid=password]")
         .type(`${password}`)
         .blur();
       if (click) {
-        cy.get('[data-testid=signup-btn]').click();
+        cy.get("[data-testid=signup-btn]").click();
       }
     }
     if (!client && type) {
-      cy.get('[data-testid=username]')
+      cy.get("[data-testid=username]")
         .type(`${username}`)
-        .get('[data-testid=email]')
+        .get("[data-testid=email]")
         .type(`${email}`)
-        .get('[data-testid=password]')
+        .get("[data-testid=password]")
         .type(`${password}`);
       if (click) {
-        cy.get('[data-testid=signup-btn]').click();
+        cy.get("[data-testid=signup-btn]").click();
       }
     }
 
     if (!type) {
       if (click) {
-        cy.get('[data-testid=signup-btn]').click();
+        cy.get("[data-testid=signup-btn]").click();
       }
     }
   }
