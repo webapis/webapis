@@ -121,7 +121,7 @@ export function updateRecievedMessage({
 
 export function updateHangout({ dispatch, name, hangout }) {
   const { username } = hangout;
-  debugger;
+
   const hangoutKey = `${name}-hangouts`;
   let localHangouts = JSON.parse(localStorage.getItem(hangoutKey));
   let hangoutIndex = localHangouts.findIndex((l) => l.username === username);
