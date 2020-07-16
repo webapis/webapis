@@ -1,4 +1,4 @@
-describe("onAccept", () => {
+describe("onDecline", () => {
   beforeEach(() => {
     if (Cypress.env("back") === "node") {
       const demo = {
@@ -39,7 +39,7 @@ describe("onAccept", () => {
       collectionName: "users",
     });
   });
-  it("offline accepted successfully", () => {
+  it("invitation declined successfully", () => {
     if (Cypress.env("back") === "node") {
       cy.loginByEmail({
         email: "bero@gmail.com",
@@ -51,7 +51,7 @@ describe("onAccept", () => {
     cy.get("[data-testid=hangouts-link]").click();
     cy.get("[data-testid=unread-link]").click();
     cy.get("[data-testid=demo]").click();
-    cy.get("[data-testid=accept-btn]").click();
-    cy.get("[data-testid=message-count]").contains(0);
+    cy.get("[data-testid=decline-btn]").click();
+    cy.get("[data-testid=blocked-ui]");
   });
 });

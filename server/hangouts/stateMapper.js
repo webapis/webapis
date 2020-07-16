@@ -33,6 +33,11 @@ export function stateMapper({ command }) {
         senderState: hangoutStates.UNBLOCKED,
         targetState: hangoutStates.UNBLOCKER,
       };
+    case clientCommands.READ:
+      return {
+        senderState: hangoutStates.READ,
+        targetState: hangoutStates.READER,
+      };
     default:
       throw new Error("clientCommand type not specified");
   }

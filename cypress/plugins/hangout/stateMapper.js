@@ -6,6 +6,7 @@ const clientCommands = {
   UNBLOCK: "UNBLOCK",
   MESSAGE: "MESSAGE",
   ONLINE: "ONLINE",
+  READ: "READ",
 };
 
 const hangoutStates = {
@@ -15,6 +16,7 @@ const hangoutStates = {
   BLOCKER: "BLOCKER",
   UNBLOCKER: "UNBLOCKER",
   MESSANGER: "MESSANGER",
+  READER: "READER",
   // acknowlegement
   INVITED: "INVITED",
   ACCEPTED: "ACCEPTED",
@@ -22,6 +24,7 @@ const hangoutStates = {
   BLOCKED: "BLOCKED",
   UNBLOCKED: "UNBLOCKED",
   MESSAGED: "MESSAGED",
+  READ: "READ",
 };
 module.exports = function stateMapper({ command }) {
   switch (command) {
@@ -55,6 +58,11 @@ module.exports = function stateMapper({ command }) {
       return {
         senderState: hangoutStates.UNBLOCKED,
         targetState: hangoutStates.UNBLOCKER,
+      };
+    case clientCommands.READ:
+      return {
+        senderState: hangoutStates.READ,
+        targetState: hangoutStates.READER,
       };
     default:
       throw new Error("clientCommand type not specified");

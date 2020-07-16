@@ -4,35 +4,47 @@ import { useHangouts } from "../../state/useHangouts";
 import * as actions from "./actions";
 import { actionTypes } from "../../state/actionTypes";
 import { useUserName } from "features/authentication/state/useUserName";
+import { useAuth } from "features/authentication";
 export function WebSocketContainer(props) {
+  const { state: authState } = useAuth();
   const { username, token } = useUserName();
-  const [socket, setSocket] = useState();
+  const [socket, setSocket] = useState(null);
 
   const { children, socketUrl } = props;
   const { dispatch, state } = useHangouts();
-  const { searchHangouts, search, pendingHangout } = state;
+  const { searchHangouts, search, pendingHangout, fetchHangouts } = state;
 
   useEffect(() => {
-    if (username) {
-      const sock = new WebSocket(`${socketUrl}/hangouts/?username=${username}`);
-      sock.onmessage = (serverMessage) => {
+    if (username && socket === null) {
+      setSocket(new WebSocket(`${socketUrl}/hangouts/?username=${username}`));
+
+      dispatch({ type: actionTypes.SOCKET_READY });
+    }
+    if (!username && socket) {
+      socket.close();
+      setSocket(null);
+      dispatch({ type: actionTypes.SET_HANGOUT_TO_INIT_STATE });
+    }
+  }, [username, socket]);
+
+  useEffect(() => {
+    if (socket) {
+      socket.onmessage = (serverMessage) => {
         const msg = JSON.parse(serverMessage.data);
 
         dispatch({ type: actionTypes.SERVER_MESSAGE_RECIEVED, message: msg });
       };
-      sock.onopen = () => {
+      socket.onopen = () => {
         dispatch({ type: actionTypes.OPEN });
       };
-      sock.onclose = () => {
+      socket.onclose = () => {
         dispatch({ type: actionTypes.CLOSED });
       };
-      sock.onerror = (error) => {
+      socket.onerror = (error) => {
         dispatch({ type: actionTypes.SOCKET_ERROR, error });
       };
-      dispatch({ type: actionTypes.SOCKET_READY, socket: sock });
-      setSocket(sock);
     }
-  }, [username]);
+  }, [socket]);
 
   useEffect(() => {
     if (searchHangouts) {
@@ -47,10 +59,19 @@ export function WebSocketContainer(props) {
     }
   }, [pendingHangout]);
 
+  useEffect(() => {
+    if (fetchHangouts && username) {
+      actions.findHangouts({ dispatch, username });
+    }
+  }, [fetchHangouts, username]);
   function sendPendingHangout() {
-    socket.send(JSON.stringify(pendingHangout));
+    try {
+      socket.send(JSON.stringify(pendingHangout));
 
-    dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
+      dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   return children;

@@ -1,10 +1,15 @@
 import { actionTypes } from "./actionTypes";
-export default function useUnread({ state, dispatch, onAppRoute }) {
+import {
+  updateUnread,
+  updateRecievedMessage,
+  updateHangout,
+} from "./local-storage/common";
+export default function useUnread({ state, dispatch, onAppRoute, username }) {
   const { unreadhangouts } = state;
 
   function onUnreadSelect({ hangout }) {
-    debugger;
     dispatch({ type: actionTypes.SELECTED_HANGOUT, hangout });
+
     onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
   }
 

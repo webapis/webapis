@@ -27,10 +27,16 @@ export default function HangoutsProvider(props) {
   });
 
   useEffect(() => {
-    const hangoutKey = `${username}-unread-hangouts`;
-    const unreadhangouts = JSON.parse(localStorage.getItem(hangoutKey));
+    const unreadhangoutKey = `${username}-unread-hangouts`;
+    const unreadhangouts = JSON.parse(localStorage.getItem(unreadhangoutKey));
     if (unreadhangouts && unreadhangouts.length > 0) {
       dispatch({ type: actionTypes.UNREAD_HANGOUTS_UPDATED, unreadhangouts });
+    }
+    const hangoutKey = `${username}-hangouts`;
+    const hangouts = JSON.parse(localStorage.getItem(hangoutKey));
+
+    if (!hangouts) {
+      dispatch({ type: actionTypes.FETCH_HANGOUTS_STARTED });
     }
   }, []);
 

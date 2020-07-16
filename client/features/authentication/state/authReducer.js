@@ -26,6 +26,7 @@ export const initState = {
   token: null,
   authFeedback: null,
   user: null,
+  signout: false,
 };
 
 export function authReducer(state, action) {
@@ -68,7 +69,6 @@ export function authReducer(state, action) {
         ...state,
         loading: false,
         user: action.user,
-        signup: false,
       };
     case actionTypes.SIGNUP_FAILED:
       return { ...state, loading: false, signup: false };
@@ -96,7 +96,7 @@ export function authReducer(state, action) {
     case actionTypes.GOT_TOKEN_FROM_URL:
       return { ...state, token: action.token };
     case actionTypes.LOGOUT:
-      return { ...initState };
+      return { ...initState, signout: true };
     case actionTypes.RECOVER_LOCAL_AUTH_STATE:
       return {
         ...state,

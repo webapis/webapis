@@ -21,11 +21,22 @@ export const initState = {
   filter: "",
   filterResult: [],
 
+  //fetch
+  fetchHangouts: false,
+
   pendingHangout: null,
   message: null,
 };
 export function reducer(state, action) {
   switch (action.type) {
+    case actionTypes.SET_HANGOUT_TO_INIT_STATE:
+      return { ...initState };
+    case actionTypes.FETCH_HANGOUTS_STARTED:
+      return { ...state, fetchHangouts: true };
+    case actionTypes.FETCH_HANGOUTS_SUCCESS:
+      return { ...state, fetchHangouts: false };
+    case actionTypes.FETCH_HANGOUTS_FAILED:
+      return { ...state, fetchHangouts: false, error: action.error };
     case actionTypes.ERROR_RECIEVED:
       return { ...state, error: action.error };
     //pending hangout

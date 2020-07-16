@@ -4,8 +4,9 @@ import { useAuthContext } from "features/authentication";
 import { useAppRoute } from "components/app-route";
 //import { savePendingHangout } from "./actions/delivering-actions/savePendingHangout";
 import { changeMessageText } from "./actions";
-import saveSentInvitation from "./local-storage/local/saveSentInvitation";
-import { savePendingAccept } from "./local-storage/remote/saveRecievedInvitation";
+import savePendingInvite from "./local-storage/onInvite";
+import { savePendingAccept } from "./local-storage/onAccept";
+import { updateUnread, saveSentMessage } from "./local-storage/common";
 import { actionTypes } from "./actionTypes";
 
 export function useHangouts() {
@@ -66,29 +67,55 @@ export function useHangouts() {
       command: "INVITE",
       timestamp,
     };
-    saveSentInvitation({ hangout: invitation, name: username, dispatch });
+    savePendingInvite({ hangout: invitation, name: username, dispatch });
     dispatch({
       type: actionTypes.SENDING_HANGOUT_STARTED,
       pendingHangout: invitation,
     });
   }
   function onAccept() {
-    const { email } = hangout;
-    const timestamp = Date.now();
-    const accept = {
-      username: hangout.username,
-      email,
-      message: null,
-      command: "ACCEPT",
-      timestamp,
-    };
-    savePendingAccept({ name: username, dispatch, hangout: accept });
-    dispatch({
-      type: actionTypes.SENDING_HANGOUT_STARTED,
-      pendingHangout: accept,
-    });
+    try {
+      const { email, timestamp } = hangout;
+
+      const accept = {
+        username: hangout.username,
+        email,
+        message: { text: "Accepted your invitation", timestamp },
+        command: "ACCEPT",
+        timestamp,
+      };
+
+      savePendingAccept({ name: username, dispatch, hangout: accept });
+      dispatch({
+        type: actionTypes.SENDING_HANGOUT_STARTED,
+        pendingHangout: accept,
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }
-  function onDecline() {}
+  function onDecline() {
+    try {
+      const { email, timestamp } = hangout;
+
+      const decline = {
+        username: hangout.username,
+        email: hangout.email,
+        message: { text: "Your invitation declined", timestamp },
+        command: "DECLINE",
+        timestamp,
+      };
+
+      updateUnread({ dispatch, hangout, name: username });
+      saveSentMessage({ hangout, name: username, dispatch, dState: "pending" });
+      dispatch({
+        type: actionTypes.SENDING_HANGOUT_STARTED,
+        pendingHangout: decline,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
   function onBlock() {}
   function onUnblock() {}
   function onMessage() {}

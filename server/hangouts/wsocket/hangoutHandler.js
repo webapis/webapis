@@ -23,55 +23,107 @@ export async function hangoutHandler({ collection, hangout, ws, connections }) {
       state: targetState,
     };
 
-    if (hangout.command === clientCommands.INVITE) {
-      const senderHangoutPushResult = await collection.updateOne(
-        { username: ws.user.username },
-        { $push: { hangouts: sender } }
-      );
+    if (
+      hangout.command === clientCommands.INVITE ||
+      hangout.command === clientCommands.ACCEPT ||
+      hangout.command === clientCommands.DECLINE
+    ) {
+      if (
+        hangout.command === clientCommands.INVITE ||
+        hangout.command === clientCommands.ACCEPT
+      ) {
+        //PUSH HANGOUT ON SENDER
+        await collection.updateOne(
+          { username: ws.user.username },
+          { $push: { hangouts: sender } }
+        );
+      }
+      debugger;
 
-      // update hangout on target
-      const targetHangoutPushResult = await collection.updateOne(
-        { username },
-        { $push: { hangouts: target } }
-      );
-    } else {
-      // update hangout on sender
-      const senderHangoutUpdateResult = await collection.updateOne(
+      debugger;
+      //PUSH UNREADS ON TARGET
+      await collection.updateOne({ username }, { $push: { unreads: target } });
+      debugger;
+      if (
+        hangout.command === clientCommands.ACCEPT ||
+        hangout.command === clientCommands.DECLINE
+      ) {
+        debugger;
+        let pullResult = await collection.updateOne(
+          { username: ws.user.username },
+          { $pull: { unreads: { timestamp, username } } }
+        );
+        debugger;
+      }
+    }
+
+    // CLIENT COMMAND ELSE//
+    else if (
+      hangout.command === clientCommands.BLOCK ||
+      hangout.command === clientCommands.UNBLOCK ||
+      hangout.command === clientCommands.MESSAGE
+    ) {
+      debugger;
+      // UPDATE HANGOUT ON SENDER
+      await collection.updateOne(
         { username: ws.user.username, "hangouts.username": username },
         { $set: { "hangouts.$": sender } }
       );
-
-      // update hangout on target
-      const targetHangoutUpdateResult = await collection.updateOne(
+      debugger;
+      // UPDATE HANGOUT ON TARGET
+      await collection.updateOne(
         { username, "hangouts.username": ws.user.username },
         { $set: { "hangouts.$": target } }
       );
+      debugger;
+      //PUSH UNREADS ON TARGET
+      await collection.updateOne({ username }, { $push: { unreads: target } });
+      debugger;
+      if (
+        hangout.command === clientCommands.BLOCK ||
+        hangout.command === clientCommands.UNBLOCK
+      ) {
+        await collection.updateOne(
+          { username: ws.user.username },
+          { $pull: { unreads: { timestamp, username } } }
+        );
+        debugger;
+      }
+    } else if (hangout.command === clientCommands.READ) {
+      debugger;
+      // UPDATE HANGOUT ON SENDER
+      await collection.updateOne(
+        { username: ws.user.username, "hangouts.username": username },
+        { $set: { "hangouts.$": sender } }
+      );
+      debugger;
+      // UPDATE HANGOUT ON TARGET
+      await collection.updateOne(
+        { username, "hangouts.username": ws.user.username },
+        { $set: { "hangouts.$": target } }
+      );
+      debugger;
+      await collection.updateOne(
+        { username: ws.user.username },
+        { $pull: { unreads: { timestamp, username } } }
+      );
+      debugger;
+      //PUSH UNREADS ON TARGET
+      await collection.updateOne({ username }, { $push: { unreads: target } });
+      debugger;
     }
-
     //TARGET ONLINE: send state change//
     const targetOnline = connections[username];
     if (targetOnline) {
       debugger;
       targetOnline.send(JSON.stringify({ hangout: target, type: "HANGOUT" })); //-----------------
     } else {
-      debugger; //
-      //TARGET OFFLINE: push updated hangout undeliverded collection
-      const targetUndeliveredUpdateResult = await collection.updateOne(
-        { username },
-        {
-          $push: {
-            undelivered: target,
-          },
-        }
-      );
+      debugger;
     }
-    //send state change to sender
+    //send state change to sender/
 
-    if (offline) {
-      ws.send(JSON.stringify({ hangout: sender, type: "OFFLINE_ACKN" })); //---------------
-    } else {
-      ws.send(JSON.stringify({ hangout: sender, type: "ACKHOWLEDGEMENT" })); //---------------
-    }
+    debugger;
+    ws.send(JSON.stringify({ hangout: sender, type: "ACKHOWLEDGEMENT" })); //---------------
   } catch (error) {
     const err = error;
 

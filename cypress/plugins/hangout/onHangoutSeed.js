@@ -9,9 +9,11 @@ const client = new MongoClient(url, {
 module.exports = async function onHangoutSeed({
   hangout,
   senderUsername,
+  senderEmail,
   targetOnline = false,
 }) {
   try {
+    debugger;
     const clnt = await client.connect();
     const database = clnt.db("auth");
     const collection = database.collection("users");
@@ -26,51 +28,95 @@ module.exports = async function onHangoutSeed({
       timestamp,
       state: senderState,
     };
-
-    debugger;
+    //
     const target = {
       username: senderUsername,
-      email: "demo@gmail.com",
+      email: senderEmail,
       message,
       timestamp,
       state: targetState,
     };
-    if (hangout.command === "INVITE") {
-      await collection.updateOne(
-        { username: senderUsername },
-        { $push: { hangouts: sender } }
-      );
 
-      // update hangout on target
-      await collection.updateOne({ username }, { $push: { hangouts: target } });
-    } else {
-      // update hangout on sender
+    if (
+      hangout.command === "INVITE" ||
+      hangout.command === "ACCEPT" ||
+      hangout.command === "DECLINE"
+    ) {
+      debugger;
+      if (hangout.command === "INVITE" || hangout.command === "ACCEPT") {
+        //PUSH HANGOUT ON SENDER
+        await collection.updateOne(
+          { username: senderUsername },
+          { $push: { hangouts: sender } }
+        );
+      }
+      debugger;
+      //PUSH UNREADS ON TARGET
+      await collection.updateOne({ username }, { $push: { unreads: target } });
+      debugger;
+      if (hangout.command === "ACCEPT" || hangout.command === "DECLINE") {
+        await collection.updateOne(
+          { username: senderUsername },
+          { $pull: { unreads: { timestamp, username } } }
+        );
+
+        debugger;
+      }
+    }
+
+    // CLIENT COMMAND ELSE
+    else if (
+      hangout.command === "BLOCK" ||
+      hangout.command === "UNBLOCK" ||
+      hangout.command === "MESSAGE"
+    ) {
+      debugger;
+      // UPDATE HANGOUT ON SENDER
       await collection.updateOne(
         { username: senderUsername, "hangouts.username": username },
         { $set: { "hangouts.$": sender } }
       );
-
-      // update hangout on target
+      debugger;
+      // UPDATE HANGOUT ON TARGET
       await collection.updateOne(
         { username, "hangouts.username": senderUsername },
         { $set: { "hangouts.$": target } }
       );
-    }
-    if (targetOnline) {
       debugger;
-      //  targetOnline.send(JSON.stringify({ hangout: target, type: "HANGOUT" })); //-----------------
-    } else {
-      debugger; //
-      //TARGET OFFLINE: push updated hangout undeliverded collection
+      //PUSH UNREADS ON TARGET
+      await collection.updateOne({ username }, { $push: { unreads: target } });
+      debugger;
+      if (hangout.command === "BLOCK" || hangout.command === "UNBLOCK") {
+        debugger;
+        await collection.updateOne(
+          { username: senderUsername },
+          { $pull: { unreads: { timestamp, username } } }
+        );
+        debugger;
+      }
+    } else if (hangout.command === "READ") {
+      debugger;
+      // UPDATE HANGOUT ON SENDER
       await collection.updateOne(
-        { username },
-        {
-          $push: {
-            undelivered: target,
-          },
-        }
+        { username: senderUsername, "hangouts.username": username },
+        { $set: { "hangouts.$": sender } }
       );
-    }
+      debugger;
+      // UPDATE HANGOUT ON TARGET
+      await collection.updateOne(
+        { username, "hangouts.username": senderUsername },
+        { $set: { "hangouts.$": target } }
+      );
+      debugger;
+      await collection.updateOne(
+        { username: senderUsername },
+        { $pull: { unreads: { timestamp, username } } }
+      );
+      debugger;
+      //PUSH UNREADS ON TARGET
+      await collection.updateOne({ username }, { $push: { unreads: target } });
+    } ////
+    debugger;
     return result;
   } catch (error) {
     console.log("seed error", error);

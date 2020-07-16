@@ -54,8 +54,20 @@ module.exports = (on, config) => {
     "seed:dropDatabase": ({ dbName }) => {
       return dropDatabase({ dbName });
     },
-    "seed:onHangout": ({ collectionName, dbName, hangout, senderUsername }) => {
-      return onHangoutSeed({ collectionName, dbName, hangout, senderUsername });
+    "seed:onHangout": ({
+      collectionName,
+      dbName,
+      hangout,
+      senderUsername,
+      senderEmail,
+    }) => {
+      return onHangoutSeed({
+        collectionName,
+        dbName,
+        hangout,
+        senderUsername,
+        senderEmail,
+      });
     },
   });
 };

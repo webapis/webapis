@@ -2,7 +2,7 @@
   "baseUrl": "https://localhost:3000",
   
     "viewportWidth": 1000,
-    "viewportHeight": 500,
+    "viewportHeight": 600,
   "env": {
      "back":"node"
   }

@@ -3,7 +3,7 @@ import { actionTypes } from "../../state/actionTypes";
 export async function searchHangouts({ search, dispatch, username }) {
   try {
     const response = await fetch(
-      `/hangouts/find?search=${search}&username=${username}`
+      `/hangouts/findOne?search=${search}&username=${username}`
     );
     if (response.ok) {
       const { hangouts } = await response.json();
@@ -12,5 +12,21 @@ export async function searchHangouts({ search, dispatch, username }) {
     }
   } catch (error) {
     dispatch({ type: actionTypes.SEARCH_HANGOUT_FAILED, error });
+  }
+}
+
+export async function findHangouts({ dispatch, username }) {
+  try {
+    const response = await fetch(`/hangouts/findHangouts?username=${username}`);
+    if (response.ok) {
+      const { hangouts } = await response.json();
+      if (hangouts.length > 0) {
+        localStorage.setItem(`${username}-hangouts`, JSON.stringify(hangouts));
+      }
+
+      dispatch({ type: actionTypes.FETCH_HANGOUTS_SUCCESS });
+    }
+  } catch (error) {
+    dispatch({ type: actionTypes.FETCH_HANGOUTS_FAILED, error });
   }
 }

@@ -1,9 +1,10 @@
-import { actionTypes } from "../../actionTypes";
-export default function saveSentInvitation({ hangout, dispatch, name }) {
+import { actionTypes } from "../actionTypes";
+import { saveSentMessage, updateSentMessage } from "./common";
+export default function savePendingInvite({ hangout, dispatch, name }) {
   const { message, username } = hangout;
   const hangoutKey = `${name}-hangouts`;
   let localHangouts = localStorage.getItem(hangoutKey);
-  const inviteHangout = { ...hangout, dState: "pending" };
+  const inviteHangout = { ...hangout };
 
   if (localHangouts && localHangouts.length > 0) {
     localStorage.setItem(
@@ -21,27 +22,16 @@ export default function saveSentInvitation({ hangout, dispatch, name }) {
     dispatch({ type: actionTypes.HANGOUT_UPDATED, hangout: inviteHangout });
   }
   if (message) {
-    const messageKey = `${name}-${username}-messages`;
-    const InvitationMessage = { ...message, username, state: "pending" };
-    dispatch({
-      type: actionTypes.MESSAGES_UPDATED,
-      messages: [InvitationMessage],
-    });
-    localStorage.setItem(messageKey, JSON.stringify([InvitationMessage]));
+    saveSentMessage({ hangout, dispatch, name, dState: "pending" });
   }
 }
 
-export function updateDeliveredInvitation({
-  dispatch,
-  name,
-  hangout,
-  onAppRoute,
-}) {
+export function updateDeliveredInvite({ dispatch, name, hangout, onAppRoute }) {
   const { username, message } = hangout;
 
   const hangoutKey = `${name}-hangouts`;
   let localHangouts = JSON.parse(localStorage.getItem(hangoutKey));
-  const invitedHangout = { ...hangout, dState: "delivered" };
+  const invitedHangout = { ...hangout };
   let hangoutIndex = localHangouts.findIndex((l) => l.username === username);
   localHangouts.splice(hangoutIndex, 1, invitedHangout);
   localStorage.setItem(hangoutKey, JSON.stringify(localHangouts));
@@ -51,15 +41,5 @@ export function updateDeliveredInvitation({
   dispatch({ type: actionTypes.HANGOUT_UPDATED, hangout: invitedHangout });
   onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
 
-  // update invitation
-
-  const messageKey = `${name}-${username}-messages`;
-  const deliveredMessage = { ...message, username, state: "delivered" };
-  let localMessages = JSON.parse(localStorage.getItem(messageKey));
-  let messageIndex = localMessages.findIndex(
-    (l) => l.timestamp === message.timestamp
-  );
-  localMessages.splice(messageIndex, 1, deliveredMessage);
-  localStorage.setItem(messageKey, JSON.stringify(localMessages));
-  dispatch({ type: actionTypes.MESSAGES_UPDATED, messages: localMessages });
+  updateSentMessage({ hangout, name, dispatch, dState: "delivered" });
 }

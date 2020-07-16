@@ -2,32 +2,23 @@ import { h } from "preact";
 import { useEffect } from "preact/hooks";
 import { useAppRoute } from "components/app-route";
 import { hangoutStates } from "server/hangouts/hangoutStates";
-// import {
-//   saveInvited,
-//   saveUnblovked,
-//   saveDeclined,
-//   saveBlocked,
-//   saveAccepted,
-//   saveMessaged,
-// } from "./actions/delivering-actions";
-// import {
-//   saveAccepter,
-//   saveBlocker,
-//   saveDecliner,
-//   saveInviter,
-//   saveMessanger,
-//   saveUnblocker,
-// } from "./actions/recieving-actions";
-import { updateDeliveredInvitation } from "./local-storage/local/saveSentInvitation";
-import saveRecievedInvitation, {
-  updateDeliveredAccept,
-} from "./local-storage/remote/saveRecievedInvitation";
+
+import { updateDeliveredInvite } from "./local-storage/onInvite";
+
+import { updateDeliveredAccept } from "./local-storage/onAccept";
+import {
+  updateUnread,
+  updateSentMessage,
+  saveUnread,
+  saveRecievedMessage,
+  updateHangout,
+} from "./local-storage/common";
 export function useMessage({ message, username, dispatch, focusedHangout }) {
   const { onAppRoute } = useAppRoute();
   function handleAcknowledgement({ hangout, offline }) {
     switch (hangout.state) {
       case hangoutStates.INVITED:
-        updateDeliveredInvitation({
+        updateDeliveredInvite({
           dispatch,
           hangout,
           name: username,
@@ -45,14 +36,9 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
         });
         break;
       case hangoutStates.DECLINED:
-        // saveDeclined({
-        //   dispatch,
-        //   hangout,
-        //   name: username,
-        //   focusedHangout,
-        //   onAppRoute,
-        //   offline,
-        // });
+        updateUnread({ dispatch, hangout, name: username });
+        updateSentMessage({ hangout, name: username, dispatch });
+        onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
         break;
       case hangoutStates.BLOCKED:
         // saveBlocked({
@@ -91,14 +77,14 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
   function onHangout({ hangout, unread }) {
     switch (hangout.state) {
       case hangoutStates.ACCEPTER:
-        // saveAccepter({
-        //   dispatch,
-        //   hangout,
-        //   name: username,
-        //   focusedHangout,
-        //   onAppRoute,
-        //   unread,
-        // });
+        updateHangout({ dispatch, name: username, hangout });
+        saveRecievedMessage({
+          hangout,
+          dispatch,
+          name: username,
+          dState: "unread",
+        });
+        saveUnread({ dispatch, name: username, hangout });
         break;
       case hangoutStates.BLOCKER:
         // saveBlocker({
@@ -111,20 +97,20 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
         // });
         break;
       case hangoutStates.DECLINER:
-        // saveDecliner({
-        //   dispatch,
-        //   hangout,
-        //   name: username,
-        //   focusedHangout,
-        //   onAppRoute,
-        //   unread,
-        // });
+        debugger;
+        updateHangout({ dispatch, name: username, hangout });
         break;
       case hangoutStates.INVITER:
-        saveRecievedInvitation({
+        saveUnread({
           dispatch,
           hangout,
           name: username,
+        });
+        saveRecievedMessage({
+          hangout,
+          dispatch,
+          name: username,
+          dState: "unread",
         });
         break;
       case hangoutStates.MESSANGER:
@@ -146,6 +132,8 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
         //   onAppRoute,
         //   unread,
         // });
+        break;
+      case hangoutStates.READER:
         break;
       default:
         break;
@@ -175,7 +163,6 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
           }
           break;
         case "UNREAD_HANGOUTS":
-          debugger;
           handleHangouts({ hangouts: message.hangouts });
           break;
         case "OFFLINE_ACKN":

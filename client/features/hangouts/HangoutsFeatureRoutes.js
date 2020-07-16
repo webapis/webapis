@@ -57,6 +57,7 @@ export default function HangoutsFeatureRoutes(props) {
     state,
     dispatch,
     onAppRoute,
+    username,
   });
   const { loading } = state;
   return [

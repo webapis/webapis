@@ -3,15 +3,16 @@ export async function onLineStateChangeHandler({ client, ws, connections }) {
     const collection = await client.db("auth").collection("users");
 
     const user = await collection.findOne({ username: ws.user.username });
-
-    if (user && user.undelivered) {
+    debugger;
+    if (user && user.unreads) {
+      debugger;
       ws.send(
-        JSON.stringify({ hangouts: user.undelivered, type: "UNREAD_HANGOUTS" }) //--
+        JSON.stringify({ hangouts: user.unreads, type: "UNREAD_HANGOUTS" }) //--
       );
-      const removeUndeliveredResult = await collection.updateOne(
-        { username: ws.user.username },
-        { $unset: { undelivered: "" } }
-      );
+      // const removeUndeliveredResult = await collection.updateOne(
+      //   { username: ws.user.username },
+      //   { $unset: { undelivered: "" } }
+      // );
       // remove undelivered
     }
   } catch (error) {
