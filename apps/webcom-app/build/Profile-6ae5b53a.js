@@ -1,0 +1,8 @@
+import { h } from "./index-a45f22ef.js";
+
+function Profile() {
+  return h("div", null, "Profile");
+}
+
+export default Profile;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiUHJvZmlsZS02YWU1YjUzYS5qcyIsInNvdXJjZXMiOlsiLi4vLi4vLi4vY2xpZW50L2F1dGgvUHJvZmlsZS5qcyJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBoIH0gZnJvbSAncHJlYWN0JztcblxuZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24gUHJvZmlsZSgpIHtcbiAgcmV0dXJuIDxkaXY+UHJvZmlsZTwvZGl2Pjtcbn1cbiJdLCJuYW1lcyI6WyJQcm9maWxlIl0sIm1hcHBpbmdzIjoiOztBQUVlLFNBQVNBLE9BQVQsR0FBbUI7QUFDaEMsU0FBTyx5QkFBUDtBQUNEOzs7OyJ9
