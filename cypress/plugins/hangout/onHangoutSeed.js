@@ -97,6 +97,14 @@ module.exports = async function onHangoutSeed({
           { $pull: { unreads: { timestamp, username } } }
         );
         debugger;
+        await collection.updateOne(
+          { username },
+          {
+            $pull: {
+              unreads: { username: senderUsername, state: { $ne: "BLOCKER" } },
+            },
+          }
+        );
       }
     } else if (hangout.command === "READ") {
       debugger;

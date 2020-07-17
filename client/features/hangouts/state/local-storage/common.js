@@ -164,3 +164,12 @@ export function removeUnread({ hangout, dispatch, name }) {
     unreadhangouts: localHangouts,
   });
 }
+
+export function removeUnreads({ dispatch, name }) {
+  const hangoutKey = `${name}-unread-hangouts`;
+  localStorage.removeItem(hangoutKey);
+  dispatch({
+    type: actionTypes.UNREAD_HANGOUTS_UPDATED,
+    unreadhangouts: [],
+  });
+}

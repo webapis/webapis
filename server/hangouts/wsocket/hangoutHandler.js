@@ -90,7 +90,18 @@ export async function hangoutHandler({ collection, hangout, ws, connections }) {
       ) {
         await collection.updateOne(
           { username: ws.user.username },
-          { $pull: { unreads: { timestamp, username } } }
+          { $pull: { unreads: { username } } }
+        );
+        await collection.updateOne(
+          { username },
+          {
+            $pull: {
+              unreads: {
+                username: ws.user.username,
+                state: { $ne: "BLOCKER" },
+              },
+            },
+          }
         );
         debugger;
       }

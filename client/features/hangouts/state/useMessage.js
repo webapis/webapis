@@ -10,6 +10,7 @@ import {
   saveRecievedMessage,
   updateHangout,
   removeUnread,
+  removeUnreads,
 } from "./local-storage/common";
 export function useMessage({ message, username, dispatch, focusedHangout }) {
   const { onAppRoute } = useAppRoute();
@@ -47,6 +48,7 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
       case hangoutStates.BLOCKED:
         updateHangout({ dispatch, hangout, name: username });
         updateSentMessage({ hangout, name: username, dispatch });
+        removeUnreads({ dispatch, name });
         dispatch({ type: actionTypes.HANGOUT_UPDATED, hangout });
         dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
         onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
@@ -85,6 +87,7 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
         break;
       case hangoutStates.BLOCKER:
         updateHangout({ dispatch, name: username, hangout });
+        removeUnreads({ dispatch, name });
         break;
       case hangoutStates.DECLINER:
         updateHangout({ dispatch, name: username, hangout });
