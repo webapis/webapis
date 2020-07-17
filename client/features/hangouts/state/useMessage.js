@@ -25,21 +25,18 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
         });
         break;
       case hangoutStates.INVITED:
-        debugger;
         updateHangout({ dispatch, hangout, name: username });
         updateSentMessage({ hangout, name: username, dispatch });
         dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
         onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
         break;
       case hangoutStates.DECLINED:
-        debugger;
         updateUnread({ dispatch, hangout, name: username });
         updateSentMessage({ hangout, name: username, dispatch });
         dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
         onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
         break;
       case hangoutStates.ACCEPTED:
-        debugger;
         updateUnread({ dispatch, hangout, name: username });
         updateHangout({ dispatch, hangout, name: username });
         updateSentMessage({ hangout, name: username, dispatch });
@@ -47,14 +44,10 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
         onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
         break;
       case hangoutStates.BLOCKED:
-        // saveBlocked({
-        //   dispatch,
-        //   hangout,
-        //   name: username,
-        //   focusedHangout,
-        //   onAppRoute,
-        //   offline,
-        // });
+        updateHangout({ dispatch, hangout, name: username });
+        debugger;
+        dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
+        onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
         break;
 
       case hangoutStates.MESSAGED:
@@ -75,7 +68,6 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
   function onHangout({ hangout }) {
     switch (hangout.state) {
       case hangoutStates.ACCEPTER:
-        debugger;
         updateHangout({ dispatch, name: username, hangout });
         saveRecievedMessage({
           hangout,
@@ -96,7 +88,6 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
         // });
         break;
       case hangoutStates.DECLINER:
-        debugger;
         updateHangout({ dispatch, name: username, hangout });
         break;
       case hangoutStates.INVITER:

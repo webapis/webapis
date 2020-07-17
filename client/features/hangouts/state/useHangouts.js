@@ -56,7 +56,7 @@ export function useHangouts() {
   function onAccept() {
     try {
       const { email, timestamp } = hangout;
-      debugger;
+
       const accept = {
         username: hangout.username,
         email,
@@ -64,7 +64,7 @@ export function useHangouts() {
         command: "ACCEPT",
         timestamp,
       };
-      debugger;
+
       saveHangout({ hangout: accept, name: username, dispatch });
       saveSentMessage({
         hangout: accept,
@@ -87,7 +87,7 @@ export function useHangouts() {
 
       const decline = {
         username: hangout.username,
-        email: hangout.email,
+        email,
         message: { text: "Your invitation declined", timestamp },
         command: "DECLINE",
         timestamp,
@@ -112,7 +112,7 @@ export function useHangouts() {
   function onMessage() {
     const { email } = hangout;
     const timestamp = Date.now();
-    debugger;
+
     const message =
       messageText !== "" ? { text: messageText, timestamp } : null;
     const messaging = {
@@ -129,7 +129,28 @@ export function useHangouts() {
       pendingHangout: messaging,
     });
   }
-  function onBlock() {}
+  function onBlock() {
+    try {
+      const { email, timestamp } = hangout;
+
+      const block = {
+        username: hangout.username,
+        email,
+        message: null,
+        command: "BLOCK",
+        timestamp,
+      };
+
+      updateHangout({ hangout: block, name: username, dispatch });
+
+      dispatch({
+        type: actionTypes.SENDING_HANGOUT_STARTED,
+        pendingHangout: block,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
   function onUnblock() {}
 
   return {
