@@ -47,6 +47,7 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
       case hangoutStates.BLOCKED:
         updateHangout({ dispatch, hangout, name: username });
         updateSentMessage({ hangout, name: username, dispatch });
+        dispatch({ type: actionTypes.HANGOUT_UPDATED, hangout });
         dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
         onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
         break;

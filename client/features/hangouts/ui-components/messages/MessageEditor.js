@@ -33,6 +33,7 @@ export default function MessageEditor({
     <div>
       <div className="input-group mb-3">
         <input
+          disabled={hangout && hangout.state === "BLOCKED"}
           type="text"
           class="form-control"
           aria-label="Recipient's username"

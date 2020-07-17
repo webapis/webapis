@@ -1,4 +1,4 @@
-describe("onMessage", () => {
+describe("onBlock", () => {
   beforeEach(() => {
     if (Cypress.env("back") === "node") {
       const demo = {
@@ -24,7 +24,7 @@ describe("onMessage", () => {
       });
     }
   });
-  it("message is sent succefully", () => {
+  it("user is blocked succefully", () => {
     let timestamp = Date.now();
     const inviter = {
       username: "bero",
