@@ -4,6 +4,7 @@ import { reducer, initState } from "./reducer";
 import { useMessage } from "./useMessage";
 import { useUserName } from "features/authentication/state/useUserName";
 import { actionTypes } from "./actionTypes";
+import { clientCommands } from "./clientCommands";
 const HangoutContext = createContext();
 export function useHangoutContext() {
   const context = useContext(HangoutContext);
@@ -26,7 +27,28 @@ export default function HangoutsProvider(props) {
     focusedHangout: hangout,
   });
 
-  useEffect(() => {}, [hangout]);
+  useEffect(() => {
+    if (hangout) {
+      switch (hangout.state) {
+        case "ACCEPTER":
+        case "DECLINER":
+        case "BLOCKER":
+        case "MESSANGER":
+        case "UNBLOCKER":
+          dispatch({
+            type: actionTypes.SENDING_HANGOUT_STARTED,
+            pendingHangout: { ...hangout, command: clientCommands.READ },
+          });
+        default:
+      }
+    }
+  }, [hangout]);
+
+  useEffect(() => {
+    if (!username) {
+      dispatch({ type: actionTypes.SET_HANGOUT_TO_INIT_STATE });
+    }
+  }, [username]);
   useEffect(() => {
     const unreadhangoutKey = `${username}-unread-hangouts`;
     const unreadhangouts = JSON.parse(localStorage.getItem(unreadhangoutKey));

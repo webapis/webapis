@@ -79,6 +79,7 @@ export async function hangoutHandler({ collection, hangout, ws, connections }) {
         { username, "hangouts.username": ws.user.username },
         { $set: { "hangouts.$": target } }
       );
+
       debugger;
       //PUSH UNREADS ON TARGET
       await collection.updateOne({ username }, { $push: { unreads: target } });

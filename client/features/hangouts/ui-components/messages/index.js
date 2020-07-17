@@ -55,6 +55,8 @@ export default function Messages({
       >
         {messages &&
           messages.length > 0 &&
+          floatMessages &&
+          floatMessages.length > 0 &&
           floatMessages({ messages: sortMessages({ messages }), username }).map(
             (m) => (
               <div style={{ display: "flex" }}>
@@ -91,13 +93,13 @@ function floatMessages({ messages, username }) {
       }
     });
   } else {
-    return null;
+    return [];
   }
 }
 function sortMessages({ messages }) {
   if (messages) {
     return messages.sort();
   } else {
-    return null;
+    return [];
   }
 }
