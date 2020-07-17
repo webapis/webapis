@@ -114,7 +114,7 @@ export async function hangoutHandler({ collection, hangout, ws, connections }) {
       );
       debugger;
       //PUSH UNREADS ON TARGET
-      await collection.updateOne({ username }, { $push: { unreads: target } });
+      // await collection.updateOne({ username }, { $push: { unreads: target } });
       debugger;
     }
     //TARGET ONLINE: send state change//

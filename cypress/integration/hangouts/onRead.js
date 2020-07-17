@@ -55,21 +55,7 @@ describe("onRead", () => {
       dbName: "auth",
       collectionName: "users",
     });
-    let messageTimeStamp = Date.now();
-    //   const messanger = {
-    //     username: "demo",
-    //     timestamp: messageTimeStamp,
-    //     message: { text: "Hello demo", timestamp: messageTimeStamp },
-    //     email: "demo@gmail.com",
-    //     command: "MESSAGE",
-    //   };
 
-    //   cy.task("seed:onHangout", {
-    //     hangout: messanger,
-    //     senderUsername: "bero",
-    //     dbName: "auth",
-    //     collectionName: "users",
-    //   });
     if (Cypress.env("back") === "node") {
       cy.loginByEmail({
         email: "demo@gmail.com",
@@ -78,9 +64,9 @@ describe("onRead", () => {
     }
 
     cy.visit("/");
-    // cy.get("[data-testid=hangouts-link]").click();
-    //  cy.get("[data-testid=unread-link]").click();
-
-    // cy.get("[data-testid=bero]").click();
+    cy.get("[data-testid=message-count]").contains(1);
+    cy.get("[data-testid=unread-link]").click();
+    cy.get("[data-testid=bero]").click();
+    cy.get("[data-testid=message-count]").contains(0);
   });
 });

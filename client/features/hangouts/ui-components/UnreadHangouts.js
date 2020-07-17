@@ -14,7 +14,7 @@ export default function UnreadHangouts({
               onClick={() => onUnreadSelect({ hangout: u })}
               className="list-group-item d-flex justify-content-between align-items-center list-group-item-action"
             >
-              {u.username}
+              {u.username},{u.message && u.message.text}
               <span
                 onClick={() => {
                   onUnreadRemove({ hangout: u });

@@ -35,11 +35,13 @@ export default function HangoutsProvider(props) {
         case "BLOCKER":
         case "MESSANGER":
         case "UNBLOCKER":
+          debugger;
           dispatch({
             type: actionTypes.SENDING_HANGOUT_STARTED,
             pendingHangout: { ...hangout, command: clientCommands.READ },
           });
         default:
+          break;
       }
     }
   }, [hangout]);

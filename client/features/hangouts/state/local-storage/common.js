@@ -128,13 +128,11 @@ export function updateHangout({ dispatch, name, hangout }) {
   localHangouts.splice(hangoutIndex, 1, hangout);
   localStorage.setItem(hangoutKey, JSON.stringify(localHangouts));
   dispatch({ type: actionTypes.HANGOUTS_UPDATED, hangouts: localHangouts });
-  dispatch({ type: actionTypes.HANGOUT_UPDATED, hangout });
 }
 
 export function saveHangout({ hangout, dispatch, name }) {
   const hangoutKey = `${name}-hangouts`;
   let localHangouts = localStorage.getItem(hangoutKey);
-  const inviteHangout = { ...hangout };
 
   if (localHangouts && localHangouts.length > 0) {
     localStorage.setItem(
@@ -149,6 +147,20 @@ export function saveHangout({ hangout, dispatch, name }) {
   } else {
     localStorage.setItem(hangoutKey, JSON.stringify([hangout]));
     dispatch({ type: actionTypes.HANGOUTS_UPDATED, hangouts: [hangout] });
-    dispatch({ type: actionTypes.HANGOUT_UPDATED, hangout });
   }
+}
+
+export function removeUnread({ hangout, dispatch, name }) {
+  const { username, timestamp } = hangout;
+  const hangoutKey = `${name}-unread-hangouts`;
+  let localHangouts = JSON.parse(localStorage.getItem(hangoutKey));
+  const hangoutIndex = localHangouts.findIndex(
+    (f) => f.username === username && f.timestamp === timestamp
+  );
+  localHangouts.splice(hangoutIndex, 1);
+  localStorage.setItem(hangoutKey, JSON.stringify(localHangouts));
+  dispatch({
+    type: actionTypes.UNREAD_HANGOUTS_UPDATED,
+    unreadhangouts: localHangouts,
+  });
 }

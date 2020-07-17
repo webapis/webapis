@@ -9,6 +9,7 @@ import {
   saveUnread,
   saveRecievedMessage,
   updateHangout,
+  removeUnread,
 } from "./local-storage/common";
 export function useMessage({ message, username, dispatch, focusedHangout }) {
   const { onAppRoute } = useAppRoute();
@@ -62,7 +63,7 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
       case hangoutStates.READ:
         updateHangout({ dispatch, name: username, hangout });
         dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
-        updateUnread({ dispatch, hangout, name: username, dState: "read" });
+        removeUnread({ dispatch, hangout, name: username });
         break;
       default:
         break;

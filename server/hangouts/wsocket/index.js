@@ -11,6 +11,7 @@ export default async function hangouts({ hangout, ws, client, connections }) {
     case clientCommands.INVITE:
     case clientCommands.MESSAGE:
     case clientCommands.UNBLOCK:
+    case clientCommands.READ:
       hangoutHandler({ collection, hangout, ws, connections });
       break;
     default:

@@ -118,7 +118,7 @@ module.exports = async function onHangoutSeed({
       );
       debugger;
       //PUSH UNREADS ON TARGET
-      await collection.updateOne({ username }, { $push: { unreads: target } });
+      //   await collection.updateOne({ username }, { $push: { unreads: target } });
     } ////
     debugger;
     return result;

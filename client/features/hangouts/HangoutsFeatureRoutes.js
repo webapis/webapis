@@ -86,6 +86,7 @@ export default function HangoutsFeatureRoutes(props) {
         "/BLOCKED",
         "/UNBLOCKED",
         "/UNBLOCKER",
+        "/READ",
       ]}
     >
       <Suspense fallback={<Loading />}>
