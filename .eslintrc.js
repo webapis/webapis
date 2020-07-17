@@ -21,5 +21,6 @@ module.exports = {
     Parse: false,
     ip: false,
     PREACT_APP_BACK: false,
+    URLSearchParams: true,
   },
 };
