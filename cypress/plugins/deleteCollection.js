@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
-const url = 'mongodb://localhost:27017';
-const MongoClient = require('mongodb').MongoClient;
+const url = "mongodb://localhost:27017";
+const MongoClient = require("mongodb").MongoClient;
 const client = new MongoClient(url, {
   useUnifiedTopology: true,
   useNewUrlParser: true,

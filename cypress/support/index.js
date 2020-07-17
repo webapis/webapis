@@ -14,14 +14,14 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import './commands'
-import './loginByEmail'
-import './parse/signup'
-import './parse/createUser'
-import './parse/loginByEmail'
-import './parse/deleteUser'
-Cypress.on('window:before:load', win => {
-    delete win.fetch;
-  });
+import "./commands";
+import "./loginByEmail";
+import "./parse/signup";
+import "./parse/createUser";
+import "./parse/loginByEmail";
+import "./parse/deleteUser";
+Cypress.on("window:before:load", (win) => {
+  delete win.fetch;
+});
 // Alternatively you can use CommonJS syntax:
 // require('./commands')

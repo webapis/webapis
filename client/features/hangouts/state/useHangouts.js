@@ -110,7 +110,7 @@ export function useHangouts() {
   }
 
   function onMessage() {
-    const { email } = hangout;
+    const { email, state } = hangout;
     const timestamp = Date.now();
 
     const message =
@@ -122,27 +122,59 @@ export function useHangouts() {
       command: "MESSAGE",
       timestamp,
     };
-    updateHangout({ hangout: messaging, name: username, dispatch });
-    saveSentMessage({ hangout, dispatch, name: username, dState: "pending" });
-    dispatch({
-      type: actionTypes.SENDING_HANGOUT_STARTED,
-      pendingHangout: messaging,
+    saveSentMessage({
+      hangout: messaging,
+      dispatch,
+      name: username,
+      dState: "pending",
     });
+    if (hangout.state === "BLOCKER") {
+      debugger;
+      saveSentMessage({
+        hangout: {
+          ...hangout,
+          message: {
+            ...hangout.message,
+            text: "You cannot send this message because you are blocked",
+            type: "blocker",
+          },
+        },
+        dispatch,
+        name: username,
+        dState: "pending",
+      });
+    } else {
+      updateHangout({ hangout: messaging, name: username, dispatch });
+
+      dispatch({
+        type: actionTypes.SENDING_HANGOUT_STARTED,
+        pendingHangout: messaging,
+      });
+    }
   }
   function onBlock() {
     try {
-      const { email, timestamp } = hangout;
-
+      const { email } = hangout;
+      const timestamp = Date.now();
       const block = {
         username: hangout.username,
         email,
-        message: null,
+        message: {
+          text: "You have blocked this user",
+          timestamp,
+          type: "blocked",
+        },
         command: "BLOCK",
         timestamp,
       };
 
       updateHangout({ hangout: block, name: username, dispatch });
-
+      saveSentMessage({
+        hangout: block,
+        dispatch,
+        name: username,
+        dState: "pending",
+      });
       dispatch({
         type: actionTypes.SENDING_HANGOUT_STARTED,
         pendingHangout: block,

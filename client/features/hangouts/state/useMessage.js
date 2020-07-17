@@ -31,13 +31,13 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
         onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
         break;
       case hangoutStates.DECLINED:
-        updateUnread({ dispatch, hangout, name: username });
+        updateUnread({ dispatch, hangout, name: username, dState: "read" });
         updateSentMessage({ hangout, name: username, dispatch });
         dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
         onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
         break;
       case hangoutStates.ACCEPTED:
-        updateUnread({ dispatch, hangout, name: username });
+        updateUnread({ dispatch, hangout, name: username, dState: "read" });
         updateHangout({ dispatch, hangout, name: username });
         updateSentMessage({ hangout, name: username, dispatch });
         dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
@@ -45,11 +45,10 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
         break;
       case hangoutStates.BLOCKED:
         updateHangout({ dispatch, hangout, name: username });
-        debugger;
+        updateSentMessage({ hangout, name: username, dispatch });
         dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
         onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
         break;
-
       case hangoutStates.MESSAGED:
         updateHangout({ dispatch, name: username, hangout });
         updateSentMessage({
@@ -59,6 +58,11 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
           dState: "delivered",
         });
         dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
+        break;
+      case hangoutStates.READ:
+        updateHangout({ dispatch, name: username, hangout });
+        dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
+        updateUnread({ dispatch, hangout, name: username, dState: "read" });
         break;
       default:
         break;
@@ -78,14 +82,7 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
         saveUnread({ dispatch, name: username, hangout });
         break;
       case hangoutStates.BLOCKER:
-        // saveBlocker({
-        //   dispatch,
-        //   hangout,
-        //   name: username,
-        //   focusedHangout,
-        //   onAppRoute,
-        //   unread,
-        // });
+        updateHangout({ dispatch, name: username, hangout });
         break;
       case hangoutStates.DECLINER:
         updateHangout({ dispatch, name: username, hangout });
@@ -95,6 +92,7 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
           dispatch,
           hangout,
           name: username,
+          dState: "unread",
         });
         saveRecievedMessage({
           hangout,
@@ -109,6 +107,7 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
           dispatch,
           hangout,
           name: username,
+          dState: "unread",
         });
         saveRecievedMessage({
           hangout,

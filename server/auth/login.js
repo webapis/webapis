@@ -1,10 +1,9 @@
-
-import apiurl from 'url';
-import * as validations from './validations/validations';
-import httpStatus from './http-status';
-import { getCredentials } from './http-auth';
-const jwt = require('jsonwebtoken');
-const passhash = require('../../server/auth/hashPassword');
+import apiurl from "url";
+import * as validations from "./validations/validations";
+import httpStatus from "./http-status";
+import { getCredentials } from "./http-auth";
+const jwt = require("jsonwebtoken");
+const passhash = require("../../server/auth/hashPassword");
 
 export default async function ({ req, res, collection }) {
   try {
@@ -25,7 +24,7 @@ export default async function ({ req, res, collection }) {
     }
     if (errors.length > 0) {
       res.statusCode = 400;
-      res.writeHead(400, { 'Content-Type': 'application/json' });
+      res.writeHead(400, { "Content-Type": "application/json" });
       res.write(JSON.stringify({ errors }));
       res.end();
     } else {
@@ -35,9 +34,8 @@ export default async function ({ req, res, collection }) {
         errors.push(httpStatus.emailorusernameNotValid);
       }
       if (errors.length > 0) {
-        
         res.statusCode = 400;
-        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.writeHead(400, { "Content-Type": "application/json" });
         res.write(JSON.stringify({ errors }));
         res.end();
       } else {
@@ -48,16 +46,18 @@ export default async function ({ req, res, collection }) {
             user = await collection.findOne({ email: emailorusername });
 
             if (user === null) {
-              
               // email is not registered 408  ----------------------------///Cookies
               errors.push(httpStatus.credentialInvalid);
-              res.writeHead(400, { 'Content-Type': 'application/json' });
+              res.writeHead(400, { "Content-Type": "application/json" });
               res.write(JSON.stringify({ errors }));
               res.end();
             } else {
-            
-  
-              resBcrypt = passhash.isPasswordCorrect(user.hash,user.salt,user.iterations,password);
+              resBcrypt = passhash.isPasswordCorrect(
+                user.hash,
+                user.salt,
+                user.iterations,
+                password
+              );
 
               if (resBcrypt) {
                 const payload = {
@@ -70,8 +70,8 @@ export default async function ({ req, res, collection }) {
                 });
                 // success login---------------------------------------------
                 res.writeHead(200, {
-                  'Content-Type': 'application/json',
-                  'Set-Cookie': `${user.username}=${token};Expires=Wed, 21 Oct 2025 07:28:00 GMT;  Path=/hangouts`,
+                  "Content-Type": "application/json",
+                  "Set-Cookie": `${user.username}=${token};Expires=Wed, 21 Oct 2025 07:28:00 GMT;  Path=/hangouts`,
                 });
                 res.write(
                   JSON.stringify({
@@ -82,10 +82,9 @@ export default async function ({ req, res, collection }) {
                 );
                 res.end();
               } else {
-                
                 // invalid credential 401-------------------------------------
                 errors.push(httpStatus.credentialInvalid);
-                res.writeHead(400, { 'Content-Type': 'application/json' });
+                res.writeHead(400, { "Content-Type": "application/json" });
                 res.write(JSON.stringify({ errors }));
                 res.end();
               }
@@ -95,17 +94,18 @@ export default async function ({ req, res, collection }) {
             user = await collection.findOne({ username: emailorusername });
 
             if (!user) {
-              
               // username is not registered 411  ------------------------------
               errors.push(httpStatus.usernameIsNotRegistered);
-              res.writeHead(400, { 'Content-Type': 'application/json' });
+              res.writeHead(400, { "Content-Type": "application/json" });
               res.write(JSON.stringify({ errors }));
               res.end();
             } else {
-
-            
-              resBcrypt = passhash.isPasswordCorrect(user.hash,user.salt,user.iterations,password);
-          
+              resBcrypt = passhash.isPasswordCorrect(
+                user.hash,
+                user.salt,
+                user.iterations,
+                password
+              );
 
               if (resBcrypt) {
                 const payload = {
@@ -118,8 +118,8 @@ export default async function ({ req, res, collection }) {
                 });
                 //success login 200------------------------------------------
                 res.writeHead(200, {
-                  'Content-Type': 'application/json',
-                  'Set-Cookie': `${user.username}=${token};Expires=Wed, 21 Oct 2025 07:28:00 GMT; Path=/hangouts`,
+                  "Content-Type": "application/json",
+                  "Set-Cookie": `${user.username}=${token};Expires=Wed, 21 Oct 2025 07:28:00 GMT; Path=/hangouts`,
                 });
                 res.write(
                   JSON.stringify({
@@ -131,10 +131,9 @@ export default async function ({ req, res, collection }) {
 
                 res.end();
               } else {
-                
                 // invalid credential 401 ------------------------------------
                 errors.push(httpStatus.credentialInvalid);
-                res.writeHead(400, { 'Content-Type': 'application/json' });
+                res.writeHead(400, { "Content-Type": "application/json" });
                 res.write(JSON.stringify({ errors }));
                 res.end();
               }
@@ -146,8 +145,8 @@ export default async function ({ req, res, collection }) {
   } catch (error) {
     const err = error;
 
-    console.log('err---------------',err)
-    res.writeHead(500, { 'Content-Type': 'application/json' });
+    console.log("err---------------", err);
+    res.writeHead(500, { "Content-Type": "application/json" });
     res.write(JSON.stringify({ error }));
     res.end();
   }
