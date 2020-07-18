@@ -173,3 +173,14 @@ export function removeUnreads({ dispatch, name }) {
     unreadhangouts: [],
   });
 }
+
+export function loadMessages({ hangout, name, dispatch }) {
+  const { username } = hangout;
+  const messageKey = `${name}-${username}-messages`;
+  const messages = JSON.parse(localStorage.getItem(messageKey));
+  if (messages && messages.length > 0) {
+    dispatch({ type: actionTypes.MESSAGES_UPDATED, messages });
+  } else {
+    dispatch({ type: actionTypes.MESSAGES_UPDATED, messages: [] });
+  }
+}

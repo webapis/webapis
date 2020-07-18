@@ -110,6 +110,7 @@ export function useHangouts() {
   }
 
   function onMessage() {
+    changeMessageText({ dispatch, text: "" });
     const { email, state } = hangout;
     const timestamp = Date.now();
 

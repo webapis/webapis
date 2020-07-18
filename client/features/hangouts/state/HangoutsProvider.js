@@ -5,6 +5,7 @@ import { useMessage } from "./useMessage";
 import { useUserName } from "features/authentication/state/useUserName";
 import { actionTypes } from "./actionTypes";
 import { clientCommands } from "./clientCommands";
+import { loadMessages } from "./local-storage/common";
 const HangoutContext = createContext();
 export function useHangoutContext() {
   const context = useContext(HangoutContext);
@@ -43,6 +44,9 @@ export default function HangoutsProvider(props) {
         default:
           break;
       }
+
+      // load messages from local storage
+      loadMessages({ hangout, name: username, dispatch });
     }
   }, [hangout]);
 

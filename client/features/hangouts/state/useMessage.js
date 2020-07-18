@@ -108,7 +108,7 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
         break;
       case hangoutStates.MESSANGER:
         updateHangout({ dispatch, name: username, hangout });
-        if (focusedHangout.username !== hangout.username) {
+        if (focusedHangout && focusedHangout.username !== hangout.username) {
           saveUnread({
             dispatch,
             hangout,

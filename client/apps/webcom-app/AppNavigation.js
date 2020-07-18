@@ -12,6 +12,7 @@ import { useHangouts } from "features/hangouts";
 import GearIcon from "icons/bootstrap/GearIcon";
 import PersonPlusIcon from "icons/bootstrap/PersonPlusIcon";
 import { FeatureRoute } from "components/app-route";
+import { WifiStatus } from "components/browser-api/online-status";
 export function AppNavigation() {
   const { username } = useUserName();
   const { onSignOut } = useAuth();
@@ -110,6 +111,9 @@ export function AppNavigation() {
                   <PersonPlusIcon width="1.5em" height="1.5em" />
                 </button>
               </FeatureRoute>
+            </NavItem>
+            <NavItem>
+              <WifiStatus fill="white" />
             </NavItem>
           </Nav>
         </NavBarCollapse>
