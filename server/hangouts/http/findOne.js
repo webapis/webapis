@@ -14,46 +14,52 @@ export default async function findOne({ req, res, collection }) {
 
     const { username } = decoded;
     // finduser
-
-    let user = await collection.findOne({ username });
-
-    if (
-      user &&
-      user.hangouts &&
-      user.hangouts.find((h) => h.username === search)
-    ) {
-      // search for users hangouts
-
+    if (search === username) {
       res.writeHead(200, { "Content-Type": "application/json" });
       res.write(
         JSON.stringify({
-          hangouts: user.hangouts,
+          hangouts: [],
         })
       );
       res.end();
     } else {
-      let users = await collection
-        .find({ username: { $regex: new RegExp(search, "i") } })
-        .project({ salt: 0, hash: 0, iterations: 0 })
-        .toArray();
+      let user = await collection.findOne({ username });
 
-      res.writeHead(200, { "Content-Type": "application/json" });
-      res.write(
-        JSON.stringify({
-          hangouts:
-            users &&
-            users.map((u) => {
-              return { ...u, state: "INVITE" };
-            }),
-        })
-      );
-      res.end();
+      if (
+        user &&
+        user.hangouts &&
+        user.hangouts.find((h) => h.username === search)
+      ) {
+        // search for users hangouts
+
+        res.writeHead(200, { "Content-Type": "application/json" });
+        res.write(
+          JSON.stringify({
+            hangouts: user.hangouts,
+          })
+        );
+        res.end();
+      } else {
+        let users = await collection
+          .find({ username: { $regex: new RegExp(search, "i") } })
+          .project({ salt: 0, hash: 0, iterations: 0 })
+          .toArray();
+
+        res.writeHead(200, { "Content-Type": "application/json" });
+        res.write(
+          JSON.stringify({
+            hangouts:
+              users &&
+              users.map((u) => {
+                return { ...u, state: "INVITE" };
+              }),
+          })
+        );
+        res.end();
+      }
     }
-
-    //
   } catch (error) {
     const err = error;
-
     res.statusCode = 500;
     res.writeHead(500, { "Content-Type": "application/json" });
     res.write(JSON.stringify({ error }));

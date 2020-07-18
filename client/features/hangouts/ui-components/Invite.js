@@ -35,6 +35,7 @@ export default function Invite({
       />
       <Center>
         <Button
+          disables={messageText === "" || messageText.length < 3}
           loading={loading}
           id="INVITE"
           onClick={onInvite}

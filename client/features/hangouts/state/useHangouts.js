@@ -34,6 +34,7 @@ export function useHangouts() {
     const timestamp = Date.now();
     const message =
       messageText !== "" ? { text: messageText, timestamp } : null;
+
     const invitation = {
       username: hangout.username,
       email,
@@ -48,10 +49,12 @@ export function useHangouts() {
       name: username,
       dState: "pending",
     });
+
     dispatch({
       type: actionTypes.SENDING_HANGOUT_STARTED,
       pendingHangout: invitation,
     });
+    changeMessageText({ dispatch, text: "" });
   }
   function onAccept() {
     try {
@@ -110,7 +113,6 @@ export function useHangouts() {
   }
 
   function onMessage() {
-    changeMessageText({ dispatch, text: "" });
     const { email, state } = hangout;
     const timestamp = Date.now();
 
@@ -152,6 +154,7 @@ export function useHangouts() {
         pendingHangout: messaging,
       });
     }
+    changeMessageText({ dispatch, text: "" });
   }
   function onBlock() {
     try {
