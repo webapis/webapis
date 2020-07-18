@@ -1,6 +1,6 @@
 import "whatwg-fetch";
 import { h, render } from "preact";
-import { AppProviders } from "./AppProviders";
+import { RootProviders } from "./RootProviders";
 import { App } from "./App";
 Parse.initialize(
   "zttpnqTr8refktBWNekZhZxSxwPaAAnElQ9k7CuA",
@@ -11,9 +11,9 @@ Parse.serverURL = `https://${ip}:1337/parse`;
 //Parse.serverURL = 'https://parseapi.back4app.com/'
 //Parse.liveQueryServerURL = `wss://webapis.back4app.io`
 render(
-  <AppProviders>
+  <RootProviders>
     <App />
-  </AppProviders>,
+  </RootProviders>,
 
   document.body
 );

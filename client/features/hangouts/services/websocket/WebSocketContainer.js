@@ -6,7 +6,9 @@ import { actionTypes } from "../../state/actionTypes";
 import { useUserName } from "features/authentication/state/useUserName";
 import { useAuth } from "features/authentication";
 import useOnlineStatus from "components/browser-api/online-status";
+import { useApplication } from "components/app-provider";
 export function WebSocketContainer(props) {
+  const { displayError } = useApplication();
   const { state: authState } = useAuth();
   const { username, token } = useUserName();
   const [socket, setSocket] = useState(null);
@@ -30,24 +32,29 @@ export function WebSocketContainer(props) {
   }, [username, socket, onlineStatus]);
 
   useEffect(() => {
-    if (socket) {
-      socket.onmessage = (serverMessage) => {
-        const msg = JSON.parse(serverMessage.data);
-
-        dispatch({ type: actionTypes.SERVER_MESSAGE_RECIEVED, message: msg });
-      };
-      socket.onopen = () => {
-        console.log("con open");
-        dispatch({ type: actionTypes.OPEN });
-      };
-      socket.onclose = () => {
-        console.log("con closed");
-        setSocket(null);
-        dispatch({ type: actionTypes.CLOSED });
-      };
-      socket.onerror = (error) => {
-        dispatch({ type: actionTypes.SOCKET_ERROR, error });
-      };
+    try {
+      if (socket) {
+        socket.onmessage = (serverMessage) => {
+          const msg = JSON.parse(serverMessage.data);
+          dispatch({ type: actionTypes.SERVER_MESSAGE_RECIEVED, message: msg });
+        };
+        socket.onopen = () => {
+          console.log("con open");
+          dispatch({ type: actionTypes.OPEN });
+        };
+        socket.onclose = () => {
+          console.log("con closed");
+          setSocket(null);
+          dispatch({ type: actionTypes.CLOSED });
+        };
+        socket.onerror = (error) => {
+          debugger;
+          dispatch({ type: actionTypes.SOCKET_ERROR, error });
+          displayError({ error });
+        };
+      }
+    } catch (error) {
+      displayError({ error });
     }
   }, [socket]);
 
@@ -72,12 +79,10 @@ export function WebSocketContainer(props) {
   function sendPendingHangout() {
     try {
       socket.send(JSON.stringify(pendingHangout));
-
       dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
     } catch (error) {
-      console.error(error);
+      displayError({ error });
     }
   }
-
   return children;
 }

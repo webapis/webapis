@@ -2,6 +2,7 @@ import { h } from "preact";
 import { useHangoutContext } from "./HangoutsProvider";
 import { useAuthContext } from "features/authentication";
 import { useAppRoute } from "components/app-route";
+import { useApplication } from "components/app-provider";
 import { changeMessageText } from "./actions";
 
 import {
@@ -13,48 +14,61 @@ import {
 import { actionTypes } from "./actionTypes";
 
 export function useHangouts() {
+  const { displayError } = useApplication();
   const { onAppRoute } = useAppRoute();
   const authContext = useAuthContext();
   const username = authContext.state.user && authContext.state.user.username;
   const [state, dispatch] = useHangoutContext();
   const { hangout, hangouts, messageText, messages, readyState } = state;
   function onNavigation(e) {
-    e.stopPropagation();
-    const id = e.currentTarget.id;
-    onAppRoute({ featureRoute: `/${id}`, route: "/hangouts" });
+    try {
+      e.stopPropagation();
+      const id = e.currentTarget.id;
+      onAppRoute({ featureRoute: `/${id}`, route: "/hangouts" });
+    } catch (error) {
+      displayError({ error });
+    }
   }
 
   function onMessageText(e) {
-    const text = e.target.value;
-    changeMessageText({ dispatch, text });
+    try {
+      const text = e.target.value;
+      changeMessageText({ dispatch, text });
+    } catch (error) {
+      displayError({ error });
+    }
   }
 
   function onInvite() {
-    const { email } = hangout;
-    const timestamp = Date.now();
-    const message =
-      messageText !== "" ? { text: messageText, timestamp } : null;
+    try {
+      const { email } = hangout;
+      const timestamp = Date.now();
+      const message =
+        messageText !== "" ? { text: messageText, timestamp } : null;
 
-    const invitation = {
-      username: hangout.username,
-      email,
-      message,
-      command: "INVITE",
-      timestamp,
-    };
-    saveHangout({ hangout: invitation, name: username, dispatch });
-    saveSentMessage({
-      hangout: invitation,
-      dispatch,
-      name: username,
-      dState: "pending",
-    });
+      const invitation = {
+        username: hangout.username,
+        email,
+        message,
+        command: "INVITE",
+        timestamp,
+      };
+      saveHangout({ hangout: invitation, name: username, dispatch });
+      saveSentMessage({
+        hangout: invitation,
+        dispatch,
+        name: username,
+        dState: "pending",
+      });
 
-    dispatch({
-      type: actionTypes.SENDING_HANGOUT_STARTED,
-      pendingHangout: invitation,
-    });
-    changeMessageText({ dispatch, text: "" });
+      dispatch({
+        type: actionTypes.SENDING_HANGOUT_STARTED,
+        pendingHangout: invitation,
+      });
+      changeMessageText({ dispatch, text: "" });
+    } catch (error) {
+      displayError({ error });
+    }
   }
   function onAccept() {
     try {
@@ -81,7 +95,7 @@ export function useHangouts() {
         pendingHangout: accept,
       });
     } catch (error) {
-      console.error(error);
+      displayError({ error });
     }
   }
   function onDecline() {
@@ -108,53 +122,57 @@ export function useHangouts() {
         pendingHangout: decline,
       });
     } catch (error) {
-      console.error(error);
+      displayError({ error });
     }
   }
 
   function onMessage() {
-    const { email, state } = hangout;
-    const timestamp = Date.now();
+    try {
+      const { email, state } = hangout;
+      const timestamp = Date.now();
 
-    const message =
-      messageText !== "" ? { text: messageText, timestamp } : null;
-    const messaging = {
-      username: hangout.username,
-      email,
-      message,
-      command: "MESSAGE",
-      timestamp,
-    };
-    saveSentMessage({
-      hangout: messaging,
-      dispatch,
-      name: username,
-      dState: "pending",
-    });
-    if (hangout.state === "BLOCKER") {
-      debugger;
+      const message =
+        messageText !== "" ? { text: messageText, timestamp } : null;
+      const messaging = {
+        username: hangout.username,
+        email,
+        message,
+        command: "MESSAGE",
+        timestamp,
+      };
       saveSentMessage({
-        hangout: {
-          ...hangout,
-          message: {
-            ...hangout.message,
-            text: "You cannot send this message because you are blocked",
-            type: "blocker",
-          },
-        },
+        hangout: messaging,
         dispatch,
         name: username,
         dState: "pending",
       });
-    } else {
-      updateHangout({ hangout: messaging, name: username, dispatch });
+      if (hangout.state === "BLOCKER") {
+        debugger;
+        saveSentMessage({
+          hangout: {
+            ...hangout,
+            message: {
+              ...hangout.message,
+              text: "You cannot send this message because you are blocked",
+              type: "blocker",
+            },
+          },
+          dispatch,
+          name: username,
+          dState: "pending",
+        });
+      } else {
+        updateHangout({ hangout: messaging, name: username, dispatch });
 
-      dispatch({
-        type: actionTypes.SENDING_HANGOUT_STARTED,
-        pendingHangout: messaging,
-      });
+        dispatch({
+          type: actionTypes.SENDING_HANGOUT_STARTED,
+          pendingHangout: messaging,
+        });
+      }
+      changeMessageText({ dispatch, text: "" });
+    } catch (error) {
+      displayError({ error });
     }
-    changeMessageText({ dispatch, text: "" });
   }
   function onBlock() {
     try {
@@ -184,7 +202,7 @@ export function useHangouts() {
         pendingHangout: block,
       });
     } catch (error) {
-      console.error(error);
+      displayError({ error });
     }
   }
   function onUnblock() {}
