@@ -33,13 +33,13 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
         onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
         break;
       case hangoutStates.DECLINED:
-        updateUnread({ dispatch, hangout, name: username, dState: "read" });
+        removeUnread({ dispatch, hangout, name: username });
         updateSentMessage({ hangout, name: username, dispatch });
         dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
         onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
         break;
       case hangoutStates.ACCEPTED:
-        updateUnread({ dispatch, hangout, name: username, dState: "read" });
+        removeUnread({ dispatch, hangout, name: username });
         updateHangout({ dispatch, hangout, name: username });
         updateSentMessage({ hangout, name: username, dispatch });
         dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
@@ -108,12 +108,15 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
         break;
       case hangoutStates.MESSANGER:
         updateHangout({ dispatch, name: username, hangout });
-        saveUnread({
-          dispatch,
-          hangout,
-          name: username,
-          dState: "unread",
-        });
+        if (focusedHangout.username !== hangout.username) {
+          saveUnread({
+            dispatch,
+            hangout,
+            name: username,
+            dState: "unread",
+          });
+        }
+
         saveRecievedMessage({
           hangout,
           dispatch,
