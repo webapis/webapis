@@ -1,4 +1,4 @@
-import { h } from "preact";
+import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
 
 const style = {
   boxShadow: `0px 3px 3px -2px rgba(0, 0, 0, 0.2),

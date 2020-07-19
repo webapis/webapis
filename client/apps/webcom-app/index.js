@@ -1,19 +1,17 @@
-import "whatwg-fetch";
-import { h, render } from "preact";
-import { RootProviders } from "./RootProviders";
-import { App } from "./App";
-Parse.initialize(
-  "zttpnqTr8refktBWNekZhZxSxwPaAAnElQ9k7CuA",
-  "Q7SHSFLG618izbySMpAsFAqgnOLaYgxNlwfFhOAr"
-); //PASTE HERE YOUR Back4App APPLICATION ID AND YOUR JavaScript KEY
-Parse.serverURL = `https://${ip}:1337/parse`;
+//import "whatwg-fetch";
+import {
+  h,
+  render,
+} from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
+import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
+
 //Parse.liveQueryServerURL = `https://${ip}:1337/parse`
 //Parse.serverURL = 'https://parseapi.back4app.com/'
 //Parse.liveQueryServerURL = `wss://webapis.back4app.io`
+const html = htm.bind(h);
+const app = html`<h1>Hello World!</h1>`;
 render(
-  <RootProviders>
-    <App />
-  </RootProviders>,
+  app,
 
   document.body
 );

@@ -1,5 +1,12 @@
-import { h, createContext } from "preact";
-import { useContext, useMemo, useReducer } from "preact/hooks";
+import {
+  h,
+  createContext,
+} from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
+import {
+  useContext,
+  useMemo,
+  useReducer,
+} from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/hooks.module.js";
 import appReducer, { initState } from "./appReducer";
 import { useAppRoute } from "components/app-route";
 import actionTypes from "./actionTypes";

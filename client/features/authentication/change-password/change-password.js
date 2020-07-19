@@ -1,5 +1,8 @@
 import "whatwg-fetch";
-import { h, render } from "preact";
+import {
+  h,
+  render,
+} from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
 import ChangePassword from "../ui-components/ChangePassword";
 import AuthProvider from "features/authentication";
 

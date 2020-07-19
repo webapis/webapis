@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
-import { h } from "preact";
-import ApplicationProvider from "components/app-provider";
+import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
+
 import AppRouteProvider from "components/app-route";
 import HangoutAdapter from "features/hangouts/state/HangoutAdapter";
 import HangoutsProvider from "features/hangouts/state/HangoutsProvider";
@@ -11,15 +11,13 @@ export function RootProviders({ children }) {
       title="Webcom"
       initState={{ route: "/", featureRoute: "/hangouts" }}
     >
-      <ApplicationProvider>
-        <AuthProvider>
-          <HangoutsProvider>
-            <HangoutAdapter socketUrl={`wss://${ip}:3000`}>
-              {children}
-            </HangoutAdapter>
-          </HangoutsProvider>
-        </AuthProvider>
-      </ApplicationProvider>
+      <AuthProvider>
+        <HangoutsProvider>
+          <HangoutAdapter socketUrl={`wss://${ip}:3000`}>
+            {children}
+          </HangoutAdapter>
+        </HangoutsProvider>
+      </AuthProvider>
     </AppRouteProvider>
   );
 }

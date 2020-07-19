@@ -1,4 +1,7 @@
-import { useEffect, useState } from "preact/hooks";
+import {
+  useEffect,
+  useState,
+} from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/hooks.module.js";
 export default function useOnlineStatus() {
   const [onlineStatus, setOnlineStatus] = useState(false);
   useEffect(() => {

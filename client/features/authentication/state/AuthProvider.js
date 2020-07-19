@@ -1,5 +1,13 @@
-import { h, createContext } from "preact";
-import { useReducer, useContext, useState, useMemo } from "preact/hooks";
+import {
+  h,
+  createContext,
+} from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
+import {
+  useReducer,
+  useContext,
+  useState,
+  useMemo,
+} from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/hooks.module.js";
 import { authReducer, initState } from "./authReducer";
 import AuthAdapter from "./AuthAdapter";
 const AuthContext = createContext();

@@ -1,4 +1,4 @@
-import { h } from "preact";
+import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
 import Signup from "features/authentication/ui-components/signup";
 const validationSuccess = {
   username: { isValid: true, message: "." },

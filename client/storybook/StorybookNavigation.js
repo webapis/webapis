@@ -1,5 +1,8 @@
-import { h } from "preact";
-import { useState, useEffect } from "preact/hooks";
+import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
+import {
+  useState,
+  useEffect,
+} from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/hooks.module.js";
 import Drawer from "controls/navigation/Drawer";
 import { AppBar } from "controls/navigation/AppBar";
 import { Menu } from "controls/navigation/Menu";

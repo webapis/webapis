@@ -1,4 +1,4 @@
-import { h } from "preact";
+import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
 export default function PersonAddIcon({
   height = 24,
   width = 24,

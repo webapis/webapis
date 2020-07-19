@@ -1,43 +1,29 @@
-import { h } from "preact";
-import { AppRoute } from "components/app-route";
-import { OnlineStatus } from "icons/onlineStatus";
+import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
+import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
+import { AppRoute } from "components/app-route/index";
+import { OnlineStatus } from "icons/onlineStatus/onlineStatus";
 import AuthDemoRoutes from "./authentication/route";
 import ComponentsRoutes from "./components/route";
 import HangoutRoutes from "./hangout/route";
-import BootstrapIcons from "./icons";
-// const hangouts = [
-//   { username: 'userone' },
-//   { username: 'usertwo' },
-//   { username: 'userthree' },
-// ];
-// const hangout = {
-//   username: 'testuser',
-//   email: 'test@gmail.com',
-//   message: { text: `Let's chat on Hangout!`, timestamp: 1590820782921 },
-// };
-// const message = {
-//   username: 'breno',
-//   text: `Let's Chat on Hangout!`,
-//   timestamp: 1591331767836,
-// };
-// //
+import BootstrapIcons from "./icons/index";
+const html = htm.bind(h);
 
 export default function StorybookRoutes() {
-  return (
-    <div style={{ height: "85vh" }}>
-      <AppRoute path="/online">
+  return html`
+    <div style=${{ height: "85vh" }}>
+      <${AppRoute} path="/online">
         <div>
-          <OnlineStatus online />
-          <OnlineStatus />
+          <${OnlineStatus} online />
+          <${OnlineStatus} />
         </div>
-      </AppRoute>
+      <//>
 
-      <AppRoute path="/icons">
-        <BootstrapIcons />
-      </AppRoute>
-      <AuthDemoRoutes />
-      <ComponentsRoutes />
-      <HangoutRoutes />
+      <${AppRoute} path="/icons">
+        <${BootstrapIcons} />
+      <//>
+      <${AuthDemoRoutes} />
+      <${ComponentsRoutes} />
+      <${HangoutRoutes} />
     </div>
-  );
+  `;
 }

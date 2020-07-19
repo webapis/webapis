@@ -1,8 +1,10 @@
-import { h } from "preact";
-import TextInput from "controls/text-input";
-import Button from "controls/button";
-import Alert from "controls/alert";
+import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
+import TextInput from "controls/text-input/index";
+import Button from "controls/button/index";
+import Alert from "controls/alert/index";
+import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 
+const html = htm.bind(h);
 export default function ChangePassword(props) {
   const {
     password,
@@ -23,15 +25,16 @@ export default function ChangePassword(props) {
   //   }
   // }, []);
 
-  return (
+  return html`
     <div
-      className="col-md-4 border mx-auto rounded"
-      style={{ margin: 15, padding: 16 }}
+      class="col-md-4 border mx-auto rounded"
+      style=${{ margin: 15, padding: 16 }}
     >
-      {loading && (
-        <div className="progress" style="height: 5px;">
+      ${loading &&
+      html`
+        <div class="progress" style="height: 5px;">
           <div
-            className="progress-bar progress-bar-striped progress-bar-animated"
+            class="progress-bar progress-bar-striped progress-bar-animated"
             role="progressbar"
             aria-valuenow="100"
             aria-valuemin="0"
@@ -39,36 +42,36 @@ export default function ChangePassword(props) {
             style="width: 100%"
           ></div>
         </div>
-      )}
-      {error && <Alert alert="danger" message={error.message} />}
-      <TextInput
+      `}
+      ${error && html`<${Alert} alert="danger" message=${error.message} />`}
+      <${TextInput}
         label="Password"
-        value={password}
+        value=${password}
         type="password"
         id="password"
         name="password"
-        onChange={onChange}
-        isValid={validation && validation["password"].isValid}
-        message={validation && validation["password"].message}
+        onChange=${onChange}
+        isValid=${validation && validation["password"].isValid}
+        message=${validation && validation["password"].message}
       />
-      <TextInput
+      <${TextInput}
         label="Confirm"
-        value={confirm}
+        value=${confirm}
         type="password"
         id="confirm"
         name="confirm"
-        onChange={onChange}
-        isValid={validation && validation["confirm"].isValid}
-        message={validation && validation["confirm"].message}
+        onChange=${onChange}
+        isValid=${validation && validation["confirm"].isValid}
+        message=${validation && validation["confirm"].message}
       />
-      <Button
+      <${Button}
         type="button"
-        loading={loading}
+        loading=${loading}
         data-testid="change-pass-btn"
-        onClick={onPasswordChange}
+        onClick=${onPasswordChange}
         title="Change"
         bg="primary"
       />
     </div>
-  );
+  `;
 }

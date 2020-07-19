@@ -1,4 +1,4 @@
-import { h } from "preact";
+import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
 export function MoreVert() {
   return (
     <svg height="24" viewBox="0 0 24 24" width="24">

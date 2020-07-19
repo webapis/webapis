@@ -1,6 +1,9 @@
-import { h } from "preact";
-import { useEffect } from "preact/hooks";
-import { Suspense, lazy } from "preact/compat";
+import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
+import { useEffect } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/hooks.module.js";
+import {
+  Suspense,
+  lazy,
+} from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/compat.module.js";
 import { AppRoute, useAppRoute } from "components/app-route";
 import { Home } from "./Home";
 import { AuthFatureRoutes, useAuth } from "features/authentication";

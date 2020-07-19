@@ -1,18 +1,28 @@
-import { h, render } from "preact";
-import StorybookProviders from "./StorybookProviders";
-import StorybookRoutes from "./StorybookRoutes";
-import Navbar, {
-  NavBarNav,
-  NavItem,
-  NavLink,
-  NavBarCollapse,
-} from "components/nav-bar";
-import NavDropdown, {
-  DropdownMenu,
-  DropdownItem,
-} from "components/nav-bar/nav-dropdown";
+import {
+  h,
+  render,
+} from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
+// import StorybookProviders from "./StorybookProviders";
+// import StorybookRoutes from "./StorybookRoutes";
+// import Navbar, {
+//   NavBarNav,
+//   NavItem,
+//   NavLink,
+//   NavBarCollapse,
+// } from "components/nav-bar";
+// import NavDropdown, {
+//   DropdownMenu,
+//   DropdownItem,
+// } from "components/nav-bar/nav-dropdown";
+import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
+import Login from "features/authentication/ui-components/Login";
+import Signup from "features/authentication/ui-components/Signup";
+import ForgotPassword from "features/authentication/ui-components/ForgotPassword";
+const html = htm.bind(h);
 
-render(
+render(html`<${ForgotPassword} message="hello" />`, document.body);
+
+/*
   <StorybookProviders>
     <Navbar brand="Storybook" bg="dark">
       <NavBarCollapse>
@@ -52,7 +62,5 @@ render(
       </NavBarCollapse>
     </Navbar>
     <StorybookRoutes />
-  </StorybookProviders>,
-
-  document.body
-);
+  </StorybookProviders>
+*/

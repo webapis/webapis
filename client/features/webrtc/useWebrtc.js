@@ -1,4 +1,7 @@
-import { useEffect, useState } from "preact/hooks";
+import {
+  useEffect,
+  useState,
+} from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/hooks.module.js";
 import iceServers from "./ice-servers";
 export function useWebrtc(props) {
   const { video, audio } = props;

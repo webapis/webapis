@@ -1,5 +1,8 @@
-import { h } from "preact";
-import { lazy, Suspense } from "preact/compat";
+import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
+import {
+  lazy,
+  Suspense,
+} from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/compat.module.js";
 import { FeatureRoute, useAppRoute } from "components/app-route";
 
 import { useHangouts } from "./state/useHangouts";

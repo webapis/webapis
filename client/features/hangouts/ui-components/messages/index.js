@@ -1,5 +1,8 @@
-import { h } from "preact";
-import { useRef, useEffect } from "preact/hooks";
+import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
+import {
+  useRef,
+  useEffect,
+} from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/hooks.module.js";
 import Message from "./Message";
 import MessageEditor from "./MessageEditor";
 import { BlockerMessage } from "./BlockerMessage";

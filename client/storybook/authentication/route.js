@@ -1,4 +1,4 @@
-import { h } from "preact";
+import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
 import { AppRoute } from "components/app-route";
 import LoginStates from "./states/login.states";
 import SignUpStates from "./states/signup.states";

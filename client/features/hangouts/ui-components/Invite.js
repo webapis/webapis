@@ -1,4 +1,4 @@
-import { h } from "preact";
+import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
 import PersonAdd from "icons/PersonAdd";
 import TextInput from "controls/text-input";
 import { Center } from "components/layout/Center";

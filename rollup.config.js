@@ -34,6 +34,7 @@ const commonPlugins = [
       { find: "server", replacement: path.resolve(__dirname + "/server") },
     ],
   }),
+  //cdn(),
   image(),
 
   postcss({
@@ -41,20 +42,20 @@ const commonPlugins = [
     plugins: [],
   }),
 
-  resolve(),
-  babel({
-    babelrc: false,
-    exclude: "node_modules/**",
-    plugins: [
-      [
-        "@babel/plugin-transform-react-jsx",
-        {
-          pragma: "h",
-          pragmaFrag: "Fragment",
-        },
-      ],
-    ],
-  }),
+  //resolve(),
+  // babel({
+  //   babelrc: false,
+  //   exclude: "node_modules/**",
+  //   plugins: [
+  //     [
+  //       "@babel/plugin-transform-react-jsx",
+  //       {
+  //         pragma: "h",
+  //         pragmaFrag: "Fragment",
+  //       },
+  //     ],
+  //   ],
+  // }),
   production && terser(),
   replace({
     PREACT_APP_BACK: process.env.PREACT_APP_BACK
@@ -69,6 +70,13 @@ const commonPlugins = [
 export default [
   {
     input: `client/apps/${process.env.appName}/index.js`,
+    external: [
+      "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js",
+      "preact",
+      "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js",
+      "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/hooks.module.js",
+      "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/compat.module.js",
+    ],
     output: [
       {
         dir: `builds/${process.env.appName}/build`,
@@ -121,62 +129,69 @@ export default [
       }),
     ],
   },
-  {
-    input: `client/features/authentication/change-password/change-password.js`,
-    output: [
-      {
-        dir: `builds/${process.env.appName}/build`,
-        format: "es",
-        sourcemap: "inline",
-      },
-    ],
-    plugins: [
-      ...commonPlugins,
-      copy({
-        targets: [
-          {
-            src: "assets/libs/parse.min.js",
-            dest: `builds/${process.env.appName}/build`,
-          },
-          {
-            src: "assets/fonts/Roboto/Roboto-Regular.ttf",
-            dest: `builds/${process.env.appName}/build`,
-          },
-          {
-            src: "assets/manifest/**",
-            dest: `builds/${process.env.appName}/build`,
-          },
-          {
-            src: "node_modules/bootstrap/dist/css/bootstrap.min.css",
-            dest: `builds/${process.env.appName}/build`,
-          },
-          {
-            src: "node_modules/bootstrap/dist/js/bootstrap.min.js",
-            dest: `builds/${process.env.appName}/build`,
-          },
-          //   { src: 'node_modules/bootstrap/js/dist/util.js', dest: `builds/${process.env.appName}/build` },
-          {
-            src: "node_modules/jquery/dist/jquery.min.js",
-            dest: `builds/${process.env.appName}/build`,
-          },
-        ],
-      }),
-      htmlTemplate({
-        template: "config/rollup/html-template/changepassword.html",
-        target: `builds/${process.env.appName}/build/changepassword.html`,
-        attrs: ['type="module"'],
-      }),
-      serve({
-        contentBase: `builds/${process.env.appName}/build/`,
-        openPage: "/changepassword.html",
-        port: 10002,
-        open: false,
-      }),
-    ],
-  },
+  // {
+  //   input: `client/features/authentication/change-password/change-password.js`,
+  //   output: [
+  //     {
+  //       dir: `builds/${process.env.appName}/build`,
+  //       format: "es",
+  //       sourcemap: "inline",
+  //     },
+  //   ],
+  //   plugins: [
+  //     ...commonPlugins,
+  //     copy({
+  //       targets: [
+  //         {
+  //           src: "assets/libs/parse.min.js",
+  //           dest: `builds/${process.env.appName}/build`,
+  //         },
+  //         {
+  //           src: "assets/fonts/Roboto/Roboto-Regular.ttf",
+  //           dest: `builds/${process.env.appName}/build`,
+  //         },
+  //         {
+  //           src: "assets/manifest/**",
+  //           dest: `builds/${process.env.appName}/build`,
+  //         },
+  //         {
+  //           src: "node_modules/bootstrap/dist/css/bootstrap.min.css",
+  //           dest: `builds/${process.env.appName}/build`,
+  //         },
+  //         {
+  //           src: "node_modules/bootstrap/dist/js/bootstrap.min.js",
+  //           dest: `builds/${process.env.appName}/build`,
+  //         },
+  //         //   { src: 'node_modules/bootstrap/js/dist/util.js', dest: `builds/${process.env.appName}/build` },
+  //         {
+  //           src: "node_modules/jquery/dist/jquery.min.js",
+  //           dest: `builds/${process.env.appName}/build`,
+  //         },
+  //       ],
+  //     }),
+  //     htmlTemplate({
+  //       template: "config/rollup/html-template/changepassword.html",
+  //       target: `builds/${process.env.appName}/build/changepassword.html`,
+  //       attrs: ['type="module"'],
+  //     }),
+  //     serve({
+  //       contentBase: `builds/${process.env.appName}/build/`,
+  //       openPage: "/changepassword.html",
+  //       port: 10002,
+  //       open: false,
+  //     }),
+  //   ],
+  // },
 
   {
     input: `client/storybook/index.js`,
+    external: [
+      "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js",
+      "preact",
+      "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js",
+      "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/hooks.module.js",
+      "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/compat.module.js",
+    ],
     output: [
       {
         dir: `client/storybook/build`,

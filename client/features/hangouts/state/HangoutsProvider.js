@@ -1,5 +1,13 @@
-import { h, createContext } from "preact";
-import { useContext, useMemo, useReducer, useEffect } from "preact/hooks";
+import {
+  h,
+  createContext,
+} from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
+import {
+  useContext,
+  useMemo,
+  useReducer,
+  useEffect,
+} from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/hooks.module.js";
 import { reducer, initState } from "./reducer";
 import { useMessage } from "./useMessage";
 import { useUserName } from "features/authentication/state/useUserName";
