@@ -1,16 +1,16 @@
 require("dotenv").config();
 const path = require("path");
 import resolve from "@rollup/plugin-node-resolve";
-import babel from "rollup-plugin-babel";
+import babel from "@rollup/plugin-babel";
 import postcss from "rollup-plugin-postcss";
 import image from "@rollup/plugin-image";
 import serve from "rollup-plugin-serve";
 import htmlTemplate from "rollup-plugin-generate-html-template";
 import del from "rollup-plugin-delete";
 import { terser } from "rollup-plugin-terser";
-import replace from "rollup-plugin-replace";
+import replace from "@rollup/plugin-replace";
 import copy from "rollup-plugin-copy";
-import alias from "rollup-plugin-alias";
+import alias from "@rollup/plugin-alias";
 const production = !process.env.ROLLUP_WATCH;
 const commonPlugins = [
   alias({

@@ -2,14 +2,14 @@ require("dotenv").config();
 import httpRoute from "./http-route";
 //import http from 'http';
 import ws from "./wsocket";
-import { parseServer } from "./parse";
+//import { parseServer } from "./parse";
 const https = require("https");
 const fs = require("fs");
 const url = "mongodb://127.0.0.1:27017";
 const { MongoClient } = require("mongodb");
 // parse
 if (process.env.PREACT_APP_BACK === "PREACT_APP_PARSE") {
-  parseServer();
+  // parseServer();
 }
 
 const options = {
