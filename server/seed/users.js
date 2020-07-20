@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const passhash = require("../../server/auth/hashPassword");
 
-export default async function users(req, res) {
+module.exports = async function users(req, res) {
   try {
     const collectionName = "users";
     const database = req.client.db("auth");
@@ -39,4 +39,4 @@ export default async function users(req, res) {
     res.write(JSON.stringify({ error }));
     res.end();
   }
-}
+};

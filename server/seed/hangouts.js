@@ -1,4 +1,4 @@
-export default async function hangouts(req, res) {
+module.exports = async function hangouts(req, res) {
   try {
     const collectionName = "users";
     const database = req.client.db("hangouts");
@@ -16,4 +16,4 @@ export default async function hangouts(req, res) {
     res.write(JSON.stringify({ error }));
     res.end();
   }
-}
+};

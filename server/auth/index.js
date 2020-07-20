@@ -1,44 +1,37 @@
-
 /* eslint-disable linebreak-style */
 /* eslint-disable no-unused-vars */
-import 'babel-polyfill';
-const bcrypt = require('crypto');
-const ObjectID = require('mongodb').ObjectId;
-import apiurl from 'url';
-import login from './login';
-import signup from './signup';
-import changePassword from './changePassword';
-import recover from './recover';
-const profile = require('./profile');
+
+const bcrypt = require("crypto");
+const ObjectID = require("mongodb").ObjectId;
+const apiurl = require("url");
+const login = require("./login");
+const signup = require("./signup");
+const changePassword = require("./changePassword");
+const recover = require("./recover");
+
 //
-export default function (req, res) {
+module.exports = function (req, res) {
   const { url } = req;
-  const collectionName = 'users';
-  const database = req.client.db('auth');
+  const collectionName = "users";
+  const database = req.client.db("auth");
   const collection = database.collection(collectionName);
   req.collection = collection;
-  
+
   switch (true) {
-    case url.includes('/login'):
-      
+    case url.includes("/login"):
       login({ req, res, collection });
       break;
-    case url.includes('/signup'):
+    case url.includes("/signup"):
       signup({ req, res, collection });
       break;
-    case url.includes('/changepass'):
-      
+    case url.includes("/changepass"):
       changePassword({ req, res, collection });
       break;
-    case url.includes('/requestpasschange'):
-      
+    case url.includes("/requestpasschange"):
       recover({ req, res, collection });
       break;
-    case url.includes('/profile'):
-      profile({ req, res, collection });
-      break;
+
     default:
       return null;
   }
-}
-
+};

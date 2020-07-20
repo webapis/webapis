@@ -8,7 +8,7 @@ import {
   useReducer,
 } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cbdf6161bd8ca09a385d62c8c697bd1cd87bb184/hooks.cdn.js";
 import appReducer, { initState } from "./appReducer";
-import { useAppRoute } from "components/app-route";
+import { useAppRoute } from "components/app-route/index";
 import actionTypes from "./actionTypes";
 const AppContext = createContext();
 

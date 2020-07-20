@@ -1,10 +1,10 @@
-import { ObjectID } from "mongodb";
-import * as validations from "./validations/validations";
-import httpStatus from "./http-status";
+const { ObjectID } = require("mongodb");
+const validations = require("./validations/validations");
+const httpStatus = require("./http-status");
 const jwt = require("jsonwebtoken");
 const passhash = require("../../server/auth/hashPassword");
 
-export default async function changePassword({ req, res, collection }) {
+module.exports = async function changePassword({ req, res, collection }) {
   try {
     const { password, confirm, token } = req.body;
 
@@ -89,6 +89,6 @@ export default async function changePassword({ req, res, collection }) {
     res.write(JSON.stringify({ error: { message: error.message } }));
     res.end();
   }
-}
+};
 
 //

@@ -1,7 +1,7 @@
 var fs = require("fs");
 var path = require("path");
 
-export default function serveStatic(request, response) {
+module.exports = function serveStatic(request, response) {
   // console.log('process.env.appName',`${__dirname}../apps/${process.env.appName}/build/index.html`)
   // console.log('request ', request.url);
 
@@ -60,4 +60,4 @@ export default function serveStatic(request, response) {
       response.end(content, "utf-8");
     }
   });
-}
+};

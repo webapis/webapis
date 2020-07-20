@@ -1,8 +1,9 @@
 require("dotenv").config();
-import httpRoute from "./http-route";
+
 //import http from 'http';
-import ws from "./wsocket";
+const ws = require("./wsocket");
 //import { parseServer } from "./parse";
+const httpRoute = require("./http-route");
 const https = require("https");
 const fs = require("fs");
 const url = "mongodb://127.0.0.1:27017";

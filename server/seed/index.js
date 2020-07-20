@@ -1,7 +1,7 @@
-import usersSeed from "./users";
-import recoverSeed from "./seed-recover";
-import hangoutSeed from "./hangouts";
-export default function seedOperation(req, res) {
+const usersSeed = require("./users");
+const recoverSeed = require("./seed-recover");
+const hangoutSeed = require("./hangouts");
+module.exports = function seedOperation(req, res) {
   const { url } = req;
   switch (true) {
     case url.includes("/users"):
@@ -16,4 +16,4 @@ export default function seedOperation(req, res) {
     default:
       null;
   }
-}
+};

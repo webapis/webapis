@@ -1,5 +1,5 @@
-import url from "url";
-export default async function ({ req, res, collection }) {
+const url = require("url");
+module.exports = async function ({ req, res, collection }) {
   try {
     let users = null;
     let search = url.parse(req.url, true).query.search;
@@ -21,4 +21,4 @@ export default async function ({ req, res, collection }) {
     res.write(JSON.stringify({ error }));
     res.end();
   }
-}
+};

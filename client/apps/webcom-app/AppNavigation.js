@@ -5,15 +5,15 @@ import Navbar, {
   NavItem,
   NavLink,
   NavBarCollapse,
-} from "components/nav-bar";
-import Nav from "components/nav";
+} from "components/nav-bar/index";
+
 import { useUserName } from "features/authentication/state/useUserName";
-import { useAuth } from "features/authentication";
-import { useHangouts } from "features/hangouts";
+import { useAuth } from "features/authentication/index";
+import { useHangouts } from "features/hangouts/index";
 import GearIcon from "icons/bootstrap/GearIcon";
 import PersonPlusIcon from "icons/bootstrap/PersonPlusIcon";
-import { FeatureRoute } from "components/app-route";
-import { WifiStatus } from "components/browser-api/online-status";
+import { FeatureRoute } from "components/app-route/index";
+import { WifiStatus } from "components/browser-api/online-status/index";
 const html = htm.bind(h);
 export function AppNavigation() {
   const { username } = useUserName();

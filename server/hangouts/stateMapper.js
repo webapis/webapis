@@ -1,39 +1,39 @@
-import { hangoutStates } from "./hangoutStates";
-import { clientCommands } from "../../client/features/hangouts/state/clientCommands";
-export function stateMapper({ command }) {
+const hangoutStates = require("./hangoutStates");
+
+module.exports = function stateMapper({ command }) {
   switch (command) {
-    case clientCommands.ACCEPT:
+    case "ACCEPT":
       return {
         senderState: hangoutStates.ACCEPTED,
         targetState: hangoutStates.ACCEPTER,
       };
-    case clientCommands.BLOCK:
+    case "BLOCK":
       return {
         senderState: hangoutStates.BLOCKED,
         targetState: hangoutStates.BLOCKER,
       };
-    case clientCommands.DECLINE:
+    case "DECLINE":
       return {
         senderState: hangoutStates.DECLINED,
         targetState: hangoutStates.DECLINER,
       };
-    case clientCommands.INVITE:
+    case "INVITE":
       return {
         senderState: hangoutStates.INVITED,
         targetState: hangoutStates.INVITER,
       };
-    case clientCommands.MESSAGE:
+    case "MESSAGE":
       return {
         senderState: hangoutStates.MESSAGED,
         targetState: hangoutStates.MESSANGER,
       };
 
-    case clientCommands.UNBLOCK:
+    case "UNBLOCK":
       return {
         senderState: hangoutStates.UNBLOCKED,
         targetState: hangoutStates.UNBLOCKER,
       };
-    case clientCommands.READ:
+    case "READ":
       return {
         senderState: hangoutStates.READ,
         targetState: hangoutStates.READER,
@@ -41,4 +41,4 @@ export function stateMapper({ command }) {
     default:
       throw new Error("clientCommand type not specified");
   }
-}
+};

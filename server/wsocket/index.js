@@ -1,13 +1,15 @@
-import hangoutsHandler from "../hangouts/wsocket";
-import { onLineStateChangeHandler } from "../hangouts/wsocket/onLineStateChangeHandler";
-import url from "url";
+const hangoutsHandler = require("../hangouts/wsocket");
+const {
+  onLineStateChangeHandler,
+} = require("../hangouts/wsocket/onLineStateChangeHandler");
+const url = require("url");
 const jwt = require("jsonwebtoken");
 const cookie = require("cookie");
 const EventEmitter = require("events");
 const WebSocket = require("ws");
-export const wsocket = new EventEmitter();
+module.exports = wsocket = new EventEmitter();
 let connections = {};
-export default async function (server, client) {
+module.exports = async function (server, client) {
   const collection = await client.db("auth").collection("users");
   const wss = new WebSocket.Server({ server });
 
@@ -50,5 +52,5 @@ export default async function (server, client) {
       const err = error;
     }
   });
-}
+};
 //

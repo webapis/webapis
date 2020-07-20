@@ -1,11 +1,11 @@
-import apiurl from "url";
-import * as validations from "./validations/validations";
-import httpStatus from "./http-status";
-import { getCredentials } from "./http-auth";
+const apiurl = require("url");
+const validations = require("./validations/validations");
+const httpStatus = require("./http-status");
+const getCredentials = require("./http-auth");
 const jwt = require("jsonwebtoken");
 const passhash = require("../../server/auth/hashPassword");
 
-export default async function ({ req, res, collection }) {
+module.exports = async function ({ req, res, collection }) {
   try {
     let user = null;
     let resBcrypt = null;
@@ -150,4 +150,4 @@ export default async function ({ req, res, collection }) {
     res.write(JSON.stringify({ error }));
     res.end();
   }
-}
+};

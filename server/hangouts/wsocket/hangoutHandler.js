@@ -1,6 +1,11 @@
-import { stateMapper } from "../stateMapper";
-import { clientCommands } from "../../../client/features/hangouts/state/clientCommands";
-export async function hangoutHandler({ collection, hangout, ws, connections }) {
+const stateMapper = require("../stateMapper");
+
+module.exports = async function hangoutHandler({
+  collection,
+  hangout,
+  ws,
+  connections,
+}) {
   try {
     debugger;
     const { senderState, targetState } = stateMapper({
@@ -24,14 +29,11 @@ export async function hangoutHandler({ collection, hangout, ws, connections }) {
     };
 
     if (
-      hangout.command === clientCommands.INVITE ||
-      hangout.command === clientCommands.ACCEPT ||
-      hangout.command === clientCommands.DECLINE
+      hangout.command === "INVITE" ||
+      hangout.command === "ACCEPT" ||
+      hangout.command === "DECLINE"
     ) {
-      if (
-        hangout.command === clientCommands.INVITE ||
-        hangout.command === clientCommands.ACCEPT
-      ) {
+      if (hangout.command === "INVITE" || hangout.command === "ACCEPT") {
         //PUSH HANGOUT ON SENDER
         await collection.updateOne(
           { username: ws.user.username },
@@ -44,10 +46,7 @@ export async function hangoutHandler({ collection, hangout, ws, connections }) {
       //PUSH UNREADS ON TARGET
       await collection.updateOne({ username }, { $push: { unreads: target } });
       debugger;
-      if (
-        hangout.command === clientCommands.ACCEPT ||
-        hangout.command === clientCommands.DECLINE
-      ) {
+      if (hangout.command === "ACCEPT" || hangout.command === "DECLINE") {
         debugger;
         let pullResult = await collection.updateOne(
           { username: ws.user.username },
@@ -63,9 +62,9 @@ export async function hangoutHandler({ collection, hangout, ws, connections }) {
 
     // CLIENT COMMAND ELSE//
     else if (
-      hangout.command === clientCommands.BLOCK ||
-      hangout.command === clientCommands.UNBLOCK ||
-      hangout.command === clientCommands.MESSAGE
+      hangout.command === "BLOCK" ||
+      hangout.command === "UNBLOCK" ||
+      hangout.command === "MESSAGE"
     ) {
       debugger;
       // UPDATE HANGOUT ON SENDER
@@ -84,10 +83,7 @@ export async function hangoutHandler({ collection, hangout, ws, connections }) {
       //PUSH UNREADS ON TARGET
       await collection.updateOne({ username }, { $push: { unreads: target } });
       debugger;
-      if (
-        hangout.command === clientCommands.BLOCK ||
-        hangout.command === clientCommands.UNBLOCK
-      ) {
+      if (hangout.command === "BLOCK" || hangout.command === "UNBLOCK") {
         await collection.updateOne(
           { username: ws.user.username },
           { $pull: { unreads: { username } } }
@@ -105,7 +101,7 @@ export async function hangoutHandler({ collection, hangout, ws, connections }) {
         );
         debugger;
       }
-    } else if (hangout.command === clientCommands.READ) {
+    } else if (hangout.command === "READ") {
       debugger;
       // UPDATE HANGOUT ON SENDER
       await collection.updateOne(
@@ -145,4 +141,4 @@ export async function hangoutHandler({ collection, hangout, ws, connections }) {
 
     console.log("hangoutHandlerError", error);
   }
-}
+};

@@ -34,7 +34,7 @@ export default function AuthProvider(props) {
   return html`
     <${AuthContext.Provider} value=${value} ...${props}>
       <${AuthAdapter} state=${state} dispatch=${dispatch}>
-        {children}
+        ${children}
       <//>
     <//>
   `;

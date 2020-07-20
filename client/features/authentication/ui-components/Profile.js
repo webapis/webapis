@@ -3,5 +3,5 @@ import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js"
 
 const html = htm.bind(h);
 export default function Profile() {
-  return <div>Profile</div>;
+  return html`<div>Profile</div>`;
 }

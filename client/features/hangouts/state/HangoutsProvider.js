@@ -8,12 +8,14 @@ import {
   useReducer,
   useEffect,
 } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cbdf6161bd8ca09a385d62c8c697bd1cd87bb184/hooks.cdn.js";
+import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 import { reducer, initState } from "./reducer";
 import { useMessage } from "./useMessage";
 import { useUserName } from "features/authentication/state/useUserName";
 import { actionTypes } from "./actionTypes";
 import { clientCommands } from "./clientCommands";
 import { loadMessages } from "./local-storage/common";
+const html = htm.bind(h);
 const HangoutContext = createContext();
 export function useHangoutContext() {
   const context = useContext(HangoutContext);
@@ -86,5 +88,5 @@ export default function HangoutsProvider(props) {
   }, []);
 
   const value = useMemo(() => [state, dispatch], [state]);
-  return <HangoutContext.Provider value={value} {...props} />;
+  return html`<${HangoutContext.Provider} value=${value} ...${props} />`;
 }

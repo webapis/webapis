@@ -1,7 +1,7 @@
-import url from "url";
+const url = require("url");
 const cookie = require("cookie");
 const jwt = require("jsonwebtoken");
-export default async function findOne({ req, res, collection }) {
+module.exports = async function findOne({ req, res, collection }) {
   try {
     // verify user authorization/
     const token = cookie.parse(req.headers["cookie"]);
@@ -65,4 +65,4 @@ export default async function findOne({ req, res, collection }) {
     res.write(JSON.stringify({ error }));
     res.end();
   }
-}
+};

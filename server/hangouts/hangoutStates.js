@@ -1,4 +1,4 @@
-export const hangoutStates = {
+module.exports = hangoutStates = {
   INVITER: "INVITER",
   ACCEPTER: "ACCEPTER",
   DECLINER: "DECLINER",

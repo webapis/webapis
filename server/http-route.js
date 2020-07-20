@@ -2,15 +2,15 @@
 /* eslint-disable indent */ //
 //import invitationOperation from './invitation';
 //import crudOperation from './crud/crud';
-import authOperation from "./auth/index";
-import hangoutsOperation from "./hangouts/http";
-import contactsOperation from "./contacts";
-import usersOperation from "./users";
-import seedOperation from "./seed";
-import serveStatic from "./serve-static/index";
-import servePassReset from "./serve-static/serve-pass-reset";
+const authOperation = require("./auth/index");
+const hangoutsOperation = require("./hangouts/http");
+const contactsOperation = require("./contacts");
+const usersOperation = require("./users");
+const seedOperation = require("./seed");
+const serveStatic = require("./serve-static/index");
+const servePassReset = require("./serve-static/serve-pass-reset");
 
-export default function httpRoute(client) {
+module.exports = function httpRoute(client) {
   return async function (req, res) {
     const { url } = req;
     const authRegex = /.*\/auth\/.*/;
@@ -106,6 +106,6 @@ export default function httpRoute(client) {
         throw new Error("No operation is provied");
     }
   };
-}
+};
 
 //

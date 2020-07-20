@@ -1,7 +1,6 @@
-import "babel-polyfill";
-import findOne from "./findOne";
-import findHangouts from "./findHangouts";
-export default function hangoutsOperation(req, res) {
+const findOne = require("./findOne");
+const findHangouts = require("./findHangouts");
+module.exports = function hangoutsOperation(req, res) {
   const { url } = req;
   const collectionName = "users";
   const database = req.client.db("auth");
@@ -18,4 +17,4 @@ export default function hangoutsOperation(req, res) {
     default:
       return null;
   }
-}
+};

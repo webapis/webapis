@@ -3,11 +3,11 @@ import { useEffect } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cbdf6161b
 import {
   Suspense,
   lazy,
-} from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/compat.module.js";
+} from "https://cdn.jsdelivr.net/gh/webapis/webapis/preact.combat.cdn.js";
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 import { AppRoute, useAppRoute } from "components/app-route/index";
 import { Home } from "./Home";
-import { AuthFatureRoutes, useAuth } from "features/authentication/index";
+import { AuthFeatureRoutes, useAuth } from "features/authentication/index";
 const html = htm.bind(h);
 const HangoutsFeatureRoutes = lazy(() =>
   import("features/hangouts/HangoutsFeatureRoutes")
@@ -26,7 +26,7 @@ export function AppRoutes() {
   return html`
     <div style=${{ height: "85vh" }}>
       <${AppRoute}path ="/auth">
-        <${AuthFatureRoutes} />
+        <${AuthFeatureRoutes} />
       <//>
       <${AppRoute}path ="/">
         <${Home} />

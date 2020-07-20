@@ -2,7 +2,7 @@ import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.m
 import {
   lazy,
   Suspense,
-} from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/compat.module.js";
+} from "https://cdn.jsdelivr.net/gh/webapis/webapis/preact.combat.cdn.js";
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 import { FeatureRoute, useAppRoute } from "components/app-route/index";
 

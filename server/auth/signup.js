@@ -1,10 +1,10 @@
-import apiurl from "url";
-import httpStatus from "./http-status";
-import * as validations from "./validations/validations";
+const apiurl = require("url");
+const httpStatus = require("./http-status");
+const validations = require("./validations/validations");
 const passhash = require("../../server/auth/hashPassword");
 const jwt = require("jsonwebtoken");
 
-export default async function ({ req, res, collection }) {
+module.exports = async function ({ req, res, collection }) {
   try {
     let errors = [];
     //const SALT_WORK_FACTOR = 10;
@@ -93,4 +93,4 @@ export default async function ({ req, res, collection }) {
     res.write(JSON.stringify({ error }));
     res.end();
   }
-}
+};

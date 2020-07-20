@@ -1,9 +1,9 @@
-import * as validations from "./validations/validations";
-import httpStatus from "./http-status";
+const validations = require("./validations/validations");
+const httpStatus = require("./http-status");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 
-export default async function ({ req, res, collection }) {
+module.exports = async function ({ req, res, collection }) {
   try {
     const { email } = req.body;
     let user = null;
@@ -73,4 +73,4 @@ export default async function ({ req, res, collection }) {
     res.write(JSON.stringify({ error }));
     res.end();
   }
-}
+};

@@ -1,8 +1,8 @@
-import * as validations from "../auth/validations/validations";
-import httpStatus from "../auth/http-status";
+const validations = require("../auth/validations/validations");
+const httpStatus = require("../auth/http-status");
 const jwt = require("jsonwebtoken");
 
-export default async function seedRecover(req, res) {
+module.exports = async function seedRecover(req, res) {
   try {
     const collectionName = "users";
     const database = req.client.db("auth");
@@ -55,5 +55,5 @@ export default async function seedRecover(req, res) {
     res.write(JSON.stringify({ error: { message: error.message } }));
     res.end();
   }
-}
+};
 //

@@ -1,7 +1,7 @@
 var fs = require("fs");
 var path = require("path");
 const url = require("url");
-export default function serverPassReset(request, response) {
+module.exports = function serverPassReset(request, response) {
   const pathname = url.parse(request.url, true).pathname;
 
   var filePath = "." + pathname;
@@ -66,5 +66,5 @@ export default function serverPassReset(request, response) {
       response.end(content, "utf-8");
     }
   });
-}
+};
 //

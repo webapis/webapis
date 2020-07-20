@@ -2,6 +2,7 @@ import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.m
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 import { useAppRoute } from "components/app-route/index";
 const html = htm.bind(h);
+//
 export default function Navbar(props) {
   const { bg = "light", brand, children } = props;
   return html`

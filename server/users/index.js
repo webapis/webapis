@@ -1,22 +1,20 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable no-unused-vars */
-import 'babel-polyfill';
-import find from './find';
 
+const find = require("./find");
 
-export default function (req, res) {
+module.exports = function (req, res) {
   const { url } = req;
-  const collectionName = 'users';
-  const database = req.client.db('auth');
+  const collectionName = "users";
+  const database = req.client.db("auth");
   const collection = database.collection(collectionName);
   req.collection = collection;
 
   switch (true) {
-    case url.includes('/find'):
-  
+    case url.includes("/find"):
       find({ req, res, collection });
       break;
     default:
       return null;
   }
-}
+};

@@ -2,9 +2,9 @@ import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.m
 import { useEffect } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cbdf6161bd8ca09a385d62c8c697bd1cd87bb184/hooks.cdn.js";
 import { useHangouts } from "../../state/useHangouts";
 import * as actions from "./actions";
-import { stateMapper } from "server/hangouts/stateMapper";
+import stateMapper from "../../state/stateMapper";
 import { clientCommands } from "features/hangouts/state/clientCommands";
-import { useAuthContext } from "features/authentication";
+import { useAuthContext } from "features/authentication/index";
 import { actionTypes } from "../../state/actionTypes";
 export function ParseServer(props) {
   const { children } = props;

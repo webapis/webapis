@@ -1,4 +1,8 @@
-export async function onLineStateChangeHandler({ client, ws, connections }) {
+module.exports = async function onLineStateChangeHandler({
+  client,
+  ws,
+  connections,
+}) {
   try {
     const collection = await client.db("auth").collection("users");
 
@@ -20,4 +24,4 @@ export async function onLineStateChangeHandler({ client, ws, connections }) {
     debugger;
     console.log("onLineStateChangeHandlerError", error);
   }
-}
+};

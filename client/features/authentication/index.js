@@ -1,5 +1,5 @@
 import AuthProvider, { useAuthContext } from "./state/AuthProvider";
 import { useAuth } from "./state/useAuth";
-import AuthFatureRoutes from "./AuthFeatureRoutes";
+import AuthFeatureRoutes from "./AuthFeatureRoutes";
 export default AuthProvider;
-export { AuthFatureRoutes, useAuthContext, useAuth };
+export { AuthFeatureRoutes, useAuthContext, useAuth };
