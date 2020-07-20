@@ -4,7 +4,7 @@ import {
   Suspense,
 } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/compat.module.js";
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
-import { FeatureRoute, useAppRoute } from "components/app-route";
+import { FeatureRoute, useAppRoute } from "components/app-route/index";
 
 import { useHangouts } from "./state/useHangouts";
 import useSearch from "./state/useSearch";

@@ -4,10 +4,11 @@ import {
   Suspense,
   lazy,
 } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/compat.module.js";
-import { AppRoute, useAppRoute } from "components/app-route";
+import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
+import { AppRoute, useAppRoute } from "components/app-route/index";
 import { Home } from "./Home";
-import { AuthFatureRoutes, useAuth } from "features/authentication";
-
+import { AuthFatureRoutes, useAuth } from "features/authentication/index";
+const html = htm.bind(h);
 const HangoutsFeatureRoutes = lazy(() =>
   import("features/hangouts/HangoutsFeatureRoutes")
 );
@@ -22,24 +23,28 @@ export function AppRoutes() {
       // onAppRoute({ route: "/auth", featureRoute: "/" });
     }
   }, [state]);
-  return (
-    <div style={{ height: "85vh" }}>
-      <AppRoute path="/auth">
-        <AuthFatureRoutes />
-      </AppRoute>
-      <AppRoute path="/">
-        <Home />
-      </AppRoute>
-      <AppRoute path="/hangouts">
-        <Suspense fallback={<div>loading...</div>}>
-          <HangoutsFeatureRoutes />
-        </Suspense>
-      </AppRoute>
-      <AppRoute path="/error">
-        <Suspense fallback={<div>loading...</div>}>
-          <ErrorPage />
-        </Suspense>
-      </AppRoute>
+  return html`
+    <div style=${{ height: "85vh" }}>
+      <${AppRoute}path ="/auth">
+        <${AuthFatureRoutes} />
+      <//>
+      <${AppRoute}path ="/">
+        <${Home} />
+      <//>
+      <${AppRoute}path ="/hangouts">
+        <${Suspense} fallback=${Loading}>
+          <${HangoutsFeatureRoutes} />
+        <//>
+      <//>
+      <${AppRoute}path ="/error">
+        <${Suspense} fallback=${Loading}>
+          <${ErrorPage} />
+        <//>
+      <//>
     </div>
-  );
+  `;
+}
+
+function Loading() {
+  return html`<div>Loading...</div>`;
 }

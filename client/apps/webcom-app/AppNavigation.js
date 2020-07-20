@@ -1,4 +1,5 @@
 import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
+import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 import Navbar, {
   NavBarNav,
   NavItem,
@@ -13,111 +14,127 @@ import GearIcon from "icons/bootstrap/GearIcon";
 import PersonPlusIcon from "icons/bootstrap/PersonPlusIcon";
 import { FeatureRoute } from "components/app-route";
 import { WifiStatus } from "components/browser-api/online-status";
+const html = htm.bind(h);
 export function AppNavigation() {
   const { username } = useUserName();
   const { onSignOut } = useAuth();
   const { state, onNavigation } = useHangouts();
   const { hangout, unreadhangouts } = state;
-  return (
+  return html`
     <div>
-      <Navbar brand="Webcom" bg="dark">
-        <NavBarCollapse>
-          <NavBarNav>
-            <NavItem>
-              {username && (
-                <NavLink
+      <${Navbar} brand="Webcom" bg="dark">
+        <${NavBarCollapse}>
+          <${NavBarNav}>
+            <${NavItem}>
+              ${username &&
+              html`
+                <${NavLink}
                   id="filter"
                   appRoute="/hangouts"
                   data-testid="hangouts-link"
                 >
                   Hangouts
-                </NavLink>
-              )}
-            </NavItem>
-          </NavBarNav>
-          <Nav horizontalAlignment="justify-content-end">
-            {username && (
+                <//>
+              `}
+            <//>
+          <//>
+          <nav horizontalAlignment="justify-content-end">
+            ${username &&
+            html`
               <button
                 id="unread"
                 appRoute="/unread"
-                onClick={onNavigation}
+                onClick=${onNavigation}
                 data-testid="unread-link"
                 type="button"
                 class="btn btn-dark"
               >
                 messages{" "}
                 <span class="badge badge-light" data-testid="message-count">
-                  {unreadhangouts ? unreadhangouts.length : 0}
+                  ${unreadhangouts ? unreadhangouts.length : 0}
                 </span>
               </button>
-            )}
-            {!username && (
-              <NavItem>
-                <NavLink id="login" appRoute="/auth" data-testid="login-link">
+            `}
+            ${!username &&
+            html`
+              <${NavItem}>
+                <${NavLink}
+                  id="login"
+                  appRoute="/auth"
+                  data-testid="login-link"
+                >
                   Sign in
-                </NavLink>
-              </NavItem>
-            )}
-            {!username && (
-              <NavItem>
-                <NavLink id="signup" appRoute="/auth" data-testid="signup-link">
+                <//>
+              <//>
+            `}
+            ${!username &&
+            html`
+              <${NavItem}>
+                <${NavLink}
+                  id="signup"
+                  appRoute="/auth"
+                  data-testid="signup-link"
+                >
                   Sign up
-                </NavLink>
-              </NavItem>
-            )}
-            <NavItem>
-              {username && (
-                <NavLink
+                <//>
+              <//>
+            `}
+            <${NavItem}>
+              ${username &&
+              html`
+                <${NavLink}
                   id="profile"
                   appRoute="/auth"
                   data-testid="profile-link"
                 >
-                  Welcome, {username}
-                </NavLink>
-              )}
-            </NavItem>
-            <NavItem>
-              {username && (
-                <NavLink
+                  Welcome, ${username}
+                <//>
+              `}
+            <//>
+            <${NavItem}>
+              ${username &&
+              html`
+                <${NavLink}
                   id="profile"
                   appRoute="/auth"
                   data-testid="signout-link"
-                  onClick={onSignOut}
+                  onClick=${onSignOut}
                 >
                   Sign out
-                </NavLink>
-              )}
-            </NavItem>
-            <NavItem>
-              {hangout && (
+                <//>
+              `}
+            <//>
+            <${NavItem}>
+              ${hangout &&
+              html`
                 <button
-                  className="btn"
+                  class="btn"
                   data-testid="nav-config"
                   id="configure"
-                  onClick={onNavigation}
+                  onClick=${onNavigation}
                 >
-                  <GearIcon color="white" />
+                  <${GearIcon} color="white" />
                 </button>
-              )}
-            </NavItem>
-            <NavItem>
-              <FeatureRoute path="/filter">
+              `}
+            <//>
+            <${NavItem}>
+              <${FeatureRoute} path="/filter">
                 <button
-                  className="btn"
+                  class="btn"
                   data-testid="search-link"
                   id="search"
-                  onClick={onNavigation}
+                  onClick=${onNavigation}
                 >
-                  <PersonPlusIcon width="1.5em" height="1.5em" />
+                  <${PersonPlusIcon} width="1.5em" height="1.5em" />
                 </button>
-              </FeatureRoute>
-            </NavItem>
-            <NavItem>
-              <WifiStatus fill="white" />
-            </NavItem>
-          </Nav>
-        </NavBarCollapse>
-      </Navbar>
+              <//>
+            <//>
+            <${NavItem}>
+              <${WifiStatus} fill="white" />
+            <//>
+          </nav>
+        <//>
+      <//>
     </div>
-  );
+  `;
 }
