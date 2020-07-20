@@ -1,7 +1,10 @@
 import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
-import { useEffect } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/hooks.module.js";
-import Messages from "./messages";
+import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
+import { useEffect } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cbdf6161bd8ca09a385d62c8c697bd1cd87bb184/hooks.cdn.js";
+import Messages from "./messages/index";
 import Layout from "./Layout";
+
+const html = htm.bind(h);
 
 export default function Hangchat({
   loading,
@@ -19,18 +22,18 @@ export default function Hangchat({
     }
   }, [hangout]);
 
-  return (
-    <Layout id="hangchat-ui" onNavigation={onNavigation}>
-      <Messages
-        loading={loading}
-        onNavigation={onNavigation}
-        hangout={hangout}
-        messages={messages}
-        onMessage={onMessage}
-        onMessageText={onMessageText}
-        messageText={messageText}
-        username={username}
+  return html`
+    <${Layout} id="hangchat-ui" onNavigation=${onNavigation}>
+      <${Messages}
+        loading=${loading}
+        onNavigation=${onNavigation}
+        hangout=${hangout}
+        messages=${messages}
+        onMessage=${onMessage}
+        onMessageText=${onMessageText}
+        messageText=${messageText}
+        username=${username}
       />
-    </Layout>
-  );
+    <//>
+  `;
 }

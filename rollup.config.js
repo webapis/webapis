@@ -1,7 +1,7 @@
 require("dotenv").config();
 const path = require("path");
 import resolve from "@rollup/plugin-node-resolve";
-import babel from "@rollup/plugin-babel";
+//import babel from "@rollup/plugin-babel";
 import postcss from "rollup-plugin-postcss";
 import image from "@rollup/plugin-image";
 import serve from "rollup-plugin-serve";
@@ -76,6 +76,7 @@ export default [
       "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js",
       "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/hooks.module.js",
       "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/compat.module.js",
+      "https://cdn.jsdelivr.net/gh/webapis/webapis@cbdf6161bd8ca09a385d62c8c697bd1cd87bb184/hooks.cdn.js",
     ],
     output: [
       {
@@ -186,10 +187,11 @@ export default [
   {
     input: `client/storybook/index.js`,
     external: [
-      "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js",
       "preact",
+      "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js",
       "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js",
       "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/hooks.module.js",
+      "https://cdn.jsdelivr.net/gh/webapis/webapis@cbdf6161bd8ca09a385d62c8c697bd1cd87bb184/hooks.cdn.js",
       "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/compat.module.js",
     ],
     output: [

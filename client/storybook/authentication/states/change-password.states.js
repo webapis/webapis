@@ -1,4 +1,5 @@
 import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
+import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 import ChangePassword from "features/authentication/ui-components/ChangePassword";
 const validationSuccess = {
   password: { isValid: true, message: "." },
@@ -8,47 +9,48 @@ const validationError = {
   password: { isValid: false, message: "invalid password format" },
   confirm: { isValid: false, message: "invalid password format" },
 };
+const html = htm.bind(h);
 export default function ChangePasswordStates() {
-  return (
-    <div className="container">
-      <div className="row">
-        <span className="col-md-12">
-          <h5 className="text-center"> ChangePassword Validation Success</h5>
-          <ChangePassword
+  return html`
+    <div class="container">
+      <div class="row">
+        <span class="col-md-12">
+          <h5 class="text-center">ChangePassword Validation Success</h5>
+          <${ChangePassword}
             password="123456789"
             confirm="123456789"
-            validation={validationSuccess}
+            validation=${validationSuccess}
           />
         </span>
       </div>
-      <div className="row">
-        <span className="col-md-12">
-          <h5 className="text-center">ChangePassword Validation Error</h5>
-          <ChangePassword validation={validationError} />
+      <div class="row">
+        <span class="col-md-12">
+          <h5 class="text-center">ChangePassword Validation Error</h5>
+          <${ChangePassword} validation=${validationError} />
         </span>
       </div>
-      <div className="row">
-        <span className="col-md-12">
-          <h5 className="text-center">ChangePassword in progress</h5>
-          <ChangePassword
+      <div class="row">
+        <span class="col-md-12">
+          <h5 class="text-center">ChangePassword in progress</h5>
+          <${ChangePassword}
             password="123456789"
             confirm="123456789"
-            validation={validationSuccess}
+            validation=${validationSuccess}
             loading
           />
         </span>
       </div>
-      <div className="row">
-        <span className="col-md-12">
-          <h5 className="text-center">ChangePassword Server error</h5>
-          <ChangePassword
+      <div class="row">
+        <span class="col-md-12">
+          <h5 class="text-center">ChangePassword Server error</h5>
+          <${ChangePassword}
             password="123456789"
             confirm="123456789"
-            validation={validationSuccess}
-            error={{ message: "Server is unavailable" }}
+            validation=${validationSuccess}
+            error=${{ message: "Server is unavailable" }}
           />
         </span>
       </div>
     </div>
-  );
+  `;
 }

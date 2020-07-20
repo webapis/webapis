@@ -2,12 +2,14 @@ import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.m
 import {
   useRef,
   useEffect,
-} from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/hooks.module.js";
+} from "https://cdn.jsdelivr.net/gh/webapis/webapis@cbdf6161bd8ca09a385d62c8c697bd1cd87bb184/hooks.cdn.js";
+import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 import Message from "./Message";
 import MessageEditor from "./MessageEditor";
 import { BlockerMessage } from "./BlockerMessage";
 import { BlockedMessage } from "./BlockedMessage";
 import { useMediaQuery } from "components/layout/useMediaQuery";
+const html = htm.bind(h);
 const styles = {
   messageContainer: {
     // width: '100%',
@@ -42,9 +44,9 @@ export default function Messages({
     onMessage(e);
     scrollerRef.current.scrollTop = scrollerRef.current.scrollHeight;
   }
-  return (
+  return html`
     <div
-      style={{
+      style=${{
         boxSizing: "border-box",
         width: "100%",
         height: "100%",
@@ -53,38 +55,42 @@ export default function Messages({
       }}
     >
       <div
-        style={{ ...styles.messageContainer, flex: device === "phone" ? 4 : 2 }}
-        ref={scrollerRef}
+        style=${{
+          ...styles.messageContainer,
+          flex: device === "phone" ? 4 : 2,
+        }}
+        ref=${scrollerRef}
       >
-        {messages &&
-          messages.length > 0 &&
-          floatMessages &&
-          floatMessages.length > 0 &&
-          floatMessages({ messages: sortMessages({ messages }), username }).map(
-            (m) => (
-              <div style={{ display: "flex" }}>
-                {" "}
-                {!m.type && <Message message={m} />}
-                {m.type && m.type === "blocker" && (
-                  <BlockerMessage message={m} />
-                )}
-                {m.type && m.type === "blocked" && (
-                  <BlockedMessage message={m} onNavigation={onNavigation} />
-                )}
-              </div>
-            )
-          )}
+        ${messages &&
+        messages.length > 0 &&
+        floatMessages &&
+        floatMessages.length > 0 &&
+        floatMessages({ messages: sortMessages({ messages }), username }).map(
+          (m) => html`
+            <div style=${{ display: "flex" }}>
+              ${!m.type && html` <${Message} message=${m} />`}
+              ${m.type &&
+              m.type === "blocker" &&
+              html`<${BlockerMessage} message=${m} />`}
+              ${m.type &&
+              m.type === "blocked" &&
+              html` <${BlockedMessage}
+                message=${m}
+                onNavigation=${onNavigation}
+              />`}
+            </div>
+          `
+        )}
       </div>
-
-      <MessageEditor
-        loading={loading}
-        hangout={hangout}
-        onMessage={onSend}
-        messageText={messageText}
-        onMessageText={onMessageText}
+      <${MessageEditor}
+        loading=${loading}
+        hangout=${hangout}
+        onMessage=${onSend}
+        messageText=${messageText}
+        onMessageText=${onMessageText}
       />
     </div>
-  );
+  `;
 }
 function floatMessages({ messages, username }) {
   if (messages && messages.length > 0 && username) {

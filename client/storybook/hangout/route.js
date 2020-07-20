@@ -1,5 +1,6 @@
 import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
-import { AppRoute } from "components/app-route";
+import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
+import { AppRoute } from "components/app-route/index";
 import Block from "features/hangouts/ui-components/Block";
 import Blocked from "features/hangouts/ui-components/Blocked";
 import Configure from "features/hangouts/ui-components/Configure";
@@ -11,6 +12,8 @@ import UnreadHangouts from "features/hangouts/ui-components/UnreadHangouts";
 import Message from "features/hangouts/ui-components/messages/Message";
 import HangoutFilter from "features/hangouts/ui-components/Filter";
 import HangoutSearch from "features/hangouts/ui-components/Search";
+
+const html = htm.bind(h);
 const hangouts = [
   { username: "userone" },
   { username: "usertwo" },
@@ -30,43 +33,45 @@ const message = {
 import { messages } from "./fakeMessages";
 export default function HangoutRoutes() {
   return [
-    <AppRoute path="/block">
-      <Block hangouts={hangouts} />
-    </AppRoute>,
-    <AppRoute path="/blocked">
-      <Blocked hangouts={hangouts} />
-    </AppRoute>,
-    <AppRoute path="/configure">
-      <Configure hangouts={hangouts} />
-    </AppRoute>,
-    <AppRoute path="/hangchat">
-      <Hangchat hangout={hangout} messages={messages} username="demo" />
-    </AppRoute>,
-    <AppRoute path="/invite">
-      <Invite hangouts={hangouts} />
-    </AppRoute>,
-    <AppRoute path="/inviter">
-      <Inviter hangouts={hangouts} />
-    </AppRoute>,
-    <AppRoute path="/invitee">
-      <Invitee hangouts={hangouts} />
-    </AppRoute>,
-    <AppRoute path="/unreadhangouts">
-      <UnreadHangouts unreadhangouts={hangouts} />
-    </AppRoute>,
-    <AppRoute path="/message">
-      <div style={{ padding: 20, backgroundColor: "#eeeeeee" }}>
-        <Message message={message} username={hangout.username} />
-      </div>
-    </AppRoute>,
-    <AppRoute path="/messages">
-      <Hangchat hangout={hangout} messages={messages} username="demo" />
-    </AppRoute>,
-    <AppRoute path="/search">
-      <HangoutSearch />
-    </AppRoute>,
-    <AppRoute path="/filter">
-      <HangoutFilter />
-    </AppRoute>,
+    html`
+      <${AppRoute} path="/block">
+        <${Block} hangouts=${hangouts} />
+      <//>
+      <${AppRoute} path="/blocked">
+        <${Blocked} hangouts=${hangouts} />
+      <//>
+      <${AppRoute} path="/configure">
+        <${Configure} hangouts=${hangouts} />
+      <//>
+      <${AppRoute} path="/hangchat">
+        <${Hangchat} hangout=${hangout} messages=${messages} username="demo" />
+      <//>
+      <${AppRoute} path="/invite">
+        <${Invite} hangouts=${hangouts} />
+      <//>
+      <${AppRoute} path="/inviter">
+        <${Inviter} hangouts=${hangouts} />
+      <//>
+      <${AppRoute} path="/invitee">
+        <${Invitee} hangouts=${hangouts} />
+      <//>
+      <${AppRoute} path="/unreadhangouts">
+        <${UnreadHangouts} unreadhangouts=${hangouts} />
+      <//>
+      <${AppRoute} path="/message">
+        <div style=${{ padding: 20, backgroundColor: "#eeeeeee" }}>
+          <${Message} message="{message}" username=${hangout.username} />
+        </div>
+      <//>
+      <${AppRoute} path="/messages">
+        <${Hangchat} hangout=${hangout} messages=${messages} username="demo" />
+      <//>
+      <${AppRoute} path="/search">
+        <${HangoutSearch} />
+      <//>
+      <${AppRoute} path="/filter">
+        <${HangoutFilter} />
+      <//>
+    `,
   ];
 }

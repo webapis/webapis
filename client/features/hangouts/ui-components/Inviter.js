@@ -1,7 +1,8 @@
 import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
+import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 import Message from "./messages/Message";
 import Layout from "./Layout";
-import Button from "controls/button";
+import Button from "controls/button/index";
 const style = {
   root: {
     display: "flex",
@@ -14,31 +15,29 @@ const style = {
     paddingBottom: 8,
   },
 };
-
+const html = htm.bind(h);
 export default function Inviter({ hangout, onAccept, onDecline, loading }) {
-  return (
-    <Layout id="inviter-ui">
-      <div style={style.root}>
-        <div style={{ marginLeft: 8, display: "flex" }}>
+  return html`
+    <${Layout} id="inviter-ui">
+      <div style=${style.root}>
+        <div style=${{ marginLeft: 8, display: "flex" }}>
           {hangout && hangout.message && (
-            <Message
-              message={
-                hangout &&
-                hangout.message && {
-                  ...hangout.message,
-                  username: hangout.username,
-                  float: "left",
-                }
-              }
-            />
+          <${Message}
+            message=${hangout &&
+            hangout.message && {
+              ...hangout.message,
+              username: hangout.username,
+              float: "left",
+            }}
+          />
           )}
         </div>
 
-        <div className="row">
-          <div className="col">
-            <Button
+        <div class="row">
+          <div class="col">
+            <${Button}
               id="DECLINE"
-              onClick={onDecline}
+              onClick=${onDecline}
               data-testid="decline-btn"
               title="Decline"
               block
@@ -47,12 +46,12 @@ export default function Inviter({ hangout, onAccept, onDecline, loading }) {
             />
           </div>
 
-          <div className="col">
-            <Button
+          <div class="col">
+            <${Button}
               id="ACCEPT"
-              onClick={onAccept}
+              onClick=${onAccept}
               data-testid="accept-btn"
-              loading={loading}
+              loading=${loading}
               title="Accept"
               bg="primary"
               block
@@ -60,6 +59,6 @@ export default function Inviter({ hangout, onAccept, onDecline, loading }) {
           </div>
         </div>
       </div>
-    </Layout>
-  );
+    <//>
+  `;
 }

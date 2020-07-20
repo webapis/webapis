@@ -2,8 +2,10 @@ import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.m
 import {
   useState,
   useEffect,
-} from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/hooks.module.js";
+} from "https://cdn.jsdelivr.net/gh/webapis/webapis@cbdf6161bd8ca09a385d62c8c697bd1cd87bb184/hooks.cdn.js";
+import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 import { useMediaQuery } from "components/layout/useMediaQuery";
+const html = htm.bind(h);
 //import './css/style.css';
 const style = {
   root: {
@@ -61,30 +63,30 @@ export default function Message(props) {
     }
   }, [timestamp]);
 
-  return (
-    <div style={{ width: "100%", marginBottom: 3 }}>
-      <div style={{ ...style.root, float }}>
+  return html`
+    <div style=${{ width: "100%", marginBottom: 3 }}>
+      <div style=${{ ...style.root, float }}>
         <div
           data-testid="message"
-          style={style.message}
-          className={`message-font-${device}-size`}
+          style=${style.message}
+          class=${`message-font-${device}-size`}
         >
-          {message && message.text}
+          ${message && message.text}
         </div>
-        <div style={style.log}>
-          <div style={style.username}>{username && username}:</div>
+        <div style=${style.log}>
+          <div style=${style.username}>${username && username}:</div>
           <div>
-            {minutes === 0 && <div>Now</div>}
-            {hours === 0 && minutes > 0 && <div>{minutes} minutes ago </div>}
-            {hours > 0 && days === 0 && (
-              <div>
-                {hours} hours {minutes} minutes ago{" "}
-              </div>
-            )}
-            {days <= 10 && days > 1 && <div>{days} days ago</div>}
+            ${minutes === 0 && html` <div>Now</div>`}
+            ${hours === 0 &&
+            minutes > 0 &&
+            html` <div>{minutes} minutes ago</div>`}
+            ${hours > 0 &&
+            days === 0 &&
+            html` <div>{hours} hours {minutes} minutes ago</div>`}
+            ${days <= 10 && days > 1 && html` <div>{days} days ago</div>`}
           </div>
         </div>
       </div>
     </div>
-  );
+  `;
 }

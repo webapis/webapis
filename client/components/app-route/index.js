@@ -7,9 +7,11 @@ import {
   useReducer,
   useMemo,
   useEffect,
-} from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/hooks.module.js";
+} from "https://cdn.jsdelivr.net/gh/webapis/webapis@cbdf6161bd8ca09a385d62c8c697bd1cd87bb184/hooks.cdn.js";
+import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 import { reducer } from "./reducer";
 import { actionTypes } from "./actionTypes";
+const html = htm.bind(h);
 const AppRouteContext = createContext();
 
 function useAppRouteContext() {
@@ -73,5 +75,5 @@ export default function AppRouteProvider(props) {
   }, []);
 
   const value = useMemo(() => [state, dispatch], [state]);
-  return <AppRouteContext.Provider value={value} {...props} />;
+  return html`<${AppRouteContext.Provider} value=${value} ...${props} />`;
 }

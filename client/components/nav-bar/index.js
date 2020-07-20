@@ -1,15 +1,16 @@
 import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
-import { useAppRoute } from "components/app-route";
-
+import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
+import { useAppRoute } from "components/app-route/index";
+const html = htm.bind(h);
 export default function Navbar(props) {
   const { bg = "light", brand, children } = props;
-  return (
-    <nav className={`navbar navbar-expand-lg navbar-${bg} bg-${bg}`}>
-      <a className="navbar-brand" href="#">
-        {brand}
+  return html`
+    <nav class="navbar navbar-expand-lg navbar-${bg} bg-${bg}">
+      <a class="navbar-brand" href="#">
+        ${brand}
       </a>
       <button
-        className="navbar-toggler"
+        class="navbar-toggler"
         type="button"
         data-toggle="collapse"
         data-target="#navbarSupportedContent"
@@ -17,27 +18,29 @@ export default function Navbar(props) {
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
-        <span className="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon"></span>
       </button>
-      {children}
+      ${children}
     </nav>
-  );
+  `;
 }
 
 export function NavBarCollapse({ children }) {
-  return (
-    <div className="collapse navbar-collapse" id="navbarSupportedContent">
-      {children}
+  return html`
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      ${children}
     </div>
-  );
+  `;
 }
 
 export function NavBarNav({ children }) {
-  return <ul className="navbar-nav mr-auto">{children}</ul>;
+  return html` <ul class="navbar-nav mr-auto">
+    ${children}
+  </ul>`;
 }
 //
 export function NavItem({ children }) {
-  return <li className="nav-item">{children}</li>;
+  return html`<li class="nav-item">${children}</li>`;
 }
 
 export function NavLink(props) {
@@ -49,5 +52,10 @@ export function NavLink(props) {
 
     onAppRoute({ featureRoute: `/${id}`, route: appRoute });
   }
-  return <a className="nav-link" href="#" onClick={handleRoute} {...props} />;
+  return html` <a
+    class="nav-link"
+    href="#"
+    onClick=${handleRoute}
+    ...${props}
+  />`;
 }

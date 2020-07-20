@@ -1,5 +1,7 @@
 import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
-import Signup from "features/authentication/ui-components/signup";
+import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
+import Signup from "features/authentication/ui-components/Signup";
+const html = htm.bind(h);
 const validationSuccess = {
   username: { isValid: true, message: "." },
   password: { isValid: true, message: "." },
@@ -11,55 +13,55 @@ const validationError = {
   email: { isValid: false, message: "Email is not valid" },
 };
 export default function SignupStates() {
-  return (
-    <div className="container">
-      <div className="row">
-        <span className="col-md-12">
-          <h5 className="text-center">Signup Validation Success</h5>
-          <Signup
+  return html`
+    <div class="container">
+      <div class="row">
+        <span class="col-md-12">
+          <h5 class="text-center">Signup Validation Success</h5>
+          <${Signup}
             username="testuser"
             email="test@gmail.com"
             password="123456789"
-            validation={validationSuccess}
+            validation=${validationSuccess}
           />
         </span>
       </div>
-      <div className="row">
-        <span className="col-md-12">
-          <h5 className="text-center">Signup Validation Error</h5>
-          <Signup
+      <div class="row">
+        <span class="col-md-12">
+          <h5 class="text-center">Signup Validation Error</h5>
+          <${Signup}
             username="testuser"
             email="test@gmail.com"
             password="123456789"
-            validation={validationError}
+            validation=${validationError}
           />
         </span>
       </div>
 
-      <div className="row">
-        <span className="col-md-12">
-          <h5 className="text-center">Signing up</h5>
-          <Signup
+      <div class="row">
+        <span class="col-md-12">
+          <h5 class="text-center">Signing up</h5>
+          <${Signup}
             username="testuser"
             email="test@gmail.com"
             password="123456789"
-            validation={validationSuccess}
+            validation=${validationSuccess}
             loading
           />
         </span>
       </div>
-      <div className="row">
-        <span className="col-md-12">
-          <h5 className="text-center">Signing Sever error</h5>
-          <Signup
+      <div class="row">
+        <span class="col-md-12">
+          <h5 class="text-center">Signing Sever error</h5>
+          <${Signup}
             username="testuser"
             email="test@gmail.com"
             password="123456789"
-            validation={validationSuccess}
-            error={{ message: "Server is unavailable" }}
+            validation=${validationSuccess}
+            error=${{ message: "Server is unavailable" }}
           />
         </span>
       </div>
     </div>
-  );
+  `;
 }

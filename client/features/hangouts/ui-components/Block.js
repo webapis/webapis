@@ -1,6 +1,8 @@
 import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
+import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 import Layout from "./Layout";
-import Button from "controls/button";
+import Button from "controls/button/index";
+const html = htm.bind(h);
 const style = {
   checkbox: { marginRight: 8 },
   checkboxRoot: {
@@ -19,17 +21,17 @@ const style = {
 };
 
 export default function Block({ onCancel, onBlock, onReport }) {
-  return (
-    <Layout style={style.layout}>
-      <div style={style.checkboxRoot}>
-        <input type="checkbox" style={style.checkbox} onChange={onReport} />
+  return html`
+    <${Layout} style=${style.layout}>
+      <div style=${style.checkboxRoot}>
+        <input type="checkbox" style=${style.checkbox} onChange=${onReport} />
         <label>Report</label>
       </div>
-      <div className="row">
-        <div className="col">
-          <Button
+      <div class="row">
+        <div class="col">
+          <${Button}
             data-testid="cancel-btn"
-            onClick={onCancel}
+            onClick=${onCancel}
             title="Cancel"
             bg="secondary"
             outline
@@ -37,10 +39,10 @@ export default function Block({ onCancel, onBlock, onReport }) {
           />
         </div>
 
-        <div className="col">
-          <Button
+        <div class="col">
+          <${Button}
             id="BLOCK"
-            onClick={onBlock}
+            onClick=${onBlock}
             data-testid="block-btn"
             title="Block"
             bg="primary"
@@ -48,6 +50,6 @@ export default function Block({ onCancel, onBlock, onReport }) {
           />
         </div>
       </div>
-    </Layout>
-  );
+    <//>
+  `;
 }

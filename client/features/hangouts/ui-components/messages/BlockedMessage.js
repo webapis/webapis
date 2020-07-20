@@ -1,4 +1,6 @@
 import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
+import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
+const html = htm.bind(h);
 const style = {
   color: "red",
   float: "right",
@@ -12,17 +14,17 @@ export function BlockedMessage({ message, onNavigation }) {
     onNavigation(e);
   }
 
-  return (
-    <div style={style} data-testid="blocked-message">
-      {message.text}
+  return html`
+    <div style=${style} data-testid="blocked-message">
+      ${message.text}
       <a
         id="UNBLOCK"
         data-testid="seemore-btn"
         href="/"
-        onClick={handleNavigation}
+        onClick=${handleNavigation}
       >
         see more
       </a>
     </div>
-  );
+  `;
 }

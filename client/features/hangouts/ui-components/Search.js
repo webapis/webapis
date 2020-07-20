@@ -1,5 +1,8 @@
 import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
-import List, { ListItem } from "controls/list";
+import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
+import List, { ListItem } from "controls/list/index";
+
+const html = htm.bind(h);
 export default function Search({
   onSearchSelect,
   onSearchInput,
@@ -7,13 +10,13 @@ export default function Search({
   search,
   searchResult = [],
 }) {
-  return (
+  return html`
     <div>
-      <div className="input-group mb-3">
+      <div class="input-group mb-3">
         <input
           data-testid="search-input"
-          value={search}
-          onChange={onSearchInput}
+          value=${search}
+          onChange=${onSearchInput}
           type="text"
           className="form-control"
           placeholder="Enter username"
@@ -23,7 +26,7 @@ export default function Search({
         <div className="input-group-append">
           <button
             data-testid="search-btn"
-            onClick={onSearch}
+            onClick=${onSearch}
             className="btn btn-outline-secondary"
             type="button"
             id="button-addon2"
@@ -32,20 +35,20 @@ export default function Search({
           </button>
         </div>
       </div>
-      <List>
-        {searchResult.length > 0 &&
-          searchResult.map((u) => {
-            return (
-              <ListItem
-                id={u.username}
-                onClick={onSearchSelect}
-                data-testid={u.username}
-              >
-                {u.username}
-              </ListItem>
-            );
-          })}
-      </List>
+      <${List}>
+        ${searchResult.length > 0 &&
+        searchResult.map((u) => {
+          return html`
+            <${ListItem}
+              id=${u.username}
+              onClick=${onSearchSelect}
+              data-testid=${u.username}
+            >
+              ${u.username}
+            <//>
+          `;
+        })}
+      <//>
     </div>
-  );
+  `;
 }

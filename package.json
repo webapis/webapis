@@ -28,7 +28,6 @@
     "nodemon": "^2.0.3",
     "prettier": "^2.0.5",
     "rollup": "^2.10.9",
-    "rollup-plugin-cdn": "^0.1.2",
     "rollup-plugin-copy": "^3.3.0",
     "rollup-plugin-delete": "^1.2.0",
     "rollup-plugin-generate-html-template": "^1.6.1",

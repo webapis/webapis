@@ -1,9 +1,11 @@
 import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
+import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 import Layout from "./Layout";
 import { Delete } from "icons/Delete";
 import { Archive } from "icons/Archive";
 import { Block } from "icons/Block";
-import Button from "controls/button";
+import Button from "controls/button/index";
+const html = htm.bind(h);
 const style = {
   iconBtn: { display: "flex", alignItems: "center", margin: 8 },
   btn: { marginRight: 8 },
@@ -28,54 +30,54 @@ export default function Configure({
   onNavigation,
   onOk,
 }) {
-  return (
-    <Layout style={style.layout}>
+  return html`
+    <${Layout} style=${style.layout}>
       <div>
-        <Checkbox label="Notifications" onChange={onNotification} />
-        <Checkbox
+        <${Checkbox} label="Notifications" onChange=${onNotification} />
+        <${Checkbox}
           label="Conversation History"
-          onChange={onConversationHistory}
+          onChange=${onConversationHistory}
         />
       </div>
       <hr />
-      <div style={style.btnContainer}>
-        <IconButton title="Archive" Icon={Archive} onClick={onArchive} />
-        <IconButton title="Delete" Icon={Delete} onClick={onDelete} />
-        <IconButton
+      <div style=${style.btnContainer}>
+        <${IconButton} title="Archive" Icon=${Archive} onClick=${onArchive} />
+        <${IconButton} title="Delete" Icon=${Delete} onClick=${onDelete} />
+        <${IconButton}
           id="bckui"
           title="Block"
-          Icon={Block}
-          onClick={onNavigation}
+          Icon=${Block}
+          onClick=${onNavigation}
         />
       </div>
       <div>
-        <Button onClick={onOk} title="OK" bg="primary" />
+        <${Button} onClick=${onOk} title="OK" bg="primary" />
       </div>
-    </Layout>
-  );
+    <//>
+  `;
 }
 
 function IconButton({ Icon, title, onClick, id }) {
-  return (
-    <div style={style.iconBtn}>
+  return html`
+    <div style=${style.iconBtn}>
       <button
-        id={id}
-        style={style.btn}
-        onClick={onClick}
-        data-testid={`${id}-btn`}
+        id=${id}
+        style=${style.btn}
+        onClick=${onClick}
+        data-testid="${id}-btn"
       >
-        <Icon id={id} />
+        <${Icon} id=${id} />
       </button>
-      <div>{title}</div>
+      <div>${title}</div>
     </div>
-  );
+  `;
 }
 
 function Checkbox({ label, onChange }) {
-  return (
-    <div style={{ margin: 8, marginTop: 8 }}>
-      <input type="checkbox" onChange={onChange} />
-      <label>{label}</label>
+  return html`
+    <div style=${{ margin: 8, marginTop: 8 }}>
+      <input type="checkbox" onChange=${onChange} />
+      <label>${label}</label>
     </div>
-  );
+  `;
 }

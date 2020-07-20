@@ -1,6 +1,8 @@
 import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
-import TextInput from "controls/text-input";
-import Button from "controls/button";
+import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
+const html = htm.bind(h);
+import TextInput from "controls/text-input/index";
+import Button from "controls/button/index";
 const styles = {
   root: {
     display: "flex",
@@ -29,27 +31,27 @@ export default function MessageEditor({
   onMessage,
   hangout,
 }) {
-  return (
+  return html`
     <div>
-      <div className="input-group mb-3">
+      <div class="input-group mb-3">
         <input
-          disabled={hangout && hangout.state === "BLOCKED"}
+          disabledc=${hangout && hangout.state === "BLOCKED"}
           type="text"
           class="form-control"
           aria-label="Recipient's username"
           aria-describedby="button-addon2"
-          onChange={onMessageText}
+          onChangec=${onMessageText}
           data-testid="message-input"
-          value={messageText}
+          valuec=${messageText}
         />
-        <div className="input-group-append">
+        <div class="input-group-append">
           <button
-            className="btn btn-outline-secondary"
+            class="btn btn-outline-secondary"
             type="button"
-            loading={loading}
-            disabled={hangout && hangout.state === "BLOCKED"}
+            loadingc=${loading}
+            disabledc=${hangout && hangout.state === "BLOCKED"}
             id="MESSAGE"
-            onClick={onMessage}
+            onClickc=${onMessage}
             data-testid="send-btn"
           >
             Send
@@ -57,5 +59,5 @@ export default function MessageEditor({
         </div>
       </div>
     </div>
-  );
+  `;
 }

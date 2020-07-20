@@ -5,7 +5,7 @@ import {
 import {
   useContext,
   useState,
-} from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/hooks.module.js";
+} from "https://cdn.jsdelivr.net/gh/webapis/webapis@cbdf6161bd8ca09a385d62c8c697bd1cd87bb184/hooks.cdn.js";
 
 const ThemeContext = createContext();
 

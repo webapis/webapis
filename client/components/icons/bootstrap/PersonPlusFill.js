@@ -1,13 +1,15 @@
 import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
+import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
+const html = htm.bind(h);
 export default function PersonPlusFill(props) {
   const { width, height, color } = props;
-  return (
+  return html`
     <svg
-      width={width}
-      height={height}
+      width=${width}
+      height=${height}
       viewBox="0 0 16 16"
       className="bi bi-person-plus-fill"
-      fill={color}
+      fill=${color}
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
@@ -19,5 +21,5 @@ export default function PersonPlusFill(props) {
         d="M13 7.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0v-2z"
       />
     </svg>
-  );
+  `;
 }
