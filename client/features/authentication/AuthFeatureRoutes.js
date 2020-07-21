@@ -28,57 +28,55 @@ export default function AuthFeatureRoutes() {
   } = useAuth();
 
   return html`
-    <div>
-      <${FeatureRoute} path="/change-pasword">
-        <${Suspense} fallback=${Loading}>
-          <${ChangePassword}
-            ...${state}
-            onFocus=${onFocus}
-            onBlur=${onChangePassBlur}
-            onChange=${onChange}
-            onPasswordChange=${onPasswordChange}
-          />
-        <//>
+    <${FeatureRoute} path="/change-pasword">
+      <${Suspense} fallback=${Loading}>
+        <${ChangePassword}
+          ...${state}
+          onFocus=${onFocus}
+          onBlur=${onChangePassBlur}
+          onChange=${onChange}
+          onPasswordChange=${onPasswordChange}
+        />
       <//>
-      <${FeatureRoute} path="/login">
-        <${Suspense} fallback=${Loading}>
-          <${Login}
-            ...${state}
-            onFocus=${onFocus}
-            onBlur=${onLoginBlur}
-            onChange=${onChange}
-            onLogin=${onLogin}
-          />
-        <//>
+    <//>
+    <${FeatureRoute} path="/login">
+      <${Suspense} fallback=${Loading}>
+        <${Login}
+          ...${state}
+          onFocus=${onFocus}
+          onBlur=${onLoginBlur}
+          onChange=${onChange}
+          onLogin=${onLogin}
+        />
       <//>
-      <${FeatureRoute} path="/signup">
-        <${Suspense} fallback=${Loading}>
-          <${Signup}
-            ...${state}
-            onFocus=${onFocus}
-            onBlur=${onSignupBlur}
-            onChange=${onChange}
-            onSignup=${onSignup}
-          />
-        <//>
+    <//>
+    <${FeatureRoute} path="/signup">
+      <${Suspense} fallback=${Loading}>
+        <${Signup}
+          ...${state}
+          onFocus=${onFocus}
+          onBlur=${onSignupBlur}
+          onChange=${onChange}
+          onSignup=${onSignup}
+        />
       <//>
-      <${FeatureRoute} path="/forgot-pasword">
-        <${Suspense} fallback=${Loading}>
-          <${ForgotPassword}
-            ...${state}
-            onFocus=${onFocus}
-            onBlur=${onRequestPassChangeBlur}
-            onChange=${onChange}
-            onRequestPasswordChange=${onRequestPasswordChange}
-          />
-        <//>
+    <//>
+    <${FeatureRoute} path="/forgot-pasword">
+      <${Suspense} fallback=${Loading}>
+        <${ForgotPassword}
+          ...${state}
+          onFocus=${onFocus}
+          onBlur=${onRequestPassChangeBlur}
+          onChange=${onChange}
+          onRequestPasswordChange=${onRequestPasswordChange}
+        />
       <//>
-      <${FeatureRoute} path="/profile">
-        <${Suspense} fallback=${Loading}>
-          <${Profile} />
-        <//>
+    <//>
+    <${FeatureRoute} path="/profile">
+      <${Suspense} fallback=${Loading}>
+        <${Profile} />
       <//>
-    </div>
+    <//>
   `;
 }
 

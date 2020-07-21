@@ -1,17 +1,23 @@
 require("dotenv").config();
 const path = require("path");
-import resolve from "@rollup/plugin-node-resolve";
-//import babel from "@rollup/plugin-babel";
-import postcss from "rollup-plugin-postcss";
 import image from "@rollup/plugin-image";
 import serve from "rollup-plugin-serve";
-import htmlTemplate from "rollup-plugin-generate-html-template";
 import del from "rollup-plugin-delete";
 import { terser } from "rollup-plugin-terser";
 import replace from "@rollup/plugin-replace";
 import copy from "rollup-plugin-copy";
 import alias from "@rollup/plugin-alias";
+import { copyBoortrapAssets } from "./assets/copyAssets";
 const production = !process.env.ROLLUP_WATCH;
+
+const externals = [
+  "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js",
+  "https://cdn.jsdelivr.net/gh/webapis/webapis@cbdf6161bd8ca09a385d62c8c697bd1cd87bb184/hooks.cdn.js",
+  "https://cdn.jsdelivr.net/gh/webapis/webapis/preact.combat.cdn.js",
+  "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js",
+  "https://cdn.jsdelivr.net/npm/whatwg-fetch@3.2.0/fetch.js",
+];
+
 const commonPlugins = [
   alias({
     entries: [
@@ -34,29 +40,9 @@ const commonPlugins = [
       { find: "server", replacement: path.resolve(__dirname + "/server") },
     ],
   }),
-  //cdn(),
   image(),
 
-  postcss({
-    extensions: [".css", ".scss"],
-    plugins: [],
-  }),
-
-  //resolve(),
-  // babel({
-  //   babelrc: false,
-  //   exclude: "node_modules/**",
-  //   plugins: [
-  //     [
-  //       "@babel/plugin-transform-react-jsx",
-  //       {
-  //         pragma: "h",
-  //         pragmaFrag: "Fragment",
-  //       },
-  //     ],
-  //   ],
-  // }),
-  production && terser(),
+  terser(),
   replace({
     PREACT_APP_BACK: process.env.PREACT_APP_BACK
       ? `${JSON.stringify(process.env.PREACT_APP_BACK)}`
@@ -70,13 +56,7 @@ const commonPlugins = [
 export default [
   {
     input: `client/apps/${process.env.appName}/index.js`,
-    external: [
-      "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js",
-      "https://cdn.jsdelivr.net/gh/webapis/webapis@cbdf6161bd8ca09a385d62c8c697bd1cd87bb184/hooks.cdn.js",
-      "https://cdn.jsdelivr.net/gh/webapis/webapis/preact.combat.cdn.js",
-      "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js",
-      "https://cdn.jsdelivr.net/npm/whatwg-fetch@3.2.0/fetch.js",
-    ],
+    external: externals,
     output: [
       {
         dir: `builds/${process.env.appName}/build`,
@@ -101,25 +81,12 @@ export default [
             src: "assets/manifest/**",
             dest: `builds/${process.env.appName}/build`,
           },
+
           {
-            src: "node_modules/bootstrap/dist/css/bootstrap.min.css",
-            dest: `builds/${process.env.appName}/build`,
-          },
-          {
-            src: "node_modules/bootstrap/dist/js/bootstrap.min.js",
-            dest: `builds/${process.env.appName}/build`,
-          },
-          //  { src: 'node_modules/bootstrap/js/dist/util.js', dest: `builds/${process.env.appName}/build` },
-          {
-            src: "node_modules/jquery/dist/jquery.min.js",
+            src: "config/rollup/html-template/index.html",
             dest: `builds/${process.env.appName}/build`,
           },
         ],
-      }),
-      htmlTemplate({
-        template: "config/rollup/html-template/index.html",
-        target: `builds/${process.env.appName}/build/index.html`,
-        attrs: ['type="module"'],
       }),
       serve({
         contentBase: `builds/${process.env.appName}/build/`,
@@ -185,13 +152,7 @@ export default [
 
   {
     input: `client/storybook/index.js`,
-    external: [
-      "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js",
-      "https://cdn.jsdelivr.net/gh/webapis/webapis@cbdf6161bd8ca09a385d62c8c697bd1cd87bb184/hooks.cdn.js",
-      "https://cdn.jsdelivr.net/gh/webapis/webapis/preact.combat.cdn.js",
-      "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js",
-      "https://cdn.jsdelivr.net/npm/whatwg-fetch@3.2.0/fetch.js",
-    ],
+    external: externals,
     output: [
       {
         dir: `client/storybook/build`,
@@ -210,26 +171,14 @@ export default [
             dest: `client/storybook/build`,
           },
           { src: "assets/manifest/**", dest: `client/storybook/build` },
+
           {
-            src: "node_modules/bootstrap/dist/css/bootstrap.min.css",
-            dest: `client/storybook/build`,
-          },
-          {
-            src: "node_modules/bootstrap/dist/js/bootstrap.min.js",
-            dest: `client/storybook/build`,
-          },
-          // { src: 'node_modules/bootstrap/js/dist/util.js', dest:`client/storybook/build`  },
-          {
-            src: "node_modules/jquery/dist/jquery.min.js",
-            dest: `client/storybook/build`,
+            src: "config/rollup/html-template/index.html",
+            dest: `client/storybook/build/`,
           },
         ],
       }),
-      htmlTemplate({
-        template: "config/rollup/html-template/index.html",
-        target: `client/storybook/build/index.html`,
-        attrs: ['type="module"'],
-      }),
+
       serve({
         contentBase: `client/storybook/build/`,
         openPage: "/index.html",

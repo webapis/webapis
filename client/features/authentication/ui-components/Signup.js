@@ -1,6 +1,5 @@
 import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
-
 const html = htm.bind(h);
 import Button from "controls/button/index";
 import TextInput from "controls/text-input/index";
@@ -19,6 +18,7 @@ export default function Signup(props) {
     error,
   } = props;
   console.log("signup props");
+
   return html`
     <div
       class="col-md-4 border mx-auto rounded"

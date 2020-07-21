@@ -9,9 +9,9 @@ import { AppRoute } from "components/app-route/index";
 import { Home } from "./Home";
 import { AuthFeatureRoutes } from "features/authentication/index";
 const html = htm.bind(h);
-// const HangoutsFeatureRoutes = lazy(() =>
-//   import("features/hangouts/HangoutsFeatureRoutes")
-// );
+const HangoutsFeatureRoutes = lazy(() =>
+  import("features/hangouts/HangoutsFeatureRoutes")
+);
 const ErrorPage = lazy(() => import("./ErrorPage"));
 export function AppRoutes() {
   return html`
@@ -20,7 +20,11 @@ export function AppRoutes() {
       <${AppRoute}path =${"/"}>
         <${Home} />
       <//>
-
+      <${AppRoute} path=${"/hangouts"}>
+        <${Suspense} fallback=${Loading}>
+          <${HangoutsFeatureRoutes} />
+        <//>
+      <//>
       <${AppRoute}path =${"/error"}>
         <${Suspense} fallback=${Loading}>
           <${ErrorPage} />

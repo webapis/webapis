@@ -46,7 +46,7 @@ export function useAppRoute() {
     dispatch({ type: actionTypes.APP_ROUTE_CHANGED, featureRoute, route });
   }
 
-  return { onAppRoute };
+  return { onAppRoute, routeState: state };
 }
 
 export function AppRoute(props) {
