@@ -103,6 +103,7 @@ module.exports = function httpRoute(client) {
 
         break;
       default:
+        debugger;
         throw new Error("No operation is provied");
     }
   };

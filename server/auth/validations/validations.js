@@ -92,6 +92,8 @@ module.exports.emailIsRegistered = async function ({ email, collection }, cb) {
       return false;
     }
   } catch (error) {
+    const err = error;
+    debugger;
     throw new Error(error);
   }
 };

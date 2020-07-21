@@ -144,7 +144,7 @@ module.exports = async function ({ req, res, collection }) {
     }
   } catch (error) {
     const err = error;
-
+    debugger;
     console.log("err---------------", err);
     res.writeHead(500, { "Content-Type": "application/json" });
     res.write(JSON.stringify({ error }));

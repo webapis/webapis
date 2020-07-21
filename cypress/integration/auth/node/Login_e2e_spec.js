@@ -19,7 +19,7 @@ describe("Login e2e", () => {
   });
 
   //node, parse
-  it("invalid credentials(wrong email) provided", () => {
+  it.only("invalid credentials(wrong email) provided", () => {
     cy.get("[data-testid=emailorusername]").type("tests@gmail.com");
     cy.get("[data-testid=password]").type("Dragonfly1922!!");
     cy.get("[data-testid=login-btn]").click();

@@ -7,7 +7,10 @@ import {
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 import { AppRoute } from "components/app-route/index";
 import { Home } from "./Home";
-import { AuthFeatureRoutes } from "features/authentication/index";
+
+const AuthFeatureRoutes = lazy(() =>
+  import("features/authentication/AuthFeatureRoutes")
+);
 const html = htm.bind(h);
 const HangoutsFeatureRoutes = lazy(() =>
   import("features/hangouts/HangoutsFeatureRoutes")
@@ -16,7 +19,11 @@ const ErrorPage = lazy(() => import("./ErrorPage"));
 export function AppRoutes() {
   return html`
     <div style=${{ height: "85vh" }}>
-      <${AppRoute} path=${"/auth"}> <${AuthFeatureRoutes} /> <//>
+      <${AppRoute} path=${"/auth"}>
+        <${Suspense} fallback=${Loading}>
+          <${AuthFeatureRoutes} />
+        <//>
+      <//>
       <${AppRoute}path =${"/"}>
         <${Home} />
       <//>

@@ -32,19 +32,20 @@ export async function signup({ dispatch, state }) {
       );
     } else if (response.status === 400) {
       const { errors } = result;
-
+      debugger;
       errors.forEach((error) => {
         serverValidation({ status: error, dispatch });
       });
       dispatch({ type: actionTypes.SIGNUP_FAILED });
     } else if (response.status === 500) {
       const { error } = result;
+      debugger;
       dispatch({ type: actionTypes.SERVER_ERROR_RECIEVED, error });
       dispatch({ type: actionTypes.SIGNUP_FAILED });
     }
   } catch (error) {
     const err = error;
-
+    debugger;
     dispatch({ type: actionTypes.SERVER_ERROR_RECIEVED, error });
     dispatch({ type: actionTypes.SIGNUP_FAILED });
   }
@@ -82,17 +83,20 @@ export async function login({ dispatch, state, formDispatch }) {
       );
     } else if (response.status === 400) {
       const { errors } = result;
-
+      debugger;
       errors.forEach((error) => {
         serverValidation({ status: error, dispatch });
       });
       dispatch({ type: actionTypes.LOGIN_FAILED });
     } else if (response.status === 500) {
       const { error } = result;
+      debugger;
       dispatch({ type: actionTypes.SERVER_ERROR_RECIEVED, error });
       dispatch({ type: actionTypes.LOGIN_FAILED });
     }
   } catch (error) {
+    const err = error;
+    debugger;
     dispatch({ type: actionTypes.SERVER_ERROR_RECIEVED, error });
     dispatch({ type: actionTypes.LOGIN_FAILED });
   }

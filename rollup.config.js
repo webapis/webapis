@@ -7,7 +7,7 @@ import { terser } from "rollup-plugin-terser";
 import replace from "@rollup/plugin-replace";
 import copy from "rollup-plugin-copy";
 import alias from "@rollup/plugin-alias";
-import { copyBoortrapAssets } from "./assets/copyAssets";
+import cleanup from "rollup-plugin-cleanup";
 const production = !process.env.ROLLUP_WATCH;
 
 const externals = [
@@ -41,8 +41,8 @@ const commonPlugins = [
     ],
   }),
   image(),
-
-  terser(),
+  production && terser(),
+  production && cleanup(),
   replace({
     PREACT_APP_BACK: process.env.PREACT_APP_BACK
       ? `${JSON.stringify(process.env.PREACT_APP_BACK)}`
@@ -61,7 +61,7 @@ export default [
       {
         dir: `builds/${process.env.appName}/build`,
         format: "es",
-        sourcemap: "inline",
+        // sourcemap: "inline",
       },
     ],
     plugins: [
@@ -157,7 +157,7 @@ export default [
       {
         dir: `client/storybook/build`,
         format: "es",
-        sourcemap: "inline",
+        //  sourcemap: "inline",
       },
     ],
     plugins: [

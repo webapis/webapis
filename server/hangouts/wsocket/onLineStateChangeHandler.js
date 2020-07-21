@@ -7,9 +7,8 @@ module.exports = async function onLineStateChangeHandler({
     const collection = await client.db("auth").collection("users");
 
     const user = await collection.findOne({ username: ws.user.username });
-    debugger;
+
     if (user && user.unreads) {
-      debugger;
       ws.send(
         JSON.stringify({ hangouts: user.unreads, type: "UNREAD_HANGOUTS" }) //--
       );

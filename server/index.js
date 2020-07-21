@@ -44,6 +44,8 @@ const options = {
   process.on("SIGINT", shutDown);
   server.listen(3000, (error) => {
     if (error) {
+      const err = error;
+      debugger;
       process.exit(0);
       throw error;
     }
