@@ -27,8 +27,8 @@ export default function AuthFeatureRoutes() {
     state,
   } = useAuth();
 
-  return [
-    html`
+  return html`
+    <div>
       <${FeatureRoute} path="/change-pasword">
         <${Suspense} fallback=${Loading}>
           <${ChangePassword}
@@ -38,48 +38,48 @@ export default function AuthFeatureRoutes() {
             onChange=${onChange}
             onPasswordChange=${onPasswordChange}
           />
-        <//> <//
-      >,
+        <//>
+      <//>
       <${FeatureRoute} path="/login">
         <${Suspense} fallback=${Loading}>
           <${Login}
-            {...state}
+            ...${state}
             onFocus=${onFocus}
             onBlur=${onLoginBlur}
             onChange=${onChange}
             onLogin=${onLogin}
           />
-        <//> <//
-      >,
+        <//>
+      <//>
       <${FeatureRoute} path="/signup">
         <${Suspense} fallback=${Loading}>
           <${Signup}
-            {...state}
+            ...${state}
             onFocus=${onFocus}
             onBlur=${onSignupBlur}
             onChange=${onChange}
             onSignup=${onSignup}
           />
-        <//> <//
-      >,
+        <//>
+      <//>
       <${FeatureRoute} path="/forgot-pasword">
         <${Suspense} fallback=${Loading}>
           <${ForgotPassword}
-            {...state}
+            ...${state}
             onFocus=${onFocus}
             onBlur=${onRequestPassChangeBlur}
             onChange=${onChange}
             onRequestPasswordChange=${onRequestPasswordChange}
           />
-        <//> <//
-      >,
+        <//>
+      <//>
       <${FeatureRoute} path="/profile">
         <${Suspense} fallback=${Loading}>
           <${Profile} />
-        <//> <//
-      >,
-    `,
-  ];
+        <//>
+      <//>
+    </div>
+  `;
 }
 
 function Loading() {

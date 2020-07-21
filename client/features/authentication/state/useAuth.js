@@ -5,6 +5,7 @@ export function useAuth() {
   const { state, dispatch } = useAuthContext();
   function onChange(e) {
     const { name, value } = e.target;
+
     dispatch({ type: actionTypes.VALUE_CHANGED, name, value });
   }
   function onLogin() {

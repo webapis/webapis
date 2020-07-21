@@ -10,7 +10,7 @@ export function RootProviders({ children }) {
   return html`
     <${AppRouteProvider}
       title="Webcom"
-      initState=${{ route: "/", featureRoute: "/hangouts" }}
+      initState=${{ route: "/auth", featureRoute: "/login" }}
     >
       <${AuthProvider}>
         <${HangoutsProvider}>

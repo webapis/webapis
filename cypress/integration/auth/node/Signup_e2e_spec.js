@@ -103,7 +103,7 @@ describe("Signup e2e", () => {
     );
   });
   //parse,node
-  it("success signup", () => {
+  it.skip("success signup", () => {
     if (Cypress.env("back") === "node") {
       cy.server();
       cy.route("POST", "/auth/signup").as("signup");

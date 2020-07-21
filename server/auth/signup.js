@@ -5,6 +5,7 @@ const passhash = require("../../server/auth/hashPassword");
 const jwt = require("jsonwebtoken");
 
 module.exports = async function ({ req, res, collection }) {
+  debugger;
   try {
     let errors = [];
     //const SALT_WORK_FACTOR = 10;
@@ -88,7 +89,7 @@ module.exports = async function ({ req, res, collection }) {
     }
   } catch (error) {
     const err = error;
-
+    debugger;
     res.writeHead(500, { "Content-Type": "application/json" });
     res.write(JSON.stringify({ error }));
     res.end();

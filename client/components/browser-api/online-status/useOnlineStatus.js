@@ -11,7 +11,6 @@ export default function useOnlineStatus() {
   }, []);
 
   function updateOnlineStatus(e) {
-    debugger;
     navigator.onLine ? setOnlineStatus(true) : setOnlineStatus(false);
   }
   return { onlineStatus };

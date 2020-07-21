@@ -9,7 +9,6 @@ const signup = require("./signup");
 const changePassword = require("./changePassword");
 const recover = require("./recover");
 
-//
 module.exports = function (req, res) {
   const { url } = req;
   const collectionName = "users";

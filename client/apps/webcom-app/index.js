@@ -1,4 +1,4 @@
-//import "whatwg-fetch";
+import "https://cdn.jsdelivr.net/npm/whatwg-fetch@3.2.0/fetch.js";
 import {
   h,
   render,
@@ -10,7 +10,6 @@ import { RootProviders } from "./RootProviders";
 //Parse.serverURL = 'https://parseapi.back4app.com/'
 //Parse.liveQueryServerURL = `wss://webapis.back4app.io`
 const html = htm.bind(h);
-const app = html`<h1>Hello World!</h1>`;
 render(
   html`<${RootProviders}>
     <${App} />

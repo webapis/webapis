@@ -60,7 +60,6 @@ export function reducer(state, action) {
     case actionTypes.LOADED_MESSAGES:
       return { ...state, messages: action.messages };
     case actionTypes.MESSAGE_TEXT_CHANGED:
-      debugger;
       return { ...state, messageText: action.text };
     //search
     case actionTypes.SEARCH_HANGOUT_STARTED:

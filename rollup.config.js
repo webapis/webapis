@@ -71,12 +71,11 @@ export default [
   {
     input: `client/apps/${process.env.appName}/index.js`,
     external: [
-      "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js",
-      "preact",
       "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js",
-      "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/hooks.module.js",
-      "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/compat.module.js",
       "https://cdn.jsdelivr.net/gh/webapis/webapis@cbdf6161bd8ca09a385d62c8c697bd1cd87bb184/hooks.cdn.js",
+      "https://cdn.jsdelivr.net/gh/webapis/webapis/preact.combat.cdn.js",
+      "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js",
+      "https://cdn.jsdelivr.net/npm/whatwg-fetch@3.2.0/fetch.js",
     ],
     output: [
       {
@@ -187,12 +186,11 @@ export default [
   {
     input: `client/storybook/index.js`,
     external: [
-      "preact",
-      "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js",
       "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js",
-      "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/hooks.module.js",
       "https://cdn.jsdelivr.net/gh/webapis/webapis@cbdf6161bd8ca09a385d62c8c697bd1cd87bb184/hooks.cdn.js",
-      "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/compat.module.js",
+      "https://cdn.jsdelivr.net/gh/webapis/webapis/preact.combat.cdn.js",
+      "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js",
+      "https://cdn.jsdelivr.net/npm/whatwg-fetch@3.2.0/fetch.js",
     ],
     output: [
       {

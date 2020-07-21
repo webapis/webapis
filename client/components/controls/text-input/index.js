@@ -12,6 +12,7 @@ const TextInput = (props) => {
       class="form-control ${isValid && "is-valid"} ${!isValid &&
       isValid !== undefined &&
       "is-invalid"}"
+      ...${props}
     />
     ${!isValid &&
     html`<small

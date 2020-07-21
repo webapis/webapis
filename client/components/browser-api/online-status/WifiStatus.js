@@ -11,7 +11,7 @@ export default function WifiStatus({ fill = white }) {
         height="1em"
         viewBox="0 0 16 16"
         class="bi bi-wifi"
-        fill="{fill}"
+        fill=${fill}
         xmlns="http://www.w3.org/2000/svg"
       >
         <path
@@ -29,7 +29,7 @@ export default function WifiStatus({ fill = white }) {
       height="1em"
       viewBox="0 0 16 16"
       class="bi bi-wifi-off"
-      fill="{fill}"
+      fill=${fill}
       xmlns="http://www.w3.org/2000/svg"
     >
       <path

@@ -53,7 +53,12 @@ export function AppRoute(props) {
   const { children, path, paths } = props;
 
   const [state, dispatch] = useAppRouteContext();
+  useEffect(() => {
+    if (state && state.route === "/hangouts") {
+    }
+  }, [state]);
   const { route } = state;
+
   if (path && route === path) {
     return children;
   } else if (paths && route === paths.find((p) => p === route)) {

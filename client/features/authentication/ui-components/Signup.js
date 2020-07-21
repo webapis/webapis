@@ -18,6 +18,7 @@ export default function Signup(props) {
     onFocus,
     error,
   } = props;
+  console.log("signup props");
   return html`
     <div
       class="col-md-4 border mx-auto rounded"

@@ -51,7 +51,6 @@ export function WebSocketContainer(props) {
         dispatch({ type: actionTypes.CLOSED });
       };
       socket.onerror = (error) => {
-        debugger;
         dispatch({ type: actionTypes.SOCKET_ERROR, error });
         displayError({ error });
       };

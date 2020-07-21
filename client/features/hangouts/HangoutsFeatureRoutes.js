@@ -67,7 +67,7 @@ export default function HangoutsFeatureRoutes(props) {
   const { loading } = state;
   return [
     html`
-      <${FeatureRoute} path="/bckui">
+      <${FeatureRoute} path=${"/bckui"}>
         <${Suspense} fallback=${Loading}>
           <${Block} hangout=${hangout} onBlock=${onBlock} />
         <//> <//

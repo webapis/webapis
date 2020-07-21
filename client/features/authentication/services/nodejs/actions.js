@@ -3,6 +3,7 @@ import serverValidation from "../../validation/serverErrorActions";
 
 export async function signup({ dispatch, state }) {
   const { email, password, username } = state;
+
   try {
     const response = await fetch(`/auth/signup`, {
       body: JSON.stringify({ password, email, username }),

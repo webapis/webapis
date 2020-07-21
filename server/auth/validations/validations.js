@@ -4,7 +4,7 @@ const {
   passwordRegex,
 } = require("./validationRegex");
 
-module.exports = function isValidUsername({ username }) {
+module.exports.isValidUsername = function ({ username }) {
   const usrname = new RegExp(usernameRegex);
   if (usrname.test(username)) {
     return true;
@@ -13,7 +13,7 @@ module.exports = function isValidUsername({ username }) {
   }
 };
 
-module.exports = function isValidEmail({ email }) {
+module.exports.isValidEmail = function ({ email }) {
   const eml = new RegExp(emailRegex);
   if (eml.test(email)) {
     return true;
@@ -21,7 +21,7 @@ module.exports = function isValidEmail({ email }) {
     return false;
   }
 };
-module.exports = function isValidPasspword({ password }) {
+module.exports.isValidPasspword = function ({ password }) {
   const psw = new RegExp(passwordRegex);
   if (psw.test(password)) {
     return true;
@@ -30,7 +30,7 @@ module.exports = function isValidPasspword({ password }) {
   }
 };
 
-module.exports = function passwordsMatch({ password, confirm }) {
+module.exports.passwordsMatch = function ({ password, confirm }) {
   if (password !== "" && password !== confirm) {
     return false;
   } else {
@@ -38,7 +38,7 @@ module.exports = function passwordsMatch({ password, confirm }) {
   }
 };
 
-module.exports = function isEmptyEmailOrUsername({ emailorusername }) {
+module.exports.isEmptyEmailOrUsername = function ({ emailorusername }) {
   if (
     emailorusername === "" ||
     emailorusername === undefined ||
@@ -50,7 +50,7 @@ module.exports = function isEmptyEmailOrUsername({ emailorusername }) {
   }
 };
 
-module.exports = function isEmptyPassword({ password }) {
+module.exports.isEmptyPassword = function ({ password }) {
   if (password === "" || password === undefined || password === null) {
     return true;
   } else {
@@ -58,7 +58,7 @@ module.exports = function isEmptyPassword({ password }) {
   }
 };
 
-module.exports = function isValidUsernameOrEmail({ emailorusername }) {
+module.exports.isValidUsernameOrEmail = function ({ emailorusername }) {
   const email = new RegExp(emailRegex);
   const username = new RegExp(usernameRegex);
   if (email.test(emailorusername) || username.test(emailorusername)) {
@@ -68,7 +68,7 @@ module.exports = function isValidUsernameOrEmail({ emailorusername }) {
   }
 };
 
-module.exports = async function userNameIsTaken({ username, collection }, cb) {
+module.exports.userNameIsTaken = async function ({ username, collection }, cb) {
   try {
     const user = await collection.findOne({ username });
 
@@ -82,7 +82,7 @@ module.exports = async function userNameIsTaken({ username, collection }, cb) {
   }
 };
 
-module.exports = async function emailIsRegistered({ email, collection }, cb) {
+module.exports.emailIsRegistered = async function ({ email, collection }, cb) {
   try {
     const user = await collection.findOne({ email });
 

@@ -46,14 +46,12 @@ export default function HangoutsProvider(props) {
         case "BLOCKER":
         case "MESSANGER":
         case "UNBLOCKER":
-          debugger;
           dispatch({
             type: actionTypes.SENDING_HANGOUT_STARTED,
             pendingHangout: { ...hangout, command: clientCommands.READ },
           });
           break;
         case "INVITE":
-          debugger;
           dispatch({
             type: actionTypes.MESSAGE_TEXT_CHANGED,
             text: `Let's chat, ${hangout.username}!`,

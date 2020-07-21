@@ -5,9 +5,7 @@ import { AppRoutes } from "./AppRoutes";
 const html = htm.bind(h);
 export function App() {
   return html`
-    <div>
-      <${AppNavigation} />
-      <${AppRoutes} />
-    </div>
+    <${AppNavigation} />
+    <${AppRoutes} />
   `;
 }

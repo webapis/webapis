@@ -125,7 +125,6 @@ export function useHangouts() {
       dState: "pending",
     });
     if (hangout.state === "BLOCKER") {
-      debugger;
       saveSentMessage({
         hangout: {
           ...hangout,

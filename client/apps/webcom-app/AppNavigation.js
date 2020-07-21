@@ -6,7 +6,7 @@ import Navbar, {
   NavLink,
   NavBarCollapse,
 } from "components/nav-bar/index";
-
+import Nav from "components/nav/index";
 import { useUserName } from "features/authentication/state/useUserName";
 import { useAuth } from "features/authentication/index";
 import { useHangouts } from "features/hangouts/index";
@@ -37,6 +37,128 @@ export function AppNavigation() {
                 <//>
               `}
             <//>
+            <!-- NavItem -->
+          <//>
+          <!-- NavBarNav -->
+          <${Nav} horizontalAlignment="justify-content-end">
+            ${username &&
+            html`
+              <button
+                id="unread"
+                appRoute="/unread"
+                onClick=${onNavigation}
+                data-testid="unread-link"
+                type="button"
+                class="btn btn-dark"
+              >
+                messages
+                <span class="badge badge-light" data-testid="message-count">
+                  ${unreadhangouts ? unreadhangouts.length : 0}
+                </span>
+              </button>
+            `}
+            ${!username &&
+            html`
+              <${NavItem}>
+                <${NavLink}
+                  id="login"
+                  appRoute="/auth"
+                  data-testid="login-link"
+                >
+                  Sign in
+                <//>
+              <//>
+            `}
+            ${!username &&
+            html`
+              <${NavItem}>
+                <${NavLink}
+                  id="signup"
+                  appRoute="/auth"
+                  data-testid="signup-link"
+                >
+                  Sign up
+                <//>
+              <//>
+            `}
+            <${NavItem}>
+              ${username &&
+              html`
+                <${NavLink}
+                  id="profile"
+                  appRoute="/auth"
+                  data-testid="profile-link"
+                >
+                  Welcome, ${username}
+                <//>
+              `}
+            <//>
+            <${NavItem}>
+              ${username &&
+              html`
+                <${NavLink}
+                  id="profile"
+                  appRoute="/auth"
+                  data-testid="signout-link"
+                  onClick=${onSignOut}
+                >
+                  Sign out
+                <//>
+              `}
+            <//>
+            <${NavItem}>
+              ${hangout &&
+              html`
+                <button
+                  class="btn"
+                  data-testid="nav-config"
+                  id="configure"
+                  onClick=${onNavigation}
+                >
+                  <${GearIcon} color="white" />
+                </button>
+              `}
+            <//>
+            <${NavItem}>
+              <${FeatureRoute} path="/filter">
+                <button
+                  class="btn"
+                  data-testid="search-link"
+                  id="search"
+                  onClick=${onNavigation}
+                >
+                  <${PersonPlusIcon} width="1.5em" height="1.5em" />
+                </button>
+              <//>
+            <//>
+            <${NavItem}>
+              <${WifiStatus} fill="white" />
+            <//>
+          <//>
+          <!-- Nav -->
+        <//>
+        <!-- NavBarCollapse -->
+      <//>
+      <!-- Navbar -->
+    </div>
+  `;
+}
+
+/*
+        <${NavBarCollapse}>
+          <${NavBarNav}>
+            <${NavItem}>
+              ${username &&
+              html`
+                <${NavLink}
+                  id="filter"
+                  appRoute="/hangouts"
+                  data-testid="hangouts-link"
+                >
+                  Hangouts
+                <//>
+              `}
+            <//>
           <//>
           <nav horizontalAlignment="justify-content-end">
             ${username &&
@@ -49,7 +171,7 @@ export function AppNavigation() {
                 type="button"
                 class="btn btn-dark"
               >
-                messages{" "}
+                messages
                 <span class="badge badge-light" data-testid="message-count">
                   ${unreadhangouts ? unreadhangouts.length : 0}
                 </span>
@@ -134,7 +256,4 @@ export function AppNavigation() {
             <//>
           </nav>
         <//>
-      <//>
-    </div>
-  `;
-}
+*/
