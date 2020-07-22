@@ -35,31 +35,33 @@ export function useAuth() {
   }
   function onSignup() {
     const { username, password, email } = state;
-    cv.validateEmailConstraint({ email });
-    cv.validateUserNameConstraint({ username });
-
-    if (
-      cv.validateEmailConstraint({ email }).isValid &&
-      cv.validateUserNameConstraint({ username }).isValid &&
-      cv.validatePasswordConstraint({ password }).isValid
-    ) {
+    if (Cypress && window.jsDisabled) {
       dispatch({ type: actionTypes.SIGNUP_STARTED });
+      debugger;
     } else {
-      dispatch({
-        type: actionTypes.CONSTRAINT_VALIDATION,
-        name: "password",
-        ...cv.validatePasswordConstraint({ password }),
-      });
-      dispatch({
-        type: actionTypes.CONSTRAINT_VALIDATION,
-        name: "email",
-        ...cv.validateEmailConstraint({ email }),
-      });
-      dispatch({
-        type: actionTypes.CONSTRAINT_VALIDATION,
-        name: "username",
-        ...cv.validateUserNameConstraint({ username }),
-      });
+      if (
+        cv.validateEmailConstraint({ email }).isValid &&
+        cv.validateUserNameConstraint({ username }).isValid &&
+        cv.validatePasswordConstraint({ password }).isValid
+      ) {
+        dispatch({ type: actionTypes.SIGNUP_STARTED });
+      } else {
+        dispatch({
+          type: actionTypes.CONSTRAINT_VALIDATION,
+          name: "password",
+          ...cv.validatePasswordConstraint({ password }),
+        });
+        dispatch({
+          type: actionTypes.CONSTRAINT_VALIDATION,
+          name: "email",
+          ...cv.validateEmailConstraint({ email }),
+        });
+        dispatch({
+          type: actionTypes.CONSTRAINT_VALIDATION,
+          name: "username",
+          ...cv.validateUserNameConstraint({ username }),
+        });
+      }
     }
   }
   function onRequestPasswordChange() {

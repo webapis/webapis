@@ -80,28 +80,28 @@ describe("2_Signup_server_side_stubbed_validation_spec", () => {
     cy.get("[data-testid=message-email]").should("not.be.visible");
     cy.get("[data-testid=message-password]").should("not.be.visible");
   });
-  it("user enters taken email", () => {
-    cy.route({
-      url: "/auth/signup",
-      method: "POST",
-      status: 400,
-      response: { errors: [214] },
-    });
-    cy.get("[data-testid=username]")
-      .type("testuser")
-      .get("[data-testid=email]")
-      .type("testuser@gmail.com")
-      .get("[data-testid=password]")
-      .type("TestPassword2020!")
-      .blur();
-    cy.get("[data-testid=signup-btn]").click();
-    cy.get("[data-testid=message-username]").should("not.be.visible");
-    cy.get("[data-testid=message-email]").contains(
-      validationMessages.REGISTERED_EMAIL
-    );
-    cy.get("[data-testid=message-password]").should("not.be.visible");
-  });
-  it.only("user enters taken email and username", () => {
+  // it("user enters taken email", () => {
+  //   cy.route({
+  //     url: "/auth/signup",
+  //     method: "POST",
+  //     status: 400,
+  //     response: { errors: [214] },
+  //   });
+  //   cy.get("[data-testid=username]")
+  //     .type("testuser")
+  //     .get("[data-testid=email]")
+  //     .type("testuser@gmail.com")
+  //     .get("[data-testid=password]")
+  //     .type("TestPassword2020!")
+  //     .blur();
+  //   cy.get("[data-testid=signup-btn]").click();
+  //   cy.get("[data-testid=message-username]").should("not.be.visible");
+  //   cy.get("[data-testid=message-email]").contains(
+  //     validationMessages.REGISTERED_EMAIL
+  //   );
+  //   cy.get("[data-testid=message-password]").should("not.be.visible");
+  // });
+  it("user enters taken email and username", () => {
     cy.route({
       url: "/auth/signup",
       method: "POST",

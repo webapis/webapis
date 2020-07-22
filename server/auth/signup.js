@@ -1,59 +1,37 @@
 const apiurl = require("url");
 const httpStatus = require("./http-status");
 const validations = require("./validations/validations");
+const userInputValidation = require("./validations/userInputValidation");
 const passhash = require("../../server/auth/hashPassword");
 const jwt = require("jsonwebtoken");
 
 module.exports = async function ({ req, res, collection }) {
+  debugger;
   try {
     let errors = [];
-    //const SALT_WORK_FACTOR = 10;
     let { username, email, password } = req.body;
-
-    if (
-      validations.isEmptyEmailOrUsername({ emailorusername: username }) ||
-      !validations.isValidUsername({ username })
-    ) {
-      //empty username ----------------------405
-      errors.push(httpStatus.usernameInvalid);
-    }
-    if (
-      validations.isEmptyEmailOrUsername({ emailorusername: email }) ||
-      !validations.isValidEmail({ email })
-    ) {
-      //empty email ------------------------407
-      errors.push(httpStatus.emailInvalid);
-    }
-    if (
-      validations.isEmptyPassword({ password }) ||
-      !validations.isValidPasspword({ password })
-    ) {
-      //empty password --------------------406
-      errors.push(httpStatus.passwordInvalid);
-    }
-
-    if (errors.length > 0) {
-      //--------------405,406,407 tested
-
+    if (userInputValidation.signupConstraints({ username, email, password })) {
+      errors = userInputValidation.signupConstraints({
+        username,
+        email,
+        password,
+      });
       res.statusCode = 400;
       res.writeHead(400, { "Content-Type": "application/json" });
       res.write(JSON.stringify({ errors }));
       res.end();
     } else {
-      await validations.userNameIsTaken({ collection, username }, () => {
-        //  usernameIsTaken: '402'--------------------------------------
-        errors.push(httpStatus.usernameIsTaken);
-      });
-
-      await validations.emailIsRegistered({ collection, email }, () => {
-        //   emailIsRegistered: '403'-----------------------------------
-        errors.push(httpStatus.emailIsRegistered);
-      });
+      await userInputValidation.userValidation(
+        { collection, username },
+        ({ errorCode }) => {
+          if (errorCode) {
+            errors.push(errorCode);
+          }
+        }
+      );
 
       if (errors.length > 0) {
-        //-------------402,403
-
-        res.statusCode = 400;
+        res.statussCode = 400;
         res.writeHead(400, { "Content-Type": "application/json" });
         res.write(JSON.stringify({ errors }));
         res.end();
