@@ -30,7 +30,7 @@ describe("1_Signup_client_side_validation_spec", () => {
       .get("[data-testid=password]")
       .focus()
       .blur();
-    cy.get("[data-testid=signup-link]").click();
+
     cy.get("[data-testid=message-username]").contains(
       validationMessages.REQUIRED_FIELD
     );
