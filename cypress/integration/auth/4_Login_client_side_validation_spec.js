@@ -1,4 +1,4 @@
-import validationMessages from "../../../../client/features/authentication/validation/validationMessages";
+import validationMessages from "../../../client/features/authentication/validation/validationMessages";
 
 describe("Login", () => {
   beforeEach(() => {
