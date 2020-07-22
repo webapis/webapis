@@ -67,7 +67,7 @@ describe("3_Signup_server_side_e2e_validation_spec", () => {
     cy.get("[data-testid=message-email]").should("not.be.visible");
     cy.get("[data-testid=message-password]").should("not.be.visible");
   });
-  it.only("user enters taken email", () => {
+  it("user enters taken email", () => {
     cy.task("seed:user", {
       email: "testuser@gmail.com",
       username: "testuserone",
@@ -88,18 +88,17 @@ describe("3_Signup_server_side_e2e_validation_spec", () => {
     cy.get("[data-testid=message-password]").should("not.be.visible");
   });
   it("user enters taken email and username", () => {
-    cy.route({
-      url: "/auth/signup",
-      method: "POST",
-      status: 400,
-      response: { errors: [215] },
+    cy.task("seed:user", {
+      email: "testuser@gmail.com",
+      username: "testuser",
+      password: "TestPassword!22s",
     });
     cy.get("[data-testid=username]")
       .type("testuser")
       .get("[data-testid=email]")
       .type("testuser@gmail.com")
       .get("[data-testid=password]")
-      .type("TestPassword2020!")
+      .type("TestPassword!22s")
       .blur();
     cy.get("[data-testid=signup-btn]").click();
     cy.get("[data-testid=message-username]").contains(

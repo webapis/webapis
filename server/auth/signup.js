@@ -21,8 +21,9 @@ module.exports = async function ({ req, res, collection }) {
       res.write(JSON.stringify({ errors }));
       res.end();
     } else {
+      debugger;
       await userInputValidation.userValidation(
-        { collection, username },
+        { collection, username, email },
         ({ errorCode }) => {
           if (errorCode) {
             errors.push(errorCode);

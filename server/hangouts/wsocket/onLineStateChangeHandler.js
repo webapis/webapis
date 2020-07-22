@@ -1,4 +1,4 @@
-module.exports = async function onLineStateChangeHandler({
+module.exports.onLineStateChangeHandler = async function ({
   client,
   ws,
   connections,

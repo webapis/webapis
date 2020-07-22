@@ -47,7 +47,7 @@ module.exports.signupConstraints = function ({ username, email, password }) {
   }
 };
 
-module.exports.userValidation = async function userNameIsTaken(
+module.exports.userValidation = async function (
   { username, email, collection },
   cb
 ) {
@@ -56,6 +56,7 @@ module.exports.userValidation = async function userNameIsTaken(
 
     if (user) {
       if (user.email === email) {
+        debugger;
         //EMAIL_USERNAME_TAKEN: 215,
         cb({ errorCode: 215 });
       } else {
@@ -65,6 +66,7 @@ module.exports.userValidation = async function userNameIsTaken(
     } else {
       const user = await collection.findOne({ email });
       if (user) {
+        debugger;
         //EMAIL_TAKEN: 214,
         cb({ errorCode: 214 });
       } else {

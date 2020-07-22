@@ -50,7 +50,7 @@ module.exports = async function (server, client) {
       });
     } catch (error) {
       const err = error;
-      debbuger;
+      debugger;
     }
   });
 };
