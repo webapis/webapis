@@ -1,25 +1,15 @@
 export default {
-  accountAlreadyExits: 202,
-  //login
-  credentialInvalid: "401",
-  //signup
-  usernameIsTaken: "402",
-  emailIsRegistered: "403",
-  usernameInvalid: "405",
-  passwordInvalid: "406", //change password
-  emailInvalid: "407",
-  //login
-  emailIsNotRegistered: "408",
-  emptyPasswordNotValid: "409",
-  emailorusernameNotValid: "410",
-  usernameIsNotRegistered: "411",
-  //change password
-  passwordDoNotMatch: "412",
-  tokenExpired: "413",
-  serverValidationRange: (status) => {
-    if (status >= 400 && status <= 410) {
-      return true;
-    }
-    return false;
-  },
+  EMPTY_PASSWORD: 205,
+  EMPTY_CONFIRM: 206,
+  EMPTY_USERNAME: 207,
+  EMPTY_EMAIL: 208,
+  WEAK_PASSWORD: 209,
+  INVALID_USERNAME: 210,
+  INVALID_EMAIL: 211,
+  INVALID_CREDENTIALS: 212,
+  USERNAME_TAKEN: 213,
+  EMAIL_TAKEN: 214,
+  EMAIL_USERNAME_TAKEN: 215,
+  CONFIRM_MISMATCH: 216,
+  TOKEN_EXPIRED: 217,
 };

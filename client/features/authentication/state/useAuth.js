@@ -32,10 +32,33 @@ export function useAuth() {
     dispatch({ type: actionTypes.LOGIN_STARTED });
   }
   function onSignup() {
-    // dispatch({ type: actionTypes.CONSTRAINT_VALIDATION, name: 'password', ...cv.validatePasswordConstraint({ password }) })
-    //  dispatch({ type: actionTypes.CONSTRAINT_VALIDATION, name: 'email', ...cv.validateEmailConstraint({ email }) })
-    //  dispatch({ type: actionTypes.CONSTRAINT_VALIDATION, name: 'username', ...cv.validateUserNameConstraint({ username }) })
-    dispatch({ type: actionTypes.SIGNUP_STARTED });
+    const { username, password, email } = state;
+    cv.validateEmailConstraint({ email });
+    cv.validateUserNameConstraint({ username });
+
+    if (
+      cv.validateEmailConstraint({ email }).isValid &&
+      cv.validateUserNameConstraint({ username }).isValid &&
+      cv.validatePasswordConstraint({ password }).isValid
+    ) {
+      dispatch({ type: actionTypes.SIGNUP_STARTED });
+    } else {
+      dispatch({
+        type: actionTypes.CONSTRAINT_VALIDATION,
+        name: "password",
+        ...cv.validatePasswordConstraint({ password }),
+      });
+      dispatch({
+        type: actionTypes.CONSTRAINT_VALIDATION,
+        name: "email",
+        ...cv.validateEmailConstraint({ email }),
+      });
+      dispatch({
+        type: actionTypes.CONSTRAINT_VALIDATION,
+        name: "username",
+        ...cv.validateUserNameConstraint({ username }),
+      });
+    }
   }
   function onRequestPasswordChange() {
     dispatch({ type: actionTypes.REQUEST_PASS_CHANGE_STARTED });

@@ -2,46 +2,60 @@ import validationMessages from "./validationMessages";
 import { emailRegex, passwordRegex, usernameRegex } from "./validationRegex";
 export function validateEmailConstraint({ email }) {
   const emailConstraint = new RegExp(emailRegex);
-
-  if (emailConstraint.test(email)) {
+  if (email === "") {
     return {
-      isValid: true,
-      message: "",
+      isValid: false,
+      message: validationMessages.REQUIRED_FIELD,
     };
-  } else {
+  } else if (!emailConstraint.test(email)) {
     return {
       isValid: false,
       message: validationMessages.INVALID_EMAIL,
+    };
+  } else {
+    return {
+      isValid: true,
+      message: "",
     };
   }
 }
 
 export function validatePasswordConstraint({ password }) {
   const passwordConstraint = new RegExp(passwordRegex);
-  if (passwordConstraint.test(password)) {
+  if (password === "") {
     return {
-      isValid: true,
-      message: "",
+      isValid: false,
+      message: validationMessages.REQUIRED_FIELD,
     };
-  } else {
+  } else if (!passwordConstraint.test(password)) {
     return {
       isValid: false,
       message: validationMessages.INVALID_PASSWORD,
+    };
+  } else {
+    return {
+      isValid: true,
+      message: "",
     };
   }
 }
 
 export function validateUserNameConstraint({ username }) {
   const usernameConstraint = new RegExp(usernameRegex);
-  if (usernameConstraint.test(username)) {
+  if (username === "") {
     return {
-      isValid: true,
-      message: "",
+      isValid: false,
+      message: validationMessages.REQUIRED_FIELD,
     };
-  } else {
+  } else if (!usernameConstraint.test(username)) {
     return {
       isValid: false,
       message: validationMessages.INVALID_USERNAME,
+    };
+  } else {
+    return {
+      isValid: true,
+      message: "",
     };
   }
 }
