@@ -14,4 +14,5 @@ export default {
   PASSWORDS_DO_NOT_MATCH: "passwords do not match",
   ACCOUNT_ALREADY_EXISTS: "Account already exists for this username.",
   REQUIRED_FIELD: "Required field",
+  EXISTING_USER: "This user already registered",
 };

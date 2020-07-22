@@ -24,6 +24,7 @@ export default function AuthFeatureRoutes() {
     onRequestPasswordChange,
     onPasswordChange,
     onChange,
+    onAuthNavigation,
     state,
   } = useAuth();
 
@@ -47,6 +48,7 @@ export default function AuthFeatureRoutes() {
           onBlur=${onLoginBlur}
           onChange=${onChange}
           onLogin=${onLogin}
+          onAuthNavigation=${onAuthNavigation}
         />
       <//>
     <//>
@@ -58,6 +60,7 @@ export default function AuthFeatureRoutes() {
           onBlur=${onSignupBlur}
           onChange=${onChange}
           onSignup=${onSignup}
+          onAuthNavigation=${onAuthNavigation}
         />
       <//>
     <//>

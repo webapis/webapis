@@ -1,8 +1,10 @@
 import { useAuthContext } from "./AuthProvider";
 import actionTypes from "./actionTypes";
 import * as cv from "../validation/constraintValidators";
+import { useAppRoute } from "components/app-route/index";
 export function useAuth() {
   const { state, dispatch } = useAuthContext();
+  const { onAppRoute } = useAppRoute();
   function onChange(e) {
     const { name, value } = e.target;
 
@@ -150,7 +152,13 @@ export function useAuth() {
     });
     dispatch({ type: actionTypes.SET_ERROR_TO_NULL });
   }
-
+  function onAuthNavigation(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    const id = e.currentTarget.id;
+    onAppRoute({ featureRoute: `/${id}`, route: "/auth" });
+    dispatch({ type: actionTypes.RESET_AUTH_STATE });
+  }
   return {
     state,
     onFocus,
@@ -165,5 +173,6 @@ export function useAuth() {
     onPasswordChange,
     onChange,
     onSignOut,
+    onAuthNavigation,
   };
 }

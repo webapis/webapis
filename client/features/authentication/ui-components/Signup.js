@@ -1,5 +1,6 @@
 import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
+import validationMessage from "../validation/validationMessages";
 const html = htm.bind(h);
 import Button from "controls/button/index";
 import TextInput from "controls/text-input/index";
@@ -16,6 +17,7 @@ export default function Signup(props) {
     onBlur,
     onFocus,
     error,
+    onAuthNavigation,
   } = props;
   console.log("signup props");
 
@@ -37,7 +39,24 @@ export default function Signup(props) {
           ></div>
         </div>
       `}
-      ${error && html`<${Alert} alert="danger" message=${error.message} />`}
+      ${error &&
+      html`<div class="alert alert-danger" role="alert" data-testid="alert">
+        ${error.message}
+        ${error.message === validationMessage.EXISTING_USER &&
+        html`<a
+          href=""
+          id="login"
+          onClick=${onAuthNavigation}
+          data-testid="signin"
+          >, Sign in<//
+        >`}
+        <button
+          type="button"
+          class="close"
+          data-dismiss="alert"
+          aria-label="Close"
+        ></button>
+      </div>`}
       <${TextInput}
         onBlur=${onBlur}
         onFocus=${onFocus}

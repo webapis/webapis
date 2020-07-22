@@ -101,7 +101,7 @@ describe("2_Signup_server_side_stubbed_validation_spec", () => {
     );
     cy.get("[data-testid=message-password]").should("not.be.visible");
   });
-  it("user enters taken email and username", () => {
+  it.only("user enters taken email and username", () => {
     cy.route({
       url: "/auth/signup",
       method: "POST",
@@ -117,11 +117,12 @@ describe("2_Signup_server_side_stubbed_validation_spec", () => {
       .blur();
     cy.get("[data-testid=signup-btn]").click();
     cy.get("[data-testid=message-username]").contains(
-      validationMessages.USERNAME_TAKEN
+      validationMessages.EXISTING_USER
     );
     cy.get("[data-testid=message-email]").contains(
-      validationMessages.REGISTERED_EMAIL
+      validationMessages.EXISTING_USER
     );
     cy.get("[data-testid=message-password]").should("not.be.visible");
+    cy.get("[data-testid=signin]");
   });
 });

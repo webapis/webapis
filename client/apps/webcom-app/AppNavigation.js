@@ -17,7 +17,7 @@ import { WifiStatus } from "components/browser-api/online-status/index";
 const html = htm.bind(h);
 export function AppNavigation() {
   const { username } = useUserName();
-  const { onSignOut } = useAuth();
+  const { onSignOut, onAuthNavigation } = useAuth();
   const { state, onNavigation } = useHangouts();
   const { hangout, unreadhangouts } = state;
   return html`
@@ -58,29 +58,23 @@ export function AppNavigation() {
               </button>
             `}
             ${!username &&
-            html`
-              <${NavItem}>
-                <${NavLink}
-                  id="login"
-                  appRoute="/auth"
-                  data-testid="login-link"
-                >
-                  Sign in
-                <//>
-              <//>
-            `}
+            html`<a
+              href=""
+              id="login"
+              data-testid="login-link"
+              onClick=${onAuthNavigation}
+            >
+              Sign in<//
+            >`}}
             ${!username &&
-            html`
-              <${NavItem}>
-                <${NavLink}
-                  id="signup"
-                  appRoute="/auth"
-                  data-testid="signup-link"
-                >
-                  Sign up
-                <//>
-              <//>
-            `}
+            html`<a
+              href=""
+              id="signup"
+              data-testid="signup-link"
+              onClick=${onAuthNavigation}
+            >
+              Sign up<//
+            >`}
             <${NavItem}>
               ${username &&
               html`
@@ -143,117 +137,3 @@ export function AppNavigation() {
     </div>
   `;
 }
-
-/*
-        <${NavBarCollapse}>
-          <${NavBarNav}>
-            <${NavItem}>
-              ${username &&
-              html`
-                <${NavLink}
-                  id="filter"
-                  appRoute="/hangouts"
-                  data-testid="hangouts-link"
-                >
-                  Hangouts
-                <//>
-              `}
-            <//>
-          <//>
-          <nav horizontalAlignment="justify-content-end">
-            ${username &&
-            html`
-              <button
-                id="unread"
-                appRoute="/unread"
-                onClick=${onNavigation}
-                data-testid="unread-link"
-                type="button"
-                class="btn btn-dark"
-              >
-                messages
-                <span class="badge badge-light" data-testid="message-count">
-                  ${unreadhangouts ? unreadhangouts.length : 0}
-                </span>
-              </button>
-            `}
-            ${!username &&
-            html`
-              <${NavItem}>
-                <${NavLink}
-                  id="login"
-                  appRoute="/auth"
-                  data-testid="login-link"
-                >
-                  Sign in
-                <//>
-              <//>
-            `}
-            ${!username &&
-            html`
-              <${NavItem}>
-                <${NavLink}
-                  id="signup"
-                  appRoute="/auth"
-                  data-testid="signup-link"
-                >
-                  Sign up
-                <//>
-              <//>
-            `}
-            <${NavItem}>
-              ${username &&
-              html`
-                <${NavLink}
-                  id="profile"
-                  appRoute="/auth"
-                  data-testid="profile-link"
-                >
-                  Welcome, ${username}
-                <//>
-              `}
-            <//>
-            <${NavItem}>
-              ${username &&
-              html`
-                <${NavLink}
-                  id="profile"
-                  appRoute="/auth"
-                  data-testid="signout-link"
-                  onClick=${onSignOut}
-                >
-                  Sign out
-                <//>
-              `}
-            <//>
-            <${NavItem}>
-              ${hangout &&
-              html`
-                <button
-                  class="btn"
-                  data-testid="nav-config"
-                  id="configure"
-                  onClick=${onNavigation}
-                >
-                  <${GearIcon} color="white" />
-                </button>
-              `}
-            <//>
-            <${NavItem}>
-              <${FeatureRoute} path="/filter">
-                <button
-                  class="btn"
-                  data-testid="search-link"
-                  id="search"
-                  onClick=${onNavigation}
-                >
-                  <${PersonPlusIcon} width="1.5em" height="1.5em" />
-                </button>
-              <//>
-            <//>
-            <${NavItem}>
-              <${WifiStatus} fill="white" />
-            <//>
-          </nav>
-        <//>
-*/

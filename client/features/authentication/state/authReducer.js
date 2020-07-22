@@ -31,6 +31,8 @@ export const initState = {
 
 export function authReducer(state, action) {
   switch (action.type) {
+    case actionTypes.RESET_AUTH_STATE:
+      return initState;
     case actionTypes.SET_ERROR_TO_NULL:
       return { ...state, error: null };
     case actionTypes.SERVER_ERROR_RECIEVED:

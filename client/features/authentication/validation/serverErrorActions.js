@@ -95,14 +95,18 @@ export default function serverValidation({ status = 0, dispatch }) {
         type: actionTypes.CONSTRAINT_VALIDATION,
         name: "username",
         isValid: false,
-        message: validationMessages.USERNAME_TAKEN,
+        message: validationMessages.EXISTING_USER,
       });
 
       dispatch({
         type: actionTypes.CONSTRAINT_VALIDATION,
         name: "email",
         isValid: false,
-        message: validationMessages.REGISTERED_EMAIL,
+        message: validationMessages.EXISTING_USER,
+      });
+      dispatch({
+        type: actionTypes.SERVER_ERROR_RECIEVED,
+        error: { message: validationMessages.EXISTING_USER },
       });
       break;
     case httpStatus.CONFIRM_MISMATCH: // 216,
