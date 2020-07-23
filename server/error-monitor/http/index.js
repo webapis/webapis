@@ -1,7 +1,6 @@
 const { clientError } = require("./client-error");
 
 module.exports = function (req, res) {
-  debugger;
   const { url } = req;
   const collectionName = "errors";
   const database = req.client.db("errmonitor");
@@ -10,7 +9,6 @@ module.exports = function (req, res) {
 
   switch (true) {
     case url.includes("/client-error/"):
-      debugger;
       clientError({ req, res, collection });
       break;
     default:

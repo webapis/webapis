@@ -1,8 +1,14 @@
 window.addEventListener("load", function () {
-  window.addEventListener("error", function (error) {
+  debugger;
+
+  window.addEventListener("error", function (e) {
+    debugger;
+    const { message, stack } = e.error;
+    debugger;
     var errorMonitor = new XMLHttpRequest();
     //oReq.addEventListener("load", reqListener);
+    debugger;
     errorMonitor.open("POST", "/client-error/");
-    errorMonitor.send(JSON.stringify({ message: error.message }));
+    errorMonitor.send(JSON.stringify({ message, stack }));
   });
 });

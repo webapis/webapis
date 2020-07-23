@@ -1,10 +1,8 @@
 const authOperation = require("./auth/index");
 const hangoutsOperation = require("./hangouts/http");
-const contactsOperation = require("./contacts");
 const usersOperation = require("./users");
-const seedOperation = require("./seed");
 const serveStatic = require("./serve-static/index");
-const errorMonitorOperations = require("./error-monitor");
+const errorMonitorOperations = require("./error-monitor/http");
 const servePassReset = require("./serve-static/serve-pass-reset");
 
 module.exports = function httpRoute(client) {
@@ -58,8 +56,6 @@ module.exports = function httpRoute(client) {
 function route({ url, req, res }) {
   const authRegex = /.*\/auth\/.*/;
   const resetRegex = /.*\/reset\/.*/;
-  const seedRegex = /.*\/seed\/.*/;
-  const contactsRegex = /.*\/contacts\/.*/;
   const usersRegex = /.*\/users\/.*/;
   const hangoutsRegex = /.*\/hangouts\/.*/;
   const clientErrorRegex = /.*\/client-error\/.*/;
@@ -67,15 +63,11 @@ function route({ url, req, res }) {
     case authRegex.test(url):
       authOperation(req, res);
       break;
-    case seedRegex.test(url):
-      seedOperation(req, res);
-      break;
+
     case resetRegex.test(url):
       servePassReset(req, res);
       break;
-    case contactsRegex.test(url):
-      contactsOperation(req, res);
-      break;
+
     case usersRegex.test(url):
       usersOperation(req, res);
       break;
