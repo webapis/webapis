@@ -6,7 +6,8 @@ describe("1_Signup_client_side_validation_spec", () => {
     cy.get("[data-testid=signup-link]").click();
   });
   //node, parse
-  it("user clicks signup btn without touching any fields", () => {
+  //required
+  it("user submits: empty username, email, password (onSubmit)", () => {
     cy.get("[data-testid=signup-link]").click();
     cy.get("[data-testid=signup-btn]").click();
     cy.get("[data-testid=message-username]").contains(
@@ -20,7 +21,8 @@ describe("1_Signup_client_side_validation_spec", () => {
     );
   });
   //node, parse
-  it("user focuses on input but leaves it empty", () => {
+  //required
+  it("user input is: empty username, email, password (onBlur)", () => {
     cy.get("[data-testid=username]")
       .focus()
       .blur()
@@ -42,7 +44,8 @@ describe("1_Signup_client_side_validation_spec", () => {
     );
   });
   //node, parse
-  it("user enters invalid username,email, or week password", () => {
+  //invalid
+  it("user input is:  invalid username,email, or week password (onBlur)", () => {
     cy.get("[data-testid=username]")
       .type("123")
       .blur()
@@ -64,7 +67,8 @@ describe("1_Signup_client_side_validation_spec", () => {
     );
   });
   //node, parse
-  it("user enters valid username,email, password", () => {
+  //valid
+  it("user input is valid username,email, password (onBlur)", () => {
     cy.get("[data-testid=username]")
       .type("testuser")
       .blur()

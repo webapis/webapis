@@ -63,21 +63,20 @@ export function validateUserNameConstraint({ username }) {
 export function validateEmailOrUsername({ value }) {
   const emailConstraint = new RegExp(emailRegex);
   const usernameConstraint = new RegExp(usernameRegex);
-
-  if (emailConstraint.test(value)) {
+  if (value === "") {
     return {
-      isValid: true,
-      message: "",
+      isValid: false,
+      message: validationMessages.REQUIRED_FIELD,
     };
-  } else if (usernameConstraint.test(value)) {
-    return {
-      isValid: true,
-      message: "",
-    };
-  } else {
+  } else if (!emailConstraint.test(value) || !usernameConstraint.test(value)) {
     return {
       isValid: false,
       message: validationMessages.INVALID_USERNAME_OR_EMAIL,
+    };
+  } else {
+    return {
+      isValid: true,
+      message: "",
     };
   }
 }

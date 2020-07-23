@@ -62,7 +62,7 @@ export default function serverValidation({ status = 0, dispatch }) {
     case httpStatus.INVALID_CREDENTIALS: // 212,
       dispatch({
         type: actionTypes.CONSTRAINT_VALIDATION,
-        name: "usernameoremail",
+        name: "emailorusername",
         isValid: false,
         message: validationMessages.INVALID_CREDENTIALS,
       });
@@ -124,16 +124,18 @@ export default function serverValidation({ status = 0, dispatch }) {
         type: actionTypes.CONSTRAINT_VALIDATION,
         name: "emailorusername",
         isValid: false,
-        message: validationMessages.INVALID_CREDENTIALS,
+        message: validationMessages.INVALID_USERNAME_OR_EMAIL,
       });
+
+      break;
+    case httpStatus.EMPTY_EMAIL_OR_USERNAME: //219
       dispatch({
         type: actionTypes.CONSTRAINT_VALIDATION,
-        name: "password",
+        name: "emailorusername",
         isValid: false,
-        message: validationMessages.INVALID_CREDENTIALS,
+        message: validationMessages.REQUIRED_FIELD,
       });
       break;
-
     default:
       return null;
   }

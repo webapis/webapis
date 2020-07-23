@@ -4,6 +4,7 @@ import * as cv from "../validation/constraintValidators";
 import { useAppRoute } from "components/app-route/index";
 export function useAuth() {
   const { state, dispatch } = useAuthContext();
+
   const { onAppRoute } = useAppRoute();
   function onChange(e) {
     const { name, value } = e.target;
@@ -11,33 +12,38 @@ export function useAuth() {
     dispatch({ type: actionTypes.VALUE_CHANGED, name, value });
   }
   function onLogin() {
-    if (password === "") {
-      dispatch({
-        type: actionTypes.CONSTRAINT_VALIDATION,
-        name: "password",
-        isValid: false,
-        message: "Required field",
-      });
+    const { emailorusername, password } = state;
+    if (Cypress && window.jsDisabled) {
+      debugger;
+      dispatch({ type: actionTypes.LOGIN_STARTED });
     } else {
+      debugger;
       dispatch({
         type: actionTypes.CONSTRAINT_VALIDATION,
-        name: "password",
-        isValid: true,
-        message: "",
+        name: "emailorusername",
+        ...cv.validateEmailOrUsername({ value: emailorusername }),
       });
+
+      if (password === "") {
+        dispatch({
+          type: actionTypes.CONSTRAINT_VALIDATION,
+          name: "password",
+          isValid: false,
+          message: "Required field",
+        });
+      }
+      if (
+        cv.validateEmailOrUsername({ value: emailorusername }).isValid &&
+        password.length > 0
+      ) {
+        dispatch({ type: actionTypes.LOGIN_STARTED });
+      }
     }
-    dispatch({
-      type: actionTypes.CONSTRAINT_VALIDATION,
-      name: "emailorusername",
-      ...cv.validateEmailOrUsername({ value: emailorusername }),
-    });
-    dispatch({ type: actionTypes.LOGIN_STARTED });
   }
   function onSignup() {
     const { username, password, email } = state;
     if (Cypress && window.jsDisabled) {
       dispatch({ type: actionTypes.SIGNUP_STARTED });
-      debugger;
     } else {
       if (
         cv.validateEmailConstraint({ email }).isValid &&
@@ -78,65 +84,69 @@ export function useAuth() {
   function onLoginBlur(e) {
     const { emailorusername, password } = state;
     const { name } = e.target;
+    if (!Cypress && !window.jsDisabled) {
+      debugger;
+      switch (name) {
+        case "emailorusername":
+          dispatch({
+            type: actionTypes.CONSTRAINT_VALIDATION,
+            name: "emailorusername",
+            ...cv.validateEmailOrUsername({ value: emailorusername }),
+          });
+          break;
+        case "password":
+          if (password === "") {
+            dispatch({
+              type: actionTypes.CONSTRAINT_VALIDATION,
+              name: "password",
+              isValid: false,
+              message: "Required field",
+            });
+          } else {
+            dispatch({
+              type: actionTypes.CONSTRAINT_VALIDATION,
+              name: "password",
+              isValid: true,
+              message: "",
+            });
+          }
+          break;
 
-    switch (name) {
-      case "password":
-        if (password === "") {
-          dispatch({
-            type: actionTypes.CONSTRAINT_VALIDATION,
-            name: "password",
-            isValid: false,
-            message: "Required field",
-          });
-        } else {
-          dispatch({
-            type: actionTypes.CONSTRAINT_VALIDATION,
-            name: "password",
-            isValid: true,
-            message: "",
-          });
-        }
-        break;
-      case "emailorusername":
-        dispatch({
-          type: actionTypes.CONSTRAINT_VALIDATION,
-          name: "emailorusername",
-          ...cv.validateEmailOrUsername({ value: emailorusername }),
-        });
-        break;
-      default:
-        throw new Error("onLoginBlur error");
+        default:
+          throw new Error("onLoginBlur error");
+      }
     }
   }
 
   function onSignupBlur(e) {
     const { email, username, password } = state;
     const { name } = e.target;
-
-    switch (name) {
-      case "password":
-        dispatch({
-          type: actionTypes.CONSTRAINT_VALIDATION,
-          name: "password",
-          ...cv.validatePasswordConstraint({ password }),
-        });
-        break;
-      case "email":
-        dispatch({
-          type: actionTypes.CONSTRAINT_VALIDATION,
-          name: "email",
-          ...cv.validateEmailConstraint({ email }),
-        });
-        break;
-      case "username":
-        dispatch({
-          type: actionTypes.CONSTRAINT_VALIDATION,
-          name: "username",
-          ...cv.validateUserNameConstraint({ username }),
-        });
-        break;
-      default:
-        throw new Error("onLoginBlur error");
+    if (!Cypress && !window.jsDisabled) {
+      switch (name) {
+        case "password":
+          dispatch({
+            type: actionTypes.CONSTRAINT_VALIDATION,
+            name: "password",
+            ...cv.validatePasswordConstraint({ password }),
+          });
+          break;
+        case "email":
+          dispatch({
+            type: actionTypes.CONSTRAINT_VALIDATION,
+            name: "email",
+            ...cv.validateEmailConstraint({ email }),
+          });
+          break;
+        case "username":
+          dispatch({
+            type: actionTypes.CONSTRAINT_VALIDATION,
+            name: "username",
+            ...cv.validateUserNameConstraint({ username }),
+          });
+          break;
+        default:
+          throw new Error("onSignUpBlur error");
+      }
     }
   }
 
