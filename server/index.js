@@ -21,7 +21,7 @@ const options = {
 (async () => {
   const client = await new MongoClient(url, { useUnifiedTopology: true });
   await client.connect();
-  // const server = http.createServer(httpRoute(client));
+
   const server = https.createServer(options, httpRoute(client));
 
   ws(server, client);

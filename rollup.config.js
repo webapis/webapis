@@ -68,11 +68,7 @@ export default [
       copy({
         targets: [
           {
-            src: "assets/libs/parse.min.js",
-            dest: `builds/${process.env.appName}/build`,
-          },
-          {
-            src: "assets/fonts/Roboto/Roboto-Regular.ttf",
+            src: "client/features/error-monitor/error-monitor.js",
             dest: `builds/${process.env.appName}/build`,
           },
           {
@@ -163,11 +159,6 @@ export default [
       ...commonPlugins,
       copy({
         targets: [
-          { src: "assets/libs/parse.min.js", dest: `client/storybook/build` },
-          {
-            src: "assets/fonts/Roboto/Roboto-Regular.ttf",
-            dest: `client/storybook/build`,
-          },
           { src: "assets/manifest/**", dest: `client/storybook/build` },
 
           {

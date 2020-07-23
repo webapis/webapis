@@ -1,9 +1,3 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable no-unused-vars */
-
-const bcrypt = require("crypto");
-const ObjectID = require("mongodb").ObjectId;
-const apiurl = require("url");
 const login = require("./login");
 const signup = require("./signup");
 const changePassword = require("./changePassword");

@@ -5,7 +5,6 @@ import {
 } from "https://cdn.jsdelivr.net/gh/webapis/webapis/preact.combat.cdn.js";
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 import { FeatureRoute, useAppRoute } from "components/app-route/index";
-
 import { useHangouts } from "./state/useHangouts";
 import useSearch from "./state/useSearch";
 import useFilter from "./state/useFilter";
@@ -65,111 +64,109 @@ export default function HangoutsFeatureRoutes(props) {
     username,
   });
   const { loading } = state;
-  return [
-    html`
-      <${FeatureRoute} path=${"/bckui"}>
-        <${Suspense} fallback=${Loading}>
-          <${Block} hangout=${hangout} onBlock=${onBlock} />
-        <//> <//
-      >,
-      <${FeatureRoute} paths=${["/UNBLOCK", "/DECLINED"]}>
-        <${Suspense} fallback=${Loading}>
-          <${Blocked} hangout=${hangout} onUnblock=${onUnblock} />
-        <//> <//
-      >,
-      <${FeatureRoute} path="/configure">
-        <${Suspense} fallback=${Loading}>
-          <${Configure} hangout=${hangout} onNavigation=${onNavigation} />
-        <//> <//
-      >,
-      <${FeatureRoute}
-        paths=${[
-          "/ACCEPTED",
-          "/ACCEPTER",
-          "/MESSANGER",
-          "/MESSAGED",
-          "/BLOCKER",
-          "/BLOCKED",
-          "/UNBLOCKED",
-          "/UNBLOCKER",
-          "/READ",
-        ]}
-      >
-        <${Suspense} fallback=${Loading}>
-          <${Hangchat}
-            loading=${loading}
-            onNavigation=${onNavigation}
-            hangout=${hangout}
-            onMessageText=${onMessageText}
-            onMessage=${onMessage}
-            messages=${messages}
-            username=${username}
-            messageText=${messageText}
-            dispatch=${dispatch}
-          />
-        <//> <//
-      >,
+  return html`
+    <${FeatureRoute} path=${"/bckui"}>
+      <${Suspense} fallback=${Loading}>
+        <${Block} hangout=${hangout} onBlock=${onBlock} />
+      <//>
+    <//>
+    <${FeatureRoute} paths=${["/UNBLOCK", "/DECLINED"]}>
+      <${Suspense} fallback=${Loading}>
+        <${Blocked} hangout=${hangout} onUnblock=${onUnblock} />
+      <//>
+    <//>
+    <${FeatureRoute} path="/configure">
+      <${Suspense} fallback=${Loading}>
+        <${Configure} hangout=${hangout} onNavigation=${onNavigation} />
+      <//>
+    <//>
+    <${FeatureRoute}
+      paths=${[
+        "/ACCEPTED",
+        "/ACCEPTER",
+        "/MESSANGER",
+        "/MESSAGED",
+        "/BLOCKER",
+        "/BLOCKED",
+        "/UNBLOCKED",
+        "/UNBLOCKER",
+        "/READ",
+      ]}
+    >
+      <${Suspense} fallback=${Loading}>
+        <${Hangchat}
+          loading=${loading}
+          onNavigation=${onNavigation}
+          hangout=${hangout}
+          onMessageText=${onMessageText}
+          onMessage=${onMessage}
+          messages=${messages}
+          username=${username}
+          messageText=${messageText}
+          dispatch=${dispatch}
+        />
+      <//>
+    <//>
 
-      <${FeatureRoute} path="/INVITE">
-        <${Suspense} fallback=${Loading}>
-          <${Invite}
-            loading=${loading}
-            hangout=${hangout}
-            onInvite=${onInvite}
-            onMessageText=${onMessageText}
-            messageText=${messageText}
-          />
-        <//> <//
-      >,
-      <${FeatureRoute} paths=${["/INVITED", "/DECLINER"]}>
-        <${Suspense} fallback=${Loading}>
-          <${Invitee} hangout=${hangout} loading=${loading} />
-        <//> <//
-      >,
-      <${FeatureRoute} path="/INVITER">
-        <${Suspense} fallback=${Loading}>
-          <${Inviter}
-            loading=${loading}
-            hangout=${hangout}
-            onAccept=${onAccept}
-            onDecline=${onDecline}
-          />
-        <//> <//
-      >,
-      <${FeatureRoute} path="/unread">
-        <${Suspense} fallback=${Loading}>
-          <${UnreadHangouts}
-            unreadhangouts=${unreadhangouts}
-            onUnreadSelect=${onUnreadSelect}
-            onUnreadRemove=${onUnreadRemove}
-          />
-        <//> <//
-      >,
-      <${FeatureRoute} path="/search">
-        <${Suspense} fallback=${Loading}>
-          <${Search}
-            onSearchSelect=${onSearchSelect}
-            searchResult=${searchResult}
-            onSearch=${onSearch}
-            onSearchInput=${onSearchInput}
-            search=${search}
-          />
-        <//> <//
-      >,
-      <${FeatureRoute} path="/filter">
-        <${Suspense} fallback=${Loading}>
-          <${Filter}
-            onLoadHangout=${onLoadHangout}
-            onNavigation=${onNavigation}
-            filter=${filter}
-            onFilterInput=${onFilterInput}
-            filterResult=${filterResult}
-            onFilterSelect=${onFilterSelect}
-          />
-        <//> <//
-      >,
-    `,
-  ];
+    <${FeatureRoute} path="/INVITE">
+      <${Suspense} fallback=${Loading}>
+        <${Invite}
+          loading=${loading}
+          hangout=${hangout}
+          onInvite=${onInvite}
+          onMessageText=${onMessageText}
+          messageText=${messageText}
+        />
+      <//>
+    <//>
+    <${FeatureRoute} paths=${["/INVITED", "/DECLINER"]}>
+      <${Suspense} fallback=${Loading}>
+        <${Invitee} hangout=${hangout} loading=${loading} />
+      <//>
+    <//>
+    <${FeatureRoute} path="/INVITER">
+      <${Suspense} fallback=${Loading}>
+        <${Inviter}
+          loading=${loading}
+          hangout=${hangout}
+          onAccept=${onAccept}
+          onDecline=${onDecline}
+        />
+      <//>
+    <//>
+    <${FeatureRoute} path="/unread">
+      <${Suspense} fallback=${Loading}>
+        <${UnreadHangouts}
+          unreadhangouts=${unreadhangouts}
+          onUnreadSelect=${onUnreadSelect}
+          onUnreadRemove=${onUnreadRemove}
+        />
+      <//>
+    <//>
+    <${FeatureRoute} path="/search">
+      <${Suspense} fallback=${Loading}>
+        <${Search}
+          onSearchSelect=${onSearchSelect}
+          searchResult=${searchResult}
+          onSearch=${onSearch}
+          onSearchInput=${onSearchInput}
+          search=${search}
+        />
+      <//>
+    <//>
+    <${FeatureRoute} path="/filter">
+      <${Suspense} fallback=${Loading}>
+        <${Filter}
+          onLoadHangout=${onLoadHangout}
+          onNavigation=${onNavigation}
+          filter=${filter}
+          onFilterInput=${onFilterInput}
+          filterResult=${filterResult}
+          onFilterSelect=${onFilterSelect}
+        />
+      <//>
+    <//>
+  `;
 }
 
 function Loading() {
