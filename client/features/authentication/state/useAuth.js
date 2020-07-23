@@ -13,7 +13,7 @@ export function useAuth() {
   }
   function onLogin() {
     const { emailorusername, password } = state;
-    if (Cypress && window.jsDisabled) {
+    if (window.jsDisabled) {
       debugger;
       dispatch({ type: actionTypes.LOGIN_STARTED });
     } else {
@@ -42,7 +42,7 @@ export function useAuth() {
   }
   function onSignup() {
     const { username, password, email } = state;
-    if (Cypress && window.jsDisabled) {
+    if (window.jsDisabled) {
       debugger;
       dispatch({ type: actionTypes.SIGNUP_STARTED });
     } else {
@@ -86,7 +86,7 @@ export function useAuth() {
   function onLoginBlur(e) {
     const { emailorusername, password } = state;
     const { name } = e.target;
-    if (Cypress && window.jsDisabled) {
+    if (window.jsDisabled) {
     } else {
       debugger;
       switch (name) {
@@ -124,7 +124,7 @@ export function useAuth() {
   function onSignupBlur(e) {
     const { email, username, password } = state;
     const { name } = e.target;
-    if (Cypress && window.jsDisabled) {
+    if (window.jsDisabled) {
     } else {
       switch (name) {
         case "password":
