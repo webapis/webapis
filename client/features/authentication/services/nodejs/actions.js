@@ -51,10 +51,10 @@ export async function signup({ dispatch, state }) {
   }
 }
 
-export async function login({ dispatch, state, formDispatch }) {
+export async function login({ dispatch, state }) {
   try {
     const { emailorusername, password } = state;
-
+    debugger;
     const response = await fetch(`/auth/login`, {
       headers: {
         "Conten-Type": "application/json",

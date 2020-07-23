@@ -1,8 +1,8 @@
-const {
-  emailRegex,
-  usernameRegex,
-  passwordRegex,
-} = require("./validationRegex");
+const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/g;
+
+const emailRegex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g;
+
+const usernameRegex = /[a-zA-Z][a-zA-Z0-9]{5,31}/g;
 
 module.exports.isValidUsername = function ({ username }) {
   const usrname = new RegExp(usernameRegex);
@@ -15,6 +15,7 @@ module.exports.isValidUsername = function ({ username }) {
 
 module.exports.isValidEmail = function ({ email }) {
   const eml = new RegExp(emailRegex);
+  debugger;
   if (eml.test(email)) {
     return true;
   } else {

@@ -5,7 +5,7 @@ export default {
   EMAIL_NOT_REGISTERED: "email is not registered",
   USERNAME_NOT_REGISTERED: "username is not registered",
   INVALID_USERNAME:
-    "only Letters a-z or A-Z and the Symbols - and _ are allowed",
+    "The first character is a letter, The input contains only alphanumeric characters, The input is 6-32 characters long",
   INVALID_EMPTY_STRING: "Required field",
   INVALID_USERNAME_OR_EMAIL: "email or username is not valid",
   INVALID_CREDENTIALS: "invalid credentials provided",

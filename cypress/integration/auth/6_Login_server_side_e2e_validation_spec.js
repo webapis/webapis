@@ -6,14 +6,21 @@ describe("5_Login_server_side_stubbed_validation_spec", () => {
 
     cy.visit("/");
     cy.get("[data-testid=login-link]").click();
+    cy.task("seed:deleteCollection", {
+      dbName: "auth",
+      collectionName: "users",
+    });
     Cypress.on("window:before:load", (win) => {
       win.jsDisabled = true;
     });
   });
-  it.only("user submits: empty emailorusername or password (219) client JSDisabled", () => {
+  it("user submits: empty emailorusername or password (219) client JSDisabled", () => {
     //  cy.route({url:'/auth/login',status:400,response:{errors:[219]}})
     cy.get("[data-testid=login-btn]").click();
     cy.get("[data-testid=message-emailorusername]").contains(
+      validationMessages.REQUIRED_FIELD
+    );
+    cy.get("[data-testid=message-password]").contains(
       validationMessages.REQUIRED_FIELD
     );
   });
@@ -39,6 +46,11 @@ describe("5_Login_server_side_stubbed_validation_spec", () => {
   });
   it("user submits: matching emailorusername and wrong password (212)", () => {
     // cy.route({url:'/auth/login',status:400,response:{errors:[212]}})
+    cy.task("seed:user", {
+      email: "testuserone@gmail.com",
+      username: "testuser",
+      password: "TestPassword!22s",
+    });
     cy.get("[data-testid=emailorusername]").type("testuser");
     cy.get("[data-testid=password]").type("TestPassword!w");
     cy.get("[data-testid=login-btn]").click();
@@ -48,5 +60,18 @@ describe("5_Login_server_side_stubbed_validation_spec", () => {
     cy.get("[data-testid=message-password]").contains(
       validationMessages.INVALID_CREDENTIALS
     );
+  });
+
+  it("user submits: valid emailorusername and password", () => {
+    cy.task("seed:user", {
+      email: "testuser@gmail.com",
+      username: "testuser",
+      password: "TestPassword!22s",
+    });
+    cy.get("[data-testid=emailorusername]").type("testuser");
+    cy.get("[data-testid=password]").type("TestPassword!22s");
+    cy.get("[data-testid=login-btn]").click();
+    cy.get("[data-testid=message-emailorusername]").should("not.be.visible");
+    cy.get("[data-testid=message-password]").should("not.be.visible");
   });
 });

@@ -43,8 +43,10 @@ export function useAuth() {
   function onSignup() {
     const { username, password, email } = state;
     if (Cypress && window.jsDisabled) {
+      debugger;
       dispatch({ type: actionTypes.SIGNUP_STARTED });
     } else {
+      debugger;
       if (
         cv.validateEmailConstraint({ email }).isValid &&
         cv.validateUserNameConstraint({ username }).isValid &&
@@ -84,7 +86,8 @@ export function useAuth() {
   function onLoginBlur(e) {
     const { emailorusername, password } = state;
     const { name } = e.target;
-    if (!Cypress && !window.jsDisabled) {
+    if (Cypress && window.jsDisabled) {
+    } else {
       debugger;
       switch (name) {
         case "emailorusername":
@@ -121,7 +124,8 @@ export function useAuth() {
   function onSignupBlur(e) {
     const { email, username, password } = state;
     const { name } = e.target;
-    if (!Cypress && !window.jsDisabled) {
+    if (Cypress && window.jsDisabled) {
+    } else {
       switch (name) {
         case "password":
           dispatch({
