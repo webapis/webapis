@@ -8,3 +8,4 @@ debug.log
 coverage
 builds/
 build/
+logs/
