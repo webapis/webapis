@@ -2,7 +2,7 @@ const authOperation = require("./auth/index");
 const hangoutsOperation = require("./hangouts/http");
 const usersOperation = require("./users");
 const serveStatic = require("./serve-static/index");
-const errorMonitorOperations = require("./error-monitor/http");
+const appMonitorOperations = require("./app-monitor/http");
 const servePassReset = require("./serve-static/serve-pass-reset");
 
 module.exports = function httpRoute(client) {
@@ -54,11 +54,14 @@ module.exports = function httpRoute(client) {
 
 //
 function route({ url, req, res }) {
+  if (url.includes("monitor")) {
+    debugger;
+  }
   const authRegex = /.*\/auth\/.*/;
   const resetRegex = /.*\/reset\/.*/;
   const usersRegex = /.*\/users\/.*/;
   const hangoutsRegex = /.*\/hangouts\/.*/;
-  const clientErrorRegex = /.*\/client-error\/.*/;
+  const appMonitorRegex = /.*\/monitor\/.*/;
   switch (true) {
     case authRegex.test(url):
       authOperation(req, res);
@@ -74,8 +77,8 @@ function route({ url, req, res }) {
     case hangoutsRegex.test(url):
       hangoutsOperation(req, res);
       break;
-    case clientErrorRegex.test(url):
-      errorMonitorOperations(req, res);
+    case appMonitorRegex.test(url):
+      appMonitorOperations(req, res);
       break;
     default:
       serveStatic(req, res);

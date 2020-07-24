@@ -1,5 +1,4 @@
-const { clientError } = require("./client-error");
-const { errorMonitor } = require("./error-monitor");
+const { sendErrors, saveError } = require("./error-monitor");
 module.exports = function (req, res) {
   const { url } = req;
   const collectionName = "errors";
@@ -8,11 +7,13 @@ module.exports = function (req, res) {
   req.collection = collection;
 
   switch (true) {
-    case url.includes("/client-error/"):
-      clientError({ req, res, collection });
+    case url.includes("/errors/"):
+      debugger;
+      sendErrors({ req, res, collection });
       break;
-    case url.includes("/error-monitor/"):
-      errorMonitor({ req, res, collection });
+    case url.includes("/client-error/"):
+      debugger;
+      saveError({ req, res, collection });
       break;
     default:
       return null;

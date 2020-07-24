@@ -3,7 +3,7 @@ import serverValidation from "../../validation/serverErrorActions";
 
 export async function signup({ dispatch, state }) {
   const { email, password, username } = state;
-  debugger;
+
   try {
     const response = await fetch(`/auth/signup`, {
       body: JSON.stringify({ password, email, username }),
@@ -16,7 +16,7 @@ export async function signup({ dispatch, state }) {
     const result = await response.json();
     if (response.status === 200) {
       const { token, username, email } = result;
-      debugger;
+
       dispatch({
         type: actionTypes.SIGNUP_SUCCESS,
         user: { token, username, email },
@@ -32,20 +32,20 @@ export async function signup({ dispatch, state }) {
       );
     } else if (response.status === 400) {
       const { errors } = result;
-      debugger;
+
       errors.forEach((error) => {
         serverValidation({ status: error, dispatch });
       });
       dispatch({ type: actionTypes.SIGNUP_FAILED });
     } else if (response.status === 500) {
       const { error } = result;
-      debugger;
+
       dispatch({ type: actionTypes.SERVER_ERROR_RECIEVED, error });
       dispatch({ type: actionTypes.SIGNUP_FAILED });
     }
   } catch (error) {
     const err = error;
-    debugger;
+
     dispatch({ type: actionTypes.SERVER_ERROR_RECIEVED, error });
     dispatch({ type: actionTypes.SIGNUP_FAILED });
   }
@@ -54,7 +54,7 @@ export async function signup({ dispatch, state }) {
 export async function login({ dispatch, state }) {
   try {
     const { emailorusername, password } = state;
-    debugger;
+
     const response = await fetch(`/auth/login`, {
       headers: {
         "Conten-Type": "application/json",
@@ -83,20 +83,20 @@ export async function login({ dispatch, state }) {
       );
     } else if (response.status === 400) {
       const { errors } = result;
-      debugger;
+
       errors.forEach((error) => {
         serverValidation({ status: error, dispatch });
       });
       dispatch({ type: actionTypes.LOGIN_FAILED });
     } else if (response.status === 500) {
       const { error } = result;
-      debugger;
+
       dispatch({ type: actionTypes.SERVER_ERROR_RECIEVED, error });
       dispatch({ type: actionTypes.LOGIN_FAILED });
     }
   } catch (error) {
     const err = error;
-    debugger;
+
     dispatch({ type: actionTypes.SERVER_ERROR_RECIEVED, error });
     dispatch({ type: actionTypes.LOGIN_FAILED });
   }

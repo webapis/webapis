@@ -71,7 +71,6 @@ export function validateEmailOrUsername({ value }) {
       message: validationMessages.REQUIRED_FIELD,
     };
   } else if (emailTest) {
-    debugger;
     return {
       isValid: true,
       message: "",

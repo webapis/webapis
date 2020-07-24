@@ -42,7 +42,7 @@ export function useAppRoute() {
     if (name) {
       localStorage.setItem(name, JSON.stringify({ route, featureRoute }));
     }
-    debugger;
+
     dispatch({ type: actionTypes.APP_ROUTE_CHANGED, featureRoute, route });
   }
 
@@ -55,13 +55,12 @@ export function AppRoute(props) {
   const [state, dispatch] = useAppRouteContext();
   useEffect(() => {
     if (state && state.route === "/error-monitor") {
-      //  debugger;;
+      //
     }
   }, [state]);
   const { route } = state;
 
   if (path && route === path) {
-    debugger;
     return children;
   } else if (paths && route === paths.find((p) => p === route)) {
     return children;
