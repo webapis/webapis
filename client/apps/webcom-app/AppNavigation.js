@@ -58,23 +58,31 @@ export function AppNavigation() {
               </button>
             `}
             ${!username &&
-            html`<a
-              href=""
-              id="login"
-              data-testid="login-link"
-              onClick=${onAuthNavigation}
-            >
-              Sign in<//
-            >`}}
+            html`
+              <${NavItem}>
+                <${NavLink}
+                  id="login"
+                  appRoute="/auth"
+                  data-testid="login-link"
+                  onClick=${onAuthNavigation}
+                >
+                  Sign in
+                <//><//
+              >
+            `}}
             ${!username &&
-            html`<a
-              href=""
-              id="signup"
-              data-testid="signup-link"
-              onClick=${onAuthNavigation}
-            >
-              Sign up<//
-            >`}
+            html`
+              <${NavItem}>
+                <${NavLink}
+                  id="signup"
+                  appRoute="/auth"
+                  data-testid="signup-link"
+                  onClick=${onAuthNavigation}
+                >
+                  Sign up
+                <//><//
+              >
+            `}
             <${NavItem}>
               ${username &&
               html`
@@ -123,6 +131,15 @@ export function AppNavigation() {
                 >
                   <${PersonPlusIcon} width="1.5em" height="1.5em" />
                 </button>
+              <//>
+            <//>
+            <${NavItem}>
+              <${NavLink}
+                id="monitor"
+                appRoute="/monitor"
+                data-testid="monitor-link"
+              >
+                monitor
               <//>
             <//>
             <${NavItem}>

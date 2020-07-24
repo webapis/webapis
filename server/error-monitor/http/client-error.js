@@ -1,4 +1,3 @@
-const iplocate = require("node-iplocate");
 module.exports.clientError = async function ({ req, res, collection }) {
   //
   try {
@@ -7,7 +6,6 @@ module.exports.clientError = async function ({ req, res, collection }) {
     const ip = req.connection.remoteAddress;
     const trimip = ip.slice(ip.lastIndexOf(":") + 1);
     const timestamp = Date.now();
-    // const location =await   iplocate(trimip)
     const rawHeaders = req.rawHeaders;
     debugger;
     const insertResult = await collection.insertOne({ message, stack });

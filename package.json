@@ -42,7 +42,6 @@
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.5.6",
-    "node-iplocate": "^1.0.2",
     "node-static": "^0.7.11",
     "nodemailer": "^6.4.6",
     "parse": "^2.13.0",

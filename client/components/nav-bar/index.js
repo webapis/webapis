@@ -50,7 +50,7 @@ export function NavLink(props) {
   function handleRoute(e) {
     e.preventDefault();
     const { id } = e.target;
-
+    debugger;
     onAppRoute({ featureRoute: `/${id}`, route: appRoute });
   }
   return html` <a

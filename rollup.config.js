@@ -68,7 +68,7 @@ export default [
       copy({
         targets: [
           {
-            src: "client/features/error-monitor/error-monitor.js",
+            src: "client/features/error-monitor/client-error.js",
             dest: `builds/${process.env.appName}/build`,
           },
           {
