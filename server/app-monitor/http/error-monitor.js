@@ -1,3 +1,4 @@
+const clientErrorEmitter = require("../event-emitters/client-error");
 module.exports.sendErrors = async function ({ req, res, collection }) {
   try {
     const errors = await collection.find().toArray();
@@ -21,7 +22,10 @@ module.exports.saveError = async function ({ req, res, collection }) {
     const timestamp = Date.now();
     const rawHeaders = req.rawHeaders;
     debugger;
+
     const insertResult = await collection.insertOne({ message, stack });
+    debugger;
+    clientErrorEmitter.emit("client-error", { message, stack });
   } catch (error) {
     debugger;
   }

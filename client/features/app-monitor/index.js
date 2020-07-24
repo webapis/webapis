@@ -6,6 +6,6 @@ const html = htm.bind(h);
 
 export default function AppMonitor() {
   return html`<${MonitorProvider}>
-    <${ErrorMonitor} />
+    <${ErrorMonitor} socketUrl=${`wss://${ip}:3000`} />
   <//>`;
 }

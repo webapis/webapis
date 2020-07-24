@@ -21,7 +21,7 @@ export function useMonitor() {
     throw new Error("useMonitor must be used with MonitorProvider");
   }
   const [state, dispatch] = context;
-
+  const { errors } = state;
   async function fetchErrors() {
     try {
       dispatch({ type: actionTypes.FETCH_ERRORS_STARTED });
@@ -37,7 +37,10 @@ export function useMonitor() {
       dispatch({ type: actionTypes.FETCH_ERRORS_FAILED, error });
     }
   }
-  return { fetchErrors, state };
+  function clietErrorRecieved({ error }) {
+    dispatch({ type: actionTypes.UPDATE_ERRORS, error });
+  }
+  return { fetchErrors, state, clietErrorRecieved };
 }
 
 export default function MonitorProvider(props) {

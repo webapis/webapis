@@ -8,6 +8,9 @@ export const initState = {
 
 export default function monitorReducer(state, action) {
   switch (action.type) {
+    case actionTypes.UPDATE_ERRORS:
+      debugger;
+      return { ...state, errors: [...state.errors, action.error] };
     case actionTypes.FETCH_ERRORS_STARTED:
       return { ...state, loading: true };
     case actionTypes.FETCH_ERRORS_SUCCESS:
