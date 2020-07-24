@@ -68,6 +68,10 @@ export default [
       copy({
         targets: [
           {
+            src: "assets/sounds/**",
+            dest: `builds/${process.env.appName}/build`,
+          },
+          {
             src: "client/features/app-monitor/client-error.js",
             dest: `builds/${process.env.appName}/build`,
           },

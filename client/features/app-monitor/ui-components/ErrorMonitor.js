@@ -15,12 +15,25 @@ export default function ErrorMonitor(props) {
   useEffect(() => {
     debugger;
     setSocket(new WebSocket(`${socketUrl}/monitor`));
+
+    return () => {
+      let closedSound = new Audio("/Shutter-sound.mp3");
+      closedSound.play();
+    };
   }, []);
 
   useEffect(() => {
     if (socket) {
       debugger;
       socket.onmessage = (e) => {
+        var msg = new SpeechSynthesisUtterance();
+        let errorSound = new Audio("/Error-sound.mp3");
+        errorSound.play();
+        setTimeout(() => {
+          msg.text = "Error recieved";
+          window.speechSynthesis.speak(msg);
+        }, 500);
+
         const { message, stack } = JSON.parse(e.data);
         debugger;
         clietErrorRecieved({ error: { message, stack } });
@@ -28,9 +41,19 @@ export default function ErrorMonitor(props) {
         console.log("messages");
       };
       socket.onopen = () => {
+        var msg = new SpeechSynthesisUtterance();
+        let openSound = new Audio("/Interface-beep-up-sound-effect.mp3");
+        openSound.play();
+        setTimeout(() => {
+          msg.text = "monitor connected";
+          window.speechSynthesis.speak(msg);
+        }, 500);
+
         console.log("con open");
       };
       socket.onclose = () => {
+        let closedSound = new Audio("/Shutter-sound.mp3");
+        closedSound.play();
         console.log("con closed");
         setSocket(null);
       };

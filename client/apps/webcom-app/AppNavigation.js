@@ -69,7 +69,7 @@ export function AppNavigation() {
                   Sign in
                 <//><//
               >
-            `}}
+            `}
             ${!username &&
             html`
               <${NavItem}>

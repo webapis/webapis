@@ -37,9 +37,9 @@ export default function HangoutsProvider(props) {
     dispatch,
     focusedHangout: hangout,
   });
-  // useEffect(() => {
-  //   console.log(ddd);
-  // }, []);
+  useEffect(() => {
+    console.log(ddd);
+  }, []);
   useEffect(() => {
     if (hangout) {
       switch (hangout.state) {
