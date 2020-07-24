@@ -42,7 +42,7 @@ export default function MessageEditor({
           aria-describedby="button-addon2"
           onChangec=${onMessageText}
           data-testid="message-input"
-          valuec=${messageText}
+          value=${messageText}
         />
         <div class="input-group-append">
           <button
@@ -51,7 +51,7 @@ export default function MessageEditor({
             loadingc=${loading}
             disabledc=${hangout && hangout.state === "BLOCKED"}
             id="MESSAGE"
-            onClickc=${onMessage}
+            onClick=${onMessage}
             data-testid="send-btn"
           >
             Send

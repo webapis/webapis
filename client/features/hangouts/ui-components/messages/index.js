@@ -41,6 +41,7 @@ export default function Messages({
   }, [messages]);
 
   function onSend(e) {
+    debugger;
     onMessage(e);
     scrollerRef.current.scrollTop = scrollerRef.current.scrollHeight;
   }

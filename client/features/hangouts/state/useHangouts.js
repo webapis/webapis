@@ -106,6 +106,7 @@ export function useHangouts() {
   }
 
   function onMessage() {
+    debugger;
     const { email, state } = hangout;
     const timestamp = Date.now();
 
