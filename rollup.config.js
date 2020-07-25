@@ -59,7 +59,7 @@ export default [
       {
         dir: `builds/${process.env.appName}/build`,
         format: "es",
-        // sourcemap: "inline",
+        sourcemap: "inline",
       },
     ],
     plugins: [
@@ -155,7 +155,7 @@ export default [
       {
         dir: `client/storybook/build`,
         format: "es",
-        //  sourcemap: "inline",
+        sourcemap: "inline",
       },
     ],
     plugins: [
