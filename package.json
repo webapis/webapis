@@ -4,13 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "cypress:open": "npx cypress open back=parse",
-    "build": "cross-env appName=webcom-app rollup -c",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "webcom:client": "cross-env appName=webcom-app rollup -c -w ",
-    "webcom:node": "concurrently \"cross-env appName=webcom-app PREACT_APP_BACK=PREACT_APP_NODEJS nodemon   server/index.js\" \" cross-env appName=webcom-app PREACT_APP_BACK=PREACT_APP_NODEJS rollup -c -w \" ",
-    "webcom:parse": "concurrently \"cross-env appName=webcom-app PREACT_APP_BACK='PREACT_APP_PARSE'  nodemon --exec babel-node server/index.js\" \" cross-env appName=webcom-app PREACT_APP_BACK=PREACT_APP_PARSE rollup -c -w \" \" parse-dashboard --config dashboard-config.json \" ",
-    "webparse:client": "cross-env appName=webparse-app rollup -c -w "
+    "start": "nps",
+    "test": "nps test"
   },
   "keywords": [],
   "author": "",
@@ -25,6 +20,7 @@
     "husky": "^4.2.5",
     "lint-staged": "^10.2.11",
     "nodemon": "^2.0.3",
+    "nps-utils": "^1.7.0",
     "prettier": "^2.0.5",
     "rollup": "^2.10.9",
     "rollup-plugin-copy": "^3.3.0",
@@ -35,9 +31,8 @@
   },
   "dependencies": {
     "bootstrap-icons": "^1.0.0-alpha5",
-    "concurrently": "^5.2.0",
     "cookie": "^0.4.1",
-    "cross-env": "^7.0.2",
+    "cypress": "^4.11.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
@@ -45,7 +40,7 @@
     "node-static": "^0.7.11",
     "nodemailer": "^6.4.6",
     "parse": "^2.13.0",
-    "parse-server": "4.2.0",
+    "parse-server": "^4.3.0",
     "puppeteer-core": "^3.2.0",
     "ws": "^7.3.0"
   },
