@@ -55,7 +55,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
-      "pre-push":"nps cyTest"
+      "pre-push":"nps testAuth"
     }
   },
   "lint-staged": {
