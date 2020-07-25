@@ -55,7 +55,8 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
-      "pre-push":"nps testAuth"
+      "pre-push":"nps testAuth",
+      "pre-merge":"nps testAuth"
     }
   },
   "lint-staged": {
