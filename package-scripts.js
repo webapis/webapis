@@ -57,16 +57,16 @@ module.exports = {
         },
       },
     },
-    test: { script: series.nps("test.auth") },
+    test: { script: series.nps("cy.auth") },
     testHangouts: {
       script: concurrent({
         app: series.nps("apps.webcom.node.dev"),
         auth: series.nps("test.hangouts"),
       }),
     },
-    // test: {
-    //   auth: { script: testFeature({ feature: "auth" }) },
-    //   hangouts: { script: testFeature({ feature: "hangouts" }) },
-    // },
+    cy: {
+      auth: { script: testFeature({ feature: "auth" }) },
+      hangouts: { script: testFeature({ feature: "hangouts" }) },
+    },
   },
 };
