@@ -1,5 +1,5 @@
 require("dotenv").config();
-
+const PORT = process.env.PORT || 5000;
 //import http from 'http';
 const ws = require("./wsocket");
 //import { parseServer } from "./parse";
@@ -42,7 +42,7 @@ const options = {
 
   process.on("SIGTERM", shutDown);
   process.on("SIGINT", shutDown);
-  server.listen(3000, (error) => {
+  server.listen(PORT, (error) => {
     if (error) {
       const err = error;
       debugger;
