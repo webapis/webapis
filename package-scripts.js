@@ -64,9 +64,9 @@ module.exports = {
         auth: series.nps("test.hangouts"),
       }),
     },
-    test: {
-      auth: { script: testFeature({ feature: "auth" }) },
-      hangouts: { script: testFeature({ feature: "hangouts" }) },
-    },
+    // test: {
+    //   auth: { script: testFeature({ feature: "auth" }) },
+    //   hangouts: { script: testFeature({ feature: "hangouts" }) },
+    // },
   },
 };
