@@ -10,7 +10,6 @@ before_install:
   - npm install --global nps
   - npm install -g wait-on
 before_script:
-  - nps apps.webcom.node.dev
 # if using Ubuntu 16 need this library
 # https://github.com/cypress-io/cypress-documentation/pull/1647
 addons:
