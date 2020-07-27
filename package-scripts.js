@@ -1,5 +1,4 @@
 const { crossEnv, series, concurrent } = require("nps-utils");
-
 function runApps({ back, env, appName }) {
   return concurrent({
     server: {
@@ -14,11 +13,11 @@ function runApps({ back, env, appName }) {
 }
 
 function serverEnv({ env }) {
-  return env === "prod" ? "node server/index.js " : "nodemon server/index.js ";
+  return env === "prod" ? "node server/index.js" : "nodemon server/index.js";
 }
 
 function clientEnv({ env }) {
-  return env === "prod" ? "rollup -c " : "rollup -c -w ";
+  return env === "prod" ? "rollup -c" : "rollup -c -w";
 }
 
 function backEnd({ back }) {
@@ -58,12 +57,7 @@ module.exports = {
         },
       },
     },
-    testAuth: {
-      script: concurrent({
-        app: series.nps("apps.webcom.node.dev"),
-        auth: series.nps("test.auth"),
-      }),
-    },
+    testAuth: { script: series.nps("test.auth") },
     testHangouts: {
       script: concurrent({
         app: series.nps("apps.webcom.node.dev"),
