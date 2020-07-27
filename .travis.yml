@@ -26,3 +26,5 @@ cache:
 
 jobs:
   include:
+  before_install:
+  - npm install --global nps
