@@ -35,5 +35,5 @@ jobs:
 deploy:
   provider: heroku
   api_key:
-    secure: "96983c82-4484-4eff-87d3-f3f1fe34a57b"
+    secure: "4e3ffa96-e5e0-4aac-bcb5-57797e441939"
     app: webcom-app-demo
