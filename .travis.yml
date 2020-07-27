@@ -31,7 +31,7 @@ cache:
 jobs:
   include:
       script:
-       - nps apps.webcom.node.dev & wait-on http://localhost:8080
+       - nps apps.webcom.node.dev & wait-on http://localhost:3000
        - nps test
     
     
