@@ -57,12 +57,7 @@ module.exports = {
         },
       },
     },
-    testAuth: {
-      script: concurrent({
-        app: series.nps("apps.webcom.node.dev"),
-        auth: series.nps("test.auth"),
-      }),
-    },
+    testAuth: { script: series.nps("test.auth") },
     testHangouts: {
       script: concurrent({
         app: series.nps("apps.webcom.node.dev"),
