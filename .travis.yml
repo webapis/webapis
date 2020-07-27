@@ -32,3 +32,8 @@ jobs:
       script:
        - nps apps.webcom.node.dev & nps test
 
+deploy:
+  provider: heroku
+  api_key:
+    secure: "96983c82-4484-4eff-87d3-f3f1fe34a57b"
+    app: webcom-app-demo
