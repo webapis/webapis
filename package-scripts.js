@@ -31,11 +31,12 @@ function app({ appName }) {
 }
 
 function testFeature({ feature }) {
-  return `cypress run --headless  --spec cypress/integration/${feature}/**/*`;
+  return `cypress run --headless --record --key 8947ab69-a60d-465d-810e-c0184180764e  --spec cypress/integration/${feature}/**/*`;
 }
 
 module.exports = {
   scripts: {
+    cyp: "npm run cypress open",
     preMerge: { script: series.nps("testAuth.node") },
     apps: {
       webcom: {
