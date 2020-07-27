@@ -8,6 +8,8 @@ services:
   - mongodb
 before_install:
   - npm install --global nps
+before_script:
+  - nps apps.webcom.node.dev
 # if using Ubuntu 16 need this library
 # https://github.com/cypress-io/cypress-documentation/pull/1647
 addons:
@@ -27,4 +29,5 @@ cache:
 
 jobs:
   include:
+    
 
