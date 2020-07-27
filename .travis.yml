@@ -30,7 +30,8 @@ cache:
 jobs:
   include:
       script:
-       - nps apps.webcom.node.dev & nps test
+       - nps apps.webcom.node.dev & wait-on http://localhost:5000
+       - nps test
 
 deploy:
   provider: heroku
