@@ -1,5 +1,4 @@
 const { crossEnv, series, concurrent } = require("nps-utils");
-
 function runApps({ back, env, appName }) {
   return concurrent({
     server: {
@@ -14,11 +13,11 @@ function runApps({ back, env, appName }) {
 }
 
 function serverEnv({ env }) {
-  return env === "prod" ? "node server/index.js " : "nodemon server/index.js ";
+  return env === "prod" ? "node server/index.js" : "nodemon server/index.js";
 }
 
 function clientEnv({ env }) {
-  return env === "prod" ? "rollup -c " : "rollup -c -w ";
+  return env === "prod" ? "rollup -c" : "rollup -c -w";
 }
 
 function backEnd({ back }) {
