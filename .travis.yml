@@ -8,6 +8,7 @@ services:
   - mongodb
 before_install:
   - npm install --global nps
+  - npm install -g wait-on
 before_script:
   - nps apps.webcom.node.dev
 # if using Ubuntu 16 need this library
@@ -29,5 +30,9 @@ cache:
 
 jobs:
   include:
+      script:
+       - nps apps.webcom.node.dev & wait-on http://localhost:8080
+       - nps test
+    
     
 
