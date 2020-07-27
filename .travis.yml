@@ -31,8 +31,3 @@ jobs:
   include:
       script:
        - nps apps.webcom.node.dev & wait-on http://localhost:3000 & nps test 
-deploy:
-  provider: heroku
-  api_key:
-    secure: HEROKU_API_KEY
-    app: webcom-app-demo
