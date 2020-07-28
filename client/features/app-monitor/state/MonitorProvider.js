@@ -28,7 +28,7 @@ export function useMonitor() {
       const response = await fetch("/monitor/errors/");
 
       const result = await response.json();
-      debugger;
+
       dispatch({
         type: actionTypes.FETCH_ERRORS_SUCCESS,
         errors: result.errors,

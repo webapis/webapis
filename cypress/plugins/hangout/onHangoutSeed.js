@@ -123,7 +123,7 @@ module.exports = async function onHangoutSeed({
       //   await collection.updateOne({ username }, { $push: { unreads: target } });
     } ////
 
-    return result;
+    return true;
   } catch (error) {
     console.log("seed error", error);
     return error;

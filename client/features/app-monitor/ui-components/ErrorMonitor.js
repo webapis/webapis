@@ -13,7 +13,6 @@ export default function ErrorMonitor(props) {
   const [socket, setSocket] = useState();
   const { errors } = state;
   useEffect(() => {
-    debugger;
     setSocket(new WebSocket(`${socketUrl}/monitor`));
 
     return () => {
@@ -24,7 +23,6 @@ export default function ErrorMonitor(props) {
 
   useEffect(() => {
     if (socket) {
-      debugger;
       socket.onmessage = (e) => {
         var msg = new SpeechSynthesisUtterance();
         let errorSound = new Audio("/Error-sound.mp3");
@@ -35,9 +33,9 @@ export default function ErrorMonitor(props) {
         }, 500);
 
         const { message, stack } = JSON.parse(e.data);
-        debugger;
+
         clietErrorRecieved({ error: { message, stack } });
-        debugger;
+
         console.log("messages");
       };
       socket.onopen = () => {

@@ -22,7 +22,8 @@ export default function Blocked({ hangout, onUnblock, onClose }) {
     <${Layout} style=${style.layout} id="blocked-ui">
       <${Center} style=${{ flexDirection: "column", alignItems: "center" }}>
         <${Block} width="60" height="70" color="red" />
-        <b>{hangout && hangout.username}</b> is blocked
+        <b data-testid="blocked-username">${hangout && hangout.username}</b> is
+        blocked
       <//>
       <div class="row">
         <div class="col">

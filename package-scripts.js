@@ -68,6 +68,7 @@ module.exports = {
     cy: {
       auth: { script: testFeature({ feature: "auth" }) },
       hangouts: { script: testFeature({ feature: "hangouts" }) },
+      open: { script: "cypress open" },
     },
   },
 };

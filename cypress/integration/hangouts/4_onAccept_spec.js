@@ -49,6 +49,7 @@ describe("onAccept", () => {
     }
 
     cy.visit("/");
+    cy.get("[data-testid=message-count]").contains(1);
     cy.get("[data-testid=hangouts-link]").click();
     cy.get("[data-testid=unread-link]").click();
     cy.get("[data-testid=demo]").click();

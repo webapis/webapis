@@ -65,10 +65,10 @@ export function WebSocketContainer(props) {
   }, [searchHangouts]);
 
   useEffect(() => {
-    if (pendingHangout) {
+    if (pendingHangout && socket.readyState === 1) {
       sendPendingHangout();
     }
-  }, [pendingHangout]);
+  }, [pendingHangout, socket]);
 
   useEffect(() => {
     if (fetchHangouts && username) {
@@ -77,7 +77,6 @@ export function WebSocketContainer(props) {
   }, [fetchHangouts, username]);
   function sendPendingHangout() {
     socket.send(JSON.stringify(pendingHangout));
-    dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
   }
   return html`${children}`;
 }

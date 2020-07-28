@@ -43,7 +43,11 @@ export function useHangouts() {
       command: "INVITE",
       timestamp,
     };
-    saveHangout({ hangout: invitation, name: username, dispatch });
+    saveHangout({
+      hangout: { ...invitation, state: "INVITE", command: undefined },
+      name: username,
+      dispatch,
+    });
     saveSentMessage({
       hangout: invitation,
       dispatch,
@@ -55,7 +59,6 @@ export function useHangouts() {
       type: actionTypes.SENDING_HANGOUT_STARTED,
       pendingHangout: invitation,
     });
-    changeMessageText({ dispatch, text: "" });
   }
   function onAccept() {
     const { email, timestamp } = hangout;
@@ -106,7 +109,6 @@ export function useHangouts() {
   }
 
   function onMessage() {
-    debugger;
     const { email, state } = hangout;
     const timestamp = Date.now();
 

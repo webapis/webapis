@@ -51,9 +51,9 @@ export function AppNavigation() {
                 type="button"
                 class="btn btn-dark"
               >
-                messages
+                messages:
                 <span class="badge badge-light" data-testid="message-count">
-                  ${unreadhangouts ? unreadhangouts.length : 0}
+                  ${" "}${unreadhangouts ? unreadhangouts.length : 0}
                 </span>
               </button>
             `}

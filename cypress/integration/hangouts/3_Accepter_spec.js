@@ -1,10 +1,10 @@
-describe("onDecline", () => {
+describe("Accepter", () => {
   beforeEach(() => {
     if (Cypress.env("back") === "node") {
       const demo = {
         username: "demo",
         email: "demo@gmail.com",
-        password: "Dragonfly1977!!!",
+        password: "Dragonly_1999!",
       };
       const bero = {
         username: "bero",
@@ -23,35 +23,50 @@ describe("onDecline", () => {
         dbName: "test",
       });
     }
-
-    const hangout = {
+  });
+  it("Accepter succeful", () => {
+    const inviter = {
       username: "bero",
       timestamp: Date.now(),
-      message: { text: "Lets chant", timestamp: Date.now() },
+      message: null,
       email: "bero@gmail.com",
       command: "INVITE",
     };
 
     cy.task("seed:onHangout", {
-      hangout,
+      hangout: inviter,
       senderUsername: "demo",
       dbName: "auth",
       collectionName: "users",
     });
-  });
-  it("invitation declined successfully", () => {
+
+    const accepter = {
+      username: "demo",
+      timestamp: Date.now(),
+      message: { text: "Your invitation is accepted", timestamp: Date.now() },
+      email: "demo@gmail.com",
+      command: "ACCEPT",
+    };
+
+    cy.task("seed:onHangout", {
+      hangout: accepter,
+      senderUsername: "bero",
+      dbName: "auth",
+      collectionName: "users",
+    });
+
     if (Cypress.env("back") === "node") {
       cy.loginByEmail({
-        email: "bero@gmail.com",
+        email: "demo@gmail.com",
         password: "Dragonly_1999!",
       });
     }
 
     cy.visit("/");
+    cy.get("[data-testid=message-count]").contains(1);
     cy.get("[data-testid=hangouts-link]").click();
     cy.get("[data-testid=unread-link]").click();
-    cy.get("[data-testid=demo]").click();
-    cy.get("[data-testid=decline-btn]").click();
-    cy.get("[data-testid=blocked-ui]");
+
+    cy.get("[data-testid=bero]").click();
   });
 });

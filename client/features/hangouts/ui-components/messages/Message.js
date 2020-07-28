@@ -74,16 +74,18 @@ export default function Message(props) {
           ${message && message.text}
         </div>
         <div style=${style.log}>
-          <div style=${style.username}>${username && username}:</div>
-          <div>
+          <div style=${style.username} data-testid="message-sender">
+            ${username && username}:
+          </div>
+          <div data-testid="time">
             ${minutes === 0 && html` <div>Now</div>`}
             ${hours === 0 &&
             minutes > 0 &&
-            html` <div>{minutes} minutes ago</div>`}
+            html` <div>${minutes} minutes ago</div>`}
             ${hours > 0 &&
             days === 0 &&
-            html` <div>{hours} hours {minutes} minutes ago</div>`}
-            ${days <= 10 && days > 1 && html` <div>{days} days ago</div>`}
+            html` <div>${hours} hours ${minutes} minutes ago</div>`}
+            ${days <= 10 && days > 1 && html` <div>${days} days ago</div>`}
           </div>
         </div>
       </div>

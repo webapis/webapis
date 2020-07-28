@@ -21,16 +21,18 @@ export default function Inviter({ hangout, onAccept, onDecline, loading }) {
     <${Layout} id="inviter-ui">
       <div style=${style.root}>
         <div style=${{ marginLeft: 8, display: "flex" }}>
-          {hangout && hangout.message && (
-          <${Message}
-            message=${hangout &&
-            hangout.message && {
-              ...hangout.message,
-              username: hangout.username,
-              float: "left",
-            }}
-          />
-          )}
+          ${hangout &&
+          hangout.message &&
+          html`
+            <${Message}
+              message=${hangout &&
+              hangout.message && {
+                ...hangout.message,
+                username: hangout.username,
+                float: "left",
+              }}
+            />
+          `}
         </div>
 
         <div class="row">

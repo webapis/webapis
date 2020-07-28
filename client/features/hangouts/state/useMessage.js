@@ -15,56 +15,82 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
   function handleAcknowledgement({ hangout, offline }) {
     switch (hangout.state) {
       case "UNBLOCKED":
-        saveUnblovked({
-          dispatch,
-          hangout,
-          name: username,
-          focusedHangout,
-          onAppRoute,
-          offline,
-        });
+        setTimeout(function () {
+          saveUnblovked({
+            dispatch,
+            hangout,
+            name: username,
+            focusedHangout,
+            onAppRoute,
+            offline,
+          });
+        }, 50);
+
         break;
       case "INVITED":
-        updateHangout({ dispatch, hangout, name: username });
-        updateSentMessage({ hangout, name: username, dispatch });
-        dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
-        onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
+        setTimeout(function () {
+          updateHangout({ dispatch, hangout, name: username });
+          updateSentMessage({
+            hangout,
+            name: username,
+            dispatch,
+            dState: "delivered",
+          });
+          dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
+          onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
+        }, 50);
+
         break;
       case "DECLINED":
-        removeUnread({ dispatch, hangout, name: username });
-        updateSentMessage({ hangout, name: username, dispatch });
-        dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
-        onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
+        setTimeout(function () {
+          removeUnread({ dispatch, hangout, name: username });
+          updateSentMessage({ hangout, name: username, dispatch });
+          dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
+          onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
+        }, 50);
+
         break;
       case "ACCEPTED":
-        removeUnread({ dispatch, hangout, name: username });
-        updateHangout({ dispatch, hangout, name: username });
-        updateSentMessage({ hangout, name: username, dispatch });
-        dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
-        onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
+        setTimeout(function () {
+          removeUnread({ dispatch, hangout, name: username });
+          updateHangout({ dispatch, hangout, name: username });
+          updateSentMessage({ hangout, name: username, dispatch });
+          dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
+          onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
+        }, 50);
+
         break;
       case "BLOCKED":
-        updateHangout({ dispatch, hangout, name: username });
-        updateSentMessage({ hangout, name: username, dispatch });
-        removeUnreads({ dispatch, name });
-        dispatch({ type: actionTypes.HANGOUT_UPDATED, hangout });
-        dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
-        onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
+        setTimeout(function () {
+          updateHangout({ dispatch, hangout, name: username });
+          updateSentMessage({ hangout, name: username, dispatch });
+          removeUnreads({ dispatch, name });
+          dispatch({ type: actionTypes.HANGOUT_UPDATED, hangout });
+          dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
+          onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
+        }, 50);
+
         break;
       case "MESSAGED":
-        updateHangout({ dispatch, name: username, hangout });
-        updateSentMessage({
-          hangout,
-          name: username,
-          dispatch,
-          dState: "delivered",
-        });
-        dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
+        setTimeout(function () {
+          updateHangout({ dispatch, name: username, hangout });
+          updateSentMessage({
+            hangout,
+            name: username,
+            dispatch,
+            dState: "delivered",
+          });
+          dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
+        }, 50);
+
         break;
       case "READ":
-        updateHangout({ dispatch, name: username, hangout });
-        dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
-        removeUnread({ dispatch, hangout, name: username });
+        setTimeout(function () {
+          updateHangout({ dispatch, name: username, hangout });
+          dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
+          removeUnread({ dispatch, hangout, name: username });
+        }, 50);
+
         break;
       default:
         break;
@@ -96,7 +122,7 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
           dispatch,
           hangout,
           name: username,
-          dState: "unread",
+          dState: "INVITER",
         });
         saveRecievedMessage({
           hangout,

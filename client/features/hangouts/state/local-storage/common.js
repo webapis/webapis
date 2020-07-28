@@ -63,7 +63,7 @@ export function saveRecievedMessage({ hangout, dispatch, name, dState }) {
 export function saveUnread({ dispatch, name, hangout, dState }) {
   const hangoutKey = `${name}-unread-hangouts`;
   let localHangouts = JSON.parse(localStorage.getItem(hangoutKey));
-  const unreadHangout = { ...hangout, dState };
+  const unreadHangout = { ...hangout, state: dState };
   if (localHangouts && localHangouts.length > 0) {
     localStorage.setItem(
       hangoutKey,
