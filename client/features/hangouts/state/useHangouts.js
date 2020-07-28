@@ -71,7 +71,11 @@ export function useHangouts() {
       timestamp,
     };
 
-    saveHangout({ hangout: accept, name: username, dispatch });
+    saveHangout({
+      hangout: { ...accept, state: "ACCEPT", command: undefined },
+      name: username,
+      dispatch,
+    });
     saveSentMessage({
       hangout: accept,
       dispatch,
@@ -95,7 +99,11 @@ export function useHangouts() {
       timestamp,
     };
 
-    updateUnread({ dispatch, hangout: decline, name: username });
+    updateUnread({
+      dispatch,
+      hangout: { ...decline, state: "DECLINE", command: undefined },
+      name: username,
+    });
     saveSentMessage({
       hangout: decline,
       name: username,

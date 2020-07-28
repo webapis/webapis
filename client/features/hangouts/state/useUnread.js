@@ -9,7 +9,12 @@ export default function useUnread({ state, dispatch, onAppRoute, username }) {
 
   function onUnreadSelect({ hangout }) {
     dispatch({ type: actionTypes.SELECTED_HANGOUT, hangout });
-
+    updateRecievedMessage({
+      hangout,
+      name: username,
+      dispatch,
+      dState: "read",
+    });
     onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
   }
 

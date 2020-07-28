@@ -23,11 +23,14 @@ describe("onAccept", () => {
         dbName: "test",
       });
     }
-
+  });
+  it("invitation accepted successfully", () => {
+    const currentDate = Date.UTC(2018, 10, 30);
+    cy.clock(currentDate, ["Date"]);
     const hangout = {
       username: "bero",
-      timestamp: Date.now(),
-      message: { text: "Lets chant", timestamp: Date.now() },
+      timestamp: currentDate,
+      message: { text: "Let's chat bero", timestamp: currentDate },
       email: "bero@gmail.com",
       command: "INVITE",
     };
@@ -39,8 +42,20 @@ describe("onAccept", () => {
       dbName: "auth",
       collectionName: "users",
     });
-  });
-  it("invitation accepted successfully", () => {
+    const expectedHangoutState = {
+      username: "demo",
+      email: "demo@gmail.com",
+      state: "ACCEPT",
+      timestamp: currentDate,
+      message: { text: "Accepted your invitation", timestamp: currentDate },
+    };
+
+    const expectedMessageState = {
+      username: "bero",
+      state: "pending",
+      timestamp: currentDate,
+      text: "Accepted your invitation",
+    };
     if (Cypress.env("back") === "node") {
       cy.loginByEmail({
         email: "bero@gmail.com",
@@ -53,7 +68,71 @@ describe("onAccept", () => {
     cy.get("[data-testid=hangouts-link]").click();
     cy.get("[data-testid=unread-link]").click();
     cy.get("[data-testid=demo]").click();
-    cy.get("[data-testid=accept-btn]").click();
-    cy.get("[data-testid=hangchat-ui]");
+
+    cy.get("[data-testid=accept-btn]")
+      .click()
+      .then(() => {
+        debugger;
+        cy.window()
+          .its("localStorage")
+          .invoke("getItem", "bero-hangouts")
+          .then((result) => {
+            const unreads = JSON.parse(result);
+            const pending = unreads[0];
+            debugger;
+            expect(pending).to.deep.equal(expectedHangoutState);
+          });
+
+        cy.window()
+          .its("localStorage")
+          .invoke("getItem", "bero-demo-messages")
+          .then((result) => {
+            const messages = JSON.parse(result);
+            const pending = messages[1];
+            debugger;
+            expect(pending).to.deep.equal(expectedMessageState);
+          });
+      });
+
+    cy.get("[data-testid=message-count]")
+      .contains(0)
+      .then(() => {
+        debugger;
+        cy.window()
+          .its("localStorage")
+          .invoke("getItem", "bero-hangouts")
+          .then((result) => {
+            const unreads = JSON.parse(result);
+            const pending = unreads[0];
+            debugger;
+            expect(pending).to.deep.equal({
+              ...expectedHangoutState,
+              state: "ACCEPTED",
+            });
+          });
+
+        cy.window()
+          .its("localStorage")
+          .invoke("getItem", "bero-demo-messages")
+          .then((result) => {
+            const messages = JSON.parse(result);
+            const pending = messages[1];
+            debugger;
+            expect(pending).to.deep.equal({
+              ...expectedMessageState,
+              state: "delivered",
+            });
+          });
+        cy.window()
+          .its("localStorage")
+          .invoke("getItem", "bero-unread-hangouts")
+          .then((result) => {
+            const messages = JSON.parse(result);
+
+            debugger;
+            expect(messages.length).to.equal(0);
+          });
+        cy.get("[data-testid=hangchat-ui]");
+      });
   });
 });

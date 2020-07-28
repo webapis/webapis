@@ -36,6 +36,7 @@ describe("Accepter", () => {
     cy.task("seed:onHangout", {
       hangout: inviter,
       senderUsername: "demo",
+      senderEmail: "demo@gmail.com",
       dbName: "auth",
       collectionName: "users",
     });
@@ -51,6 +52,7 @@ describe("Accepter", () => {
     cy.task("seed:onHangout", {
       hangout: accepter,
       senderUsername: "bero",
+      senderEmail: "bero@gmail.com",
       dbName: "auth",
       collectionName: "users",
     });

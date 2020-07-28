@@ -43,7 +43,12 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
         break;
       case "DECLINED":
         setTimeout(function () {
-          removeUnread({ dispatch, hangout, name: username });
+          updateUnread({
+            dispatch,
+            hangout,
+            name: username,
+            dState: "DECLINED",
+          });
           updateSentMessage({ hangout, name: username, dispatch });
           dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
           onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
@@ -54,7 +59,12 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
         setTimeout(function () {
           removeUnread({ dispatch, hangout, name: username });
           updateHangout({ dispatch, hangout, name: username });
-          updateSentMessage({ hangout, name: username, dispatch });
+          updateSentMessage({
+            hangout,
+            name: username,
+            dispatch,
+            dState: "delivered",
+          });
           dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
           onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
         }, 50);

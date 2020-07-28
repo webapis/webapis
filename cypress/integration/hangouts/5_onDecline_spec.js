@@ -23,11 +23,14 @@ describe("onDecline", () => {
         dbName: "test",
       });
     }
-
+  });
+  it("invitation declined successfully", () => {
+    const currentDate = Date.UTC(2018, 10, 30);
+    cy.clock(currentDate, ["Date"]);
     const hangout = {
       username: "bero",
-      timestamp: Date.now(),
-      message: { text: "Lets chant", timestamp: Date.now() },
+      timestamp: currentDate,
+      message: { text: "Let's chat bero", timestamp: currentDate },
       email: "bero@gmail.com",
       command: "INVITE",
     };
@@ -35,11 +38,11 @@ describe("onDecline", () => {
     cy.task("seed:onHangout", {
       hangout,
       senderUsername: "demo",
+      senderEmail: "demo@gmail.com",
       dbName: "auth",
       collectionName: "users",
     });
-  });
-  it("invitation declined successfully", () => {
+
     if (Cypress.env("back") === "node") {
       cy.loginByEmail({
         email: "bero@gmail.com",
@@ -51,9 +54,31 @@ describe("onDecline", () => {
     cy.get("[data-testid=message-count]").contains(1);
     cy.get("[data-testid=hangouts-link]").click();
     cy.get("[data-testid=unread-link]").click();
-    cy.get("[data-testid=demo]").click();
+    cy.get("[data-testid=demo]")
+      .click()
+      .then(() => {
+        debugger;
+        cy.window()
+          .its("localStorage")
+          .invoke("getItem", "bero-demo-messages")
+          .then((result) => {
+            const expectedMessageState = {
+              username: "demo",
+              state: "read",
+              timestamp: currentDate,
+              text: "Let's chat bero",
+            };
+            const messages = JSON.parse(result);
+            const pending = messages[0];
+            debugger;
+            expect(pending).to.deep.equal(expectedMessageState);
+          });
+        cy.get("[data-testid=message]").contains("Let's chat bero");
+        cy.get("[data-testid=message-sender]").contains("demo");
+        cy.get("[data-testid=time]").contains("Now");
+      });
     cy.get("[data-testid=decline-btn]").click();
-    cy.get("[data-testid=blocked-ui]");
-    cy.get("[data-testid=blocked-username]").contains("demo");
+    // cy.get("[data-testid=blocked-ui]");
+    // cy.get("[data-testid=blocked-username]").contains("demo");
   });
 });
