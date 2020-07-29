@@ -40,7 +40,7 @@ export default function MessageEditor({
           class="form-control"
           aria-label="Recipient's username"
           aria-describedby="button-addon2"
-          onChangec=${onMessageText}
+          onChange=${onMessageText}
           data-testid="message-input"
           value=${messageText}
         />

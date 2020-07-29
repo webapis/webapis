@@ -65,34 +65,37 @@ describe("Inviter", () => {
       text: "Hello bero let's chat",
     };
     cy.visit("/");
-    cy.get("[data-testid=message-count]").contains(1);
-    cy.window()
-      .its("localStorage")
-      .invoke("getItem", "bero-unread-hangouts")
-      .then((result) => {
-        const unreads = JSON.parse(result);
-        const pending = unreads[0];
+    cy.get("[data-testid=message-count]")
+      .contains(1)
+      .then(() => {
+        cy.window()
+          .its("localStorage")
+          .invoke("getItem", "bero-unread-hangouts")
+          .then((result) => {
+            const unreads = JSON.parse(result);
+            const pending = unreads[0];
 
-        expect(pending).to.deep.equal(expectedHangoutState);
+            expect(pending).to.deep.equal(expectedHangoutState);
+          });
+
+        cy.window()
+          .its("localStorage")
+          .invoke("getItem", "bero-demo-messages")
+          .then((result) => {
+            const messages = JSON.parse(result);
+            const pending = messages[0];
+
+            expect(pending).to.deep.equal({
+              ...expectedMessageState,
+              state: "unread",
+            });
+          });
+
+        cy.get("[data-testid=unread-link]").click();
+        cy.get("[data-testid=demo]").click();
+        cy.get("[data-testid=message]").contains("Hello bero let's chat");
+        cy.get("[data-testid=message-sender]").contains("demo");
+        cy.get("[data-testid=time]").contains("Now");
       });
-
-    cy.window()
-      .its("localStorage")
-      .invoke("getItem", "bero-demo-messages")
-      .then((result) => {
-        const messages = JSON.parse(result);
-        const pending = messages[0];
-
-        expect(pending).to.deep.equal({
-          ...expectedMessageState,
-          state: "unread",
-        });
-      });
-
-    cy.get("[data-testid=unread-link]").click();
-    cy.get("[data-testid=demo]").click();
-    cy.get("[data-testid=message]").contains("Hello bero let's chat");
-    cy.get("[data-testid=message-sender]").contains("demo");
-    cy.get("[data-testid=time]").contains("Now");
   });
 });

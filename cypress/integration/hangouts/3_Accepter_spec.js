@@ -71,14 +71,13 @@ describe("Accepter", () => {
       .contains(1)
       .then(() => {
         debugger;
+        cy.get("[data-testid=unread-link]")
+          .click()
+          .then(() => {
+            cy.get("[data-testid=bero]").click();
+            debugger;
+          });
       });
     //cy.get("[data-testid=hangouts-link]").click();
-    cy.get("[data-testid=unread-link]")
-      .click()
-      .then(() => {
-        debugger;
-      });
-
-    cy.get("[data-testid=bero]").click();
   });
 });

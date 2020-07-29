@@ -41,11 +41,11 @@ export function saveSentMessage({ hangout, dispatch, name, dState }) {
     });
   }
 }
-export function saveRecievedMessage({ hangout, dispatch, name, dState }) {
+export function saveRecievedMessage({ hangout, dispatch, name }) {
   const { username, message } = hangout;
   const messageKey = `${name}-${username}-messages`;
   const localMessages = JSON.parse(localStorage.getItem(messageKey));
-  const pendingMessage = { ...message, username, state: dState };
+  const pendingMessage = { ...message, username, state: "unread" };
   if (localMessages && localMessages.length > 0) {
     localStorage.setItem(
       messageKey,
@@ -63,10 +63,11 @@ export function saveRecievedMessage({ hangout, dispatch, name, dState }) {
     });
   }
 }
-export function saveUnread({ dispatch, name, hangout, dState }) {
+export function saveUnread({ dispatch, name, hangout }) {
+  const { state } = hangout;
   const hangoutKey = `${name}-unread-hangouts`;
   let localHangouts = JSON.parse(localStorage.getItem(hangoutKey));
-  const unreadHangout = { ...hangout, state: dState };
+  const unreadHangout = { ...hangout, state };
   if (localHangouts && localHangouts.length > 0) {
     localStorage.setItem(
       hangoutKey,
@@ -85,11 +86,11 @@ export function saveUnread({ dispatch, name, hangout, dState }) {
   }
 }
 
-export function updateSentMessage({ hangout, name, dispatch, dState }) {
+export function updateSentMessage({ hangout, name, dispatch }) {
   const { username, message } = hangout;
   const { timestamp } = message;
   const messageKey = `${name}-${username}-messages`;
-  const updatedMessage = { ...message, username: name, state: dState };
+  const updatedMessage = { ...message, username: name, state: "delivered" };
   const localMessages = JSON.parse(localStorage.getItem(messageKey));
 
   let messageIndex = localMessages.findIndex((i) => {

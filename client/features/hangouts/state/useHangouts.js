@@ -26,6 +26,7 @@ export function useHangouts() {
   }
 
   function onMessageText(e) {
+    debugger;
     const text = e.target.value;
     changeMessageText({ dispatch, text });
   }
@@ -117,14 +118,14 @@ export function useHangouts() {
   }
 
   function onMessage() {
-    const { email, state } = hangout;
     const timestamp = Date.now();
-
+    debugger;
     const message =
       messageText !== "" ? { text: messageText, timestamp } : null;
+    debugger;
     const messaging = {
       username: hangout.username,
-      email,
+      email: hangout.email,
       message,
       command: "MESSAGE",
       timestamp,
@@ -157,7 +158,7 @@ export function useHangouts() {
         pendingHangout: messaging,
       });
     }
-    changeMessageText({ dispatch, text: "" });
+    //  changeMessageText({ dispatch, text: "" });
   }
   function onBlock() {
     const { email } = hangout;
