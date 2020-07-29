@@ -57,7 +57,6 @@ describe("onDecline", () => {
     cy.get("[data-testid=demo]")
       .click()
       .then(() => {
-        debugger;
         cy.window()
           .its("localStorage")
           .invoke("getItem", "bero-demo-messages")
@@ -70,15 +69,57 @@ describe("onDecline", () => {
             };
             const messages = JSON.parse(result);
             const pending = messages[0];
-            debugger;
+
             expect(pending).to.deep.equal(expectedMessageState);
           });
+        cy.window()
+          .its("localStorage")
+          .invoke("getItem", "bero-unread-hangouts")
+          .then((result) => {
+            const expectedUnreadState = {
+              username: "demo",
+              email: "demo@gmail.com",
+              state: "INVITER",
+              timestamp: currentDate,
+              message: { text: "Let's chat bero", timestamp: currentDate },
+            };
+            const unreads = JSON.parse(result);
+            const pending = unreads[0];
+
+            expect(pending).to.deep.equal(expectedUnreadState);
+          });
+
         cy.get("[data-testid=message]").contains("Let's chat bero");
         cy.get("[data-testid=message-sender]").contains("demo");
         cy.get("[data-testid=time]").contains("Now");
       });
-    cy.get("[data-testid=decline-btn]").click();
-    // cy.get("[data-testid=blocked-ui]");
+    cy.get("[data-testid=decline-btn]")
+      .click()
+      .then(() => {
+        cy.get("[data-testid=spinner]");
+      });
+
+    cy.get("[data-testid=blocked-ui]").then(() => {
+      cy.window()
+        .its("localStorage")
+        .invoke("getItem", "bero-unread-hangouts")
+        .then((result) => {
+          const expectedUnreadState = {
+            username: "demo",
+            email: "demo@gmail.com",
+            state: "DECLINED",
+            timestamp: currentDate,
+            message: {
+              text: "Your invitation declined",
+              timestamp: currentDate,
+            },
+          };
+          const unreads = JSON.parse(result);
+          const pending = unreads[0];
+
+          expect(pending).to.deep.equal(expectedUnreadState);
+        });
+    });
     // cy.get("[data-testid=blocked-username]").contains("demo");
   });
 });

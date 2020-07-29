@@ -72,7 +72,7 @@ describe("Inviter", () => {
       .then((result) => {
         const unreads = JSON.parse(result);
         const pending = unreads[0];
-        debugger;
+
         expect(pending).to.deep.equal(expectedHangoutState);
       });
 
@@ -82,7 +82,7 @@ describe("Inviter", () => {
       .then((result) => {
         const messages = JSON.parse(result);
         const pending = messages[0];
-        debugger;
+
         expect(pending).to.deep.equal({
           ...expectedMessageState,
           state: "unread",

@@ -65,21 +65,21 @@ describe("onAccept", () => {
 
     cy.visit("/");
     cy.get("[data-testid=message-count]").contains(1);
-    cy.get("[data-testid=hangouts-link]").click();
+
     cy.get("[data-testid=unread-link]").click();
     cy.get("[data-testid=demo]").click();
 
     cy.get("[data-testid=accept-btn]")
       .click()
       .then(() => {
-        debugger;
+        cy.get("[data-testid=spinner]");
         cy.window()
           .its("localStorage")
           .invoke("getItem", "bero-hangouts")
           .then((result) => {
             const unreads = JSON.parse(result);
             const pending = unreads[0];
-            debugger;
+
             expect(pending).to.deep.equal(expectedHangoutState);
           });
 
@@ -89,7 +89,7 @@ describe("onAccept", () => {
           .then((result) => {
             const messages = JSON.parse(result);
             const pending = messages[1];
-            debugger;
+
             expect(pending).to.deep.equal(expectedMessageState);
           });
       });
@@ -97,14 +97,13 @@ describe("onAccept", () => {
     cy.get("[data-testid=message-count]")
       .contains(0)
       .then(() => {
-        debugger;
         cy.window()
           .its("localStorage")
           .invoke("getItem", "bero-hangouts")
           .then((result) => {
             const unreads = JSON.parse(result);
             const pending = unreads[0];
-            debugger;
+
             expect(pending).to.deep.equal({
               ...expectedHangoutState,
               state: "ACCEPTED",
@@ -117,7 +116,7 @@ describe("onAccept", () => {
           .then((result) => {
             const messages = JSON.parse(result);
             const pending = messages[1];
-            debugger;
+
             expect(pending).to.deep.equal({
               ...expectedMessageState,
               state: "delivered",
@@ -129,7 +128,6 @@ describe("onAccept", () => {
           .then((result) => {
             const messages = JSON.parse(result);
 
-            debugger;
             expect(messages.length).to.equal(0);
           });
         cy.get("[data-testid=hangchat-ui]");

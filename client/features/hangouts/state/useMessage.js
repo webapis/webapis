@@ -9,6 +9,7 @@ import {
   updateHangout,
   removeUnread,
   removeUnreads,
+  updateUnread,
 } from "./local-storage/common";
 export function useMessage({ message, username, dispatch, focusedHangout }) {
   const { onAppRoute } = useAppRoute();
@@ -24,7 +25,7 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
             onAppRoute,
             offline,
           });
-        }, 50);
+        }, 200);
 
         break;
       case "INVITED":
@@ -38,7 +39,7 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
           });
           dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
           onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
-        }, 50);
+        }, 200);
 
         break;
       case "DECLINED":
@@ -51,8 +52,9 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
           });
           updateSentMessage({ hangout, name: username, dispatch });
           dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
+
           onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
-        }, 50);
+        }, 200);
 
         break;
       case "ACCEPTED":
@@ -67,7 +69,7 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
           });
           dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
           onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
-        }, 50);
+        }, 200);
 
         break;
       case "BLOCKED":
@@ -78,7 +80,7 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
           dispatch({ type: actionTypes.HANGOUT_UPDATED, hangout });
           dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
           onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
-        }, 50);
+        }, 200);
 
         break;
       case "MESSAGED":
@@ -91,7 +93,7 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
             dState: "delivered",
           });
           dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
-        }, 50);
+        }, 200);
 
         break;
       case "READ":
@@ -99,7 +101,7 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
           updateHangout({ dispatch, name: username, hangout });
           dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
           removeUnread({ dispatch, hangout, name: username });
-        }, 50);
+        }, 200);
 
         break;
       default:

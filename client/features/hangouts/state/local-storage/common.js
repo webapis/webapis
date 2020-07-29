@@ -1,19 +1,22 @@
 import { actionTypes } from "../actionTypes";
 
 export function updateUnread({ dispatch, hangout, name, dState }) {
-  const { username, timestamp } = hangout;
-  const hangoutKey = `${name}-unread-hangouts`;
-  const readHangout = { ...hangout, dState };
-  let localHangouts = JSON.parse(localStorage.getItem(hangoutKey));
-  const hangoutIndex = localHangouts.findIndex(
-    (f) => f.username === username && f.timestamp === timestamp
-  );
-  localHangouts.splice(hangoutIndex, 1, readHangout);
-  localStorage.setItem(hangoutKey, JSON.stringify(localHangouts));
-  dispatch({
-    type: actionTypes.UNREAD_HANGOUTS_UPDATED,
-    unreadhangouts: localHangouts,
-  });
+  try {
+    const { username, timestamp } = hangout;
+
+    const hangoutKey = `${name}-unread-hangouts`;
+    const readHangout = { ...hangout, state: dState };
+    let localHangouts = JSON.parse(localStorage.getItem(hangoutKey));
+    const hangoutIndex = localHangouts.findIndex(
+      (f) => f.username === username && f.timestamp === timestamp
+    );
+    localHangouts.splice(hangoutIndex, 1, readHangout);
+    localStorage.setItem(hangoutKey, JSON.stringify(localHangouts));
+    dispatch({
+      type: actionTypes.UNREAD_HANGOUTS_UPDATED,
+      unreadhangouts: localHangouts,
+    });
+  } catch (error) {}
 }
 
 export function saveSentMessage({ hangout, dispatch, name, dState }) {

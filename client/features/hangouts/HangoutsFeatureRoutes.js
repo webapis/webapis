@@ -128,7 +128,7 @@ export default function HangoutsFeatureRoutes(props) {
     <${FeatureRoute} path="/INVITER">
       <${Suspense} fallback=${Loading}>
         <${Inviter}
-          loading=${loading}
+          state=${state}
           hangout=${hangout}
           onAccept=${onAccept}
           onDecline=${onDecline}

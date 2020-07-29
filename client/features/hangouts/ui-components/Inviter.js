@@ -1,5 +1,11 @@
 import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
+import {
+  useContext,
+  useMemo,
+  useReducer,
+  useEffect,
+} from "https://cdn.jsdelivr.net/gh/webapis/webapis@cbdf6161bd8ca09a385d62c8c697bd1cd87bb184/hooks.cdn.js";
 import Message from "./messages/Message";
 import Layout from "./Layout";
 import Button from "controls/button/index";
@@ -16,7 +22,15 @@ const style = {
   },
 };
 const html = htm.bind(h);
-export default function Inviter({ hangout, onAccept, onDecline, loading }) {
+export default function Inviter({
+  hangout,
+  onAccept,
+  onDecline,
+  loading,
+  state,
+}) {
+  const { pendingHangout } = state;
+
   return html`
     <${Layout} id="inviter-ui">
       <div style=${style.root}>
@@ -41,6 +55,7 @@ export default function Inviter({ hangout, onAccept, onDecline, loading }) {
               id="DECLINE"
               onClick=${onDecline}
               data-testid="decline-btn"
+              loading=${pendingHangout && pendingHangout.command === "DECLINE"}
               title="Decline"
               block
               bg="danger"
@@ -53,7 +68,7 @@ export default function Inviter({ hangout, onAccept, onDecline, loading }) {
               id="ACCEPT"
               onClick=${onAccept}
               data-testid="accept-btn"
-              loading=${loading}
+              loading=${pendingHangout && pendingHangout.command === "ACCEPT"}
               title="Accept"
               bg="primary"
               block
