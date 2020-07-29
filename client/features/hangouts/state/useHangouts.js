@@ -100,17 +100,17 @@ export function useHangouts() {
       timestamp,
     };
 
-    updateUnread({
-      dispatch,
-      hangout: { ...decline, state: "DECLINE", command: undefined },
-      name: username,
-    });
-    saveSentMessage({
-      hangout: decline,
-      name: username,
-      dispatch,
-      dState: "pending",
-    });
+    // updateUnread({
+    //   dispatch,
+    //   hangout: { ...decline, state: "DECLINE", command: undefined },
+    //   name: username,
+    // });
+    // saveSentMessage({
+    //   hangout: decline,
+    //   name: username,
+    //   dispatch,
+    //   dState: "pending",
+    // });
     dispatch({
       type: actionTypes.SENDING_HANGOUT_STARTED,
       pendingHangout: decline,
@@ -134,10 +134,10 @@ export function useHangouts() {
       hangout: messaging,
       dispatch,
       name: username,
-      dState: "pending",
     });
     if (hangout.state === "BLOCKER") {
       saveSentMessage({
+        //------------------------------updating tobe checked
         hangout: {
           ...hangout,
           message: {
@@ -148,7 +148,6 @@ export function useHangouts() {
         },
         dispatch,
         name: username,
-        dState: "pending",
       });
     } else {
       updateHangout({ hangout: messaging, name: username, dispatch });
@@ -158,7 +157,7 @@ export function useHangouts() {
         pendingHangout: messaging,
       });
     }
-    //  changeMessageText({ dispatch, text: "" });
+    changeMessageText({ dispatch, text: "" });
   }
   function onBlock() {
     const { email } = hangout;
