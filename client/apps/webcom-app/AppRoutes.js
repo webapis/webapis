@@ -3,7 +3,7 @@ import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.m
 import {
   Suspense,
   lazy,
-} from "https://cdn.jsdelivr.net/gh/webapis/webapis/preact.combat.cdn.js";
+} from "https://gitcdn.xyz/cdn/webapis/webapis/3ee095aa65a1f8f9cf98a6b6f55d5080c9d0acb6/preact.combat.cdn.js";
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 import { AppRoute } from "components/app-route/index";
 import { Home } from "./Home";
@@ -30,7 +30,17 @@ export function AppRoutes() {
       <//>
       <${AppRoute} path=${"/hangouts"}>
         <${Suspense} fallback=${Loading}>
-          <${HangoutsFeatureRoutes} />
+          <div
+            class="row d-flex justify-content-center"
+            style=${{ height: "100%" }}
+          >
+            <div
+              class="col-md-5 card"
+              style=${{ paddingTop: 5, height: "100%" }}
+            >
+              <${HangoutsFeatureRoutes} />
+            </div>
+          </div>
         <//>
       <//>
       <${AppRoute}path =${"/error"}>
