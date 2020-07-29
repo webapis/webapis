@@ -44,12 +44,13 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
         break;
       case "DECLINED":
         setTimeout(function () {
-          updateUnread({
-            dispatch,
-            hangout,
-            name: username,
-            dState: "DECLINED",
-          });
+          // updateUnread({
+          //   dispatch,
+          //   hangout,
+          //   name: username,
+          //   dState: "DECLINED",
+          // });
+          removeUnread({ dispatch, hangout, name: username });
           updateSentMessage({ hangout, name: username, dispatch });
           dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
 
@@ -119,7 +120,7 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
           name: username,
           dState: "unread",
         });
-        saveUnread({ dispatch, name: username, hangout });
+        saveUnread({ dispatch, name: username, hangout, dState: "ACCEPTER" });
         break;
       case "BLOCKER":
         updateHangout({ dispatch, name: username, hangout });
@@ -145,6 +146,13 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
         break;
       case "MESSANGER":
         updateHangout({ dispatch, name: username, hangout });
+        saveRecievedMessage({
+          hangout,
+          dispatch,
+          name: username,
+          dState: "unread",
+        });
+
         if (focusedHangout && focusedHangout.username !== hangout.username) {
           saveUnread({
             dispatch,
@@ -154,12 +162,6 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
           });
         }
 
-        saveRecievedMessage({
-          hangout,
-          dispatch,
-          name: username,
-          dState: "unread",
-        });
         break;
       case "UNBLOCKER":
         // saveUnblocker({

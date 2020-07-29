@@ -25,10 +25,12 @@ describe("Accepter", () => {
     }
   });
   it("Accepter succeful", () => {
+    const timestamp = Date.UTC(2018, 10, 30);
+    cy.clock(timestamp, ["Date"]);
     const inviter = {
       username: "bero",
-      timestamp: Date.now(),
-      message: null,
+      timestamp,
+      message: { text: "Let's cha bero", timestamp },
       email: "bero@gmail.com",
       command: "INVITE",
     };
@@ -43,8 +45,8 @@ describe("Accepter", () => {
 
     const accepter = {
       username: "demo",
-      timestamp: Date.now(),
-      message: { text: "Your invitation is accepted", timestamp: Date.now() },
+      timestamp,
+      message: { text: "Your invitation is accepted", timestamp },
       email: "demo@gmail.com",
       command: "ACCEPT",
     };
@@ -65,9 +67,17 @@ describe("Accepter", () => {
     }
 
     cy.visit("/");
-    cy.get("[data-testid=message-count]").contains(1);
-    cy.get("[data-testid=hangouts-link]").click();
-    cy.get("[data-testid=unread-link]").click();
+    cy.get("[data-testid=message-count]")
+      .contains(1)
+      .then(() => {
+        debugger;
+      });
+    //cy.get("[data-testid=hangouts-link]").click();
+    cy.get("[data-testid=unread-link]")
+      .click()
+      .then(() => {
+        debugger;
+      });
 
     cy.get("[data-testid=bero]").click();
   });

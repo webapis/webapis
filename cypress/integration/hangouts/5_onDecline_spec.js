@@ -99,27 +99,7 @@ describe("onDecline", () => {
         cy.get("[data-testid=spinner]");
       });
 
-    cy.get("[data-testid=blocked-ui]").then(() => {
-      cy.window()
-        .its("localStorage")
-        .invoke("getItem", "bero-unread-hangouts")
-        .then((result) => {
-          const expectedUnreadState = {
-            username: "demo",
-            email: "demo@gmail.com",
-            state: "DECLINED",
-            timestamp: currentDate,
-            message: {
-              text: "Your invitation declined",
-              timestamp: currentDate,
-            },
-          };
-          const unreads = JSON.parse(result);
-          const pending = unreads[0];
-
-          expect(pending).to.deep.equal(expectedUnreadState);
-        });
-    });
-    // cy.get("[data-testid=blocked-username]").contains("demo");
+    cy.get("[data-testid=blocked-ui]");
+    cy.get("[data-testid=message-count]").contains(0);
   });
 });
