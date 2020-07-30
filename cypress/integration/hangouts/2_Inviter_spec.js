@@ -68,13 +68,14 @@ describe("Inviter", () => {
     cy.get("[data-testid=message-count]")
       .contains(1)
       .then(() => {
+        debugger;
         cy.window()
           .its("localStorage")
           .invoke("getItem", "bero-unread-hangouts")
           .then((result) => {
             const unreads = JSON.parse(result);
             const pending = unreads[0];
-
+            // testing saveUnread() ---------------------------------
             expect(pending).to.deep.equal(expectedHangoutState);
           });
 
@@ -84,7 +85,7 @@ describe("Inviter", () => {
           .then((result) => {
             const messages = JSON.parse(result);
             const pending = messages[0];
-
+            //testing saveRecievedMessage----------------------------------
             expect(pending).to.deep.equal({
               ...expectedMessageState,
               state: "unread",

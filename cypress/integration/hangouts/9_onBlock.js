@@ -1,4 +1,4 @@
-describe("Decliner", () => {
+describe("onBlock", () => {
   beforeEach(() => {
     if (Cypress.env("back") === "node") {
       const demo = {
@@ -24,11 +24,12 @@ describe("Decliner", () => {
       });
     }
   });
-  it("Decliner succeful", () => {
+  it("user is blocked succefully", () => {
+    let timestamp = Date.now();
     const inviter = {
       username: "bero",
-      timestamp: Date.now(),
-      message: { text: "Lets chat bero", timestamp: Date.now() },
+      timestamp,
+      message: { text: "Hello bero letschat", timestamp },
       email: "bero@gmail.com",
       command: "INVITE",
     };
@@ -40,21 +41,35 @@ describe("Decliner", () => {
       collectionName: "users",
     });
 
-    const decliner = {
+    const accepter = {
       username: "demo",
-      timestamp: Date.now(),
-      message: { text: "Your invitation is declined", timestamp: Date.now() },
+      timestamp,
+      message: { text: "Your invitation is accepted", timestamp },
       email: "demo@gmail.com",
-      command: "DECLINE",
+      command: "ACCEPT",
     };
 
     cy.task("seed:onHangout", {
-      hangout: decliner,
+      hangout: accepter,
       senderUsername: "bero",
       dbName: "auth",
       collectionName: "users",
     });
+    let messageTimeStamp = Date.now();
+    const messanger = {
+      username: "demo",
+      timestamp: messageTimeStamp,
+      message: { text: "Hello demo", timestamp: messageTimeStamp },
+      email: "demo@gmail.com",
+      command: "MESSAGE",
+    };
 
+    cy.task("seed:onHangout", {
+      hangout: messanger,
+      senderUsername: "bero",
+      dbName: "auth",
+      collectionName: "users",
+    });
     if (Cypress.env("back") === "node") {
       cy.loginByEmail({
         email: "demo@gmail.com",
@@ -63,8 +78,10 @@ describe("Decliner", () => {
     }
 
     cy.visit("/");
-    cy.get("[data-testid=message-count]").contains(0);
     cy.get("[data-testid=hangouts-link]").click();
-    cy.get("[data-testid=bero]").click();
+    // cy.get("[data-testid=bero]").click();
+    // cy.get("[data-testid=nav-config]").click();
+    // cy.get("[data-testid=bckui-btn]").click();
+    // cy.get("[data-testid=block-btn]").click();
   });
 });

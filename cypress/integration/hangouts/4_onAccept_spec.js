@@ -73,25 +73,6 @@ describe("onAccept", () => {
       .click()
       .then(() => {
         cy.get("[data-testid=spinner]");
-        cy.window()
-          .its("localStorage")
-          .invoke("getItem", "bero-hangouts")
-          .then((result) => {
-            const unreads = JSON.parse(result);
-            const pending = unreads[0];
-
-            expect(pending).to.deep.equal(expectedHangoutState);
-          });
-
-        cy.window()
-          .its("localStorage")
-          .invoke("getItem", "bero-demo-messages")
-          .then((result) => {
-            const messages = JSON.parse(result);
-            const pending = messages[1];
-
-            expect(pending).to.deep.equal(expectedMessageState);
-          });
       });
 
     cy.get("[data-testid=message-count]")
@@ -99,38 +80,33 @@ describe("onAccept", () => {
       .then(() => {
         cy.window()
           .its("localStorage")
-          .invoke("getItem", "bero-hangouts")
-          .then((result) => {
-            const unreads = JSON.parse(result);
-            const pending = unreads[0];
-
-            expect(pending).to.deep.equal({
-              ...expectedHangoutState,
-              state: "ACCEPTED",
-            });
-          });
-
-        cy.window()
-          .its("localStorage")
-          .invoke("getItem", "bero-demo-messages")
-          .then((result) => {
-            const messages = JSON.parse(result);
-            const pending = messages[1];
-
-            expect(pending).to.deep.equal({
-              ...expectedMessageState,
-              state: "delivered",
-            });
-          });
-        cy.window()
-          .its("localStorage")
           .invoke("getItem", "bero-unread-hangouts")
           .then((result) => {
             const messages = JSON.parse(result);
-
+            //test removeUnread()------------------------------------------
             expect(messages.length).to.equal(0);
           });
         cy.get("[data-testid=hangchat-ui]");
+
+        cy.get("[data-testid=left-message-wrapper]")
+          .find("[data-testid=message]")
+          .contains("Let's chat bero");
+        cy.get("[data-testid=left-message-wrapper]")
+          .find("[data-testid=message-sender]")
+          .contains("demo");
+        cy.get("[data-testid=left-message-wrapper]")
+          .find("[data-testid=time]")
+          .contains("Now");
+
+        cy.get("[data-testid=right-message-wrapper]")
+          .find("[data-testid=message]")
+          .contains("Accepted your invitation");
+        cy.get("[data-testid=right-message-wrapper]")
+          .find("[data-testid=message-sender]")
+          .contains("me");
+        cy.get("[data-testid=right-message-wrapper]")
+          .find("[data-testid=time]")
+          .contains("Now");
       });
   });
 });

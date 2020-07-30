@@ -1,4 +1,4 @@
-describe("Accepter", () => {
+describe("onMessage_spec", () => {
   beforeEach(() => {
     if (Cypress.env("back") === "node") {
       const demo = {
@@ -24,13 +24,15 @@ describe("Accepter", () => {
       });
     }
   });
-  it("Accepter succeful", () => {
+  it("message is sent succefully", () => {
     const timestamp = Date.UTC(2018, 10, 30);
     cy.clock(timestamp, ["Date"]);
+
+    //  let timestamp = Date.now();
     const inviter = {
       username: "bero",
       timestamp,
-      message: { text: "Let's cha bero", timestamp },
+      message: { text: "Hello bero let's chat", timestamp },
       email: "bero@gmail.com",
       command: "INVITE",
     };
@@ -38,7 +40,6 @@ describe("Accepter", () => {
     cy.task("seed:onHangout", {
       hangout: inviter,
       senderUsername: "demo",
-      senderEmail: "demo@gmail.com",
       dbName: "auth",
       collectionName: "users",
     });
@@ -59,30 +60,59 @@ describe("Accepter", () => {
       collectionName: "users",
     });
 
+    const read = {
+      username: "bero",
+      timestamp,
+      message: { text: "Your invitation is accepted", timestamp },
+      email: "bero@gmail.com",
+      command: "READ",
+    };
+    cy.task("seed:onHangout", {
+      hangout: read,
+      senderUsername: "demo",
+      senderEmail: "demo@gmail.com",
+      dbName: "auth",
+      collectionName: "users",
+    });
+
+    const message = {
+      username: "bero",
+      timestamp,
+      message: { text: "Hello bero", timestamp },
+      email: "bero@gmail.com",
+      command: "MESSAGE",
+    };
+
+    cy.task("seed:onHangout", {
+      hangout: message,
+      senderUsername: "demo",
+      senderEmail: "demo@gmail.com",
+      dbName: "auth",
+      collectionName: "users",
+    });
+
     if (Cypress.env("back") === "node") {
       cy.loginByEmail({
-        email: "demo@gmail.com",
+        email: "bero@gmail.com",
         password: "Dragonly_1999!",
       });
     }
 
     cy.visit("/");
-    cy.get("[data-testid=message-count]")
-      .contains(1)
-      .then(() => {
-        cy.get("[data-testid=unread-link]")
-          .click()
-          .then(() => {
-            cy.get("[data-testid=bero]").contains(
-              "bero,Your invitation is accepted"
-            );
-            cy.get("[data-testid=bero]").click();
-            cy.get("[data-testid=message]").contains(
-              "Your invitation is accepted"
-            );
-            cy.get("[data-testid=message-sender]").contains("bero");
-            cy.get("[data-testid=time]").contains("Now");
-          });
-      });
+    cy.get("[data-testid=message-count]").contains(1);
+    cy.get("[data-testid=hangouts-link]").click();
+
+    cy.get("[data-testid=demo]").click();
+    cy.get("[data-testid=message-count]").contains(1);
+
+    cy.get("[data-testid=left-message-wrapper]")
+      .find("[data-testid=message]")
+      .contains("Hello bero");
+    cy.get("[data-testid=left-message-wrapper]")
+      .find("[data-testid=message-sender]")
+      .contains("demo");
+    cy.get("[data-testid=left-message-wrapper]")
+      .find("[data-testid=time]")
+      .contains("Now");
   });
 });

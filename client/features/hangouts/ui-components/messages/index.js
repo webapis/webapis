@@ -55,6 +55,7 @@ export default function Messages({
       }}
     >
       <div
+        class="messages-wrapper"
         style=${{
           ...styles.messageContainer,
           flex: device === "phone" ? 4 : 2,
@@ -66,20 +67,18 @@ export default function Messages({
         floatMessages &&
         floatMessages.length > 0 &&
         floatMessages({ messages: sortMessages({ messages }), username }).map(
-          (m) => html`
-            <div style=${{ display: "flex" }}>
-              ${!m.type && html` <${Message} message=${m} />`}
-              ${m.type &&
-              m.type === "blocker" &&
-              html`<${BlockerMessage} message=${m} />`}
-              ${m.type &&
-              m.type === "blocked" &&
-              html` <${BlockedMessage}
-                message=${m}
-                onNavigation=${onNavigation}
-              />`}
-            </div>
-          `
+          (m) => html`<div style=${{ display: "flex" }}>
+            ${!m.type && html` <${Message} message=${m} />`}
+            ${m.type &&
+            m.type === "blocker" &&
+            html`<${BlockerMessage} message=${m} />`}
+            ${m.type &&
+            m.type === "blocked" &&
+            html` <${BlockedMessage}
+              message=${m}
+              onNavigation=${onNavigation}
+            />`}
+          </div> `
         )}
       </div>
       <${MessageEditor}

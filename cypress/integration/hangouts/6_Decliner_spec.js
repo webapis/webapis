@@ -1,4 +1,4 @@
-describe("Accepter", () => {
+describe("Decliner", () => {
   beforeEach(() => {
     if (Cypress.env("back") === "node") {
       const demo = {
@@ -24,13 +24,11 @@ describe("Accepter", () => {
       });
     }
   });
-  it("Accepter succeful", () => {
-    const timestamp = Date.UTC(2018, 10, 30);
-    cy.clock(timestamp, ["Date"]);
+  it("Decliner succeful", () => {
     const inviter = {
       username: "bero",
-      timestamp,
-      message: { text: "Let's cha bero", timestamp },
+      timestamp: Date.now(),
+      message: { text: "Lets chat bero", timestamp: Date.now() },
       email: "bero@gmail.com",
       command: "INVITE",
     };
@@ -38,23 +36,21 @@ describe("Accepter", () => {
     cy.task("seed:onHangout", {
       hangout: inviter,
       senderUsername: "demo",
-      senderEmail: "demo@gmail.com",
       dbName: "auth",
       collectionName: "users",
     });
 
-    const accepter = {
+    const decliner = {
       username: "demo",
-      timestamp,
-      message: { text: "Your invitation is accepted", timestamp },
+      timestamp: Date.now(),
+      message: null,
       email: "demo@gmail.com",
-      command: "ACCEPT",
+      command: "DECLINE",
     };
 
     cy.task("seed:onHangout", {
-      hangout: accepter,
+      hangout: decliner,
       senderUsername: "bero",
-      senderEmail: "bero@gmail.com",
       dbName: "auth",
       collectionName: "users",
     });
@@ -67,22 +63,8 @@ describe("Accepter", () => {
     }
 
     cy.visit("/");
-    cy.get("[data-testid=message-count]")
-      .contains(1)
-      .then(() => {
-        cy.get("[data-testid=unread-link]")
-          .click()
-          .then(() => {
-            cy.get("[data-testid=bero]").contains(
-              "bero,Your invitation is accepted"
-            );
-            cy.get("[data-testid=bero]").click();
-            cy.get("[data-testid=message]").contains(
-              "Your invitation is accepted"
-            );
-            cy.get("[data-testid=message-sender]").contains("bero");
-            cy.get("[data-testid=time]").contains("Now");
-          });
-      });
+    cy.get("[data-testid=message-count]").contains(0);
+    cy.get("[data-testid=hangouts-link]").click();
+    cy.get("[data-testid=bero]").click();
   });
 });

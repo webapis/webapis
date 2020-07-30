@@ -10,6 +10,7 @@ import {
   saveSentMessage,
   saveHangout,
   updateHangout,
+  removeUnread,
 } from "./local-storage/common";
 import { actionTypes } from "./actionTypes";
 
@@ -53,7 +54,6 @@ export function useHangouts() {
       hangout: invitation,
       dispatch,
       name: username,
-      dState: "pending",
     });
 
     dispatch({
@@ -83,7 +83,7 @@ export function useHangouts() {
       name: username,
       dState: "pending",
     });
-    updateUnread({ dispatch, hangout: accept, name: username });
+    removeUnread({ dispatch, hangout: accept, name: username });
     dispatch({
       type: actionTypes.SENDING_HANGOUT_STARTED,
       pendingHangout: accept,
@@ -95,22 +95,10 @@ export function useHangouts() {
     const decline = {
       username: hangout.username,
       email,
-      message: { text: "Your invitation declined", timestamp },
+      message: null,
       command: "DECLINE",
       timestamp,
     };
-
-    // updateUnread({
-    //   dispatch,
-    //   hangout: { ...decline, state: "DECLINE", command: undefined },
-    //   name: username,
-    // });
-    // saveSentMessage({
-    //   hangout: decline,
-    //   name: username,
-    //   dispatch,
-    //   dState: "pending",
-    // });
     dispatch({
       type: actionTypes.SENDING_HANGOUT_STARTED,
       pendingHangout: decline,
@@ -120,8 +108,7 @@ export function useHangouts() {
   function onMessage() {
     const timestamp = Date.now();
 
-    const message =
-      messageText !== "" ? { text: messageText, timestamp } : null;
+    const message = { text: messageText, timestamp };
 
     const messaging = {
       username: hangout.username,
@@ -150,7 +137,11 @@ export function useHangouts() {
         name: username,
       });
     } else {
-      updateHangout({ hangout: messaging, name: username, dispatch });
+      // updateHangout({
+      //   hangout: { ...messaging, state: "MESSAGE" },
+      //   name: username,
+      //   dispatch,
+      // });
 
       dispatch({
         type: actionTypes.SENDING_HANGOUT_STARTED,
@@ -166,7 +157,7 @@ export function useHangouts() {
       username: hangout.username,
       email,
       message: {
-        text: "You have blocked this user",
+        text: "",
         timestamp,
         type: "blocked",
       },
@@ -174,12 +165,18 @@ export function useHangouts() {
       timestamp,
     };
 
-    updateHangout({ hangout: block, name: username, dispatch });
+    // updateHangout({
+    //   hangout: { ...block, state: "BLOCK", command: undefined },
+    //   name: username,
+    //   dispatch,
+    // });
     saveSentMessage({
-      hangout: block,
+      hangout: {
+        ...block,
+        message: { text: "You have blocked this message", timestamp },
+      },
       dispatch,
       name: username,
-      dState: "pending",
     });
     dispatch({
       type: actionTypes.SENDING_HANGOUT_STARTED,
