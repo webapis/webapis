@@ -107,8 +107,7 @@ export function useHangouts() {
   function onMessage() {
     const timestamp = Date.now();
 
-    const message =
-      messageText !== "" ? { text: messageText, timestamp } : null;
+    const message = { text: messageText, timestamp };
 
     const messaging = {
       username: hangout.username,
@@ -137,7 +136,11 @@ export function useHangouts() {
         name: username,
       });
     } else {
-      updateHangout({ hangout: messaging, name: username, dispatch });
+      updateHangout({
+        hangout: { ...messaging, state: "MESSAGE" },
+        name: username,
+        dispatch,
+      });
 
       dispatch({
         type: actionTypes.SENDING_HANGOUT_STARTED,

@@ -89,7 +89,7 @@ describe("onAccept", () => {
         cy.get("[data-testid=hangchat-ui]");
 
         cy.get("[data-testid=left-message-wrapper]")
-          .find("[data-testid]")
+          .find("[data-testid=message]")
           .contains("Let's chat bero");
         cy.get("[data-testid=left-message-wrapper]")
           .find("[data-testid=message-sender]")
@@ -99,7 +99,7 @@ describe("onAccept", () => {
           .contains("Now");
 
         cy.get("[data-testid=right-message-wrapper]")
-          .find("[data-testid]")
+          .find("[data-testid=message]")
           .contains("Accepted your invitation");
         cy.get("[data-testid=right-message-wrapper]")
           .find("[data-testid=message-sender]")

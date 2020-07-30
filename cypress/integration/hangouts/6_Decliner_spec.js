@@ -43,7 +43,7 @@ describe("Decliner", () => {
     const decliner = {
       username: "demo",
       timestamp: Date.now(),
-      message: { text: "Your invitation is declined", timestamp: Date.now() },
+      message: null,
       email: "demo@gmail.com",
       command: "DECLINE",
     };
