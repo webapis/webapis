@@ -156,7 +156,7 @@ export function useHangouts() {
       username: hangout.username,
       email,
       message: {
-        text: "You have blocked this user",
+        text: "",
         timestamp,
         type: "blocked",
       },
@@ -164,12 +164,18 @@ export function useHangouts() {
       timestamp,
     };
 
-    updateHangout({ hangout: block, name: username, dispatch });
+    updateHangout({
+      hangout: { ...block, state: "BLOCK", command: undefined },
+      name: username,
+      dispatch,
+    });
     saveSentMessage({
-      hangout: block,
+      hangout: {
+        ...block,
+        message: { text: "You have blocked this message", timestamp },
+      },
       dispatch,
       name: username,
-      dState: "pending",
     });
     dispatch({
       type: actionTypes.SENDING_HANGOUT_STARTED,
