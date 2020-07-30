@@ -21,7 +21,8 @@ const Filter = lazy(() => import("./ui-components/Filter"));
 const UnreadHangouts = lazy(() => import("./ui-components/UnreadHangouts"));
 const html = htm.bind(h);
 export default function HangoutsFeatureRoutes(props) {
-  const { onAppRoute } = useAppRoute();
+  const { onAppRoute, routeState } = useAppRoute();
+  const { featureRoute } = routeState;
   const {
     state,
     hangout,
@@ -64,37 +65,34 @@ export default function HangoutsFeatureRoutes(props) {
     username,
   });
   const { loading } = state;
-  return html`
-    <${FeatureRoute} path=${"/bckui"}>
-      <${Suspense} fallback=${Loading}>
+  switch (featureRoute) {
+    case "/bckui":
+      return html` <${Suspense} fallback=${Loading}>
         <${Block} hangout=${hangout} onBlock=${onBlock} />
-      <//>
-    <//>
-    <${FeatureRoute} paths=${["/UNBLOCK", "/DECLINED"]}>
-      <${Suspense} fallback=${Loading}>
-        <${Blocked} hangout=${hangout} onUnblock=${onUnblock} />
-      <//>
-    <//>
-    <${FeatureRoute} path="/configure">
-      <${Suspense} fallback=${Loading}>
+      <//>`;
+    case "/UNBLOCK":
+    case "/DECLINED":
+      return html`
+        <${Suspense} fallback=${Loading}>
+          <${Blocked} hangout=${hangout} onUnblock=${onUnblock} />
+        <//>
+      `;
+    case "/configure":
+      return html` <${Suspense} fallback=${Loading}>
         <${Configure} hangout=${hangout} onNavigation=${onNavigation} />
-      <//>
-    <//>
-    <${FeatureRoute}
-      paths=${[
-        "/ACCEPTED",
-        "/ACCEPTER",
-        "/MESSANGER",
-        "/MESSAGED",
-        "/BLOCKER",
-        "/BLOCKED",
-        "/UNBLOCKED",
-        "/UNBLOCKER",
-        "/READ",
-        "/READER",
-      ]}
-    >
-      <${Suspense} fallback=${Loading}>
+      <//>`;
+
+    case "/ACCEPTED":
+    case "/ACCEPTER":
+    case "/MESSANGER":
+    case "/MESSAGED":
+    case "/BLOCKER":
+    case "/BLOCKED":
+    case "/UNBLOCKED":
+    case "/UNBLOCKER":
+    case "/READ":
+    case "/READER":
+      return html` <${Suspense} fallback=${Loading}>
         <${Hangchat}
           loading=${loading}
           onNavigation=${onNavigation}
@@ -106,11 +104,9 @@ export default function HangoutsFeatureRoutes(props) {
           messageText=${messageText}
           dispatch=${dispatch}
         />
-      <//>
-    <//>
-
-    <${FeatureRoute} path="/INVITE">
-      <${Suspense} fallback=${Loading}>
+      <//>`;
+    case "/INVITE":
+      return html` <${Suspense} fallback=${Loading}>
         <${Invite}
           loading=${loading}
           hangout=${hangout}
@@ -118,34 +114,32 @@ export default function HangoutsFeatureRoutes(props) {
           onMessageText=${onMessageText}
           messageText=${messageText}
         />
-      <//>
-    <//>
-    <${FeatureRoute} paths=${["/INVITED", "/DECLINER"]}>
-      <${Suspense} fallback=${Loading}>
+      <//>`;
+    case "/INVITED":
+    case "/DECLINER":
+      return html` <${Suspense} fallback=${Loading}>
         <${Invitee} hangout=${hangout} loading=${loading} />
-      <//>
-    <//>
-    <${FeatureRoute} path="/INVITER">
-      <${Suspense} fallback=${Loading}>
+      <//>`;
+    case "/INVITER":
+      return html` <${Suspense} fallback=${Loading}>
         <${Inviter}
           state=${state}
           hangout=${hangout}
           onAccept=${onAccept}
           onDecline=${onDecline}
         />
-      <//>
-    <//>
-    <${FeatureRoute} path="/unread">
-      <${Suspense} fallback=${Loading}>
+      <//>`;
+    case "/unread":
+      return html` <${Suspense} fallback=${Loading}>
         <${UnreadHangouts}
           unreadhangouts=${unreadhangouts}
           onUnreadSelect=${onUnreadSelect}
           onUnreadRemove=${onUnreadRemove}
         />
-      <//>
-    <//>
-    <${FeatureRoute} path="/search">
-      <${Suspense} fallback=${Loading}>
+      <//>`;
+
+    case "/search":
+      return html` <${Suspense} fallback=${Loading}>
         <${Search}
           onSearchSelect=${onSearchSelect}
           searchResult=${searchResult}
@@ -153,10 +147,9 @@ export default function HangoutsFeatureRoutes(props) {
           onSearchInput=${onSearchInput}
           search=${search}
         />
-      <//>
-    <//>
-    <${FeatureRoute} path="/filter">
-      <${Suspense} fallback=${Loading}>
+      <//>`;
+    case "/filter":
+      return html` <${Suspense} fallback=${Loading}>
         <${Filter}
           onLoadHangout=${onLoadHangout}
           onNavigation=${onNavigation}
@@ -165,9 +158,10 @@ export default function HangoutsFeatureRoutes(props) {
           filterResult=${filterResult}
           onFilterSelect=${onFilterSelect}
         />
-      <//>
-    <//>
-  `;
+      <//>`;
+    default:
+      return null;
+  }
 }
 
 function Loading() {

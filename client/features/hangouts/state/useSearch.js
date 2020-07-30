@@ -7,7 +7,9 @@ export default function useSearch({ state, dispatch, onAppRoute }) {
 
     const hangout = searchResult.find((s) => s.username === id);
     dispatch({ type: actionTypes.SELECTED_HANGOUT, hangout });
-    onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
+    setTimeout(function () {
+      onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
+    }, 200);
   }
   function onSearchInput(e) {
     dispatch({ type: actionTypes.SEARCH_INPUT_CHANGE, search: e.target.value });

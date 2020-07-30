@@ -49,6 +49,19 @@ const commonPlugins = [
   replace({
     ip: JSON.stringify(process.env.ip),
   }),
+  !production &&
+    replace({
+      "https://cdn.jsdelivr.net/npm/whatwg-fetch@3.2.0/fetch.js":
+        "https://localhost:3000/fetch.js",
+      "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js":
+        "https://localhost:3000/preact.module.js",
+      "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js":
+        "https://localhost:3000/htm.module.js",
+      "https://gitcdn.xyz/repo/webapis/webapis/master/preact.combat.cdn.js":
+        "https://localhost:3000/preact.combat.dev.cdn.js",
+      "https://cdn.jsdelivr.net/gh/webapis/webapis@cbdf6161bd8ca09a385d62c8c697bd1cd87bb184/hooks.cdn.js":
+        "https://localhost:3000/hooks.dev.cdn.js",
+    }),
 ];
 
 export default [
@@ -64,6 +77,33 @@ export default [
     ],
     plugins: [
       del({ targets: `builds/${process.env.appName}/build/*` }),
+
+      !production &&
+        copy({
+          targets: [
+            {
+              src: "assets/libs/dev/**",
+              dest: `builds/${process.env.appName}/build`,
+            },
+            {
+              src: "config/rollup/html-template/dev/index.html",
+              dest: `builds/${process.env.appName}/build`,
+            },
+          ],
+        }),
+      production &&
+        copy({
+          targets: [
+            {
+              src: "assets/libs/prod/**",
+              dest: `builds/${process.env.appName}/build`,
+            },
+            {
+              src: "config/rollup/html-template/prod/index.html",
+              dest: `builds/${process.env.appName}/build`,
+            },
+          ],
+        }),
       ...commonPlugins,
       copy({
         targets: [
@@ -77,11 +117,6 @@ export default [
           },
           {
             src: "assets/manifest/**",
-            dest: `builds/${process.env.appName}/build`,
-          },
-
-          {
-            src: "config/rollup/html-template/index.html",
             dest: `builds/${process.env.appName}/build`,
           },
         ],
@@ -160,6 +195,27 @@ export default [
     ],
     plugins: [
       del({ targets: `client/storybook/build/*` }),
+
+      !production &&
+        copy({
+          targets: [
+            { src: "assets/libs/dev/**", dest: `client/storybook/build` },
+            {
+              src: "config/rollup/html-template/dev/index.html",
+              dest: `client/storybook/build`,
+            },
+          ],
+        }),
+      production &&
+        copy({
+          targets: [
+            { src: "assets/libs/prod/**", dest: `client/storybook/build` },
+            {
+              src: "config/rollup/html-template/prod/index.html",
+              dest: `client/storybook/build`,
+            },
+          ],
+        }),
       ...commonPlugins,
       copy({
         targets: [

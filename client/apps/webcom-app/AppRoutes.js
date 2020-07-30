@@ -30,17 +30,7 @@ export function AppRoutes() {
       <//>
       <${AppRoute} path=${"/hangouts"}>
         <${Suspense} fallback=${Loading}>
-          <div
-            class="row d-flex justify-content-center"
-            style=${{ height: "100%" }}
-          >
-            <div
-              class="col-md-5 card"
-              style=${{ paddingTop: 5, height: "100%" }}
-            >
-              <${HangoutsFeatureRoutes} />
-            </div>
-          </div>
+          <${HangoutsFeatureRoutes} />
         <//>
       <//>
       <${AppRoute}path =${"/error"}>

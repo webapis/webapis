@@ -11,7 +11,7 @@ export default function Search({
   searchResult = [],
 }) {
   return html`
-    <div>
+    <div data-testid="search-ui">
       <div class="input-group mb-3">
         <input
           data-testid="search-input"

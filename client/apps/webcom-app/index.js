@@ -8,7 +8,7 @@ import { App } from "./App";
 import { RootProviders } from "./RootProviders";
 //Parse.liveQueryServerURL = `https://${ip}:1337/parse`
 //Parse.serverURL = 'https://parseapi.back4app.com/'
-//Parse.liveQueryServerURL = `wss://webapis.back4app.io`
+//Parse.liveQueryServerURL = `wss://webapis.back4app.io`//
 const html = htm.bind(h);
 render(
   html`<${RootProviders}>

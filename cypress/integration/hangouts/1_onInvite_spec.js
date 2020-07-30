@@ -49,9 +49,8 @@ describe("onInvite", () => {
     cy.visit("/");
     cy.wait(50);
     cy.get("[data-testid=hangouts-link]").click();
-
     cy.get("[data-testid=search-link]").click();
-
+    cy.get("[data-testid=search-ui]");
     cy.get("[data-testid=search-input]").type("bero");
     cy.get("[data-testid=search-btn]").click();
     cy.get("[data-testid=bero]").click();
