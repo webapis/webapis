@@ -18,6 +18,7 @@ const Invitee = lazy(() => import("./ui-components/Invitee"));
 const Inviter = lazy(() => import("./ui-components/Inviter"));
 const Search = lazy(() => import("./ui-components/Search"));
 const Filter = lazy(() => import("./ui-components/Filter"));
+const Declined = lazy(() => import("./ui-components/Declined"));
 const UnreadHangouts = lazy(() => import("./ui-components/UnreadHangouts"));
 const html = htm.bind(h);
 export default function HangoutsFeatureRoutes(props) {
@@ -70,9 +71,14 @@ export default function HangoutsFeatureRoutes(props) {
         <${Block} hangout=${hangout} onBlock=${onBlock} />
       <//>
     <//>
-    <${FeatureRoute} paths=${["/UNBLOCK", "/DECLINED"]}>
+    <${FeatureRoute} paths=${["/UNBLOCK"]}>
       <${Suspense} fallback=${Loading}>
         <${Blocked} hangout=${hangout} onUnblock=${onUnblock} />
+      <//>
+    <//>
+    <${FeatureRoute} paths=${["/DECLINED"]}>
+      <${Suspense} fallback=${Loading}>
+        <${Declined} hangout=${hangout} />
       <//>
     <//>
     <${FeatureRoute} path="/configure">

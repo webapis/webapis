@@ -70,14 +70,19 @@ describe("Accepter", () => {
     cy.get("[data-testid=message-count]")
       .contains(1)
       .then(() => {
-        debugger;
         cy.get("[data-testid=unread-link]")
           .click()
           .then(() => {
+            cy.get("[data-testid=bero]").contains(
+              "bero,Your invitation is accepted"
+            );
             cy.get("[data-testid=bero]").click();
-            debugger;
+            cy.get("[data-testid=message]").contains(
+              "Your invitation is accepted"
+            );
+            cy.get("[data-testid=message-sender]").contains("bero");
+            cy.get("[data-testid=time]").contains("Now");
           });
       });
-    //cy.get("[data-testid=hangouts-link]").click();
   });
 });

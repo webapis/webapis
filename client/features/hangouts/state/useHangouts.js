@@ -10,6 +10,7 @@ import {
   saveSentMessage,
   saveHangout,
   updateHangout,
+  removeUnread,
 } from "./local-storage/common";
 import { actionTypes } from "./actionTypes";
 
@@ -26,7 +27,6 @@ export function useHangouts() {
   }
 
   function onMessageText(e) {
-    debugger;
     const text = e.target.value;
     changeMessageText({ dispatch, text });
   }
@@ -53,7 +53,6 @@ export function useHangouts() {
       hangout: invitation,
       dispatch,
       name: username,
-      dState: "pending",
     });
 
     dispatch({
@@ -83,7 +82,7 @@ export function useHangouts() {
       name: username,
       dState: "pending",
     });
-    updateUnread({ dispatch, hangout: accept, name: username });
+    removeUnread({ dispatch, hangout: accept, name: username });
     dispatch({
       type: actionTypes.SENDING_HANGOUT_STARTED,
       pendingHangout: accept,
@@ -95,22 +94,10 @@ export function useHangouts() {
     const decline = {
       username: hangout.username,
       email,
-      message: { text: "Your invitation declined", timestamp },
+      message: null,
       command: "DECLINE",
       timestamp,
     };
-
-    // updateUnread({
-    //   dispatch,
-    //   hangout: { ...decline, state: "DECLINE", command: undefined },
-    //   name: username,
-    // });
-    // saveSentMessage({
-    //   hangout: decline,
-    //   name: username,
-    //   dispatch,
-    //   dState: "pending",
-    // });
     dispatch({
       type: actionTypes.SENDING_HANGOUT_STARTED,
       pendingHangout: decline,
@@ -119,10 +106,10 @@ export function useHangouts() {
 
   function onMessage() {
     const timestamp = Date.now();
-    debugger;
+
     const message =
       messageText !== "" ? { text: messageText, timestamp } : null;
-    debugger;
+
     const messaging = {
       username: hangout.username,
       email: hangout.email,

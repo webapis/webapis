@@ -52,54 +52,25 @@ describe("onDecline", () => {
 
     cy.visit("/");
     cy.get("[data-testid=message-count]").contains(1);
-    cy.get("[data-testid=hangouts-link]").click();
     cy.get("[data-testid=unread-link]").click();
-    cy.get("[data-testid=demo]")
-      .click()
-      .then(() => {
-        cy.window()
-          .its("localStorage")
-          .invoke("getItem", "bero-demo-messages")
-          .then((result) => {
-            const expectedMessageState = {
-              username: "demo",
-              state: "read",
-              timestamp: currentDate,
-              text: "Let's chat bero",
-            };
-            const messages = JSON.parse(result);
-            const pending = messages[0];
+    cy.get("[data-testid=demo]").contains("demo,Let's chat bero");
+    cy.get("[data-testid=demo]").click();
+    cy.get("[data-testid=left-message-wrapper]")
+      .find("[data-testid]")
+      .contains("Let's chat bero");
+    cy.get("[data-testid=left-message-wrapper]")
+      .find("[data-testid=message-sender]")
+      .contains("demo");
+    cy.get("[data-testid=left-message-wrapper]")
+      .find("[data-testid=time]")
+      .contains("Now");
 
-            expect(pending).to.deep.equal(expectedMessageState);
-          });
-        cy.window()
-          .its("localStorage")
-          .invoke("getItem", "bero-unread-hangouts")
-          .then((result) => {
-            const expectedUnreadState = {
-              username: "demo",
-              email: "demo@gmail.com",
-              state: "INVITER",
-              timestamp: currentDate,
-              message: { text: "Let's chat bero", timestamp: currentDate },
-            };
-            const unreads = JSON.parse(result);
-            const pending = unreads[0];
-
-            expect(pending).to.deep.equal(expectedUnreadState);
-          });
-
-        cy.get("[data-testid=message]").contains("Let's chat bero");
-        cy.get("[data-testid=message-sender]").contains("demo");
-        cy.get("[data-testid=time]").contains("Now");
-      });
     cy.get("[data-testid=decline-btn]")
       .click()
       .then(() => {
         cy.get("[data-testid=spinner]");
       });
-
-    cy.get("[data-testid=blocked-ui]");
+    cy.get("[data-testid=declined-ui]");
     cy.get("[data-testid=message-count]").contains(0);
   });
 });

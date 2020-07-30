@@ -40,16 +40,13 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
       case "DECLINED":
         setTimeout(function () {
           removeUnread(commonArg);
-          updateSentMessage(commonArg);
           dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
-
           onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
         }, 200);
 
         break;
       case "ACCEPTED":
         setTimeout(function () {
-          removeUnread(commonArg);
           updateHangout(commonArg);
           updateSentMessage(commonArg);
           dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
@@ -70,7 +67,6 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
         break;
       case "MESSAGED":
         setTimeout(function () {
-          debugger;
           updateHangout(commonArg);
           updateSentMessage(commonArg);
           dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });

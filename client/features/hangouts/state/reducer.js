@@ -30,7 +30,6 @@ export const initState = {
 export function reducer(state, action) {
   switch (action.type) {
     case actionTypes.MESSAGE_TEXT_CHANGED:
-      debugger;
       return { ...state, messageText: action.text };
     case actionTypes.SET_HANGOUT_TO_INIT_STATE:
       return { ...initState };

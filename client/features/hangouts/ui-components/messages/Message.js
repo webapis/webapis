@@ -64,7 +64,10 @@ export default function Message(props) {
   }, [timestamp]);
 
   return html`
-    <div style=${{ width: "100%", marginBottom: 3 }}>
+    <div
+      data-testid=${`${float}-message-wrapper`}
+      style=${{ width: "100%", marginBottom: 3 }}
+    >
       <div style=${{ ...style.root, float }}>
         <div
           data-testid="message"

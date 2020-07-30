@@ -44,7 +44,6 @@ export async function fetchHangout({ search, dispatch, username }) {
 }
 
 export function changeMessageText({ text, dispatch }) {
-  debugger;
   dispatch({ type: actionTypes.MESSAGE_TEXT_CHANGED, text });
 }
 
