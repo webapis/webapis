@@ -70,7 +70,6 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
         break;
       case "MESSAGED":
         setTimeout(function () {
-          debugger;
           updateHangout(commonArg);
           updateSentMessage(commonArg);
           dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });

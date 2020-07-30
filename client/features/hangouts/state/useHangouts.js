@@ -26,7 +26,6 @@ export function useHangouts() {
   }
 
   function onMessageText(e) {
-    debugger;
     const text = e.target.value;
     changeMessageText({ dispatch, text });
   }
@@ -119,10 +118,10 @@ export function useHangouts() {
 
   function onMessage() {
     const timestamp = Date.now();
-    debugger;
+
     const message =
       messageText !== "" ? { text: messageText, timestamp } : null;
-    debugger;
+
     const messaging = {
       username: hangout.username,
       email: hangout.email,

@@ -70,12 +70,10 @@ describe("Accepter", () => {
     cy.get("[data-testid=message-count]")
       .contains(1)
       .then(() => {
-        debugger;
         cy.get("[data-testid=unread-link]")
           .click()
           .then(() => {
             cy.get("[data-testid=bero]").click();
-            debugger;
           });
       });
     //cy.get("[data-testid=hangouts-link]").click();

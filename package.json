@@ -33,6 +33,7 @@
   "dependencies": {
     "bootstrap-icons": "^1.0.0-alpha5",
     "cookie": "^0.4.1",
+    "cypress": "^4.11.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
