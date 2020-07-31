@@ -45,11 +45,11 @@ export function useHangouts() {
       command: "INVITE",
       timestamp,
     };
-    saveHangout({
-      hangout: { ...invitation, state: "INVITE", command: undefined },
-      name: username,
-      dispatch,
-    });
+    // saveHangout({
+    //   hangout: { ...invitation, state: "INVITE", command: undefined },
+    //   name: username,
+    //   dispatch,
+    // });
     saveSentMessage({
       hangout: invitation,
       dispatch,
@@ -61,6 +61,7 @@ export function useHangouts() {
       pendingHangout: invitation,
     });
   }
+
   function onAccept() {
     const { email, timestamp } = hangout;
 
@@ -72,11 +73,11 @@ export function useHangouts() {
       timestamp,
     };
 
-    saveHangout({
-      hangout: { ...accept, state: "ACCEPT", command: undefined },
-      name: username,
-      dispatch,
-    });
+    // saveHangout({
+    //   hangout: { ...accept, state: "ACCEPT", command: undefined },
+    //   name: username,
+    //   dispatch,
+    // });
     saveSentMessage({
       hangout: accept,
       dispatch,

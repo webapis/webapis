@@ -17,6 +17,7 @@ module.exports = async function (server, client) {
   const wss = new WebSocket.Server({ server });
 
   wss.on("connection", async function connection(ws, request) {
+    //FIXME :HG same user signs in from multiple devices at the same time
     if (request.url.includes("hangouts")) {
       try {
         debugger;

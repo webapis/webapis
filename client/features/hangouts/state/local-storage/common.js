@@ -128,8 +128,9 @@ export function updateHangout({ dispatch, name, hangout }) {
 
   const hangoutKey = `${name}-hangouts`;
   let localHangouts = JSON.parse(localStorage.getItem(hangoutKey));
-  let hangoutIndex = localHangouts.findIndex((l) => l.username === username);
-  localHangouts.splice(hangoutIndex, 1, hangout);
+  let hangoutIndex =
+    localHangouts && localHangouts.findIndex((l) => l.username === username);
+  localHangouts && localHangouts.splice(hangoutIndex, 1, hangout);
   localStorage.setItem(hangoutKey, JSON.stringify(localHangouts));
   dispatch({ type: actionTypes.HANGOUTS_UPDATED, hangouts: localHangouts });
 }

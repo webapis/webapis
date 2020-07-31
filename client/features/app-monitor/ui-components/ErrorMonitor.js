@@ -6,7 +6,7 @@ import {
 } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cbdf6161bd8ca09a385d62c8c697bd1cd87bb184/hooks.cdn.js";
 import { useMonitor } from "../state/MonitorProvider";
 const html = htm.bind(h);
-
+//TODO EM delete,filter,sort errors
 export default function ErrorMonitor(props) {
   const { socketUrl } = props;
   const { fetchErrors, state, clietErrorRecieved } = useMonitor();

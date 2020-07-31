@@ -5,11 +5,13 @@ import { actionTypes } from "./actionTypes";
 import {
   updateSentMessage,
   saveUnread,
+  saveHangout,
   saveRecievedMessage,
   updateHangout,
   removeUnread,
   removeUnreads,
 } from "./local-storage/common";
+
 export function useMessage({ message, username, dispatch, focusedHangout }) {
   const { onAppRoute } = useAppRoute();
   function handleAcknowledgement({ hangout, offline }) {
@@ -30,7 +32,7 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
         break;
       case "INVITED":
         setTimeout(function () {
-          updateHangout(commonArg);
+          saveHangout(commonArg);
           updateSentMessage(commonArg);
           dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
           onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
@@ -47,7 +49,7 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
         break;
       case "ACCEPTED":
         setTimeout(function () {
-          updateHangout(commonArg);
+          saveHangout(commonArg);
           updateSentMessage(commonArg);
           dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
           onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
@@ -107,6 +109,7 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
         saveRecievedMessage(commonArg);
         break;
       case "MESSANGER":
+        //FIXME GH focused hangout issue
         updateHangout(commonArg);
         saveRecievedMessage(commonArg);
         if (!focusedHangout) {

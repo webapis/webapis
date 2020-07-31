@@ -1,0 +1,974 @@
+{
+  "rootTopicKey": "3a1809d3-6d2f-4ebc-8bdf-25ec4c6a451d",
+  "editorRootTopicKey": "3a1809d3-6d2f-4ebc-8bdf-25ec4c6a451d",
+  "focusKey": "88a4283e-696d-4a8f-b6f2-91f2c3d7e373",
+  "extData": {
+    "TOPIC_REFERENCE": {
+      "reference": {
+        "6677053a-6f9f-4501-bad3-f5af23695108": {
+          "keyList": [],
+          "dataMap": {}
+        },
+        "c27d0b82-ac2d-43a8-b914-93fdd48b7fd7": {
+          "keyList": [],
+          "dataMap": {}
+        }
+      }
+    }
+  },
+  "topics": [
+    {
+      "key": "3a1809d3-6d2f-4ebc-8bdf-25ec4c6a451d",
+      "parentKey": null,
+      "subKeys": [
+        "643f1e46-eecf-440a-b6eb-5f3f63fff494",
+        "db9e8ed4-ecd4-4d3d-b845-0a3b2a2fac30"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "hangouts"
+        }
+      ]
+    },
+    {
+      "key": "d0b8b57d-60e4-456b-8eb1-c0ee27d8014c",
+      "parentKey": "72827f21-9694-4d40-b050-8ec6b86fb7a4",
+      "subKeys": [
+        "9413e4a5-e181-4433-80cd-4b78cc07dbc2"
+      ],
+      "collapse": false,
+      "style": "{\"contentStyle\":{\"background\":\"#e5f993\"}}",
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "false"
+        }
+      ]
+    },
+    {
+      "key": "0f5494c0-e91f-4fc3-a2ef-1f4a605b0f63",
+      "parentKey": "3a9292c1-0241-462c-98c8-8ab7fa513164",
+      "subKeys": [],
+      "collapse": false,
+      "style": "{\"contentStyle\":{\"background\":\"#00cc99\"}}",
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "online"
+        }
+      ]
+    },
+    {
+      "key": "96a58aa0-9db1-4575-a149-72018b2c7f67",
+      "parentKey": "45dcf0ff-4019-42cc-8a01-3dab0bb808e5",
+      "subKeys": [
+        "1586b0fb-1f14-45cf-8cb3-9256559eaa9d"
+      ],
+      "collapse": false,
+      "style": "{\"contentStyle\":{\"background\":\"#e0ab7e\"}}",
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "onDeliveryAcknowledgement"
+        }
+      ]
+    },
+    {
+      "key": "94b6c600-d9e8-4cfe-930e-c827099f92fe",
+      "parentKey": "cfaf5e9e-bba3-43ad-bbbb-a96f3c28f372",
+      "subKeys": [
+        "04930e63-bdfe-4605-a8fb-2aec7c1a4021",
+        "af915d9e-b32c-4268-8ed2-881d918854aa",
+        "118d270d-c79a-41b2-a20d-b171efcc54d7",
+        "10d90fc8-aa82-4208-a4c6-fa782e7aa028",
+        "b32d92fb-b369-47a6-a1d5-faddb82c525c",
+        "1ce75b75-226f-4356-926a-927206bd974b",
+        "88a4283e-696d-4a8f-b6f2-91f2c3d7e373"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "state"
+        }
+      ]
+    },
+    {
+      "key": "23a320c9-9169-47ae-8974-c3b66e9660ce",
+      "parentKey": "53f36849-3b9c-478b-8a3c-fdbef761ec7d",
+      "subKeys": [
+        "9244cf51-592d-45a9-91fa-3b3b9188436b",
+        "f9e80002-be8a-4e48-a1c5-40b384c04897"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "online"
+        }
+      ]
+    },
+    {
+      "key": "1ce75b75-226f-4356-926a-927206bd974b",
+      "parentKey": "94b6c600-d9e8-4cfe-930e-c827099f92fe",
+      "subKeys": [],
+      "collapse": false,
+      "style": "{\"contentStyle\":{\"background\":\"#f5c396\"}}",
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "BLOCKER"
+        }
+      ]
+    },
+    {
+      "key": "c27d0b82-ac2d-43a8-b914-93fdd48b7fd7",
+      "parentKey": "eada3d45-c521-4fa3-8b4f-d71ab9fc5c5d",
+      "subKeys": [],
+      "collapse": false,
+      "style": "{\"contentStyle\":{\"background\":\"#50e3c2\"}}",
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "saveHangout\n(common.js)"
+        }
+      ]
+    },
+    {
+      "key": "b60a619f-021f-420b-9c46-2203c522bf4e",
+      "parentKey": "cdfc43d1-c324-47b7-84da-1d2d5ee7144c",
+      "subKeys": [],
+      "collapse": false,
+      "style": "{\"contentStyle\":{\"background\":\"#50e3c2\"}}",
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "updateHangout"
+        }
+      ]
+    },
+    {
+      "key": "af915d9e-b32c-4268-8ed2-881d918854aa",
+      "parentKey": "94b6c600-d9e8-4cfe-930e-c827099f92fe",
+      "subKeys": [],
+      "collapse": false,
+      "style": "{\"contentStyle\":{\"background\":\"#f5c396\"}}",
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "ACCEPTER"
+        }
+      ]
+    },
+    {
+      "key": "53f36849-3b9c-478b-8a3c-fdbef761ec7d",
+      "parentKey": "5e2aa2d0-f4cf-4e20-a9f5-b72c634b1d57",
+      "subKeys": [
+        "4142c71e-88e0-4ae6-bf46-b4b8d4bc3679",
+        "1adbc9cc-af09-4a15-89b0-71b6e955a564",
+        "23a320c9-9169-47ae-8974-c3b66e9660ce"
+      ],
+      "collapse": false,
+      "style": "{\"contentStyle\":{\"background\":\"#f8e71c\"}}",
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "onAccept"
+        }
+      ]
+    },
+    {
+      "key": "9413e4a5-e181-4433-80cd-4b78cc07dbc2",
+      "parentKey": "d0b8b57d-60e4-456b-8eb1-c0ee27d8014c",
+      "subKeys": [],
+      "collapse": false,
+      "style": "{\"contentStyle\":{\"background\":\"#9b9b9b\"}}",
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "savePendingHangout"
+        }
+      ]
+    },
+    {
+      "key": "82897ed7-d41c-47ca-afd6-ba8c6d64934e",
+      "parentKey": "370cb2c7-cfa0-40bc-a605-daaa59ee2696",
+      "subKeys": [
+        "f75a1c1d-edb1-4383-a1fa-7cf44bba7e1a"
+      ],
+      "collapse": false,
+      "style": "{\"contentStyle\":{\"background\":\"#9b9b9b\"}}",
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "savePendingHangout"
+        }
+      ]
+    },
+    {
+      "key": "84deb189-fbc3-4208-a53b-6fa644e45b99",
+      "parentKey": "d3a7e651-236a-4a7f-8f08-7271ec812b79",
+      "subKeys": [
+        "ae46bf24-52d2-428a-9b60-970975a3cf9b"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "false"
+        }
+      ]
+    },
+    {
+      "key": "db9e8ed4-ecd4-4d3d-b845-0a3b2a2fac30",
+      "parentKey": "3a1809d3-6d2f-4ebc-8bdf-25ec4c6a451d",
+      "subKeys": [
+        "5e2aa2d0-f4cf-4e20-a9f5-b72c634b1d57",
+        "cfaf5e9e-bba3-43ad-bbbb-a96f3c28f372"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "client"
+        }
+      ]
+    },
+    {
+      "key": "1c995644-16e8-408b-a26b-226ea4c3f9da",
+      "parentKey": "7d8ca9b3-107b-42f3-b639-b1d049417180",
+      "subKeys": [],
+      "collapse": false,
+      "style": "{\"contentStyle\":{\"background\":\"#50e3c2\"}}",
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "saveHangout\n(common.js)"
+        }
+      ]
+    },
+    {
+      "key": "88a4283e-696d-4a8f-b6f2-91f2c3d7e373",
+      "parentKey": "94b6c600-d9e8-4cfe-930e-c827099f92fe",
+      "subKeys": [],
+      "collapse": false,
+      "style": "{\"contentStyle\":{\"background\":\"#f5c396\"}}",
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "UNBLOCKER"
+        }
+      ]
+    },
+    {
+      "key": "6677053a-6f9f-4501-bad3-f5af23695108",
+      "parentKey": "eada3d45-c521-4fa3-8b4f-d71ab9fc5c5d",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "updateSentMessage\n(common.js)"
+        }
+      ]
+    },
+    {
+      "key": "04930e63-bdfe-4605-a8fb-2aec7c1a4021",
+      "parentKey": "94b6c600-d9e8-4cfe-930e-c827099f92fe",
+      "subKeys": [],
+      "collapse": false,
+      "style": "{\"contentStyle\":{\"background\":\"#f5c396\"}}",
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "INVITER"
+        }
+      ]
+    },
+    {
+      "key": "f9e80002-be8a-4e48-a1c5-40b384c04897",
+      "parentKey": "23a320c9-9169-47ae-8974-c3b66e9660ce",
+      "subKeys": [
+        "3a9292c1-0241-462c-98c8-8ab7fa513164"
+      ],
+      "collapse": false,
+      "style": "{\"contentStyle\":{\"background\":\"#e5f993\"}}",
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "false"
+        }
+      ]
+    },
+    {
+      "key": "fc31a06a-545d-405c-b3bf-116ffb71b4a4",
+      "parentKey": "5e2aa2d0-f4cf-4e20-a9f5-b72c634b1d57",
+      "subKeys": [
+        "b04e6e3b-c3c1-41f9-ab63-e93eae421a7d",
+        "5d8bbb4d-c70f-492a-b3ec-a5d2bd99b96f"
+      ],
+      "collapse": false,
+      "style": "{\"contentStyle\":{\"background\":\"#f8e71c\"}}",
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "onMessage"
+        }
+      ]
+    },
+    {
+      "key": "b32d92fb-b369-47a6-a1d5-faddb82c525c",
+      "parentKey": "94b6c600-d9e8-4cfe-930e-c827099f92fe",
+      "subKeys": [],
+      "collapse": false,
+      "style": "{\"contentStyle\":{\"background\":\"#f5c396\"}}",
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "READER"
+        }
+      ]
+    },
+    {
+      "key": "ae46bf24-52d2-428a-9b60-970975a3cf9b",
+      "parentKey": "84deb189-fbc3-4208-a53b-6fa644e45b99",
+      "subKeys": [
+        "6d70031d-bbfa-4d81-ad91-39a2c528781d"
+      ],
+      "collapse": false,
+      "style": "{\"contentStyle\":{\"background\":\"#9b9b9b\"}}",
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "savePendingHangout"
+        },
+        {
+          "type": "DESC",
+          "data": ""
+        }
+      ]
+    },
+    {
+      "key": "f75a1c1d-edb1-4383-a1fa-7cf44bba7e1a",
+      "parentKey": "82897ed7-d41c-47ca-afd6-ba8c6d64934e",
+      "subKeys": [],
+      "collapse": false,
+      "style": "{\"contentStyle\":{\"background\":\"#00cc99\"}}",
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "online"
+        }
+      ]
+    },
+    {
+      "key": "9244cf51-592d-45a9-91fa-3b3b9188436b",
+      "parentKey": "23a320c9-9169-47ae-8974-c3b66e9660ce",
+      "subKeys": [
+        "df6196f3-b875-4178-86bd-1a48fb323b7c"
+      ],
+      "collapse": false,
+      "style": "{\"contentStyle\":{\"background\":\"#a167a5\"}}",
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "true"
+        }
+      ]
+    },
+    {
+      "key": "e7f715a1-494a-472a-8af3-ed1d653e3779",
+      "parentKey": "80a9b3e3-f67e-4aaf-9d29-7008626b9386",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "saveSentMessage"
+        }
+      ]
+    },
+    {
+      "key": "d3a7e651-236a-4a7f-8f08-7271ec812b79",
+      "parentKey": "80a9b3e3-f67e-4aaf-9d29-7008626b9386",
+      "subKeys": [
+        "85c0ce5f-aa32-41c6-a0ce-a81b82807dd0",
+        "84deb189-fbc3-4208-a53b-6fa644e45b99"
+      ],
+      "collapse": false,
+      "style": "{\"contentStyle\":{\"background\":\"#00cc99\"}}",
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "online"
+        }
+      ]
+    },
+    {
+      "key": "dc77e063-c991-4c94-876b-e86888a58f72",
+      "parentKey": "1cad62ad-6979-49f1-9972-bc377e47c7af",
+      "subKeys": [
+        "a2a8b7a5-047b-4173-a7cd-11ca2385baeb"
+      ],
+      "collapse": false,
+      "style": "{\"contentStyle\":{\"background\":\"#a167a5\"}}",
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "true"
+        }
+      ]
+    },
+    {
+      "key": "45dcf0ff-4019-42cc-8a01-3dab0bb808e5",
+      "parentKey": "049e52b7-3a98-4b1b-8678-ebb8064b00ac",
+      "subKeys": [
+        "96a58aa0-9db1-4575-a149-72018b2c7f67"
+      ],
+      "collapse": false,
+      "style": "{\"contentStyle\":{\"background\":\"#f5a623\"}}",
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "sendPendingHangout"
+        }
+      ]
+    },
+    {
+      "key": "1adbc9cc-af09-4a15-89b0-71b6e955a564",
+      "parentKey": "53f36849-3b9c-478b-8a3c-fdbef761ec7d",
+      "subKeys": [],
+      "collapse": false,
+      "style": "{\"contentStyle\":{\"background\":\"#f6f2fa\"}}",
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "removeUnread"
+        }
+      ]
+    },
+    {
+      "key": "aa25883f-948a-4b1f-a40d-11e39cc76fcf",
+      "parentKey": "5e2aa2d0-f4cf-4e20-a9f5-b72c634b1d57",
+      "subKeys": [],
+      "collapse": false,
+      "style": "{\"contentStyle\":{\"background\":\"#f8e71c\"}}",
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "onBlock"
+        }
+      ]
+    },
+    {
+      "key": "118d270d-c79a-41b2-a20d-b171efcc54d7",
+      "parentKey": "94b6c600-d9e8-4cfe-930e-c827099f92fe",
+      "subKeys": [],
+      "collapse": false,
+      "style": "{\"contentStyle\":{\"background\":\"#f5c396\"}}",
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "DECLINER"
+        }
+      ]
+    },
+    {
+      "key": "1586b0fb-1f14-45cf-8cb3-9256559eaa9d",
+      "parentKey": "96a58aa0-9db1-4575-a149-72018b2c7f67",
+      "subKeys": [],
+      "collapse": false,
+      "style": "{\"contentStyle\":{\"background\":\"#f6f2fa\"}}",
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "removeUnread"
+        }
+      ]
+    },
+    {
+      "key": "4142c71e-88e0-4ae6-bf46-b4b8d4bc3679",
+      "parentKey": "53f36849-3b9c-478b-8a3c-fdbef761ec7d",
+      "subKeys": [],
+      "collapse": false,
+      "style": "{\"contentStyle\":{\"borderColor\":\"#f16879\",\"background\":\"#f56e7e\"}}",
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "saveSentMessage"
+        }
+      ]
+    },
+    {
+      "key": "643f1e46-eecf-440a-b6eb-5f3f63fff494",
+      "parentKey": "3a1809d3-6d2f-4ebc-8bdf-25ec4c6a451d",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "server"
+        }
+      ]
+    },
+    {
+      "key": "370cb2c7-cfa0-40bc-a605-daaa59ee2696",
+      "parentKey": "1cad62ad-6979-49f1-9972-bc377e47c7af",
+      "subKeys": [
+        "82897ed7-d41c-47ca-afd6-ba8c6d64934e"
+      ],
+      "collapse": false,
+      "style": "{\"contentStyle\":{\"background\":\"#e5f993\"}}",
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "false"
+        }
+      ]
+    },
+    {
+      "key": "5d8bbb4d-c70f-492a-b3ec-a5d2bd99b96f",
+      "parentKey": "fc31a06a-545d-405c-b3bf-116ffb71b4a4",
+      "subKeys": [
+        "670c74fa-7691-4069-afa7-32830f169aac",
+        "a030ee23-76fd-4dad-8b26-3ecde723fbfa"
+      ],
+      "collapse": false,
+      "style": "{\"contentStyle\":{\"background\":\"#00cc99\"}}",
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "hangout.state==='BLOCKER'"
+        }
+      ]
+    },
+    {
+      "key": "85c0ce5f-aa32-41c6-a0ce-a81b82807dd0",
+      "parentKey": "d3a7e651-236a-4a7f-8f08-7271ec812b79",
+      "subKeys": [
+        "91354ca5-093d-45d1-8a0d-4d886212d674"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "true"
+        }
+      ]
+    },
+    {
+      "key": "cdfc43d1-c324-47b7-84da-1d2d5ee7144c",
+      "parentKey": "a2a8b7a5-047b-4173-a7cd-11ca2385baeb",
+      "subKeys": [
+        "080c6dce-c45d-4d4d-ada4-65b9cd7d63bd",
+        "b60a619f-021f-420b-9c46-2203c522bf4e"
+      ],
+      "collapse": false,
+      "style": "{\"contentStyle\":{\"background\":\"#e0ab7e\"}}",
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "onDeliveryAcknowledgement"
+        }
+      ]
+    },
+    {
+      "key": "91354ca5-093d-45d1-8a0d-4d886212d674",
+      "parentKey": "85c0ce5f-aa32-41c6-a0ce-a81b82807dd0",
+      "subKeys": [
+        "eada3d45-c521-4fa3-8b4f-d71ab9fc5c5d"
+      ],
+      "collapse": false,
+      "style": "{\"contentStyle\":{\"background\":\"#f5a623\"}}",
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "sendPendingHangout"
+        }
+      ]
+    },
+    {
+      "key": "0ec308f6-8c8d-4c52-b14e-288b2e465031",
+      "parentKey": "7d8ca9b3-107b-42f3-b639-b1d049417180",
+      "subKeys": [],
+      "collapse": false,
+      "style": "{\"contentStyle\":{\"background\":\"#fa8c99\"}}",
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "updateSentMessage\n(common.js)"
+        }
+      ]
+    },
+    {
+      "key": "fbe31053-d77c-429c-acda-9683b8a0d53e",
+      "parentKey": "5e2aa2d0-f4cf-4e20-a9f5-b72c634b1d57",
+      "subKeys": [],
+      "collapse": false,
+      "style": "{\"contentStyle\":{\"background\":\"#f8e71c\"}}",
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "onUnblock"
+        }
+      ]
+    },
+    {
+      "key": "a030ee23-76fd-4dad-8b26-3ecde723fbfa",
+      "parentKey": "5d8bbb4d-c70f-492a-b3ec-a5d2bd99b96f",
+      "subKeys": [
+        "4666fc65-df1d-4c54-b2e0-7e605b7863af"
+      ],
+      "collapse": false,
+      "style": "{\"contentStyle\":{\"background\":\"#a167a5\"}}",
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "true"
+        }
+      ]
+    },
+    {
+      "key": "80a9b3e3-f67e-4aaf-9d29-7008626b9386",
+      "parentKey": "5e2aa2d0-f4cf-4e20-a9f5-b72c634b1d57",
+      "subKeys": [
+        "e7f715a1-494a-472a-8af3-ed1d653e3779",
+        "d3a7e651-236a-4a7f-8f08-7271ec812b79"
+      ],
+      "collapse": false,
+      "style": "{\"contentStyle\":{\"background\":\"#f8e71c\"}}",
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "onInvite "
+        }
+      ]
+    },
+    {
+      "key": "10d90fc8-aa82-4208-a4c6-fa782e7aa028",
+      "parentKey": "94b6c600-d9e8-4cfe-930e-c827099f92fe",
+      "subKeys": [],
+      "collapse": false,
+      "style": "{\"contentStyle\":{\"background\":\"#f5c396\"}}",
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "MESSANGER"
+        }
+      ]
+    },
+    {
+      "key": "1cad62ad-6979-49f1-9972-bc377e47c7af",
+      "parentKey": "670c74fa-7691-4069-afa7-32830f169aac",
+      "subKeys": [
+        "dc77e063-c991-4c94-876b-e86888a58f72",
+        "370cb2c7-cfa0-40bc-a605-daaa59ee2696"
+      ],
+      "collapse": false,
+      "style": "{\"contentStyle\":{\"background\":\"#00cc99\"}}",
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "online"
+        }
+      ]
+    },
+    {
+      "key": "6d70031d-bbfa-4d81-ad91-39a2c528781d",
+      "parentKey": "ae46bf24-52d2-428a-9b60-970975a3cf9b",
+      "subKeys": [],
+      "collapse": false,
+      "style": "{\"contentStyle\":{\"background\":\"#00cc99\"}}",
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "online"
+        }
+      ]
+    },
+    {
+      "key": "4666fc65-df1d-4c54-b2e0-7e605b7863af",
+      "parentKey": "a030ee23-76fd-4dad-8b26-3ecde723fbfa",
+      "subKeys": [],
+      "collapse": false,
+      "style": "{\"contentStyle\":{\"background\":\"#f56e7e\"}}",
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "saveSentMessage\ntype:'blocker'"
+        }
+      ]
+    },
+    {
+      "key": "eada3d45-c521-4fa3-8b4f-d71ab9fc5c5d",
+      "parentKey": "91354ca5-093d-45d1-8a0d-4d886212d674",
+      "subKeys": [
+        "c27d0b82-ac2d-43a8-b914-93fdd48b7fd7",
+        "6677053a-6f9f-4501-bad3-f5af23695108"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "onDeliverAcknowledgement"
+        }
+      ]
+    },
+    {
+      "key": "b04e6e3b-c3c1-41f9-ab63-e93eae421a7d",
+      "parentKey": "fc31a06a-545d-405c-b3bf-116ffb71b4a4",
+      "subKeys": [],
+      "collapse": false,
+      "style": "{\"contentStyle\":{\"background\":\"#f56e7e\"}}",
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "saveSentMessage"
+        }
+      ]
+    },
+    {
+      "key": "7d8ca9b3-107b-42f3-b639-b1d049417180",
+      "parentKey": "df6196f3-b875-4178-86bd-1a48fb323b7c",
+      "subKeys": [
+        "0ec308f6-8c8d-4c52-b14e-288b2e465031",
+        "1c995644-16e8-408b-a26b-226ea4c3f9da"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "onDeliverAcknowledgement"
+        }
+      ]
+    },
+    {
+      "key": "670c74fa-7691-4069-afa7-32830f169aac",
+      "parentKey": "5d8bbb4d-c70f-492a-b3ec-a5d2bd99b96f",
+      "subKeys": [
+        "1cad62ad-6979-49f1-9972-bc377e47c7af"
+      ],
+      "collapse": false,
+      "style": "{\"contentStyle\":{\"background\":\"#e5f993\"}}",
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "false"
+        }
+      ]
+    },
+    {
+      "key": "080c6dce-c45d-4d4d-ada4-65b9cd7d63bd",
+      "parentKey": "cdfc43d1-c324-47b7-84da-1d2d5ee7144c",
+      "subKeys": [],
+      "collapse": false,
+      "style": "{\"contentStyle\":{\"background\":\"#fa8c99\"}}",
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "updateSentMessage"
+        }
+      ]
+    },
+    {
+      "key": "5e2aa2d0-f4cf-4e20-a9f5-b72c634b1d57",
+      "parentKey": "db9e8ed4-ecd4-4d3d-b845-0a3b2a2fac30",
+      "subKeys": [
+        "80a9b3e3-f67e-4aaf-9d29-7008626b9386",
+        "53f36849-3b9c-478b-8a3c-fdbef761ec7d",
+        "102eaf12-5977-40cb-ac19-a25f819d50a7",
+        "fc31a06a-545d-405c-b3bf-116ffb71b4a4",
+        "fbe31053-d77c-429c-acda-9683b8a0d53e",
+        "aa25883f-948a-4b1f-a40d-11e39cc76fcf"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "useHangouts.js"
+        }
+      ]
+    },
+    {
+      "key": "cfaf5e9e-bba3-43ad-bbbb-a96f3c28f372",
+      "parentKey": "db9e8ed4-ecd4-4d3d-b845-0a3b2a2fac30",
+      "subKeys": [
+        "94b6c600-d9e8-4cfe-930e-c827099f92fe"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "onHangout\nuseMessage.js"
+        }
+      ]
+    },
+    {
+      "key": "df6196f3-b875-4178-86bd-1a48fb323b7c",
+      "parentKey": "9244cf51-592d-45a9-91fa-3b3b9188436b",
+      "subKeys": [
+        "7d8ca9b3-107b-42f3-b639-b1d049417180"
+      ],
+      "collapse": false,
+      "style": "{\"contentStyle\":{\"background\":\"#f5a623\"}}",
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "sendPendingHangout"
+        }
+      ]
+    },
+    {
+      "key": "72827f21-9694-4d40-b050-8ec6b86fb7a4",
+      "parentKey": "102eaf12-5977-40cb-ac19-a25f819d50a7",
+      "subKeys": [
+        "049e52b7-3a98-4b1b-8678-ebb8064b00ac",
+        "d0b8b57d-60e4-456b-8eb1-c0ee27d8014c"
+      ],
+      "collapse": false,
+      "style": "{\"contentStyle\":{\"background\":\"#00cc99\"}}",
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "online"
+        }
+      ]
+    },
+    {
+      "key": "a2a8b7a5-047b-4173-a7cd-11ca2385baeb",
+      "parentKey": "dc77e063-c991-4c94-876b-e86888a58f72",
+      "subKeys": [
+        "cdfc43d1-c324-47b7-84da-1d2d5ee7144c"
+      ],
+      "collapse": false,
+      "style": "{\"contentStyle\":{\"background\":\"#f5a623\"}}",
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "sendPendingHangout"
+        }
+      ]
+    },
+    {
+      "key": "102eaf12-5977-40cb-ac19-a25f819d50a7",
+      "parentKey": "5e2aa2d0-f4cf-4e20-a9f5-b72c634b1d57",
+      "subKeys": [
+        "72827f21-9694-4d40-b050-8ec6b86fb7a4"
+      ],
+      "collapse": false,
+      "style": "{\"contentStyle\":{\"background\":\"#f8e71c\"}}",
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "onDecline"
+        }
+      ]
+    },
+    {
+      "key": "049e52b7-3a98-4b1b-8678-ebb8064b00ac",
+      "parentKey": "72827f21-9694-4d40-b050-8ec6b86fb7a4",
+      "subKeys": [
+        "45dcf0ff-4019-42cc-8a01-3dab0bb808e5"
+      ],
+      "collapse": false,
+      "style": "{\"contentStyle\":{\"background\":\"#a167a5\"}}",
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "true"
+        }
+      ]
+    },
+    {
+      "key": "3a9292c1-0241-462c-98c8-8ab7fa513164",
+      "parentKey": "f9e80002-be8a-4e48-a1c5-40b384c04897",
+      "subKeys": [
+        "0f5494c0-e91f-4fc3-a2ef-1f4a605b0f63"
+      ],
+      "collapse": false,
+      "style": "{\"contentStyle\":{\"background\":\"#9b9b9b\"}}",
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "savePendingHangout"
+        }
+      ]
+    }
+  ],
+  "config": {
+    "readOnly": false,
+    "allowUndo": true,
+    "layoutDir": 2,
+    "theme": {
+      "name": "default",
+      "randomColor": true,
+      "background": "rgb(57,60,65)",
+      "highlightColor": "#50C9CE",
+      "marginH": 60,
+      "marginV": 20,
+      "contentStyle": {
+        "lineHeight": "1.5"
+      },
+      "linkStyle": {
+        "lineRadius": 5,
+        "lineType": "curve",
+        "lineWidth": "3px"
+      },
+      "rootTopic": {
+        "contentStyle": {
+          "fontSize": "34px",
+          "borderRadius": "35px",
+          "padding": "16px 18px 16px 18px"
+        },
+        "subLinkStyle": {
+          "lineType": "curve",
+          "lineWidth": "3px",
+          "lineColor": "rgb(113, 203, 45)"
+        }
+      },
+      "primaryTopic": {
+        "contentStyle": {
+          "borderWidth": "1px",
+          "borderStyle": "solid",
+          "borderRadius": "20px",
+          "fontSize": "17px",
+          "padding": "10px 15px 10px 15px"
+        },
+        "subLinkStyle": {
+          "lineType": "curve",
+          "lineWidth": "3px",
+          "lineColor": "rgb(113, 203, 45)"
+        }
+      },
+      "normalTopic": {
+        "contentStyle": {
+          "border": "1px solid #e8eaec",
+          "borderRadius": "20px",
+          "fontSize": "17px",
+          "padding": "4px 10px"
+        },
+        "subLinkStyle": {
+          "lineType": "curve",
+          "lineWidth": "3px",
+          "lineColor": "white"
+        }
+      }
+    }
+  },
+  "formatVersion": "0.0"
+}

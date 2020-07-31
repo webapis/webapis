@@ -31,6 +31,7 @@ export default function HangoutsProvider(props) {
 
   const [state, dispatch] = useReducer(reducer, initState);
   const { hangout, message } = state;
+  //TODO HG onmessage sound effect
   const handleMessage = useMessage({
     message,
     username,

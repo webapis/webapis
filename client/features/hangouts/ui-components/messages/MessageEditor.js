@@ -1,8 +1,9 @@
 import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 const html = htm.bind(h);
-import TextInput from "controls/text-input/index";
-import Button from "controls/button/index";
+
+//TODO HG disable sent text button when text message input
+
 const styles = {
   root: {
     display: "flex",

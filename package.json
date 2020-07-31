@@ -42,6 +42,7 @@
     "nodemailer": "^6.4.6",
     "parse": "^2.13.0",
     "parse-server": "^4.3.0",
+    "preact": "^10.4.6",
     "puppeteer-core": "^3.2.0",
     "ws": "^7.3.0"
   },
