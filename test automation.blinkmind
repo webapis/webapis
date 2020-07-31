@@ -1,0 +1,1127 @@
+{
+  "rootTopicKey": "5506e3bd-d0b5-47d9-aa01-3f04d68b9cf5",
+  "editorRootTopicKey": "5506e3bd-d0b5-47d9-aa01-3f04d68b9cf5",
+  "focusKey": "8bf58e43-bbbc-4139-84d9-5a44769dae05",
+  "extData": {
+    "TOPIC_REFERENCE": {
+      "reference": {}
+    }
+  },
+  "topics": [
+    {
+      "key": "c1ebce98-66ba-4d0b-9f93-99c386a59483",
+      "parentKey": "a998ba9f-1139-4660-8b0e-a2abcf85698c",
+      "subKeys": [
+        "0e1835a5-f3bd-4c2b-b37f-7109355b488e",
+        "7ada0e78-c680-4d55-8622-a21ed4c677bf"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "firefox"
+        }
+      ]
+    },
+    {
+      "key": "8f377020-5589-4e4a-b612-5173898b0716",
+      "parentKey": "5506e3bd-d0b5-47d9-aa01-3f04d68b9cf5",
+      "subKeys": [
+        "95d6f1c8-cb96-46af-8369-768b575a0d11"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "cy"
+        }
+      ]
+    },
+    {
+      "key": "c4d2ff22-588f-4def-9686-88528f8050ca",
+      "parentKey": "49cecf38-ab0d-41e3-80ca-26aa06d6b15c",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "parallelization"
+        }
+      ]
+    },
+    {
+      "key": "4645542c-8944-4e7d-a1c2-f211831fefa3",
+      "parentKey": "d7dd2ce6-80af-43e9-a146-f7ac4de01669",
+      "subKeys": [
+        "908564b4-6827-4fbc-ba42-b5efb221afd5",
+        "ebd00b66-b0b6-44eb-ae03-90a9e399169c"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "cross"
+        }
+      ]
+    },
+    {
+      "key": "521534a4-90c6-4763-838c-ad53f13996c0",
+      "parentKey": "d641888d-f481-4166-9aba-cd588f7878c3",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "browser.chrome.auth"
+        }
+      ]
+    },
+    {
+      "key": "0e0deece-ce7a-4124-8c16-311820297c30",
+      "parentKey": "d641888d-f481-4166-9aba-cd588f7878c3",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "browser.electron.auth"
+        }
+      ]
+    },
+    {
+      "key": "da5be447-adba-48be-a690-ca0234f449a9",
+      "parentKey": "908564b4-6827-4fbc-ba42-b5efb221afd5",
+      "subKeys": [
+        "de1c6de3-4ab6-4288-acf5-13f58e17ed23",
+        "69e38023-da60-4046-95fb-9bb317762fc8"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "chrome"
+        }
+      ]
+    },
+    {
+      "key": "eb676897-a04b-42b4-9bd0-d3b45cd2746a",
+      "parentKey": "783f2f92-3584-4845-b4d7-f70dcc186337",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "auth"
+        }
+      ]
+    },
+    {
+      "key": "69e38023-da60-4046-95fb-9bb317762fc8",
+      "parentKey": "da5be447-adba-48be-a690-ca0234f449a9",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "hangouts"
+        }
+      ]
+    },
+    {
+      "key": "2ef0f5b8-f95f-47ca-9d97-3a2457952ab0",
+      "parentKey": "5506e3bd-d0b5-47d9-aa01-3f04d68b9cf5",
+      "subKeys": [
+        "4e2bbdae-cb71-4edc-bef6-ac975fcc43d6",
+        "83fd7c2b-c769-4409-9a05-25199aa77b74"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "test"
+        }
+      ]
+    },
+    {
+      "key": "b6ab8df3-b720-4fa1-842d-ebb8557b6062",
+      "parentKey": "f7433a2c-d44c-4a51-b3c4-a7d1fea93ffa",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "hangouts"
+        }
+      ]
+    },
+    {
+      "key": "4170393a-80bd-4c8d-9078-e615476065bb",
+      "parentKey": "753771aa-9628-4da2-8f53-23bc4a5dee22",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "webrtc"
+        }
+      ]
+    },
+    {
+      "key": "8222caab-519a-40e9-b282-6e2a34c9e4af",
+      "parentKey": "706a402d-2dcc-4197-8a40-51109830fb5b",
+      "subKeys": [
+        "2229eeef-ccc2-4b6b-b7b7-dce62e872012",
+        "e66b8c86-fd03-484d-b8d5-93c7244a1f8d"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "series"
+        }
+      ]
+    },
+    {
+      "key": "b643b836-4733-4f93-af87-f325e69c60d2",
+      "parentKey": "d641888d-f481-4166-9aba-cd588f7878c3",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "browser.electron.hangouts"
+        }
+      ]
+    },
+    {
+      "key": "d7b09ada-db90-464b-b5d9-e741785d64c1",
+      "parentKey": "51bd7ca5-fc1f-4bd7-821a-00635e21eb88",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "auth"
+        }
+      ]
+    },
+    {
+      "key": "39f8aaad-a864-4472-8167-b7a598a8cd97",
+      "parentKey": "783f2f92-3584-4845-b4d7-f70dcc186337",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "hangouts"
+        }
+      ]
+    },
+    {
+      "key": "0e1835a5-f3bd-4c2b-b37f-7109355b488e",
+      "parentKey": "c1ebce98-66ba-4d0b-9f93-99c386a59483",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "auth"
+        }
+      ]
+    },
+    {
+      "key": "95d6f1c8-cb96-46af-8369-768b575a0d11",
+      "parentKey": "8f377020-5589-4e4a-b612-5173898b0716",
+      "subKeys": [
+        "d7dd2ce6-80af-43e9-a146-f7ac4de01669",
+        "c1130eab-5717-4397-a383-6c055ab90b02"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "features"
+        }
+      ]
+    },
+    {
+      "key": "a7b798e5-9403-4a2a-ba71-95b1352c9cfe",
+      "parentKey": "ebd00b66-b0b6-44eb-ae03-90a9e399169c",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "browser.firefox.auth"
+        }
+      ]
+    },
+    {
+      "key": "49cecf38-ab0d-41e3-80ca-26aa06d6b15c",
+      "parentKey": "96ba37d6-9dd6-4fbc-970e-22f27ed82dcd",
+      "subKeys": [
+        "27abce0a-5086-465e-9db0-796fac86fb7a",
+        "c4d2ff22-588f-4def-9686-88528f8050ca"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "cy"
+        }
+      ]
+    },
+    {
+      "key": "63b130b4-daf4-4d4b-a275-7beb6076bd39",
+      "parentKey": "6cd6c476-ce88-49b3-82af-4e7f2e0ca411",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "cy.features.ci.hangouts"
+        }
+      ]
+    },
+    {
+      "key": "383816e7-6dcd-4382-8273-30ac6cd89194",
+      "parentKey": "d641888d-f481-4166-9aba-cd588f7878c3",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "browser.firefox.hangouts"
+        }
+      ]
+    },
+    {
+      "key": "2229eeef-ccc2-4b6b-b7b7-dce62e872012",
+      "parentKey": "8222caab-519a-40e9-b282-6e2a34c9e4af",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "cy.features.local.auth"
+        }
+      ]
+    },
+    {
+      "key": "82c7be52-e8ca-4562-b824-0879b8a03085",
+      "parentKey": "10674752-bd77-4c56-af88-c3d46f1d8229",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "auth"
+        }
+      ]
+    },
+    {
+      "key": "83fd7c2b-c769-4409-9a05-25199aa77b74",
+      "parentKey": "2ef0f5b8-f95f-47ca-9d97-3a2457952ab0",
+      "subKeys": [
+        "706a402d-2dcc-4197-8a40-51109830fb5b",
+        "69c65e71-1fe4-4fac-9f33-6c7fef1b6f85"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "local"
+        }
+      ]
+    },
+    {
+      "key": "6bc55a22-df50-4b2a-8e43-8ba4d9c2be9b",
+      "parentKey": "753771aa-9628-4da2-8f53-23bc4a5dee22",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "hangouts"
+        }
+      ]
+    },
+    {
+      "key": "51bd7ca5-fc1f-4bd7-821a-00635e21eb88",
+      "parentKey": "a998ba9f-1139-4660-8b0e-a2abcf85698c",
+      "subKeys": [
+        "d7b09ada-db90-464b-b5d9-e741785d64c1",
+        "4e9e8221-5b35-471c-ab9e-d8c36680745e"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "electon"
+        }
+      ]
+    },
+    {
+      "key": "908564b4-6827-4fbc-ba42-b5efb221afd5",
+      "parentKey": "4645542c-8944-4e7d-a1c2-f211831fefa3",
+      "subKeys": [
+        "da5be447-adba-48be-a690-ca0234f449a9",
+        "783f2f92-3584-4845-b4d7-f70dcc186337",
+        "f7433a2c-d44c-4a51-b3c4-a7d1fea93ffa"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "browser"
+        }
+      ]
+    },
+    {
+      "key": "753771aa-9628-4da2-8f53-23bc4a5dee22",
+      "parentKey": "c1130eab-5717-4397-a383-6c055ab90b02",
+      "subKeys": [
+        "e27c0098-e498-4542-a379-50c74ac6a313",
+        "6bc55a22-df50-4b2a-8e43-8ba4d9c2be9b",
+        "4170393a-80bd-4c8d-9078-e615476065bb"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "default"
+        }
+      ]
+    },
+    {
+      "key": "349dfc45-9c68-434f-ae29-ce0851249603",
+      "parentKey": "6cd6c476-ce88-49b3-82af-4e7f2e0ca411",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "cy.feature.ci.auth"
+        }
+      ]
+    },
+    {
+      "key": "4e2bbdae-cb71-4edc-bef6-ac975fcc43d6",
+      "parentKey": "2ef0f5b8-f95f-47ca-9d97-3a2457952ab0",
+      "subKeys": [
+        "5c8ae3ba-74dd-48e4-9abb-5d15b9a1708d",
+        "c9f9145b-74b5-473b-9274-5690e6c1dea3"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "ci"
+        }
+      ]
+    },
+    {
+      "key": "10674752-bd77-4c56-af88-c3d46f1d8229",
+      "parentKey": "a998ba9f-1139-4660-8b0e-a2abcf85698c",
+      "subKeys": [
+        "82c7be52-e8ca-4562-b824-0879b8a03085",
+        "cf1bb976-e3b6-419b-902c-f604129a469e"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "chrome"
+        }
+      ]
+    },
+    {
+      "key": "d641888d-f481-4166-9aba-cd588f7878c3",
+      "parentKey": "7c827b95-9323-4400-afc5-07d47c97cfc9",
+      "subKeys": [
+        "521534a4-90c6-4763-838c-ad53f13996c0",
+        "a90193b3-c40a-4e8f-92ab-847c82f201ec",
+        "0e0deece-ce7a-4124-8c16-311820297c30",
+        "b643b836-4733-4f93-af87-f325e69c60d2",
+        "c3f640df-8838-46f3-bb0f-7fc192652daa",
+        "383816e7-6dcd-4382-8273-30ac6cd89194"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "series"
+        }
+      ]
+    },
+    {
+      "key": "d7dd2ce6-80af-43e9-a146-f7ac4de01669",
+      "parentKey": "95d6f1c8-cb96-46af-8369-768b575a0d11",
+      "subKeys": [
+        "4645542c-8944-4e7d-a1c2-f211831fefa3",
+        "93b24f45-26a8-4455-923f-a2f8ab58d1c4"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "local"
+        }
+      ]
+    },
+    {
+      "key": "e9cba479-f126-4e63-8f05-24a96531b8e3",
+      "parentKey": "a227cde1-1895-4500-940a-24bc4c87e5ae",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "feature"
+        }
+      ]
+    },
+    {
+      "key": "c9f9145b-74b5-473b-9274-5690e6c1dea3",
+      "parentKey": "4e2bbdae-cb71-4edc-bef6-ac975fcc43d6",
+      "subKeys": [
+        "14e1c88f-408c-49b9-9e37-0f3813647614"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "cross"
+        }
+      ]
+    },
+    {
+      "key": "8e5bbd6c-8dd0-46dc-b833-c0431ccc3091",
+      "parentKey": "14e1c88f-408c-49b9-9e37-0f3813647614",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "cy.features.ci.cross.hangouts"
+        }
+      ]
+    },
+    {
+      "key": "7ada0e78-c680-4d55-8622-a21ed4c677bf",
+      "parentKey": "c1ebce98-66ba-4d0b-9f93-99c386a59483",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "hangouts"
+        }
+      ]
+    },
+    {
+      "key": "783f2f92-3584-4845-b4d7-f70dcc186337",
+      "parentKey": "908564b4-6827-4fbc-ba42-b5efb221afd5",
+      "subKeys": [
+        "eb676897-a04b-42b4-9bd0-d3b45cd2746a",
+        "39f8aaad-a864-4472-8167-b7a598a8cd97"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "electon"
+        }
+      ]
+    },
+    {
+      "key": "e66b8c86-fd03-484d-b8d5-93c7244a1f8d",
+      "parentKey": "8222caab-519a-40e9-b282-6e2a34c9e4af",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "cy.features.local.hangouts"
+        }
+      ]
+    },
+    {
+      "key": "cf6fefbd-c9e5-4cb9-95d6-beb1eda0418d",
+      "parentKey": "ebd00b66-b0b6-44eb-ae03-90a9e399169c",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "browser.electron.hangouts"
+        }
+      ]
+    },
+    {
+      "key": "5c8ae3ba-74dd-48e4-9abb-5d15b9a1708d",
+      "parentKey": "4e2bbdae-cb71-4edc-bef6-ac975fcc43d6",
+      "subKeys": [
+        "6cd6c476-ce88-49b3-82af-4e7f2e0ca411"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "default"
+        }
+      ]
+    },
+    {
+      "key": "eaf51c02-c4ed-46a6-8e33-a671f55ac980",
+      "parentKey": "a0035853-4a45-4ea4-b691-036aafe94a37",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "cy.features.local.cross.hangouts"
+        }
+      ]
+    },
+    {
+      "key": "27abce0a-5086-465e-9db0-796fac86fb7a",
+      "parentKey": "49cecf38-ab0d-41e3-80ca-26aa06d6b15c",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "record"
+        }
+      ]
+    },
+    {
+      "key": "cf1bb976-e3b6-419b-902c-f604129a469e",
+      "parentKey": "10674752-bd77-4c56-af88-c3d46f1d8229",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "hangouts"
+        }
+      ]
+    },
+    {
+      "key": "0e5066cf-68fa-44b9-8860-b7a0f29b936d",
+      "parentKey": "ebd00b66-b0b6-44eb-ae03-90a9e399169c",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "browser.electron.auth"
+        }
+      ]
+    },
+    {
+      "key": "a90193b3-c40a-4e8f-92ab-847c82f201ec",
+      "parentKey": "d641888d-f481-4166-9aba-cd588f7878c3",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "browser.chrome.hangouts"
+        }
+      ]
+    },
+    {
+      "key": "14e1c88f-408c-49b9-9e37-0f3813647614",
+      "parentKey": "c9f9145b-74b5-473b-9274-5690e6c1dea3",
+      "subKeys": [
+        "9a863fc7-9460-4992-9436-2de513ffcb93",
+        "8e5bbd6c-8dd0-46dc-b833-c0431ccc3091"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "series"
+        }
+      ]
+    },
+    {
+      "key": "622ff2bd-1ff3-435d-a86b-a9dc157706f2",
+      "parentKey": "c1130eab-5717-4397-a383-6c055ab90b02",
+      "subKeys": [
+        "a998ba9f-1139-4660-8b0e-a2abcf85698c",
+        "7c827b95-9323-4400-afc5-07d47c97cfc9"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "cross"
+        }
+      ]
+    },
+    {
+      "key": "a0035853-4a45-4ea4-b691-036aafe94a37",
+      "parentKey": "69c65e71-1fe4-4fac-9f33-6c7fef1b6f85",
+      "subKeys": [
+        "eaf51c02-c4ed-46a6-8e33-a671f55ac980",
+        "a8a578c2-16f0-46d9-9be2-91b7479d2e32"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "series"
+        }
+      ]
+    },
+    {
+      "key": "8bf58e43-bbbc-4139-84d9-5a44769dae05",
+      "parentKey": "ebd00b66-b0b6-44eb-ae03-90a9e399169c",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "browser.firefox.hangouts"
+        }
+      ]
+    },
+    {
+      "key": "7c827b95-9323-4400-afc5-07d47c97cfc9",
+      "parentKey": "622ff2bd-1ff3-435d-a86b-a9dc157706f2",
+      "subKeys": [
+        "d641888d-f481-4166-9aba-cd588f7878c3"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "default"
+        }
+      ]
+    },
+    {
+      "key": "9a863fc7-9460-4992-9436-2de513ffcb93",
+      "parentKey": "14e1c88f-408c-49b9-9e37-0f3813647614",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "cy.feature.ci.cross.auth"
+        }
+      ]
+    },
+    {
+      "key": "96ba37d6-9dd6-4fbc-970e-22f27ed82dcd",
+      "parentKey": "a227cde1-1895-4500-940a-24bc4c87e5ae",
+      "subKeys": [
+        "49cecf38-ab0d-41e3-80ca-26aa06d6b15c"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "ci"
+        }
+      ]
+    },
+    {
+      "key": "706a402d-2dcc-4197-8a40-51109830fb5b",
+      "parentKey": "83fd7c2b-c769-4409-9a05-25199aa77b74",
+      "subKeys": [
+        "8222caab-519a-40e9-b282-6e2a34c9e4af"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "default"
+        }
+      ]
+    },
+    {
+      "key": "bc68fcc2-93c1-437f-86a5-219089a85fa6",
+      "parentKey": "ebd00b66-b0b6-44eb-ae03-90a9e399169c",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "browser.chrome.hangouts"
+        }
+      ]
+    },
+    {
+      "key": "c1130eab-5717-4397-a383-6c055ab90b02",
+      "parentKey": "95d6f1c8-cb96-46af-8369-768b575a0d11",
+      "subKeys": [
+        "622ff2bd-1ff3-435d-a86b-a9dc157706f2",
+        "753771aa-9628-4da2-8f53-23bc4a5dee22"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "ci"
+        }
+      ]
+    },
+    {
+      "key": "4e9e8221-5b35-471c-ab9e-d8c36680745e",
+      "parentKey": "51bd7ca5-fc1f-4bd7-821a-00635e21eb88",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "hangouts"
+        }
+      ]
+    },
+    {
+      "key": "e27c0098-e498-4542-a379-50c74ac6a313",
+      "parentKey": "753771aa-9628-4da2-8f53-23bc4a5dee22",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "auth"
+        }
+      ]
+    },
+    {
+      "key": "c3f640df-8838-46f3-bb0f-7fc192652daa",
+      "parentKey": "d641888d-f481-4166-9aba-cd588f7878c3",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "browser.firefox.auth"
+        }
+      ]
+    },
+    {
+      "key": "5506e3bd-d0b5-47d9-aa01-3f04d68b9cf5",
+      "parentKey": null,
+      "subKeys": [
+        "8f377020-5589-4e4a-b612-5173898b0716",
+        "2ef0f5b8-f95f-47ca-9d97-3a2457952ab0",
+        "a227cde1-1895-4500-940a-24bc4c87e5ae"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "test automation"
+        }
+      ]
+    },
+    {
+      "key": "a8a578c2-16f0-46d9-9be2-91b7479d2e32",
+      "parentKey": "a0035853-4a45-4ea4-b691-036aafe94a37",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "cy.features.local.cross.auth"
+        }
+      ]
+    },
+    {
+      "key": "a998ba9f-1139-4660-8b0e-a2abcf85698c",
+      "parentKey": "622ff2bd-1ff3-435d-a86b-a9dc157706f2",
+      "subKeys": [
+        "10674752-bd77-4c56-af88-c3d46f1d8229",
+        "51bd7ca5-fc1f-4bd7-821a-00635e21eb88",
+        "c1ebce98-66ba-4d0b-9f93-99c386a59483"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "browser"
+        }
+      ]
+    },
+    {
+      "key": "a227cde1-1895-4500-940a-24bc4c87e5ae",
+      "parentKey": "5506e3bd-d0b5-47d9-aa01-3f04d68b9cf5",
+      "subKeys": [
+        "96ba37d6-9dd6-4fbc-970e-22f27ed82dcd",
+        "72e3ad59-58e6-4632-8c23-7845924e5ba5",
+        "e9cba479-f126-4e63-8f05-24a96531b8e3"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "config"
+        }
+      ]
+    },
+    {
+      "key": "ebd00b66-b0b6-44eb-ae03-90a9e399169c",
+      "parentKey": "4645542c-8944-4e7d-a1c2-f211831fefa3",
+      "subKeys": [
+        "f95bcee2-6c5e-4c0a-a07d-04e647b37005",
+        "bc68fcc2-93c1-437f-86a5-219089a85fa6",
+        "0e5066cf-68fa-44b9-8860-b7a0f29b936d",
+        "cf6fefbd-c9e5-4cb9-95d6-beb1eda0418d",
+        "a7b798e5-9403-4a2a-ba71-95b1352c9cfe",
+        "8bf58e43-bbbc-4139-84d9-5a44769dae05"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "default"
+        }
+      ]
+    },
+    {
+      "key": "eda72ec2-73ea-427c-a3df-d2f698f6a8bd",
+      "parentKey": "f7433a2c-d44c-4a51-b3c4-a7d1fea93ffa",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "auth"
+        }
+      ]
+    },
+    {
+      "key": "93b24f45-26a8-4455-923f-a2f8ab58d1c4",
+      "parentKey": "d7dd2ce6-80af-43e9-a146-f7ac4de01669",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "default"
+        }
+      ]
+    },
+    {
+      "key": "f95bcee2-6c5e-4c0a-a07d-04e647b37005",
+      "parentKey": "ebd00b66-b0b6-44eb-ae03-90a9e399169c",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "browser.chrome.auth"
+        }
+      ]
+    },
+    {
+      "key": "6cd6c476-ce88-49b3-82af-4e7f2e0ca411",
+      "parentKey": "5c8ae3ba-74dd-48e4-9abb-5d15b9a1708d",
+      "subKeys": [
+        "349dfc45-9c68-434f-ae29-ce0851249603",
+        "63b130b4-daf4-4d4b-a275-7beb6076bd39"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "series"
+        }
+      ]
+    },
+    {
+      "key": "69c65e71-1fe4-4fac-9f33-6c7fef1b6f85",
+      "parentKey": "83fd7c2b-c769-4409-9a05-25199aa77b74",
+      "subKeys": [
+        "a0035853-4a45-4ea4-b691-036aafe94a37"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "cross"
+        }
+      ]
+    },
+    {
+      "key": "72e3ad59-58e6-4632-8c23-7845924e5ba5",
+      "parentKey": "a227cde1-1895-4500-940a-24bc4c87e5ae",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "local"
+        }
+      ]
+    },
+    {
+      "key": "de1c6de3-4ab6-4288-acf5-13f58e17ed23",
+      "parentKey": "da5be447-adba-48be-a690-ca0234f449a9",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "auth"
+        }
+      ]
+    },
+    {
+      "key": "f7433a2c-d44c-4a51-b3c4-a7d1fea93ffa",
+      "parentKey": "908564b4-6827-4fbc-ba42-b5efb221afd5",
+      "subKeys": [
+        "eda72ec2-73ea-427c-a3df-d2f698f6a8bd",
+        "b6ab8df3-b720-4fa1-842d-ebb8557b6062"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "firefox"
+        }
+      ]
+    }
+  ],
+  "config": {
+    "readOnly": false,
+    "allowUndo": true,
+    "layoutDir": 2,
+    "theme": {
+      "name": "default",
+      "randomColor": true,
+      "background": "rgb(57,60,65)",
+      "highlightColor": "#50C9CE",
+      "marginH": 60,
+      "marginV": 20,
+      "contentStyle": {
+        "lineHeight": "1.5"
+      },
+      "linkStyle": {
+        "lineRadius": 5,
+        "lineType": "curve",
+        "lineWidth": "3px"
+      },
+      "rootTopic": {
+        "contentStyle": {
+          "fontSize": "34px",
+          "borderRadius": "35px",
+          "padding": "16px 18px 16px 18px"
+        },
+        "subLinkStyle": {
+          "lineType": "curve",
+          "lineWidth": "3px",
+          "lineColor": "rgb(113, 203, 45)"
+        }
+      },
+      "primaryTopic": {
+        "contentStyle": {
+          "borderWidth": "1px",
+          "borderStyle": "solid",
+          "borderRadius": "20px",
+          "fontSize": "17px",
+          "padding": "10px 15px 10px 15px"
+        },
+        "subLinkStyle": {
+          "lineType": "curve",
+          "lineWidth": "3px",
+          "lineColor": "rgb(113, 203, 45)"
+        }
+      },
+      "normalTopic": {
+        "contentStyle": {
+          "border": "1px solid #e8eaec",
+          "borderRadius": "20px",
+          "fontSize": "17px",
+          "padding": "4px 10px"
+        },
+        "subLinkStyle": {
+          "lineType": "curve",
+          "lineWidth": "3px",
+          "lineColor": "white"
+        }
+      }
+    }
+  },
+  "formatVersion": null
+}
