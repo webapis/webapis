@@ -32,7 +32,7 @@ function app({ appName }) {
 
 function crossMap({ browsers, features, record }) {
   return browsers.reduce((acc, b) => {
-    return { ...acc, ...browserMap({ features, browser: b }) };
+    return { ...acc, ...browserMap({ features, browser: b, record }) };
   }, {});
 }
 function browserMap({ features, browser, record }) {
@@ -40,7 +40,10 @@ function browserMap({ features, browser, record }) {
     browser: {
       [browser]: {
         ...features.reduce((a, f) => {
-          return { ...a, [f]: { script: cyConf({ browser, feature: f }) } };
+          return {
+            ...a,
+            [f]: { script: cyConf({ browser, feature: f, record }) },
+          };
         }, {}),
       },
     },
@@ -68,12 +71,18 @@ function cyConf({ browser, record = false, feature }) {
   }
 }
 
-function defaultBrowser({ features, record }) {
-  return features.reduce((acc, f) => {
-    const loc = { ...acc, [f]: { script: cyConf({ feature: f, record }) } };
-    console.log("f", f);
-    return loc;
-  }, {});
+function defaultBrowser({ features, record, type }) {
+  const defaultFeatures = features.map((f) => {
+    return `cy.${type}.${f}`;
+  });
+  return {
+    script: series.nps(...defaultFeatures),
+    ...features.reduce((acc, f) => {
+      const loc = { ...acc, [f]: { script: cyConf({ feature: f, record }) } };
+
+      return loc;
+    }, {}),
+  };
 }
 
 module.exports = {
@@ -100,15 +109,17 @@ module.exports = {
     },
     test: {
       local: {
-        script: series.nps("cy.local.auth", "cy.local.hangouts"),
+        script: series.nps("cy.local"),
         cross: { script: series.nps("cy.local.cross") },
       },
-      script: series.nps("cy.ci.auth"),
+      script: series.nps("cy.ci.auth"), //?
     },
     cy: {
       local: {
+        // default nps cy.local :  nps cy.local.auth && nps cy.local.hangouts
         // nps cy.local.auth
-        ...defaultBrowser({ features: ["auth", "hangouts"] }),
+        ...defaultBrowser({ features: ["auth", "hangouts"], type: "local" }),
+        // nps cy.local.cross ?
         //nps cy.local.cross.browser.chrome.auth
         cross: crossMap({
           browsers: ["chrome"],
@@ -116,9 +127,15 @@ module.exports = {
         }),
       },
       ci: {
+        //default nps cy.ci :   nps cy.ci.auth && nps cy.ci.hangouts
         //nps cy.ci.auth
-        ...defaultBrowser({ features: ["auth", "hangouts"], record: true }),
+        ...defaultBrowser({
+          features: ["auth", "hangouts"],
+          record: true,
+          type: "ci",
+        }),
         //nps cy.ci.cross.browser.chrome.auth
+        // nps cy.ci.cross ?
         cross: crossMap({
           browsers: ["chrome"],
           features: ["auth", "hangouts"],

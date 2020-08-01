@@ -1,7 +1,7 @@
 {
   "rootTopicKey": "5506e3bd-d0b5-47d9-aa01-3f04d68b9cf5",
   "editorRootTopicKey": "5506e3bd-d0b5-47d9-aa01-3f04d68b9cf5",
-  "focusKey": "753771aa-9628-4da2-8f53-23bc4a5dee22",
+  "focusKey": "895483ed-f849-487c-9dee-b22a9d5b6905",
   "extData": {
     "TOPIC_REFERENCE": {
       "reference": {}
@@ -57,7 +57,8 @@
       "key": "4645542c-8944-4e7d-a1c2-f211831fefa3",
       "parentKey": "d7dd2ce6-80af-43e9-a146-f7ac4de01669",
       "subKeys": [
-        "908564b4-6827-4fbc-ba42-b5efb221afd5"
+        "908564b4-6827-4fbc-ba42-b5efb221afd5",
+        "9dc07161-c09b-4904-b6fd-4cb3e6ce98bc"
       ],
       "collapse": false,
       "style": null,
@@ -120,6 +121,21 @@
         {
           "type": "CONTENT",
           "data": "hangouts"
+        }
+      ]
+    },
+    {
+      "key": "9dc07161-c09b-4904-b6fd-4cb3e6ce98bc",
+      "parentKey": "4645542c-8944-4e7d-a1c2-f211831fefa3",
+      "subKeys": [
+        "895483ed-f849-487c-9dee-b22a9d5b6905"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "default"
         }
       ]
     },
@@ -207,6 +223,19 @@
       ]
     },
     {
+      "key": "895483ed-f849-487c-9dee-b22a9d5b6905",
+      "parentKey": "9dc07161-c09b-4904-b6fd-4cb3e6ce98bc",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "series"
+        }
+      ]
+    },
+    {
       "key": "49cecf38-ab0d-41e3-80ca-26aa06d6b15c",
       "parentKey": "96ba37d6-9dd6-4fbc-970e-22f27ed82dcd",
       "subKeys": [
@@ -250,7 +279,7 @@
     },
     {
       "key": "3e649dbe-05ec-421c-9344-a92971e4684b",
-      "parentKey": "93b24f45-26a8-4455-923f-a2f8ab58d1c4",
+      "parentKey": "d7dd2ce6-80af-43e9-a146-f7ac4de01669",
       "subKeys": [],
       "collapse": false,
       "style": null,
@@ -258,6 +287,19 @@
         {
           "type": "CONTENT",
           "data": "auth"
+        }
+      ]
+    },
+    {
+      "key": "6f6ee93c-db5f-471a-b322-3f926461695a",
+      "parentKey": "93b24f45-26a8-4455-923f-a2f8ab58d1c4",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "series"
         }
       ]
     },
@@ -448,6 +490,8 @@
       "parentKey": "8f377020-5589-4e4a-b612-5173898b0716",
       "subKeys": [
         "4645542c-8944-4e7d-a1c2-f211831fefa3",
+        "4e5e23a0-85cf-4a1d-9cd2-dd2d0b6b373a",
+        "3e649dbe-05ec-421c-9344-a92971e4684b",
         "93b24f45-26a8-4455-923f-a2f8ab58d1c4"
       ],
       "collapse": false,
@@ -807,7 +851,7 @@
     },
     {
       "key": "4e5e23a0-85cf-4a1d-9cd2-dd2d0b6b373a",
-      "parentKey": "93b24f45-26a8-4455-923f-a2f8ab58d1c4",
+      "parentKey": "d7dd2ce6-80af-43e9-a146-f7ac4de01669",
       "subKeys": [],
       "collapse": false,
       "style": null,
@@ -835,15 +879,14 @@
       "key": "93b24f45-26a8-4455-923f-a2f8ab58d1c4",
       "parentKey": "d7dd2ce6-80af-43e9-a146-f7ac4de01669",
       "subKeys": [
-        "4e5e23a0-85cf-4a1d-9cd2-dd2d0b6b373a",
-        "3e649dbe-05ec-421c-9344-a92971e4684b"
+        "6f6ee93c-db5f-471a-b322-3f926461695a"
       ],
       "collapse": false,
       "style": null,
       "blocks": [
         {
           "type": "CONTENT",
-          "data": "default browser"
+          "data": "default"
         }
       ]
     },
