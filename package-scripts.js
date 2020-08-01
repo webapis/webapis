@@ -145,7 +145,7 @@ module.exports = {
         //nps cy.ci.auth
         ...defaultBrowser({
           features: ["auth", "hangouts"],
-          record: true,
+          record: false,
           type: "ci",
         }),
         //nps cy.ci.cross.browser.chrome.auth
