@@ -1,7 +1,7 @@
 {
   "rootTopicKey": "5506e3bd-d0b5-47d9-aa01-3f04d68b9cf5",
   "editorRootTopicKey": "5506e3bd-d0b5-47d9-aa01-3f04d68b9cf5",
-  "focusKey": "8bf58e43-bbbc-4139-84d9-5a44769dae05",
+  "focusKey": "753771aa-9628-4da2-8f53-23bc4a5dee22",
   "extData": {
     "TOPIC_REFERENCE": {
       "reference": {}
@@ -28,7 +28,8 @@
       "key": "8f377020-5589-4e4a-b612-5173898b0716",
       "parentKey": "5506e3bd-d0b5-47d9-aa01-3f04d68b9cf5",
       "subKeys": [
-        "95d6f1c8-cb96-46af-8369-768b575a0d11"
+        "d7dd2ce6-80af-43e9-a146-f7ac4de01669",
+        "c1130eab-5717-4397-a383-6c055ab90b02"
       ],
       "collapse": false,
       "style": null,
@@ -56,8 +57,7 @@
       "key": "4645542c-8944-4e7d-a1c2-f211831fefa3",
       "parentKey": "d7dd2ce6-80af-43e9-a146-f7ac4de01669",
       "subKeys": [
-        "908564b4-6827-4fbc-ba42-b5efb221afd5",
-        "ebd00b66-b0b6-44eb-ae03-90a9e399169c"
+        "908564b4-6827-4fbc-ba42-b5efb221afd5"
       ],
       "collapse": false,
       "style": null,
@@ -111,19 +111,6 @@
       ]
     },
     {
-      "key": "eb676897-a04b-42b4-9bd0-d3b45cd2746a",
-      "parentKey": "783f2f92-3584-4845-b4d7-f70dcc186337",
-      "subKeys": [],
-      "collapse": false,
-      "style": null,
-      "blocks": [
-        {
-          "type": "CONTENT",
-          "data": "auth"
-        }
-      ]
-    },
-    {
       "key": "69e38023-da60-4046-95fb-9bb317762fc8",
       "parentKey": "da5be447-adba-48be-a690-ca0234f449a9",
       "subKeys": [],
@@ -166,24 +153,10 @@
       ]
     },
     {
-      "key": "4170393a-80bd-4c8d-9078-e615476065bb",
-      "parentKey": "753771aa-9628-4da2-8f53-23bc4a5dee22",
-      "subKeys": [],
-      "collapse": false,
-      "style": null,
-      "blocks": [
-        {
-          "type": "CONTENT",
-          "data": "webrtc"
-        }
-      ]
-    },
-    {
       "key": "8222caab-519a-40e9-b282-6e2a34c9e4af",
       "parentKey": "706a402d-2dcc-4197-8a40-51109830fb5b",
       "subKeys": [
-        "2229eeef-ccc2-4b6b-b7b7-dce62e872012",
-        "e66b8c86-fd03-484d-b8d5-93c7244a1f8d"
+        "2229eeef-ccc2-4b6b-b7b7-dce62e872012"
       ],
       "collapse": false,
       "style": null,
@@ -221,19 +194,6 @@
       ]
     },
     {
-      "key": "39f8aaad-a864-4472-8167-b7a598a8cd97",
-      "parentKey": "783f2f92-3584-4845-b4d7-f70dcc186337",
-      "subKeys": [],
-      "collapse": false,
-      "style": null,
-      "blocks": [
-        {
-          "type": "CONTENT",
-          "data": "hangouts"
-        }
-      ]
-    },
-    {
       "key": "0e1835a5-f3bd-4c2b-b37f-7109355b488e",
       "parentKey": "c1ebce98-66ba-4d0b-9f93-99c386a59483",
       "subKeys": [],
@@ -243,35 +203,6 @@
         {
           "type": "CONTENT",
           "data": "auth"
-        }
-      ]
-    },
-    {
-      "key": "95d6f1c8-cb96-46af-8369-768b575a0d11",
-      "parentKey": "8f377020-5589-4e4a-b612-5173898b0716",
-      "subKeys": [
-        "d7dd2ce6-80af-43e9-a146-f7ac4de01669",
-        "c1130eab-5717-4397-a383-6c055ab90b02"
-      ],
-      "collapse": false,
-      "style": null,
-      "blocks": [
-        {
-          "type": "CONTENT",
-          "data": "features"
-        }
-      ]
-    },
-    {
-      "key": "a7b798e5-9403-4a2a-ba71-95b1352c9cfe",
-      "parentKey": "ebd00b66-b0b6-44eb-ae03-90a9e399169c",
-      "subKeys": [],
-      "collapse": false,
-      "style": null,
-      "blocks": [
-        {
-          "type": "CONTENT",
-          "data": "browser.firefox.auth"
         }
       ]
     },
@@ -318,6 +249,19 @@
       ]
     },
     {
+      "key": "3e649dbe-05ec-421c-9344-a92971e4684b",
+      "parentKey": "93b24f45-26a8-4455-923f-a2f8ab58d1c4",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "auth"
+        }
+      ]
+    },
+    {
       "key": "2229eeef-ccc2-4b6b-b7b7-dce62e872012",
       "parentKey": "8222caab-519a-40e9-b282-6e2a34c9e4af",
       "subKeys": [],
@@ -326,7 +270,7 @@
       "blocks": [
         {
           "type": "CONTENT",
-          "data": "cy.features.local.auth"
+          "data": "cy.features.local"
         }
       ]
     },
@@ -393,7 +337,6 @@
       "parentKey": "4645542c-8944-4e7d-a1c2-f211831fefa3",
       "subKeys": [
         "da5be447-adba-48be-a690-ca0234f449a9",
-        "783f2f92-3584-4845-b4d7-f70dcc186337",
         "f7433a2c-d44c-4a51-b3c4-a7d1fea93ffa"
       ],
       "collapse": false,
@@ -411,14 +354,14 @@
       "subKeys": [
         "e27c0098-e498-4542-a379-50c74ac6a313",
         "6bc55a22-df50-4b2a-8e43-8ba4d9c2be9b",
-        "4170393a-80bd-4c8d-9078-e615476065bb"
+        "2042c45e-e6fa-40db-bc7a-bc1b5f72b222"
       ],
       "collapse": false,
       "style": null,
       "blocks": [
         {
           "type": "CONTENT",
-          "data": "default"
+          "data": "default browser"
         }
       ]
     },
@@ -468,6 +411,19 @@
       ]
     },
     {
+      "key": "2042c45e-e6fa-40db-bc7a-bc1b5f72b222",
+      "parentKey": "753771aa-9628-4da2-8f53-23bc4a5dee22",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": ""
+        }
+      ]
+    },
+    {
       "key": "d641888d-f481-4166-9aba-cd588f7878c3",
       "parentKey": "7c827b95-9323-4400-afc5-07d47c97cfc9",
       "subKeys": [
@@ -489,7 +445,7 @@
     },
     {
       "key": "d7dd2ce6-80af-43e9-a146-f7ac4de01669",
-      "parentKey": "95d6f1c8-cb96-46af-8369-768b575a0d11",
+      "parentKey": "8f377020-5589-4e4a-b612-5173898b0716",
       "subKeys": [
         "4645542c-8944-4e7d-a1c2-f211831fefa3",
         "93b24f45-26a8-4455-923f-a2f8ab58d1c4"
@@ -558,48 +514,6 @@
       ]
     },
     {
-      "key": "783f2f92-3584-4845-b4d7-f70dcc186337",
-      "parentKey": "908564b4-6827-4fbc-ba42-b5efb221afd5",
-      "subKeys": [
-        "eb676897-a04b-42b4-9bd0-d3b45cd2746a",
-        "39f8aaad-a864-4472-8167-b7a598a8cd97"
-      ],
-      "collapse": false,
-      "style": null,
-      "blocks": [
-        {
-          "type": "CONTENT",
-          "data": "electon"
-        }
-      ]
-    },
-    {
-      "key": "e66b8c86-fd03-484d-b8d5-93c7244a1f8d",
-      "parentKey": "8222caab-519a-40e9-b282-6e2a34c9e4af",
-      "subKeys": [],
-      "collapse": false,
-      "style": null,
-      "blocks": [
-        {
-          "type": "CONTENT",
-          "data": "cy.features.local.hangouts"
-        }
-      ]
-    },
-    {
-      "key": "cf6fefbd-c9e5-4cb9-95d6-beb1eda0418d",
-      "parentKey": "ebd00b66-b0b6-44eb-ae03-90a9e399169c",
-      "subKeys": [],
-      "collapse": false,
-      "style": null,
-      "blocks": [
-        {
-          "type": "CONTENT",
-          "data": "browser.electron.hangouts"
-        }
-      ]
-    },
-    {
       "key": "5c8ae3ba-74dd-48e4-9abb-5d15b9a1708d",
       "parentKey": "4e2bbdae-cb71-4edc-bef6-ac975fcc43d6",
       "subKeys": [
@@ -650,19 +564,6 @@
         {
           "type": "CONTENT",
           "data": "hangouts"
-        }
-      ]
-    },
-    {
-      "key": "0e5066cf-68fa-44b9-8860-b7a0f29b936d",
-      "parentKey": "ebd00b66-b0b6-44eb-ae03-90a9e399169c",
-      "subKeys": [],
-      "collapse": false,
-      "style": null,
-      "blocks": [
-        {
-          "type": "CONTENT",
-          "data": "browser.electron.auth"
         }
       ]
     },
@@ -728,19 +629,6 @@
       ]
     },
     {
-      "key": "8bf58e43-bbbc-4139-84d9-5a44769dae05",
-      "parentKey": "ebd00b66-b0b6-44eb-ae03-90a9e399169c",
-      "subKeys": [],
-      "collapse": false,
-      "style": null,
-      "blocks": [
-        {
-          "type": "CONTENT",
-          "data": "browser.firefox.hangouts"
-        }
-      ]
-    },
-    {
       "key": "7c827b95-9323-4400-afc5-07d47c97cfc9",
       "parentKey": "622ff2bd-1ff3-435d-a86b-a9dc157706f2",
       "subKeys": [
@@ -799,21 +687,8 @@
       ]
     },
     {
-      "key": "bc68fcc2-93c1-437f-86a5-219089a85fa6",
-      "parentKey": "ebd00b66-b0b6-44eb-ae03-90a9e399169c",
-      "subKeys": [],
-      "collapse": false,
-      "style": null,
-      "blocks": [
-        {
-          "type": "CONTENT",
-          "data": "browser.chrome.hangouts"
-        }
-      ]
-    },
-    {
       "key": "c1130eab-5717-4397-a383-6c055ab90b02",
-      "parentKey": "95d6f1c8-cb96-46af-8369-768b575a0d11",
+      "parentKey": "8f377020-5589-4e4a-b612-5173898b0716",
       "subKeys": [
         "622ff2bd-1ff3-435d-a86b-a9dc157706f2",
         "753771aa-9628-4da2-8f53-23bc4a5dee22"
@@ -931,22 +806,15 @@
       ]
     },
     {
-      "key": "ebd00b66-b0b6-44eb-ae03-90a9e399169c",
-      "parentKey": "4645542c-8944-4e7d-a1c2-f211831fefa3",
-      "subKeys": [
-        "f95bcee2-6c5e-4c0a-a07d-04e647b37005",
-        "bc68fcc2-93c1-437f-86a5-219089a85fa6",
-        "0e5066cf-68fa-44b9-8860-b7a0f29b936d",
-        "cf6fefbd-c9e5-4cb9-95d6-beb1eda0418d",
-        "a7b798e5-9403-4a2a-ba71-95b1352c9cfe",
-        "8bf58e43-bbbc-4139-84d9-5a44769dae05"
-      ],
+      "key": "4e5e23a0-85cf-4a1d-9cd2-dd2d0b6b373a",
+      "parentKey": "93b24f45-26a8-4455-923f-a2f8ab58d1c4",
+      "subKeys": [],
       "collapse": false,
       "style": null,
       "blocks": [
         {
           "type": "CONTENT",
-          "data": "default"
+          "data": "hangouts"
         }
       ]
     },
@@ -966,26 +834,16 @@
     {
       "key": "93b24f45-26a8-4455-923f-a2f8ab58d1c4",
       "parentKey": "d7dd2ce6-80af-43e9-a146-f7ac4de01669",
-      "subKeys": [],
+      "subKeys": [
+        "4e5e23a0-85cf-4a1d-9cd2-dd2d0b6b373a",
+        "3e649dbe-05ec-421c-9344-a92971e4684b"
+      ],
       "collapse": false,
       "style": null,
       "blocks": [
         {
           "type": "CONTENT",
-          "data": "default"
-        }
-      ]
-    },
-    {
-      "key": "f95bcee2-6c5e-4c0a-a07d-04e647b37005",
-      "parentKey": "ebd00b66-b0b6-44eb-ae03-90a9e399169c",
-      "subKeys": [],
-      "collapse": false,
-      "style": null,
-      "blocks": [
-        {
-          "type": "CONTENT",
-          "data": "browser.chrome.auth"
+          "data": "default browser"
         }
       ]
     },
@@ -1123,5 +981,5 @@
       }
     }
   },
-  "formatVersion": null
+  "formatVersion": "0.0"
 }
