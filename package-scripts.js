@@ -30,10 +30,23 @@ function app({ appName }) {
   return `appName=${appName} `;
 }
 
-function crossMap({ browsers, features, record }) {
-  return browsers.reduce((acc, b) => {
-    return { ...acc, ...browserMap({ features, browser: b, record }) };
-  }, {});
+function crossMap({ browsers, features, record, type }) {
+  //nps cy.local.cross.browser.chrome.hangouts
+  //nps cy.ci.cross.browser.chrome.auth
+  let defaultCross = browsers.reduce((acc, b) => {
+    const st = features.map((f) => {
+      return `cy.${type}.cross.browser.${b}.${f}`;
+    });
+
+    return st;
+  }, []);
+
+  return {
+    script: series.nps(...defaultCross),
+    ...browsers.reduce((acc, b) => {
+      return { ...acc, ...browserMap({ features, browser: b, record }) };
+    }, {}),
+  };
 }
 function browserMap({ features, browser, record }) {
   const mapping = {
@@ -112,18 +125,19 @@ module.exports = {
         script: series.nps("cy.local"),
         cross: { script: series.nps("cy.local.cross") },
       },
-      script: series.nps("cy.ci.auth"), //?
+      script: series.nps("cy.ci"), //?
     },
     cy: {
       local: {
         // default nps cy.local :  nps cy.local.auth && nps cy.local.hangouts
         // nps cy.local.auth
         ...defaultBrowser({ features: ["auth", "hangouts"], type: "local" }),
-        // nps cy.local.cross ?
+        // nps cy.local.cross series
         //nps cy.local.cross.browser.chrome.auth
         cross: crossMap({
           browsers: ["chrome"],
           features: ["auth", "hangouts"],
+          type: "local",
         }),
       },
       ci: {
@@ -135,11 +149,12 @@ module.exports = {
           type: "ci",
         }),
         //nps cy.ci.cross.browser.chrome.auth
-        // nps cy.ci.cross ?
+        // nps cy.ci.cross  series
         cross: crossMap({
           browsers: ["chrome"],
           features: ["auth", "hangouts"],
           record: true,
+          type: "ci",
         }),
       },
       open: { script: "cypress open" },
