@@ -11,7 +11,7 @@ before_install:
   - npm install -g wait-on
 before_script:
 # if using Ubuntu 16 need this library
-# https://github.com/cypress-io/cypress-documentation/pull/1647
+# https://github.com/cypress-io/cypress-documentation/pull/1647.
 addons:
   apt:
     packages:
