@@ -19,7 +19,7 @@ export function AppNavigation() {
   const { username } = useUserName();
   const { onSignOut, onAuthNavigation } = useAuth();
   const { state, onNavigation } = useHangouts();
-  const { hangout, unreadhangouts, readyState } = state;
+  const { hangout, unreadhangouts, readyState, error } = state;
   return html`
     <div>
       <${Navbar} brand="Webcom" bg="dark">
@@ -145,6 +145,7 @@ export function AppNavigation() {
             <${NavItem}>
               <${NavLink} id="monitor" data-testid="socket-connection">
                 ${readyState === 1 ? "connected" : "disconnected"}
+                ${error && error.message}
               <//>
             <//>
             <${NavItem}>
