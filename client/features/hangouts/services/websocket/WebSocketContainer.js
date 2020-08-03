@@ -19,7 +19,13 @@ export function WebSocketContainer(props) {
   const { onlineStatus } = useOnlineStatus();
   const { children, socketUrl } = props;
   const { dispatch, state } = useHangouts();
-  const { searchHangouts, search, pendingHangout, fetchHangouts } = state;
+  const {
+    searchHangouts,
+    search,
+    pendingHangout,
+    fetchHangouts,
+    readyState,
+  } = state;
 
   useEffect(() => {
     if (username && socket === null && onlineStatus) {
@@ -47,7 +53,7 @@ export function WebSocketContainer(props) {
       };
       socket.onclose = () => {
         console.log("con closed");
-        setSocket(null);
+        // setSocket(null);
         dispatch({ type: actionTypes.CLOSED });
       };
       socket.onerror = (error) => {
@@ -64,10 +70,10 @@ export function WebSocketContainer(props) {
   }, [searchHangouts]);
 
   useEffect(() => {
-    if (pendingHangout && socket) {
+    if (pendingHangout && readyState === 1) {
       sendPendingHangout();
     }
-  }, [pendingHangout, socket]);
+  }, [pendingHangout, readyState]);
 
   useEffect(() => {
     if (fetchHangouts && username) {
