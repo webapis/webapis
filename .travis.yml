@@ -11,7 +11,7 @@ before_install:
   - npm install -g wait-on
 before_script:
 # if using Ubuntu 16 need this library
-# https://github.com/cypress-io/cypress-documentation/pull/1647.
+# https://github.com/cypress-io/cypress-documentation/pull/1647
 addons:
   apt:
     packages:
@@ -29,8 +29,5 @@ cache:
 
 jobs:
   include:
-    -stage: 'Parallel'
       script:
-       - nps apps.webcom.node.prod & wait-on http://localhost:3000 & nps cy.ci.auth
-      script:
-       - nps apps.webcom.node.prod & wait-on http://localhost:3000 & nps cy.ci.hangouts
+       - nps apps.webcom.node.prod & wait-on http://localhost:3000 & nps test 
