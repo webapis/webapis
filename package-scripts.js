@@ -135,7 +135,7 @@ module.exports = {
         // nps cy.local.cross series
         //nps cy.local.cross.browser.chrome.auth
         cross: crossMap({
-          browsers: ["chrome"],
+          browsers: ["chrome", "firefox"],
           features: ["auth", "hangouts"],
           type: "local",
         }),
@@ -151,7 +151,7 @@ module.exports = {
         //nps cy.ci.cross.browser.chrome.auth
         // nps cy.ci.cross  series
         cross: crossMap({
-          browsers: ["chrome"],
+          browsers: ["chrome", "firefox"],
           features: ["auth", "hangouts"],
           record: true,
           type: "ci",

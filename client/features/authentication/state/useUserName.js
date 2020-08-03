@@ -1,7 +1,7 @@
 import {
   useEffect,
   useState,
-} from "https://cdn.jsdelivr.net/gh/webapis/webapis@cbdf6161bd8ca09a385d62c8c697bd1cd87bb184/hooks.cdn.js";
+} from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
 import { useAuthContext } from "./AuthProvider";
 import actionTypes from "./actionTypes";
 export function useUserName() {

@@ -1,5 +1,5 @@
 import { actionTypes } from "./actionTypes";
-import { useEffect } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cbdf6161bd8ca09a385d62c8c697bd1cd87bb184/hooks.cdn.js";
+import { useEffect } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
 import filterHangouts from "./local-storage/local/filterHangouts";
 import loadHangouts from "./local-storage/local/loadHangouts";
 import {
