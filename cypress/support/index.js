@@ -23,5 +23,11 @@ import "./parse/deleteUser";
 Cypress.on("window:before:load", (win) => {
   delete win.fetch;
 });
+
+Cypress.on("uncaught:exception", (err, runnable) => {
+  // returning false here prevents Cypress from
+  // failing the test
+  cy.log("application error..", err);
+});
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
