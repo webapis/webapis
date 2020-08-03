@@ -68,7 +68,7 @@ function browserMap({ features, browser, record }) {
 function cyConf({ browser, record = false, feature }) {
   //ci cross
   if (record && browser) {
-    return `cypress run --headless --record --key 8947ab69-a60d-465d-810e-c0184180764e --browser ${browser} --spec cypress/integration/${feature}/**/*`;
+    return `cypress run --headless --record --key 8947ab69-a60d-465d-810e-c0184180764e --parallel --group ${browser}/${feature}  --browser ${browser} --spec cypress/integration/${feature}/**/*`;
   }
   // local cross
   else if (!record && browser) {
@@ -76,7 +76,7 @@ function cyConf({ browser, record = false, feature }) {
   }
   // ci default
   else if (record && !browser) {
-    return `cypress run --headless --record --key 8947ab69-a60d-465d-810e-c0184180764e  --spec cypress/integration/${feature}/**/*`;
+    return `cypress run --headless --record --key 8947ab69-a60d-465d-810e-c0184180764e --parallel --group ${feature} --spec cypress/integration/${feature}/**/*`;
   }
   //local default
   else if (!record && !browser) {
