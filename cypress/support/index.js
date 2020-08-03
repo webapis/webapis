@@ -27,7 +27,7 @@ Cypress.on("window:before:load", (win) => {
 Cypress.on("uncaught:exception", (err, runnable) => {
   // returning false here prevents Cypress from
   // failing the test
-  cy.log("application error..", err);
+  cy.log("application error..", JSON.stringify(err));
   return false;
 });
 // Alternatively you can use CommonJS syntax:
