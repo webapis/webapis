@@ -28,7 +28,7 @@ export function WebSocketContainer(props) {
   } = state;
 
   useEffect(() => {
-    if (username && socket === null && onlineStatus) {
+    if (username && username.length > 0 && socket === null) {
       setSocket(new WebSocket(`${socketUrl}/hangouts/?username=${username}`));
       console.log("set to init state.");
       dispatch({ type: actionTypes.SOCKET_READY });
@@ -36,10 +36,10 @@ export function WebSocketContainer(props) {
     if (!username && socket) {
       console.log("socket close");
 
-      setSocket(null);
-      dispatch({ type: actionTypes.SET_HANGOUT_TO_INIT_STATE });
+      //  setSocket(null);
+      //  dispatch({ type: actionTypes.SET_HANGOUT_TO_INIT_STATE });
     }
-  }, [username, socket, onlineStatus]);
+  }, [username, socket]);
 
   useEffect(() => {
     if (socket) {
