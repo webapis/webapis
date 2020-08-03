@@ -26,36 +26,15 @@ cache:
     - npm ci
     - npm run cy:verify
     - npm run cy:info
-defaults: &defaults
-  script:
-    #   ## print all Travis environment variables for debugging
-    - $(npm bin)/print-env TRAVIS
-    - nps apps.webcom.node.prod & wait-on http://localhost:3000 & nps cy.ci.auth
-    - nps apps.webcom.node.prod & wait-on http://localhost:3000 & nps cy.ci.hangouts
-    # after all tests finish running we need
-    # to kill all background jobs (like "npm start &")
+
 jobs:
   include:
     # we have multiple jobs to execute using just a single stage
     # but we can pass group name via environment variable to Cypress test runner
     - stage: test
-      env:
-        - STAGE_NAME="hangouts"
-      <<: *defaults
-    # run tests in parallel by including several test jobs with same name variable
-    - stage: test
-      env:
-        - STAGE_NAME="auth"
-      <<: *defaults
-    - stage: test
-      env:
-        - STAGE_NAME="auth"
-      <<: *defaults
-    - stage: test
-      env:
-        - STAGE_NAME="hangouts"
-      <<: *defaults
-    - stage: test
-      env:
-        - STAGE_NAME="auth"
-      <<: *defaults
+      script:
+    #   ## print all Travis environment variables for debugging
+      - nps apps.webcom.node.prod & wait-on http://localhost:3000 & nps cy.ci.auth
+      script:
+      - nps apps.webcom.node.prod & wait-on http://localhost:3000 & nps cy.ci.hangouts
+ 
