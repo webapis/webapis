@@ -3,7 +3,7 @@
   "viewportWidth": 1000,
   "viewportHeight": 600,
   "defaultCommandTimeout":10000,
-  "video":false,
+  "video":true,
   "env": {
     "back": "node"
   },
