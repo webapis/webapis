@@ -52,7 +52,6 @@ export function WebSocketContainer(props) {
       };
       socket.onerror = (error) => {
         dispatch({ type: actionTypes.SOCKET_ERROR, error });
-        displayError({ error });
       };
     }
   }, [socket]);
