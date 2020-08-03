@@ -19,13 +19,7 @@ export function WebSocketContainer(props) {
   const { onlineStatus } = useOnlineStatus();
   const { children, socketUrl } = props;
   const { dispatch, state } = useHangouts();
-  const {
-    searchHangouts,
-    search,
-    pendingHangout,
-    fetchHangouts,
-    readyState,
-  } = state;
+  const { searchHangouts, search, pendingHangout, fetchHangouts } = state;
 
   useEffect(() => {
     if (username && username.length > 0 && socket === null) {
@@ -71,10 +65,10 @@ export function WebSocketContainer(props) {
   }, [searchHangouts]);
 
   useEffect(() => {
-    if (pendingHangout && readyState === 1) {
+    if (pendingHangout && socket) {
       sendPendingHangout();
     }
-  }, [pendingHangout, readyState]);
+  }, [pendingHangout, socket]);
 
   useEffect(() => {
     if (fetchHangouts && username) {
