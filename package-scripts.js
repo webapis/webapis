@@ -144,7 +144,7 @@ module.exports = {
         //default nps cy.ci :   nps cy.ci.auth && nps cy.ci.hangouts
         //nps cy.ci.auth
         ...defaultBrowser({
-          features: ["hangouts"],
+          features: ["auth", "hangouts"],
           record: true,
           type: "ci",
         }),

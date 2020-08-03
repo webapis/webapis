@@ -81,19 +81,6 @@ describe("onInvite", () => {
     cy.get("[data-testid=oninvite-btn]")
       .click()
       .then(() => {
-        debugger;
-
-        // cy.window()
-        //   .its("localStorage")
-        //   .invoke("getItem", "demo-hangouts")
-        //   .then((result) => {
-        //     const hangout = JSON.parse(result);
-        //     const pending = hangout[0];
-        //     //testing saveHangout()--------------------------------
-        //     expect(pending).to.deep.equal(expectedHangoutState);
-        //     cy.get("[data-testid=spinner]").should("be.visible");
-        //     cy.get("[data-testid=messageTextInput]").should("be.disabled");
-        //   });
         cy.window()
           .its("localStorage")
           .invoke("getItem", "demo-bero-messages")
