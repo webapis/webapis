@@ -29,6 +29,7 @@ cache:
 
 jobs:
   include:
+    -stage: 'Parallel'
       script:
        - nps apps.webcom.node.prod & wait-on http://localhost:3000 & nps cy.ci.auth
       script:
