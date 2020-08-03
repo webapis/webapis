@@ -29,5 +29,9 @@ cache:
 
 jobs:
   include:
+    - stage: "auth test" 
       script:
-       - nps apps.webcom.node.prod & wait-on http://localhost:3000 & nps test 
+       - nps apps.webcom.node.prod & wait-on http://localhost:3000 &  nps cy.ci.auth
+    - stage: "hangouts test" 
+      script:
+       - nps apps.webcom.node.prod & wait-on http://localhost:3000 &  nps cy.ci.hangouts
