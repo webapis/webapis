@@ -64,7 +64,7 @@ export function WebSocketContainer(props) {
   }, [searchHangouts]);
 
   useEffect(() => {
-    if (pendingHangout && socket.readyState === 1) {
+    if (pendingHangout && socket && socket.readyState === 1) {
       sendPendingHangout();
     }
   }, [pendingHangout, socket]);
