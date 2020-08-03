@@ -33,8 +33,5 @@ jobs:
     # but we can pass group name via environment variable to Cypress test runner
     - stage: test
       script:
-    #   ## print all Travis environment variables for debugging
-      - nps apps.webcom.node.prod & wait-on http://localhost:3000 & nps cy.ci.auth
-      script:
-      - nps apps.webcom.node.prod & wait-on http://localhost:3000 & nps cy.ci.hangouts
+      - nps apps.webcom.node.prod & wait-on http://localhost:3000 & nps test
  
