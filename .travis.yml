@@ -31,7 +31,8 @@ jobs:
   include:
     # we have multiple jobs to execute using just a single stage
     # but we can pass group name via environment variable to Cypress test runner
-    - stage: test
-      script:
-      - nps apps.webcom.node.prod & wait-on http://localhost:3000 & nps test
+    - name: auth
+      script: nps apps.webcom.node.prod & wait-on http://localhost:3000 & nps cy.ci.auth
+    - name: hangouts
+      script: nps apps.webcom.node.prod & wait-on http://localhost:3000 & nps cy.ci.hangouts
  
