@@ -30,7 +30,8 @@ defaults: &defaults
   script:
     #   ## print all Travis environment variables for debugging
     - $(npm bin)/print-env TRAVIS
-    - nps apps.webcom.node.prod & wait-on http://localhost:3000 & nps test
+    - nps apps.webcom.node.prod & wait-on http://localhost:3000 & nps cy.ci.auth
+    - nps apps.webcom.node.prod & wait-on http://localhost:3000 & nps cy.ci.hangouts
     # after all tests finish running we need
     # to kill all background jobs (like "npm start &")
 jobs:
