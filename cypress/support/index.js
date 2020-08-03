@@ -28,6 +28,7 @@ Cypress.on("uncaught:exception", (err, runnable) => {
   // returning false here prevents Cypress from
   // failing the test
   cy.log("application error..", JSON.stringify(err));
+  cy.log("application error stack..", JSON.stringify(err.stack));
   return false;
 });
 // Alternatively you can use CommonJS syntax:
