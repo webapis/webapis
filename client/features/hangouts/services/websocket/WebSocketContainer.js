@@ -58,6 +58,7 @@ export function WebSocketContainer(props) {
       };
       socket.onerror = (error) => {
         dispatch({ type: actionTypes.SOCKET_ERROR, error });
+        throw error;
       };
     }
   }, [socket]);
