@@ -102,34 +102,33 @@ describe("onInvite", () => {
           });
       });
 
-    cy.get("[data-testid=invitee-ui]").then(() => {
-      cy.window()
-        .its("localStorage")
-        .invoke("getItem", "demo-hangouts")
-        .then((result) => {
-          const hangout = JSON.parse(result);
-          const devlivered = hangout[0];
-          //testing SaveHangout()---------------------------------------
-          expect(devlivered).to.deep.equal({
-            ...expectedHangoutState,
-            state: "INVITED",
-          });
+    cy.get("[data-testid=invitee-ui]");
+    cy.window()
+      .its("localStorage")
+      .invoke("getItem", "demo-hangouts")
+      .then((result) => {
+        const hangout = JSON.parse(result);
+        const devlivered = hangout[0];
+        //testing SaveHangout()---------------------------------------
+        expect(devlivered).to.deep.equal({
+          ...expectedHangoutState,
+          state: "INVITED",
         });
-      cy.window()
-        .its("localStorage")
-        .invoke("getItem", "demo-bero-messages")
-        .then((result) => {
-          const messages = JSON.parse(result);
-          const pending = messages[0];
-          //testing updateSentMessage()-------------------------------
-          expect(pending).to.deep.equal({
-            ...expectedMessageState,
-            state: "delivered",
-          });
+      });
+    cy.window()
+      .its("localStorage")
+      .invoke("getItem", "demo-bero-messages")
+      .then((result) => {
+        const messages = JSON.parse(result);
+        const pending = messages[0];
+        //testing updateSentMessage()-------------------------------
+        expect(pending).to.deep.equal({
+          ...expectedMessageState,
+          state: "delivered",
         });
-      cy.get("[data-testid=hangouts-link]").click();
-      cy.get("[data-testid=bero]").click();
-      cy.get("[data-testid=invitee-ui]");
-    });
+      });
+    cy.get("[data-testid=hangouts-link]").click();
+    cy.get("[data-testid=bero]").click();
+    cy.get("[data-testid=invitee-ui]");
   });
 });
