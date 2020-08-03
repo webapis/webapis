@@ -75,38 +75,35 @@ describe("onAccept", () => {
         cy.get("[data-testid=spinner]");
       });
 
-    cy.get("[data-testid=message-count]")
-      .contains(0)
-      .then(() => {
-        cy.window()
-          .its("localStorage")
-          .invoke("getItem", "bero-unread-hangouts")
-          .then((result) => {
-            const messages = JSON.parse(result);
-            //test removeUnread()------------------------------------------
-            expect(messages.length).to.equal(0);
-          });
-        cy.get("[data-testid=hangchat-ui]");
-
-        cy.get("[data-testid=left-message-wrapper]")
-          .find("[data-testid=message]")
-          .contains("Let's chat bero");
-        cy.get("[data-testid=left-message-wrapper]")
-          .find("[data-testid=message-sender]")
-          .contains("demo");
-        cy.get("[data-testid=left-message-wrapper]")
-          .find("[data-testid=time]")
-          .contains("Now");
-
-        cy.get("[data-testid=right-message-wrapper]")
-          .find("[data-testid=message]")
-          .contains("Accepted your invitation");
-        cy.get("[data-testid=right-message-wrapper]")
-          .find("[data-testid=message-sender]")
-          .contains("me");
-        cy.get("[data-testid=right-message-wrapper]")
-          .find("[data-testid=time]")
-          .contains("Now");
+    cy.get("[data-testid=message-count]").contains(0);
+    cy.window()
+      .its("localStorage")
+      .invoke("getItem", "bero-unread-hangouts")
+      .then((result) => {
+        const messages = JSON.parse(result);
+        //test removeUnread()------------------------------------------
+        expect(messages.length).to.equal(0);
       });
+    cy.get("[data-testid=hangchat-ui]");
+
+    cy.get("[data-testid=left-message-wrapper]")
+      .find("[data-testid=message]")
+      .contains("Let's chat bero");
+    cy.get("[data-testid=left-message-wrapper]")
+      .find("[data-testid=message-sender]")
+      .contains("demo");
+    cy.get("[data-testid=left-message-wrapper]")
+      .find("[data-testid=time]")
+      .contains("Now");
+
+    cy.get("[data-testid=right-message-wrapper]")
+      .find("[data-testid=message]")
+      .contains("Accepted your invitation");
+    cy.get("[data-testid=right-message-wrapper]")
+      .find("[data-testid=message-sender]")
+      .contains("me");
+    cy.get("[data-testid=right-message-wrapper]")
+      .find("[data-testid=time]")
+      .contains("Now");
   });
 });
