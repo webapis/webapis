@@ -47,6 +47,7 @@ describe("onInvite", () => {
     cy.clock(currentDate, ["Date"]);
 
     cy.visit("/");
+    cy.screenshot();
     cy.wait(50);
     cy.get("[data-testid=hangouts-link]").click();
     cy.get("[data-testid=search-link]").click();
@@ -76,6 +77,7 @@ describe("onInvite", () => {
       text: "Lets chat on Hangout",
     };
     cy.get("[data-testid=socket-connection]").contains("connected");
+    cy.screenshot();
     cy.get("[data-testid=oninvite-btn]")
       .click()
       .then(() => {
