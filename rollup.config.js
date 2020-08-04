@@ -59,7 +59,7 @@ const commonPlugins = [
         "https://localhost:3000/htm.module.js",
       "https://gitcdn.xyz/repo/webapis/webapis/master/preact.combat.cdn.js":
         "https://localhost:3000/preact.combat.dev.cdn.js",
-      "https://cdn.jsdelivr.net/gh/webapis/webapis@cbdf6161bd8ca09a385d62c8c697bd1cd87bb184/hooks.cdn.js":
+      "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js":
         "https://localhost:3000/hooks.dev.cdn.js",
     }),
 ];
