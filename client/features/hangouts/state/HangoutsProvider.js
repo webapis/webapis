@@ -14,7 +14,7 @@ import { useMessage } from "./useMessage";
 import { useUserName } from "features/authentication/state/useUserName";
 import { actionTypes } from "./actionTypes";
 import { clientCommands } from "./clientCommands";
-import { loadMessages } from "./local-storage/common";
+import { loadMessages, removeUnreads } from "./local-storage/common";
 const html = htm.bind(h);
 const HangoutContext = createContext();
 export function useHangoutContext() {
@@ -66,6 +66,7 @@ export default function HangoutsProvider(props) {
 
       // load messages from local storage
       loadMessages({ hangout, name: username, dispatch });
+      removeUnreads({ dispatch, name: username });
     }
   }, [hangout]);
 
