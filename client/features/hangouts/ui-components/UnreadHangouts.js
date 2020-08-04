@@ -16,15 +16,8 @@ export default function UnreadHangouts({
             onClick=${() => onUnreadSelect({ hangout: u })}
             class="list-group-item d-flex justify-content-between align-items-center list-group-item-action"
           >
-            ${u.username},${u.message && u.message.text}
-            <span
-              onClick=${() => {
-                onUnreadRemove({ hangout: u });
-              }}
-              class="btn badge badge-danger badge-pill"
-            >
-              X
-            </span>
+            ${u.username}, messages:
+            <span class="badge badge-primary">${u.messageCounter}</span>
           </li>
         `;
       })}

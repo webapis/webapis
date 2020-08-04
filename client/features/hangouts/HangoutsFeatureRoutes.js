@@ -59,7 +59,12 @@ export default function HangoutsFeatureRoutes(props) {
     onAppRoute,
     username,
   });
-  const { unreadhangouts, onUnreadSelect, onUnreadRemove } = useUnread({
+  const {
+    unreadhangouts,
+    onUnreadSelect,
+    onUnreadRemove,
+    reducedUnreads,
+  } = useUnread({
     state,
     dispatch,
     onAppRoute,
@@ -137,7 +142,7 @@ export default function HangoutsFeatureRoutes(props) {
     case "/unread":
       return html` <${Suspense} fallback=${Loading}>
         <${UnreadHangouts}
-          unreadhangouts=${unreadhangouts}
+          unreadhangouts=${reducedUnreads}
           onUnreadSelect=${onUnreadSelect}
           onUnreadRemove=${onUnreadRemove}
         />
