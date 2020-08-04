@@ -158,7 +158,7 @@ export function useHangouts() {
       username: hangout.username,
       email,
       message: {
-        text: "",
+        text: "You have blocked this message",
         timestamp,
         type: "blocked",
       },
@@ -174,7 +174,6 @@ export function useHangouts() {
     saveSentMessage({
       hangout: {
         ...block,
-        message: { text: "You have blocked this message", timestamp },
       },
       dispatch,
       name: username,

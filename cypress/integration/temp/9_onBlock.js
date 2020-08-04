@@ -79,11 +79,13 @@ describe("onBlock", () => {
 
     cy.visit("/");
     cy.get("[data-testid=hangouts-link]").click();
-    //TODO HG onBlock,Blocker,onUnblock,UnBlocker,onRead cypress
 
-    // cy.get("[data-testid=bero]").click();
-    // cy.get("[data-testid=nav-config]").click();
-    // cy.get("[data-testid=bckui-btn]").click();
-    // cy.get("[data-testid=block-btn]").click();
+    cy.get("[data-testid=bero]").click();
+    cy.get("[data-testid=nav-config]").click();
+    cy.get("[data-testid=bckui-btn]").click();
+    cy.get("[data-testid=block-btn]").click();
+    cy.get("[data-testid=hangchat-ui]");
+    cy.get("[data-testid=send-btn]").should("be.disabled");
+    cy.get("[data-testid=message-input]").should("be.disabled");
   });
 });

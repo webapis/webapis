@@ -6,7 +6,7 @@ const ws = require("./wsocket");
 const httpRoute = require("./http-route");
 const https = require("https");
 const fs = require("fs");
-const url = "mongodb://127.0.0.1:27017";
+const url = process.env.DB_URL || "mongodb://127.0.0.1:27017";
 const { MongoClient } = require("mongodb");
 // parse
 if (process.env.PREACT_APP_BACK === "PREACT_APP_PARSE") {

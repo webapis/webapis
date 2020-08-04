@@ -36,7 +36,7 @@ export default function MessageEditor({
     <div>
       <div class="input-group mb-3">
         <input
-          disabledc=${hangout && hangout.state === "BLOCKED"}
+          disabled=${hangout && hangout.state === "BLOCKED"}
           type="text"
           class="form-control"
           aria-label="Recipient's username"
@@ -49,8 +49,8 @@ export default function MessageEditor({
           <button
             class="btn btn-outline-secondary"
             type="button"
-            loadingc=${loading}
-            disabledc=${hangout && hangout.state === "BLOCKED"}
+            loading=${loading}
+            disabled=${hangout && hangout.state === "BLOCKED"}
             id="MESSAGE"
             onClick=${onMessage}
             data-testid="send-btn"
