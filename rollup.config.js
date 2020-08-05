@@ -183,57 +183,57 @@ export default [
   //   ],
   // },
 
-  {
-    input: `client/storybook/index.js`,
-    external: externals,
-    output: [
-      {
-        dir: `client/storybook/build`,
-        format: "es",
-        sourcemap: "inline",
-      },
-    ],
-    plugins: [
-      del({ targets: `client/storybook/build/*` }),
+  // {
+  //   input: `client/storybook/index.js`,
+  //   external: externals,
+  //   output: [
+  //     {
+  //       dir: `client/storybook/build`,
+  //       format: "es",
+  //       sourcemap: "inline",
+  //     },
+  //   ],
+  //   plugins: [
+  //     del({ targets: `client/storybook/build/*` }),
 
-      !production &&
-        copy({
-          targets: [
-            { src: "assets/libs/dev/**", dest: `client/storybook/build` },
-            {
-              src: "config/rollup/html-template/dev/index.html",
-              dest: `client/storybook/build`,
-            },
-          ],
-        }),
-      production &&
-        copy({
-          targets: [
-            { src: "assets/libs/prod/**", dest: `client/storybook/build` },
-            {
-              src: "config/rollup/html-template/prod/index.html",
-              dest: `client/storybook/build`,
-            },
-          ],
-        }),
-      ...commonPlugins,
-      copy({
-        targets: [
-          { src: "assets/manifest/**", dest: `client/storybook/build` },
+  //     !production &&
+  //       copy({
+  //         targets: [
+  //           { src: "assets/libs/dev/**", dest: `client/storybook/build` },
+  //           {
+  //             src: "config/rollup/html-template/dev/index.html",
+  //             dest: `client/storybook/build`,
+  //           },
+  //         ],
+  //       }),
+  //     production &&
+  //       copy({
+  //         targets: [
+  //           { src: "assets/libs/prod/**", dest: `client/storybook/build` },
+  //           {
+  //             src: "config/rollup/html-template/prod/index.html",
+  //             dest: `client/storybook/build`,
+  //           },
+  //         ],
+  //       }),
+  //     ...commonPlugins,
+  //     copy({
+  //       targets: [
+  //         { src: "assets/manifest/**", dest: `client/storybook/build` },
 
-          {
-            src: "config/rollup/html-template/index.html",
-            dest: `client/storybook/build/`,
-          },
-        ],
-      }),
+  //         {
+  //           src: "config/rollup/html-template/index.html",
+  //           dest: `client/storybook/build/`,
+  //         },
+  //       ],
+  //     }),
 
-      serve({
-        contentBase: `client/storybook/build/`,
-        openPage: "/index.html",
-        port: 10004,
-        open: true,
-      }),
-    ],
-  },
+  //     serve({
+  //       contentBase: `client/storybook/build/`,
+  //       openPage: "/index.html",
+  //       port: 10004,
+  //       open: true,
+  //     }),
+  //   ],
+  // },
 ];
