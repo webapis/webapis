@@ -25,7 +25,8 @@ const options = {
   await client.connect();
   console.log("process.env.NODE_ENV", process.env.NODE_ENV);
   if (process.env.NODE_ENV === "production") {
-    server = http.createServer(httpRoute(client));
+    server = https.createServer(options, httpRoute(client));
+    //  server = http.createServer(httpRoute(client));
   } else {
     server = https.createServer(options, httpRoute(client));
   }
