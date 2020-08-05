@@ -24,12 +24,15 @@ describe("onRead", () => {
       });
     }
   });
-  it("accepter is read succefully", () => {
-    let timestamp = Date.now();
+  it("message is sent succefully", () => {
+    const timestamp = Date.UTC(2018, 10, 30);
+    cy.clock(timestamp, ["Date"]);
+
+    //  let timestamp = Date.now();
     const inviter = {
       username: "bero",
       timestamp,
-      message: { text: "Hello bero letschat", timestamp },
+      message: { text: "Hello bero let's chat", timestamp },
       email: "bero@gmail.com",
       command: "INVITE",
     };
@@ -52,21 +55,64 @@ describe("onRead", () => {
     cy.task("seed:onHangout", {
       hangout: accepter,
       senderUsername: "bero",
+      senderEmail: "bero@gmail.com",
+      dbName: "auth",
+      collectionName: "users",
+    });
+
+    const read = {
+      username: "bero",
+      timestamp,
+      message: { text: "Your invitation is accepted", timestamp },
+      email: "bero@gmail.com",
+      command: "READ",
+    };
+    cy.task("seed:onHangout", {
+      hangout: read,
+      senderUsername: "demo",
+      senderEmail: "demo@gmail.com",
+      dbName: "auth",
+      collectionName: "users",
+    });
+
+    const message = {
+      username: "bero",
+      timestamp,
+      message: { text: "Hello bero", timestamp },
+      email: "bero@gmail.com",
+      command: "MESSAGE",
+    };
+
+    cy.task("seed:onHangout", {
+      hangout: message,
+      senderUsername: "demo",
+      senderEmail: "demo@gmail.com",
       dbName: "auth",
       collectionName: "users",
     });
 
     if (Cypress.env("back") === "node") {
       cy.loginByEmail({
-        email: "demo@gmail.com",
+        email: "bero@gmail.com",
         password: "Dragonly_1999!",
       });
     }
 
     cy.visit("/");
     cy.get("[data-testid=message-count]").contains(1);
-    cy.get("[data-testid=unread-link]").click();
-    cy.get("[data-testid=bero]").click();
+    cy.get("[data-testid=hangouts-link]").click();
+
+    cy.get("[data-testid=demo]").click();
     cy.get("[data-testid=message-count]").contains(0);
+
+    cy.get("[data-testid=left-message-wrapper]")
+      .find("[data-testid=message]")
+      .contains("Hello bero");
+    cy.get("[data-testid=left-message-wrapper]")
+      .find("[data-testid=message-sender]")
+      .contains("demo");
+    cy.get("[data-testid=left-message-wrapper]")
+      .find("[data-testid=time]")
+      .contains("Now");
   });
 });

@@ -44,11 +44,12 @@ export default function HangoutsProvider(props) {
   useEffect(() => {
     if (hangout) {
       switch (hangout.state) {
-        case "ACCEPTER":
-        case "DECLINER":
-        case "BLOCKER":
+        // case "ACCEPTER":
+        // case "DECLINER":
+        // case "BLOCKER":
         case "MESSANGER":
-        case "UNBLOCKER":
+          //case "UNBLOCKER":
+          // case "READER":
           dispatch({
             type: actionTypes.SENDING_HANGOUT_STARTED,
             pendingHangout: { ...hangout, command: clientCommands.READ },

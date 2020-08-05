@@ -94,8 +94,9 @@ describe("Blocker", () => {
 
     cy.visit("/");
     cy.get("[data-testid=hangouts-link]").click();
-    cy.get("[data-testid=unread-link]").click();
-
-    // cy.get("[data-testid=bero]").click();
+    cy.get("[data-testid=bero]").click();
+    cy.get("[data-testid=message-input]").type("Hey x");
+    cy.get("[data-testid=send-btn]").click();
+    cy.get("[data-testid=blocker-message]").should("be.visible");
   });
 });
