@@ -6,7 +6,7 @@ import del from "rollup-plugin-delete";
 import { terser } from "rollup-plugin-terser";
 import replace from "@rollup/plugin-replace";
 import copy from "rollup-plugin-copy";
-import alias from "@rollup/plugin-alias";
+import alias from "rollup-plugin-alias";
 const production = !process.env.ROLLUP_WATCH;
 
 const externals = [
@@ -169,11 +169,11 @@ export default [
   //         },
   //       ],
   //     }),
-  //     htmlTemplate({
-  //       template: "config/rollup/html-template/changepassword.html",
-  //       target: `builds/${process.env.appName}/build/changepassword.html`,
-  //       attrs: ['type="module"'],
-  //     }),
+  //     // htmlTemplate({
+  //     //   template: "config/rollup/html-template/changepassword.html",
+  //     //   target: `builds/${process.env.appName}/build/changepassword.html`,
+  //     //   attrs: ['type="module"'],
+  //     // }),
   //     serve({
   //       contentBase: `builds/${process.env.appName}/build/`,
   //       openPage: "/changepassword.html",
