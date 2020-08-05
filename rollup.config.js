@@ -48,6 +48,7 @@ const commonPlugins = [
   }),
   replace({
     ip: JSON.stringify(process.env.ip),
+    PORT: JSON.stringify(process.env.PORT),
   }),
   !production &&
     replace({
