@@ -46,9 +46,11 @@ const commonPlugins = [
       ? `${JSON.stringify(process.env.PREACT_APP_BACK)}`
       : "PREACT_APP_PARSE",
   }),
+
   replace({
     ip: JSON.stringify(process.env.ip),
     PORT: JSON.stringify(process.env.PORT),
+    //  HOST: process.env.NODE_ENV==='production' ? location.origin.replace(/^http/, 'ws') :'wss//localhost:3000'
   }),
   !production &&
     replace({
