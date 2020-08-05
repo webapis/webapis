@@ -103,7 +103,7 @@ describe("onMessage_spec", () => {
     cy.get("[data-testid=hangouts-link]").click();
 
     cy.get("[data-testid=demo]").click();
-    cy.get("[data-testid=message-count]").contains(1);
+    cy.get("[data-testid=message-count]").contains(0);
 
     cy.get("[data-testid=left-message-wrapper]")
       .find("[data-testid=message]")

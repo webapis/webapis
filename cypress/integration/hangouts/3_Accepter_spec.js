@@ -73,9 +73,8 @@ describe("Accepter", () => {
         cy.get("[data-testid=unread-link]")
           .click()
           .then(() => {
-            cy.get("[data-testid=bero]").contains(
-              "bero,Your invitation is accepted"
-            );
+            cy.get("[data-testid=bero]").should("have.length", 1);
+            cy.get(".badge-primary").contains(1);
             cy.get("[data-testid=bero]").click();
             cy.get("[data-testid=message]").contains(
               "Your invitation is accepted"

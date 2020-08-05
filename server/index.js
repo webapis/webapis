@@ -5,6 +5,7 @@ const ws = require("./wsocket");
 //import { parseServer } from "./parse";
 const httpRoute = require("./http-route");
 const https = require("https");
+const http = require("http");
 const fs = require("fs");
 const url = process.env.DB_URL || "mongodb://127.0.0.1:27017";
 const { MongoClient } = require("mongodb");
@@ -19,10 +20,15 @@ const options = {
 };
 
 (async () => {
+  let server = null;
   const client = await new MongoClient(url, { useUnifiedTopology: true });
   await client.connect();
-
-  const server = https.createServer(options, httpRoute(client));
+  console.log("process.env.NODE_ENV", process.env.NODE_ENV);
+  if (process.env.NODE_ENV === "production") {
+    server = http.createServer(httpRoute(client));
+  } else {
+    server = https.createServer(options, httpRoute(client));
+  }
 
   ws(server, client);
   function shutDown() {

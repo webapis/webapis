@@ -14,7 +14,9 @@ export function RootProviders({ children }) {
     >
       <${AuthProvider}>
         <${HangoutsProvider}>
-          <${HangoutAdapter} socketUrl=${`wss://${ip}:3000`}>
+          <${HangoutAdapter}
+            socketUrl=${location.origin.replace(/^http/, "ws")}
+          >
             ${children}
           <//>
         <//>

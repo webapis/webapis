@@ -6,7 +6,7 @@ import del from "rollup-plugin-delete";
 import { terser } from "rollup-plugin-terser";
 import replace from "@rollup/plugin-replace";
 import copy from "rollup-plugin-copy";
-import alias from "@rollup/plugin-alias";
+import alias from "rollup-plugin-alias";
 const production = !process.env.ROLLUP_WATCH;
 
 const externals = [
@@ -46,8 +46,11 @@ const commonPlugins = [
       ? `${JSON.stringify(process.env.PREACT_APP_BACK)}`
       : "PREACT_APP_PARSE",
   }),
+
   replace({
     ip: JSON.stringify(process.env.ip),
+    PORT: JSON.stringify(process.env.PORT),
+    //  HOST: process.env.NODE_ENV==='production' ? location.origin.replace(/^http/, 'ws') :'wss//localhost:3000'
   }),
   !production &&
     replace({
@@ -57,7 +60,7 @@ const commonPlugins = [
         "https://localhost:3000/preact.module.js",
       "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js":
         "https://localhost:3000/htm.module.js",
-      "https://gitcdn.xyz/repo/webapis/webapis/master/preact.combat.cdn.js":
+      "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/preact.combat.cdn.js":
         "https://localhost:3000/preact.combat.dev.cdn.js",
       "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js":
         "https://localhost:3000/hooks.dev.cdn.js",
@@ -169,11 +172,11 @@ export default [
   //         },
   //       ],
   //     }),
-  //     htmlTemplate({
-  //       template: "config/rollup/html-template/changepassword.html",
-  //       target: `builds/${process.env.appName}/build/changepassword.html`,
-  //       attrs: ['type="module"'],
-  //     }),
+  //     // htmlTemplate({
+  //     //   template: "config/rollup/html-template/changepassword.html",
+  //     //   target: `builds/${process.env.appName}/build/changepassword.html`,
+  //     //   attrs: ['type="module"'],
+  //     // }),
   //     serve({
   //       contentBase: `builds/${process.env.appName}/build/`,
   //       openPage: "/changepassword.html",
@@ -183,57 +186,57 @@ export default [
   //   ],
   // },
 
-  {
-    input: `client/storybook/index.js`,
-    external: externals,
-    output: [
-      {
-        dir: `client/storybook/build`,
-        format: "es",
-        sourcemap: "inline",
-      },
-    ],
-    plugins: [
-      del({ targets: `client/storybook/build/*` }),
+  // {
+  //   input: `client/storybook/index.js`,
+  //   external: externals,
+  //   output: [
+  //     {
+  //       dir: `client/storybook/build`,
+  //       format: "es",
+  //       sourcemap: "inline",
+  //     },
+  //   ],
+  //   plugins: [
+  //     del({ targets: `client/storybook/build/*` }),
 
-      !production &&
-        copy({
-          targets: [
-            { src: "assets/libs/dev/**", dest: `client/storybook/build` },
-            {
-              src: "config/rollup/html-template/dev/index.html",
-              dest: `client/storybook/build`,
-            },
-          ],
-        }),
-      production &&
-        copy({
-          targets: [
-            { src: "assets/libs/prod/**", dest: `client/storybook/build` },
-            {
-              src: "config/rollup/html-template/prod/index.html",
-              dest: `client/storybook/build`,
-            },
-          ],
-        }),
-      ...commonPlugins,
-      copy({
-        targets: [
-          { src: "assets/manifest/**", dest: `client/storybook/build` },
+  //     !production &&
+  //       copy({
+  //         targets: [
+  //           { src: "assets/libs/dev/**", dest: `client/storybook/build` },
+  //           {
+  //             src: "config/rollup/html-template/dev/index.html",
+  //             dest: `client/storybook/build`,
+  //           },
+  //         ],
+  //       }),
+  //     production &&
+  //       copy({
+  //         targets: [
+  //           { src: "assets/libs/prod/**", dest: `client/storybook/build` },
+  //           {
+  //             src: "config/rollup/html-template/prod/index.html",
+  //             dest: `client/storybook/build`,
+  //           },
+  //         ],
+  //       }),
+  //     ...commonPlugins,
+  //     copy({
+  //       targets: [
+  //         { src: "assets/manifest/**", dest: `client/storybook/build` },
 
-          {
-            src: "config/rollup/html-template/index.html",
-            dest: `client/storybook/build/`,
-          },
-        ],
-      }),
+  //         {
+  //           src: "config/rollup/html-template/index.html",
+  //           dest: `client/storybook/build/`,
+  //         },
+  //       ],
+  //     }),
 
-      serve({
-        contentBase: `client/storybook/build/`,
-        openPage: "/index.html",
-        port: 10004,
-        open: true,
-      }),
-    ],
-  },
+  //     serve({
+  //       contentBase: `client/storybook/build/`,
+  //       openPage: "/index.html",
+  //       port: 10004,
+  //       open: true,
+  //     }),
+  //   ],
+  // },
 ];

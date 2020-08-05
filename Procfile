@@ -1,1 +1,1 @@
-web: node server/index.js
+web: nps apps.webcom.node.prod
