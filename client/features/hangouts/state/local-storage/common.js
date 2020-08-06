@@ -101,26 +101,23 @@ export function updateSentMessage({ hangout, name, dispatch }) {
   dispatch({ type: actionTypes.MESSAGES_UPDATED, messages: localMessages });
 }
 
-export function updateRecievedMessage({
-  hangout,
-  name,
-  dispatch,
-  dState,
-  messagedBy,
-}) {
-  const { username, message } = hangout;
-
-  const { timestamp } = message;
+export function updateRecievedMessages({ hangout, name, dispatch, dState }) {
+  const { username } = hangout;
   const messageKey = `${name}-${username}-messages`;
-  const updatedMessage = { ...message, username, state: dState };
   const localMessages = JSON.parse(localStorage.getItem(messageKey));
-
-  let messageIndex = localMessages.findIndex((i) => {
-    i.username === username, i.timestamp === timestamp;
-  });
-  localMessages.splice(messageIndex, 1, updatedMessage);
-  localStorage.setItem(messageKey, JSON.stringify(localMessages));
-  dispatch({ type: actionTypes.MESSAGES_UPDATED, messages: localMessages });
+  if (localMessages && localMessages.length > 0) {
+    let updatedMessages = localMessages.map((l) => {
+      if (dState === "reading" && l.state === "unread") {
+        return { ...l, state: "reading" };
+      } else if (dState === "read" && l.state === "reading") {
+        return { ...l, state: "read" };
+      } else {
+        return l;
+      }
+    });
+    localStorage.setItem(messageKey, JSON.stringify(updatedMessages));
+    dispatch({ type: actionTypes.MESSAGES_UPDATED, messages: updatedMessages });
+  }
 }
 
 export function updateHangout({ dispatch, name, hangout }) {

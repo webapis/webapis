@@ -9,6 +9,7 @@ import {
   saveRecievedMessage,
   updateHangout,
   removeUnread,
+  updateRecievedMessages,
   removeUnreads,
 } from "./local-storage/common";
 
@@ -77,9 +78,14 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
         break;
       case "READ":
         setTimeout(function () {
-          updateHangout(commonArg);
+          updateHangout({
+            hangout: { ...focusedHangout, state: "READ" },
+            name: username,
+            dispatch,
+          });
+          updateRecievedMessages(commonArg);
           dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
-          removeUnread(commonArg);
+          // removeUnread(commonArg);
         }, 200);
 
         break;

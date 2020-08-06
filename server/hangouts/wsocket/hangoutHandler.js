@@ -27,94 +27,106 @@ module.exports = async function hangoutHandler({
       state: targetState,
     };
 
-    if (
-      hangout.command === "INVITE" ||
-      hangout.command === "ACCEPT" ||
-      hangout.command === "DECLINE"
-    ) {
-      if (hangout.command === "INVITE" || hangout.command === "ACCEPT") {
-        //PUSH HANGOUT ON SENDER
-        await collection.updateOne(
-          { username: ws.user.username },
-          { $push: { hangouts: sender } }
-        );
-      }
-
-      //PUSH UNREADS ON TARGET
-      await collection.updateOne({ username }, { $push: { unreads: target } });
-
-      if (hangout.command === "ACCEPT" || hangout.command === "DECLINE") {
-        let pullResult = await collection.updateOne(
-          { username: ws.user.username },
-          { $pull: { unreads: { timestamp, username } } }
-        );
+    let funcs = {
+      updateTargetHangout: async function () {
         // UPDATE HANGOUT ON TARGET
         await collection.updateOne(
           { username, "hangouts.username": ws.user.username },
           { $set: { "hangouts.$": target } }
         );
-      }
-    }
-
-    // CLIENT COMMAND ELSE//
-    else if (
-      hangout.command === "BLOCK" ||
-      hangout.command === "UNBLOCK" ||
-      hangout.command === "MESSAGE"
-    ) {
-      // UPDATE HANGOUT ON SENDER
-      await collection.updateOne(
-        { username: ws.user.username, "hangouts.username": username },
-        { $set: { "hangouts.$": sender } }
-      );
-
-      // UPDATE HANGOUT ON TARGET
-      await collection.updateOne(
-        { username, "hangouts.username": ws.user.username },
-        { $set: { "hangouts.$": target } }
-      );
-
-      //PUSH UNREADS ON TARGET
-      await collection.updateOne({ username }, { $push: { unreads: target } });
-
-      if (hangout.command === "BLOCK" || hangout.command === "UNBLOCK") {
+      },
+      updateSenderHangout: async function () {
+        // UPDATE HANGOUT ON SENDER
+        await collection.updateOne(
+          { username: ws.user.username, "hangouts.username": username },
+          { $set: { "hangouts.$": sender } }
+        );
+      },
+      pushSenderHangout: async function () {
+        //PUSH HANGOUT ON SENDER
         await collection.updateOne(
           { username: ws.user.username },
-          { $pull: { unreads: { username } } }
+          { $push: { hangouts: sender } }
         );
+      },
+      pushTargetUnread: async function () {
+        //PUSH UNREADS ON TARGET
         await collection.updateOne(
           { username },
-          {
-            $pull: {
-              unreads: {
-                username: ws.user.username,
-                state: { $ne: "BLOCKER" },
-              },
-            },
-          }
+          { $push: { unreads: target } }
         );
-      }
-    } else if (hangout.command === "READ") {
-      // UPDATE HANGOUT ON SENDER
-      await collection.updateOne(
-        { username: ws.user.username, "hangouts.username": username },
-        { $set: { "hangouts.$": sender } }
-      );
+      },
+      pullSenderUnread: async function () {
+        await collection.updateOne(
+          { username: ws.user.username },
+          { $pull: { unreads: { timestamp, username } } }
+        );
+      },
+      pullSenderAllUnreads: async function () {},
+      pullTargetAllUnreads: async function () {},
+    };
+    switch (hangout.command) {
+      case "INVITE": //------------------------------------
+        //SENDER
+        funcs.pushSenderHangout(); //INVITED
+        //TARGET
+        funcs.pushTargetUnread(); //INVITER
+        break;
+      case "ACCEPT":
+        //SENDER-----------------------------------------
+        funcs.pullSenderUnread(); //INVITER
+        funcs.pushSenderHangout(); //ACCEPTED
+        //TARGET-----------------------------------------
+        funcs.updateTargetHangout(); //ACCEPTER
+        funcs.pushTargetUnread(); //ACCEPTER
 
-      // UPDATE HANGOUT ON TARGET
-      await collection.updateOne(
-        { username, "hangouts.username": ws.user.username },
-        { $set: { "hangouts.$": target } }
-      );
+        break;
+      case "DECLINE":
+        //SENDER-----------------------------------------
+        funcs.pullSenderUnread(); //INVITER
+        //TARGET-----------------------------------------
+        funcs.updateTargetHangout(); //DECLINER
+        break;
+      case "MESSAGE":
+        //SENDER-----------------------------------------
+        funcs.updateSenderHangout(); //MESSAGED
+        //TARGET-----------------------------------------
+        funcs.updateTargetHangout(); //MESSANGER
+        funcs.pushTargetUnread(); //MESSANGER
+        break;
+      case "BLOCK":
+        //SENDER-----------------------------------------
+        funcs.updateSenderHangout(); //BLOCKED
 
-      await collection.updateOne(
-        { username: ws.user.username },
-        { $pull: { unreads: { timestamp, username } } }
-      );
+        //TARGET-----------------------------------------
+        funcs.updateTargetHangout(); //BLOCKER
+        funcs.pullTargetAllUnreads(); //ALL
+        funcs.pushTargetUnread(); //BLOCKER
+        break;
+      case "UNBLOCK":
+        //SENDER-----------------------------------------
+        funcs.updateSenderHangout(); //UNBLOCKED
+        //TARGET-----------------------------------------
+        funcs.updateTargetHangout(); //UNBLOCKER
+        funcs.pushTargetUnread(); //UNBLOCKER
+        break;
 
-      //PUSH UNREADS ON TARGET
-      // await collection.updateOne({ username }, { $push: { unreads: target } });
+      case "READING":
+        //SENDER-----------------------------------------
+        funcs.pullSenderAllUnreads(); //ALL
+        funcs.updateSenderHangout(); //READ
+        //TARGET-----------------------------------------
+        funcs.pushTargetUnread(); //READER
+        break;
+      case "SEENING":
+        //SENDER-----------------------------------------
+        funcs.pullSenderUnread(); //READER
+        funcs.updateSenderHangout(); //SEEN
+
+        break;
+      default:
     }
+
     //TARGET ONLINE: send state change//
     const targetOnline = connections[username];
     if (targetOnline) {

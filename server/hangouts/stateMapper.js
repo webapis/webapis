@@ -33,7 +33,7 @@ module.exports = function stateMapper({ command }) {
         senderState: hangoutStates.UNBLOCKED,
         targetState: hangoutStates.UNBLOCKER,
       };
-    case "READ":
+    case "READING":
       return {
         senderState: hangoutStates.READ,
         targetState: hangoutStates.READER,

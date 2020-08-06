@@ -14,4 +14,5 @@ module.exports = hangoutStates = {
   UNBLOCKED: "UNBLOCKED",
   MESSAGED: "MESSAGED",
   READ: "READ",
+  READING: "READING",
 };

@@ -14,7 +14,11 @@ import { useMessage } from "./useMessage";
 import { useUserName } from "features/authentication/state/useUserName";
 import { actionTypes } from "./actionTypes";
 import { clientCommands } from "./clientCommands";
-import { loadMessages, removeUnreads } from "./local-storage/common";
+import {
+  loadMessages,
+  removeUnreads,
+  updateRecievedMessages,
+} from "./local-storage/common";
 const html = htm.bind(h);
 const HangoutContext = createContext();
 export function useHangoutContext() {
@@ -41,6 +45,20 @@ export default function HangoutsProvider(props) {
   // useEffect(() => {
   //   console.log(ddd);
   // }, []);
+
+  function onRead() {
+    updateRecievedMessages({
+      hangout,
+      name: username,
+      dispatch,
+      dState: "reading",
+    });
+    dispatch({
+      type: actionTypes.SENDING_HANGOUT_STARTED,
+      pendingHangout: { ...hangout, command: clientCommands.READING },
+    });
+  }
+
   useEffect(() => {
     if (hangout) {
       switch (hangout.state) {
@@ -50,10 +68,7 @@ export default function HangoutsProvider(props) {
         case "MESSANGER":
           //case "UNBLOCKER":
           // case "READER":
-          dispatch({
-            type: actionTypes.SENDING_HANGOUT_STARTED,
-            pendingHangout: { ...hangout, command: clientCommands.READ },
-          });
+          onRead();
           break;
         case "INVITE":
           dispatch({
@@ -67,6 +82,7 @@ export default function HangoutsProvider(props) {
 
       // load messages from local storage
       loadMessages({ hangout, name: username, dispatch });
+
       removeUnreads({ dispatch, name: username });
     }
   }, [hangout]);

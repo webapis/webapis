@@ -11,7 +11,8 @@ module.exports = async function hangouts({ hangout, ws, client, connections }) {
     case "INVITE":
     case "MESSAGE":
     case "UNBLOCK":
-    case "READ":
+    case "READING":
+    case "SEEING":
       hangoutHandler({ collection, hangout, ws, connections });
       break;
     default:
