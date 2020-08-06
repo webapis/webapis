@@ -51,27 +51,27 @@ describe("onDecline", () => {
     }
 
     cy.visit("/");
-    // cy.get("[data-testid=message-count]").contains(1);
-    // cy.get("[data-testid=unread-link]").click();
-    // cy.get("[data-testid=demo]").should("have.length", 1);
-    // cy.get(".badge-primary").contains(1);
-    // cy.get("[data-testid=demo]").click();
-    // cy.get("[data-testid=left-message-wrapper]")
-    //   .find("[data-testid]")
-    //   .contains("Let's chat bero");
-    // cy.get("[data-testid=left-message-wrapper]")
-    //   .find("[data-testid=message-sender]")
-    //   .contains("demo");
-    // cy.get("[data-testid=left-message-wrapper]")
-    //   .find("[data-testid=time]")
-    //   .contains("Now");
+    cy.get("[data-testid=message-count]").contains(1);
+    cy.get("[data-testid=unread-link]").click();
+    cy.get("[data-testid=demo]").should("have.length", 1);
+    cy.get(".badge-primary").contains(1);
+    cy.get("[data-testid=demo]").click();
+    cy.get("[data-testid=left-message-wrapper]")
+      .find("[data-testid]")
+      .contains("Let's chat bero");
+    cy.get("[data-testid=left-message-wrapper]")
+      .find("[data-testid=message-sender]")
+      .contains("demo");
+    cy.get("[data-testid=left-message-wrapper]")
+      .find("[data-testid=time]")
+      .contains("Now");
 
-    // cy.get("[data-testid=decline-btn]")
-    //   .click()
-    //   .then(() => {
-    //     cy.get("[data-testid=spinner]");
-    //   });
-    // cy.get("[data-testid=declined-ui]");
-    // cy.get("[data-testid=message-count]").contains(0);
+    cy.get("[data-testid=decline-btn]")
+      .click()
+      .then(() => {
+        cy.get("[data-testid=spinner]");
+      });
+    cy.get("[data-testid=declined-ui]");
+    cy.get("[data-testid=message-count]").contains(0);
   });
 });
