@@ -18,6 +18,7 @@ import {
   loadMessages,
   removeUnreads,
   updateRecievedMessages,
+  updateRecievedMessage,
 } from "./local-storage/common";
 const html = htm.bind(h);
 const HangoutContext = createContext();
@@ -62,7 +63,7 @@ export default function HangoutsProvider(props) {
   useEffect(() => {
     if (hangout) {
       switch (hangout.state) {
-        //  case "ACCEPTER":
+        case "ACCEPTER":
         // case "INVITER":
         // case "DECLINER":
         // case "BLOCKER":

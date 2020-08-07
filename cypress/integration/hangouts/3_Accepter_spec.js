@@ -81,6 +81,9 @@ describe("Accepter", () => {
             );
             cy.get("[data-testid=message-sender]").contains("bero");
             cy.get("[data-testid=time]").contains("Now");
+            cy.get("[data-testid=left-message-wrapper]")
+              .find(".message-state")
+              .contains("read");
           });
       });
   });
