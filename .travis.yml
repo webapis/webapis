@@ -3,6 +3,10 @@ language: node_js
 node_js:
   # Node 10.3+ includes npm@6 which has good "npm ci" command
   - 10.16
+branches:
+  only:
+  - deploy
+  - master
 
 services:
   - mongodb
@@ -29,7 +33,6 @@ cache:
 
 jobs:
   include:
-    - if: (branch = deploy) || (branch = master)
     # we have multiple jobs to execute using just a single stage
     # but we can pass group name via environment variable to Cypress test runner
     - name: auth
