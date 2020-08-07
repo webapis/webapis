@@ -30,6 +30,8 @@ cache:
 jobs:
   include:
     - if: branch = deploy
+  exclude:
+    - if: branch = ssr
     # we have multiple jobs to execute using just a single stage
     # but we can pass group name via environment variable to Cypress test runner
     - name: auth
