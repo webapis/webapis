@@ -6,11 +6,11 @@ import { useAppRoute } from "components/app-route/index";
 import { changeMessageText } from "./actions";
 
 import {
-  updateUnread,
   saveSentMessage,
   saveHangout,
-  updateHangout,
+  updateRecievedMessage,
   removeUnread,
+  saveRecievedMessage,
 } from "./local-storage/common";
 import { actionTypes } from "./actionTypes";
 
@@ -45,17 +45,17 @@ export function useHangouts() {
       command: "INVITE",
       timestamp,
     };
-    // saveHangout({
-    //   hangout: { ...invitation, state: "INVITE", command: undefined },
-    //   name: username,
-    //   dispatch,
-    // });
+    saveHangout({
+      hangout: { ...invitation, state: "INVITE", command: undefined },
+      name: username,
+      dispatch,
+    });
     saveSentMessage({
       hangout: invitation,
       dispatch,
       name: username,
     });
-
+    onAppRoute({ featureRoute: `/INVITE`, route: "/hangouts" });
     dispatch({
       type: actionTypes.SENDING_HANGOUT_STARTED,
       pendingHangout: invitation,
@@ -73,18 +73,22 @@ export function useHangouts() {
       timestamp,
     };
 
-    // saveHangout({
-    //   hangout: { ...accept, state: "ACCEPT", command: undefined },
-    //   name: username,
-    //   dispatch,
-    // });
+    saveHangout({
+      hangout: { ...accept, state: "ACCEPT", command: undefined },
+      name: username,
+      dispatch,
+    });
     saveSentMessage({
       hangout: accept,
       dispatch,
       name: username,
       dState: "pending",
     });
+
+    saveRecievedMessage({ hangout, dispatch, name: username, dState: "read" });
     removeUnread({ dispatch, hangout: accept, name: username });
+    onAppRoute({ featureRoute: `/ACCEPT`, route: "/hangouts" });
+
     dispatch({
       type: actionTypes.SENDING_HANGOUT_STARTED,
       pendingHangout: accept,
@@ -100,6 +104,8 @@ export function useHangouts() {
       command: "DECLINE",
       timestamp,
     };
+    removeUnread({ hangout, dispatch, name: username });
+    onAppRoute({ featureRoute: `/DECLINE`, route: "/hangouts" });
     dispatch({
       type: actionTypes.SENDING_HANGOUT_STARTED,
       pendingHangout: decline,

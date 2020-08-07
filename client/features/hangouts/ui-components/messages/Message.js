@@ -5,6 +5,7 @@ import {
 } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 import { useMediaQuery } from "components/layout/useMediaQuery";
+import messageStateColor from "./messageStateColor";
 const html = htm.bind(h);
 //import './css/style.css';
 const style = {
@@ -62,18 +63,18 @@ export default function Message(props) {
       }, 60000);
     }
   }, [timestamp]);
-
+  useEffect(() => {
+    if (message) {
+      const msg = message;
+    }
+  }, [message]);
   return html`
     <div
       data-testid=${`${float}-message-wrapper`}
       style=${{ width: "100%", marginBottom: 3 }}
     >
-      <div style=${{ ...style.root, float }}>
-        <div
-          data-testid="message"
-          style=${style.message}
-          class=${`message-font-${device}-size`}
-        >
+      <div data-testid="message-root" style=${{ ...style.root, float }}>
+        <div data-testid="message" class=${`message-font-${device}-size`}>
           ${message && message.text}
         </div>
         <div style=${style.log}>
@@ -90,6 +91,9 @@ export default function Message(props) {
             html` <div>${hours} hours ${minutes} minutes ago</div>`}
             ${days <= 10 && days > 1 && html` <div>${days} days ago</div>`}
           </div>
+        </div>
+        <div class="message-state" style=${{ fontSize: 8 }}>
+          ${message && message.state}
         </div>
       </div>
     </div>

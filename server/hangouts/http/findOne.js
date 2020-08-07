@@ -51,7 +51,7 @@ module.exports = async function findOne({ req, res, collection }) {
             hangouts:
               users &&
               users.map((u) => {
-                return { ...u, state: "INVITE" };
+                return { ...u, state: "INVITEE" };
               }),
           })
         );

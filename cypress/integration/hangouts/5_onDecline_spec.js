@@ -66,11 +66,7 @@ describe("onDecline", () => {
       .find("[data-testid=time]")
       .contains("Now");
 
-    cy.get("[data-testid=decline-btn]")
-      .click()
-      .then(() => {
-        cy.get("[data-testid=spinner]");
-      });
+    cy.get("[data-testid=decline-btn]").click();
     cy.get("[data-testid=declined-ui]");
     cy.get("[data-testid=message-count]").contains(0);
   });

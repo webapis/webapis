@@ -62,7 +62,8 @@ export default function HangoutsProvider(props) {
   useEffect(() => {
     if (hangout) {
       switch (hangout.state) {
-        // case "ACCEPTER":
+        //  case "ACCEPTER":
+        // case "INVITER":
         // case "DECLINER":
         // case "BLOCKER":
         case "MESSANGER":
@@ -70,7 +71,7 @@ export default function HangoutsProvider(props) {
           // case "READER":
           onRead();
           break;
-        case "INVITE":
+        case "INVITEE":
           dispatch({
             type: actionTypes.MESSAGE_TEXT_CHANGED,
             text: `Let's chat, ${hangout.username}!`,

@@ -69,11 +69,7 @@ describe("onAccept", () => {
     cy.get("[data-testid=unread-link]").click();
     cy.get("[data-testid=demo]").click();
 
-    cy.get("[data-testid=accept-btn]")
-      .click()
-      .then(() => {
-        cy.get("[data-testid=spinner]");
-      });
+    cy.get("[data-testid=accept-btn]").click();
 
     cy.get("[data-testid=message-count]").contains(0);
     cy.window()
@@ -83,7 +79,11 @@ describe("onAccept", () => {
         const messages = JSON.parse(result);
         //test removeUnread()------------------------------------------
       });
-    cy.get("[data-testid=hangchat-ui]");
+    cy.get("[data-testid=hangchat-ui]").then(() => {
+      cy.get("[data-testid=right-message-wrapper]")
+        .find(".message-state")
+        .contains("pending");
+    });
     cy.get("[data-testid=message-count]").contains(0);
     cy.get("[data-testid=left-message-wrapper]")
       .find("[data-testid=message]")
@@ -104,5 +104,11 @@ describe("onAccept", () => {
     cy.get("[data-testid=right-message-wrapper]")
       .find("[data-testid=time]")
       .contains("Now");
+    cy.get("[data-testid=right-message-wrapper]")
+      .find(".message-state")
+      .contains("delivered");
+    cy.get("[data-testid=left-message-wrapper]")
+      .find(".message-state")
+      .contains("read");
   });
 });

@@ -41,11 +41,11 @@ export function saveSentMessage({ hangout, dispatch, name }) {
     });
   }
 }
-export function saveRecievedMessage({ hangout, dispatch, name }) {
+export function saveRecievedMessage({ hangout, dispatch, name, dState }) {
   const { username, message } = hangout;
   const messageKey = `${name}-${username}-messages`;
   const localMessages = JSON.parse(localStorage.getItem(messageKey));
-  const pendingMessage = { ...message, username, state: "unread" };
+  const pendingMessage = { ...message, username, state: dState };
   if (localMessages && localMessages.length > 0) {
     localStorage.setItem(
       messageKey,
@@ -87,15 +87,17 @@ export function saveUnread({ dispatch, name, hangout }) {
 }
 
 export function updateSentMessage({ hangout, name, dispatch }) {
+  debugger;
   const { username, message } = hangout;
   const { timestamp } = message;
   const messageKey = `${name}-${username}-messages`;
   const updatedMessage = { ...message, username: name, state: "delivered" };
   const localMessages = JSON.parse(localStorage.getItem(messageKey));
 
-  let messageIndex = localMessages.findIndex((i) => {
-    i.username === username, i.timestamp === timestamp;
-  });
+  let messageIndex = localMessages.findIndex(
+    (i) => i.username === name && i.timestamp === timestamp
+  );
+  debugger;
   localMessages.splice(messageIndex, 1, updatedMessage);
   localStorage.setItem(messageKey, JSON.stringify(localMessages));
   dispatch({ type: actionTypes.MESSAGES_UPDATED, messages: localMessages });
@@ -119,7 +121,22 @@ export function updateRecievedMessages({ hangout, name, dispatch, dState }) {
     dispatch({ type: actionTypes.MESSAGES_UPDATED, messages: updatedMessages });
   }
 }
+export function updateRecievedMessage({ hangout, name, dispatch, dState }) {
+  const { username, message } = hangout;
 
+  const { timestamp } = message;
+  const messageKey = `${name}-${username}-messages`;
+  const updatedMessage = { ...message, username, state: dState };
+  const localMessages = JSON.parse(localStorage.getItem(messageKey));
+
+  let messageIndex = localMessages.findIndex(
+    (i) => i.username === username && i.timestamp === timestamp
+  );
+
+  localMessages.splice(messageIndex, 1, updatedMessage);
+  localStorage.setItem(messageKey, JSON.stringify(localMessages));
+  dispatch({ type: actionTypes.MESSAGES_UPDATED, messages: localMessages });
+}
 export function updateHangout({ dispatch, name, hangout }) {
   const { username } = hangout;
 

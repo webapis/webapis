@@ -33,27 +33,25 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
         break;
       case "INVITED":
         setTimeout(function () {
-          saveHangout(commonArg);
+          updateHangout(commonArg);
           updateSentMessage(commonArg);
           dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
-          onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
         }, 200);
 
         break;
       case "DECLINED":
         setTimeout(function () {
-          removeUnread(commonArg);
           dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
-          onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
         }, 200);
 
         break;
       case "ACCEPTED":
         setTimeout(function () {
-          saveHangout(commonArg);
+          updateHangout(commonArg);
+
           updateSentMessage(commonArg);
+
           dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
-          onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
         }, 200);
 
         break;
@@ -99,7 +97,12 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
     switch (hangout.state) {
       case "ACCEPTER":
         updateHangout(commonArg);
-        saveRecievedMessage(commonArg);
+        saveRecievedMessage({
+          hangout,
+          dispatch,
+          name: username,
+          dState: "unread",
+        });
         saveUnread(commonArg);
         break;
       case "BLOCKER":
@@ -112,12 +115,17 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
         break;
       case "INVITER":
         saveUnread(commonArg);
-        saveRecievedMessage(commonArg);
+
         break;
       case "MESSANGER":
         //FIXME GH focused hangout issue
         updateHangout(commonArg);
-        saveRecievedMessage(commonArg);
+        saveRecievedMessage({
+          hangout,
+          dispatch,
+          name: username,
+          dState: "unread",
+        });
         if (!focusedHangout) {
           saveUnread(commonArg);
         } else {

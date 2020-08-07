@@ -83,6 +83,7 @@ export default function HangoutsFeatureRoutes(props) {
         <//>
       `;
     case "/DECLINED":
+    case "/DECLINE":
       return html`
         <${Suspense} fallback=${Loading}>
           <${Declined} hangout=${hangout} />
@@ -93,6 +94,7 @@ export default function HangoutsFeatureRoutes(props) {
         <${Configure} hangout=${hangout} onNavigation=${onNavigation} />
       <//>`;
     case "/ACCEPTED":
+    case "/ACCEPT":
     case "/ACCEPTER":
     case "/MESSANGER":
     case "/MESSAGED":
@@ -115,7 +117,7 @@ export default function HangoutsFeatureRoutes(props) {
           dispatch=${dispatch}
         />
       <//>`;
-    case "/INVITE":
+    case "/INVITEE":
       return html` <${Suspense} fallback=${Loading}>
         <${Invite}
           loading=${loading}
@@ -126,6 +128,7 @@ export default function HangoutsFeatureRoutes(props) {
         />
       <//>`;
     case "/INVITED":
+    case "/INVITE":
     case "/DECLINER":
       return html` <${Suspense} fallback=${Loading}>
         <${Invitee} hangout=${hangout} loading=${loading} />
