@@ -14,6 +14,7 @@ module.exports = function httpRoute(client) {
     });
     req.client = client;
     res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Cache-Control", "max-age=31536000");
     let data = [];
 
     let responseHeader = {

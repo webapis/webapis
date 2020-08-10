@@ -100,6 +100,9 @@ function defaultBrowser({ features, record, type }) {
 
 module.exports = {
   scripts: {
+    prerender: {
+      script: crossEnv("appName=webcom-app") + " node ssr/pre-render.js",
+    },
     apps: {
       webcom: {
         node: {
