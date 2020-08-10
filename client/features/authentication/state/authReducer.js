@@ -2,6 +2,7 @@ import actionTypes from "./actionTypes";
 export const initState = {
   login: false,
   signup: false,
+  signout: false,
   changePassword: false,
   requestPassChange: false,
   validation: {

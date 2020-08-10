@@ -6,7 +6,6 @@ const passhash = require("../../server/auth/hashPassword");
 const jwt = require("jsonwebtoken");
 
 module.exports = async function ({ req, res, collection }) {
-  debugger;
   try {
     let errors = [];
     let { username, email, password } = req.body;
@@ -21,7 +20,6 @@ module.exports = async function ({ req, res, collection }) {
       res.write(JSON.stringify({ errors }));
       res.end();
     } else {
-      debugger;
       await userInputValidation.userValidation(
         { collection, username, email },
         ({ errorCode }) => {
@@ -67,7 +65,7 @@ module.exports = async function ({ req, res, collection }) {
     }
   } catch (error) {
     const err = error;
-    debugger;
+
     res.writeHead(500, { "Content-Type": "application/json" });
     res.write(JSON.stringify({ error }));
     res.end();

@@ -11,12 +11,11 @@ module.exports = async function ({ req, res, collection }) {
     let resBcrypt = null;
 
     let { emailorusername, password } = authHeader.getCredentials(req);
-    debugger;
+
     let errors = [];
     if (
       userInputValidation.loginFirstConstraints({ emailorusername, password })
     ) {
-      debugger;
       errors = userInputValidation.loginFirstConstraints({
         emailorusername,
         password,
@@ -26,10 +25,8 @@ module.exports = async function ({ req, res, collection }) {
       res.write(JSON.stringify({ errors }));
       res.end();
     } else {
-      debugger;
       //is email
       if (validations.isValidEmail({ email: emailorusername })) {
-        debugger;
         user = await collection.findOne({ email: emailorusername });
         resBcrypt = passhash.isPasswordCorrect(
           user.hash,
@@ -68,7 +65,6 @@ module.exports = async function ({ req, res, collection }) {
           res.end();
         }
       } else {
-        debugger;
         //is username
         user = await collection.findOne({ username: emailorusername });
 
@@ -121,7 +117,7 @@ module.exports = async function ({ req, res, collection }) {
     }
   } catch (error) {
     const err = error;
-    debugger;
+
     console.log("err---------------", err);
     res.writeHead(500, { "Content-Type": "application/json" });
     res.write(JSON.stringify({ error }));

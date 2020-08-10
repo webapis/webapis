@@ -46,7 +46,6 @@ module.exports = function httpRoute(client) {
         route({ url, req, res });
         break;
       default:
-        debugger;
         throw new Error("No operation is provied");
     }
   };
@@ -55,7 +54,6 @@ module.exports = function httpRoute(client) {
 //
 function route({ url, req, res }) {
   if (url.includes("monitor")) {
-    debugger;
   }
   const authRegex = /.*\/auth\/.*/;
   const resetRegex = /.*\/reset\/.*/;

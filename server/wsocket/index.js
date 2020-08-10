@@ -20,7 +20,6 @@ module.exports = async function (server, client) {
     //FIXME :HG same user signs in from multiple devices at the same time
     if (request.url.includes("hangouts")) {
       try {
-        debugger;
         const token = cookie.parse(request.headers["cookie"]);
 
         let uname = url.parse(request.url, true).query.username;
@@ -28,13 +27,13 @@ module.exports = async function (server, client) {
         const decoded = await jwt.verify(token[uname], process.env.secret);
 
         const { username } = decoded;
-        debugger;
+
         console.log(username, "connected");
         const user = await collection.findOne({ username });
 
         ws.user = user;
         connections[username] = ws;
-        debugger;
+
         onLineStateChangeHandler({ connections, ws, client });
         ws.on("message", function incoming(message) {
           console.log("recieved,", message);
@@ -53,10 +52,8 @@ module.exports = async function (server, client) {
         });
       } catch (error) {
         const err = error;
-        debugger;
       }
     } else if (request.url.includes("monitor")) {
-      debugger;
       console.log("monitor socket connected");
       errorMonitor({ ws });
     }

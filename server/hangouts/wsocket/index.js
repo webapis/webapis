@@ -16,7 +16,6 @@ module.exports = async function hangouts({ hangout, ws, client, connections }) {
       hangoutHandler({ collection, hangout, ws, connections });
       break;
     default:
-      debugger;
       throw new Error("No message type is provided for switch statement");
   }
 };

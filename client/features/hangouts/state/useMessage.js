@@ -15,7 +15,7 @@ import {
 
 export function useMessage({ message, username, dispatch, focusedHangout }) {
   const { onAppRoute } = useAppRoute();
-  function handleAcknowledgement({ hangout, offline }) {
+  function onDeliveryAcknowledgement({ hangout, offline }) {
     const commonArg = { dispatch, name: username, hangout };
     switch (hangout.state) {
       case "UNBLOCKED":
@@ -162,7 +162,10 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
     if (message && username) {
       switch (message.type) {
         case "ACKHOWLEDGEMENT":
-          handleAcknowledgement({ hangout: message.hangout, offline: false });
+          onDeliveryAcknowledgement({
+            hangout: message.hangout,
+            offline: false,
+          });
           break;
         case "HANGOUT":
           if (
@@ -178,7 +181,10 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
           handleHangouts({ hangouts: message.hangouts });
           break;
         case "OFFLINE_ACKN":
-          handleAcknowledgement({ hangout: message.hangout, offline: true });
+          onDeliveryAcknowledgement({
+            hangout: message.hangout,
+            offline: true,
+          });
           break;
         default:
           break;

@@ -83,7 +83,7 @@ module.exports = async function changePassword({ req, res, collection }) {
     }
   } catch (error) {
     const er = error;
-    debugger;
+
     res.statusCode = 500;
     res.writeHead(500, { "Content-Type": "application/json" });
     res.write(JSON.stringify({ error: { message: error.message } }));

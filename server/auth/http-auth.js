@@ -1,5 +1,3 @@
-const { errors } = require("puppeteer-core");
-
 module.exports.containsHttpAuthHeader = function (req) {
   // check for basic auth header
   if (
@@ -7,10 +5,8 @@ module.exports.containsHttpAuthHeader = function (req) {
       req.headers["authorization"].indexOf("Basic ") !== -1) ||
     req.headers["authorization"].indexOf("Bearer ") !== -1
   ) {
-    debugger;
     return true;
   } else {
-    debugger;
     return false;
   }
 };
@@ -22,15 +18,12 @@ module.exports.getAuthType = function (req) {
   if (req.headers["authorization"].startsWith("Basic ")) {
     return "Basic";
   } else {
-    debugger;
     return null;
   }
 };
 
 module.exports.getCredentials = function (req) {
-  debugger;
   try {
-    debugger;
     const base64Credentials = req.headers.authorization.substring(
       "Basic ".length
     );
@@ -38,13 +31,12 @@ module.exports.getCredentials = function (req) {
     const credentials = Buffer.from(base64Credentials, "base64").toString(
       "ascii"
     );
-    debugger;
+
     const [emailorusername, password] = credentials.split(":");
 
     return { emailorusername, password };
   } catch (error) {
-    debugger;
-    return errors;
+    return error;
   }
 };
 

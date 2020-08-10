@@ -20,7 +20,7 @@ export function WebSocketContainer(props) {
   const { children, socketUrl } = props;
   const { dispatch, state } = useHangouts();
   const { searchHangouts, search, pendingHangout, fetchHangouts } = state;
-
+  const { signout } = authState;
   useEffect(() => {
     if (username && username.length > 0 && socket === null) {
       setSocket(new WebSocket(`${socketUrl}/hangouts/?username=${username}`));
@@ -30,11 +30,16 @@ export function WebSocketContainer(props) {
     if (!username && socket) {
       console.log("socket close");
 
-      //  setSocket(null);
-      //  dispatch({ type: actionTypes.SET_HANGOUT_TO_INIT_STATE });
+      setSocket(null);
+      dispatch({ type: actionTypes.SET_HANGOUT_TO_INIT_STATE });
     }
   }, [username, socket]);
-
+  useEffect(() => {
+    if (signout) {
+      socket.close();
+      setSocket(null);
+    }
+  }, [signout]);
   useEffect(() => {
     if (socket) {
       socket.onmessage = (serverMessage) => {
@@ -47,7 +52,7 @@ export function WebSocketContainer(props) {
       };
       socket.onclose = () => {
         console.log("con closed");
-        // setSocket(null);
+        setSocket(null);
         dispatch({ type: actionTypes.CLOSED });
       };
       socket.onerror = (error) => {

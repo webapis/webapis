@@ -39,7 +39,6 @@ module.exports = function stateMapper({ command }) {
         targetState: hangoutStates.READER,
       };
     default:
-      debugger;
       throw new Error("clientCommand type not specified");
   }
 };

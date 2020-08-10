@@ -8,11 +8,9 @@ module.exports = function (req, res) {
 
   switch (true) {
     case url.includes("/errors/"):
-      debugger;
       sendErrors({ req, res, collection });
       break;
     case url.includes("/client-error/"):
-      debugger;
       saveError({ req, res, collection });
       break;
     default:

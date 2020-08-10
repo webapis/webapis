@@ -51,7 +51,7 @@ const options = {
   server.listen(PORT, (error) => {
     if (error) {
       const err = error;
-      debugger;
+
       process.exit(0);
       throw error;
     }

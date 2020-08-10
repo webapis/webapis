@@ -15,7 +15,7 @@ module.exports.isValidUsername = function ({ username }) {
 
 module.exports.isValidEmail = function ({ email }) {
   const eml = new RegExp(emailRegex);
-  debugger;
+
   if (eml.test(email)) {
     return true;
   } else {
@@ -94,7 +94,7 @@ module.exports.emailIsRegistered = async function ({ email, collection }, cb) {
     }
   } catch (error) {
     const err = error;
-    debugger;
+
     throw new Error(error);
   }
 };

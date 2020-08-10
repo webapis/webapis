@@ -87,7 +87,6 @@ export function saveUnread({ dispatch, name, hangout }) {
 }
 
 export function updateSentMessage({ hangout, name, dispatch }) {
-  debugger;
   const { username, message } = hangout;
   const { timestamp } = message;
   const messageKey = `${name}-${username}-messages`;
@@ -97,7 +96,7 @@ export function updateSentMessage({ hangout, name, dispatch }) {
   let messageIndex = localMessages.findIndex(
     (i) => i.username === name && i.timestamp === timestamp
   );
-  debugger;
+
   localMessages.splice(messageIndex, 1, updatedMessage);
   localStorage.setItem(messageKey, JSON.stringify(localMessages));
   dispatch({ type: actionTypes.MESSAGES_UPDATED, messages: localMessages });

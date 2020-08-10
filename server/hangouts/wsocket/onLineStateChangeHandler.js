@@ -20,7 +20,7 @@ module.exports.onLineStateChangeHandler = async function ({
     }
   } catch (error) {
     const err = error;
-    debugger;
+
     console.log("onLineStateChangeHandlerError", error);
   }
 };

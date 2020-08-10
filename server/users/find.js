@@ -17,7 +17,7 @@ module.exports = async function ({ req, res, collection }) {
     res.end();
   } catch (error) {
     const err = error;
-    debugger;
+
     res.statusCode = 500;
     res.writeHead(500, { "Content-Type": "application/json" });
     res.write(JSON.stringify({ error }));

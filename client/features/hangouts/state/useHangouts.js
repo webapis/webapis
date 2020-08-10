@@ -27,6 +27,13 @@ export function useHangouts() {
     onAppRoute({ featureRoute: `/${id}`, route: "/hangouts" });
   }
 
+  function sendPendingHangout({ hangout }) {
+    dispatch({
+      type: actionTypes.SENDING_HANGOUT_STARTED,
+      pendingHangout: hangout,
+    });
+  }
+
   function onMessageText(e) {
     const text = e.target.value;
     changeMessageText({ dispatch, text });
@@ -56,10 +63,7 @@ export function useHangouts() {
       name: username,
     });
     onAppRoute({ featureRoute: `/INVITE`, route: "/hangouts" });
-    dispatch({
-      type: actionTypes.SENDING_HANGOUT_STARTED,
-      pendingHangout: invitation,
-    });
+    sendPendingHangout({ hangout: invitation });
   }
 
   function onAccept() {
@@ -88,11 +92,7 @@ export function useHangouts() {
     saveRecievedMessage({ hangout, dispatch, name: username, dState: "read" });
     removeUnread({ dispatch, hangout: accept, name: username });
     onAppRoute({ featureRoute: `/ACCEPT`, route: "/hangouts" });
-
-    dispatch({
-      type: actionTypes.SENDING_HANGOUT_STARTED,
-      pendingHangout: accept,
-    });
+    sendPendingHangout({ hangout: accept });
   }
   function onDecline() {
     const { email, timestamp } = hangout;
@@ -106,10 +106,7 @@ export function useHangouts() {
     };
     removeUnread({ hangout, dispatch, name: username });
     onAppRoute({ featureRoute: `/DECLINE`, route: "/hangouts" });
-    dispatch({
-      type: actionTypes.SENDING_HANGOUT_STARTED,
-      pendingHangout: decline,
-    });
+    sendPendingHangout({ hangout: decline });
   }
 
   function onMessage() {
@@ -150,10 +147,7 @@ export function useHangouts() {
       //   dispatch,
       // });
 
-      dispatch({
-        type: actionTypes.SENDING_HANGOUT_STARTED,
-        pendingHangout: messaging,
-      });
+      sendPendingHangout({ hangout: messaging });
     }
     changeMessageText({ dispatch, text: "" });
   }
@@ -184,10 +178,7 @@ export function useHangouts() {
       dispatch,
       name: username,
     });
-    dispatch({
-      type: actionTypes.SENDING_HANGOUT_STARTED,
-      pendingHangout: block,
-    });
+    sendPendingHangout({ hangout: block });
   }
   function onUnblock() {}
 

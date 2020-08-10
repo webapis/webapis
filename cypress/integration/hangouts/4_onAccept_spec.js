@@ -42,13 +42,6 @@ describe("onAccept", () => {
       dbName: "auth",
       collectionName: "users",
     });
-    const expectedHangoutState = {
-      username: "demo",
-      email: "demo@gmail.com",
-      state: "ACCEPT",
-      timestamp: currentDate,
-      message: { text: "Accepted your invitation", timestamp: currentDate },
-    };
 
     const expectedMessageState = {
       username: "bero",
@@ -79,6 +72,8 @@ describe("onAccept", () => {
         const messages = JSON.parse(result);
         //test removeUnread()------------------------------------------
       });
+    //saveHangout() ACCEPT------------------------------------------
+    //saveSentMessage(dState:'pending')-----------------------------
     cy.get("[data-testid=hangchat-ui]").then(() => {
       cy.get("[data-testid=right-message-wrapper]")
         .find(".message-state")
@@ -104,9 +99,12 @@ describe("onAccept", () => {
     cy.get("[data-testid=right-message-wrapper]")
       .find("[data-testid=time]")
       .contains("Now");
+    //updateSentMessage(dState:'delivered')------------------------------
+    //updateHangout(ACCEPTED)--------------------------------------------
     cy.get("[data-testid=right-message-wrapper]")
       .find(".message-state")
       .contains("delivered");
+    //saveRecievedMessage(dState:'read')---------------------------------
     cy.get("[data-testid=left-message-wrapper]")
       .find(".message-state")
       .contains("read");

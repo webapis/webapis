@@ -108,6 +108,7 @@ describe("onInvite", () => {
           state: "INVITE",
         });
       });
+
     cy.window()
       .its("localStorage")
       .invoke("getItem", "demo-bero-messages")
@@ -120,6 +121,7 @@ describe("onInvite", () => {
           state: "pending",
         });
       });
+
     cy.get("[data-testid=hangouts-link]").click();
     cy.get("[data-testid=bero]").click();
     cy.get("[data-testid=invitee-ui]");
