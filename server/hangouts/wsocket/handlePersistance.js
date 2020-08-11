@@ -8,7 +8,8 @@ module.exports.handlePersistance = function ({
 }) {
   ////
 
-  const { email, message, offline, timestamp } = hangout;
+  const { email, message, offline, timestamp, browserId } = hangout;
+  debugger;
   let funcs = {
     updateTargetHangout: async function () {
       // UPDATE HANGOUT ON TARGET
@@ -27,7 +28,7 @@ module.exports.handlePersistance = function ({
     pushSenderHangout: async function () {
       //PUSH HANGOUT ON SENDER
       await collection.updateOne(
-        { username: senderUserName },
+        { username: senderUserName, browserId },
         { $push: { hangouts: sender } }
       );
     },

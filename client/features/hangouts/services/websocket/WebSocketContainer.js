@@ -19,21 +19,36 @@ export function WebSocketContainer(props) {
   const { onlineStatus } = useOnlineStatus();
   const { children, socketUrl } = props;
   const { dispatch, state } = useHangouts();
-  const { searchHangouts, search, pendingHangout, fetchHangouts } = state;
+  const {
+    searchHangouts,
+    search,
+    pendingHangout,
+    fetchHangouts,
+    browserId,
+  } = state;
   const { signout } = authState;
-  useEffect(() => {
-    if (username && username.length > 0 && socket === null) {
-      setSocket(new WebSocket(`${socketUrl}/hangouts/?username=${username}`));
-      console.log("set to init state.");
-      dispatch({ type: actionTypes.SOCKET_READY });
-    }
-    if (!username && socket) {
-      console.log("socket close");
 
-      setSocket(null);
-      dispatch({ type: actionTypes.SET_HANGOUT_TO_INIT_STATE });
+  function onSocket() {
+    setSocket(
+      new WebSocket(
+        `${socketUrl}/hangouts/?username=${username}&browserId=${browserId}`
+      )
+    );
+    console.log("set to init state.");
+    dispatch({ type: actionTypes.SOCKET_READY });
+  }
+
+  useEffect(() => {
+    if (username && username.length > 0 && browserId && socket === null) {
+      onSocket();
     }
-  }, [username, socket]);
+    // if (!username && socket) {
+    //   console.log("socket close");
+
+    //   setSocket(null);
+    //   dispatch({ type: actionTypes.SET_HANGOUT_TO_INIT_STATE });
+    // }
+  }, [username, socket, browserId]);
   useEffect(() => {
     if (signout) {
       socket.close();
@@ -71,6 +86,7 @@ export function WebSocketContainer(props) {
 
   useEffect(() => {
     if (pendingHangout && socket && socket.readyState === 1) {
+      debugger;
       sendPendingHangout();
     }
   }, [pendingHangout, socket]);

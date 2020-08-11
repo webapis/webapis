@@ -26,9 +26,12 @@ export const initState = {
 
   pendingHangout: null,
   message: null,
+  browserId: null,
 };
 export function reducer(state, action) {
   switch (action.type) {
+    case actionTypes.SET_BROWSER_ID:
+      return { ...state, browserId: action.browserId };
     case actionTypes.MESSAGE_TEXT_CHANGED:
       return { ...state, messageText: action.text };
     case actionTypes.SET_HANGOUT_TO_INIT_STATE:
@@ -50,7 +53,14 @@ export function reducer(state, action) {
         messageText: "",
       };
     case actionTypes.SENDING_HANGOUT_STARTED:
-      return { ...state, loading: true, pendingHangout: action.pendingHangout };
+      return {
+        ...state,
+        loading: true,
+        pendingHangout: {
+          ...action.pendingHangout,
+          browserId: state.browserId,
+        },
+      };
     //----
     case actionTypes.CLEARED_HANGOUT:
       return { ...state, hangout: null };

@@ -43,4 +43,5 @@ export const actionTypes = {
 
   //user siged out
   SET_HANGOUT_TO_INIT_STATE: "SET_HANGOUT_TO_INIT_STATE",
+  SET_BROWSER_ID: "SET_BROWSER_ID",
 };

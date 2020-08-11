@@ -23,16 +23,18 @@ module.exports = async function (server, client) {
         const token = cookie.parse(request.headers["cookie"]);
 
         let uname = url.parse(request.url, true).query.username;
-
+        let browserId = url.parse(request.url, true).query.browserId;
+        debugger;
         const decoded = await jwt.verify(token[uname], process.env.secret);
-
+        debugger;
         const { username } = decoded;
 
         console.log(username, "connected");
         const user = await collection.findOne({ username });
-
+        debugger;
         ws.user = user;
-        connections[username] = ws;
+        ws.browserId = browserId;
+        connections[`${username}-${browserId}`] = ws;
 
         onLineStateChangeHandler({ connections, ws, client });
         ws.on("message", function incoming(message) {
