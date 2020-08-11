@@ -26,11 +26,17 @@ module.exports.handlePersistance = function ({
       );
     },
     pushSenderHangout: async function () {
+      const pushField = `browsers.${browserId}.hangouts`;
+      debugger;
       //PUSH HANGOUT ON SENDER
       await collection.updateOne(
-        { username: senderUserName, browserId },
-        { $push: { hangouts: sender } }
+        { username: senderUserName },
+        { $push: { [pushField]: sender } },
+        {
+          upsert: true,
+        }
       );
+      debugger;
     },
     pushTargetUnread: async function () {
       //PUSH UNREADS ON TARGET

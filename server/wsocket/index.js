@@ -40,6 +40,7 @@ module.exports = async function (server, client) {
         ws.on("message", function incoming(message) {
           console.log("recieved,", message);
           try {
+            debugger;
             const hangout = JSON.parse(message);
             hangoutsHandler({ hangout, connections, ws, client });
           } catch (error) {
