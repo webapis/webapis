@@ -1,6 +1,6 @@
 import actionTypes from "../../state/actionTypes";
 import serverValidation from "../../validation/serverErrorActions";
-
+import createBrowserId from "../../state/onBrowserId";
 export async function signup({ dispatch, state }) {
   const { email, password, username } = state;
 
@@ -21,7 +21,7 @@ export async function signup({ dispatch, state }) {
         type: actionTypes.SIGNUP_SUCCESS,
         user: { token, username, email },
       });
-
+      createBrowserId({ username });
       window.localStorage.setItem(
         "webcom",
         JSON.stringify({

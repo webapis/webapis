@@ -1,4 +1,4 @@
-module.exports.handlePersistance = function ({
+module.exports.handlePersistance = async function ({
   target,
   sender,
   collection,
@@ -9,6 +9,8 @@ module.exports.handlePersistance = function ({
   ////
 
   const { email, message, offline, timestamp, browserId } = hangout;
+  const senderBrowsers = await collection.findOne({ username: senderUserName });
+  const targetBrowsers = await collection.findOne({ username });
   debugger;
   let funcs = {
     updateTargetHangout: async function () {

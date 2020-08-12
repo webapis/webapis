@@ -1,4 +1,5 @@
 const hangoutsHandler = require("../hangouts/wsocket");
+const br = require("./handleBrowserId");
 const { errorMonitor } = require("../app-monitor/wsocket");
 const {
   onLineStateChangeHandler,
@@ -24,23 +25,22 @@ module.exports = async function (server, client) {
 
         let uname = url.parse(request.url, true).query.username;
         let browserId = url.parse(request.url, true).query.browserId;
-        debugger;
+
         const decoded = await jwt.verify(token[uname], process.env.secret);
-        debugger;
+
         const { username } = decoded;
 
         console.log(username, "connected");
         const user = await collection.findOne({ username });
-        debugger;
+
         ws.user = user;
         ws.browserId = browserId;
         connections[`${username}-${browserId}`] = ws;
-
+        br.handleBrowserId({ collection, browserId, username });
         onLineStateChangeHandler({ connections, ws, client });
         ws.on("message", function incoming(message) {
           console.log("recieved,", message);
           try {
-            debugger;
             const hangout = JSON.parse(message);
             hangoutsHandler({ hangout, connections, ws, client });
           } catch (error) {
