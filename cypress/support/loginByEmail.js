@@ -1,5 +1,5 @@
 import { saveBrowserIdToLocalStorage } from "../../client/features/authentication/state/onBrowserId";
-Cypress.Commands.add("loginByEmail", ({ email, password, hasBrowserId }) => {
+Cypress.Commands.add("loginByEmail", ({ email, password }) => {
   cy.log("email and password", email, password);
   cy.request({
     url: "https://localhost:3000/auth/login",
@@ -9,7 +9,7 @@ Cypress.Commands.add("loginByEmail", ({ email, password, hasBrowserId }) => {
       "Access-Control-Allow-Headers": "*",
       Authorization: `Basic ${btoa(`${email}:${password}`)}`,
     },
-    body: JSON.stringify({ hasBrowserId }),
+    body: JSON.stringify({ hasBrowserId: false }),
     failOnStatusCode: false,
   })
     .its("body")

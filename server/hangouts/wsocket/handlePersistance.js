@@ -29,16 +29,19 @@ module.exports.handlePersistance = async function ({
     },
     pushSenderHangout: async function () {
       const user = await collection.findOne({ username: senderUserName });
+      const browsers = user.browsers;
       debugger;
       //PUSH HANGOUT ON SENDER
-      await collection.update(
-        { username: senderUserName },
-        { $push: { "browsers.$[t].hangouts": sender } },
-        {
-          arrayFilters: [{ "t.browserId": browserId }],
-          upsert: true,
-        }
-      );
+      for await (const browser of browsers) {
+        await collection.update(
+          { username: senderUserName },
+          { $push: { "browsers.$[t].hangouts": sender } },
+          {
+            arrayFilters: [{ "t.browserId": browser.browserId }],
+            upsert: true,
+          }
+        );
+      }
     },
     pushTargetUnread: async function () {
       //PUSH UNREADS ON TARGET
