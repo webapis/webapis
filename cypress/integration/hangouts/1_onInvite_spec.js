@@ -29,6 +29,7 @@ describe("onInvite", () => {
       cy.loginByEmail({
         email: "demo@gmail.com",
         password: "Dragonfly1977!!!",
+        hasBrowserId: false,
       });
     }
     if (Cypress.env("back") === "parse") {

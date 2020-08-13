@@ -11,7 +11,7 @@ module.exports.handlePersistance = async function ({
   const { email, message, offline, timestamp, browserId } = hangout;
   const senderBrowsers = await collection.findOne({ username: senderUserName });
   const targetBrowsers = await collection.findOne({ username });
-  debugger;
+
   let funcs = {
     updateTargetHangout: async function () {
       // UPDATE HANGOUT ON TARGET
@@ -28,17 +28,17 @@ module.exports.handlePersistance = async function ({
       );
     },
     pushSenderHangout: async function () {
-      const pushField = `browsers.${browserId}.hangouts`;
+      const user = await collection.findOne({ username: senderUserName });
       debugger;
       //PUSH HANGOUT ON SENDER
-      await collection.updateOne(
+      await collection.update(
         { username: senderUserName },
-        { $push: { [pushField]: sender } },
+        { $push: { "browsers.$[t].hangouts": sender } },
         {
+          arrayFilters: [{ "t.browserId": browserId }],
           upsert: true,
         }
       );
-      debugger;
     },
     pushTargetUnread: async function () {
       //PUSH UNREADS ON TARGET

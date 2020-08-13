@@ -28,7 +28,6 @@ export function useHangouts() {
   }
 
   function sendPendingHangout({ hangout }) {
-    debugger;
     dispatch({
       type: actionTypes.SENDING_HANGOUT_STARTED,
       pendingHangout: hangout,

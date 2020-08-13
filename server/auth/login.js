@@ -12,9 +12,9 @@ module.exports = async function ({ req, res, collection }) {
     let resBcrypt = null;
 
     let { emailorusername, password } = authHeader.getCredentials(req);
-    debugger;
+
     let { hasBrowserId } = req.body;
-    debugger;
+
     let errors = [];
     if (
       userInputValidation.loginFirstConstraints({ emailorusername, password })

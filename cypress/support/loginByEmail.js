@@ -1,18 +1,21 @@
-Cypress.Commands.add("loginByEmail", ({ email, password }) => {
+import { saveBrowserIdToLocalStorage } from "../../client/features/authentication/state/onBrowserId";
+Cypress.Commands.add("loginByEmail", ({ email, password, hasBrowserId }) => {
   cy.log("email and password", email, password);
   cy.request({
     url: "https://localhost:3000/auth/login",
-    method: "GET",
+    method: "POST",
     headers: {
       "Conten-Type": "application/json",
       "Access-Control-Allow-Headers": "*",
       Authorization: `Basic ${btoa(`${email}:${password}`)}`,
     },
+    body: JSON.stringify({ hasBrowserId }),
     failOnStatusCode: false,
   })
     .its("body")
     .then((body) => {
-      const { email, username, token } = body;
+      const { email, username, token, browserId } = body;
+      saveBrowserIdToLocalStorage({ username, browserId });
       cy.window()
         .its("localStorage")
         .invoke(

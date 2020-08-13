@@ -29,7 +29,7 @@ module.exports = async function (server, client) {
 
         const { username } = decoded;
 
-        console.log(username, "connected");
+        console.log(username, "connected from", browserId);
         const user = await collection.findOne({ username });
 
         ws.user = user;
@@ -57,6 +57,7 @@ module.exports = async function (server, client) {
       }
     } else if (request.url.includes("monitor")) {
       console.log("monitor socket connected");
+
       errorMonitor({ ws });
     }
   });

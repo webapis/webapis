@@ -4,6 +4,7 @@ import {
 } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
 import { useAuthContext } from "./AuthProvider";
 import actionTypes from "./actionTypes";
+import { browserIdExists, loadBrowserId } from "./onBrowserId";
 export function useUserName() {
   const [userName, setUsername] = useState(null);
   const [token, setToken] = useState(null);
@@ -23,6 +24,7 @@ export function useUserName() {
         type: actionTypes.RECOVER_LOCAL_AUTH_STATE,
         user: { username, token, email, objectId },
       });
+      initBrowserId({ username, dispatch });
     }
   }, []);
 
@@ -34,6 +36,7 @@ export function useUserName() {
       setToken(token);
       setEmail(email);
       setObjectId(objectId);
+      initBrowserId({ username, dispatch });
     }
   }, [state.user]);
 
@@ -47,4 +50,13 @@ export function useUserName() {
   }, [state]);
 
   return { username: userName, token, email };
+}
+
+function initBrowserId({ username, dispatch }) {
+  if (browserIdExists({ username })) {
+    dispatch({
+      type: actionTypes.BROWSER_ID_LOADED,
+      browserId: loadBrowserId({ username }),
+    });
+  }
 }

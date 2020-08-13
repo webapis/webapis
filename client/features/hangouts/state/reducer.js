@@ -56,10 +56,7 @@ export function reducer(state, action) {
       return {
         ...state,
         loading: true,
-        pendingHangout: {
-          ...action.pendingHangout,
-          browserId: state.browserId,
-        },
+        pendingHangout: action.pendingHangout,
       };
     //----
     case actionTypes.CLEARED_HANGOUT:

@@ -8,7 +8,6 @@ import {
 } from "../../state/onBrowserId";
 export async function signup({ dispatch, state }) {
   try {
-    debugger;
     const { email, password, username } = state;
 
     const response = await fetch(`/auth/signup`, {
@@ -22,7 +21,7 @@ export async function signup({ dispatch, state }) {
     const result = await response.json();
     if (response.status === 200) {
       const { token, username, email, browserId } = result;
-      debugger;
+
       dispatch({
         type: actionTypes.SIGNUP_SUCCESS,
         user: { token, username, email, browserId },
@@ -80,14 +79,13 @@ export async function login({ dispatch, state }) {
     if (response.status === 200) {
       const { token, username, email } = result;
       if (hasBrowserId) {
-        debugger;
         dispatch({
           type: actionTypes.BROWSER_ID_LOADED,
           browserId: loadBrowserId({ username }),
         });
       } else {
         const { browserId } = result;
-        debugger;
+
         saveBrowserIdToLocalStorage({ username, browserId });
         dispatch({
           type: actionTypes.BROWSER_ID_LOADED,
@@ -109,14 +107,14 @@ export async function login({ dispatch, state }) {
       );
     } else if (response.status === 400) {
       const { errors } = result;
-      debugger;
+
       errors.forEach((error) => {
         serverValidation({ status: error, dispatch });
       });
       dispatch({ type: actionTypes.LOGIN_FAILED });
     } else if (response.status === 500) {
       const { error } = result;
-      debugger;
+
       dispatch({ type: actionTypes.SERVER_ERROR_RECIEVED, error });
       dispatch({ type: actionTypes.LOGIN_FAILED });
     }

@@ -11,7 +11,7 @@ module.exports = async function seedUser({
   email,
   username,
   password,
-  browserId = "1234567890",
+  browserId = 1234567890,
 }) {
   try {
     const clnt = await client.connect();

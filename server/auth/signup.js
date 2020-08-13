@@ -8,9 +8,9 @@ const jwt = require("jsonwebtoken");
 module.exports = async function ({ req, res, collection }) {
   try {
     let errors = [];
-    debugger;
+
     let { username, email, password } = req.body;
-    debugger;
+
     if (userInputValidation.signupConstraints({ username, email, password })) {
       errors = userInputValidation.signupConstraints({
         username,
@@ -68,9 +68,10 @@ module.exports = async function ({ req, res, collection }) {
     }
   } catch (error) {
     const err = error;
-    debugger;
+
     res.writeHead(500, { "Content-Type": "application/json" });
     res.write(JSON.stringify({ error }));
     res.end();
   }
 };
+//

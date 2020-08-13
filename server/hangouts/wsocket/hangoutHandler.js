@@ -6,7 +6,6 @@ module.exports = async function hangoutHandler({
   ws,
   connections,
 }) {
-  debugger;
   try {
     const { senderState, targetState } = stateMapper({
       command: hangout.command,

@@ -19,14 +19,8 @@ export function WebSocketContainer(props) {
   const { onlineStatus } = useOnlineStatus();
   const { children, socketUrl } = props;
   const { dispatch, state } = useHangouts();
-  const {
-    searchHangouts,
-    search,
-    pendingHangout,
-    fetchHangouts,
-    browserId,
-  } = state;
-  const { signout } = authState;
+  const { searchHangouts, search, pendingHangout, fetchHangouts } = state;
+  const { signout, browserId } = authState;
 
   function onSocket() {
     setSocket(
@@ -39,6 +33,8 @@ export function WebSocketContainer(props) {
   }
 
   useEffect(() => {
+    if (browserId) {
+    }
     if (username && username.length > 0 && browserId && socket === null) {
       onSocket();
     }
@@ -51,8 +47,10 @@ export function WebSocketContainer(props) {
   }, [username, socket, browserId]);
   useEffect(() => {
     if (signout) {
-      socket.close();
-      setSocket(null);
+      if (socket) {
+        socket.close();
+        setSocket(null);
+      }
     }
   }, [signout]);
   useEffect(() => {
@@ -86,7 +84,6 @@ export function WebSocketContainer(props) {
 
   useEffect(() => {
     if (pendingHangout && socket && socket.readyState === 1) {
-      debugger;
       sendPendingHangout();
     }
   }, [pendingHangout, socket]);
@@ -97,7 +94,7 @@ export function WebSocketContainer(props) {
     }
   }, [fetchHangouts, username]);
   function sendPendingHangout() {
-    socket.send(JSON.stringify(pendingHangout));
+    socket.send(JSON.stringify({ ...pendingHangout, browserId }));
   }
   return html`${children}`;
 }
