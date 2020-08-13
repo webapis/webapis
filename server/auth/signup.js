@@ -8,7 +8,9 @@ const jwt = require("jsonwebtoken");
 module.exports = async function ({ req, res, collection }) {
   try {
     let errors = [];
+    debugger;
     let { username, email, password } = req.body;
+    debugger;
     if (userInputValidation.signupConstraints({ username, email, password })) {
       errors = userInputValidation.signupConstraints({
         username,
@@ -38,13 +40,14 @@ module.exports = async function ({ req, res, collection }) {
         //successful signup-------------------------------------
 
         const { hash, salt, iterations } = passhash.hashPassword(password);
-
+        const browserId = Date.now();
         const result = await collection.insertOne({
           hash,
           salt,
           iterations,
           email,
           username,
+          browsers: [{ browserId }],
         });
 
         const user = result.ops[0];
@@ -59,13 +62,13 @@ module.exports = async function ({ req, res, collection }) {
           "Content-Type": "application/json",
           "Set-Cookie": `${user.username}=${token};Expires=Wed, 21 Oct 2025 07:28:00 GMT; Path=/hangouts`,
         });
-        res.write(JSON.stringify({ token, email, username }));
+        res.write(JSON.stringify({ token, email, username, browserId }));
         res.end();
       }
     }
   } catch (error) {
     const err = error;
-
+    debugger;
     res.writeHead(500, { "Content-Type": "application/json" });
     res.write(JSON.stringify({ error }));
     res.end();

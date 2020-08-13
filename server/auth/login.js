@@ -5,13 +5,16 @@ const authHeader = require("./http-auth");
 const jwt = require("jsonwebtoken");
 const passhash = require("../../server/auth/hashPassword");
 const userInputValidation = require("./validations/userInputValidation");
+const e = require("express");
 module.exports = async function ({ req, res, collection }) {
   try {
     let user = null;
     let resBcrypt = null;
 
     let { emailorusername, password } = authHeader.getCredentials(req);
-
+    debugger;
+    let { hasBrowserId } = req.body;
+    debugger;
     let errors = [];
     if (
       userInputValidation.loginFirstConstraints({ emailorusername, password })
@@ -49,13 +52,30 @@ module.exports = async function ({ req, res, collection }) {
             "Content-Type": "application/json",
             "Set-Cookie": `${user.username}=${token};Expires=Wed, 21 Oct 2025 07:28:00 GMT;  Path=/hangouts`,
           });
-          res.write(
-            JSON.stringify({
-              token,
-              username: user.username,
-              email: user.email,
-            })
-          );
+          if (!hasBrowserId) {
+            const browserId = Date.now();
+            const updateBrowsers = await collection.update(
+              { username: user.username },
+              { $push: { browsers: { browserId } } }
+            );
+            res.write(
+              JSON.stringify({
+                token,
+                username: user.username,
+                email: user.email,
+                browserId,
+              })
+            );
+          } else {
+            res.write(
+              JSON.stringify({
+                token,
+                username: user.username,
+                email: user.email,
+              })
+            );
+          }
+
           res.end();
         } else {
           // invalid credential 401-------------------------------------
@@ -96,13 +116,37 @@ module.exports = async function ({ req, res, collection }) {
               "Content-Type": "application/json",
               "Set-Cookie": `${user.username}=${token};Expires=Wed, 21 Oct 2025 07:28:00 GMT; Path=/hangouts`,
             });
-            res.write(
-              JSON.stringify({
-                token,
-                username: user.username,
-                email: user.email,
-              })
-            );
+            // res.write(
+            //   JSON.stringify({
+            //     token,
+            //     username: user.username,
+            //     email: user.email,
+            //   })
+            // );
+
+            if (!hasBrowserId) {
+              const browserId = Date.now();
+              const updateBrowsers = await collection.update(
+                { username: user.username },
+                { $push: { browsers: { browserId } } }
+              );
+              res.write(
+                JSON.stringify({
+                  token,
+                  username: user.username,
+                  email: user.email,
+                  browserId,
+                })
+              );
+            } else {
+              res.write(
+                JSON.stringify({
+                  token,
+                  username: user.username,
+                  email: user.email,
+                })
+              );
+            }
 
             res.end();
           } else {

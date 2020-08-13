@@ -1,5 +1,4 @@
 const hangoutsHandler = require("../hangouts/wsocket");
-const br = require("./handleBrowserId");
 const { errorMonitor } = require("../app-monitor/wsocket");
 const {
   onLineStateChangeHandler,
@@ -36,7 +35,7 @@ module.exports = async function (server, client) {
         ws.user = user;
         ws.browserId = browserId;
         connections[`${username}-${browserId}`] = ws;
-        br.handleBrowserId({ collection, browserId, username });
+
         onLineStateChangeHandler({ connections, ws, client });
         ws.on("message", function incoming(message) {
           console.log("recieved,", message);

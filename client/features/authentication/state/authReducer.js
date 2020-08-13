@@ -28,10 +28,13 @@ export const initState = {
   authFeedback: null,
   user: null,
   signout: false,
+  browserId: null,
 };
 
 export function authReducer(state, action) {
   switch (action.type) {
+    case actionTypes.BROWSER_ID_LOADED:
+      return { ...state, browserId: action.browserId };
     case actionTypes.RESET_AUTH_STATE:
       return initState;
     case actionTypes.SET_ERROR_TO_NULL:

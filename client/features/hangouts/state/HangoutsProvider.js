@@ -44,12 +44,6 @@ export default function HangoutsProvider(props) {
     focusedHangout: hangout,
   });
 
-  useEffect(() => {
-    if (username) {
-      onbrowserId({ username, dispatch });
-    }
-  }, [username]);
-
   function onRead() {
     updateRecievedMessages({
       hangout,
@@ -113,16 +107,4 @@ export default function HangoutsProvider(props) {
 
   const value = useMemo(() => [state, dispatch], [state]);
   return html`<${HangoutContext.Provider} value=${value} ...${props} />`;
-}
-
-function onbrowserId({ username, dispatch }) {
-  const browserId = JSON.parse(localStorage.getItem(`${username}-browserId`));
-  if (browserId) {
-    dispatch({ type: actionTypes.SET_BROWSER_ID, browserId });
-  } else {
-    //create browserId
-    let newbrowserId = Date.now() + 10;
-    localStorage.setItem(`${username}-browserId`, JSON.stringify(newbrowserId));
-    dispatch({ type: actionTypes.SET_BROWSER_ID, browserId: newbrowserId });
-  }
 }

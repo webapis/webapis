@@ -11,14 +11,23 @@ describe("5_Login_server_side_stubbed_validation_spec", () => {
     });
   });
   it("user submits: empty emailorusername or password (219) client JSDisabled", () => {
-    cy.route({ url: "/auth/login", status: 400, response: { errors: [219] } });
+    cy.route({
+      url: "/auth/login",
+      status: 400,
+      response: { errors: [219], method: "POST" },
+    });
     cy.get("[data-testid=login-btn]").click();
     cy.get("[data-testid=message-emailorusername]").contains(
       validationMessages.REQUIRED_FIELD
     );
   });
   it("user submits: invalid emailorusername (218) client JSDisabled", () => {
-    cy.route({ url: "/auth/login", status: 400, response: { errors: [218] } });
+    cy.route({
+      url: "/auth/login",
+      status: 400,
+      response: { errors: [218] },
+      method: "POST",
+    });
     cy.get("[data-testid=emailorusername]").type("1232/*sd$");
     cy.get("[data-testid=login-btn]").click();
     cy.get("[data-testid=message-emailorusername]").contains(
@@ -26,7 +35,12 @@ describe("5_Login_server_side_stubbed_validation_spec", () => {
     );
   });
   it("user submits :non existent usernameoremail (212)", () => {
-    cy.route({ url: "/auth/login", status: 400, response: { errors: [212] } });
+    cy.route({
+      url: "/auth/login",
+      status: 400,
+      response: { errors: [212] },
+      method: "POST",
+    });
     cy.get("[data-testid=emailorusername]").type("testuser");
     cy.get("[data-testid=password]").type("TestPassword!w");
     cy.get("[data-testid=login-btn]").click();
@@ -38,7 +52,12 @@ describe("5_Login_server_side_stubbed_validation_spec", () => {
     );
   });
   it("user submits: matching emailorusername and wrong password (212)", () => {
-    cy.route({ url: "/auth/login", status: 400, response: { errors: [212] } });
+    cy.route({
+      url: "/auth/login",
+      status: 400,
+      response: { errors: [212] },
+      method: "POST",
+    });
     cy.get("[data-testid=emailorusername]").type("testuser");
     cy.get("[data-testid=password]").type("TestPassword!w");
     cy.get("[data-testid=login-btn]").click();
