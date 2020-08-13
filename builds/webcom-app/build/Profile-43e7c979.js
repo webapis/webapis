@@ -1,0 +1,8 @@
+import { h } from "./index-c4021a67.js";
+
+function Profile() {
+  return h("div", null, "Profile");
+}
+
+export default Profile;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiUHJvZmlsZS00M2U3Yzk3OS5qcyIsInNvdXJjZXMiOlsiLi4vLi4vLi4vY2xpZW50L2ZlYXR1cmVzL2F1dGhlbnRpY2F0aW9uL3VpLWNvbXBvbmVudHMvUHJvZmlsZS5qcyJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBoIH0gZnJvbSBcInByZWFjdFwiO1xuXG5leHBvcnQgZGVmYXVsdCBmdW5jdGlvbiBQcm9maWxlKCkge1xuICByZXR1cm4gPGRpdj5Qcm9maWxlPC9kaXY+O1xufVxuIl0sIm5hbWVzIjpbIlByb2ZpbGUiXSwibWFwcGluZ3MiOiI7O0FBRWUsU0FBU0EsT0FBVCxHQUFtQjtBQUNoQyxTQUFPLHlCQUFQO0FBQ0Q7Ozs7In0=
