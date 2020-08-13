@@ -1,17 +1,26 @@
 module.exports = {
   env: {
     browser: true,
-    es6: true,
     node: true,
+    es2020: true,
+    jest: true,
   },
-  extends: 'preact',
-  globals: {
-    Atomics: 'readonly',
-    SharedArrayBuffer: 'readonly',
-  },
+  plugins: ["jest"],
+  extends: ["eslint:recommended", "preact", "prettier"],
   parserOptions: {
-    ecmaVersion: 2018,
-    sourceType: 'module',
+    ecmaVersion: 11,
+    sourceType: "module",
+    ecmaFeatures: {
+      jsx: true,
+    },
   },
-  rules: {},
+  rules: {
+    "no-unused-vars": 1,
+  },
+  globals: {
+    Parse: false,
+    ip: false,
+    PREACT_APP_BACK: false,
+    URLSearchParams: true,
+  },
 };

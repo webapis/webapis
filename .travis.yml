@@ -1,0 +1,42 @@
+language: node_js
+
+node_js:
+  # Node 10.3+ includes npm@6 which has good "npm ci" command
+  - 10.16
+branches:
+  only:
+  - deploy
+  - master
+
+services:
+  - mongodb
+before_install:
+  - npm install --global nps
+  - npm install -g wait-on
+before_script:
+# if using Ubuntu 16 need this library
+# https://github.com/cypress-io/cypress-documentation/pull/1647
+addons:
+  apt:
+    packages:
+    - libgconf-2-4
+
+cache:
+  # cache both npm modules and Cypress binary
+  directories:
+    - ~/.npm
+    - ~/.cache
+  override:
+    - npm ci
+    - npm run cy:verify
+    - npm run cy:info
+
+jobs:
+  include:
+    # we have multiple jobs to execute using just a single stage
+    # but we can pass group name via environment variable to Cypress test runner
+    - name: auth
+      script: nps apps.webcom.node.prod & wait-on http://localhost:3000 & nps cy.ci.auth
+    - name: hangouts
+      script: nps apps.webcom.node.prod & wait-on http://localhost:3000 & nps cy.ci.hangouts
+ 

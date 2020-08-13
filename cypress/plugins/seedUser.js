@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
-const bcrypt = require('bcrypt');
-const url = 'mongodb://localhost:27017';
-const MongoClient = require('mongodb').MongoClient;
+const passhash = require("../../server/auth/hashPassword");
+const url = "mongodb://localhost:27017";
+const MongoClient = require("mongodb").MongoClient;
 const client = new MongoClient(url, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
@@ -10,21 +10,21 @@ const client = new MongoClient(url, {
 module.exports = async function seedUser({ email, username, password }) {
   try {
     const clnt = await client.connect();
-    const database = clnt.db('auth');
-    const collection = database.collection('users');
-    await collection.deleteMany();
+    const database = clnt.db("auth");
 
-    const salt = await bcrypt.genSalt(10);
-
-    const hash = await bcrypt.hash(password, salt);
+    const collection = database.collection("users");
+    const { hash, salt, iterations } = passhash.hashPassword(password);
     const result = await collection.insertOne({
-      password: hash,
+      hash,
+      salt,
+      iterations,
       email,
       username,
     });
 
     return result;
   } catch (error) {
+    console.log("seedUserError", error);
     return error;
   }
 };

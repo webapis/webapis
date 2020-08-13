@@ -14,9 +14,22 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import './commands'
-Cypress.on('window:before:load', win => {
-    delete win.fetch;
-  });
+import "./commands";
+import "./loginByEmail";
+import "./parse/signup";
+import "./parse/createUser";
+import "./parse/loginByEmail";
+import "./parse/deleteUser";
+Cypress.on("window:before:load", (win) => {
+  delete win.fetch;
+});
+
+Cypress.on("uncaught:exception", (err, runnable) => {
+  // returning false here prevents Cypress from
+  // failing the test
+  cy.log("application error..", JSON.stringify(err));
+  cy.log("application error stack..", JSON.stringify(err.stack));
+  return false;
+});
 // Alternatively you can use CommonJS syntax:
 // require('./commands')

@@ -2,7 +2,12 @@
 npm-debug.log
 node_modules/
 yarn-error.log
-.lock
 .env
 debug.log
 coverage
+builds/
+build/
+logs/
+videos/
+screenshots/
+Chrome/

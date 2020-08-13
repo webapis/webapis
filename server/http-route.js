@@ -1,100 +1,84 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable indent */ //
-import crudOperation from './crud/crud';
-import authOperation from './auth/index';
-import seedOperation from './seed';
-import serveStatic from './serve-static/index';
-import servePassReset from './serve-static/serve-pass-reset';
-const url = 'mongodb://localhost:27017';
-const MongoClient = require('mongodb').MongoClient;
-const client = new MongoClient(url, {
-  useUnifiedTopology: true,
-  useNewUrlParser: true,
-});
+const authOperation = require("./auth/index");
+const hangoutsOperation = require("./hangouts/http");
+const usersOperation = require("./users");
+const serveStatic = require("./serve-static/index");
+const appMonitorOperations = require("./app-monitor/http");
+const servePassReset = require("./serve-static/serve-pass-reset");
 
-export default async function httpRoute(req, res) {
-  const { url } = req;
+module.exports = function httpRoute(client) {
+  return async function (req, res) {
+    const { url } = req;
+    req.auth = null;
+    res.on("end", () => {
+      clnt.close();
+    });
+    req.client = client;
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    let data = [];
+
+    let responseHeader = {
+      "access-control-allow-origin": "*",
+      "access-control-allow-methods": "GET,POST,PUT,DELETE,OPTIONS",
+      "access-control-allow-headers": "*",
+      "access-control-max-age": 10,
+      "Content-Type": "application/json",
+    };
+    switch (req.method) {
+      case "OPTIONS":
+        res.writeHead(200, responseHeader);
+        res.end();
+        break;
+      case "POST":
+      case "PUT":
+      case "DELETE":
+        req.on("data", (chunk) => {
+          data.push(chunk);
+        });
+        req.on("end", () => {
+          if (data.length > 0) {
+            const body = JSON.parse(data);
+            req.body = body;
+          }
+          route({ url, req, res });
+        });
+        break;
+      case "GET":
+        route({ url, req, res });
+        break;
+      default:
+        throw new Error("No operation is provied");
+    }
+  };
+};
+
+//
+function route({ url, req, res }) {
+  if (url.includes("monitor")) {
+  }
   const authRegex = /.*\/auth\/.*/;
   const resetRegex = /.*\/reset\/.*/;
-  const crudRegex = /.*\/crud\/.*/;
-  const seedRegex = /.*\/seed\/.*/;
-
-  req.auth = null;
-  const clnt = await client.connect();
-  req.client = clnt;
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  let data = [];
-
-  let responseHeader = {
-    'access-control-allow-origin': '*',
-    'access-control-allow-methods': 'GET,POST,PUT,DELETE,OPTIONS',
-    'access-control-allow-headers': '*',
-    'access-control-max-age': 10,
-    'Content-Type': 'application/json',
-  };
-  switch (req.method) {
-    case 'OPTIONS':
-      debugger;
-      res.writeHead(200, responseHeader);
-      res.end();
+  const usersRegex = /.*\/users\/.*/;
+  const hangoutsRegex = /.*\/hangouts\/.*/;
+  const appMonitorRegex = /.*\/monitor\/.*/;
+  switch (true) {
+    case authRegex.test(url):
+      authOperation(req, res);
       break;
-    case 'POST':
-    case 'PUT':
 
-    case 'DELETE':
-      req.on('data', (chunk) => {
-        data.push(chunk);
-      });
-      req.on('end', () => {
-        if (data.length > 0) {
-          debugger;
-          const body = JSON.parse(data);
-          req.body = body;
-        }
-        switch (true) {
-          case authRegex.test(url):
-            debugger;
-            authOperation(req, res);
-            break;
-          case crudRegex.test(url):
-            debugger;
-            crudOperation(req, res);
-            break;
-          case seedRegex.test(url):
-            debugger;
-            seedOperation(req, res);
-            break;
-          case resetRegex.test(url):
-            servePassReset(req, res);
-            break;
-          default:
-            serveStatic(req, res);
-        }
-      });
+    case resetRegex.test(url):
+      servePassReset(req, res);
       break;
-    case 'GET':
-      switch (true) {
-        case authRegex.test(url):
-          debugger;
-          authOperation(req, res);
-          break;
-        case crudRegex.test(url):
-          debugger;
-          crudOperation(req, res);
-          break;
-        case seedRegex.test(url):
-          debugger;
-          seedOperation(req, res);
-          break;
-        case resetRegex.test(url):
-          servePassReset(req, res);
-          break;
-        default:
-          serveStatic(req, res);
-      }
 
+    case usersRegex.test(url):
+      usersOperation(req, res);
+      break;
+    case hangoutsRegex.test(url):
+      hangoutsOperation(req, res);
+      break;
+    case appMonitorRegex.test(url):
+      appMonitorOperations(req, res);
       break;
     default:
-      crudOperation(req, res);
+      serveStatic(req, res);
   }
 }

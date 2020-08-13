@@ -1,0 +1,3 @@
+export default {
+  ACCORDION_SELECTED: "ACCORDION_SELECTED",
+};

@@ -8,7 +8,7 @@ export class MongoClient {
           collection: () => {
             return {
               findOne: () => {
-                debugger;
+                
                 return global.findOne;
               },
               insertOne: () => {

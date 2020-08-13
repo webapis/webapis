@@ -1,8 +1,14 @@
 /* eslint-disable no-undef */
-const seedLogin = require('./seedLogin');
-const seedDelete = require('./seedDelete');
-const seedUser = require('./seedUser');
-/// <reference types="cypress" />
+const seedLogin = require("./seedLogin");
+const seedDelete = require("./seedDelete");
+const seedUser = require("./seedUser");
+const seedHangouts = require("./seedHangouts");
+const deleteCollection = require("./deleteCollection");
+const seedOnInvite = require("./seedOnInvite");
+const seedOnAccept = require("./seedOnAccept");
+const dropDatabase = require("./dropDatabase");
+const onHangoutSeed = require("./hangout/onHangoutSeed");
+///
 // ***********************************************************
 // This example plugins/index.js can be used to load plugins
 //
@@ -23,15 +29,45 @@ module.exports = (on, config) => {
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
 
-  on('task', {
-    'seed:login': ({ email, username, password }) => {
+  on("task", {
+    "seed:login": ({ email, username, password }) => {
       return seedLogin({ email, username, password });
     },
-    'seed:user': ({ email, username, password }) => {
+    "seed:user": ({ email, username, password }) => {
       return seedUser({ email, username, password });
     },
-    'seed:delete': () => {
+    "seed:delete": () => {
       return seedDelete();
+    },
+    "seed:hangouts": () => {
+      return seedHangouts();
+    },
+    "seed:deleteCollection": ({ dbName, collectionName }) => {
+      return deleteCollection({ dbName, collectionName });
+    },
+    "seed:onInvite": () => {
+      return seedOnInvite();
+    },
+    "seed:onAccept": () => {
+      return seedOnAccept();
+    },
+    "seed:dropDatabase": ({ dbName }) => {
+      return dropDatabase({ dbName });
+    },
+    "seed:onHangout": ({
+      collectionName,
+      dbName,
+      hangout,
+      senderUsername,
+      senderEmail,
+    }) => {
+      return onHangoutSeed({
+        collectionName,
+        dbName,
+        hangout,
+        senderUsername,
+        senderEmail,
+      });
     },
   });
 };

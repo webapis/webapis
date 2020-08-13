@@ -1,3 +1,11 @@
 {
-  "baseUrl": "http://localhost:3000"
+  "baseUrl": "https://localhost:3000",
+  "viewportWidth": 1000,
+  "viewportHeight": 600,
+  "defaultCommandTimeout":10000,
+  "video":true,
+  "env": {
+    "back": "node"
+  },
+  "projectId": "xet8gf"
 }
