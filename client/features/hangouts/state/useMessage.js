@@ -169,10 +169,18 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
       onHangout({ hangout, unread: true });
     });
   }
-
+  function handleDelayedAcknowledgements({ hangouts }) {
+    hangouts,
+      forEach((hangout) => {
+        onDeliveryAcknowledgement({ hangout });
+      });
+  }
   useEffect(() => {
     if (message && username) {
       switch (message.type) {
+        case "DELAYED_ACKHOWLEDGEMENTS":
+          handleDelayedAcknowledgements({ hangout: message.hangouts });
+          break;
         case "ACKHOWLEDGEMENT":
           onDeliveryAcknowledgement({
             hangout: message.hangout,
@@ -192,12 +200,12 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
         case "UNREAD_HANGOUTS":
           handleHangouts({ hangouts: message.hangouts });
           break;
-        case "OFFLINE_ACKN":
-          onDeliveryAcknowledgement({
-            hangout: message.hangout,
-            offline: true,
-          });
-          break;
+        // case "OFFLINE_ACKN":
+        //   onDeliveryAcknowledgement({
+        //     hangout: message.hangout,
+        //     offline: true,
+        //   });
+        //  break;
         default:
           break;
       }

@@ -36,7 +36,7 @@ module.exports = async function (server, client) {
 
         connections[`${username}-${browserId}`] = ws;
 
-        onLineStateChangeHandler({ connections, ws, client });
+        onLineStateChangeHandler({ connections, ws, client, browserId });
         ws.on("message", function incoming(message) {
           console.log("recieved,", message);
           try {

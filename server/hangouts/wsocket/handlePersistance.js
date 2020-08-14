@@ -108,7 +108,7 @@ module.exports.handlePersistance = async function ({
       for await (const browser of senderBrowsers) {
         await collection.update(
           { username: senderUserName },
-          { $pull: { "browsers.$[t].unreads": { username } } },
+          { $pull: { "browsers.$[t].unreads": { username, timestamp } } },
           { arrayFilters: [{ "t.browserId": browser.browserId }], upsert: true }
         );
       }
@@ -185,8 +185,8 @@ module.exports.handlePersistance = async function ({
       break;
     case "SEENING":
       //SENDER-----------------------------------------
-      funcs.pullSenderUnread(); //READER
-      funcs.updateSenderHangout(); //SEEN
+      // funcs.pullSenderUnread(); //READER
+      // funcs.updateSenderHangout(); //SEEN
 
       break;
     default:
