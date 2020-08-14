@@ -7,18 +7,21 @@ module.exports.onLineStateChangeHandler = async function ({
     const collection = await client.db("auth").collection("users");
     const user = await collection.findOne({ username: ws.user.username });
     const senderBrowser = user.browsers.find((b) => b.browserId === browserId);
-    const senderUndelivered = senderBrowser.undelivered;
-    pullSenderUndelivered({
-      browserId: senderBrowser.browserId,
-      username: ws.user.username,
-    });
-    if (undelivered && undelivered.length > 0) {
-      ws.send(
-        JSON.stringify({
-          hangouts: senderUndelivered,
-          type: "DELAYED_ACKHOWLEDGEMENTS",
-        }) //--
-      );
+
+    if (senderBrowser && senderBrowser.undelivered) {
+      const senderUndelivered = senderBrowser.undelivered;
+      pullSenderUndelivered({
+        browserId: senderBrowser.browserId,
+        username: ws.user.username,
+      });
+      if (undelivered && undelivered.length > 0) {
+        ws.send(
+          JSON.stringify({
+            hangouts: senderUndelivered,
+            type: "DELAYED_ACKHOWLEDGEMENTS",
+          }) //--
+        );
+      }
     }
   } catch (error) {
     const err = error;
