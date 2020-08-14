@@ -61,6 +61,7 @@ export function useHangouts() {
       hangout: invitation,
       dispatch,
       name: username,
+      dState: "pending",
     });
     onAppRoute({ featureRoute: `/INVITE`, route: "/hangouts" });
     sendPendingHangout({ hangout: invitation });
@@ -125,6 +126,7 @@ export function useHangouts() {
       hangout: messaging,
       dispatch,
       name: username,
+      dState: "pending",
     });
     if (hangout.state === "BLOCKER") {
       saveSentMessage({
@@ -139,6 +141,7 @@ export function useHangouts() {
         },
         dispatch,
         name: username,
+        dState: "pending",
       });
     } else {
       // updateHangout({
@@ -177,6 +180,7 @@ export function useHangouts() {
       },
       dispatch,
       name: username,
+      dState: "pending",
     });
     sendPendingHangout({ hangout: block });
   }

@@ -10,13 +10,14 @@ module.exports = async function hangoutHandler({
     const { senderState, targetState } = stateMapper({
       command: hangout.command,
     });
-    const { username, email, message, offline, timestamp } = hangout;
+    const { username, email, message, offline, timestamp, browserId } = hangout;
     const sender = {
       username,
       email,
       message,
       timestamp,
       state: senderState,
+      browserId,
     };
     //
     const target = {
@@ -36,16 +37,6 @@ module.exports = async function hangoutHandler({
       username,
       hangout,
     });
-
-    //TARGET ONLINE: send state change//
-    const targetOnline = connections[username];
-    if (targetOnline) {
-      targetOnline.send(JSON.stringify({ hangout: target, type: "HANGOUT" })); //-----------------
-    } else {
-    }
-    //send state change to sender/
-
-    ws.send(JSON.stringify({ hangout: sender, type: "ACKHOWLEDGEMENT" })); //---------------
   } catch (error) {
     const err = error;
 

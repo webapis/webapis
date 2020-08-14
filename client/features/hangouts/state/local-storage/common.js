@@ -19,11 +19,11 @@ export function updateUnread({ dispatch, hangout, name, dState }) {
   } catch (error) {}
 }
 
-export function saveSentMessage({ hangout, dispatch, name }) {
+export function saveSentMessage({ hangout, dispatch, name, dState }) {
   const { username, message } = hangout;
   const messageKey = `${name}-${username}-messages`;
   const localMessages = JSON.parse(localStorage.getItem(messageKey));
-  const pendingMessage = { ...message, username: name, state: "pending" };
+  const pendingMessage = { ...message, username: name, state: dState };
   if (localMessages && localMessages.length > 0) {
     localStorage.setItem(
       messageKey,

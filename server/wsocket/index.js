@@ -33,7 +33,7 @@ module.exports = async function (server, client) {
         const user = await collection.findOne({ username });
 
         ws.user = user;
-        ws.browserId = browserId;
+
         connections[`${username}-${browserId}`] = ws;
 
         onLineStateChangeHandler({ connections, ws, client });

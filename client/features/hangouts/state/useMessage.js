@@ -2,10 +2,12 @@ import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.m
 import { useEffect } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
 import { useAppRoute } from "components/app-route/index";
 import { actionTypes } from "./actionTypes";
+import { useAuth } from "../../authentication/state/useAuth";
 import {
   updateSentMessage,
   saveUnread,
   saveHangout,
+  saveSentMessage,
   saveRecievedMessage,
   updateHangout,
   removeUnread,
@@ -15,6 +17,8 @@ import {
 
 export function useMessage({ message, username, dispatch, focusedHangout }) {
   const { onAppRoute } = useAppRoute();
+  const { state: authState } = useAuth();
+  const { browserId } = authState;
   function onDeliveryAcknowledgement({ hangout, offline }) {
     const commonArg = { dispatch, name: username, hangout };
     switch (hangout.state) {
@@ -32,9 +36,17 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
 
         break;
       case "INVITED":
+        debugger;
+
         setTimeout(function () {
-          updateHangout(commonArg);
-          updateSentMessage(commonArg);
+          if (browserId === hangout.browserId) {
+            updateHangout(commonArg);
+            updateSentMessage(commonArg);
+          } else {
+            saveHangout({ hangout, dispatch, name: username });
+            saveSentMessage({ hangout, dispatch, name, dState: "delivered" });
+          }
+
           dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
         }, 200);
 
