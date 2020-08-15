@@ -38,6 +38,7 @@ module.exports = async function onHangoutSeed({
     };
     console.log("cypress node pid", process.pid);
     mongoDBPersistance.handlePersistance({
+      connections: {},
       target,
       sender,
       senderUserName: senderUsername,

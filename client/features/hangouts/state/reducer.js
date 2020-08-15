@@ -99,7 +99,6 @@ export function reducer(state, action) {
     case actionTypes.FILTER_INPUT_CHANGED:
       return { ...state, filter: action.filter };
     case actionTypes.LOADED_HANGOUTS:
-      debugger;
       return { ...state, filterResult: action.hangouts };
     case actionTypes.SELECTED_HANGOUT:
       return {

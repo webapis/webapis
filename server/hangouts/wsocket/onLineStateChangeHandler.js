@@ -5,30 +5,50 @@ module.exports.onLineStateChangeHandler = async function ({
 }) {
   try {
     const collection = await client.db("auth").collection("users");
+    debugger;
     const user = await collection.findOne({ username: ws.user.username });
-    const senderBrowser = user.browsers.find((b) => {
+    const connectedBrowser = user.browsers.find((b) => {
       if (b.browserId === browserId) {
         return b;
       }
-    });
-    //SEND SENDER UNDELIVERED
-    if (senderBrowser && senderBrowser.undelivered) {
-      const senderUndelivered = senderBrowser.undelivered;
+    }); //
+    //SEND DELAYED HANGOUTS
+    if (connectedBrowser && connectedBrowser.delayed) {
+      const delayedHangouts = connectedBrowser.delayed;
 
-      if (senderUndelivered && senderUndelivered.length > 0) {
+      if (delayedHangouts && delayedHangouts.length > 0) {
         ws.send(
           JSON.stringify({
-            hangouts: senderUndelivered,
+            hangouts: delayedHangouts,
             type: "DELAYED_ACKHOWLEDGEMENTS",
           }) //--
         );
       }
-      pullSenderUndelivered({
-        browserId: senderBrowser.browserId,
+      pulldelayedHangouts({
+        browserId: connectedBrowser.browserId,
         username: ws.user.username,
         collection,
       });
-    } else {
+    }
+    //SEND DELAYED UNDELIVERED
+    if (connectedBrowser && connectedBrowser.undelivered) {
+      debugger;
+      const undeliveredHangouts = connectedBrowser.undelivered;
+      if (undeliveredHangouts && undeliveredHangouts.length > 0) {
+        debugger;
+        ws.send(
+          JSON.stringify({
+            hangouts: undeliveredHangouts,
+            type: "UNDELIVERED_HANGOUTS",
+          }) //--
+        );
+
+        pullUndeliveredHangouts({
+          browserId: connectedBrowser.browserId,
+          username: ws.user.username,
+          collection,
+        });
+      }
     }
   } catch (error) {
     const err = error;
@@ -37,7 +57,14 @@ module.exports.onLineStateChangeHandler = async function ({
   }
 };
 
-async function pullSenderUndelivered({ browserId, username, collection }) {
+async function pulldelayedHangouts({ browserId, username, collection }) {
+  await collection.update(
+    { username },
+    { $pull: { "browsers.$[t].delayed": {} } },
+    { arrayFilters: [{ "t.browserId": browserId }] }
+  );
+}
+async function pullUndeliveredHangouts({ browserId, username, collection }) {
   await collection.update(
     { username },
     { $pull: { "browsers.$[t].undelivered": {} } },

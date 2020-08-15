@@ -139,6 +139,7 @@ describe("onInvite", () => {
         });
       });
 
+    //inviter logges in from hist second device(browser)
     cy.get("[data-testid=signout-link]").click();
     cy.visit("/");
 
@@ -152,7 +153,9 @@ describe("onInvite", () => {
     cy.get("[data-testid=login-link]").click();
     cy.get("[data-testid=emailorusername]").type("demouser");
     cy.get("[data-testid=password]").type("Dragonfly1977!!!");
-    cy.pause();
+
     cy.get("[data-testid=login-btn]").click();
+    cy.get("[data-testid=hangouts-link]").click();
+    cy.get("[data-testid=berouser]");
   });
 });

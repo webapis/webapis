@@ -58,5 +58,6 @@ function initBrowserId({ username, dispatch }) {
       type: actionTypes.BROWSER_ID_LOADED,
       browserId: loadBrowserId({ username }),
     });
+  } else {
   }
 }

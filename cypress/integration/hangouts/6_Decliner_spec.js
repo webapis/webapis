@@ -1,22 +1,22 @@
 describe("Decliner", () => {
   beforeEach(() => {
     if (Cypress.env("back") === "node") {
-      const demo = {
-        username: "demo",
-        email: "demo@gmail.com",
+      const demouser = {
+        username: "demouser",
+        email: "demouser@gmail.com",
         password: "Dragonly_1999!",
       };
-      const bero = {
-        username: "bero",
-        email: "bero@gmail.com",
+      const berouser = {
+        username: "berouser",
+        email: "berouser@gmail.com",
         password: "Dragonly_1999!",
       };
       cy.task("seed:deleteCollection", {
         dbName: "auth",
         collectionName: "users",
       });
-      cy.task("seed:user", demo);
-      cy.task("seed:user", bero);
+      cy.task("seed:user", demouser);
+      cy.task("seed:user", berouser);
     }
     if (Cypress.env("back") === "parse") {
       cy.task("seed:dropDatabase", {
@@ -26,45 +26,48 @@ describe("Decliner", () => {
   });
   it("Decliner succeful", () => {
     const inviter = {
-      username: "bero",
+      username: "berouser",
       timestamp: Date.now(),
-      message: { text: "Lets chat bero", timestamp: Date.now() },
-      email: "bero@gmail.com",
+      message: { text: "Lets chat berouser", timestamp: Date.now() },
+      email: "berouser@gmail.com",
       command: "INVITE",
     };
 
     cy.task("seed:onHangout", {
       hangout: inviter,
-      senderUsername: "demo",
+      senderUsername: "demouser",
       dbName: "auth",
       collectionName: "users",
     });
 
     const decliner = {
-      username: "demo",
+      username: "demouser",
       timestamp: Date.now(),
       message: null,
-      email: "demo@gmail.com",
+      email: "demouser@gmail.com",
       command: "DECLINE",
     };
 
     cy.task("seed:onHangout", {
       hangout: decliner,
-      senderUsername: "bero",
+      senderUsername: "berouser",
       dbName: "auth",
       collectionName: "users",
     });
-
+    cy.window()
+      .its("localStorage")
+      .invoke("setItem", "demouser-browserId", "1234567890");
     if (Cypress.env("back") === "node") {
       cy.loginByEmail({
-        email: "demo@gmail.com",
+        email: "demouser@gmail.com",
         password: "Dragonly_1999!",
+        hasBrowserId: true,
       });
     }
 
     cy.visit("/");
     cy.get("[data-testid=message-count]").contains(0);
     cy.get("[data-testid=hangouts-link]").click();
-    cy.get("[data-testid=bero]").click();
+    cy.get("[data-testid=berouser]").click();
   });
 });

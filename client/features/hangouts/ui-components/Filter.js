@@ -27,7 +27,6 @@ export default function Filter({
         <${List}>
           ${filterResult.length > 0 &&
           filterResult.map((f) => {
-            debugger;
             return html`
               <${ListItem}
                 id=${f.username}

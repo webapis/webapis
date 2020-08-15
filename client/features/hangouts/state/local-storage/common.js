@@ -47,6 +47,7 @@ export function saveRecievedMessage({ hangout, dispatch, name, dState }) {
   const localMessages = JSON.parse(localStorage.getItem(messageKey));
   const pendingMessage = { ...message, username, state: dState };
   if (localMessages && localMessages.length > 0) {
+    debugger;
     localStorage.setItem(
       messageKey,
       JSON.stringify([...localMessages, pendingMessage])
@@ -56,11 +57,13 @@ export function saveRecievedMessage({ hangout, dispatch, name, dState }) {
       messages: [...localMessages, pendingMessage],
     });
   } else {
+    debugger;
     localStorage.setItem(messageKey, JSON.stringify([pendingMessage]));
     dispatch({
       type: actionTypes.MESSAGES_UPDATED,
       messages: [pendingMessage],
     });
+    debugger;
   }
 }
 export function saveUnread({ dispatch, name, hangout }) {
@@ -155,10 +158,8 @@ export function saveHangout({ hangout, dispatch, name }) {
 
   if (localHangouts && localHangouts.length > 0) {
     if (localHangouts.some((hg) => hg.username === username)) {
-      debugger;
       updateHangout({ hangout, dispatch, name });
     } else {
-      debugger;
       localStorage.setItem(
         hangoutKey,
         JSON.stringify([...localHangouts, hangout])
@@ -171,7 +172,6 @@ export function saveHangout({ hangout, dispatch, name }) {
 
     dispatch({ type: actionTypes.HANGOUT_UPDATED, hangout: hangout });
   } else {
-    debugger;
     localStorage.setItem(hangoutKey, JSON.stringify([hangout]));
     dispatch({ type: actionTypes.HANGOUTS_UPDATED, hangouts: [hangout] });
   }

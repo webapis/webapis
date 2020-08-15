@@ -26,7 +26,7 @@ module.exports.handlePersistance = async function ({
         } else {
           await collection.update(
             { username: senderUserName },
-            { $push: { "browsers.$[t].undelivered": sender } },
+            { $push: { "browsers.$[t].delayed": sender } },
             {
               arrayFilters: [{ "t.browserId": browser.browserId }],
               upsert: true,
