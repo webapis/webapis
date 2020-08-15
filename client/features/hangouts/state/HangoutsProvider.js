@@ -101,6 +101,7 @@ export default function HangoutsProvider(props) {
     const hangouts = JSON.parse(localStorage.getItem(hangoutKey));
 
     if (!hangouts) {
+      debugger;
       dispatch({ type: actionTypes.FETCH_HANGOUTS_STARTED });
     }
   }, []);

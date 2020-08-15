@@ -40,7 +40,7 @@ module.exports = async function ({ req, res, collection }) {
         //successful signup-------------------------------------
 
         const { hash, salt, iterations } = passhash.hashPassword(password);
-        const browserId = Date.now();
+        const browserId = Date.now().toString();
         const result = await collection.insertOne({
           hash,
           salt,

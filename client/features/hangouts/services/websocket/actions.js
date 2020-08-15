@@ -20,7 +20,9 @@ export async function findHangouts({ dispatch, username }) {
     const response = await fetch(`/hangouts/findHangouts?username=${username}`);
     if (response.ok) {
       const { hangouts } = await response.json();
+      debugger;
       if (hangouts.length > 0) {
+        debugger;
         localStorage.setItem(`${username}-hangouts`, JSON.stringify(hangouts));
       }
 

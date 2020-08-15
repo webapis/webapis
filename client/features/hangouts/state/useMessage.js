@@ -36,8 +36,6 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
 
         break;
       case "INVITED":
-        debugger;
-
         setTimeout(function () {
           if (browserId === hangout.browserId) {
             updateHangout(commonArg);
@@ -170,16 +168,15 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
     });
   }
   function handleDelayedAcknowledgements({ hangouts }) {
-    hangouts,
-      forEach((hangout) => {
-        onDeliveryAcknowledgement({ hangout });
-      });
+    hangouts.forEach((hangout) => {
+      onDeliveryAcknowledgement({ hangout });
+    });
   }
   useEffect(() => {
     if (message && username) {
       switch (message.type) {
         case "DELAYED_ACKHOWLEDGEMENTS":
-          handleDelayedAcknowledgements({ hangout: message.hangouts });
+          handleDelayedAcknowledgements({ hangouts: message.hangouts });
           break;
         case "ACKHOWLEDGEMENT":
           onDeliveryAcknowledgement({

@@ -53,7 +53,7 @@ module.exports = async function ({ req, res, collection }) {
             "Set-Cookie": `${user.username}=${token};Expires=Wed, 21 Oct 2025 07:28:00 GMT;  Path=/hangouts`,
           });
           if (!hasBrowserId) {
-            const browserId = Date.now();
+            const browserId = Date.now().toString();
             const updateBrowsers = await collection.update(
               { username: user.username },
               { $push: { browsers: { browserId } } }
@@ -125,7 +125,7 @@ module.exports = async function ({ req, res, collection }) {
             // );
 
             if (!hasBrowserId) {
-              const browserId = Date.now();
+              const browserId = Date.now().toString();
               const updateBrowsers = await collection.update(
                 { username: user.username },
                 { $push: { browsers: { browserId } } }

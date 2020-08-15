@@ -50,7 +50,7 @@ module.exports = async function (server, client) {
         });
         ws.on("close", function () {
           console.log("connection closed:", username);
-          delete connections[username];
+          delete connections[`${username}-${browserId}`];
         });
       } catch (error) {
         const err = error;

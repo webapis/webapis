@@ -6,15 +6,16 @@ module.exports.onLineStateChangeHandler = async function ({
   try {
     const collection = await client.db("auth").collection("users");
     const user = await collection.findOne({ username: ws.user.username });
-    const senderBrowser = user.browsers.find((b) => b.browserId === browserId);
-
+    const senderBrowser = user.browsers.find((b) => {
+      if (b.browserId === browserId) {
+        return b;
+      }
+    });
+    //SEND SENDER UNDELIVERED
     if (senderBrowser && senderBrowser.undelivered) {
       const senderUndelivered = senderBrowser.undelivered;
-      pullSenderUndelivered({
-        browserId: senderBrowser.browserId,
-        username: ws.user.username,
-      });
-      if (undelivered && undelivered.length > 0) {
+
+      if (senderUndelivered && senderUndelivered.length > 0) {
         ws.send(
           JSON.stringify({
             hangouts: senderUndelivered,
@@ -22,17 +23,24 @@ module.exports.onLineStateChangeHandler = async function ({
           }) //--
         );
       }
+      pullSenderUndelivered({
+        browserId: senderBrowser.browserId,
+        username: ws.user.username,
+        collection,
+      });
+    } else {
     }
   } catch (error) {
     const err = error;
+
     console.log("onLineStateChangeHandlerError", error);
   }
 };
 
-async function pullSenderUndelivered({ browserId, username }) {
+async function pullSenderUndelivered({ browserId, username, collection }) {
   await collection.update(
     { username },
-    { $pull: { "browsers.$[t].undelivered": { username } } },
+    { $pull: { "browsers.$[t].undelivered": {} } },
     { arrayFilters: [{ "t.browserId": browserId }] }
   );
 }

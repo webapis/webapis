@@ -20,14 +20,13 @@ module.exports.handlePersistance = async function ({
         const senderOnline =
           connections[`${senderUserName}-${browser.browserId}`];
         if (senderOnline) {
-          debugger;
           senderOnline.send(
             JSON.stringify({ hangout: sender, type: "ACKHOWLEDGEMENT" })
           );
         } else {
           await collection.update(
             { username: senderUserName },
-            { $push: { "browsers.$[t].mirrors": sender } },
+            { $push: { "browsers.$[t].undelivered": sender } },
             {
               arrayFilters: [{ "t.browserId": browser.browserId }],
               upsert: true,
