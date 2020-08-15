@@ -29,6 +29,7 @@ export async function findHangouts({ dispatch, username }) {
       dispatch({ type: actionTypes.FETCH_HANGOUTS_SUCCESS });
     }
   } catch (error) {
+    debugger;
     dispatch({ type: actionTypes.FETCH_HANGOUTS_FAILED, error });
   }
 }

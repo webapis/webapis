@@ -149,20 +149,29 @@ export function updateHangout({ dispatch, name, hangout }) {
 }
 
 export function saveHangout({ hangout, dispatch, name }) {
+  const { username } = hangout;
   const hangoutKey = `${name}-hangouts`;
-  let localHangouts = localStorage.getItem(hangoutKey);
+  let localHangouts = JSON.parse(localStorage.getItem(hangoutKey));
 
   if (localHangouts && localHangouts.length > 0) {
-    localStorage.setItem(
-      hangoutKey,
-      JSON.stringify([...localHangouts, hangout])
-    );
-    dispatch({
-      type: actionTypes.HANGOUTS_UPDATED,
-      hangouts: [...localHangouts, hangout],
-    });
+    if (localHangouts.some((hg) => hg.username === username)) {
+      debugger;
+      updateHangout({ hangout, dispatch, name });
+    } else {
+      debugger;
+      localStorage.setItem(
+        hangoutKey,
+        JSON.stringify([...localHangouts, hangout])
+      );
+      dispatch({
+        type: actionTypes.HANGOUTS_UPDATED,
+        hangouts: [...localHangouts, hangout],
+      });
+    }
+
     dispatch({ type: actionTypes.HANGOUT_UPDATED, hangout: hangout });
   } else {
+    debugger;
     localStorage.setItem(hangoutKey, JSON.stringify([hangout]));
     dispatch({ type: actionTypes.HANGOUTS_UPDATED, hangouts: [hangout] });
   }

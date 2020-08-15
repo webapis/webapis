@@ -20,6 +20,7 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
   const { state: authState } = useAuth();
   const { browserId } = authState;
   function onDeliveryAcknowledgement({ hangout, offline }) {
+    debugger;
     const commonArg = { dispatch, name: username, hangout };
     switch (hangout.state) {
       case "UNBLOCKED":
@@ -176,9 +177,11 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
     if (message && username) {
       switch (message.type) {
         case "DELAYED_ACKHOWLEDGEMENTS":
+          debugger;
           handleDelayedAcknowledgements({ hangouts: message.hangouts });
           break;
         case "ACKHOWLEDGEMENT":
+          debugger;
           onDeliveryAcknowledgement({
             hangout: message.hangout,
             offline: false,

@@ -26,8 +26,9 @@ export default function Filter({
       <div>
         <${List}>
           ${filterResult.length > 0 &&
-          filterResult.map(
-            (f) => html`
+          filterResult.map((f) => {
+            debugger;
+            return html`
               <${ListItem}
                 id=${f.username}
                 data-testid=${f.username}
@@ -35,8 +36,8 @@ export default function Filter({
               >
                 ${f.username}
               <//>
-            `
-          )}
+            `;
+          })}
         <//>
       </div>
       ${filterResult.length === 0 &&

@@ -11,10 +11,11 @@ module.exports = async function findHangouts({ req, res, collection }) {
     // finduser
     let user = await collection.findOne({ username });
     if (user && user.browsers) {
-      debugger;
-      const hangs = user.browsers.find((b) => b.hangouts.length > 0);
+      const hangs = user.browsers.find(
+        (b) => b.hangouts && b.hangouts.length > 0
+      );
       // search for users hangouts
-      debugger;
+
       res.writeHead(200, { "Content-Type": "application/json" });
       res.write(
         JSON.stringify({
@@ -33,7 +34,7 @@ module.exports = async function findHangouts({ req, res, collection }) {
     }
   } catch (error) {
     const err = error;
-
+    debugger;
     res.statusCode = 500;
     res.writeHead(500, { "Content-Type": "application/json" });
     res.write(JSON.stringify({ error }));
