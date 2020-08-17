@@ -20,11 +20,18 @@ import "./parse/signup";
 import "./parse/createUser";
 import "./parse/loginByEmail";
 import "./parse/deleteUser";
+import "./auth/login";
+import "./auth/signup";
+import "./auth/signout";
+import "./hangout/invite";
+import "./hangout/accept";
+
 Cypress.on("window:before:load", (win) => {
   delete win.fetch;
 });
 
 Cypress.on("uncaught:exception", (err, runnable) => {
+  debugger;
   // returning false here prevents Cypress from
   // failing the test
   cy.log("application error..", JSON.stringify(err));

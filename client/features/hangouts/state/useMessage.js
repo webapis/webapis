@@ -177,9 +177,11 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
     if (message && username) {
       switch (message.type) {
         case "DELAYED_ACKHOWLEDGEMENTS":
+          debugger;
           handleDelayedAcknowledgements({ hangouts: message.hangouts });
           break;
         case "ACKHOWLEDGEMENT":
+          debugger;
           onDeliveryAcknowledgement({
             hangout: message.hangout,
             offline: false,
@@ -196,6 +198,7 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
           }
           break;
         case "UNDELIVERED_HANGOUTS":
+          debugger;
           handleHangouts({ hangouts: message.hangouts });
           break;
         // case "OFFLINE_ACKN":
