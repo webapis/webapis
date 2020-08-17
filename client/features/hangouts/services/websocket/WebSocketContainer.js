@@ -70,7 +70,7 @@ export function WebSocketContainer(props) {
       };
       socket.onerror = (error) => {
         const err = error.message;
-        debugger;
+        //
         dispatch({ type: actionTypes.SOCKET_ERROR, error });
         //   throw error;
       };

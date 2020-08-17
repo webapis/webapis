@@ -91,7 +91,7 @@ export function useHangouts() {
     });
 
     saveRecievedMessage({ hangout, dispatch, name: username, dState: "read" });
-    removeUnread({ dispatch, hangout: accept, name: username });
+    // removeUnread({ dispatch, hangout: accept, name: username });
     onAppRoute({ featureRoute: `/ACCEPT`, route: "/hangouts" });
     sendPendingHangout({ hangout: accept });
   }

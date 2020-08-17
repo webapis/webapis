@@ -47,7 +47,6 @@ export function saveRecievedMessage({ hangout, dispatch, name, dState }) {
   const localMessages = JSON.parse(localStorage.getItem(messageKey));
   const pendingMessage = { ...message, username, state: dState };
   if (localMessages && localMessages.length > 0) {
-    debugger;
     localStorage.setItem(
       messageKey,
       JSON.stringify([...localMessages, pendingMessage])
@@ -57,13 +56,11 @@ export function saveRecievedMessage({ hangout, dispatch, name, dState }) {
       messages: [...localMessages, pendingMessage],
     });
   } else {
-    debugger;
     localStorage.setItem(messageKey, JSON.stringify([pendingMessage]));
     dispatch({
       type: actionTypes.MESSAGES_UPDATED,
       messages: [pendingMessage],
     });
-    debugger;
   }
 }
 export function saveUnread({ dispatch, name, hangout }) {
