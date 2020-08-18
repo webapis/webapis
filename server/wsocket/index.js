@@ -17,12 +17,11 @@ module.exports = async function (server, client) {
   const wss = new WebSocket.Server({ server });
 
   wss.on("connection", async function connection(ws, request) {
-    debugger;
     //FIXME :HG same user signs in from multiple devices at the same time
     if (request.url.includes("hangouts")) {
       try {
         const token = cookie.parse(request.headers["cookie"]);
-        debugger;
+
         let uname = url.parse(request.url, true).query.username;
         let browserId = url.parse(request.url, true).query.browserId;
 
@@ -32,7 +31,7 @@ module.exports = async function (server, client) {
 
         console.log(username, "connected from", browserId);
         const user = await collection.findOne({ username });
-        debugger;
+
         ws.user = user;
 
         connections[`${username}-${browserId}`] = ws;
@@ -55,7 +54,6 @@ module.exports = async function (server, client) {
         });
       } catch (error) {
         const err = error;
-        debugger;
       }
     } else if (request.url.includes("monitor")) {
       console.log("monitor socket connected");

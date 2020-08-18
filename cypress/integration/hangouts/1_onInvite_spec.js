@@ -23,7 +23,7 @@ describe("onInvite", () => {
     cy.login({ username: "demouser" });
 
     cy.wait(50);
-    cy.get("[data-testid=hangouts-link]").click();
+    // cy.get("[data-testid=hangouts-link]").click();
     cy.get("[data-testid=search]").click();
 
     cy.get("[data-testid=search-ui]");
@@ -53,7 +53,6 @@ describe("onInvite", () => {
       timestamp: currentDate,
       text: "Lets chat on Hangout",
     };
-    cy.get("[data-testid=socket-connection]").contains("connected");
 
     cy.get("[data-testid=oninvite-btn]")
       .click()
@@ -85,29 +84,29 @@ describe("onInvite", () => {
 
     cy.get("[data-testid=hangouts-link]").click();
     cy.get("[data-testid=berouser]").click();
-    cy.get("[data-testid=invitee-ui]");
-
-    cy.window()
-      .its("localStorage")
-      .invoke("getItem", "demouser-berouser-messages")
-      .then((result) => {
-        const messages = JSON.parse(result);
-        const devlivered = messages[0];
-        //testing updateSentMessage()-------------------------------3
-        expect(devlivered).to.deep.equal({
-          ...expectedMessageState,
-          state: "delivered",
+    cy.get("[data-testid=invitee-ui]").then(() => {
+      cy.window()
+        .its("localStorage")
+        .invoke("getItem", "demouser-berouser-messages")
+        .then((result) => {
+          const messages = JSON.parse(result);
+          const devlivered = messages[0];
+          //testing updateSentMessage()-------------------------------3
+          expect(devlivered).to.deep.equal({
+            ...expectedMessageState,
+            state: "delivered",
+          });
         });
-      });
-    cy.window()
-      .its("localStorage")
-      .invoke("getItem", "demouser-hangouts")
-      .then((result) => {
-        const hangout = JSON.parse(result);
-        const devlivered = hangout[0];
-        //testing updateHangout()---------------------------------------4
-        expect(devlivered.state).to.deep.equal("INVITED");
-      });
+      cy.window()
+        .its("localStorage")
+        .invoke("getItem", "demouser-hangouts")
+        .then((result) => {
+          const hangout = JSON.parse(result);
+          const devlivered = hangout[0];
+          //testing updateHangout()---------------------------------------4
+          expect(devlivered.state).to.deep.equal("INVITED");
+        });
+    });
 
     //inviter logges in from hist second device(browser)
     cy.get("[data-testid=signout-link]").click();

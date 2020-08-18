@@ -37,7 +37,6 @@ describe("onAccept", () => {
           .its("localStorage")
           .invoke("getItem", "berouser-hangouts")
           .then((hangoutState) => {
-            debugger;
             const expectedHangoutState = {
               username: "demouser",
               email: "demouser@gmail.com",
@@ -85,12 +84,10 @@ describe("onAccept", () => {
             );
             cy.get("[data-testid=message-count]").contains(0);
 
-            cy.get("[data-testid=hangchat-ui]").then(() => {
-              cy.get("[data-testid=right-message-wrapper]")
-                .find(".message-state")
-                //saveSentMessage(dState:'pending')-----------------------------2.1
-                .contains("pending");
-            });
+            cy.get("[data-testid=right-message-wrapper]")
+              .find(".message-state")
+              //saveSentMessage(dState:'pending')-----------------------------2.1
+              .contains("pending");
           });
       });
 

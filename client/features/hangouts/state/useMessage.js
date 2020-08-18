@@ -86,7 +86,6 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
         break;
       case "READ":
         setTimeout(function () {
-          debugger;
           updateHangout({
             hangout: { ...focusedHangout, state: "READ" },
             name: username,

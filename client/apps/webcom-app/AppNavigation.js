@@ -26,6 +26,18 @@ export function AppNavigation() {
         <${NavBarCollapse}>
           <${NavBarNav}>
             <!-- NavItem -->
+            <${NavItem}>
+              ${username &&
+              html`
+                <${NavLink}
+                  id="filter"
+                  appRoute="/hangouts"
+                  data-testid="hangouts-link"
+                >
+                  Hangouts
+                <//>
+              `}
+            <//>
           <//>
           <!-- NavBarNav -->
           <${Nav} horizontalAlignment="justify-content-end">

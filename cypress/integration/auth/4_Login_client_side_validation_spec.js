@@ -3,11 +3,20 @@ import validationMessages from "../../../client/features/authentication/validati
 describe("4_Login_client_side_validation_spec", () => {
   beforeEach(() => {
     cy.visit("/");
-    cy.get("[data-testid=login-link]").click();
+    cy.wait(50);
+    Cypress.on("window:before:load", (win) => {
+      win.jsDisabled = false;
+    });
+    //cy.pause()
+    // cy.get("[data-testid=login-link]").click();
   });
   it("user inputs: empty emailorusername or password (onBlur)", () => {
-    cy.get("[data-testid=emailorusername]").focus().blur();
-    cy.get("[data-testid=password]").focus().blur();
+    cy.get("[data-testid=emailorusername]").focus();
+    cy.wait(50);
+    cy.get("[data-testid=emailorusername]").blur();
+    cy.get("[data-testid=password]").focus();
+    cy.wait(50);
+    cy.get("[data-testid=password]").blur();
     cy.get("[data-testid=message-emailorusername]").contains(
       validationMessages.REQUIRED_FIELD
     );

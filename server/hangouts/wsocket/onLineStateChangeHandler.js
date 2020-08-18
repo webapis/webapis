@@ -5,7 +5,7 @@ module.exports.onLineStateChangeHandler = async function ({
 }) {
   try {
     const collection = await client.db("auth").collection("users");
-    debugger;
+
     const user = await collection.findOne({ username: ws.user.username });
     const connectedBrowser = user.browsers.find((b) => {
       if (b.browserId === browserId) {
@@ -32,10 +32,8 @@ module.exports.onLineStateChangeHandler = async function ({
     }
     //SEND DELAYED UNDELIVERED
     if (connectedBrowser && connectedBrowser.undelivered) {
-      debugger;
       const undeliveredHangouts = connectedBrowser.undelivered;
       if (undeliveredHangouts && undeliveredHangouts.length > 0) {
-        debugger;
         ws.send(
           JSON.stringify({
             hangouts: undeliveredHangouts,

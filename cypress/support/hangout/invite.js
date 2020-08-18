@@ -1,6 +1,6 @@
 Cypress.Commands.add("invite", () => {
   cy.get("[data-testid=hangouts-link]").click();
-  cy.get("[data-testid=search-link]").click();
+  cy.get("[data-testid=search]").click();
 
   cy.get("[data-testid=search-ui]");
   cy.get("[data-testid=search-input]").type("berouser");

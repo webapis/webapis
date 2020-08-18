@@ -137,5 +137,6 @@ describe("3_Signup_server_side_e2e_validation_spec", () => {
       cy.window().its("localStorage").invoke("getItem", "testuser-browserId"),
       "is not null"
     );
+    cy.signout();
   });
 });

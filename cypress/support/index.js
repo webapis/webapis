@@ -32,7 +32,6 @@ Cypress.on("window:before:load", (win) => {
 });
 
 Cypress.on("uncaught:exception", (err, runnable) => {
-  debugger;
   // returning false here prevents Cypress from
   // failing the test
   cy.log("application error..", JSON.stringify(err));

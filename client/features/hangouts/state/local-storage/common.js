@@ -111,10 +111,8 @@ export function updateRecievedMessages({ hangout, name, dispatch, dState }) {
   if (recievedMessages && recievedMessages.length > 0) {
     let updatedRecievedMessages = recievedMessages.map((l) => {
       if (state === "READING") {
-        debugger;
         return { ...l, state: "reading" };
       } else if (state === "READ") {
-        debugger;
         return { ...l, state: "read" };
       } else {
         return l;

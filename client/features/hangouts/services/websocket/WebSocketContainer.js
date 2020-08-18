@@ -20,7 +20,7 @@ export function WebSocketContainer(props) {
   const { children, socketUrl } = props;
   const { dispatch, state } = useHangouts();
   const { searchHangouts, search, pendingHangout, fetchHangouts } = state;
-  const { signout, browserId } = authState;
+  const { signout, browserId, authenticated } = authState;
 
   function onSocket() {
     setSocket(
@@ -38,13 +38,19 @@ export function WebSocketContainer(props) {
     if (username && username.length > 0 && browserId && socket === null) {
       onSocket();
     }
-    // if (!username && socket) {
-    //   console.log("socket close");
+    if (!username && socket) {
+      console.log("socket close");
 
-    //   setSocket(null);
-    //   dispatch({ type: actionTypes.SET_HANGOUT_TO_INIT_STATE });
-    // }
+      setSocket(null);
+      dispatch({ type: actionTypes.SET_HANGOUT_TO_INIT_STATE });
+    }
   }, [username, socket, browserId]);
+
+  useEffect(() => {
+    if (authenticated) {
+      onSocket();
+    }
+  }, [authenticated]);
   useEffect(() => {
     if (signout) {
       if (socket) {
@@ -60,6 +66,7 @@ export function WebSocketContainer(props) {
         dispatch({ type: actionTypes.SERVER_MESSAGE_RECIEVED, message: msg });
       };
       socket.onopen = () => {
+        debugger;
         console.log("con open");
         dispatch({ type: actionTypes.OPEN });
       };
@@ -92,6 +99,7 @@ export function WebSocketContainer(props) {
 
   useEffect(() => {
     if (fetchHangouts && username) {
+      debugger;
       actions.findHangouts({ dispatch, username });
     }
   }, [fetchHangouts, username]);

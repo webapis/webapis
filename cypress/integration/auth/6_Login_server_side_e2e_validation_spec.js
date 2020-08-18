@@ -68,5 +68,6 @@ describe("5_Login_server_side_stubbed_validation_spec", () => {
     cy.login({ username: "testuser" });
     cy.get("[data-testid=message-emailorusername]").should("not.be.visible");
     cy.get("[data-testid=message-password]").should("not.be.visible");
+    cy.signout();
   }); //
 });

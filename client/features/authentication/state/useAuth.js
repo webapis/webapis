@@ -11,10 +11,10 @@ export function useAuth() {
 
   // useEffect(() => {
   //   if (!user) {
-  //     debugger;;
+  //     ;
   //     onAppRoute({ route: "/auth", featureRoute: "/login" });
   //   } else {
-  //     debugger;;
+  //     ;
   //     onAppRoute({ route: "/", featureRoute: "/home" });
   //   }
   // }, [user]);

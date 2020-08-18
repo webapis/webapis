@@ -33,6 +33,7 @@ describe("onMessage_spec", () => {
     cy.get("[data-testid=send-btn]").click();
     cy.signout();
     cy.login({ username: "berouser" });
+    cy.pause();
     cy.get("[data-testid=message-count]").contains(1); ///?
     cy.get("[data-testid=hangouts-link]").click();
 
