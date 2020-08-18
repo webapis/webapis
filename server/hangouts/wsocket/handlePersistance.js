@@ -20,10 +20,12 @@ module.exports.handlePersistance = async function ({
         const senderOnline =
           connections[`${senderUserName}-${browser.browserId}`];
         if (senderOnline) {
+          debugger;
           senderOnline.send(
             JSON.stringify({ hangout: sender, type: "ACKHOWLEDGEMENT" })
           );
         } else {
+          debugger;
           await collection.update(
             { username: senderUserName },
             { $push: { "browsers.$[t].delayed": sender } },
@@ -39,10 +41,12 @@ module.exports.handlePersistance = async function ({
       for (const browser of targetBrowsers) {
         const targetOnline = connections[`${username}-${browser.browserId}`];
         if (targetOnline) {
+          debugger;
           targetOnline.send(
             JSON.stringify({ hangout: target, type: "HANGOUT" })
           ); //-----------------
         } else {
+          debugger;
           await collection.update(
             { username },
             { $push: { "browsers.$[t].undelivered": target } },
@@ -92,28 +96,28 @@ module.exports.handlePersistance = async function ({
         );
       }
     },
-    pushTargetUnread: async function () {
-      //PUSH UNREADS ON TARGET
-      for await (const browser of targetBrowsers) {
-        await collection.update(
-          { username },
-          { $push: { "browsers.$[t].unreads": target } },
-          { arrayFilters: [{ "t.browserId": browser.browserId }], upsert: true }
-        );
-      }
-    },
+    // pushTargetUnread: async function () {
+    //   //PUSH UNREADS ON TARGET
+    //   for await (const browser of targetBrowsers) {
+    //     await collection.update(
+    //       { username },
+    //       { $push: { "browsers.$[t].unreads": target } },
+    //       { arrayFilters: [{ "t.browserId": browser.browserId }], upsert: true }
+    //     );
+    //   }
+    // },
 
-    pullSenderUnread: async function () {
-      for await (const browser of senderBrowsers) {
-        await collection.update(
-          { username: senderUserName },
-          { $pull: { "browsers.$[t].unreads": { username, timestamp } } },
-          { arrayFilters: [{ "t.browserId": browser.browserId }], upsert: true }
-        );
-      }
-    },
-    pullSenderAllUnreads: async function () {},
-    pullTargetAllUnreads: async function () {},
+    // pullSenderUnread: async function () {
+    //   for await (const browser of senderBrowsers) {
+    //     await collection.update(
+    //       { username: senderUserName },
+    //       { $pull: { "browsers.$[t].unreads": { username, timestamp } } },
+    //       { arrayFilters: [{ "t.browserId": browser.browserId }], upsert: true }
+    //     );
+    //   }
+    // },
+    // pullSenderAllUnreads: async function () {},
+    // pullTargetAllUnreads: async function () {},
   };
   switch (hangout.command) {
     case "INVITE": //------------------------------------
@@ -122,22 +126,22 @@ module.exports.handlePersistance = async function ({
       funcs.pushSenderHangout(); //INVITED
       funcs.senderOnline();
       //TARGET
-      funcs.pushTargetUnread(); //INVITER
+      //  funcs.pushTargetUnread(); //INVITER
       funcs.targetOnline();
       break;
     case "ACCEPT":
       //SENDER-----------------------------------------
-      funcs.pullSenderUnread(); //INVITER
+      // funcs.pullSenderUnread(); //INVITER
       funcs.pushSenderHangout(); //ACCEPTED
       funcs.senderOnline();
       //TARGET-----------------------------------------
       funcs.updateTargetHangout(); //ACCEPTER
-      funcs.pushTargetUnread(); //ACCEPTER
+      // funcs.pushTargetUnread(); //ACCEPTER
       funcs.targetOnline();
       break;
     case "DECLINE":
       //SENDER-----------------------------------------
-      funcs.pullSenderUnread(); //INVITER
+      //   funcs.pullSenderUnread(); //INVITER
       funcs.senderOnline();
       //TARGET-----------------------------------------
       funcs.updateTargetHangout(); //DECLINER
@@ -149,7 +153,7 @@ module.exports.handlePersistance = async function ({
       funcs.senderOnline();
       //TARGET-----------------------------------------
       funcs.updateTargetHangout(); //MESSANGER
-      funcs.pushTargetUnread(); //MESSANGER
+      //  funcs.pushTargetUnread(); //MESSANGER
       funcs.targetOnline();
       break;
     case "BLOCK":
@@ -159,8 +163,8 @@ module.exports.handlePersistance = async function ({
 
       //TARGET-----------------------------------------
       funcs.updateTargetHangout(); //BLOCKER
-      funcs.pullTargetAllUnreads(); //ALL
-      funcs.pushTargetUnread(); //BLOCKER
+      //    funcs.pullTargetAllUnreads(); //ALL
+      //    funcs.pushTargetUnread(); //BLOCKER
       funcs.targetOnline();
       break;
     case "UNBLOCK":
@@ -169,17 +173,19 @@ module.exports.handlePersistance = async function ({
       funcs.senderOnline();
       //TARGET-----------------------------------------
       funcs.updateTargetHangout(); //UNBLOCKER
-      funcs.pushTargetUnread(); //UNBLOCKER
+      //   funcs.pushTargetUnread(); //UNBLOCKER
       funcs.targetOnline();
       break;
 
     case "READING":
+      debugger;
       //SENDER-----------------------------------------
-      funcs.pullSenderAllUnreads(); //ALL
+      // funcs.pullSenderAllUnreads(); //ALL
       funcs.updateSenderHangout(); //READ
       funcs.senderOnline();
       //TARGET-----------------------------------------
-      funcs.pushTargetUnread(); //READER
+      funcs.updateTargetHangout(); //READER
+      //  funcs.pushTargetUnread(); //READER
       funcs.targetOnline();
       break;
     case "SEENING":

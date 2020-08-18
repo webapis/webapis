@@ -26,6 +26,7 @@ import "./auth/signout";
 import "./hangout/invite";
 import "./hangout/accept";
 import "./hangout/decline";
+import "./hangout/block";
 Cypress.on("window:before:load", (win) => {
   delete win.fetch;
 });

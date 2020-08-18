@@ -83,17 +83,17 @@ describe("onAccept", () => {
             expect(recievedMessageState).to.deep.equal(
               expectedRecievedMessageState
             );
+            cy.get("[data-testid=message-count]").contains(0);
+
+            cy.get("[data-testid=hangchat-ui]").then(() => {
+              cy.get("[data-testid=right-message-wrapper]")
+                .find(".message-state")
+                //saveSentMessage(dState:'pending')-----------------------------2.1
+                .contains("pending");
+            });
           });
       });
 
-    cy.get("[data-testid=message-count]").contains(0);
-
-    cy.get("[data-testid=hangchat-ui]").then(() => {
-      cy.get("[data-testid=right-message-wrapper]")
-        .find(".message-state")
-        //saveSentMessage(dState:'pending')-----------------------------2.1
-        .contains("pending");
-    });
     cy.get("[data-testid=message-count]").contains(0);
     //saveRecievedMessage(dState:'read')---------------------------------3.1
     cy.get("[data-testid=left-message-wrapper]")
@@ -126,13 +126,3 @@ describe("onAccept", () => {
       .contains("delivered");
   });
 });
-
-/*
-  cy.window()
-      .its("localStorage")
-      .invoke("getItem", "berouser-unread-hangouts")
-      .then((result) => {
-        const messages = JSON.parse(result);
-        //test removeUnread()------------------------------------------
-      });
-*/

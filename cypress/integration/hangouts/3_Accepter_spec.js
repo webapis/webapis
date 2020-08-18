@@ -24,8 +24,10 @@ describe("Accepter", () => {
     cy.invite();
     cy.signout();
     cy.login({ username: "berouser" });
+
     cy.accept();
     cy.signout();
+
     cy.login({ username: "demouser" });
 
     cy.get("[data-testid=message-count]")

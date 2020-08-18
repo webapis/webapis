@@ -62,38 +62,10 @@ describe("5_Login_server_side_stubbed_validation_spec", () => {
     );
   });
 
-  it("Succesful login: user submits: valid emailorusername and password FIRST LOGIN", () => {
-    cy.server();
-    cy.route({ url: "/auth/login", method: "POST" }).as("succesfulLogin");
-    cy.task("seed:user", {
-      email: "testuser@gmail.com",
-      username: "testuser",
-      password: "TestPassword!22s",
-    });
-
-    cy.get("[data-testid=emailorusername]").type("testuser");
-    cy.get("[data-testid=password]").type("TestPassword!22s");
-    cy.get("[data-testid=login-btn]").click();
-    cy.get("[data-testid=message-emailorusername]").should("not.be.visible");
-    cy.get("[data-testid=message-password]").should("not.be.visible");
-    cy.wait("@succesfulLogin");
-    cy.window()
-      .its("localStorage")
-      .invoke("getItem", "testuser-browserId")
-      .should("not.equal", 1234567890);
-  });
   it("Succesful login: user submits: valid emailorusername and password SUBSEQUENT LOGIN", () => {
-    cy.task("seed:user", {
-      email: "testuser@gmail.com",
-      username: "testuser",
-      password: "TestPassword!22s",
-    });
-    cy.window()
-      .its("localStorage")
-      .invoke("setItem", "testuser-browserId", JSON.stringify(1234567890));
-    cy.get("[data-testid=emailorusername]").type("testuser");
-    cy.get("[data-testid=password]").type("TestPassword!22s");
-    cy.get("[data-testid=login-btn]").click();
+    cy.signup({ username: "testuser" });
+    cy.signout();
+    cy.login({ username: "testuser" });
     cy.get("[data-testid=message-emailorusername]").should("not.be.visible");
     cy.get("[data-testid=message-password]").should("not.be.visible");
   }); //
