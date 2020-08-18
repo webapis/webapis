@@ -1,14 +1,25 @@
+import { useEffect } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
 import { useAuthContext } from "./AuthProvider";
 import actionTypes from "./actionTypes";
 import * as cv from "../validation/constraintValidators";
 import { useAppRoute } from "components/app-route/index";
+
 export function useAuth() {
   const { state, dispatch } = useAuthContext();
-
+  const { user } = state;
   const { onAppRoute } = useAppRoute();
+
+  // useEffect(() => {
+  //   if (!user) {
+  //     debugger;;
+  //     onAppRoute({ route: "/auth", featureRoute: "/login" });
+  //   } else {
+  //     debugger;;
+  //     onAppRoute({ route: "/", featureRoute: "/home" });
+  //   }
+  // }, [user]);
   function onChange(e) {
     const { name, value } = e.target;
-
     dispatch({ type: actionTypes.VALUE_CHANGED, name, value });
   }
   function onLogin() {

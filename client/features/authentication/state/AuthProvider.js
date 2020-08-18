@@ -12,8 +12,7 @@ import {
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 import { authReducer, initState } from "./authReducer";
 import AuthAdapter from "./AuthAdapter";
-import { browserIdExists, loadBrowserId } from "./onBrowserId";
-import { actionTypes } from "../../hangouts/state/actionTypes";
+import { useAppRoute } from "components/app-route/index";
 const AuthContext = createContext();
 const html = htm.bind(h);
 export function useAuthContext() {
@@ -31,21 +30,22 @@ export function useAuthContext() {
 }
 
 export default function AuthProvider(props) {
-  const { children } = props;
+  const { children, authedRoute } = props;
   const [state, dispatch] = useReducer(authReducer, initState);
+  const { onAppRoute } = useAppRoute();
   const { user } = state;
   const value = useMemo(() => [state, dispatch], [state]);
 
-  // useEffect(() => {
-  //   if (user && browserIdExists({username:user.username})) {
-  //
-  //     dispatch({
-  //       type: actionTypes.SET_BROWSER_ID,
-  //       browserId: loadBrowserId({ username:user.username }),
-  //     });
-  //   }
-
-  // }, [user]);
+  useEffect(() => {
+    if (user) {
+      onAppRoute({
+        route: authedRoute.route,
+        featureRoute: authedRoute.featureRoute,
+      });
+    } else {
+      onAppRoute({ route: "/auth", featureRoute: "/login" });
+    }
+  }, [user]);
 
   return html`
     <${AuthContext.Provider} value=${value} ...${props}>

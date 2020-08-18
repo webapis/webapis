@@ -25,18 +25,6 @@ export function AppNavigation() {
       <${Navbar} brand="Webcom" bg="dark">
         <${NavBarCollapse}>
           <${NavBarNav}>
-            <${NavItem}>
-              ${username &&
-              html`
-                <${NavLink}
-                  id="filter"
-                  appRoute="/hangouts"
-                  data-testid="hangouts-link"
-                >
-                  Hangouts
-                <//>
-              `}
-            <//>
             <!-- NavItem -->
           <//>
           <!-- NavBarNav -->
@@ -121,35 +109,14 @@ export function AppNavigation() {
                 </button>
               `}
             <//>
-            <${NavItem}>
-              <${FeatureRoute} path="/filter">
-                <button
-                  class="btn"
-                  data-testid="search-link"
-                  id="search"
-                  onClick=${onNavigation}
-                >
-                  <${PersonPlusIcon} width="1.5em" height="1.5em" />
-                </button>
-              <//>
-            <//>
-            <${NavItem}>
-              <${NavLink}
-                id="monitor"
-                appRoute="/monitor"
-                data-testid="monitor-link"
-              >
-                monitor
-              <//>
-            <//>
+
             <${NavItem}>
               <${NavLink} id="monitor" data-testid="socket-connection">
-                ${readyState === 1 ? "connected" : "disconnected"}
+                ${readyState === 1
+                  ? html`<span class="badge badge-success">online</span>`
+                  : html`<span class="badge badge-danger">offline</span>`}
                 ${error && error.message}
               <//>
-            <//>
-            <${NavItem}>
-              <${WifiStatus} fill="white" />
             <//>
           <//>
           <!-- Nav -->

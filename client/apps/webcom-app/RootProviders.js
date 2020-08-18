@@ -10,9 +10,11 @@ export function RootProviders({ children }) {
   return html`
     <${AppRouteProvider}
       title="Webcom"
-      initState=${{ route: "/auth", featureRoute: "/" }}
+      initState=${{ route: "/auth", featureRoute: "/login" }}
     >
-      <${AuthProvider}>
+      <${AuthProvider}
+        authedRoute=${{ route: "/hangouts", featureRoute: "/filter" }}
+      >
         <${HangoutsProvider}>
           <${HangoutAdapter}
             socketUrl=${location.origin.replace(/^http/, "ws")}

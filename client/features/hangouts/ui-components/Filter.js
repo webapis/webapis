@@ -17,12 +17,16 @@ export default function Filter({
   }, []);
   return html`
     <div style=${{ height: "100%", display: "flex", flexDirection: "column" }}>
-      <input
-        class="form-control"
-        value=${filter}
-        onChange=${onFilterInput}
-        data-testid="filter-input"
-      />
+      ${filterResult.length > 0 &&
+      html`
+        <input
+          class="form-control"
+          value=${filter}
+          onChange=${onFilterInput}
+          data-testid="filter-input"
+        />
+      `}
+
       <div>
         <${List}>
           ${filterResult.length > 0 &&

@@ -16,6 +16,7 @@ describe("onInvite", () => {
     const currentDate = Date.UTC(2018, 10, 30);
     cy.clock(currentDate, ["Date"]);
     cy.signup({ username: "demouser" });
+
     cy.signout();
     cy.signup({ username: "berouser" });
     cy.signout();
@@ -23,7 +24,7 @@ describe("onInvite", () => {
 
     cy.wait(50);
     cy.get("[data-testid=hangouts-link]").click();
-    cy.get("[data-testid=search-link]").click();
+    cy.get("[data-testid=search]").click();
 
     cy.get("[data-testid=search-ui]");
     cy.get("[data-testid=search-input]").type("berouser");

@@ -29,6 +29,7 @@ export const initState = {
   user: null,
   signout: false,
   browserId: null,
+  authenticated: false,
 };
 
 export function authReducer(state, action) {
@@ -64,6 +65,7 @@ export function authReducer(state, action) {
         success: true,
         loading: false,
         user: action.user,
+        authenticated: true,
         password: "",
       };
     case actionTypes.LOGIN_FAILED:
@@ -75,6 +77,7 @@ export function authReducer(state, action) {
         ...state,
         loading: false,
         user: action.user,
+        authenticated: true,
       };
     case actionTypes.SIGNUP_FAILED:
       return { ...state, loading: false, signup: false };
@@ -102,11 +105,12 @@ export function authReducer(state, action) {
     case actionTypes.GOT_TOKEN_FROM_URL:
       return { ...state, token: action.token };
     case actionTypes.LOGOUT:
-      return { ...initState, signout: true };
+      return { ...initState, signout: true, authenticated: false };
     case actionTypes.RECOVER_LOCAL_AUTH_STATE:
       return {
         ...state,
         user: action.user,
+        authenticated: true,
       };
     default:
       return state;

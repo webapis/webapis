@@ -4,9 +4,9 @@ import {
   Suspense,
   lazy,
 } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/preact.combat.cdn.js";
+
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
-import { AppRoute } from "components/app-route/index";
-import { Home } from "./Home";
+import { AppRoute, useAppRoute } from "components/app-route/index";
 
 const AuthFeatureRoutes = lazy(() =>
   import("features/authentication/AuthFeatureRoutes")
@@ -18,33 +18,43 @@ const HangoutsFeatureRoutes = lazy(() =>
 const ErrorPage = lazy(() => import("./ErrorPage"));
 const AppMonitor = lazy(() => import("features/app-monitor/index"));
 export function AppRoutes() {
-  return html`
-    <div style=${{ height: "85vh" }}>
-      <${AppRoute} path=${"/auth"}>
-        <${Suspense} fallback=${Loading}>
-          <${AuthFeatureRoutes} />
+  const { routeState } = useAppRoute();
+
+  const { route } = routeState;
+
+  switch (route) {
+    case "/auth":
+      return html`<div style=${{ height: "85vh" }}>
+        <${AppRoute} path=${"/auth"}>
+          <${Suspense} fallback=${Loading}>
+            <${AuthFeatureRoutes} />
+          <//>
         <//>
-      <//>
-      <${AppRoute}path =${"/"}>
-        <${Home} />
-      <//>
-      <${AppRoute} path=${"/hangouts"}>
+      </div>`;
+    case "/hangouts":
+      return html` <${AppRoute} path=${"/hangouts"}>
         <${Suspense} fallback=${Loading}>
           <${HangoutsFeatureRoutes} />
         <//>
-      <//>
-      <${AppRoute}path =${"/error"}>
+      <//>`;
+    case "/error":
+      return html` <${AppRoute}path =${"/error"}>
         <${Suspense} fallback=${Loading}>
           <${ErrorPage} />
         <//>
-      <//>
-      <${AppRoute} path=${"/monitor"}>
-        <${Suspense} fallback=${Loading}>
-          <${AppMonitor}//>
+      <//>`;
+
+    case "/monitor":
+      return html`
+        <${AppRoute} path=${"/monitor"}>
+          <${Suspense} fallback=${Loading}>
+            <${AppMonitor}//>
+          <//>
         <//>
-      <//>
-    </div>
-  `;
+      `;
+    default:
+      return null;
+  }
 }
 
 function Loading() {
