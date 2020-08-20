@@ -18,7 +18,6 @@ describe("3_Signup_server_side_e2e_validation_spec", () => {
   });
 
   it("client side JS disabled: user submmits empty fields", () => {
-    //cy.task('seed:user',({email:'testuser'}))
     cy.get("[data-testid=signup-btn]").click();
     cy.get("[data-testid=message-username]").contains(
       validationMessages.REQUIRED_FIELD
