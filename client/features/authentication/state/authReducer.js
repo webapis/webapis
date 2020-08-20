@@ -1,10 +1,5 @@
 import actionTypes from "./actionTypes";
 export const initState = {
-  login: false,
-  signup: false,
-  signout: false,
-  changePassword: false,
-  requestPassChange: false,
   validation: {
     username: { isValid: undefined, message: "" },
     email: { isValid: undefined, message: "" },
@@ -17,7 +12,6 @@ export const initState = {
   },
   email: "",
   password: "",
-  success: false,
   error: null,
   username: "",
   loading: false,
@@ -27,9 +21,12 @@ export const initState = {
   token: null,
   authFeedback: null,
   user: null,
-  signout: false,
   browserId: null,
-  authenticated: false,
+  authStarted: false,
+  signupStarted: false, //used by service
+  loginStarted: false, //used by service
+  changePasswordStared: false, //used by service
+  requestPassChangeStarted: false, //used by service
 };
 
 export function authReducer(state, action) {
@@ -55,62 +52,91 @@ export function authReducer(state, action) {
         ...state,
         [action.name]: action.value,
       };
-
       return nextState;
     case actionTypes.LOGIN_STARTED:
-      return { ...state, loading: true, login: true };
-    case actionTypes.LOGIN_SUCCESS:
       return {
         ...state,
-        success: true,
+        loading: true,
+        loginStarted: true,
+        authStarted: true,
+      };
+    case actionTypes.LOGIN_SUCCESS:
+      debugger;
+      return {
+        ...state,
         loading: false,
+
         user: action.user,
-        authenticated: true,
+        authStarted: false,
+        loginStarted: false,
         password: "",
       };
     case actionTypes.LOGIN_FAILED:
-      return { ...state, loading: false, login: false };
-    case actionTypes.SIGNUP_STARTED:
-      return { ...state, loading: true, signup: true };
-    case actionTypes.SIGNUP_SUCCESS:
       return {
         ...state,
         loading: false,
+        loginStarted: false,
+        authStarted: false,
+      };
+    case actionTypes.SIGNUP_STARTED:
+      return {
+        ...state,
+        loading: true,
+        signupStarted: true,
+        authStarted: true,
+      };
+    case actionTypes.SIGNUP_SUCCESS:
+      debugger;
+      return {
+        ...state,
+        loading: false,
+
         user: action.user,
-        authenticated: true,
+        signupStarted: false,
+        authStarted: false,
       };
     case actionTypes.SIGNUP_FAILED:
-      return { ...state, loading: false, signup: false };
+      return {
+        ...state,
+        loading: false,
+        signupStarted: false,
+        authStarted: false,
+      };
     case actionTypes.CHANGE_PASSWORD_STARTED:
-      return { ...state, loading: true, changePassword: true };
+      return { ...state, loading: true, changePasswordStared: true };
     case actionTypes.CHANGE_PASSWORD_SUCCESS:
       return {
         ...state,
         loading: false,
         user: action.user,
-        changePassword: false,
+        changePasswordStared: false,
+        authStarted: false,
       };
     case actionTypes.CHANGE_PASSWORD_FAILED:
-      return { ...state, loading: false, changePassword: false };
+      return {
+        ...state,
+        loading: false,
+        changePasswordStared: false,
+        authStarted: false,
+      };
     case actionTypes.REQUEST_PASS_CHANGE_STARTED:
-      return { ...state, loading: true, requestPassChange: true };
+      return { ...state, loading: true, requestPassChangeStarted: true };
     case actionTypes.REQUEST_PASS_CHANGE_SUCCESS:
       return {
         ...state,
         loading: false,
-        requestPassChange: false,
+        requestPassChangeStarted: false,
       };
     case actionTypes.REQUEST_PASS_CHANGE_FAILED:
-      return { ...state, loading: false, requestPassChange: false };
+      return { ...state, loading: false, requestPassChangeStarted: false };
     case actionTypes.GOT_TOKEN_FROM_URL:
       return { ...state, token: action.token };
     case actionTypes.LOGOUT:
-      return { ...initState, signout: true, authenticated: false };
+      return { ...initState };
     case actionTypes.RECOVER_LOCAL_AUTH_STATE:
       return {
         ...state,
         user: action.user,
-        authenticated: true,
       };
     default:
       return state;

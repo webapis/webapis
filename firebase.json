@@ -1,0 +1,9 @@
+{"hosting": {
+  "public": "builds/webcom-app/build",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}
+}

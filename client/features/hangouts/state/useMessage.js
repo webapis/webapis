@@ -84,19 +84,19 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
         }, 200);
 
         break;
-      case "READ":
-        setTimeout(function () {
-          updateHangout({
-            hangout: { ...focusedHangout, state: "READ" },
-            name: username,
-            dispatch,
-          });
-          updateRecievedMessages(commonArg);
-          dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
-          // removeUnread(commonArg);
-        }, 200);
+      // case "READ":
+      //   setTimeout(function () {
+      //     updateHangout({
+      //       hangout: { ...focusedHangout, state: "READ" },
+      //       name: username,
+      //       dispatch,
+      //     });
+      //     updateRecievedMessages(commonArg);
+      //     dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
+      //     // removeUnread(commonArg);
+      //   }, 200);
 
-        break;
+      //   break;
       default:
         break;
     }
@@ -177,15 +177,18 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
     if (message && username) {
       switch (message.type) {
         case "DELAYED_ACKHOWLEDGEMENTS":
+          debugger;
           handleDelayedAcknowledgements({ hangouts: message.hangouts });
           break;
         case "ACKHOWLEDGEMENT":
+          debugger;
           onDeliveryAcknowledgement({
             hangout: message.hangout,
             offline: false,
           });
           break;
         case "HANGOUT":
+          debugger;
           if (
             focusedHangout &&
             focusedHangout.username === message.hangout.username
@@ -196,6 +199,7 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
           }
           break;
         case "UNDELIVERED_HANGOUTS":
+          debugger;
           handleHangouts({ hangouts: message.hangouts });
           break;
         // case "OFFLINE_ACKN":

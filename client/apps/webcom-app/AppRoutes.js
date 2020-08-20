@@ -34,7 +34,9 @@ export function AppRoutes() {
     case "/hangouts":
       return html` <${AppRoute} path=${"/hangouts"}>
         <${Suspense} fallback=${Loading}>
-          <${HangoutsFeatureRoutes} />
+          <div style=${{ height: "87vh" }}>
+            <${HangoutsFeatureRoutes} />
+          </div>
         <//>
       <//>`;
     case "/error":

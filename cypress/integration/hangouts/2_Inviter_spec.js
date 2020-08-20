@@ -1,3 +1,5 @@
+const { JsonWebTokenError } = require("jsonwebtoken");
+
 describe("Inviter", () => {
   beforeEach(() => {
     if (Cypress.env("back") === "node") {
@@ -11,6 +13,10 @@ describe("Inviter", () => {
         dbName: "test",
       });
     }
+    cy.window()
+      .its("localStorage")
+      .invoke("setItem", "browserId", JSON.stringify("1234567890"));
+    cy.visit("/");
   });
   it("message is sent succefully", () => {
     const currentDate = Date.UTC(2018, 10, 30);
@@ -18,12 +24,17 @@ describe("Inviter", () => {
 
     let timestamp = currentDate;
     cy.signup({ username: "demouser" });
+
     cy.signout();
+
     cy.signup({ username: "berouser" });
+
     cy.signout();
+
     cy.login({ username: "demouser" });
     cy.invite();
     cy.signout();
+
     cy.login({ username: "berouser" });
 
     const expectedHangoutState = {

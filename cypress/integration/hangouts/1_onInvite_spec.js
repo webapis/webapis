@@ -11,21 +11,22 @@ describe("onInvite", () => {
         dbName: "test",
       });
     }
+    cy.visit("/");
   });
   it("invite success", () => {
     const currentDate = Date.UTC(2018, 10, 30);
     cy.clock(currentDate, ["Date"]);
     cy.signup({ username: "demouser" });
-
     cy.signout();
     cy.signup({ username: "berouser" });
     cy.signout();
+
     cy.login({ username: "demouser" });
 
     cy.wait(50);
     // cy.get("[data-testid=hangouts-link]").click();
-    cy.get("[data-testid=search]").click();
 
+    cy.get("[data-testid=search]").click();
     cy.get("[data-testid=search-ui]");
     cy.get("[data-testid=search-input]").type("berouser");
 
@@ -83,31 +84,30 @@ describe("onInvite", () => {
       });
 
     cy.get("[data-testid=hangouts-link]").click();
-    cy.get("[data-testid=berouser]").click();
-    cy.get("[data-testid=invitee-ui]").then(() => {
-      cy.window()
-        .its("localStorage")
-        .invoke("getItem", "demouser-berouser-messages")
-        .then((result) => {
-          const messages = JSON.parse(result);
-          const devlivered = messages[0];
-          //testing updateSentMessage()-------------------------------3
-          expect(devlivered).to.deep.equal({
-            ...expectedMessageState,
-            state: "delivered",
-          });
-        });
-      cy.window()
-        .its("localStorage")
-        .invoke("getItem", "demouser-hangouts")
-        .then((result) => {
-          const hangout = JSON.parse(result);
-          const devlivered = hangout[0];
-          //testing updateHangout()---------------------------------------4
-          expect(devlivered.state).to.deep.equal("INVITED");
-        });
-    });
 
+    cy.get("[data-testid=berouser]").click();
+    cy.get("[data-testid=invitee-ui]");
+    cy.window()
+      .its("localStorage")
+      .invoke("getItem", "demouser-berouser-messages")
+      .then((result) => {
+        const messages = JSON.parse(result);
+        const devlivered = messages[0];
+        //testing updateSentMessage()-------------------------------3
+        expect(devlivered).to.deep.equal({
+          ...expectedMessageState,
+          state: "delivered",
+        });
+      });
+    cy.window()
+      .its("localStorage")
+      .invoke("getItem", "demouser-hangouts")
+      .then((result) => {
+        const hangout = JSON.parse(result);
+        const devlivered = hangout[0];
+        //testing updateHangout()---------------------------------------4
+        expect(devlivered.state).to.deep.equal("INVITED");
+      });
     //inviter logges in from hist second device(browser)
     cy.get("[data-testid=signout-link]").click();
     cy.visit("/");

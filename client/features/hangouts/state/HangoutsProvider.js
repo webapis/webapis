@@ -11,7 +11,7 @@ import {
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 import { reducer, initState } from "./reducer";
 import { useMessage } from "./useMessage";
-import { useUserName } from "features/authentication/state/useUserName";
+import { useAuth } from "features/authentication/state/useAuth";
 import { actionTypes } from "./actionTypes";
 import { clientCommands } from "./clientCommands";
 import {
@@ -32,14 +32,14 @@ export function useHangoutContext() {
 }
 
 export default function HangoutsProvider(props) {
-  const { username, token } = useUserName();
-
+  const { state: authState } = useAuth();
+  const { user } = authState;
   const [state, dispatch] = useReducer(reducer, initState);
   const { hangout, message } = state;
   //TODO HG onmessage sound effect
   const handleMessage = useMessage({
     message,
-    username,
+    username: user && user.username,
     dispatch,
     focusedHangout: hangout,
   });
@@ -47,9 +47,9 @@ export default function HangoutsProvider(props) {
   function onRead() {
     updateRecievedMessages({
       hangout,
-      name: username,
+      name: user && user.username,
       dispatch,
-      dState: "reading",
+      dState: "read",
     });
     dispatch({
       type: actionTypes.SENDING_HANGOUT_STARTED,
@@ -60,7 +60,7 @@ export default function HangoutsProvider(props) {
   useEffect(() => {
     if (hangout) {
       switch (hangout.state) {
-        case "ACCEPTER":
+        // case "ACCEPTER":
         // case "INVITER":
         // case "DECLINER":
         // case "BLOCKER":
@@ -80,30 +80,36 @@ export default function HangoutsProvider(props) {
       }
 
       // load messages from local storage
-      loadMessages({ hangout, name: username, dispatch });
+      loadMessages({ hangout, name: user && user.username, dispatch });
 
-      removeUnreads({ dispatch, name: username });
+      removeUnreads({ dispatch, name: user && user.username });
     }
   }, [hangout]);
 
+  // useEffect(() => {
+  //   if (!username) {
+  //     dispatch({ type: actionTypes.SET_HANGOUT_TO_INIT_STATE });
+  //   }
+  // }, [username]);
   useEffect(() => {
-    if (!username) {
-      dispatch({ type: actionTypes.SET_HANGOUT_TO_INIT_STATE });
-    }
-  }, [username]);
-  useEffect(() => {
-    const unreadhangoutKey = `${username}-unread-hangouts`;
+    const unreadhangoutKey = `${user && user.username}-unread-hangouts`;
     const unreadhangouts = JSON.parse(localStorage.getItem(unreadhangoutKey));
     if (unreadhangouts && unreadhangouts.length > 0) {
       dispatch({ type: actionTypes.UNREAD_HANGOUTS_UPDATED, unreadhangouts });
     }
-    const hangoutKey = `${username}-hangouts`;
+    const hangoutKey = `${user && user.username}-hangouts`;
     const hangouts = JSON.parse(localStorage.getItem(hangoutKey));
 
-    if (!hangouts && username && username.length > 0) {
-      // dispatch({ type: actionTypes.FETCH_HANGOUTS_STARTED });
+    if (
+      !hangouts &&
+      user &&
+      user.username &&
+      user &&
+      user.username.length > 0
+    ) {
+      dispatch({ type: actionTypes.FETCH_HANGOUTS_STARTED });
     }
-  }, [username]);
+  }, [user]);
 
   const value = useMemo(() => [state, dispatch], [state]);
   return html`<${HangoutContext.Provider} value=${value} ...${props} />`;

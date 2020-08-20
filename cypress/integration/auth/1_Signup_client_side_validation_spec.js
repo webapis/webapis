@@ -2,6 +2,9 @@ import validationMessages from "../../../client/features/authentication/validati
 
 describe("1_Signup_client_side_validation_spec", () => {
   beforeEach(() => {
+    cy.window()
+      .its("localStorage")
+      .invoke("setItem", "browserId", JSON.stringify("1234567890"));
     cy.visit("/");
     cy.get("[data-testid=signup-link]").click();
   });

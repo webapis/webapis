@@ -11,6 +11,7 @@ export function useUserName() {
   const [email, setEmail] = useState("");
   const [objectId, setObjectId] = useState(null);
   const { state, dispatch } = useAuthContext();
+  const { authenticated } = state;
   useEffect(() => {
     if (window.localStorage.getItem("webcom")) {
       const { username, token, email, objectId } = JSON.parse(
@@ -48,6 +49,14 @@ export function useUserName() {
       setObjectId(null);
     }
   }, [state]);
+  useEffect(() => {
+    if (!authenticated) {
+      setUsername(null);
+      setToken(null);
+      setEmail(null);
+      setObjectId(null);
+    }
+  }, [authenticated]);
 
   return { username: userName, token, email };
 }

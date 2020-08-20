@@ -11,6 +11,10 @@ describe("onDecline", () => {
         dbName: "test",
       });
     }
+    cy.window()
+      .its("localStorage")
+      .invoke("setItem", "browserId", JSON.stringify("1234567890"));
+    cy.visit("/");
   });
   it("invitation declined successfully", () => {
     const currentDate = Date.UTC(2018, 10, 30);

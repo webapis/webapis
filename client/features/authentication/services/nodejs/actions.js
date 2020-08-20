@@ -11,7 +11,12 @@ export async function signup({ dispatch, state }) {
     const { email, password, username } = state;
 
     const response = await fetch(`/auth/signup`, {
-      body: JSON.stringify({ password, email, username }),
+      body: JSON.stringify({
+        password,
+        email,
+        username,
+        browserId: loadBrowserId(),
+      }),
       headers: {
         ContentType: "application/json",
         Accept: "application/json",
@@ -21,13 +26,11 @@ export async function signup({ dispatch, state }) {
     const result = await response.json();
     if (response.status === 200) {
       const { token, username, email, browserId } = result;
-
       dispatch({
         type: actionTypes.SIGNUP_SUCCESS,
-        user: { token, username, email, browserId },
+        user: { token, username, email },
       });
-      saveBrowserIdToLocalStorage({ username, browserId });
-      dispatch({ type: actionTypes.BROWSER_ID_LOADED, browserId });
+
       window.localStorage.setItem(
         "webcom",
         JSON.stringify({
@@ -36,6 +39,10 @@ export async function signup({ dispatch, state }) {
           email,
         })
       );
+      if (browserIdExists() === false) {
+        saveBrowserIdToLocalStorage({ browserId });
+        dispatch({ type: actionTypes.BROWSER_ID_LOADED, browserId });
+      }
     } else if (response.status === 400) {
       const { errors } = result;
 
@@ -60,9 +67,6 @@ export async function signup({ dispatch, state }) {
 export async function login({ dispatch, state }) {
   try {
     const { emailorusername, password } = state;
-    const hasBrowserId = browserIdExists({ username: emailorusername })
-      ? true
-      : false;
 
     const response = await fetch(`/auth/login`, {
       headers: {
@@ -71,22 +75,22 @@ export async function login({ dispatch, state }) {
         Authorization: `Basic ${btoa(`${emailorusername}:${password}`)}`,
       },
       method: "POST",
-      body: JSON.stringify({ hasBrowserId }),
+      body: JSON.stringify({ hasBrowserId: browserIdExists() }),
     });
 
     const result = await response.json();
 
     if (response.status === 200) {
       const { token, username, email } = result;
-      if (hasBrowserId) {
+      if (browserIdExists()) {
         dispatch({
           type: actionTypes.BROWSER_ID_LOADED,
-          browserId: loadBrowserId({ username }),
+          browserId: loadBrowserId(),
         });
       } else {
         const { browserId } = result;
 
-        saveBrowserIdToLocalStorage({ username, browserId });
+        saveBrowserIdToLocalStorage({ browserId });
         dispatch({
           type: actionTypes.BROWSER_ID_LOADED,
           browserId,
@@ -142,9 +146,9 @@ export async function changePassword({ dispatch, state }) {
     const result = await response.json();
     if (response.status === 200) {
       const { token, username, email } = result;
-      if (!browserIdExists({ username })) {
+      if (!browserIdExists()) {
         const browserId = generateBrowserId();
-        saveBrowserIdToLocalStorage({ browserId, username });
+        saveBrowserIdToLocalStorage({ browserId });
         dispatch({ type: actionTypes.BROWSER_ID_LOADED, browserId });
       } else {
         dispatch({

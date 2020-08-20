@@ -1,16 +1,9 @@
+import { useEffect } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
 import { actionTypes } from "./actionTypes";
+
 export default function useSearch({ state, dispatch, onAppRoute }) {
-  const { search, searchResult } = state;
-
-  function onSearchSelect(e) {
-    const { id } = e.target;
-
-    const hangout = searchResult.find((s) => s.username === id);
-    dispatch({ type: actionTypes.SELECTED_HANGOUT, hangout });
-    setTimeout(function () {
-      onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
-    }, 200);
-  }
+  const { search, hangouts } = state;
+  useEffect(() => {}, []);
   function onSearchInput(e) {
     dispatch({ type: actionTypes.SEARCH_INPUT_CHANGE, search: e.target.value });
   }
@@ -19,5 +12,20 @@ export default function useSearch({ state, dispatch, onAppRoute }) {
     dispatch({ type: actionTypes.SEARCH_HANGOUT_STARTED });
   }
 
-  return { onSearch, onSearchInput, onSearchSelect, search, searchResult };
+  function onSearchSelect(e) {
+    const { id } = e.target;
+
+    const hangout = hangouts.find((s) => s.username === id);
+    dispatch({ type: actionTypes.SELECTED_HANGOUT, hangout });
+    setTimeout(function () {
+      onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
+    }, 200);
+  }
+
+  return {
+    onSearch,
+    onSearchInput,
+    onSearchSelect,
+    search,
+  };
 }

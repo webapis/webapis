@@ -2,6 +2,9 @@ import validationMessages from "../../../client/features/authentication/validati
 
 describe("4_Login_client_side_validation_spec", () => {
   beforeEach(() => {
+    cy.window()
+      .its("localStorage")
+      .invoke("setItem", "browserId", JSON.stringify("1234567890"));
     cy.visit("/");
     cy.wait(50);
     Cypress.on("window:before:load", (win) => {

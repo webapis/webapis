@@ -3,6 +3,9 @@ import validationMessages from "../../../client/features/authentication/validati
 describe("3_Signup_server_side_e2e_validation_spec", () => {
   beforeEach(() => {
     cy.server();
+    cy.window()
+      .its("localStorage")
+      .invoke("setItem", "browserId", JSON.stringify("1234567890"));
     cy.visit("/");
     cy.get("[data-testid=signup-link]").click();
     cy.task("seed:deleteCollection", {
@@ -131,6 +134,7 @@ describe("3_Signup_server_side_e2e_validation_spec", () => {
       password: "TestPassword!22s",
       email: "testuser@gmail.com",
       username: "testuser",
+      browserId: "1234567890",
     });
 
     assert.isNotNull(

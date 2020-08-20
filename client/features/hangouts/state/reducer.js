@@ -27,9 +27,12 @@ export const initState = {
   pendingHangout: null,
   message: null,
   browserId: null,
+  socketConnected: false,
 };
 export function reducer(state, action) {
   switch (action.type) {
+    case actionTypes.SOCKET_CONNECTION_STATE_CHANGED:
+      return { ...state, socketConnected: action.connected };
     case actionTypes.SET_BROWSER_ID:
       return { ...state, browserId: action.browserId };
     case actionTypes.MESSAGE_TEXT_CHANGED:
@@ -39,7 +42,7 @@ export function reducer(state, action) {
     case actionTypes.FETCH_HANGOUTS_STARTED:
       return { ...state, fetchHangouts: true };
     case actionTypes.FETCH_HANGOUTS_SUCCESS:
-      return { ...state, fetchHangouts: false };
+      return { ...state, fetchHangouts: false, hangouts: action.hangouts };
     case actionTypes.FETCH_HANGOUTS_FAILED:
       return { ...state, fetchHangouts: false, error: action.error };
     case actionTypes.ERROR_RECIEVED:
@@ -82,7 +85,7 @@ export function reducer(state, action) {
       return {
         ...state,
         loading: false,
-        searchResult: action.hangouts,
+        hangouts: action.hangouts,
         searchHangouts: false,
       };
     case actionTypes.SEARCH_HANGOUT_FAILED:
@@ -99,7 +102,7 @@ export function reducer(state, action) {
     case actionTypes.FILTER_INPUT_CHANGED:
       return { ...state, filter: action.filter };
     case actionTypes.LOADED_HANGOUTS:
-      return { ...state, filterResult: action.hangouts };
+      return { ...state, hangouts: action.hangouts };
     case actionTypes.SELECTED_HANGOUT:
       return {
         ...state,
@@ -108,16 +111,7 @@ export function reducer(state, action) {
     //SOCKET
     case actionTypes.SOCKET_ERROR:
       return { ...state, error: action.error };
-    case actionTypes.CONNECTING:
-      return { ...state, readyState: 0 };
-    case actionTypes.OPEN:
-      return { ...state, readyState: 1 };
-    case actionTypes.CLOSING:
-      return { ...state, readyState: 2 };
-    case actionTypes.CLOSED:
-      return { ...state, readyState: 3 };
-    case actionTypes.SOCKET_READY:
-      return { ...state, socket: action.socket };
+
     default:
       return state;
   }

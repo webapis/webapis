@@ -153,7 +153,7 @@ export function updateHangout({ dispatch, name, hangout }) {
     localHangouts && localHangouts.findIndex((l) => l.username === username);
   localHangouts && localHangouts.splice(hangoutIndex, 1, hangout);
   localStorage.setItem(hangoutKey, JSON.stringify(localHangouts));
-  dispatch({ type: actionTypes.HANGOUTS_UPDATED, hangouts: localHangouts });
+  //dispatch({ type: actionTypes.HANGOUTS_UPDATED, hangouts: localHangouts });
 }
 
 export function saveHangout({ hangout, dispatch, name }) {
@@ -169,16 +169,16 @@ export function saveHangout({ hangout, dispatch, name }) {
         hangoutKey,
         JSON.stringify([...localHangouts, hangout])
       );
-      dispatch({
-        type: actionTypes.HANGOUTS_UPDATED,
-        hangouts: [...localHangouts, hangout],
-      });
+      // dispatch({
+      //   type: actionTypes.HANGOUTS_UPDATED,
+      //   hangouts: [...localHangouts, hangout],
+      // });
     }
 
     dispatch({ type: actionTypes.HANGOUT_UPDATED, hangout: hangout });
   } else {
     localStorage.setItem(hangoutKey, JSON.stringify([hangout]));
-    dispatch({ type: actionTypes.HANGOUTS_UPDATED, hangouts: [hangout] });
+    // dispatch({ type: actionTypes.HANGOUTS_UPDATED, hangouts: [hangout] });
   }
 }
 
@@ -217,5 +217,18 @@ export function loadMessages({ hangout, name, dispatch }) {
     dispatch({ type: actionTypes.MESSAGES_UPDATED, messages });
   } else {
     dispatch({ type: actionTypes.MESSAGES_UPDATED, messages: [] });
+  }
+}
+
+export function saveHangouts({ hangouts, username }) {
+  localStorage.setItem(`${username}-hangouts`, JSON.stringify(hangouts));
+}
+
+export function loadHangouts({ name, dispatch }) {
+  const hangoutKey = `${name}-hangouts`;
+
+  const localHangouts = JSON.parse(localStorage.getItem(hangoutKey));
+  if (localHangouts && localHangouts.length > 0) {
+    dispatch({ type: actionTypes.LOADED_HANGOUTS, hangouts: localHangouts });
   }
 }

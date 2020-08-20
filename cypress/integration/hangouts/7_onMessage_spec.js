@@ -11,6 +11,10 @@ describe("onMessage_spec", () => {
         dbName: "test",
       });
     }
+    cy.window()
+      .its("localStorage")
+      .invoke("setItem", "browserId", JSON.stringify("1234567890"));
+    cy.visit("/");
   });
   it("message is sent succefully", () => {
     cy.signup({ username: "demouser" });
@@ -25,8 +29,11 @@ describe("onMessage_spec", () => {
     cy.signout();
     cy.login({ username: "demouser" });
 
+    cy.get("[data-testid=unread-link]").contains(1);
+
     cy.get("[data-testid=unread-link]").click();
     cy.get("[data-testid=berouser]").click();
+
     cy.get("[data-testid=message-input]").type("Hello berouser");
     cy.get("[data-testid=send-btn]").click();
     cy.get("[data-testid=right-message-wrapper]")
@@ -42,13 +49,17 @@ describe("onMessage_spec", () => {
 
     cy.signout();
     cy.login({ username: "berouser" });
+    cy.get("[data-testid=unread-link]").contains(1);
     cy.get("[data-testid=unread-link]").click();
+
     cy.get("[data-testid=demouser]").click();
+
     cy.get("[data-testid=message-input]").type("What are you doing demouser");
     cy.get("[data-testid=send-btn]").click();
 
     cy.signout();
     cy.login({ username: "demouser" });
+    cy.get("[data-testid=unread-link]").contains(1);
     cy.get("[data-testid=unread-link]").click();
     cy.get("[data-testid=berouser]").click();
   });

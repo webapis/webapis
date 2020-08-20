@@ -9,7 +9,12 @@ module.exports = async function ({ req, res, collection }) {
   try {
     let errors = [];
 
-    let { username, email, password } = req.body;
+    let {
+      username,
+      email,
+      password,
+      browserId = Date.now().toString(),
+    } = req.body;
 
     if (userInputValidation.signupConstraints({ username, email, password })) {
       errors = userInputValidation.signupConstraints({
@@ -40,7 +45,7 @@ module.exports = async function ({ req, res, collection }) {
         //successful signup-------------------------------------
 
         const { hash, salt, iterations } = passhash.hashPassword(password);
-        const browserId = Date.now().toString();
+        //const browserId = hasBrowserId ? 'existingBr': Date.now().toString();
         const result = await collection.insertOne({
           hash,
           salt,

@@ -11,6 +11,10 @@ describe("Decliner", () => {
         dbName: "test",
       });
     }
+    cy.window()
+      .its("localStorage")
+      .invoke("setItem", "browserId", JSON.stringify("1234567890"));
+    cy.visit("/");
   });
   it("Decliner succeful", () => {
     cy.signup({ username: "demouser" });

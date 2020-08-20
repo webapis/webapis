@@ -4,30 +4,35 @@ import * as actions from "./actions";
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 const html = htm.bind(h);
 export default function NodeAuthService({ children, state, dispatch }) {
-  const { login, signup, changePassword, requestPassChange } = state;
+  const {
+    signupStarted,
+    loginStarted,
+    changePasswordStared,
+    requestPassChangeStarted,
+  } = state;
 
   useEffect(() => {
-    if (login) {
+    if (loginStarted) {
       actions.login({ dispatch, state });
     }
-  }, [login]);
+  }, [loginStarted]);
 
   useEffect(() => {
-    if (signup) {
+    if (signupStarted) {
       actions.signup({ dispatch, state });
     }
-  }, [signup]);
+  }, [signupStarted]);
 
   useEffect(() => {
-    if (changePassword) {
+    if (changePasswordStared) {
       actions.changePassword({ dispatch, state });
     }
-  }, [changePassword]);
+  }, [changePasswordStared]);
 
   useEffect(() => {
-    if (requestPassChange) {
+    if (requestPassChangeStarted) {
       actions.forgotPassword({ dispatch, state });
     }
-  }, [requestPassChange]);
+  }, [requestPassChangeStarted]);
   return html`${children}`;
 }

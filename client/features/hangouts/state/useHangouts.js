@@ -64,6 +64,7 @@ export function useHangouts() {
       dState: "pending",
     });
     onAppRoute({ featureRoute: `/INVITE`, route: "/hangouts" });
+
     sendPendingHangout({ hangout: invitation });
   }
 

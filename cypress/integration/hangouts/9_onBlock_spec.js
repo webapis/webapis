@@ -11,6 +11,10 @@ describe("onBlock", () => {
         dbName: "test",
       });
     }
+    cy.window()
+      .its("localStorage")
+      .invoke("setItem", "browserId", JSON.stringify("1234567890"));
+    cy.visit("/");
   });
   it("user is blocked succefully", () => {
     const currentDate = Date.UTC(2018, 10, 30);
@@ -26,8 +30,11 @@ describe("onBlock", () => {
     cy.accept();
     cy.signout();
     cy.login({ username: "demouser" });
+
+    cy.get("[data-testid=unread-link]").contains(1);
     cy.get("[data-testid=unread-link]").click();
     cy.get("[data-testid=berouser]").click();
+
     cy.get("[data-testid=message-input]").type("Hello berouser x");
     cy.get("[data-testid=send-btn]").click();
     cy.signout();

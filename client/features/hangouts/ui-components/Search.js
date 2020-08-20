@@ -1,15 +1,14 @@
 import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 import List, { ListItem } from "controls/list/index";
-
+import useSearch from "../state/useSearch";
 const html = htm.bind(h);
-export default function Search({
-  onSearchSelect,
-  onSearchInput,
-  onSearch,
-  search,
-  searchResult = [],
-}) {
+export default function Search({ state, dispatch, onAppRoute, hangouts }) {
+  const { onSearchSelect, onSearchInput, onSearch, search } = useSearch({
+    state,
+    dispatch,
+    onAppRoute,
+  });
   return html`
     <div data-testid="search-ui">
       <div class="input-group mb-3">
@@ -36,8 +35,9 @@ export default function Search({
         </div>
       </div>
       <${List}>
-        ${searchResult.length > 0 &&
-        searchResult.map((u) => {
+        ${hangouts &&
+        hangouts.length > 0 &&
+        hangouts.map((u) => {
           return html`
             <${ListItem}
               id=${u.username}
