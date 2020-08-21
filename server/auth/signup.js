@@ -4,18 +4,13 @@ const validations = require("./validations/validations");
 const userInputValidation = require("./validations/userInputValidation");
 const passhash = require("../../server/auth/hashPassword");
 const jwt = require("jsonwebtoken");
-
+//
 module.exports = async function ({ req, res, collection }) {
   try {
     let errors = [];
 
-    let {
-      username,
-      email,
-      password,
-      browserId = Date.now().toString(),
-    } = req.body;
-
+    let { username, email, password, browserId } = req.body;
+    debugger;
     if (userInputValidation.signupConstraints({ username, email, password })) {
       errors = userInputValidation.signupConstraints({
         username,
@@ -46,13 +41,15 @@ module.exports = async function ({ req, res, collection }) {
 
         const { hash, salt, iterations } = passhash.hashPassword(password);
         //const browserId = hasBrowserId ? 'existingBr': Date.now().toString();
+        const userBrowserId =
+          browserId === null ? Date.now().toString() : browserId;
         const result = await collection.insertOne({
           hash,
           salt,
           iterations,
           email,
           username,
-          browsers: [{ browserId }],
+          browsers: [{ browserId: userBrowserId }],
         });
 
         const user = result.ops[0];
@@ -67,7 +64,9 @@ module.exports = async function ({ req, res, collection }) {
           "Content-Type": "application/json",
           "Set-Cookie": `${user.username}=${token};Expires=Wed, 21 Oct 2025 07:28:00 GMT; Path=/hangouts`,
         });
-        res.write(JSON.stringify({ token, email, username, browserId }));
+        res.write(
+          JSON.stringify({ token, email, username, browserId: userBrowserId })
+        );
         res.end();
       }
     }

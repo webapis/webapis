@@ -9,7 +9,8 @@ import {
 export async function signup({ dispatch, state }) {
   try {
     const { email, password, username } = state;
-
+    const browserId = loadBrowserId();
+    debugger;
     const response = await fetch(`/auth/signup`, {
       body: JSON.stringify({
         password,

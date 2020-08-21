@@ -135,11 +135,12 @@ describe("3_Signup_server_side_e2e_validation_spec", () => {
       username: "testuser",
       browserId: "1234567890",
     });
-    cy.get("[data-testid=socket-connection]").contains("online");
+
     assert.isNotNull(
       cy.window().its("localStorage").invoke("getItem", "browserId"),
       "is not null"
     );
+    cy.get("[data-testid=socket-connection]").contains("online");
     cy.signout();
     cy.get("[data-testid=socket-connection]").contains("offline");
   });

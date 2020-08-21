@@ -22,12 +22,10 @@ module.exports.handlePersistance = async function ({
           const senderOnline =
             connections[`${senderUserName}-${browser.browserId}`];
           if (senderOnline) {
-            debugger;
             senderOnline.send(
               JSON.stringify({ hangout: sender, type: "ACKHOWLEDGEMENT" })
             );
           } else {
-            debugger;
             await collection.update(
               { username: senderUserName },
               { $push: { "browsers.$[t].delayed": sender } },
@@ -43,12 +41,10 @@ module.exports.handlePersistance = async function ({
         for (const browser of targetBrowsers) {
           const targetOnline = connections[`${username}-${browser.browserId}`];
           if (targetOnline) {
-            debugger;
             targetOnline.send(
               JSON.stringify({ hangout: target, type: "HANGOUT" })
             ); //-----------------
           } else {
-            debugger;
             await collection.update(
               { username },
               { $push: { "browsers.$[t].undelivered": target } },

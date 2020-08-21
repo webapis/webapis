@@ -106,7 +106,7 @@ function floatMessages({ messages, username }) {
 }
 function sortMessages({ messages }) {
   if (messages) {
-    return messages.sort((a, b) => b.timestamp - a.timestamp);
+    return messages.sort((a, b) => a.timestamp - b.timestamp);
   } else {
     return [];
   }
