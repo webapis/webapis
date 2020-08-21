@@ -5,7 +5,7 @@ yarn-error.log
 .env
 debug.log
 coverage
-builds/
+builds
 build/
 logs/
 videos/

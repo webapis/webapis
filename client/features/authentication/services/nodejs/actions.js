@@ -25,7 +25,7 @@ export async function signup({ dispatch, state }) {
     });
     const result = await response.json();
     if (response.status === 200) {
-      const { token, username, email, browserId } = result;
+      const { token, username, email } = result;
       dispatch({
         type: actionTypes.SIGNUP_SUCCESS,
         user: { token, username, email },
@@ -39,9 +39,19 @@ export async function signup({ dispatch, state }) {
           email,
         })
       );
-      if (browserIdExists() === false) {
+      if (browserIdExists()) {
+        dispatch({
+          type: actionTypes.BROWSER_ID_LOADED,
+          browserId: loadBrowserId(),
+        });
+      } else {
+        const { browserId } = result;
+
         saveBrowserIdToLocalStorage({ browserId });
-        dispatch({ type: actionTypes.BROWSER_ID_LOADED, browserId });
+        dispatch({
+          type: actionTypes.BROWSER_ID_LOADED,
+          browserId,
+        });
       }
     } else if (response.status === 400) {
       const { errors } = result;

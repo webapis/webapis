@@ -62,12 +62,14 @@ describe("5_Login_server_side_stubbed_validation_spec", () => {
     );
   });
 
-  it("Succesful login: user submits: valid emailorusername and password SUBSEQUENT LOGIN", () => {
+  it.only("Succesful login: user submits: valid emailorusername and password SUBSEQUENT LOGIN", () => {
     cy.signup({ username: "testuser" });
     cy.signout();
     cy.login({ username: "testuser" });
     cy.get("[data-testid=message-emailorusername]").should("not.be.visible");
     cy.get("[data-testid=message-password]").should("not.be.visible");
+    cy.get("[data-testid=socket-connection]").contains("online");
     cy.signout();
+    cy.get("[data-testid=socket-connection]").contains("offline");
   }); //
 });
