@@ -130,7 +130,6 @@ export function useHangouts() {
       dState: "pending",
     });
     if (hangout.state === "BLOCKER") {
-      debugger;
       saveSentMessage({
         ///------------------------------updating tobe checked
         hangout: {
@@ -146,7 +145,6 @@ export function useHangouts() {
         dState: "pending",
       });
     } else {
-      debugger;
       // updateHangout({
       //   hangout: { ...messaging, state: "MESSAGE" },
       //   name: username,
@@ -158,7 +156,9 @@ export function useHangouts() {
     changeMessageText({ dispatch, text: "" });
   }
   function onBlock() {
+    debugger;
     const { email } = hangout;
+
     const timestamp = Date.now();
     const block = {
       username: hangout.username,
@@ -188,7 +188,9 @@ export function useHangouts() {
     sendPendingHangout({ hangout: block });
   }
   function onUnblock() {}
-
+  function emptyHangout() {
+    dispatch({ type: actionTypes.HANGOUT_UPDATED, hangout: null });
+  }
   return {
     onInvite,
     onAccept,
@@ -206,5 +208,6 @@ export function useHangouts() {
     username,
     messages,
     readyState,
+    emptyHangout,
   };
 }

@@ -73,7 +73,6 @@ export function WebSocketContainer(props) {
   useEffect(() => {
     if (socket && user) {
       socket.onmessage = (serverMessage) => {
-        debugger;
         const msg = JSON.parse(serverMessage.data);
         hangoutDispatch({
           type: actionTypes.SERVER_MESSAGE_RECIEVED,

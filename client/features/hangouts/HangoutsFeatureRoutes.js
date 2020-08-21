@@ -38,6 +38,7 @@ export default function HangoutsFeatureRoutes(props) {
     messages,
     dispatch,
     onNavigation,
+    emptyHangout,
   } = useHangouts();
 
   const {
@@ -96,6 +97,7 @@ export default function HangoutsFeatureRoutes(props) {
           username=${username}
           messageText=${messageText}
           dispatch=${dispatch}
+          emptyHangout=${emptyHangout}
         />
       <//>`;
     case "/INVITEE":

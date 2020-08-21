@@ -88,7 +88,7 @@ export function saveUnread({ dispatch, name, hangout }) {
 
 export function updateSentMessage({ hangout, name, dispatch }) {
   const { username, message } = hangout;
-  debugger;
+
   const { timestamp } = message;
   const messageKey = `${name}-${username}-messages`;
   const updatedMessage = { ...message, username: name, state: "delivered" };

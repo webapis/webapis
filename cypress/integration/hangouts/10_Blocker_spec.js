@@ -38,7 +38,7 @@ describe("Blocker", () => {
 
     cy.login({ username: "demouser" });
 
-    cy.get("[data-testid=unread-link]").contains(1);
+    cy.get("[data-testid=message-count]").contains(1);
 
     cy.get("[data-testid=unread-link]").click();
     cy.get("[data-testid=berouser]").click();
@@ -50,11 +50,11 @@ describe("Blocker", () => {
     cy.signout();
 
     cy.login({ username: "berouser" });
-
-    cy.block();
     cy.pause();
-    cy.signout();
+    cy.block();
 
+    cy.signout();
+    //cy.pause()
     cy.login({ username: "demouser" });
 
     cy.get("[data-testid=hangouts-link]").click();

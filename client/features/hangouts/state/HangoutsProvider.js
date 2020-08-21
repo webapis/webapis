@@ -96,11 +96,14 @@ export default function HangoutsProvider(props) {
   //   }
   // }, [username]);
   useEffect(() => {
-    const unreadhangoutKey = `${user && user.username}-unread-hangouts`;
-    const unreadhangouts = JSON.parse(localStorage.getItem(unreadhangoutKey));
-    if (unreadhangouts && unreadhangouts.length > 0) {
-      dispatch({ type: actionTypes.UNREAD_HANGOUTS_UPDATED, unreadhangouts });
+    if (user) {
+      const unreadhangoutKey = `${user && user.username}-unread-hangouts`;
+      const unreadhangouts = JSON.parse(localStorage.getItem(unreadhangoutKey));
+      if (unreadhangouts && unreadhangouts.length > 0) {
+        dispatch({ type: actionTypes.UNREAD_HANGOUTS_UPDATED, unreadhangouts });
+      }
     }
+
     const hangoutKey = `${user && user.username}-hangouts`;
     const hangouts = JSON.parse(localStorage.getItem(hangoutKey));
 

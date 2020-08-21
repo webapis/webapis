@@ -36,7 +36,6 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
 
         break;
       case "INVITED":
-        debugger;
         setTimeout(function () {
           if (browserId === hangout.browserId) {
             updateHangout(commonArg);
@@ -118,14 +117,13 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
         break;
       case "BLOCKER":
         updateHangout(commonArg);
-        dispatch({ type: actionTypes.HANGOUT_UPDATED, hangout });
+        //  dispatch({ type: actionTypes.HANGOUT_UPDATED, hangout });
         removeUnreads(commonArg);
         break;
       case "DECLINER":
         updateHangout(commonArg);
         break;
       case "INVITER":
-        debugger;
         saveUnread(commonArg);
 
         break;
@@ -179,18 +177,15 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
     if (message && username) {
       switch (message.type) {
         case "DELAYED_ACKHOWLEDGEMENTS":
-          debugger;
           handleDelayedAcknowledgements({ hangouts: message.hangouts });
           break;
         case "ACKHOWLEDGEMENT":
-          debugger;
           onDeliveryAcknowledgement({
             hangout: message.hangout,
             offline: false,
           });
           break;
         case "HANGOUT":
-          debugger;
           if (
             focusedHangout &&
             focusedHangout.username === message.hangout.username
@@ -201,7 +196,6 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
           }
           break;
         case "UNDELIVERED_HANGOUTS":
-          debugger;
           handleHangouts({ hangouts: message.hangouts });
           break;
         // case "OFFLINE_ACKN":

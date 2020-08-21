@@ -38,7 +38,7 @@ export function reducer(state, action) {
     case actionTypes.MESSAGE_TEXT_CHANGED:
       return { ...state, messageText: action.text };
     case actionTypes.SET_HANGOUT_TO_INIT_STATE:
-      return { ...initState };
+      return { ...initState, connected: state.connected };
     case actionTypes.FETCH_HANGOUTS_STARTED:
       return { ...state, fetchHangouts: true };
     case actionTypes.FETCH_HANGOUTS_SUCCESS:
@@ -104,6 +104,7 @@ export function reducer(state, action) {
     case actionTypes.LOADED_HANGOUTS:
       return { ...state, hangouts: action.hangouts };
     case actionTypes.SELECTED_HANGOUT:
+      debugger;
       return {
         ...state,
         hangout: action.hangout,
