@@ -130,6 +130,7 @@ export function useHangouts() {
       dState: "pending",
     });
     if (hangout.state === "BLOCKER") {
+      debugger;
       saveSentMessage({
         ///------------------------------updating tobe checked
         hangout: {
@@ -145,6 +146,7 @@ export function useHangouts() {
         dState: "pending",
       });
     } else {
+      debugger;
       // updateHangout({
       //   hangout: { ...messaging, state: "MESSAGE" },
       //   name: username,

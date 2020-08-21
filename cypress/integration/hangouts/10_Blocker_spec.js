@@ -52,7 +52,7 @@ describe("Blocker", () => {
     cy.login({ username: "berouser" });
 
     cy.block();
-
+    cy.pause();
     cy.signout();
 
     cy.login({ username: "demouser" });
@@ -61,6 +61,7 @@ describe("Blocker", () => {
     cy.get("[data-testid=berouser]").click();
 
     cy.get("[data-testid=message-input]").type("Hey x");
+    cy.pause();
     cy.get("[data-testid=send-btn]").click();
     cy.get("[data-testid=blocker-message]").should("be.visible");
   });
