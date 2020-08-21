@@ -8,7 +8,14 @@ const jwt = require("jsonwebtoken");
 module.exports = async function ({ req, res, collection }) {
   try {
     let errors = [];
-    let { username, email, password } = req.body;
+
+    let {
+      username,
+      email,
+      password,
+      browserId = Date.now().toString(),
+    } = req.body;
+
     if (userInputValidation.signupConstraints({ username, email, password })) {
       errors = userInputValidation.signupConstraints({
         username,
@@ -38,13 +45,14 @@ module.exports = async function ({ req, res, collection }) {
         //successful signup-------------------------------------
 
         const { hash, salt, iterations } = passhash.hashPassword(password);
-
+        //const browserId = hasBrowserId ? 'existingBr': Date.now().toString();
         const result = await collection.insertOne({
           hash,
           salt,
           iterations,
           email,
           username,
+          browsers: [{ browserId }],
         });
 
         const user = result.ops[0];
@@ -59,7 +67,7 @@ module.exports = async function ({ req, res, collection }) {
           "Content-Type": "application/json",
           "Set-Cookie": `${user.username}=${token};Expires=Wed, 21 Oct 2025 07:28:00 GMT; Path=/hangouts`,
         });
-        res.write(JSON.stringify({ token, email, username }));
+        res.write(JSON.stringify({ token, email, username, browserId }));
         res.end();
       }
     }
@@ -71,3 +79,4 @@ module.exports = async function ({ req, res, collection }) {
     res.end();
   }
 };
+//

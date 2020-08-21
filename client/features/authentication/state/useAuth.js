@@ -1,14 +1,15 @@
+import { useEffect } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
 import { useAuthContext } from "./AuthProvider";
 import actionTypes from "./actionTypes";
 import * as cv from "../validation/constraintValidators";
 import { useAppRoute } from "components/app-route/index";
+
 export function useAuth() {
   const { state, dispatch } = useAuthContext();
-
   const { onAppRoute } = useAppRoute();
+
   function onChange(e) {
     const { name, value } = e.target;
-
     dispatch({ type: actionTypes.VALUE_CHANGED, name, value });
   }
   function onLogin() {
@@ -39,33 +40,37 @@ export function useAuth() {
     }
   }
   function onSignup() {
-    const { username, password, email } = state;
-    if (window.jsDisabled) {
-      dispatch({ type: actionTypes.SIGNUP_STARTED });
-    } else {
-      if (
-        cv.validateEmailConstraint({ email }).isValid &&
-        cv.validateUserNameConstraint({ username }).isValid &&
-        cv.validatePasswordConstraint({ password }).isValid
-      ) {
+    try {
+      const { username, password, email } = state;
+      if (window.jsDisabled) {
         dispatch({ type: actionTypes.SIGNUP_STARTED });
       } else {
-        dispatch({
-          type: actionTypes.CONSTRAINT_VALIDATION,
-          name: "password",
-          ...cv.validatePasswordConstraint({ password }),
-        });
-        dispatch({
-          type: actionTypes.CONSTRAINT_VALIDATION,
-          name: "email",
-          ...cv.validateEmailConstraint({ email }),
-        });
-        dispatch({
-          type: actionTypes.CONSTRAINT_VALIDATION,
-          name: "username",
-          ...cv.validateUserNameConstraint({ username }),
-        });
+        if (
+          cv.validateEmailConstraint({ email }).isValid &&
+          cv.validateUserNameConstraint({ username }).isValid &&
+          cv.validatePasswordConstraint({ password }).isValid
+        ) {
+          dispatch({ type: actionTypes.SIGNUP_STARTED });
+        } else {
+          dispatch({
+            type: actionTypes.CONSTRAINT_VALIDATION,
+            name: "password",
+            ...cv.validatePasswordConstraint({ password }),
+          });
+          dispatch({
+            type: actionTypes.CONSTRAINT_VALIDATION,
+            name: "email",
+            ...cv.validateEmailConstraint({ email }),
+          });
+          dispatch({
+            type: actionTypes.CONSTRAINT_VALIDATION,
+            name: "username",
+            ...cv.validateUserNameConstraint({ username }),
+          });
+        }
       }
+    } catch (error) {
+      const err = error;
     }
   }
   function onRequestPasswordChange() {

@@ -2,10 +2,12 @@ import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.m
 import { useEffect } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
 import { useAppRoute } from "components/app-route/index";
 import { actionTypes } from "./actionTypes";
+import { useAuth } from "../../authentication/state/useAuth";
 import {
   updateSentMessage,
   saveUnread,
   saveHangout,
+  saveSentMessage,
   saveRecievedMessage,
   updateHangout,
   removeUnread,
@@ -15,6 +17,8 @@ import {
 
 export function useMessage({ message, username, dispatch, focusedHangout }) {
   const { onAppRoute } = useAppRoute();
+  const { state: authState } = useAuth();
+  const { browserId } = authState;
   function onDeliveryAcknowledgement({ hangout, offline }) {
     const commonArg = { dispatch, name: username, hangout };
     switch (hangout.state) {
@@ -33,8 +37,14 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
         break;
       case "INVITED":
         setTimeout(function () {
-          updateHangout(commonArg);
-          updateSentMessage(commonArg);
+          if (browserId === hangout.browserId) {
+            updateHangout(commonArg);
+            updateSentMessage(commonArg);
+          } else {
+            saveHangout({ hangout, dispatch, name: username });
+            saveSentMessage({ hangout, dispatch, name, dState: "delivered" });
+          }
+
           dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
         }, 200);
 
@@ -74,19 +84,19 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
         }, 200);
 
         break;
-      case "READ":
-        setTimeout(function () {
-          updateHangout({
-            hangout: { ...focusedHangout, state: "READ" },
-            name: username,
-            dispatch,
-          });
-          updateRecievedMessages(commonArg);
-          dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
-          // removeUnread(commonArg);
-        }, 200);
+      // case "READ":
+      //   setTimeout(function () {
+      //     updateHangout({
+      //       hangout: { ...focusedHangout, state: "READ" },
+      //       name: username,
+      //       dispatch,
+      //     });
+      //     updateRecievedMessages(commonArg);
+      //     dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
+      //     // removeUnread(commonArg);
+      //   }, 200);
 
-        break;
+      //   break;
       default:
         break;
     }
@@ -119,6 +129,7 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
         break;
       case "MESSANGER":
         //FIXME GH focused hangout issue
+
         updateHangout(commonArg);
         saveRecievedMessage({
           hangout,
@@ -157,17 +168,27 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
       onHangout({ hangout, unread: true });
     });
   }
-
+  function handleDelayedAcknowledgements({ hangouts }) {
+    hangouts.forEach((hangout) => {
+      onDeliveryAcknowledgement({ hangout });
+    });
+  }
   useEffect(() => {
     if (message && username) {
       switch (message.type) {
+        case "DELAYED_ACKHOWLEDGEMENTS":
+          debugger;
+          handleDelayedAcknowledgements({ hangouts: message.hangouts });
+          break;
         case "ACKHOWLEDGEMENT":
+          debugger;
           onDeliveryAcknowledgement({
             hangout: message.hangout,
             offline: false,
           });
           break;
         case "HANGOUT":
+          debugger;
           if (
             focusedHangout &&
             focusedHangout.username === message.hangout.username
@@ -177,15 +198,16 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
             onHangout({ hangout: message.hangout, unread: true });
           }
           break;
-        case "UNREAD_HANGOUTS":
+        case "UNDELIVERED_HANGOUTS":
+          debugger;
           handleHangouts({ hangouts: message.hangouts });
           break;
-        case "OFFLINE_ACKN":
-          onDeliveryAcknowledgement({
-            hangout: message.hangout,
-            offline: true,
-          });
-          break;
+        // case "OFFLINE_ACKN":
+        //   onDeliveryAcknowledgement({
+        //     hangout: message.hangout,
+        //     offline: true,
+        //   });
+        //  break;
         default:
           break;
       }

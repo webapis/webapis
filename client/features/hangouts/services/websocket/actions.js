@@ -1,5 +1,6 @@
 //fetch hangout from server if not found in local hangouts
 import { actionTypes } from "../../state/actionTypes";
+import { saveHangouts } from "../../state/local-storage/common";
 export async function searchHangouts({ search, dispatch, username }) {
   try {
     const response = await fetch(
@@ -20,11 +21,12 @@ export async function findHangouts({ dispatch, username }) {
     const response = await fetch(`/hangouts/findHangouts?username=${username}`);
     if (response.ok) {
       const { hangouts } = await response.json();
+
       if (hangouts.length > 0) {
-        localStorage.setItem(`${username}-hangouts`, JSON.stringify(hangouts));
+        saveHangouts({ hangouts, username });
       }
 
-      dispatch({ type: actionTypes.FETCH_HANGOUTS_SUCCESS });
+      dispatch({ type: actionTypes.FETCH_HANGOUTS_SUCCESS, hangouts });
     }
   } catch (error) {
     dispatch({ type: actionTypes.FETCH_HANGOUTS_FAILED, error });

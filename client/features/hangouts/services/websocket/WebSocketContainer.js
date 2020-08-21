@@ -2,77 +2,106 @@ import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.m
 import {
   useEffect,
   useState,
+  useReducer,
 } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 import { useHangouts } from "../../state/useHangouts";
 import * as actions from "./actions";
 import { actionTypes } from "../../state/actionTypes";
-import { useUserName } from "features/authentication/state/useUserName";
+import socketActionTypes from "./actionTypes";
 import { useAuth } from "features/authentication/index";
-import useOnlineStatus from "components/browser-api/online-status/index";
-
+import reducer, { initState } from "./reducer";
+import useOnlineStatus from "components/browser-api/online-status/useOnlineStatus";
 const html = htm.bind(h);
 export function WebSocketContainer(props) {
-  const { state: authState } = useAuth();
-  const { username, token } = useUserName();
-  const [socket, setSocket] = useState(null);
+  const [state, dispatch] = useReducer(reducer, initState);
   const { onlineStatus } = useOnlineStatus();
+  const { state: authState } = useAuth();
+  const { socket, connected } = state;
   const { children, socketUrl } = props;
-  const { dispatch, state } = useHangouts();
+  const { dispatch: hangoutDispatch, state: hangoutState } = useHangouts();
   const {
     searchHangouts,
     search,
     pendingHangout,
     fetchHangouts,
-    browserId,
-  } = state;
-  const { signout } = authState;
+  } = hangoutState;
+  const { browserId, authStarted, user } = authState;
 
   function onSocket() {
-    setSocket(
-      new WebSocket(
-        `${socketUrl}/hangouts/?username=${username}&browserId=${browserId}`
-      )
+    const sock = new WebSocket(
+      `${socketUrl}/hangouts/?username=${
+        user && user.username
+      }&browserId=${browserId}`
     );
-    console.log("set to init state.");
-    dispatch({ type: actionTypes.SOCKET_READY });
+    dispatch({ type: socketActionTypes.SOCKET_INITIALIZED, socket: sock });
   }
-
   useEffect(() => {
-    if (username && username.length > 0 && browserId && socket === null) {
+    if (authStarted) {
+      dispatch({ type: socketActionTypes.INITIAL_STATE });
+    }
+  }, [authStarted]);
+  useEffect(() => {
+    // user authenticated
+    if (user && browserId && socket === null) {
       onSocket();
     }
-    // if (!username && socket) {
-    //   console.log("socket close");
-
-    //   setSocket(null);
-    //   dispatch({ type: actionTypes.SET_HANGOUT_TO_INIT_STATE });
-    // }
-  }, [username, socket, browserId]);
-  useEffect(() => {
-    if (signout) {
+    //user unauthenticated
+    if (user === null && socket !== null) {
       socket.close();
-      setSocket(null);
     }
-  }, [signout]);
+  }, [user, socket, browserId]);
+  //onlineStatus changed to false
+  // useEffect(() => {
+  //   if (!onlineStatus) {
+  //
+  //     hangoutDispatch({
+  //       type: actionTypes.SOCKET_CONNECTION_STATE_CHANGED,
+  //       connected: false,
+  //     });
+  //     dispatch({ type: socketActionTypes.INITIAL_STATE });
+  //   }
+  // }, [onlineStatus]);
+  // //onlineStatus changed to true
+  // useEffect(() => {
+  //   if (onlineStatus && user && browserId) {
+  //
+  //     onSocket();
+  //   }
+  // }, [onlineStatus, user, browserId]);
   useEffect(() => {
     if (socket) {
       socket.onmessage = (serverMessage) => {
         const msg = JSON.parse(serverMessage.data);
-        dispatch({ type: actionTypes.SERVER_MESSAGE_RECIEVED, message: msg });
+        hangoutDispatch({
+          type: actionTypes.SERVER_MESSAGE_RECIEVED,
+          message: msg,
+        });
       };
       socket.onopen = () => {
-        console.log("con open");
-        dispatch({ type: actionTypes.OPEN });
+        dispatch({
+          type: socketActionTypes.SOCKET_CONNECTION_CHANGED,
+          connected: true,
+        });
+        hangoutDispatch({
+          type: actionTypes.SOCKET_CONNECTION_STATE_CHANGED,
+          connected: true,
+        });
       };
       socket.onclose = () => {
-        console.log("con closed");
-        setSocket(null);
-        dispatch({ type: actionTypes.CLOSED });
+        dispatch({
+          type: socketActionTypes.SOCKET_CONNECTION_CHANGED,
+          connected: false,
+        });
+        hangoutDispatch({
+          type: actionTypes.SOCKET_CONNECTION_STATE_CHANGED,
+          connected: false,
+        });
       };
       socket.onerror = (error) => {
-        dispatch({ type: actionTypes.SOCKET_ERROR, error });
-        throw error;
+        const err = error.message;
+        //
+        hangoutDispatch({ type: actionTypes.SOCKET_ERROR, error });
       };
     }
   }, [socket]);
@@ -80,24 +109,31 @@ export function WebSocketContainer(props) {
   useEffect(() => {
     if (searchHangouts) {
       //2.
-      actions.searchHangouts({ dispatch, search, username });
+
+      actions.searchHangouts({
+        dispatch: hangoutDispatch,
+        search,
+        username: user && user.username,
+      });
     }
   }, [searchHangouts]);
 
   useEffect(() => {
     if (pendingHangout && socket && socket.readyState === 1) {
-      debugger;
       sendPendingHangout();
     }
   }, [pendingHangout, socket]);
 
   useEffect(() => {
-    if (fetchHangouts && username) {
-      actions.findHangouts({ dispatch, username });
+    if (fetchHangouts && user && user.username) {
+      actions.findHangouts({
+        dispatch: hangoutDispatch,
+        username: user.username,
+      });
     }
-  }, [fetchHangouts, username]);
+  }, [fetchHangouts, user]);
   function sendPendingHangout() {
-    socket.send(JSON.stringify(pendingHangout));
+    socket.send(JSON.stringify({ ...pendingHangout, browserId }));
   }
   return html`${children}`;
 }

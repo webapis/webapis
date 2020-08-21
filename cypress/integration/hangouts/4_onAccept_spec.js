@@ -1,91 +1,112 @@
 describe("onAccept", () => {
   beforeEach(() => {
     if (Cypress.env("back") === "node") {
-      const demo = {
-        username: "demo",
-        email: "demo@gmail.com",
-        password: "Dragonfly1977!!!",
-      };
-      const bero = {
-        username: "bero",
-        email: "bero@gmail.com",
-        password: "Dragonly_1999!",
-      };
       cy.task("seed:deleteCollection", {
         dbName: "auth",
         collectionName: "users",
       });
-      cy.task("seed:user", demo);
-      cy.task("seed:user", bero);
     }
     if (Cypress.env("back") === "parse") {
       cy.task("seed:dropDatabase", {
         dbName: "test",
       });
     }
+    cy.window()
+      .its("localStorage")
+      .invoke("setItem", "browserId", JSON.stringify("1234567890"));
+    cy.visit("/");
   });
   it("invitation accepted successfully", () => {
     const currentDate = Date.UTC(2018, 10, 30);
     cy.clock(currentDate, ["Date"]);
-    const hangout = {
-      username: "bero",
-      timestamp: currentDate,
-      message: { text: "Let's chat bero", timestamp: currentDate },
-      email: "bero@gmail.com",
-      command: "INVITE",
-    };
 
-    cy.task("seed:onHangout", {
-      hangout,
-      senderUsername: "demo",
-      senderEmail: "demo@gmail.com",
-      dbName: "auth",
-      collectionName: "users",
-    });
+    cy.signup({ username: "demouser" });
+    cy.signout();
+    cy.signup({ username: "berouser" });
+    cy.signout();
+    cy.login({ username: "demouser" });
+    cy.invite();
+    cy.signout();
+    cy.login({ username: "berouser" });
 
-    const expectedMessageState = {
-      username: "bero",
-      state: "pending",
-      timestamp: currentDate,
-      text: "Accepted your invitation",
-    };
-    if (Cypress.env("back") === "node") {
-      cy.loginByEmail({
-        email: "bero@gmail.com",
-        password: "Dragonly_1999!",
-      });
-    }
-
-    cy.visit("/");
     cy.get("[data-testid=message-count]").contains(1);
 
     cy.get("[data-testid=unread-link]").click();
-    cy.get("[data-testid=demo]").click();
+    cy.get("[data-testid=demouser]").click();
 
-    cy.get("[data-testid=accept-btn]").click();
+    cy.get("[data-testid=accept-btn]")
+      .click()
+      .then(() => {
+        cy.window()
+          .its("localStorage")
+          .invoke("getItem", "berouser-hangouts")
+          .then((hangoutState) => {
+            const expectedHangoutState = {
+              username: "demouser",
+              email: "demouser@gmail.com",
+              message: {
+                text: "Accepted your invitation",
+                timestamp: 1543536000000,
+              },
+              timestamp: 1543536000000,
+              state: "ACCEPT",
+            };
+            //saveHangout() ACCEPT------------------------------------------1
+            expect(JSON.parse(hangoutState)[0]).to.deep.equal(
+              expectedHangoutState
+            );
+          });
 
-    cy.get("[data-testid=message-count]").contains(0);
-    cy.window()
-      .its("localStorage")
-      .invoke("getItem", "bero-unread-hangouts")
-      .then((result) => {
-        const messages = JSON.parse(result);
-        //test removeUnread()------------------------------------------
+        cy.window()
+          .its("localStorage")
+          .invoke("getItem", "berouser-demouser-messages")
+          .then((result) => {
+            const recievedMessageState = JSON.parse(result).find(
+              (r) => r.username === "demouser"
+            );
+            const sentMessageState = JSON.parse(result).find(
+              (r) => r.username === "berouser"
+            );
+            const expectedSentMessageState = {
+              text: "Accepted your invitation",
+              timestamp: 1543536000000,
+              username: "berouser",
+              state: "pending",
+            };
+
+            const expectedRecievedMessageState = {
+              text: "Let's chat, berouser!",
+              timestamp: 1543536000000,
+              username: "demouser",
+              state: "read",
+            };
+            //saveSentMessage() "pending"-------------------------------------2
+            expect(sentMessageState).to.deep.equal(expectedSentMessageState);
+            //saveRecievedMessage()dState:'read'-------------------------------------------3
+            expect(recievedMessageState).to.deep.equal(
+              expectedRecievedMessageState
+            );
+            cy.get("[data-testid=message-count]").contains(0);
+
+            cy.get("[data-testid=right-message-wrapper]")
+              .find(".message-state")
+              //saveSentMessage(dState:'pending')-----------------------------2.1
+              .contains("pending");
+          });
       });
-    //saveHangout() ACCEPT------------------------------------------
-    //saveSentMessage(dState:'pending')-----------------------------
-    cy.get("[data-testid=hangchat-ui]").then(() => {
-      cy.get("[data-testid=right-message-wrapper]")
-        .find(".message-state")
-        .contains("pending");
-    });
+
     cy.get("[data-testid=message-count]").contains(0);
+    //saveRecievedMessage(dState:'read')---------------------------------3.1
     cy.get("[data-testid=left-message-wrapper]")
       .find("[data-testid=message]")
-      .contains("Let's chat bero");
+      .contains("Let's chat, berouser!");
     cy.get("[data-testid=left-message-wrapper]")
       .find("[data-testid=message-sender]")
-      .contains("demo");
+      .contains("demouser");
+    cy.get("[data-testid=left-message-wrapper]")
+      .find(".message-state")
+      .contains("read");
+
     cy.get("[data-testid=left-message-wrapper]")
       .find("[data-testid=time]")
       .contains("Now");
@@ -104,9 +125,5 @@ describe("onAccept", () => {
     cy.get("[data-testid=right-message-wrapper]")
       .find(".message-state")
       .contains("delivered");
-    //saveRecievedMessage(dState:'read')---------------------------------
-    cy.get("[data-testid=left-message-wrapper]")
-      .find(".message-state")
-      .contains("read");
   });
 });

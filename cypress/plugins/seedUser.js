@@ -7,7 +7,12 @@ const client = new MongoClient(url, {
   useNewUrlParser: true,
 });
 
-module.exports = async function seedUser({ email, username, password }) {
+module.exports = async function seedUser({
+  email,
+  username,
+  password,
+  browserId = "1234567890",
+}) {
   try {
     const clnt = await client.connect();
     const database = clnt.db("auth");
@@ -20,6 +25,7 @@ module.exports = async function seedUser({ email, username, password }) {
       iterations,
       email,
       username,
+      browsers: [{ browserId }],
     });
 
     return result;

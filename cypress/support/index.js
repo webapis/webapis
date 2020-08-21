@@ -20,6 +20,13 @@ import "./parse/signup";
 import "./parse/createUser";
 import "./parse/loginByEmail";
 import "./parse/deleteUser";
+import "./auth/login";
+import "./auth/signup";
+import "./auth/signout";
+import "./hangout/invite";
+import "./hangout/accept";
+import "./hangout/decline";
+import "./hangout/block";
 Cypress.on("window:before:load", (win) => {
   delete win.fetch;
 });

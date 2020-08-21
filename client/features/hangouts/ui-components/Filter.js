@@ -1,33 +1,43 @@
 import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
-import { useEffect } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
+
 import List, { ListItem } from "controls/list/index";
 import PersonPlusFill from "icons/bootstrap/PersonPlusFill";
+import useFilter from "../state/useFilter";
 const html = htm.bind(h);
 export default function Filter({
-  onLoadHangout,
-  filter,
-  filterResult = [],
-  onFilterSelect,
-  onFilterInput,
+  hangouts,
   onNavigation,
+  state,
+  dispatch,
+  onAppRoute,
+  username,
 }) {
-  useEffect(() => {
-    onLoadHangout && onLoadHangout();
-  }, []);
+  const { filter, onFilterSelect, onFilterInput } = useFilter({
+    state,
+    dispatch,
+    onAppRoute,
+    username,
+  });
   return html`
     <div style=${{ height: "100%", display: "flex", flexDirection: "column" }}>
-      <input
-        class="form-control"
-        value=${filter}
-        onChange=${onFilterInput}
-        data-testid="filter-input"
-      />
+      ${hangouts &&
+      hangouts.length > 0 &&
+      html`
+        <input
+          class="form-control"
+          value=${filter}
+          onChange=${onFilterInput}
+          data-testid="filter-input"
+        />
+      `}
+
       <div>
         <${List}>
-          ${filterResult.length > 0 &&
-          filterResult.map(
-            (f) => html`
+          ${hangouts &&
+          hangouts.length > 0 &&
+          hangouts.map((f) => {
+            return html`
               <${ListItem}
                 id=${f.username}
                 data-testid=${f.username}
@@ -35,11 +45,11 @@ export default function Filter({
               >
                 ${f.username}
               <//>
-            `
-          )}
+            `;
+          })}
         <//>
       </div>
-      ${filterResult.length === 0 &&
+      ${true &&
       html`
         <div class="row align-items-center" style=${{ flex: 1 }}>
           <div class="col-2  mx-auto">

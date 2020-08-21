@@ -7,26 +7,26 @@ import Navbar, {
   NavBarCollapse,
 } from "components/nav-bar/index";
 import Nav from "components/nav/index";
-import { useUserName } from "features/authentication/state/useUserName";
+
 import { useAuth } from "features/authentication/index";
 import { useHangouts } from "features/hangouts/index";
 import GearIcon from "icons/bootstrap/GearIcon";
-import PersonPlusIcon from "icons/bootstrap/PersonPlusIcon";
-import { FeatureRoute } from "components/app-route/index";
-import { WifiStatus } from "components/browser-api/online-status/index";
+
 const html = htm.bind(h);
 export function AppNavigation() {
-  const { username } = useUserName();
-  const { onSignOut, onAuthNavigation } = useAuth();
+  const { onSignOut, onAuthNavigation, state: authState } = useAuth();
+  const { authenticated, user } = authState;
+
   const { state, onNavigation } = useHangouts();
-  const { hangout, unreadhangouts, readyState, error } = state;
+  const { hangout, socketConnected, unreadhangouts, error } = state;
   return html`
     <div>
       <${Navbar} brand="Webcom" bg="dark">
         <${NavBarCollapse}>
           <${NavBarNav}>
+            <!-- NavItem -->
             <${NavItem}>
-              ${username &&
+              ${user &&
               html`
                 <${NavLink}
                   id="filter"
@@ -37,11 +37,11 @@ export function AppNavigation() {
                 <//>
               `}
             <//>
-            <!-- NavItem -->
           <//>
           <!-- NavBarNav -->
           <${Nav} horizontalAlignment="justify-content-end">
-            ${username &&
+            ${user &&
+            user.username &&
             html`
               <button
                 id="unread"
@@ -57,7 +57,7 @@ export function AppNavigation() {
                 </span>
               </button>
             `}
-            ${!username &&
+            ${!user &&
             html`
               <${NavItem}>
                 <${NavLink}
@@ -70,7 +70,7 @@ export function AppNavigation() {
                 <//><//
               >
             `}
-            ${!username &&
+            ${!user &&
             html`
               <${NavItem}>
                 <${NavLink}
@@ -84,19 +84,19 @@ export function AppNavigation() {
               >
             `}
             <${NavItem}>
-              ${username &&
+              ${user &&
               html`
                 <${NavLink}
                   id="profile"
                   appRoute="/auth"
                   data-testid="profile-link"
                 >
-                  Welcome, ${username}
+                  Welcome, ${user && user.username}
                 <//>
               `}
             <//>
             <${NavItem}>
-              ${username &&
+              ${user &&
               html`
                 <${NavLink}
                   id="profile"
@@ -121,35 +121,14 @@ export function AppNavigation() {
                 </button>
               `}
             <//>
-            <${NavItem}>
-              <${FeatureRoute} path="/filter">
-                <button
-                  class="btn"
-                  data-testid="search-link"
-                  id="search"
-                  onClick=${onNavigation}
-                >
-                  <${PersonPlusIcon} width="1.5em" height="1.5em" />
-                </button>
-              <//>
-            <//>
-            <${NavItem}>
-              <${NavLink}
-                id="monitor"
-                appRoute="/monitor"
-                data-testid="monitor-link"
-              >
-                monitor
-              <//>
-            <//>
+
             <${NavItem}>
               <${NavLink} id="monitor" data-testid="socket-connection">
-                ${readyState === 1 ? "connected" : "disconnected"}
+                ${socketConnected
+                  ? html`<span class="badge badge-success">online</span>`
+                  : html`<span class="badge badge-danger">offline</span>`}
                 ${error && error.message}
               <//>
-            <//>
-            <${NavItem}>
-              <${WifiStatus} fill="white" />
             <//>
           <//>
           <!-- Nav -->

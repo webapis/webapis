@@ -1,5 +1,4 @@
 const hangoutsHandler = require("../hangouts/wsocket");
-const br = require("./handleBrowserId");
 const { errorMonitor } = require("../app-monitor/wsocket");
 const {
   onLineStateChangeHandler,
@@ -30,14 +29,14 @@ module.exports = async function (server, client) {
 
         const { username } = decoded;
 
-        console.log(username, "connected");
+        console.log(username, "connected from", browserId);
         const user = await collection.findOne({ username });
 
         ws.user = user;
-        ws.browserId = browserId;
+
         connections[`${username}-${browserId}`] = ws;
-        br.handleBrowserId({ collection, browserId, username });
-        onLineStateChangeHandler({ connections, ws, client });
+
+        onLineStateChangeHandler({ connections, ws, client, browserId });
         ws.on("message", function incoming(message) {
           console.log("recieved,", message);
           try {
@@ -51,13 +50,14 @@ module.exports = async function (server, client) {
         });
         ws.on("close", function () {
           console.log("connection closed:", username);
-          delete connections[username];
+          delete connections[`${username}-${browserId}`];
         });
       } catch (error) {
         const err = error;
       }
     } else if (request.url.includes("monitor")) {
       console.log("monitor socket connected");
+
       errorMonitor({ ws });
     }
   });

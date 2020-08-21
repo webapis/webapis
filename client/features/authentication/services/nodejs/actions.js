@@ -1,12 +1,22 @@
 import actionTypes from "../../state/actionTypes";
 import serverValidation from "../../validation/serverErrorActions";
-import createBrowserId from "../../state/onBrowserId";
+import {
+  generateBrowserId,
+  saveBrowserIdToLocalStorage,
+  browserIdExists,
+  loadBrowserId,
+} from "../../state/onBrowserId";
 export async function signup({ dispatch, state }) {
-  const { email, password, username } = state;
-
   try {
+    const { email, password, username } = state;
+
     const response = await fetch(`/auth/signup`, {
-      body: JSON.stringify({ password, email, username }),
+      body: JSON.stringify({
+        password,
+        email,
+        username,
+        browserId: loadBrowserId(),
+      }),
       headers: {
         ContentType: "application/json",
         Accept: "application/json",
@@ -15,13 +25,12 @@ export async function signup({ dispatch, state }) {
     });
     const result = await response.json();
     if (response.status === 200) {
-      const { token, username, email } = result;
-
+      const { token, username, email, browserId } = result;
       dispatch({
         type: actionTypes.SIGNUP_SUCCESS,
         user: { token, username, email },
       });
-      createBrowserId({ username });
+
       window.localStorage.setItem(
         "webcom",
         JSON.stringify({
@@ -30,6 +39,10 @@ export async function signup({ dispatch, state }) {
           email,
         })
       );
+      if (browserIdExists() === false) {
+        saveBrowserIdToLocalStorage({ browserId });
+        dispatch({ type: actionTypes.BROWSER_ID_LOADED, browserId });
+      }
     } else if (response.status === 400) {
       const { errors } = result;
 
@@ -61,13 +74,28 @@ export async function login({ dispatch, state }) {
         "Access-Control-Allow-Headers": "*",
         Authorization: `Basic ${btoa(`${emailorusername}:${password}`)}`,
       },
-      method: "GET",
+      method: "POST",
+      body: JSON.stringify({ hasBrowserId: browserIdExists() }),
     });
 
     const result = await response.json();
 
     if (response.status === 200) {
       const { token, username, email } = result;
+      if (browserIdExists()) {
+        dispatch({
+          type: actionTypes.BROWSER_ID_LOADED,
+          browserId: loadBrowserId(),
+        });
+      } else {
+        const { browserId } = result;
+
+        saveBrowserIdToLocalStorage({ browserId });
+        dispatch({
+          type: actionTypes.BROWSER_ID_LOADED,
+          browserId,
+        });
+      }
 
       dispatch({
         type: actionTypes.LOGIN_SUCCESS,
@@ -118,7 +146,16 @@ export async function changePassword({ dispatch, state }) {
     const result = await response.json();
     if (response.status === 200) {
       const { token, username, email } = result;
-
+      if (!browserIdExists()) {
+        const browserId = generateBrowserId();
+        saveBrowserIdToLocalStorage({ browserId });
+        dispatch({ type: actionTypes.BROWSER_ID_LOADED, browserId });
+      } else {
+        dispatch({
+          type: actionTypes.BROWSER_ID_LOADED,
+          browserId: loadBrowserId({ username }),
+        });
+      }
       dispatch({
         type: actionTypes.CHANGE_PASSWORD_SUCCESS,
         user: { token, username, email },

@@ -3,6 +3,9 @@ import validationMessages from "../../../client/features/authentication/validati
 describe("3_Signup_server_side_e2e_validation_spec", () => {
   beforeEach(() => {
     cy.server();
+    cy.window()
+      .its("localStorage")
+      .invoke("setItem", "browserId", JSON.stringify("1234567890"));
     cy.visit("/");
     cy.get("[data-testid=signup-link]").click();
     cy.task("seed:deleteCollection", {
@@ -14,8 +17,7 @@ describe("3_Signup_server_side_e2e_validation_spec", () => {
     });
   });
 
-  it.only("client side JS disabled: user submmits empty fields", () => {
-    //cy.task('seed:user',({email:'testuser'}))
+  it("client side JS disabled: user submmits empty fields", () => {
     cy.get("[data-testid=signup-btn]").click();
     cy.get("[data-testid=message-username]").contains(
       validationMessages.REQUIRED_FIELD
@@ -109,5 +111,35 @@ describe("3_Signup_server_side_e2e_validation_spec", () => {
     );
     cy.get("[data-testid=message-password]").should("not.be.visible");
     cy.get("[data-testid=signin]");
+  });
+  it("Succeful signup", () => {
+    cy.server();
+    cy.route({
+      url: "/auth/signup",
+      method: "POST",
+    }).as("successSignUp");
+    cy.get("[data-testid=username]")
+      .type("testuser")
+      .get("[data-testid=email]")
+      .type("testuser@gmail.com")
+      .get("[data-testid=password]")
+      .type("TestPassword!22s")
+      .blur();
+    cy.get("[data-testid=signup-btn]").click();
+    cy.get("[data-testid=message-username]").should("not.to.be.visible");
+    cy.get("[data-testid=message-email]").should("not.to.be.visible");
+    cy.get("[data-testid=message-password]").should("not.to.be.visible");
+    cy.wait("@successSignUp").its("requestBody").should("deep.equal", {
+      password: "TestPassword!22s",
+      email: "testuser@gmail.com",
+      username: "testuser",
+      browserId: "1234567890",
+    });
+
+    assert.isNotNull(
+      cy.window().its("localStorage").invoke("getItem", "testuser-browserId"),
+      "is not null"
+    );
+    cy.signout();
   });
 });

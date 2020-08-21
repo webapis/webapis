@@ -10,12 +10,16 @@ module.exports = async function findHangouts({ req, res, collection }) {
     const { username } = decoded;
     // finduser
     let user = await collection.findOne({ username });
-    if (user && user.hangouts) {
+    if (user && user.browsers) {
+      const hangs = user.browsers.find(
+        (b) => b.hangouts && b.hangouts.length > 0
+      );
       // search for users hangouts
+
       res.writeHead(200, { "Content-Type": "application/json" });
       res.write(
         JSON.stringify({
-          hangouts: user.hangouts,
+          hangouts: hangs ? hangs.hangouts : [],
         })
       );
       res.end();

@@ -28,7 +28,6 @@ export function useHangouts() {
   }
 
   function sendPendingHangout({ hangout }) {
-    debugger;
     dispatch({
       type: actionTypes.SENDING_HANGOUT_STARTED,
       pendingHangout: hangout,
@@ -62,8 +61,10 @@ export function useHangouts() {
       hangout: invitation,
       dispatch,
       name: username,
+      dState: "pending",
     });
     onAppRoute({ featureRoute: `/INVITE`, route: "/hangouts" });
+
     sendPendingHangout({ hangout: invitation });
   }
 
@@ -91,7 +92,7 @@ export function useHangouts() {
     });
 
     saveRecievedMessage({ hangout, dispatch, name: username, dState: "read" });
-    removeUnread({ dispatch, hangout: accept, name: username });
+    // removeUnread({ dispatch, hangout: accept, name: username });
     onAppRoute({ featureRoute: `/ACCEPT`, route: "/hangouts" });
     sendPendingHangout({ hangout: accept });
   }
@@ -126,6 +127,7 @@ export function useHangouts() {
       hangout: messaging,
       dispatch,
       name: username,
+      dState: "pending",
     });
     if (hangout.state === "BLOCKER") {
       saveSentMessage({
@@ -140,6 +142,7 @@ export function useHangouts() {
         },
         dispatch,
         name: username,
+        dState: "pending",
       });
     } else {
       // updateHangout({
@@ -178,6 +181,7 @@ export function useHangouts() {
       },
       dispatch,
       name: username,
+      dState: "pending",
     });
     sendPendingHangout({ hangout: block });
   }

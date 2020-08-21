@@ -4,10 +4,8 @@ import {
   Suspense,
 } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/preact.combat.cdn.js";
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
-import { FeatureRoute, useAppRoute } from "components/app-route/index";
+import { useAppRoute } from "components/app-route/index";
 import { useHangouts } from "./state/useHangouts";
-import useSearch from "./state/useSearch";
-import useFilter from "./state/useFilter";
 import useUnread from "./state/useUnread";
 const Block = lazy(() => import("./ui-components/Block"));
 const Blocked = lazy(() => import("./ui-components/Blocked"));
@@ -26,6 +24,7 @@ export default function HangoutsFeatureRoutes(props) {
   const { featureRoute } = routeState;
   const {
     state,
+    hangouts,
     hangout,
     onInvite,
     onAccept,
@@ -40,25 +39,7 @@ export default function HangoutsFeatureRoutes(props) {
     dispatch,
     onNavigation,
   } = useHangouts();
-  const {
-    search,
-    onSearchInput,
-    searchResult,
-    onSearch,
-    onSearchSelect,
-  } = useSearch({ state, dispatch, onAppRoute });
-  const {
-    filter,
-    filterResult,
-    onFilterSelect,
-    onFilterInput,
-    onLoadHangout,
-  } = useFilter({
-    dispatch,
-    state,
-    onAppRoute,
-    username,
-  });
+
   const {
     unreadhangouts,
     onUnreadSelect,
@@ -154,22 +135,21 @@ export default function HangoutsFeatureRoutes(props) {
     case "/search":
       return html` <${Suspense} fallback=${Loading}>
         <${Search}
-          onSearchSelect=${onSearchSelect}
-          searchResult=${searchResult}
-          onSearch=${onSearch}
-          onSearchInput=${onSearchInput}
-          search=${search}
+          hangouts=${hangouts}
+          dispatch=${dispatch}
+          state=${state}
+          onAppRoute=${onAppRoute}
         />
       <//>`;
     case "/filter":
       return html` <${Suspense} fallback=${Loading}>
         <${Filter}
-          onLoadHangout=${onLoadHangout}
+          hangouts=${hangouts}
+          dispatch=${dispatch}
+          state=${state}
+          onAppRoute=${onAppRoute}
+          username=${username}
           onNavigation=${onNavigation}
-          filter=${filter}
-          onFilterInput=${onFilterInput}
-          filterResult=${filterResult}
-          onFilterSelect=${onFilterSelect}
         />
       <//>`;
     default:

@@ -62,16 +62,12 @@ describe("5_Login_server_side_stubbed_validation_spec", () => {
     );
   });
 
-  it("user submits: valid emailorusername and password", () => {
-    cy.task("seed:user", {
-      email: "testuser@gmail.com",
-      username: "testuser",
-      password: "TestPassword!22s",
-    });
-    cy.get("[data-testid=emailorusername]").type("testuser");
-    cy.get("[data-testid=password]").type("TestPassword!22s");
-    cy.get("[data-testid=login-btn]").click();
+  it("Succesful login: user submits: valid emailorusername and password SUBSEQUENT LOGIN", () => {
+    cy.signup({ username: "testuser" });
+    cy.signout();
+    cy.login({ username: "testuser" });
     cy.get("[data-testid=message-emailorusername]").should("not.be.visible");
     cy.get("[data-testid=message-password]").should("not.be.visible");
-  });
+    cy.signout();
+  }); //
 });

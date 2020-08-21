@@ -1,76 +1,63 @@
+const { JsonWebTokenError } = require("jsonwebtoken");
+
 describe("Inviter", () => {
   beforeEach(() => {
     if (Cypress.env("back") === "node") {
-      const demo = {
-        username: "demo",
-        email: "demo@gmail.com",
-        password: "Dragonly_1999!",
-      };
-      const bero = {
-        username: "bero",
-        email: "bero@gmail.com",
-        password: "Dragonly_1999!",
-      };
       cy.task("seed:deleteCollection", {
         dbName: "auth",
         collectionName: "users",
       });
-      cy.task("seed:user", demo);
-      cy.task("seed:user", bero);
     }
     if (Cypress.env("back") === "parse") {
       cy.task("seed:dropDatabase", {
         dbName: "test",
       });
     }
+    cy.window()
+      .its("localStorage")
+      .invoke("setItem", "browserId", JSON.stringify("1234567890"));
+    cy.visit("/");
   });
   it("message is sent succefully", () => {
     const currentDate = Date.UTC(2018, 10, 30);
     cy.clock(currentDate, ["Date"]);
+
     let timestamp = currentDate;
-    const inviter = {
-      username: "bero",
-      timestamp,
-      message: { text: "Hello bero let's chat", timestamp },
-      email: "bero@gmail.com",
-      command: "INVITE",
-    };
+    cy.signup({ username: "demouser" });
 
-    cy.task("seed:onHangout", {
-      hangout: inviter,
-      senderUsername: "demo",
-      senderEmail: "demo@gmail.com",
-      dbName: "auth",
-      collectionName: "users",
-    });
+    cy.signout();
 
-    if (Cypress.env("back") === "node") {
-      cy.loginByEmail({
-        email: "bero@gmail.com",
-        password: "Dragonly_1999!",
-      });
-    }
+    cy.signup({ username: "berouser" });
+
+    cy.signout();
+
+    cy.login({ username: "demouser" });
+    cy.invite();
+    cy.signout();
+
+    cy.login({ username: "berouser" });
+
     const expectedHangoutState = {
-      username: "demo",
-      email: "demo@gmail.com",
+      username: "demouser",
+      email: "demouser@gmail.com",
       state: "INVITER",
       timestamp: currentDate,
-      message: { text: "Hello bero let's chat", timestamp: currentDate },
+      message: { text: "Let's chat, berouser!", timestamp: currentDate },
     };
 
-    const expectedMessageState = {
-      username: "demo",
-      state: "pending",
-      timestamp: currentDate,
-      text: "Hello bero let's chat",
-    };
-    cy.visit("/");
+    // const expectedMessageState = {
+    //   username: "demouser",
+    //   state: "pending",
+    //   timestamp: currentDate,
+    //   text: "Let's chat, berouser!",
+    // };
+
     cy.get("[data-testid=message-count]")
       .contains(1)
       .then(() => {
         cy.window()
           .its("localStorage")
-          .invoke("getItem", "bero-unread-hangouts")
+          .invoke("getItem", "berouser-unread-hangouts")
           .then((result) => {
             const unreads = JSON.parse(result);
             const pending = unreads[0];
@@ -79,9 +66,9 @@ describe("Inviter", () => {
           });
 
         cy.get("[data-testid=unread-link]").click();
-        cy.get("[data-testid=demo]").click();
-        cy.get("[data-testid=message]").contains("Hello bero let's chat");
-        cy.get("[data-testid=message-sender]").contains("demo");
+        cy.get("[data-testid=demouser]").click();
+        cy.get("[data-testid=message]").contains("Let's chat, berouser!");
+        cy.get("[data-testid=message-sender]").contains("demouser");
         cy.get("[data-testid=time]").contains("Now");
       });
   });

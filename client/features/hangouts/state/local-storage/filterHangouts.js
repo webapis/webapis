@@ -1,4 +1,4 @@
-import { actionTypes } from "../../actionTypes";
+import { actionTypes } from "../actionTypes";
 export default function filterHangouts({ filter, dispatch, name }) {
   const hangoutKey = `${name}-hangouts`;
   const localHangouts = JSON.parse(localStorage.getItem(hangoutKey));
