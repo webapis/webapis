@@ -17,8 +17,8 @@ describe("onBlock", () => {
     cy.visit("/");
   });
   it("user is blocked succefully", () => {
-    const currentDate = Date.UTC(2018, 10, 30);
-    cy.clock(currentDate, ["Date"]);
+    // const currentDate = Date.UTC(2018, 10, 30);
+    // cy.clock(currentDate, ["Date"]);
     cy.signup({ username: "demouser" });
     cy.signout();
     cy.signup({ username: "berouser" });

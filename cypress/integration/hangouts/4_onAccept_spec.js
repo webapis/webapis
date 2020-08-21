@@ -37,6 +37,10 @@ describe("onAccept", () => {
     cy.get("[data-testid=accept-btn]")
       .click()
       .then(() => {
+        cy.get("[data-testid=right-message-wrapper]")
+          .find(".message-state")
+          //saveSentMessage(dState:'pending')-----------------------------2.1
+          .contains("pending");
         cy.window()
           .its("localStorage")
           .invoke("getItem", "berouser-hangouts")
@@ -87,11 +91,6 @@ describe("onAccept", () => {
               expectedRecievedMessageState
             );
             cy.get("[data-testid=message-count]").contains(0);
-
-            cy.get("[data-testid=right-message-wrapper]")
-              .find(".message-state")
-              //saveSentMessage(dState:'pending')-----------------------------2.1
-              .contains("pending");
           });
       });
 

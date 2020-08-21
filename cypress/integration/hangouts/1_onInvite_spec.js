@@ -17,13 +17,13 @@ describe("onInvite", () => {
     const currentDate = Date.UTC(2018, 10, 30);
     cy.clock(currentDate, ["Date"]);
     cy.signup({ username: "demouser" });
+
     cy.signout();
+
     cy.signup({ username: "berouser" });
     cy.signout();
 
     cy.login({ username: "demouser" });
-
-    cy.wait(50);
     // cy.get("[data-testid=hangouts-link]").click();
 
     cy.get("[data-testid=search]").click();
@@ -67,26 +67,22 @@ describe("onInvite", () => {
             //testing saveSentMessagsage()-------------------------------1
             expect(pending).to.deep.equal(expectedMessageState);
           });
+        cy.window()
+          .its("localStorage")
+          .invoke("getItem", "demouser-hangouts")
+          .then((result) => {
+            const hangout = JSON.parse(result);
+            const devlivered = hangout[0];
+            //testing SaveHangout()---------------------------------------2
+            expect(devlivered).to.deep.equal({
+              ...expectedHangoutState,
+              state: "INVITE",
+            });
+          });
       });
 
     cy.get("[data-testid=invitee-ui]");
-    cy.window()
-      .its("localStorage")
-      .invoke("getItem", "demouser-hangouts")
-      .then((result) => {
-        const hangout = JSON.parse(result);
-        const devlivered = hangout[0];
-        //testing SaveHangout()---------------------------------------2
-        expect(devlivered).to.deep.equal({
-          ...expectedHangoutState,
-          state: "INVITE",
-        });
-      });
-
-    cy.get("[data-testid=hangouts-link]").click();
-
-    cy.get("[data-testid=berouser]").click();
-    cy.get("[data-testid=invitee-ui]");
+    cy.get(".invited");
     cy.window()
       .its("localStorage")
       .invoke("getItem", "demouser-berouser-messages")
@@ -111,7 +107,6 @@ describe("onInvite", () => {
     //inviter logges in from hist second device(browser)
     cy.get("[data-testid=signout-link]").click();
     cy.visit("/");
-
     cy.window()
       .its("localStorage")
       .invoke("setItem", "demouser-browserId", "1234567890");

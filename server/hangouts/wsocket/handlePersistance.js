@@ -76,10 +76,26 @@ module.exports.handlePersistance = async function ({
       },
       updateSenderHangout: async function () {
         // UPDATE HANGOUT ON SENDER
-        await collection.updateOne(
-          { username: senderUserName, "hangouts.username": username },
-          { $set: { "hangouts.$": sender } }
-        );
+        const user = await collection.findOne({ username: senderUserName });
+        const browsers = user.browsers;
+        // await collection.updateOne(
+        //   { username: senderUserName, "hangouts.username": username },
+        //   { $set: { "hangouts.$": sender } }
+        // );
+
+        for await (const browser of browsers) {
+          const upd = await collection.update(
+            { username: senderUserName },
+            { $set: { "browsers.$[t].hangouts.$[u]": sender } },
+            {
+              arrayFilters: [
+                { "t.browserId": browser.browserId },
+                { "u.username": username },
+              ],
+              multi: true,
+            }
+          );
+        }
       },
       pushSenderHangout: async function () {
         //PUSH HANGOUT ON SENDER
@@ -114,6 +130,28 @@ module.exports.handlePersistance = async function ({
       //     );
       //   }
       // },
+      pullTargetAllUndelivered: async function () {
+        for await (const browser of senderBrowsers) {
+          debugger;
+          const updateResult = await collection.update(
+            { username },
+            {
+              $pull: {
+                "browsers.$[t].undelivered": {
+                  username: senderUserName,
+                  state: { $ne: "BLOCKER" },
+                },
+              },
+            },
+            {
+              arrayFilters: [{ "t.browserId": browser.browserId }],
+              upsert: true,
+            }
+          );
+
+          debugger;
+        }
+      },
       // pullSenderAllUnreads: async function () {},
       // pullTargetAllUnreads: async function () {},
     };
@@ -163,6 +201,8 @@ module.exports.handlePersistance = async function ({
         funcs.updateTargetHangout(); //BLOCKER
         //    funcs.pullTargetAllUnreads(); //ALL
         //    funcs.pushTargetUnread(); //BLOCKER
+        funcs.pullTargetAllUndelivered();
+
         funcs.targetOnline();
         break;
       case "UNBLOCK":

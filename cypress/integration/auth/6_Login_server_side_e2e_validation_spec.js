@@ -69,7 +69,10 @@ describe("5_Login_server_side_stubbed_validation_spec", () => {
     cy.get("[data-testid=message-emailorusername]").should("not.be.visible");
     cy.get("[data-testid=message-password]").should("not.be.visible");
     cy.get("[data-testid=socket-connection]").contains("online");
+    cy.get("[data-testid=profile-link]").contains("testuser");
+    // cy.pause()
     cy.signout();
+    cy.get("[data-testid=login-link]");
     cy.get("[data-testid=socket-connection]").contains("offline");
   });
 });

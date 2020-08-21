@@ -32,10 +32,11 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
           //   onAppRoute,
           //   offline,
           // });
-        }, 200);
+        }, 0);
 
         break;
       case "INVITED":
+        debugger;
         setTimeout(function () {
           if (browserId === hangout.browserId) {
             updateHangout(commonArg);
@@ -124,6 +125,7 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
         updateHangout(commonArg);
         break;
       case "INVITER":
+        debugger;
         saveUnread(commonArg);
 
         break;

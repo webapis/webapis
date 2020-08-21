@@ -43,7 +43,11 @@ export default function HangoutsProvider(props) {
     dispatch,
     focusedHangout: hangout,
   });
-
+  useEffect(() => {
+    if (user === null) {
+      dispatch({ type: actionTypes.SET_HANGOUT_TO_INIT_STATE });
+    }
+  }, [user]);
   function onRead() {
     updateRecievedMessages({
       hangout,

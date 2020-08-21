@@ -17,8 +17,8 @@ describe("onMessage_spec", () => {
     cy.visit("/");
   });
   it("message is sent succefully", () => {
-    const timestamp = Date.UTC(2018, 10, 30);
-    cy.clock(timestamp, ["Date"]);
+    // const timestamp = Date.UTC(2018, 10, 30);
+    // cy.clock(timestamp, ["Date"]);
     cy.signup({ username: "demouser" });
     cy.signout();
     cy.signup({ username: "berouser" });

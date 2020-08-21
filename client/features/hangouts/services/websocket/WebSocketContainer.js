@@ -49,6 +49,7 @@ export function WebSocketContainer(props) {
     //user unauthenticated
     if (user === null && socket !== null) {
       socket.close();
+      dispatch({ type: socketActionTypes.INITIAL_STATE });
     }
   }, [user, socket, browserId]);
   //onlineStatus changed to false
@@ -70,8 +71,9 @@ export function WebSocketContainer(props) {
   //   }
   // }, [onlineStatus, user, browserId]);
   useEffect(() => {
-    if (socket) {
+    if (socket && user) {
       socket.onmessage = (serverMessage) => {
+        debugger;
         const msg = JSON.parse(serverMessage.data);
         hangoutDispatch({
           type: actionTypes.SERVER_MESSAGE_RECIEVED,
@@ -104,7 +106,7 @@ export function WebSocketContainer(props) {
         hangoutDispatch({ type: actionTypes.SOCKET_ERROR, error });
       };
     }
-  }, [socket]);
+  }, [socket, user]);
 
   useEffect(() => {
     if (searchHangouts) {

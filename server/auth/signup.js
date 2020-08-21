@@ -10,7 +10,7 @@ module.exports = async function ({ req, res, collection }) {
     let errors = [];
 
     let { username, email, password, browserId } = req.body;
-    debugger;
+
     if (userInputValidation.signupConstraints({ username, email, password })) {
       errors = userInputValidation.signupConstraints({
         username,

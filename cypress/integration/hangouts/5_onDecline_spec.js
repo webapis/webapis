@@ -17,8 +17,8 @@ describe("onDecline", () => {
     cy.visit("/");
   });
   it("invitation declined successfully", () => {
-    const currentDate = Date.UTC(2018, 10, 30);
-    cy.clock(currentDate, ["Date"]);
+    // const currentDate = Date.UTC(2018, 10, 30);
+    // cy.clock(currentDate, ["Date"]);
 
     cy.signup({ username: "demouser" });
     cy.signout();
@@ -28,7 +28,7 @@ describe("onDecline", () => {
     cy.invite();
     cy.signout();
     cy.login({ username: "berouser" });
-
+    //cy.pause()
     cy.get("[data-testid=message-count]").contains(1);
     cy.get("[data-testid=unread-link]").click();
     cy.get("[data-testid=demouser]").should("have.length", 1);

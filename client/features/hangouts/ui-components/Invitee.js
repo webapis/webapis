@@ -22,6 +22,7 @@ export default function Invitee({ hangout, dispatch }) {
           You will be able to chat with <b>${hangout && hangout.email}</b> once
           your invition has been accepted.
         </p>
+        ${hangout.state === "INVITED" && html`<div class="invited" />`}
       <//>
     <//>
   `;

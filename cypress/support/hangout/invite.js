@@ -15,4 +15,7 @@ Cypress.Commands.add("invite", () => {
   );
 
   cy.get("[data-testid=oninvite-btn]").click();
+  cy.get("[data-testid=invitee-ui]");
+
+  cy.get(".invited");
 });

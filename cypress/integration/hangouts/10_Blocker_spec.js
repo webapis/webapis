@@ -17,8 +17,8 @@ describe("Blocker", () => {
     cy.visit("/");
   });
   it("blocker recieved succefully", () => {
-    const currentDate = Date.UTC(2018, 10, 30);
-    cy.clock(currentDate, ["Date"]);
+    // const currentDate = Date.UTC(2018, 10, 30);
+    // cy.clock(currentDate, ["Date"]);
 
     cy.signup({ username: "demouser" });
     cy.signout();
@@ -27,27 +27,32 @@ describe("Blocker", () => {
     cy.signout();
     cy.login({ username: "demouser" });
     cy.invite();
-    //   cy.pause()
+
     cy.signout();
-    //  cy.pause()
+
     cy.login({ username: "berouser" });
-    //  cy.pause()
+
     cy.accept();
 
     cy.signout();
-    //  cy.pause()
+
     cy.login({ username: "demouser" });
 
-    //  cy.pause();
     cy.get("[data-testid=unread-link]").contains(1);
+
     cy.get("[data-testid=unread-link]").click();
     cy.get("[data-testid=berouser]").click();
 
     cy.get("[data-testid=message-input]").type("Hello berouser x");
+
     cy.get("[data-testid=send-btn]").click();
+
     cy.signout();
+
     cy.login({ username: "berouser" });
+
     cy.block();
+
     cy.signout();
 
     cy.login({ username: "demouser" });

@@ -61,7 +61,6 @@ export function authReducer(state, action) {
         authStarted: true,
       };
     case actionTypes.LOGIN_SUCCESS:
-      debugger;
       return {
         ...state,
         loading: false,
@@ -86,7 +85,6 @@ export function authReducer(state, action) {
         authStarted: true,
       };
     case actionTypes.SIGNUP_SUCCESS:
-      debugger;
       return {
         ...state,
         loading: false,
