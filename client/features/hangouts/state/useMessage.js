@@ -58,9 +58,7 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
       case "ACCEPTED":
         setTimeout(function () {
           updateHangout(commonArg);
-
           updateSentMessage(commonArg);
-
           dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
         }, 200);
 
@@ -177,15 +175,42 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
     if (message && username) {
       switch (message.type) {
         case "DELAYED_ACKHOWLEDGEMENTS":
+          dispatch({
+            type: actionTypes.ON_SOCKET_MESSAGE,
+            on_socket_message: true,
+          });
+
           handleDelayedAcknowledgements({ hangouts: message.hangouts });
+          setTimeout(() => {
+            dispatch({
+              type: actionTypes.ON_SOCKET_MESSAGE,
+              on_socket_message: false,
+            });
+          }, 0);
           break;
         case "ACKHOWLEDGEMENT":
+          dispatch({
+            type: actionTypes.ON_SOCKET_MESSAGE,
+            on_socket_message: true,
+          });
+
           onDeliveryAcknowledgement({
             hangout: message.hangout,
             offline: false,
           });
+          setTimeout(() => {
+            dispatch({
+              type: actionTypes.ON_SOCKET_MESSAGE,
+              on_socket_message: false,
+            });
+          }, 0);
           break;
         case "HANGOUT":
+          dispatch({
+            type: actionTypes.ON_SOCKET_MESSAGE,
+            on_socket_message: true,
+          });
+
           if (
             focusedHangout &&
             focusedHangout.username === message.hangout.username
@@ -194,9 +219,25 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
           } else {
             onHangout({ hangout: message.hangout, unread: true });
           }
+          setTimeout(() => {
+            dispatch({
+              type: actionTypes.ON_SOCKET_MESSAGE,
+              on_socket_message: false,
+            });
+          }, 0);
           break;
         case "UNDELIVERED_HANGOUTS":
+          dispatch({
+            type: actionTypes.ON_SOCKET_MESSAGE,
+            on_socket_message: true,
+          });
           handleHangouts({ hangouts: message.hangouts });
+          setTimeout(() => {
+            dispatch({
+              type: actionTypes.ON_SOCKET_MESSAGE,
+              on_socket_message: false,
+            });
+          }, 0);
           break;
         // case "OFFLINE_ACKN":
         //   onDeliveryAcknowledgement({

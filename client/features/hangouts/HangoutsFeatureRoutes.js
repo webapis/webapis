@@ -26,12 +26,13 @@ export default function HangoutsFeatureRoutes(props) {
     state,
     hangouts,
     hangout,
-    onInvite,
-    onAccept,
-    onDecline,
-    onBlock,
-    onUnblock,
-    onMessage,
+    onUserClientCommand,
+    // onInvite,
+    // onAccept,
+    // onDecline,
+    // onBlock,
+    // onUnblock,
+    // onMessage,
     onMessageText,
     messageText,
     username,
@@ -56,12 +57,12 @@ export default function HangoutsFeatureRoutes(props) {
   switch (featureRoute) {
     case "/bckui":
       return html` <${Suspense} fallback=${Loading}>
-        <${Block} hangout=${hangout} onBlock=${onBlock} />
+        <${Block} hangout=${hangout} onBlock=${onUserClientCommand} />
       <//>`;
     case "/UNBLOCK":
       return html`
         <${Suspense} fallback=${Loading}>
-          <${Blocked} hangout=${hangout} onUnblock=${onUnblock} />
+          <${Blocked} hangout=${hangout} onUnblock=${onUserClientCommand} />
         <//>
       `;
     case "/DECLINED":
@@ -92,7 +93,7 @@ export default function HangoutsFeatureRoutes(props) {
           onNavigation=${onNavigation}
           hangout=${hangout}
           onMessageText=${onMessageText}
-          onMessage=${onMessage}
+          onMessage=${onUserClientCommand}
           messages=${messages}
           username=${username}
           messageText=${messageText}
@@ -105,7 +106,7 @@ export default function HangoutsFeatureRoutes(props) {
         <${Invite}
           loading=${loading}
           hangout=${hangout}
-          onInvite=${onInvite}
+          onInvite=${onUserClientCommand}
           onMessageText=${onMessageText}
           messageText=${messageText}
         />
@@ -121,8 +122,8 @@ export default function HangoutsFeatureRoutes(props) {
         <${Inviter}
           state=${state}
           hangout=${hangout}
-          onAccept=${onAccept}
-          onDecline=${onDecline}
+          onAccept=${onUserClientCommand}
+          onDecline=${onUserClientCommand}
         />
       <//>`;
     case "/unread":

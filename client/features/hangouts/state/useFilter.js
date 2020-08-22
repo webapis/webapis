@@ -30,7 +30,7 @@ export default function useFilter({ state, dispatch, onAppRoute, username }) {
     const { id } = e.target;
 
     const hangout = hangouts.find((s) => s.username === id);
-    debugger;
+
     dispatch({ type: actionTypes.SELECTED_HANGOUT, hangout });
     onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
   }

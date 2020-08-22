@@ -34,65 +34,68 @@ describe("onAccept", () => {
     cy.get("[data-testid=unread-link]").click();
     cy.get("[data-testid=demouser]").click();
 
-    cy.get("[data-testid=accept-btn]")
-      .click()
-      .then(() => {
-        cy.get("[data-testid=right-message-wrapper]")
-          .find(".message-state")
-          //saveSentMessage(dState:'pending')-----------------------------2.1
-          .contains("pending");
-        cy.window()
-          .its("localStorage")
-          .invoke("getItem", "berouser-hangouts")
-          .then((hangoutState) => {
-            const expectedHangoutState = {
-              username: "demouser",
-              email: "demouser@gmail.com",
-              message: {
-                text: "Accepted your invitation",
-                timestamp: 1543536000000,
-              },
-              timestamp: 1543536000000,
-              state: "ACCEPT",
-            };
-            //saveHangout() ACCEPT------------------------------------------1
-            expect(JSON.parse(hangoutState)[0]).to.deep.equal(
-              expectedHangoutState
-            );
-          });
+    cy.get("[data-testid=accept-btn]").click();
+    cy.get("[data-testid=right-message-wrapper]")
+      .find(".message-state")
+      //saveSentMessage(dState:'pending')-----------------------------2.1
+      .contains("pending");
+    // .then(() => {
+    // cy.get("[data-testid=right-message-wrapper]")
+    //   .find(".message-state")
+    //   //saveSentMessage(dState:'pending')-----------------------------2.1
+    //   .contains("pending");
+    // cy.window()
+    //   .its("localStorage")
+    //   .invoke("getItem", "berouser-hangouts")
+    //   .then((hangoutState) => {
+    //     const expectedHangoutState = {
+    //       username: "demouser",
+    //       email: "demouser@gmail.com",
+    //       message: {
+    //         text: "Accepted your invitation",
+    //         timestamp: 1543536000000,
+    //       },
+    //       timestamp: 1543536000000,
+    //       state: "ACCEPT",
+    //     };
+    //     //saveHangout() ACCEPT------------------------------------------1
+    //     expect(JSON.parse(hangoutState)[0]).to.deep.equal(
+    //       expectedHangoutState
+    //     );
+    //   });
 
-        cy.window()
-          .its("localStorage")
-          .invoke("getItem", "berouser-demouser-messages")
-          .then((result) => {
-            const recievedMessageState = JSON.parse(result).find(
-              (r) => r.username === "demouser"
-            );
-            const sentMessageState = JSON.parse(result).find(
-              (r) => r.username === "berouser"
-            );
-            const expectedSentMessageState = {
-              text: "Accepted your invitation",
-              timestamp: 1543536000000,
-              username: "berouser",
-              state: "pending",
-            };
+    // cy.window()
+    //   .its("localStorage")
+    //   .invoke("getItem", "berouser-demouser-messages")
+    //   .then((result) => {
+    //     const recievedMessageState = JSON.parse(result).find(
+    //       (r) => r.username === "demouser"
+    //     );
+    //     const sentMessageState = JSON.parse(result).find(
+    //       (r) => r.username === "berouser"
+    //     );
+    //     const expectedSentMessageState = {
+    //       text: "Accepted your invitation",
+    //       timestamp: 1543536000000,
+    //       username: "berouser",
+    //       state: "pending",
+    //     };
 
-            const expectedRecievedMessageState = {
-              text: "Let's chat, berouser!",
-              timestamp: 1543536000000,
-              username: "demouser",
-              state: "read",
-            };
-            //saveSentMessage() "pending"-------------------------------------2
-            expect(sentMessageState).to.deep.equal(expectedSentMessageState);
-            //saveRecievedMessage()dState:'read'-------------------------------------------3
-            expect(recievedMessageState).to.deep.equal(
-              expectedRecievedMessageState
-            );
-            cy.get("[data-testid=message-count]").contains(0);
-          });
-      });
+    //     const expectedRecievedMessageState = {
+    //       text: "Let's chat, berouser!",
+    //       timestamp: 1543536000000,
+    //       username: "demouser",
+    //       state: "read",
+    //     };
+    //     //saveSentMessage() "pending"-------------------------------------2
+    //     expect(sentMessageState).to.deep.equal(expectedSentMessageState);
+    //     //saveRecievedMessage()dState:'read'-------------------------------------------3
+    //     expect(recievedMessageState).to.deep.equal(
+    //       expectedRecievedMessageState
+    //     );
+    //     cy.get("[data-testid=message-count]").contains(0);
+    //   });
+    // });
 
     cy.get("[data-testid=message-count]").contains(0);
     //saveRecievedMessage(dState:'read')---------------------------------3.1

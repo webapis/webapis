@@ -28,9 +28,21 @@ export const initState = {
   message: null,
   browserId: null,
   socketConnected: false,
+  on_user_client_command: null,
+  on_socket_message: false,
+  on_socket_command_send: false,
 };
 export function reducer(state, action) {
   switch (action.type) {
+    case actionTypes.ON_SOCKET_MESSAGE:
+      return { ...state, on_socket_message: action.on_socket_message };
+    case actionTypes.ON_USER_CLIENT_COMMAND:
+      const nextState = {
+        ...state,
+        on_user_client_command: action.on_user_client_command,
+      };
+
+      return nextState;
     case actionTypes.SOCKET_CONNECTION_STATE_CHANGED:
       return { ...state, socketConnected: action.connected };
     case actionTypes.SET_BROWSER_ID:
@@ -68,10 +80,13 @@ export function reducer(state, action) {
       return { ...state, unreadhangouts: action.unreadhangouts };
     case actionTypes.HANGOUT_UPDATED:
       return { ...state, hangout: action.hangout };
+
     case actionTypes.HANGOUTS_UPDATED:
       return { ...state, hangouts: action.hangouts };
+
     case actionTypes.MESSAGES_UPDATED:
       return { ...state, messages: action.messages };
+
     case actionTypes.SERVER_MESSAGE_RECIEVED:
       return { ...state, message: action.message };
     case actionTypes.LOADED_MESSAGES:
@@ -104,7 +119,6 @@ export function reducer(state, action) {
     case actionTypes.LOADED_HANGOUTS:
       return { ...state, hangouts: action.hangouts };
     case actionTypes.SELECTED_HANGOUT:
-      debugger;
       return {
         ...state,
         hangout: action.hangout,
