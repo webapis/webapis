@@ -31,6 +31,7 @@ export const initState = {
   on_user_client_command: null,
   on_socket_message: false,
   on_socket_command_send: false,
+  unreadsCount: 0,
 };
 export function reducer(state, action) {
   switch (action.type) {
@@ -77,7 +78,11 @@ export function reducer(state, action) {
     case actionTypes.CLEARED_HANGOUT:
       return { ...state, hangout: null };
     case actionTypes.UNREAD_HANGOUTS_UPDATED:
-      return { ...state, unreadhangouts: action.unreadhangouts };
+      return {
+        ...state,
+        unreadhangouts: action.unreadhangouts,
+        unreadsCount: action.unreadhangouts.length,
+      };
     case actionTypes.HANGOUT_UPDATED:
       return { ...state, hangout: action.hangout };
 

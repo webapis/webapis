@@ -18,7 +18,13 @@ export function AppNavigation() {
   const { authenticated, user } = authState;
 
   const { state, onNavigation } = useHangouts();
-  const { hangout, socketConnected, unreadhangouts, error } = state;
+  const {
+    hangout,
+    socketConnected,
+    unreadhangouts,
+    unreadsCount,
+    error,
+  } = state;
   return html`
     <div>
       <${Navbar} brand="Webcom" bg="dark">
@@ -53,7 +59,7 @@ export function AppNavigation() {
               >
                 messages:
                 <span class="badge badge-light" data-testid="message-count">
-                  ${" "}${unreadhangouts ? unreadhangouts.length : 0}
+                  ${" "}${unreadsCount}
                 </span>
               </button>
             `}
