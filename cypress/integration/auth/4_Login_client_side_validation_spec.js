@@ -6,7 +6,7 @@ describe("4_Login_client_side_validation_spec", () => {
       .its("localStorage")
       .invoke("setItem", "browserId", JSON.stringify("1234567890"));
     cy.visit("/");
-    cy.wait(50);
+    cy.wait(500);
     Cypress.on("window:before:load", (win) => {
       win.jsDisabled = false;
     });
@@ -15,10 +15,10 @@ describe("4_Login_client_side_validation_spec", () => {
   });
   it("user inputs: empty emailorusername or password (onBlur)", () => {
     cy.get("[data-testid=emailorusername]").focus();
-    cy.wait(50);
+    cy.wait(500);
     cy.get("[data-testid=emailorusername]").blur();
     cy.get("[data-testid=password]").focus();
-    cy.wait(50);
+    cy.wait(500);
     cy.get("[data-testid=password]").blur();
     cy.get("[data-testid=message-emailorusername]").contains(
       validationMessages.REQUIRED_FIELD

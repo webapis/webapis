@@ -37,7 +37,7 @@ describe("Blocker", () => {
     cy.signout();
 
     cy.login({ username: "demouser" });
-
+    cy.wait(500);
     cy.get("[data-testid=unread-link]").contains(1);
 
     cy.get("[data-testid=unread-link]").click();

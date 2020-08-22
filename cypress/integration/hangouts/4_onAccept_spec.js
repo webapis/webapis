@@ -28,7 +28,7 @@ describe("onAccept", () => {
     cy.invite();
     cy.signout();
     cy.login({ username: "berouser" });
-
+    cy.wait(100);
     cy.get("[data-testid=message-count]").contains(1);
 
     cy.get("[data-testid=unread-link]").click();
@@ -96,7 +96,7 @@ describe("onAccept", () => {
     //     cy.get("[data-testid=message-count]").contains(0);
     //   });
     // });
-
+    cy.wait(500);
     cy.get("[data-testid=message-count]").contains(0);
     //saveRecievedMessage(dState:'read')---------------------------------3.1
     cy.get("[data-testid=left-message-wrapper]")

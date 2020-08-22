@@ -30,7 +30,7 @@ describe("onBlock", () => {
     cy.accept();
     cy.signout();
     cy.login({ username: "demouser" });
-
+    cy.wait(500);
     cy.get("[data-testid=unread-link]").contains(1);
     cy.get("[data-testid=unread-link]").click();
     cy.get("[data-testid=berouser]").click();

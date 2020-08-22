@@ -33,6 +33,7 @@ describe("Accepter", () => {
     cy.accept();
     cy.signout();
     cy.login({ username: "demouser" });
+    cy.wait(500);
     cy.get("[data-testid=unread-link]");
     cy.get("[data-testid=unread-link]").contains(0);
 

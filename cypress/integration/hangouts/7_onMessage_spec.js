@@ -28,7 +28,7 @@ describe("onMessage_spec", () => {
     cy.accept();
     cy.signout();
     cy.login({ username: "demouser" });
-
+    cy.wait(500);
     cy.get("[data-testid=unread-link]").contains(1);
 
     cy.get("[data-testid=unread-link]").click();
