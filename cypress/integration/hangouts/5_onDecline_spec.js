@@ -14,7 +14,7 @@ describe("onDecline", () => {
     cy.window()
       .its("localStorage")
       .invoke("setItem", "browserId", JSON.stringify("1234567890"));
-    cy.visit("/");
+    //  cy.visit("/");
   });
   it("invitation declined successfully", () => {
     // const currentDate = Date.UTC(2018, 10, 30);
@@ -28,8 +28,12 @@ describe("onDecline", () => {
     cy.invite();
     cy.signout();
     cy.login({ username: "berouser" });
-    //cy.pause()
-    cy.get("[data-testid=message-count]").contains(1);
+
+    cy.get("[data-testid=unread-link]");
+    cy.get("[data-testid=unread-link]")
+      .find("[data-testid=message-count]")
+      .contains(1);
+    cy.wait(200);
     cy.get("[data-testid=unread-link]").click();
     cy.get("[data-testid=demouser]").should("have.length", 1);
     cy.get(".badge-primary").contains(1);

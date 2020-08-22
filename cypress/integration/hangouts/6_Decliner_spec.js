@@ -14,7 +14,7 @@ describe("Decliner", () => {
     cy.window()
       .its("localStorage")
       .invoke("setItem", "browserId", JSON.stringify("1234567890"));
-    cy.visit("/");
+    //   cy.visit("/");
   });
   it("Decliner succeful", () => {
     cy.signup({ username: "demouser" });
@@ -28,7 +28,9 @@ describe("Decliner", () => {
     cy.decline();
     cy.signout();
     cy.login({ username: "demouser" });
-    cy.get("[data-testid=message-count]").contains(0);
+    // cy.get("[data-testid=unread-link]");
+    // cy.get("[data-testid=unread-link]").find("[data-testid=message-count]")
+    // .contains(0);
     cy.get("[data-testid=hangouts-link]").click();
     cy.get("[data-testid=berouser]").click();
   });

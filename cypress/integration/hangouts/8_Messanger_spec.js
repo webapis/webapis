@@ -14,7 +14,7 @@ describe("onMessage_spec", () => {
     cy.window()
       .its("localStorage")
       .invoke("setItem", "browserId", JSON.stringify("1234567890"));
-    cy.visit("/");
+    //   cy.visit("/");
   });
   it("message is sent succefully", () => {
     // const timestamp = Date.UTC(2018, 10, 30);
@@ -30,17 +30,23 @@ describe("onMessage_spec", () => {
     cy.accept();
     cy.signout();
     cy.login({ username: "demouser" });
-    cy.wait(500);
-    cy.get("[data-testid=unread-link]").contains(1);
+    cy.get("[data-testid=unread-link]");
+    cy.get("[data-testid=unread-link]")
+      .find("[data-testid=message-count]")
+      .contains(1);
+    cy.wait(200);
     cy.get("[data-testid=unread-link]").click();
     cy.get("[data-testid=berouser]").click();
-    cy.wait(2000);
+
     cy.get("[data-testid=message-input]").type("Hello berouser");
     cy.get("[data-testid=send-btn]").click();
     cy.signout();
     cy.login({ username: "berouser" });
 
-    cy.get("[data-testid=message-count]").contains(1); ///?
+    cy.get("[data-testid=unread-link]");
+    cy.get("[data-testid=unread-link]")
+      .find("[data-testid=message-count]")
+      .contains(1);
     cy.get("[data-testid=hangouts-link]").click();
 
     cy.get("[data-testid=demouser]").click();

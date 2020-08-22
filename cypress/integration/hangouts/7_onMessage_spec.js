@@ -14,7 +14,7 @@ describe("onMessage_spec", () => {
     cy.window()
       .its("localStorage")
       .invoke("setItem", "browserId", JSON.stringify("1234567890"));
-    cy.visit("/");
+    // cy.visit("/");
   });
   it("message is sent succefully", () => {
     cy.signup({ username: "demouser" });
@@ -28,9 +28,11 @@ describe("onMessage_spec", () => {
     cy.accept();
     cy.signout();
     cy.login({ username: "demouser" });
-    cy.wait(500);
-    cy.get("[data-testid=unread-link]").contains(1);
-
+    cy.get("[data-testid=unread-link]");
+    cy.get("[data-testid=unread-link]")
+      .find("[data-testid=message-count]")
+      .contains(1);
+    cy.wait(200);
     cy.get("[data-testid=unread-link]").click();
     cy.get("[data-testid=berouser]").click();
 
@@ -49,7 +51,11 @@ describe("onMessage_spec", () => {
 
     cy.signout();
     cy.login({ username: "berouser" });
-    cy.get("[data-testid=unread-link]").contains(1);
+    cy.get("[data-testid=unread-link]");
+    cy.get("[data-testid=unread-link]")
+      .find("[data-testid=message-count]")
+      .contains(1);
+    cy.wait(200);
     cy.get("[data-testid=unread-link]").click();
 
     cy.get("[data-testid=demouser]").click();
@@ -60,6 +66,7 @@ describe("onMessage_spec", () => {
     cy.signout();
     cy.login({ username: "demouser" });
     cy.get("[data-testid=unread-link]").contains(1);
+    cy.wait(200);
     cy.get("[data-testid=unread-link]").click();
     cy.get("[data-testid=berouser]").click();
   });

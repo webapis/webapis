@@ -286,8 +286,9 @@ export default function HangoutsProvider(props) {
 
       // load messages from local storage
       loadMessages({ hangout, name: user && user.username, dispatch });
-
-      removeUnreads({ dispatch, name: user && user.username });
+      setTimeout(() => {
+        removeUnreads({ dispatch, name: user && user.username });
+      }, 100);
     }
   }, [hangout]);
 

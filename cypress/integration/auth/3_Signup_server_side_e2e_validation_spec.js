@@ -142,6 +142,7 @@ describe("3_Signup_server_side_e2e_validation_spec", () => {
     );
     cy.get("[data-testid=socket-connection]").contains("online");
     cy.signout();
+    cy.wait(200);
     cy.get("[data-testid=socket-connection]").contains("offline");
   });
 });

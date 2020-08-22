@@ -14,7 +14,7 @@ describe("onAccept", () => {
     cy.window()
       .its("localStorage")
       .invoke("setItem", "browserId", JSON.stringify("1234567890"));
-    cy.visit("/");
+    // cy.visit("/");
   });
   it("invitation accepted successfully", () => {
     const currentDate = Date.UTC(2018, 10, 30);
@@ -28,9 +28,11 @@ describe("onAccept", () => {
     cy.invite();
     cy.signout();
     cy.login({ username: "berouser" });
-    cy.wait(100);
-    cy.get("[data-testid=message-count]").contains(1);
-
+    cy.get("[data-testid=unread-link]");
+    cy.get("[data-testid=unread-link]")
+      .find("[data-testid=message-count]")
+      .contains(1);
+    cy.wait(200);
     cy.get("[data-testid=unread-link]").click();
     cy.get("[data-testid=demouser]").click();
 
@@ -96,8 +98,11 @@ describe("onAccept", () => {
     //     cy.get("[data-testid=message-count]").contains(0);
     //   });
     // });
-    cy.wait(500);
-    cy.get("[data-testid=message-count]").contains(0);
+    cy.get("[data-testid=unread-link]");
+    cy.get("[data-testid=unread-link]")
+      .find("[data-testid=message-count]")
+      .contains(0);
+    cy.wait(200);
     //saveRecievedMessage(dState:'read')---------------------------------3.1
     cy.get("[data-testid=left-message-wrapper]")
       .find("[data-testid=message]")

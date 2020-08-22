@@ -16,7 +16,7 @@ describe("Inviter", () => {
     cy.window()
       .its("localStorage")
       .invoke("setItem", "browserId", JSON.stringify("1234567890"));
-    cy.visit("/");
+    // cy.visit("/");
   });
   it("message is sent succefully", () => {
     const currentDate = Date.UTC(2018, 10, 30);
@@ -52,7 +52,9 @@ describe("Inviter", () => {
     //   text: "Let's chat, berouser!",
     // };
 
-    cy.get("[data-testid=message-count]")
+    cy.get("[data-testid=unread-link]");
+    cy.get("[data-testid=unread-link]")
+      .find("[data-testid=message-count]")
       .contains(1)
       .then(() => {
         cy.window()
@@ -64,12 +66,13 @@ describe("Inviter", () => {
             // testing saveUnread() ---------------------------------
             expect(pending).to.deep.equal(expectedHangoutState);
           });
-
-        cy.get("[data-testid=unread-link]").click();
-        cy.get("[data-testid=demouser]").click();
-        cy.get("[data-testid=message]").contains("Let's chat, berouser!");
-        cy.get("[data-testid=message-sender]").contains("demouser");
-        cy.get("[data-testid=time]").contains("Now");
       });
+    cy.wait(200);
+    cy.get("[data-testid=unread-link]").click();
+    cy.get("[data-testid=demouser]").click();
+    cy.get("[data-testid=message]").contains("Let's chat, berouser!");
+    cy.get("[data-testid=message-sender]").contains("demouser");
+    cy.get("[data-testid=time]").contains("Now");
   });
 });
+//});

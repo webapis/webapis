@@ -11,7 +11,7 @@ describe("onInvite", () => {
         dbName: "test",
       });
     }
-    cy.visit("/");
+    //  cy.visit("/");
   });
   it("invite success", () => {
     const currentDate = Date.UTC(2018, 10, 30);

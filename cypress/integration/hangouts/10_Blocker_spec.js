@@ -14,7 +14,7 @@ describe("Blocker", () => {
     cy.window()
       .its("localStorage")
       .invoke("setItem", "browserId", JSON.stringify("1234567890"));
-    cy.visit("/");
+    // cy.visit("/");
   });
   it("blocker recieved succefully", () => {
     // const currentDate = Date.UTC(2018, 10, 30);
@@ -37,9 +37,10 @@ describe("Blocker", () => {
     cy.signout();
 
     cy.login({ username: "demouser" });
-    cy.wait(500);
-    cy.get("[data-testid=unread-link]").contains(1);
-
+    cy.get("[data-testid=unread-link]");
+    //     cy.get("[data-testid=unread-link]").find("[data-testid=message-count]")
+    //     .contains(1);
+    // cy.wait(200)
     cy.get("[data-testid=unread-link]").click();
     cy.get("[data-testid=berouser]").click();
 
@@ -54,7 +55,7 @@ describe("Blocker", () => {
     cy.block();
 
     cy.signout();
-    //cy.pause()
+
     cy.login({ username: "demouser" });
 
     cy.get("[data-testid=hangouts-link]").click();

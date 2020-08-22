@@ -10,7 +10,7 @@ describe("4_Login_client_side_validation_spec", () => {
     Cypress.on("window:before:load", (win) => {
       win.jsDisabled = false;
     });
-    //cy.pause()
+
     // cy.get("[data-testid=login-link]").click();
   });
   it("user inputs: empty emailorusername or password (onBlur)", () => {
