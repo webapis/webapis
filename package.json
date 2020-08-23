@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "ava": "^3.11.1",
     "eslint-config-preact": "^1.1.1",
     "exact": "^0.8.0",
     "husky": "^4.2.5",

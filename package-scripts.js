@@ -120,6 +120,9 @@ module.exports = {
         },
       },
     },
+    testAva: {
+      script: "ava",
+    },
     test: {
       local: {
         script: series.nps("cy.local"),
