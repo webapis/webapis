@@ -13,6 +13,7 @@ export default function Search({ state, dispatch, onAppRoute, hangouts }) {
     <div data-testid="search-ui">
       <div class="input-group mb-3">
         <input
+          autofocus
           data-testid="search-input"
           value=${search}
           onChange=${onSearchInput}

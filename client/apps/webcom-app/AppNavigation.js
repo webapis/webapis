@@ -7,24 +7,29 @@ import Navbar, {
   NavBarCollapse,
 } from "components/nav-bar/index";
 import Nav from "components/nav/index";
-
+import { useAppRoute } from "components/app-route/index";
 import { useAuth } from "features/authentication/index";
 import { useHangouts } from "features/hangouts/index";
 import GearIcon from "icons/bootstrap/GearIcon";
-
+import PersonPlusIcon from "icons/bootstrap/PersonPlusIcon";
+import PeopleIcon from "icons/bootstrap/PeopleIcon";
+import { actionTypes } from "../../features/hangouts/state/actionTypes";
 const html = htm.bind(h);
 export function AppNavigation() {
-  const { onSignOut, onAuthNavigation, state: authState } = useAuth();
-  const { authenticated, user } = authState;
+  const { routeState } = useAppRoute();
 
-  const { state, onNavigation } = useHangouts();
-  const {
-    hangout,
-    socketConnected,
-    unreadhangouts,
-    unreadsCount,
-    error,
-  } = state;
+  const { featureRoute } = routeState;
+  const { onSignOut, onAuthNavigation, state: authState } = useAuth();
+  const { user } = authState;
+
+  const { state, onNavigation, dispatch } = useHangouts();
+  const { hangout, socketConnected, hangouts, unreadsCount, error } = state;
+
+  function onPersonPlusClick(e) {
+    onNavigation(e);
+    dispatch({ type: actionTypes.HANGOUTS_UPDATED, hangouts: [] });
+  }
+
   return html`
     <div>
       <${Navbar} brand="Webcom" bg="dark">
@@ -33,6 +38,8 @@ export function AppNavigation() {
             <!-- NavItem -->
             <${NavItem}>
               ${user &&
+              featureRoute !== "/filter" &&
+              featureRoute !== "/search" &&
               html`
                 <${NavLink}
                   id="filter"
@@ -42,6 +49,28 @@ export function AppNavigation() {
                   Hangouts
                 <//>
               `}
+            <//>
+            <${NavItem}>
+              <button
+                disabled=${!user || featureRoute === "/search"}
+                class="btn"
+                data-testid="search-link"
+                id="search"
+                onClick=${onPersonPlusClick}
+              >
+                <${PersonPlusIcon} width="1.5em" height="1.5em" />
+              </button>
+            <//>
+            <${NavItem}>
+              <button
+                disabled=${!user || featureRoute === "/filter"}
+                class="btn"
+                data-testid="filter-link"
+                id="search"
+                onClick=${onPersonPlusClick}
+              >
+                <${PeopleIcon} width="2em" height="2em" color="white" />
+              </button>
             <//>
           <//>
           <!-- NavBarNav -->

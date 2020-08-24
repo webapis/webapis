@@ -273,6 +273,12 @@ export default function HangoutsProvider(props) {
           //case "UNBLOCKER":
           // case "READER":
           onRead();
+          removeUnreads({
+            dispatch,
+            name: user && user.username,
+            hangout,
+            state: "MESSANGER",
+          });
           break;
         case "INVITEE":
           dispatch({
@@ -286,9 +292,7 @@ export default function HangoutsProvider(props) {
 
       // load messages from local storage
       loadMessages({ hangout, name: user && user.username, dispatch });
-      setTimeout(() => {
-        removeUnreads({ dispatch, name: user && user.username });
-      }, 100);
+      setTimeout(() => {}, 100);
     }
   }, [hangout]);
 

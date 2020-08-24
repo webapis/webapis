@@ -201,13 +201,20 @@ export function removeUnread({ hangout, dispatch, name }) {
   }
 }
 
-export function removeUnreads({ dispatch, name }) {
+export function removeUnreads({ dispatch, name, hangout, state }) {
+  debugger;
+  const { username } = hangout;
   const hangoutKey = `${name}-unread-hangouts`;
-  localStorage.removeItem(hangoutKey);
+  const localHangouts = JSON.parse(localStorage.getItem(hangoutKey)).filter(
+    (f) =>
+      (f.username === username && f.state === state) || f.username !== username
+  );
+  debugger;
   dispatch({
     type: actionTypes.UNREAD_HANGOUTS_UPDATED,
-    unreadhangouts: [],
+    unreadhangouts: localHangouts,
   });
+  localStorage.setItem(hangoutKey, JSON.stringify(localHangouts));
 }
 
 export function loadMessages({ hangout, name, dispatch }) {

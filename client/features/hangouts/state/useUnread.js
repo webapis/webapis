@@ -3,7 +3,11 @@ import {
   useState,
 } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
 import { actionTypes } from "./actionTypes";
-import { updateUnread, updateHangout } from "./local-storage/common";
+import {
+  updateUnread,
+  updateHangout,
+  removeUnreads,
+} from "./local-storage/common";
 export default function useUnread({ state, dispatch, onAppRoute, username }) {
   const [reducedUnreads, setReducedUnreads] = useState([]);
   const { unreadhangouts } = state;
@@ -15,9 +19,12 @@ export default function useUnread({ state, dispatch, onAppRoute, username }) {
   }, [unreadhangouts]);
 
   function onUnreadSelect({ hangout }) {
+    debugger;
     dispatch({ type: actionTypes.SELECTED_HANGOUT, hangout });
 
     onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
+    removeUnreads({ hangout, dispatch, name: username, state: "ACCEPTER" });
+    removeUnreads({ hangout, dispatch, name: username, state: "INVITER" });
   }
 
   function onUnreadRemove() {}
