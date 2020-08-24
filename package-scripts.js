@@ -100,6 +100,7 @@ function defaultBrowser({ features, record, type }) {
 
 module.exports = {
   scripts: {
+    storybook: { script: "rollup -c rollup.storybook.config.js -w" },
     apps: {
       webcom: {
         node: {

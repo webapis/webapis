@@ -26,51 +26,12 @@ export default function Filter({
   }
   return html`
     <div style=${{ height: "100%", display: "flex", flexDirection: "column" }}>
-      ${hangouts &&
-      hangouts.length > 0 &&
-      html`
-        <input
-          class="form-control"
-          value=${filter}
-          onChange=${onFilterInput}
-          data-testid="filter-input"
-        />
-      `}
-
-      <div>
-        <${List}>
-          ${hangouts &&
-          hangouts.length > 0 &&
-          hangouts.map((f) => {
-            return html`
-              <${ListItem}
-                id=${f.username}
-                data-testid=${f.username}
-                onClick=${onFilterSelect}
-              >
-                ${f.username}
-              <//>
-            `;
-          })}
-        <//>
-      </div>
-      ${hangouts &&
-      hangouts.length === 0 &&
-      html`
-        <div class="row align-items-center" style=${{ flex: 1 }}>
-          <div class="col-2  mx-auto">
-            <button
-              data-testid="search"
-              id="search"
-              onClick=${onInviteNewFriend}
-              class="btn btn-outline-secondary"
-            >
-              <${PersonPlusFill} width="2em" height="2em" />
-              <div>Invite new friend</div>
-            </button>
-          </div>
-        </div>
-      `}
+      <input
+        class="form-control"
+        value=${filter}
+        onChange=${onFilterInput}
+        data-testid="filter-input"
+      />
     </div>
   `;
 }
