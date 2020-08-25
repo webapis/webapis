@@ -15,7 +15,7 @@ const Invite = lazy(() => import("./ui-components/Invite"));
 const Invitee = lazy(() => import("./ui-components/Invitee"));
 const Inviter = lazy(() => import("./ui-components/Inviter"));
 const Search = lazy(() => import("./ui-components/Search"));
-const Filter = lazy(() => import("./ui-components/Filter"));
+const Hangouts = lazy(() => import("./ui-components/Hangouts"));
 const Declined = lazy(() => import("./ui-components/Declined"));
 const UnreadHangouts = lazy(() => import("./ui-components/UnreadHangouts"));
 const html = htm.bind(h);
@@ -135,26 +135,16 @@ export default function HangoutsFeatureRoutes(props) {
         />
       <//>`;
 
-    case "/search":
+    case "/hangout":
       return html` <${Suspense} fallback=${Loading}>
-        <${Search}
+        <${Hangouts}
           hangouts=${hangouts}
           dispatch=${dispatch}
           state=${state}
           onAppRoute=${onAppRoute}
         />
       <//>`;
-    case "/filter":
-      return html` <${Suspense} fallback=${Loading}>
-        <${Filter}
-          hangouts=${hangouts}
-          dispatch=${dispatch}
-          state=${state}
-          onAppRoute=${onAppRoute}
-          username=${username}
-          onNavigation=${onNavigation}
-        />
-      <//>`;
+
     default:
       return null;
   }

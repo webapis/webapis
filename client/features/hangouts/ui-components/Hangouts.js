@@ -1,9 +1,6 @@
 import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
-import List, { ListItem } from "controls/list/index";
 const html = htm.bind(h);
-import Filter from "./Filter";
-import Search from "./Search";
 
 export default function Hangouts({
   hangouts,
@@ -14,23 +11,27 @@ export default function Hangouts({
   username,
 }) {
   return html`
-    <div class="container">
+    <div class="container-fluid bg-success" style="height:90vh">
       <div class=" row justify-content-center">
-        <div class="col-md-8 col-lg-6">
+        <div class="col-md-8 col-lg-5 pt-3">
           <div class="card">
-            <div class="card-header">
-              Contact List
+            <div class="card-header ">
+              <${PeopleIcon} />
             </div>
             <div class="card-body">
               <${SeachComponent}
                 placeholder="Enter username"
                 btnTitle="Search"
               />
-              <${FilterInput} placeholder="Enter username" />
+
               <div class="list-group">
-                ${hangouts.map((h) => {
+                ${hangouts &&
+                hangouts.map((h) => {
                   return html`
-                    <a href="#" class="list-group-item list-group-item-action">
+                    <a
+                      href="#"
+                      class="list-group-item list-group-item-action mb-1 border rounded-pill border-success"
+                    >
                       ${h.username}
                     </a>
                   `;
@@ -43,25 +44,6 @@ export default function Hangouts({
     </div>
   `;
 }
-
-/*
- <${List}>
-      ${hangouts &&
-      hangouts.length > 0 &&
-      hangouts.map((u) => {
-        return html`
-          <${ListItem}
-            id=${u.username}
-            onClick=${onSearchSelect}
-            data-testid=${u.username}
-          >
-            ${u.username}
-          <//>
-        `;
-      })}
-    <//>
-
-*/
 
 function SeachComponent({ placeholder, btnTitle }) {
   return html`
@@ -86,16 +68,20 @@ function SeachComponent({ placeholder, btnTitle }) {
   `;
 }
 
-function FilterInput() {
+export function PeopleIcon() {
   return html`
-    <div class="form-group">
-      <input
-        placeholder="Enter username for filtering"
-        type="email"
-        class="form-control"
-        id="filter-input"
-        aria-describedby="emailHelp"
+    <svg
+      width="1.5em"
+      height="1.5em"
+      viewBox="0 0 16 16"
+      class="bi bi-people-fill"
+      fill="currentColor"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        fill-rule="evenodd"
+        d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"
       />
-    </div>
+    </svg>
   `;
 }
