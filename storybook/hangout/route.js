@@ -12,7 +12,8 @@ import UnreadHangouts from "../../client/features/hangouts/ui-components/UnreadH
 import Message from "../../client/features/hangouts/ui-components/messages/Message";
 import HangoutFilter from "../../client/features/hangouts/ui-components/Filter";
 import HangoutSearch from "../../client/features/hangouts/ui-components/Search";
-import Hangouts from "../../client/features/hangouts/ui-components/Hangouts";
+import HangoutsUiStates from "./hangouts.ui.state";
+
 const html = htm.bind(h);
 const hangouts = [
   { username: "userone" },
@@ -73,7 +74,7 @@ export default function HangoutRoutes() {
         <${HangoutFilter} />
       <//>
       <${AppRoute} path="/hangouts">
-        <${Hangouts} hangouts=${[{ username: "demo" }, { username: "bero" }]} />
+        <${HangoutsUiStates} />
       <//>
     `,
   ];

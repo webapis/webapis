@@ -13,7 +13,7 @@ module.exports = async function findOne({ req, res, collection }) {
     const decoded = await jwt.verify(token[uname], process.env.secret);
 
     const { username } = decoded;
-    // finduser
+    // prevent for searching users's own name
     if (search === username) {
       res.writeHead(200, { "Content-Type": "application/json" });
       res.write(
@@ -24,7 +24,7 @@ module.exports = async function findOne({ req, res, collection }) {
       res.end();
     } else {
       let user = await collection.findOne({ username });
-
+      // search for hangout among connected hangouts
       if (
         user &&
         user.hangouts &&
@@ -35,11 +35,12 @@ module.exports = async function findOne({ req, res, collection }) {
         res.writeHead(200, { "Content-Type": "application/json" });
         res.write(
           JSON.stringify({
-            hangouts: user.hangouts,
+            hangouts: [user.hangouts.find((h) => h.username === search)],
           })
         );
         res.end();
       } else {
+        // if hangout previously was not connected
         let users = await collection
           .find({ username: { $regex: new RegExp(search, "i") } })
           .project({ salt: 0, hash: 0, iterations: 0 })
