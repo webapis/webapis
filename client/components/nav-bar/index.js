@@ -8,7 +8,7 @@ export default function Navbar(props) {
   return html`
     <div class="bg-success p-1 ">
       <nav
-        class="navbar navbar-expand-lg navbar-${bg} bg-${bg} rounded-pill"
+        class="navbar navbar-expand-lg navbar navbar-light bg-light rounded-pill"
         style="width:100%"
       >
         <a class="navbar-brand" href="#">
