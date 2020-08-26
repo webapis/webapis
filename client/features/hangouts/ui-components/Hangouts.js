@@ -24,6 +24,7 @@ export default function Hangouts({
   onSendInviteGuest,
   onMessageFoGuestInput,
   onGuestEmailChange,
+  error,
 }) {
   return html`
     <div class="container-fluid bg-success" style="height:90vh">
@@ -56,6 +57,7 @@ export default function Hangouts({
                   invitingGuest=${invitingGuest}
                   inviteGuest=${inviteGuest}
                   messageForGuest=${messageForGuest}
+                  error=${error}
                 />
               `}
 
@@ -65,6 +67,7 @@ export default function Hangouts({
                   return html`
                     <div>
                       <a
+                        data-testid=${h.username}
                         href="#"
                         class="list-group-item list-group-item-action mb-1 border rounded-pill border-success"
                       >
@@ -147,6 +150,7 @@ export function InviteGuest({
   onGuestEmailChange,
   onSendInviteGuest,
   onMessageFoGuestInput,
+  error,
 }) {
   return html`
     <div>
@@ -173,6 +177,12 @@ export function InviteGuest({
             </button>
           </div>
         `}
+        ${error &&
+        html`
+          <div class="alert alert-danger" role="alert">
+            ${error && error.message}
+          </div>
+        `}
       </div>
       ${inviteGuest &&
       html`
@@ -196,6 +206,7 @@ export function InviteGuest({
           />
           <div class="input-group-append">
             <button
+              data-testid="invite"
               onClick=${onSendInviteGuest}
               disabled=${guestEmail === ""}
               class="btn btn-outline-secondary"

@@ -42,6 +42,20 @@ export const initState = {
 };
 export function reducer(state, action) {
   switch (action.type) {
+    case actionTypes.INVITE_AS_GUEST_STARTED:
+      debugger;
+      return { ...state, invitingGuest: true };
+    case actionTypes.INVITE_AS_GUEST_SUCCESS:
+      debugger;
+      return {
+        ...state,
+        invitingGuest: false,
+        invitationSuccess: true,
+        inviteGuest: false,
+      };
+    case actionTypes.INVITE_AS_GUEST_FAILED:
+      debugger;
+      return { ...state, invitingGuest: false, error: action.error };
     case actionTypes.GUEST_EMAIL_CHANGED:
       return { ...state, guestEmail: action.guestEmail };
     case actionTypes.MESSAGE_FOR_GUEST_CHANGED:

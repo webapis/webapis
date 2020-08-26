@@ -25,6 +25,8 @@ export function WebSocketContainer(props) {
     search,
     pendingHangout,
     fetchHangouts,
+    invitingGuest,
+    guestEmail,
   } = hangoutState;
   const { browserId, authStarted, user } = authState;
 
@@ -52,24 +54,7 @@ export function WebSocketContainer(props) {
       dispatch({ type: socketActionTypes.INITIAL_STATE });
     }
   }, [user, socket, browserId]);
-  //onlineStatus changed to false
-  // useEffect(() => {
-  //   if (!onlineStatus) {
-  //
-  //     hangoutDispatch({
-  //       type: actionTypes.SOCKET_CONNECTION_STATE_CHANGED,
-  //       connected: false,
-  //     });
-  //     dispatch({ type: socketActionTypes.INITIAL_STATE });
-  //   }
-  // }, [onlineStatus]);
-  // //onlineStatus changed to true
-  // useEffect(() => {
-  //   if (onlineStatus && user && browserId) {
-  //
-  //     onSocket();
-  //   }
-  // }, [onlineStatus, user, browserId]);
+
   useEffect(() => {
     if (socket && user) {
       socket.onmessage = (serverMessage) => {
@@ -133,6 +118,13 @@ export function WebSocketContainer(props) {
       });
     }
   }, [fetchHangouts, user]);
+
+  useEffect(() => {
+    if (invitingGuest && user) {
+      debugger;
+      actions.InviteAsGuest({ guestEmail, dispatch: hangoutDispatch });
+    }
+  }, [invitingGuest, user]);
   function sendPendingHangout() {
     socket.send(JSON.stringify({ ...pendingHangout, browserId }));
   }

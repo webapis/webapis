@@ -51,6 +51,17 @@ export default function HanogutUiState() {
         searchResult="notfound"
         invitationSuccess=${true}
         inviteGuest=${false}
+        userNotFound=${true}
+      />
+      <h5 class="bg-success text-white text-center">
+        Guest Invitation sending failed
+      </h5>
+      <${Hangouts}
+        hangouts=${[]}
+        searchResult="notfound"
+        userNotFound=${true}
+        inviteGuest=${true}
+        error=${{ message: "something went wrong" }}
       />
       <h5 class="bg-success text-white text-center">User is found</h5>
       <${Hangouts}
