@@ -1,15 +1,13 @@
 import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
-import { useState } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
 const html = htm.bind(h);
 
 export default function Hangouts({
   hangouts,
-  // onNavigation,
-  // state,
-  // dispatch,
-  // onAppRoute,
-  // username,
+  onNavigation,
+  dispatch,
+  onAppRoute,
+  username,
   search,
   searchResult = "",
   guestEmail, //InviteGuest
@@ -20,6 +18,12 @@ export default function Hangouts({
   inviteGuest, // Invite Guest
   messageForGuest, // InviteGuest
   searchComplete, //SearchComponent
+  onSearchInput,
+  onSearch,
+  onInviteGuest,
+  onSendInviteGuest,
+  onMessageFoGuestInput,
+  onGuestEmailChange,
 }) {
   return html`
     <div class="container-fluid bg-success" style="height:90vh">
@@ -31,15 +35,21 @@ export default function Hangouts({
             </div>
             <div class="card-body">
               <${SeachComponent}
+                onSearchInput=${onSearchInput}
+                onSearch=${onSearch}
                 placeholder="Enter username or email"
                 btnTitle="Search"
                 search=${search}
                 searching=${searching}
                 searchComplete=${searchComplete}
               />
-              ${searchResult === "notfound" &&
+              ${userNotFound &&
               html`
                 <${InviteGuest}
+                  onGuestEmailChange=${onGuestEmailChange}
+                  onSendInviteGuest=${onSendInviteGuest}
+                  onMessageFoGuestInput=${onMessageFoGuestInput}
+                  onInviteGuest=${onInviteGuest}
                   guestEmail=${guestEmail}
                   invitationSuccess=${invitationSuccess}
                   userNotFound=${userNotFound}
@@ -78,10 +88,14 @@ function SeachComponent({
   search,
   searching,
   searchComplete,
+  onSearchInput,
+  onSearch,
 }) {
   return html`
     <div class="input-group mb-3">
       <input
+        onChange=${onSearchInput}
+        data-testid="user-search-input"
         type="text"
         class="form-control"
         placeholder=${placeholder}
@@ -101,7 +115,9 @@ function SeachComponent({
         `}
 
         <button
+          onClick=${onSearch}
           disabled=${search === ""}
+          data-testid="user-search-button"
           class="btn btn-outline-secondary"
           type="button"
           id="button-addon2"
@@ -127,17 +143,23 @@ export function InviteGuest({
   invitingGuest,
   inviteGuest,
   messageForGuest,
+  onInviteGuest,
+  onGuestEmailChange,
+  onSendInviteGuest,
+  onMessageFoGuestInput,
 }) {
-  const [state, setState] = useState({ invite: false });
-
   return html`
     <div>
-      <div>
+      <div data-testid="invite-guest">
         ${userNotFound &&
         html`
           <div class="alert alert-warning" role="alert">
             ${guestusername} is not found.
-            <button class="btn btn-link">
+            <button
+              onClick=${onInviteGuest}
+              data-testid="invite-as-guest-btn"
+              class="btn btn-link"
+            >
               Invite as a guest.
             </button>
           </div>
@@ -145,7 +167,7 @@ export function InviteGuest({
         ${invitationSuccess &&
         html`
           <div class="alert alert-success" role="alert">
-            Guest invitation sent successfuly.
+            Guest invitation sent to ${guestusername} successfuly.
             <button class="btn btn-outline-success small">
               ok
             </button>
@@ -155,6 +177,7 @@ export function InviteGuest({
       ${inviteGuest &&
       html`
         <textarea
+          onChange=${onMessageFoGuestInput}
           disabled=${invitingGuest}
           value=${messageForGuest}
           class="form-control"
@@ -163,6 +186,8 @@ export function InviteGuest({
         ></textarea>
         <div class="input-group mb-3 mt-1">
           <input
+            onChange=${onGuestEmailChange}
+            data-testid="guest-email"
             disabled=${invitingGuest}
             type="email"
             class="form-control"
@@ -171,6 +196,7 @@ export function InviteGuest({
           />
           <div class="input-group-append">
             <button
+              onClick=${onSendInviteGuest}
               disabled=${guestEmail === ""}
               class="btn btn-outline-secondary"
               type="button"
@@ -215,21 +241,17 @@ export function BackSpace() {
       width="1em"
       height="1em"
       viewBox="0 0 16 16"
-      class="bi bi-backspace"
+      class="bi bi-x"
       fill="currentColor"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
         fill-rule="evenodd"
-        d="M6.603 2h7.08a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1h-7.08a1 1 0 0 1-.76-.35L1 8l4.844-5.65A1 1 0 0 1 6.603 2zm7.08-1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-7.08a2 2 0 0 1-1.519-.698L.241 8.65a1 1 0 0 1 0-1.302L5.084 1.7A2 2 0 0 1 6.603 1h7.08z"
+        d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"
       />
       <path
         fill-rule="evenodd"
-        d="M5.83 5.146a.5.5 0 0 0 0 .708l5 5a.5.5 0 0 0 .707-.708l-5-5a.5.5 0 0 0-.708 0z"
-      />
-      <path
-        fill-rule="evenodd"
-        d="M11.537 5.146a.5.5 0 0 1 0 .708l-5 5a.5.5 0 0 1-.708-.708l5-5a.5.5 0 0 1 .707 0z"
+        d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"
       />
     </svg>
   `;

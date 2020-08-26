@@ -29,7 +29,7 @@ export function useHangouts() {
     hangouts,
     messageText,
     messages,
-
+    inviteGuest,
     pendingHangout,
     loading,
   } = state;
@@ -40,12 +40,12 @@ export function useHangouts() {
     onAppRoute({ featureRoute: `/${id}`, route: "/hangouts" });
   }
 
-  function sendPendingHangout({ hangout }) {
-    dispatch({
-      type: actionTypes.SENDING_HANGOUT_STARTED,
-      pendingHangout: hangout,
-    });
-  }
+  //   function sendPendingHangout({ hangout }) {
+  //     dispatch({
+  //       type: actionTypes.SENDING_HANGOUT_STARTED,
+  //       pendingHangout: hangout,
+  //     });
+  //  }
 
   function onMessageText(e) {
     const text = e.target.value;
@@ -63,7 +63,39 @@ export function useHangouts() {
       on_user_client_command: id,
     });
   }
+  function onSearchInput(e) {
+    dispatch({ type: actionTypes.SEARCH_INPUT_CHANGE, search: e.target.value });
+  }
+
+  function onSearch() {
+    dispatch({ type: actionTypes.SEARCH_HANGOUT_STARTED });
+  }
+  function onInviteGuest() {
+    dispatch({ type: actionTypes.INVITE_GUEST, inviteGuest: !inviteGuest });
+  }
+  function onMessageForGuestInput(e) {
+    const value = e.target.value;
+    dispatch({
+      type: actionTypes.MESSAGE_TEXT_CHANGED,
+      messageForGuest: value,
+    });
+  }
+  function onGuestEmailChange(e) {
+    dispatch({
+      type: actionTypes.GUEST_EMAIL_CHANGED,
+      guestEmail: e.target.value,
+    });
+  }
+  function onSendInviteGuest(e) {
+    debugger;
+  }
   return {
+    onGuestEmailChange,
+    onMessageForGuestInput,
+    onInviteGuest,
+    onSearchInput,
+    onSearch,
+    onSendInviteGuest,
     onUserClientCommand,
     // onInvite,
     // onAccept,

@@ -9,7 +9,13 @@ export async function searchHangouts({ search, dispatch, username }) {
     if (response.ok) {
       const { hangouts } = await response.json();
       //3.
-      dispatch({ type: actionTypes.SEARCH_HANGOUT_SUCCESS, hangouts });
+      const userNotFound = hangouts.length === 0 ? true : false;
+      debugger;
+      dispatch({
+        type: actionTypes.SEARCH_HANGOUT_SUCCESS,
+        hangouts,
+        userNotFound,
+      });
     }
   } catch (error) {
     dispatch({ type: actionTypes.SEARCH_HANGOUT_FAILED, error });

@@ -40,6 +40,12 @@ export default function HangoutsFeatureRoutes(props) {
     dispatch,
     onNavigation,
     emptyHangout,
+    onSearchInput,
+    onSearch,
+    onInviteGuest,
+    onMessageFoGuestInput,
+    onGuestEmailChange,
+    onSendInviteGuest,
   } = useHangouts();
 
   const {
@@ -138,9 +144,14 @@ export default function HangoutsFeatureRoutes(props) {
     case "/hangout":
       return html` <${Suspense} fallback=${Loading}>
         <${Hangouts}
-          hangouts=${hangouts}
+          onGuestEmailChange=${onGuestEmailChange}
+          onSendInviteGuest=${onSendInviteGuest}
+          onMessageFoGuestInput=${onMessageFoGuestInput}
+          onInviteGuest=${onInviteGuest}
+          onSearchInput=${onSearchInput}
+          onSearch=${onSearch}
           dispatch=${dispatch}
-          state=${state}
+          ...${state}
           onAppRoute=${onAppRoute}
         />
       <//>`;
