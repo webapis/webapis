@@ -11,8 +11,7 @@ import { useAppRoute } from "components/app-route/index";
 import { useAuth } from "features/authentication/index";
 import { useHangouts } from "features/hangouts/index";
 import GearIcon from "icons/bootstrap/GearIcon";
-import PersonPlusIcon from "icons/bootstrap/PersonPlusIcon";
-import PeopleIcon from "icons/bootstrap/PeopleIcon";
+
 import { actionTypes } from "../../features/hangouts/state/actionTypes";
 const html = htm.bind(h);
 export function AppNavigation() {
@@ -32,66 +31,42 @@ export function AppNavigation() {
 
   return html`
     <div>
-      <${Navbar} brand="Webcom" bg="dark">
+      <${Navbar} brand="Webcom">
         <${NavBarCollapse}>
           <${NavBarNav}>
             <!-- NavItem -->
             <${NavItem}>
               ${user &&
-              featureRoute !== "/filter" &&
-              featureRoute !== "/search" &&
+              featureRoute !== "/hangout" &&
               html`
                 <${NavLink}
-                  id="filter"
+                  id="hangout"
                   appRoute="/hangouts"
                   data-testid="hangouts-link"
                 >
-                  Hangouts
+                  <${PeopleIcon} id="hangout" />
                 <//>
               `}
-            <//>
-            <${NavItem}>
-              <button
-                disabled=${!user || featureRoute === "/search"}
-                class="btn"
-                data-testid="search-link"
-                id="search"
-                onClick=${onPersonPlusClick}
-              >
-                <${PersonPlusIcon} width="1.5em" height="1.5em" />
-              </button>
-            <//>
-            <${NavItem}>
-              <button
-                disabled=${!user || featureRoute === "/filter"}
-                class="btn"
-                data-testid="filter-link"
-                id="search"
-                onClick=${onPersonPlusClick}
-              >
-                <${PeopleIcon} width="2em" height="2em" color="white" />
-              </button>
             <//>
           <//>
           <!-- NavBarNav -->
           <${Nav} horizontalAlignment="justify-content-end">
             ${user &&
             user.username &&
-            html`
-              <button
+            html` <${NavItem}>
+              <${NavLink}
+                href="#"
                 id="unread"
                 appRoute="/unread"
                 onClick=${onNavigation}
                 data-testid="unread-link"
-                type="button"
-                class="btn btn-dark"
               >
-                messages:
+                <${Envelope} />
                 <span class="badge badge-light" data-testid="message-count">
                   ${" "}${unreadsCount}
                 </span>
-              </button>
-            `}
+              <//>
+            <//>`}
             ${!user &&
             html`
               <${NavItem}>
@@ -172,5 +147,43 @@ export function AppNavigation() {
       <//>
       <!-- Navbar -->
     </div>
+  `;
+}
+
+export function PeopleIcon(props) {
+  return html`
+    <svg
+      ...${props}
+      width="1.5em"
+      height="1.5em"
+      viewBox="0 0 16 16"
+      class="bi bi-people-fill"
+      fill="currentColor"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        ...${props}
+        fill-rule="evenodd"
+        d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"
+      />
+    </svg>
+  `;
+}
+
+function Envelope() {
+  return html`
+    <svg
+      width="1em"
+      height="1em"
+      viewBox="0 0 16 16"
+      class="bi bi-envelope-fill"
+      fill="currentColor"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        fill-rule="evenodd"
+        d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z"
+      />
+    </svg>
   `;
 }

@@ -22,7 +22,7 @@ render(
     title="Webcom"
     initState=${{ route: "/", featureRoute: "/hangouts", name: "storybook" }}
   >
-    <${Navbar} brand="Storybook" bg="dark">
+    <${Navbar} brand="Storybook" bg="white">
       <${NavBarCollapse}>
         <${NavBarNav}>
           <${NavDropdown} title="Components">

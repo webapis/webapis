@@ -6,23 +6,28 @@ const html = htm.bind(h);
 export default function Navbar(props) {
   const { bg = "light", brand, children } = props;
   return html`
-    <nav class="navbar navbar-expand-lg navbar-${bg} bg-${bg}">
-      <a class="navbar-brand" href="#">
-        ${brand}
-      </a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
+    <div class="bg-success p-1 ">
+      <nav
+        class="navbar navbar-expand-lg navbar navbar-light bg-light rounded-pill"
+        style="width:100%"
       >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      ${children}
-    </nav>
+        <a class="navbar-brand" href="#">
+          ${brand}
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        ${children}
+      </nav>
+    </div>
   `;
 }
 

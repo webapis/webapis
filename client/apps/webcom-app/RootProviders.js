@@ -13,7 +13,7 @@ export function RootProviders({ children }) {
       initState=${{ route: "/auth", featureRoute: "/login" }}
     >
       <${AuthProvider}
-        authedRoute=${{ route: "/hangouts", featureRoute: "/filter" }}
+        authedRoute=${{ route: "/hangouts", featureRoute: "/hangout" }}
       >
         <${HangoutsProvider}>
           <${HangoutAdapter}
