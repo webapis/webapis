@@ -11,8 +11,18 @@ const styles = {
 const html = htm.bind(h);
 export default function Layout({ children, style, id }) {
   return html`
-    <div data-testid=${id} style=${{ ...styles.root, ...style }}>
-      ${children}
+    <div
+      class="container-fluid bg-success"
+      style="height:90vh"
+      data-testid=${id}
+    >
+      <div class=" row justify-content-center">
+        <div class="col-md-8 col-lg-5 pt-3">
+          <div class="card">
+            ${children}
+          </div>
+        </div>
+      </div>
     </div>
   `;
 }

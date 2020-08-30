@@ -73,6 +73,7 @@ export default function Hangouts({
                   return html`
                     <div>
                       <a
+                        id=${h.username}
                         onClick=${onSearchSelect}
                         data-testid=${h.username}
                         href="#"
