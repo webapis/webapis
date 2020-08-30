@@ -27,12 +27,6 @@ export default function HangoutsFeatureRoutes(props) {
     hangouts,
     hangout,
     onUserClientCommand,
-    // onInvite,
-    // onAccept,
-    // onDecline,
-    // onBlock,
-    // onUnblock,
-    // onMessage,
     onMessageText,
     messageText,
     username,
@@ -46,6 +40,8 @@ export default function HangoutsFeatureRoutes(props) {
     onMessageFoGuestInput,
     onGuestEmailChange,
     onSendInviteGuest,
+    onGuestEmailInputFocus,
+    onSearchSelect,
   } = useHangouts();
 
   const {
@@ -151,6 +147,8 @@ export default function HangoutsFeatureRoutes(props) {
           onSearchInput=${onSearchInput}
           onSearch=${onSearch}
           dispatch=${dispatch}
+          onGuestEmailInputFocus=${onGuestEmailInputFocus}
+          onSearchSelect=${onSearchSelect}
           ...${state}
           onAppRoute=${onAppRoute}
         />

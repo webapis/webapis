@@ -42,7 +42,7 @@ module.exports = async function findOne({ req, res, collection }) {
       } else {
         // if hangout previously was not connected
         let users = await collection
-          .find({ username: { $regex: new RegExp(search, "i") } })
+          .find({ $or: [{ username: search }, { email: search }] })
           .project({ salt: 0, hash: 0, iterations: 0 })
           .toArray();
 

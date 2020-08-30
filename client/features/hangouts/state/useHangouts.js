@@ -1,21 +1,12 @@
 import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
-import {
-  useEffect,
-  useState,
-} from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
+
 import { useHangoutContext } from "./HangoutsProvider";
 import { useAuthContext } from "features/authentication/index";
 import { useAppRoute } from "components/app-route/index";
 
 import { changeMessageText } from "./actions";
-import { clientCommands } from "./clientCommands";
-import {
-  saveSentMessage,
-  saveHangout,
-  updateRecievedMessage,
-  removeUnread,
-  saveRecievedMessage,
-} from "./local-storage/common";
+import { emailRegex } from "../../authentication/validation/validationRegex";
+
 import { actionTypes } from "./actionTypes";
 
 export function useHangouts() {
@@ -32,6 +23,7 @@ export function useHangouts() {
     inviteGuest,
     pendingHangout,
     loading,
+    guestEmail,
   } = state;
 
   function onNavigation(e) {
@@ -70,6 +62,15 @@ export function useHangouts() {
   function onSearch() {
     dispatch({ type: actionTypes.SEARCH_HANGOUT_STARTED });
   }
+  function onSearchSelect(e) {
+    const { id } = e.target;
+
+    const hangout = hangouts.find((s) => s.username === id);
+    dispatch({ type: actionTypes.SELECTED_HANGOUT, hangout });
+    setTimeout(function () {
+      onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
+    }, 200);
+  }
   function onInviteGuest() {
     dispatch({ type: actionTypes.INVITE_GUEST, inviteGuest: !inviteGuest });
   }
@@ -87,23 +88,42 @@ export function useHangouts() {
     });
   }
   function onSendInviteGuest(e) {
-    dispatch({ type: actionTypes.INVITE_AS_GUEST_STARTED });
+    const emailConstraint = new RegExp(emailRegex);
+    if (guestEmail === "") {
+      dispatch({
+        type: actionTypes.VALIDATED_GUEST_EMAIL_FORMAT,
+        isValidGuestEmail: false,
+      });
+    } else if (guestEmail !== "" && !emailConstraint.test(guestEmail)) {
+      dispatch({
+        type: actionTypes.VALIDATED_GUEST_EMAIL_FORMAT,
+        isValidGuestEmail: false,
+      });
+    } else {
+      dispatch({
+        type: actionTypes.INVITE_AS_GUEST_STARTED,
+        isValidGuestEmail: true,
+      });
+    }
+
     debugger;
+  }
+  function onGuestEmailInputFocus() {
+    dispatch({
+      type: actionTypes.VALIDATED_GUEST_EMAIL_FORMAT,
+      isValidGuestEmail: undefined,
+    });
   }
   return {
     onGuestEmailChange,
+    onSearchSelect,
     onMessageForGuestInput,
     onInviteGuest,
     onSearchInput,
     onSearch,
     onSendInviteGuest,
     onUserClientCommand,
-    // onInvite,
-    // onAccept,
-    // onDecline,
-    // onBlock,
-    // onUnblock,
-    // onMessage,
+    onGuestEmailInputFocus,
     state,
     onNavigation,
     onMessageText,
