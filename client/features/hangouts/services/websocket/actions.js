@@ -39,11 +39,20 @@ export async function findHangouts({ dispatch, username }) {
   }
 }
 
-export async function InviteAsGuest({ guestEmail, dispatch }) {
+export async function InviteAsGuest({
+  from,
+  to,
+  subject,
+  text,
+  type,
+  dispatch,
+}) {
   try {
-    const response = await fetch(
-      `/hangouts/inviteasguest?guestemail=${guestEmail}`
-    );
+    debugger;
+    const response = await fetch(`/googleapis/gmailapi`, {
+      method: "post",
+      body: JSON.stringify({ from, to, subject, text, type }),
+    });
     if (response.ok && response.status === 200) {
       debugger;
       dispatch({ type: actionTypes.INVITE_AS_GUEST_SUCCESS });

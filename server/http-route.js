@@ -3,6 +3,7 @@ const hangoutsOperation = require("./hangouts/http");
 const usersOperation = require("./users");
 const serveStatic = require("./serve-static/index");
 const appMonitorOperations = require("./app-monitor/http");
+const googleapisOperations = require("./googleapis/googleapis");
 const servePassReset = require("./serve-static/serve-pass-reset");
 
 module.exports = function httpRoute(client) {
@@ -52,7 +53,7 @@ module.exports = function httpRoute(client) {
 };
 
 //
-function route({ url, req, res }) {
+function route({ url, req, res, server }) {
   if (url.includes("monitor")) {
   }
   const authRegex = /.*\/auth\/.*/;
@@ -60,6 +61,7 @@ function route({ url, req, res }) {
   const usersRegex = /.*\/users\/.*/;
   const hangoutsRegex = /.*\/hangouts\/.*/;
   const appMonitorRegex = /.*\/monitor\/.*/;
+  const googleapisRegex = /.*\/googleapis\/.*/;
   switch (true) {
     case authRegex.test(url):
       authOperation(req, res);
@@ -77,6 +79,9 @@ function route({ url, req, res }) {
       break;
     case appMonitorRegex.test(url):
       appMonitorOperations(req, res);
+      break;
+    case googleapisRegex.test(url):
+      googleapisOperations(req, res);
       break;
     default:
       serveStatic(req, res);
