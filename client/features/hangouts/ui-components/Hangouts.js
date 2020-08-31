@@ -24,6 +24,9 @@ export default function Hangouts({
   onSendInviteGuest,
   onMessageFoGuestInput,
   onGuestEmailChange,
+  isValidGuestEmail,
+  onGuestEmailInputFocus,
+  onSearchSelect,
   error,
 }) {
   return html`
@@ -58,6 +61,9 @@ export default function Hangouts({
                   inviteGuest=${inviteGuest}
                   messageForGuest=${messageForGuest}
                   error=${error}
+                  isValidGuestEmail=${isValidGuestEmail}
+                  onGuestEmailInputFocus=${onGuestEmailInputFocus}
+                  onSearchSelect=${onGuestEmailInputFocus}
                 />
               `}
 
@@ -67,11 +73,13 @@ export default function Hangouts({
                   return html`
                     <div>
                       <a
+                        id=${h.username}
+                        onClick=${onSearchSelect}
                         data-testid=${h.username}
                         href="#"
                         class="list-group-item list-group-item-action mb-1 border rounded-pill border-success"
                       >
-                        ${h.username}
+                        ${h.username}:${h.email}
                       </a>
                     </div>
                   `;
@@ -151,6 +159,8 @@ export function InviteGuest({
   onSendInviteGuest,
   onMessageFoGuestInput,
   error,
+  isValidGuestEmail,
+  onGuestEmailInputFocus,
 }) {
   return html`
     <div>
@@ -196,11 +206,15 @@ export function InviteGuest({
         ></textarea>
         <div class="input-group mb-3 mt-1">
           <input
+            onFocus=${onGuestEmailInputFocus}
             onChange=${onGuestEmailChange}
             data-testid="guest-email"
             disabled=${invitingGuest}
             type="email"
-            class="form-control"
+            class="form-control ${isValidGuestEmail &&
+            "is-valid"} ${!isValidGuestEmail &&
+            isValidGuestEmail !== undefined &&
+            "is-invalid"}"
             placeholder="Enter guest's email"
             value=${guestEmail}
           />
@@ -222,6 +236,14 @@ export function InviteGuest({
                 : html` Invite`}
             </button>
           </div>
+          ${!isValidGuestEmail &&
+          html`<small
+            id="emailHelp"
+            class=" ${!isValidGuestEmail && "invalid-feedback"}"
+            data-testid="message-${name}"
+          >
+            Invalid Email format.
+          </small>`}
         </div>
       `}
     </div>

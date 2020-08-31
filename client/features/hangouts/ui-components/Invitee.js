@@ -13,7 +13,7 @@ const style = {
 };
 export default function Invitee({ hangout, dispatch }) {
   return html`
-    <${Layout} style=${style.layout} id="invitee-ui">
+    <${Layout} id="invitee-ui">
       <${Center}>
         <${Done} width="70" height="70" color="green" />
       <//>

@@ -6,13 +6,7 @@ import TextInput from "controls/text-input/index";
 import { Center } from "components/layout/Center";
 import Layout from "./Layout";
 import Button from "controls/button/index";
-const style = {
-  layout: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-  },
-};
+
 //
 
 const html = htm.bind(h);
@@ -24,30 +18,32 @@ export default function Invite({
   loading,
 }) {
   return html`
-    <${Layout} style=${style.layout} id="invite-ui">
-      <${Center}>
+    <${Layout} id="invite-ui">
+      <div class="card-header ">
         <${PersonAdd} color="green" />
-      <//>
-      <${Center}>
-        Start Conversation with <b>${hangout && hangout.email}</b>
-      <//>
-      <${TextInput}
-        id="messageTextInput"
-        onChange=${onMessageText}
-        value=${messageText}
-        data-testid="messageTextInput"
-        disabled=${loading}
-      />
-      <div class="d-flex justify-content-center">
-        <${Button}
-          disables=${messageText === ""}
-          loading=${loading}
-          id="INVITE"
-          onClick=${onInvite}
-          data-testid="oninvite-btn"
-          title="Send Invite"
-          bg="primary"
+      </div>
+      <div class="card-body">
+        <${Center}>
+          Start Conversation with <b>${hangout && hangout.email}</b>
+        <//>
+        <${TextInput}
+          id="messageTextInput"
+          onChange=${onMessageText}
+          value=${messageText}
+          data-testid="messageTextInput"
+          disabled=${loading}
         />
+        <div class="d-flex justify-content-center">
+          <${Button}
+            disables=${messageText === ""}
+            loading=${loading}
+            id="INVITE"
+            onClick=${onInvite}
+            data-testid="oninvite-btn"
+            title="Send Invite"
+            bg="primary"
+          />
+        </div>
       </div>
     <//>
   `;

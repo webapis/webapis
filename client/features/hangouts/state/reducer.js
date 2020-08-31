@@ -24,6 +24,7 @@ export const initState = {
   inviteGuest: false, // Invite Guest
   messageForGuest: "Let's chat", // InviteGuest
   searchComplete: false, //SearchComponent
+  isValidGuestEmail: undefined,
   //filter
   filter: "",
   filterResult: [],
@@ -42,6 +43,8 @@ export const initState = {
 };
 export function reducer(state, action) {
   switch (action.type) {
+    case actionTypes.VALIDATED_GUEST_EMAIL_FORMAT:
+      return { ...state, isValidGuestEmail: action.isValidGuestEmail };
     case actionTypes.INVITE_AS_GUEST_STARTED:
       return { ...state, invitingGuest: true };
     case actionTypes.INVITE_AS_GUEST_SUCCESS:

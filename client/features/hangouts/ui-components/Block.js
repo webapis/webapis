@@ -22,7 +22,7 @@ const style = {
 
 export default function Block({ onCancel, onBlock, onReport }) {
   return html`
-    <${Layout} style=${style.layout}>
+    <${Layout}>
       <div style=${style.checkboxRoot}>
         <input type="checkbox" style=${style.checkbox} onChange=${onReport} />
         <label>Report</label>

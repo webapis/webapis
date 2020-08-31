@@ -122,11 +122,14 @@ export function WebSocketContainer(props) {
 
   useEffect(() => {
     if (invitingGuest && user) {
+      debugger;
       actions.InviteAsGuest({
-        guestEmail,
+        from: user.email,
+        to: guestEmail,
+        subject: messageForGuest,
+        text: "invitation",
+        type: "GUEST_INVITATION",
         dispatch: hangoutDispatch,
-        username: user && user.username,
-        messageForGuest,
       });
     }
   }, [invitingGuest, user]);
