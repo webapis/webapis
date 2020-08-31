@@ -52,8 +52,7 @@ render(
               <${DropdownItem} id="invitee">Invitee<//>
               <${DropdownItem} id="inviter">Inviter<//>
               <${DropdownItem} id="unreadhangouts">UnreadHangouts<//>
-              <${DropdownItem} id="search">Hangout Search<//>
-              <${DropdownItem} id="filter">Hangout Filter<//>
+              <${DropdownItem} id="hangchat">Hangchat<//>
             <//>
           <//>
         <//>

@@ -4,27 +4,6 @@ const html = htm.bind(h);
 
 //TODO HG disable sent text button when text message input
 
-const styles = {
-  root: {
-    display: "flex",
-    alignItems: "center",
-    // position:'fixed',
-    width: "100%",
-    // bottom:10,
-    // right:10,
-  },
-  input: {
-    //margin:0
-    padding: 5,
-    marginLeft: 8,
-    marginRight: 8,
-    marginTop: 8,
-    marginBottom: 8,
-    boxSizing: "border-box",
-    flex: 1,
-    width: "100%",
-  },
-};
 export default function MessageEditor({
   loading,
   messageText,

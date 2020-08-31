@@ -4,7 +4,7 @@ import { AppRoute } from "../../client/components/app-route/index";
 import Block from "../../client/features/hangouts/ui-components/Block";
 import Blocked from "../../client/features/hangouts/ui-components/Blocked";
 import Configure from "../../client/features/hangouts/ui-components/Configure";
-import Hangchat from "../../client/features/hangouts/ui-components/Hangchat";
+//import Hangchat from "../../client/features/hangouts/ui-components/Hangchat";
 import Invite from "../../client/features/hangouts/ui-components/Invite";
 import Invitee from "../../client/features/hangouts/ui-components/Invitee";
 import Inviter from "../../client/features/hangouts/ui-components/Inviter";
@@ -13,7 +13,7 @@ import Message from "../../client/features/hangouts/ui-components/messages/Messa
 import HangoutFilter from "../../client/features/hangouts/ui-components/Filter";
 import HangoutSearch from "../../client/features/hangouts/ui-components/Search";
 import HangoutsUiStates from "./hangouts.ui.state";
-
+import HangChatUiState from "./hangchat.ui.state";
 const html = htm.bind(h);
 const hangouts = [
   { username: "userone" },
@@ -44,9 +44,7 @@ export default function HangoutRoutes() {
       <${AppRoute} path="/configure">
         <${Configure} hangout=${{ username: "demouser" }} />
       <//>
-      <${AppRoute} path="/hangchat">
-        <${Hangchat} hangout=${hangout} messages=${messages} username="demo" />
-      <//>
+
       <${AppRoute} path="/invite">
         <${Invite} hangouts=${hangouts} />
       <//>
@@ -64,17 +62,12 @@ export default function HangoutRoutes() {
           <${Message} message="{message}" username=${hangout.username} />
         </div>
       <//>
-      <${AppRoute} path="/messages">
-        <${Hangchat} hangout=${hangout} messages=${messages} username="demo" />
-      <//>
-      <${AppRoute} path="/search">
-        <${HangoutSearch} />
-      <//>
-      <${AppRoute} path="/filter">
-        <${HangoutFilter} />
-      <//>
+
       <${AppRoute} path="/hangouts">
         <${HangoutsUiStates} />
+      <//>
+      <${AppRoute} path="/hangchat">
+        <${HangChatUiState} />
       <//>
     `,
   ];
