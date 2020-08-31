@@ -36,13 +36,13 @@ export default function HangoutRoutes() {
   return [
     html`
       <${AppRoute} path="/block">
-        <${Block} hangouts=${hangouts} />
+        <${Block} hangouts=${hangouts} username="demouser" />
       <//>
       <${AppRoute} path="/blocked">
         <${Blocked} hangouts=${hangouts} />
       <//>
       <${AppRoute} path="/configure">
-        <${Configure} hangouts=${hangouts} />
+        <${Configure} hangout=${{ username: "demouser" }} />
       <//>
       <${AppRoute} path="/hangchat">
         <${Hangchat} hangout=${hangout} messages=${messages} username="demo" />

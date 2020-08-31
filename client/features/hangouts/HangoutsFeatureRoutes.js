@@ -64,7 +64,11 @@ export default function HangoutsFeatureRoutes(props) {
     case "/UNBLOCK":
       return html`
         <${Suspense} fallback=${Loading}>
-          <${Blocked} hangout=${hangout} onUnblock=${onUserClientCommand} />
+          <${Blocked}
+            hangout=${hangout}
+            onUnblock=${onUserClientCommand}
+            username=${username}
+          />
         <//>
       `;
     case "/DECLINED":

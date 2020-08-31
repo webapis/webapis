@@ -46,13 +46,14 @@ describe("Test Hangouts", () => {
     cy.signout();
   });
   it.only("User Clickes invite as a guest button (guest invitation success)", () => {
-    // cy.server();
-    // cy.route({
-    //   url: "/hangouts/inviteasguest?guestemail=webapis.github@gmail.com",
-    //   response: {},
-    //   status: 200,
-    //   ok: true,
-    // });
+    cy.server();
+    cy.route({
+      url: "/googleapis/gmailapi",
+      response: {},
+      status: 200,
+      ok: true,
+      method: "post",
+    });
     cy.get("[data-testid=user-search-input]").type("testuser");
     cy.get("[data-testid=user-search-button]").click();
     cy.get("[data-testid=invite-as-guest-btn]").click();
@@ -62,7 +63,7 @@ describe("Test Hangouts", () => {
   it("User Clickes invite as a guest button (guest invitation failed)", () => {
     cy.server();
     cy.route({
-      url: "/hangouts/inviteasguest?guestemail=testuser@gmail.com",
+      url: "/googleapis/gmailapi",
       response: { error: { message: "Something went wrong" } },
       status: 400,
       ok: false,

@@ -20,34 +20,37 @@ const style = {
   },
 };
 
-export default function Block({ onCancel, onBlock, onReport }) {
+export default function Block({ onCancel, onBlock, onReport, username = "" }) {
   return html`
     <${Layout}>
-      <div style=${style.checkboxRoot}>
-        <input type="checkbox" style=${style.checkbox} onChange=${onReport} />
-        <label>Report</label>
-      </div>
-      <div class="row">
-        <div class="col">
-          <${Button}
-            data-testid="cancel-btn"
-            onClick=${onCancel}
-            title="Cancel"
-            bg="secondary"
-            outline
-            block
-          />
+      <div class="card-header ">Block ${username}</div>
+      <div class="card-body">
+        <div style=${style.checkboxRoot}>
+          <input type="checkbox" style=${style.checkbox} onChange=${onReport} />
+          <label>Report</label>
         </div>
+        <div class="row">
+          <div class="col">
+            <${Button}
+              data-testid="cancel-btn"
+              onClick=${onCancel}
+              title="Cancel"
+              bg="secondary"
+              outline
+              block
+            />
+          </div>
 
-        <div class="col">
-          <${Button}
-            id="BLOCK"
-            onClick=${onBlock}
-            data-testid="block-btn"
-            title="Block"
-            bg="primary"
-            block
-          />
+          <div class="col">
+            <${Button}
+              id="BLOCK"
+              onClick=${onBlock}
+              data-testid="block-btn"
+              title="Block"
+              bg="primary"
+              block
+            />
+          </div>
         </div>
       </div>
     <//>

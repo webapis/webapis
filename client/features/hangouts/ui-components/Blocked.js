@@ -5,46 +5,41 @@ import { Center } from "components/layout/Center";
 import Button from "controls/button/index";
 import Layout from "./Layout";
 
-const style = {
-  layout: {
-    display: "flex",
-    flexDirection: "column",
-    height: "100%",
-    justifyContent: "space-between",
-    boxSizing: "border-box",
-    paddingTop: 68,
-  },
-};
 const html = htm.bind(h);
 
 export default function Blocked({ hangout, onUnblock, onClose }) {
   return html`
-    <${Layout} style=${style.layout} id="blocked-ui">
-      <${Center} style=${{ flexDirection: "column", alignItems: "center" }}>
-        <${Block} width="60" height="70" color="red" />
+    <${Layout} id="blocked-ui">
+      <div class="card-header ">
         <b data-testid="blocked-username">${hangout && hangout.username}</b> is
         blocked
-      <//>
-      <div class="row">
-        <div class="col">
-          <${Button}
-            data-testid="close-btn"
-            onClick=${onClose}
-            title="CLOSE"
-            bg="secondary"
-            block
-            outline
-          />
-        </div>
-        <div class="col">
-          <${Button}
-            id="UNBLOCK"
-            onClick=${onUnblock}
-            data-testid="unblock-btn"
-            title="UNBLOCK"
-            bg="primary"
-            block
-          />
+      </div>
+      <div class="card-body">
+        <${Center} style=${{ flexDirection: "column", alignItems: "center" }}>
+          <${Block} width="60" height="70" color="red" />
+        <//>
+
+        <div class="row">
+          <div class="col">
+            <${Button}
+              data-testid="close-btn"
+              onClick=${onClose}
+              title="CLOSE"
+              bg="secondary"
+              block
+              outline
+            />
+          </div>
+          <div class="col">
+            <${Button}
+              id="UNBLOCK"
+              onClick=${onUnblock}
+              data-testid="unblock-btn"
+              title="UNBLOCK"
+              bg="primary"
+              block
+            />
+          </div>
         </div>
       </div>
     <//>
