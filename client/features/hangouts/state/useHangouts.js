@@ -88,7 +88,6 @@ export function useHangouts() {
   }
   function onSendInviteGuest(e) {
     dispatch({ type: actionTypes.INVITE_AS_GUEST_STARTED });
-    debugger;
   }
   return {
     onGuestEmailChange,

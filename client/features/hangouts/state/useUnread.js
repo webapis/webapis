@@ -19,7 +19,6 @@ export default function useUnread({ state, dispatch, onAppRoute, username }) {
   }, [unreadhangouts]);
 
   function onUnreadSelect({ hangout }) {
-    debugger;
     dispatch({ type: actionTypes.SELECTED_HANGOUT, hangout });
 
     onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });

@@ -45,18 +45,18 @@ describe("Test Hangouts", () => {
       });
     cy.signout();
   });
-  it("User Clickes invite as a guest button (guest invitation success)", () => {
-    cy.server();
-    cy.route({
-      url: "/hangouts/inviteasguest?guestemail=testuser@gmail.com",
-      response: {},
-      status: 200,
-      ok: true,
-    });
+  it.only("User Clickes invite as a guest button (guest invitation success)", () => {
+    // cy.server();
+    // cy.route({
+    //   url: "/hangouts/inviteasguest?guestemail=webapis.github@gmail.com",
+    //   response: {},
+    //   status: 200,
+    //   ok: true,
+    // });
     cy.get("[data-testid=user-search-input]").type("testuser");
     cy.get("[data-testid=user-search-button]").click();
     cy.get("[data-testid=invite-as-guest-btn]").click();
-    cy.get("[data-testid=guest-email]").type("testuser@gmail.com");
+    cy.get("[data-testid=guest-email]").type("webapis.github@gmail.com");
     cy.get("[data-testid=invite]").click();
   });
   it("User Clickes invite as a guest button (guest invitation failed)", () => {

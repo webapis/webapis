@@ -10,7 +10,7 @@ export async function searchHangouts({ search, dispatch, username }) {
       const { hangouts } = await response.json();
       //3.
       const userNotFound = hangouts.length === 0 ? true : false;
-      debugger;
+
       dispatch({
         type: actionTypes.SEARCH_HANGOUT_SUCCESS,
         hangouts,
@@ -39,17 +39,28 @@ export async function findHangouts({ dispatch, username }) {
   }
 }
 
-export async function InviteAsGuest({ guestEmail, dispatch }) {
+export async function InviteAsGuest({
+  guestEmail,
+  dispatch,
+  username,
+  messageForGuest,
+}) {
   try {
-    const response = await fetch(
-      `/hangouts/inviteasguest?guestemail=${guestEmail}`
-    );
+    debugger;
+    const response = await fetch(`/hangouts/inviteasguest`, {
+      method: "POST",
+      headers: {
+        ContentType: "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({ messageForGuest, username, guestEmail }),
+    });
     if (response.ok && response.status === 200) {
-      debugger;
       dispatch({ type: actionTypes.INVITE_AS_GUEST_SUCCESS });
     } else {
-      const { error } = await response.json();
       debugger;
+      const { error } = await response.json();
+
       dispatch({ type: actionTypes.INVITE_AS_GUEST_FAILED, error });
     }
   } catch (error) {

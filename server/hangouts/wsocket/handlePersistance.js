@@ -132,7 +132,6 @@ module.exports.handlePersistance = async function ({
       // },
       pullTargetAllUndelivered: async function () {
         for await (const browser of senderBrowsers) {
-          debugger;
           const updateResult = await collection.update(
             { username },
             {
@@ -148,8 +147,6 @@ module.exports.handlePersistance = async function ({
               upsert: true,
             }
           );
-
-          debugger;
         }
       },
       // pullSenderAllUnreads: async function () {},

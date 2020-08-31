@@ -202,14 +202,13 @@ export function removeUnread({ hangout, dispatch, name }) {
 }
 
 export function removeUnreads({ dispatch, name, hangout, state }) {
-  debugger;
   const { username } = hangout;
   const hangoutKey = `${name}-unread-hangouts`;
   const localHangouts = JSON.parse(localStorage.getItem(hangoutKey)).filter(
     (f) =>
       (f.username === username && f.state === state) || f.username !== username
   );
-  debugger;
+
   dispatch({
     type: actionTypes.UNREAD_HANGOUTS_UPDATED,
     unreadhangouts: localHangouts,

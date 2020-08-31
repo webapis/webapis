@@ -27,6 +27,7 @@ export function WebSocketContainer(props) {
     fetchHangouts,
     invitingGuest,
     guestEmail,
+    messageForGuest,
   } = hangoutState;
   const { browserId, authStarted, user } = authState;
 
@@ -121,8 +122,12 @@ export function WebSocketContainer(props) {
 
   useEffect(() => {
     if (invitingGuest && user) {
-      debugger;
-      actions.InviteAsGuest({ guestEmail, dispatch: hangoutDispatch });
+      actions.InviteAsGuest({
+        guestEmail,
+        dispatch: hangoutDispatch,
+        username: user && user.username,
+        messageForGuest,
+      });
     }
   }, [invitingGuest, user]);
   function sendPendingHangout() {
