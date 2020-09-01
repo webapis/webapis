@@ -16,7 +16,7 @@ export default function SignupStates() {
   return html`
     <div class="container">
       <div class="row">
-        <span class="col-md-12">
+        <span class="col-md-12 bg-success">
           <h5 class="text-center">Signup Validation Success</h5>
           <${Signup}
             username="testuser"
@@ -27,7 +27,7 @@ export default function SignupStates() {
         </span>
       </div>
       <div class="row">
-        <span class="col-md-12">
+        <span class="col-md-12 bg-success">
           <h5 class="text-center">Signup Validation Error</h5>
           <${Signup}
             username="testuser"
@@ -39,7 +39,7 @@ export default function SignupStates() {
       </div>
 
       <div class="row">
-        <span class="col-md-12">
+        <span class="col-md-12 bg-success">
           <h5 class="text-center">Signing up</h5>
           <${Signup}
             username="testuser"
@@ -51,7 +51,7 @@ export default function SignupStates() {
         </span>
       </div>
       <div class="row">
-        <span class="col-md-12">
+        <span class="col-md-12 bg-success">
           <h5 class="text-center">Signing Sever error</h5>
           <${Signup}
             username="testuser"

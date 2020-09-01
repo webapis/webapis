@@ -4,7 +4,7 @@ import validationMessage from "../validation/validationMessages";
 const html = htm.bind(h);
 import Button from "controls/button/index";
 import TextInput from "controls/text-input/index";
-import Alert from "controls/alert/index";
+
 export default function Signup(props) {
   const {
     username,
@@ -19,11 +19,10 @@ export default function Signup(props) {
     error,
     onAuthNavigation,
   } = props;
-  console.log("signup props");
 
   return html`
     <div
-      class="col-md-4 border mx-auto rounded"
+      class="col-md-4 border mx-auto rounded bg-light"
       style=${{ margin: 15, padding: 16 }}
     >
       ${loading &&

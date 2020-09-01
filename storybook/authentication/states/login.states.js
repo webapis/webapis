@@ -14,7 +14,7 @@ export default function LoginStates() {
   return html`
     <div class="container">
       <div class="row">
-        <span class="col-md-12">
+        <span class="col-md-12 bg-success">
           <h5 class="text-center">Login Validation Success</h5>
 
           <${Login}
@@ -25,7 +25,7 @@ export default function LoginStates() {
         </span>
       </div>
       <div class="row">
-        <span class="col-md-12">
+        <span class="col-md-12 bg-success">
           <h5 class="text-center">Login Validation Error</h5>
 
           <${Login}
@@ -36,7 +36,7 @@ export default function LoginStates() {
         </span>
       </div>
       <div class="row">
-        <span class="col-md-12">
+        <span class="col-md-12 bg-success">
           <h5 class="text-center">Logging in</h5>
           <${Login}
             emailorusername="testuser"
@@ -47,7 +47,7 @@ export default function LoginStates() {
         </span>
       </div>
       <div class="row">
-        <span class="col-md-12">
+        <span class="col-md-12 bg-success">
           <h5 class="text-center">Logging Server error</h5>
           <${Login}
             emailorusername="testuser"
