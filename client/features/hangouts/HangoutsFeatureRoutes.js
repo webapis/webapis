@@ -10,7 +10,7 @@ import useUnread from "./state/useUnread";
 const Block = lazy(() => import("./ui-components/Block"));
 const Blocked = lazy(() => import("./ui-components/Blocked"));
 const Configure = lazy(() => import("./ui-components/Configure"));
-const Hangchat = lazy(() => import("./ui-components/Hangchat"));
+const Hangchat = lazy(() => import("./ui-components/Messages"));
 const Invite = lazy(() => import("./ui-components/Invite"));
 const Invitee = lazy(() => import("./ui-components/Invitee"));
 const Inviter = lazy(() => import("./ui-components/Inviter"));

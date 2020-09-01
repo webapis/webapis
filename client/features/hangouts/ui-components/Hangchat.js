@@ -25,6 +25,7 @@ export default function Hangchat({
   useEffect(() => {
     return () => {
       // emptyHangout();
+      debugger;
     };
   }, []);
   return html`

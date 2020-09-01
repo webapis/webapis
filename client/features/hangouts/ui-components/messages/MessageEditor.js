@@ -26,7 +26,7 @@ export default function MessageEditor({
         />
         <div class="input-group-append">
           <button
-            class="btn btn-outline-secondary"
+            class="btn btn-primary"
             type="button"
             loading=${loading}
             disabled=${hangout && hangout.state === "BLOCKED"}

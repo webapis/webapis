@@ -12,6 +12,7 @@ export default function UnreadHangouts({
       unreadhangouts.map((u) => {
         return html`
           <li
+            id=${u.username}
             data-testid=${u.username}
             onClick=${() => onUnreadSelect({ hangout: u })}
             class="list-group-item d-flex justify-content-between align-items-center list-group-item-action"

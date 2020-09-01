@@ -63,7 +63,6 @@ export default function Hangouts({
                   error=${error}
                   isValidGuestEmail=${isValidGuestEmail}
                   onGuestEmailInputFocus=${onGuestEmailInputFocus}
-                  onSearchSelect=${onGuestEmailInputFocus}
                 />
               `}
 

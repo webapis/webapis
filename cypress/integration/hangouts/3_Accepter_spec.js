@@ -44,12 +44,16 @@ describe("Accepter", () => {
       .then(() => {
         cy.get("[data-testid=berouser]").should("have.length", 1);
         cy.get(".badge-primary").contains(1);
+
         cy.get("[data-testid=berouser]").click();
+
         cy.get("[data-testid=message]").contains("Accepted your invitation");
         cy.get("[data-testid=message-sender]").contains("berouser");
-        cy.get("[data-testid=time]").contains("Now");
         cy.get("[data-testid=left-message-wrapper]")
-          .find(".message-state")
+          .find("[data-testid=time]")
+          .contains("Now");
+        cy.get("[data-testid=left-message-wrapper]")
+          .find("[data-testid=message-state]")
           .contains("read");
       });
   });
