@@ -21,7 +21,7 @@ export function Messages({ children }) {
     <div class="d-block d-sm-none">
       <div
         class="row justify-content-center bg-success overflow-auto"
-        style="height:67vh"
+        style="height:75vh"
       >
         <div class="col bg-light pb-1">
           ${children}
