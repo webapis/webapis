@@ -1,49 +1,19 @@
 import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
-import {
-  useContext,
-  useMemo,
-  useReducer,
-  useEffect,
-} from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
-import Message from "./messages/Message";
-import Layout from "./Layout";
+
+import { Message, Messages } from "../ui-components/Messages";
+import { useMessageTimeLog } from "../ui-components/Messages";
 import Button from "controls/button/index";
-const style = {
-  root: {
-    display: "flex",
-    flexDirection: "column",
-    width: "100%",
-    height: "100%",
-    paddingTop: 70,
-    boxSizing: "border-box",
-    justifyContent: "space-between",
-    paddingBottom: 8,
-  },
-};
+
 const html = htm.bind(h);
-export default function Inviter({
-  hangout,
-  onUserClientCommand,
-  pendingHangout,
-}) {
+export function Inviter(props) {
+  const { pendingHangout, onUserClientCommand } = props;
   return html`
-    <${Layout} id="inviter-ui">
-      <div style=${style.root}>
-        <div style=${{ marginLeft: 8, display: "flex" }}>
-          ${hangout &&
-          hangout.message &&
-          html`
-            <${Message}
-              message=${hangout &&
-              hangout.message && {
-                ...hangout.message,
-                username: hangout.username,
-                float: "left",
-              }}
-            />
-          `}
-        </div>
+    <div class="row justify-content-center" id="inviter-ui">
+      <div class="col-sm-5 bg-light">
+        <${Messages}>
+          <${Message} ...${props} />
+        <//>
 
         <div class="row">
           <div class="col">
@@ -59,7 +29,7 @@ export default function Inviter({
             />
           </div>
 
-          <div class="col">
+          <div class="col mb-1">
             <${Button}
               id="ACCEPT"
               onClick=${onUserClientCommand}
@@ -72,6 +42,24 @@ export default function Inviter({
           </div>
         </div>
       </div>
-    <//>
+    </div>
+  `;
+}
+
+export default function InviterContainer({ state, funcs }) {
+  const { hangout } = state;
+  const { message, username } = hangout;
+  const { timestamp, text, state: messageState } = message;
+  const { timelog } = useMessageTimeLog({ timestamp });
+  return html`
+    <${Inviter}
+      ...${state}
+      ...${funcs}
+      timestamp=${timestamp}
+      timelog=${timelog}
+      text=${text}
+      state=${messageState}
+      username=${username}
+    />
   `;
 }

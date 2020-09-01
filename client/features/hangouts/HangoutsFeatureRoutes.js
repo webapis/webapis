@@ -13,7 +13,7 @@ const Configure = lazy(() => import("./ui-components/Configure"));
 const Hangchat = lazy(() => import("./ui-components/Messages"));
 const Invite = lazy(() => import("./ui-components/Invite"));
 const Invitee = lazy(() => import("./ui-components/Invitee"));
-const Inviter = lazy(() => import("./ui-components/Inviter"));
+const InviterContainer = lazy(() => import("./ui-components/Inviter"));
 const HangoutsContainer = lazy(() => import("./ui-components/Hangouts"));
 const Declined = lazy(() => import("./ui-components/Declined"));
 const UnreadHangouts = lazy(() => import("./ui-components/UnreadHangouts"));
@@ -76,7 +76,7 @@ export default function HangoutsFeatureRoutes(props) {
       <//>`;
     case "/INVITER":
       return html` <${Suspense} fallback=${Loading}>
-        <${Inviter} ...${state} ...${funcs} />
+        <${InviterContainer} state=${state} funcs=${funcs} />
       <//>`;
     case "/unread":
       return html` <${Suspense} fallback=${Loading}>

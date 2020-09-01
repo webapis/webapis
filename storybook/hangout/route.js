@@ -7,7 +7,7 @@ import Configure from "../../client/features/hangouts/ui-components/Configure";
 //import Hangchat from "../../client/features/hangouts/ui-components/Hangchat";
 import Invite from "../../client/features/hangouts/ui-components/Invite";
 import Invitee from "../../client/features/hangouts/ui-components/Invitee";
-import Inviter from "../../client/features/hangouts/ui-components/Inviter";
+import { Inviter } from "../../client/features/hangouts/ui-components/Inviter";
 import UnreadHangouts from "../../client/features/hangouts/ui-components/UnreadHangouts";
 import Message from "../../client/features/hangouts/ui-components/messages/Message";
 import HangoutFilter from "../../client/features/hangouts/ui-components/Filter";
@@ -49,7 +49,12 @@ export default function HangoutRoutes() {
         <${Invite} hangouts=${hangouts} />
       <//>
       <${AppRoute} path="/inviter">
-        <${Inviter} hangouts=${hangouts} />
+        <${Inviter}
+          text="let's chat"
+          username="demouser"
+          state="unread"
+          timelog="Now"
+        />
       <//>
       <${AppRoute} path="/invitee">
         <${Invitee} hangouts=${hangouts} />
