@@ -14,17 +14,27 @@ export default function Messages({ children }) {
 
 export function Message({ float, text }) {
   if (float === "right")
-    return html`<div class="row justify-content-end">
-      <div class="float-right">timestamp</div>
-      <div class="float-right bg-info" style="max-width:70%;">
+    return html`<div class="row justify-content-end font-italic mb-1">
+      <div
+        class="float-right  align-self-end text-muted px-1"
+        style="font-size: 0.7rem;"
+      >
+        timestamp
+      </div>
+      <div class="float-right bg-info p-1 rounded" style="max-width:70%;">
         Message Right.${text}
       </div>
     </div>`;
   return html`<div class="row justify-content-start">
-    <div class="float-left bg-warning " style="max-width:70%;">
+    <div class="float-left bg-warning p-1 rounded" style="max-width:70%;">
       Message Left.${text}
     </div>
-    <div class="float-left">timestamp</div>
+    <div
+      class="float-left  align-self-end text-muted font-italic px-1"
+      style="font-size: 0.7rem;"
+    >
+      timestamp
+    </div>
   </div>`;
 }
 
