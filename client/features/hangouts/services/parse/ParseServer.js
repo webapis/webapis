@@ -8,10 +8,10 @@ import { useAuthContext } from "features/authentication/index";
 import { actionTypes } from "../../state/actionTypes";
 export function ParseServer(props) {
   const { children } = props;
-  const { state, dispatch } = useHangouts();
+  const { state } = useHangouts();
   const authContext = useAuthContext();
   const { user } = authContext.state;
-  const { searchHangouts, search, pendingHangout } = state;
+  const { searchHangouts, search, pendingHangout, dispatch } = state;
 
   useEffect(() => {
     if (searchHangouts) {

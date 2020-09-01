@@ -153,12 +153,10 @@ export default function Hangchat({
   loading,
   messages = [],
   onMessageText,
-  onMessage,
   messageText,
   username,
   hangout,
-  onNavigation,
-  emptyHangout,
+  onUserClientCommand,
 }) {
   useEffect(() => {
     return () => {
@@ -174,7 +172,7 @@ export default function Hangchat({
           loading=${loading}
           messageText=${messageText}
           onMessageText=${onMessageText}
-          onMessage=${onMessage}
+          onMessage=${onUserClientCommand}
           hangout=${hangout}
         />
       </div>

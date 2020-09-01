@@ -8,9 +8,13 @@ import {
   updateHangout,
   removeUnreads,
 } from "./local-storage/common";
-export default function useUnread({ state, dispatch, onAppRoute, username }) {
+export default function useUnread({
+  unreadhangouts,
+  dispatch,
+  onAppRoute,
+  username,
+}) {
   const [reducedUnreads, setReducedUnreads] = useState([]);
-  const { unreadhangouts } = state;
 
   useEffect(() => {
     if (unreadhangouts && unreadhangouts.length > 0) {

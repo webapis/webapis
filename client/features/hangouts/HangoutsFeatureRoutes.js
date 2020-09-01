@@ -14,48 +14,20 @@ const Hangchat = lazy(() => import("./ui-components/Messages"));
 const Invite = lazy(() => import("./ui-components/Invite"));
 const Invitee = lazy(() => import("./ui-components/Invitee"));
 const Inviter = lazy(() => import("./ui-components/Inviter"));
-const Search = lazy(() => import("./ui-components/Search"));
-const Hangouts = lazy(() => import("./ui-components/Hangouts"));
+const HangoutsContainer = lazy(() => import("./ui-components/Hangouts"));
 const Declined = lazy(() => import("./ui-components/Declined"));
 const UnreadHangouts = lazy(() => import("./ui-components/UnreadHangouts"));
 const html = htm.bind(h);
 export default function HangoutsFeatureRoutes(props) {
   const { onAppRoute, routeState } = useAppRoute();
   const { featureRoute } = routeState;
-  const {
-    state,
-    hangouts,
-    hangout,
-    onUserClientCommand,
-    onMessageText,
-    messageText,
-    username,
-    messages,
-    dispatch,
-    onNavigation,
-    emptyHangout,
-    onSearchInput,
-    onSearch,
-    onInviteGuest,
-    onMessageFoGuestInput,
-    onGuestEmailChange,
-    onSendInviteGuest,
-    onGuestEmailInputFocus,
-    onSearchSelect,
-  } = useHangouts();
+  const { state, funcs } = useHangouts();
 
-  const {
-    unreadhangouts,
-    onUnreadSelect,
-    onUnreadRemove,
-    reducedUnreads,
-  } = useUnread({
-    state,
-    dispatch,
+  const { onUnreadSelect, onUnreadRemove, reducedUnreads } = useUnread({
+    ...state,
     onAppRoute,
-    username,
   });
-  const { loading } = state;
+
   switch (featureRoute) {
     case "/bckui":
       return html` <${Suspense} fallback=${Loading}>
@@ -64,23 +36,19 @@ export default function HangoutsFeatureRoutes(props) {
     case "/UNBLOCK":
       return html`
         <${Suspense} fallback=${Loading}>
-          <${Blocked}
-            hangout=${hangout}
-            onUnblock=${onUserClientCommand}
-            username=${username}
-          />
+          <${Blocked} ...${state} ...${funcs} />
         <//>
       `;
     case "/DECLINED":
     case "/DECLINE":
       return html`
         <${Suspense} fallback=${Loading}>
-          <${Declined} hangout=${hangout} />
+          <${Declined} ...${state} ...${funcs} />
         <//>
       `;
     case "/configure":
       return html` <${Suspense} fallback=${Loading}>
-        <${Configure} hangout=${hangout} onNavigation=${onNavigation} />
+        <${Configure} ...${state} ...${funcs} />
       <//>`;
     case "/ACCEPTED":
     case "/ACCEPT":
@@ -94,43 +62,21 @@ export default function HangoutsFeatureRoutes(props) {
     case "/READ":
     case "/READER":
       return html` <${Suspense} fallback=${Loading}>
-        <${Hangchat}
-          loading=${loading}
-          onNavigation=${onNavigation}
-          hangout=${hangout}
-          onMessageText=${onMessageText}
-          onMessage=${onUserClientCommand}
-          messages=${messages}
-          username=${username}
-          messageText=${messageText}
-          dispatch=${dispatch}
-          emptyHangout=${emptyHangout}
-        />
+        <${Hangchat} ...${state} ...${funcs} />
       <//>`;
     case "/INVITEE":
       return html` <${Suspense} fallback=${Loading}>
-        <${Invite}
-          loading=${loading}
-          hangout=${hangout}
-          onInvite=${onUserClientCommand}
-          onMessageText=${onMessageText}
-          messageText=${messageText}
-        />
+        <${Invite} ...${state} ...${funcs} />
       <//>`;
     case "/INVITED":
     case "/INVITE":
     case "/DECLINER":
       return html` <${Suspense} fallback=${Loading}>
-        <${Invitee} hangout=${hangout} loading=${loading} />
+        <${Invitee} ...${state} ...${funcs} />
       <//>`;
     case "/INVITER":
       return html` <${Suspense} fallback=${Loading}>
-        <${Inviter}
-          state=${state}
-          hangout=${hangout}
-          onAccept=${onUserClientCommand}
-          onDecline=${onUserClientCommand}
-        />
+        <${Inviter} ...${state} ...${funcs} />
       <//>`;
     case "/unread":
       return html` <${Suspense} fallback=${Loading}>
@@ -143,19 +89,7 @@ export default function HangoutsFeatureRoutes(props) {
 
     case "/hangout":
       return html` <${Suspense} fallback=${Loading}>
-        <${Hangouts}
-          onGuestEmailChange=${onGuestEmailChange}
-          onSendInviteGuest=${onSendInviteGuest}
-          onMessageFoGuestInput=${onMessageFoGuestInput}
-          onInviteGuest=${onInviteGuest}
-          onSearchInput=${onSearchInput}
-          onSearch=${onSearch}
-          dispatch=${dispatch}
-          onGuestEmailInputFocus=${onGuestEmailInputFocus}
-          onSearchSelect=${onSearchSelect}
-          ...${state}
-          onAppRoute=${onAppRoute}
-        />
+        <${HangoutsContainer} state=${state} funcs=${funcs} />
       <//>`;
 
     default:

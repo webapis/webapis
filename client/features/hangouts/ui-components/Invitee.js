@@ -11,7 +11,7 @@ const style = {
     justifyContent: "center",
   },
 };
-export default function Invitee({ hangout, dispatch }) {
+export default function Invitee({ hangout }) {
   return html`
     <${Layout} id="invitee-ui">
       <${Center}>

@@ -19,8 +19,9 @@ export function WebSocketContainer(props) {
   const { state: authState } = useAuth();
   const { socket, connected } = state;
   const { children, socketUrl } = props;
-  const { dispatch: hangoutDispatch, state: hangoutState } = useHangouts();
+  const { state: hangoutState } = useHangouts();
   const {
+    dispatch: hangoutDispatch,
     searchHangouts,
     search,
     pendingHangout,

@@ -7,7 +7,7 @@ import Layout from "./Layout";
 
 const html = htm.bind(h);
 
-export default function Blocked({ hangout, onUnblock, onClose }) {
+export default function Blocked({ hangout, onUserClientCommand, onClose }) {
   return html`
     <${Layout} id="blocked-ui">
       <div class="card-header ">
@@ -33,7 +33,7 @@ export default function Blocked({ hangout, onUnblock, onClose }) {
           <div class="col">
             <${Button}
               id="UNBLOCK"
-              onClick=${onUnblock}
+              onClick=${onUserClientCommand}
               data-testid="unblock-btn"
               title="UNBLOCK"
               bg="primary"

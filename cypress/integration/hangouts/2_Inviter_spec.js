@@ -68,6 +68,7 @@ describe("Inviter", () => {
           });
       });
     cy.wait(200);
+
     cy.get("[data-testid=unread-link]").click();
     cy.get("[data-testid=demouser]").click();
     cy.get("[data-testid=message]").contains("Let's chat, berouser!");

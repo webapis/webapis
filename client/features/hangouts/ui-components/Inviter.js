@@ -24,13 +24,9 @@ const style = {
 const html = htm.bind(h);
 export default function Inviter({
   hangout,
-  onAccept,
-  onDecline,
-  loading,
-  state,
+  onUserClientCommand,
+  pendingHangout,
 }) {
-  const { pendingHangout } = state;
-
   return html`
     <${Layout} id="inviter-ui">
       <div style=${style.root}>
@@ -53,7 +49,7 @@ export default function Inviter({
           <div class="col">
             <${Button}
               id="DECLINE"
-              onClick=${onDecline}
+              onClick=${onUserClientCommand}
               data-testid="decline-btn"
               loading=${pendingHangout && pendingHangout.command === "DECLINE"}
               title="Decline"
@@ -66,7 +62,7 @@ export default function Inviter({
           <div class="col">
             <${Button}
               id="ACCEPT"
-              onClick=${onAccept}
+              onClick=${onUserClientCommand}
               data-testid="accept-btn"
               loading=${pendingHangout && pendingHangout.command === "ACCEPT"}
               title="Accept"

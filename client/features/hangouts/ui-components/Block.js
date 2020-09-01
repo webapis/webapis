@@ -20,7 +20,12 @@ const style = {
   },
 };
 
-export default function Block({ onCancel, onBlock, onReport, username = "" }) {
+export default function Block({
+  onCancel,
+  onUserClientCommand,
+  onReport,
+  username = "",
+}) {
   return html`
     <${Layout}>
       <div class="card-header ">Block ${username}</div>
@@ -44,7 +49,7 @@ export default function Block({ onCancel, onBlock, onReport, username = "" }) {
           <div class="col">
             <${Button}
               id="BLOCK"
-              onClick=${onBlock}
+              onClick=${onUserClientCommand}
               data-testid="block-btn"
               title="Block"
               bg="primary"

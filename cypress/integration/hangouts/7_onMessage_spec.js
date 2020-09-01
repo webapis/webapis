@@ -41,9 +41,10 @@ describe("onMessage_spec", () => {
     cy.get("[data-testid=right-message-wrapper]")
       .find("[data-testid=message]")
       .contains("Hello berouser");
-    cy.get("[data-testid=right-message-wrapper]")
-      .find("[data-testid=message-sender]")
-      .contains("me");
+
+    // cy.get("[data-testid=right-message-wrapper]")
+    //   .find("[data-testid=message-sender]")
+    //   .contains("me");
     cy.get("[data-testid=right-message-wrapper]")
       .find("[data-testid=time]")
       .contains("Now");

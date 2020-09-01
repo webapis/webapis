@@ -12,7 +12,7 @@ import Button from "controls/button/index";
 const html = htm.bind(h);
 export default function Invite({
   hangout,
-  onInvite,
+  onUserClientCommand,
   onMessageText,
   messageText,
   loading,
@@ -38,7 +38,7 @@ export default function Invite({
             disables=${messageText === ""}
             loading=${loading}
             id="INVITE"
-            onClick=${onInvite}
+            onClick=${onUserClientCommand}
             data-testid="oninvite-btn"
             title="Send Invite"
             bg="primary"

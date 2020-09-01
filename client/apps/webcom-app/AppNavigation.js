@@ -21,9 +21,16 @@ export function AppNavigation() {
   const { onSignOut, onAuthNavigation, state: authState } = useAuth();
   const { user } = authState;
 
-  const { state, onNavigation, dispatch } = useHangouts();
-  const { hangout, socketConnected, hangouts, unreadsCount, error } = state;
-
+  const { state, funcs } = useHangouts();
+  const {
+    hangout,
+    socketConnected,
+    hangouts,
+    unreadsCount,
+    error,
+    dispatch,
+  } = state;
+  const { onNavigation } = funcs;
   function onPersonPlusClick(e) {
     onNavigation(e);
     dispatch({ type: actionTypes.HANGOUTS_UPDATED, hangouts: [] });

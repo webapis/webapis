@@ -16,6 +16,7 @@ export default function Hangchat({
   hangout,
   onNavigation,
   emptyHangout,
+  onUserClientCommand,
 }) {
   useEffect(() => {
     if (hangout) {
