@@ -4,34 +4,21 @@ import {
   useState,
 } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
+import Layout from "./Layout";
 import MessageEditor from "./messages/MessageEditor";
 const html = htm.bind(h);
-export function Messages({ children }) {
-  return html` <div class="container-fluid">
-    <div class="d-none d-sm-block">
-      <div
-        class="row justify-content-center bg-success overflow-auto"
-        style="height:60vh"
-      >
-        <div class="col bg-light py-1">
-          ${children}
-        </div>
-      </div>
-    </div>
-    <div class="d-block d-sm-none">
-      <div
-        class="row justify-content-center bg-success overflow-auto"
-        style="height:75vh"
-      >
-        <div class="col bg-light pb-1">
-          ${children}
-        </div>
-      </div>
-    </div>
+export function Messages({ messages, name }) {
+  const { transformedMessages } = useTransformMessages({ messages, name });
+  return html` <div class="bg-light container-fluid pb-5">
+    ${transformedMessages &&
+    transformedMessages.map((msg) => {
+      return html` <${Message} ...${msg} /> `;
+    })}
   </div>`;
 }
 
-export function Message({ float, text, timelog, username, state }) {
+export function Message({ float, text, username, state, timestamp }) {
+  const { timelog } = useMessageTimeLog({ timestamp });
   if (float === "right")
     return html`<div
       data-testid="right-message-wrapper"
@@ -49,7 +36,7 @@ export function Message({ float, text, timelog, username, state }) {
         class="float-right bg-info p-1 rounded"
         style="max-width:70%; font-size: 0.8rem;"
       >
-        ${text}
+        ${text}rtrt
       </div>
     </div>`;
   return html`<div
@@ -70,7 +57,7 @@ export function Message({ float, text, timelog, username, state }) {
       class="ml-1 p-1 bg-warning rounded"
       style="font-size: 0.8rem;"
     >
-      ${text}
+      ${text}rtrtrrtrt
     </div>
     <div class=" font-italic text-muted pl-1" style="font-size: 0.6rem;">
       <div data-testid="message-sender">${username}</div>
@@ -126,24 +113,6 @@ function useMessageTimeLog({ timestamp }) {
   return { timelog };
 }
 
-function MessageContainer({ message }) {
-  const { timestamp } = message;
-  const { timelog } = useMessageTimeLog({ timestamp });
-
-  return html`<${Message} ...${message} timelog=${timelog} />`;
-}
-
-function MessageListContainer({ messages, name }) {
-  const { transformedMessages } = useTransformMessages({ messages, name });
-
-  return html`<${Messages}
-    >${transformedMessages &&
-    transformedMessages.map((msg) => {
-      return html` <${MessageContainer} message=${msg} /> `;
-    })}<//
-  >`;
-}
-
 export default function Hangchat({
   loading,
   messages = [],
@@ -153,16 +122,10 @@ export default function Hangchat({
   hangout,
   onUserClientCommand,
 }) {
-  useEffect(() => {
-    return () => {
-      // emptyHangout();
-      debugger;
-    };
-  }, []);
   return html`
-    <div class="row justify-content-center">
-      <div class="col-sm-5">
-        <${MessageListContainer} messages=${messages} name=${username} />
+    <${Layout}>
+      <${Messages} messages=${messages} name=${username} />
+      <div class="w-100" style="position:absolute; bottom:0;">
         <${MessageEditor}
           loading=${loading}
           messageText=${messageText}
@@ -171,7 +134,7 @@ export default function Hangchat({
           hangout=${hangout}
         />
       </div>
-    </div>
+    <//>
   `;
 }
 
@@ -180,6 +143,7 @@ function useTransformMessages({ messages, name }) {
 
   useEffect(() => {
     if (messages) {
+      debugger;
       setTransformedMessages(
         sortMessages({ messages: floatMessages({ messages, username: name }) })
       );

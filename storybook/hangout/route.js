@@ -4,14 +4,12 @@ import { AppRoute } from "../../client/components/app-route/index";
 import Block from "../../client/features/hangouts/ui-components/Block";
 import Blocked from "../../client/features/hangouts/ui-components/Blocked";
 import Configure from "../../client/features/hangouts/ui-components/Configure";
-//import Hangchat from "../../client/features/hangouts/ui-components/Hangchat";
 import Invite from "../../client/features/hangouts/ui-components/Invite";
 import Invitee from "../../client/features/hangouts/ui-components/Invitee";
 import Inviter from "../../client/features/hangouts/ui-components/Inviter";
 import UnreadHangouts from "../../client/features/hangouts/ui-components/UnreadHangouts";
 import Message from "../../client/features/hangouts/ui-components/messages/Message";
-import HangoutFilter from "../../client/features/hangouts/ui-components/Filter";
-import HangoutSearch from "../../client/features/hangouts/ui-components/Search";
+
 import HangoutsUiStates from "./hangouts.ui.state";
 import HangChatUiState from "./hangchat.ui.state";
 const html = htm.bind(h);
