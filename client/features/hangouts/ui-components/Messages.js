@@ -73,7 +73,7 @@ export function BlockingMessage() {
   </div>`;
 }
 
-function useMessageTimeLog({ timestamp }) {
+export function useMessageTimeLog({ timestamp }) {
   const [timelog, setTimeLog] = useState("");
   function convertMS(ms) {
     var d, h, m, s;

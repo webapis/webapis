@@ -21,7 +21,7 @@ export default function Login(props) {
   } = props;
   return html`
     <div
-      class="col-md-4 border mx-auto rounded"
+      class="col-md-4 border mx-auto rounded bg-light"
       style=${{ margin: 15, padding: 16 }}
     >
       ${loading &&

@@ -6,7 +6,7 @@ import Blocked from "../../client/features/hangouts/ui-components/Blocked";
 import Configure from "../../client/features/hangouts/ui-components/Configure";
 import Invite from "../../client/features/hangouts/ui-components/Invite";
 import Invitee from "../../client/features/hangouts/ui-components/Invitee";
-import Inviter from "../../client/features/hangouts/ui-components/Inviter";
+import { Inviter } from "../../client/features/hangouts/ui-components/Inviter";
 import UnreadHangouts from "../../client/features/hangouts/ui-components/UnreadHangouts";
 import Message from "../../client/features/hangouts/ui-components/messages/Message";
 
@@ -47,7 +47,12 @@ export default function HangoutRoutes() {
         <${Invite} hangouts=${hangouts} />
       <//>
       <${AppRoute} path="/inviter">
-        <${Inviter} hangouts=${hangouts} />
+        <${Inviter}
+          text="let's chat"
+          username="demouser"
+          state="unread"
+          timelog="Now"
+        />
       <//>
       <${AppRoute} path="/invitee">
         <${Invitee} hangouts=${hangouts} />

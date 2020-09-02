@@ -1,6 +1,6 @@
 const findOne = require("./findOne");
 const findHangouts = require("./findHangouts");
-const inviteAsGuest = require("./inviteAsGuest");
+
 module.exports = function hangoutsOperation(req, res) {
   const { url } = req;
   const collectionName = "users";
@@ -15,8 +15,6 @@ module.exports = function hangoutsOperation(req, res) {
     case url.includes("/findHangouts"):
       findHangouts({ req, res, collection });
       break;
-    case url.includes("/inviteasguest"):
-      inviteAsGuest({ req, res, collection });
 
     default:
       return null;
