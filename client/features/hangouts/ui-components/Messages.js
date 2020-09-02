@@ -38,8 +38,8 @@ export function Message({ float, text, timelog, username, state }) {
       class="row justify-content-end mb-2"
     >
       <div
-        class="float-right  align-self-end text-muted px-1 font-italic"
-        style="font-size: 0.7rem;"
+        class="float-right text-muted px-1 font-italic"
+        style="font-size: 0.6rem;"
       >
         <div data-testid="time">${timelog}</div>
         <div data-testid="message-state">${state}</div>
@@ -54,30 +54,25 @@ export function Message({ float, text, timelog, username, state }) {
     </div>`;
   return html`<div
     data-testid="left-message-wrapper"
-    class="row justify-content-start mb-2"
+    class="no-gutters rounded  p-1 mb-2 d-flex"
+    style="max-width:75%;"
   >
-    <div
-      class="float-left bg-warning p-1 rounded row no-gutters"
-      style="max-width:75%;"
-    >
-      <div class="col-2 rounded row no-gutters">
-        <div class="col  d-flex justify-content-center ">
-          <div
-            class="bg-success align-self-center d-flex justify-content-center align-items-center rounded-circle"
-            style="width:30px;height:30px;font-size: 0.8rem;"
-          >
-            M
-          </div>
-        </div>
-      </div>
-      <div class="col-10" style="font-size: 0.8rem;" data-testid="message">
-        ${text}
+    <div class="d-flex">
+      <div
+        class="rounded-circle text-center bg-info"
+        style="width:40px;height:40px;line-height:2;"
+      >
+        M
       </div>
     </div>
     <div
-      class="float-left  align-self-end text-muted font-italic px-1"
-      style="font-size: 0.7rem;"
+      data-testid="message"
+      class="ml-1 pl-1 bg-warning rounded"
+      style="font-size: 0.8rem;"
     >
+      ${text}
+    </div>
+    <div class=" font-italic text-muted pl-1" style="font-size: 0.6rem;">
       <div data-testid="message-sender">${username}</div>
       <div data-testid="time">${timelog}</div>
       <div data-testid="message-state">${state}</div>

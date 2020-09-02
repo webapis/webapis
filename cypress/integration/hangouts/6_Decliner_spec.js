@@ -28,7 +28,7 @@ describe("Decliner", () => {
     cy.login({ username: "berouser" });
     cy.decline();
     cy.signout();
-    cy.pause();
+
     cy.login({ username: "demouser" });
     // cy.get("[data-testid=unread-link]");
     // cy.get("[data-testid=unread-link]").find("[data-testid=message-count]")

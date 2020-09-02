@@ -55,7 +55,7 @@ export default function HangchatUiState() {
           <${Message}
             timelog="Now"
             float="left"
-            text="Hello bero. I am allright. What about you. Are you ok? What are you planning to do tomorrow? Can you tell me that."
+            text="Hello bero. "
             username="demouser"
           />
           <${Message}
