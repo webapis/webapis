@@ -39,10 +39,10 @@ export function Message({ float, text, timelog, username, state }) {
     >
       <div
         class="float-right text-muted px-1 font-italic"
-        style="font-size: 0.6rem;"
+        style="font-size: 0.6rem;width:60px;"
       >
-        <div data-testid="time">${timelog}</div>
-        <div data-testid="message-state">${state}</div>
+        <div class="text-right" data-testid="time">${timelog}</div>
+        <div class="text-right" data-testid="message-state">${state}</div>
       </div>
       <div
         data-testid="message"
@@ -67,14 +67,14 @@ export function Message({ float, text, timelog, username, state }) {
     </div>
     <div
       data-testid="message"
-      class="ml-1 pl-1 bg-warning rounded"
+      class="ml-1 p-1 bg-warning rounded"
       style="font-size: 0.8rem;"
     >
       ${text}
     </div>
     <div class=" font-italic text-muted pl-1" style="font-size: 0.6rem;">
       <div data-testid="message-sender">${username}</div>
-      <div data-testid="time">${timelog}</div>
+      <div data-testid="time" style="width:60px;">${timelog}</div>
       <div data-testid="message-state">${state}</div>
     </div>
   </div>`;
