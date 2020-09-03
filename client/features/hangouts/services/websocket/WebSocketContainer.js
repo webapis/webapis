@@ -123,7 +123,6 @@ export function WebSocketContainer(props) {
 
   useEffect(() => {
     if (invitingGuest && user) {
-      debugger;
       actions.InviteAsGuest({
         from: user.email,
         to: guestEmail,

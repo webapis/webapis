@@ -144,7 +144,6 @@ function useTransformMessages({ messages, name }) {
 
   useEffect(() => {
     if (messages) {
-      debugger;
       setTransformedMessages(
         sortMessages({ messages: floatMessages({ messages, username: name }) })
       );

@@ -48,7 +48,6 @@ export async function InviteAsGuest({
   dispatch,
 }) {
   try {
-    debugger;
     const response = await fetch(`/googleapis/gmailapi`, {
       method: "post",
       body: JSON.stringify({ from, to, subject, text, type }),
@@ -56,13 +55,11 @@ export async function InviteAsGuest({
     if (response.ok && response.status === 200) {
       dispatch({ type: actionTypes.INVITE_AS_GUEST_SUCCESS });
     } else {
-      debugger;
       const { error } = await response.json();
 
       dispatch({ type: actionTypes.INVITE_AS_GUEST_FAILED, error });
     }
   } catch (error) {
-    debugger;
     dispatch({ type: actionTypes.INVITE_AS_GUEST_FAILED, error });
   }
 }

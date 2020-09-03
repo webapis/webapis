@@ -23,11 +23,10 @@ export default function useUnread({
   }, [unreadhangouts]);
 
   function onUnreadSelect({ hangout }) {
-    debugger;
     dispatch({ type: actionTypes.SELECTED_HANGOUT, hangout });
-    debugger;
+
     onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
-    debugger;
+
     removeUnreads({ hangout, dispatch, name: username, state: "ACCEPTER" });
     removeUnreads({ hangout, dispatch, name: username, state: "INVITER" });
   }
