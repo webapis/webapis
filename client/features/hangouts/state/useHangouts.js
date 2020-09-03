@@ -33,13 +33,6 @@ export function useHangouts() {
     onAppRoute({ featureRoute: `/${id}`, route: "/hangouts" });
   }
 
-  //   function sendPendingHangout({ hangout }) {
-  //     dispatch({
-  //       type: actionTypes.SENDING_HANGOUT_STARTED,
-  //       pendingHangout: hangout,
-  //     });
-  //  }
-
   function onMessageText(e) {
     const text = e.target.value;
     changeMessageText({ dispatch, text });

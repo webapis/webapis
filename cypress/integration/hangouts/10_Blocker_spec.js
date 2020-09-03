@@ -58,12 +58,12 @@ describe("Blocker", () => {
 
     cy.login({ username: "demouser" });
 
-    cy.get("[data-testid=hangouts-link]").click();
+    // cy.get("[data-testid=hangouts-link]").click();
     cy.get("[data-testid=berouser]").click();
 
     cy.get("[data-testid=message-input]").type("Hey x");
 
     cy.get("[data-testid=send-btn]").click();
-    cy.get("[data-testid=blocker-message]").should("be.visible");
+    cy.get("[data-testid=blocked-message]").should("be.visible");
   });
 });

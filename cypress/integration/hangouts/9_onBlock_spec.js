@@ -47,7 +47,6 @@ describe("onBlock", () => {
 
     cy.get("[data-testid=demouser]").click();
     cy.get("[data-testid=config-btn]").click();
-    cy.pause();
     cy.get("[data-testid=bckui-btn]").click();
 
     cy.get("[data-testid=block-btn]").click();

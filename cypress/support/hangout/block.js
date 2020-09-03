@@ -1,5 +1,5 @@
 Cypress.Commands.add("block", () => {
-  cy.get("[data-testid=hangouts-link]").click();
+  ///cy.get("[data-testid=hangouts-link]").click();
 
   cy.get("[data-testid=demouser]").click();
   cy.get("[data-testid=nav-config]").click();

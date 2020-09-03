@@ -192,12 +192,6 @@ export default function HangoutsProvider(props) {
         dState: "pending",
       });
     } else {
-      // updateHangout({
-      //   hangout: { ...messaging, state: "MESSAGE" },
-      //   name: username,
-      //   dispatch,
-      // });
-
       sendPendingHangout({ hangout: messaging });
     }
     dispatch({ type: actionTypes.MESSAGE_TEXT_CHANGED, text: "" });
@@ -218,11 +212,6 @@ export default function HangoutsProvider(props) {
       timestamp,
     };
 
-    // updateHangout({
-    //   hangout: { ...block, state: "BLOCK", command: undefined },
-    //   name: username,
-    //   dispatch,
-    // });
     saveSentMessage({
       hangout: {
         ...block,

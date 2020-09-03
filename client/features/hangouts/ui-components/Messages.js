@@ -12,7 +12,17 @@ export function Messages({ messages, name }) {
   return html` <div class="bg-light container-fluid pb-5">
     ${transformedMessages &&
     transformedMessages.map((msg) => {
-      return html` <${Message} ...${msg} /> `;
+      if (msg.type === "blocked") {
+        return html`<${BlockingMessage}
+          text="You have blocked this chat room."
+        /> `;
+      } else if (msg.type === "blocker") {
+        return html`<${BlockingMessage}
+          text="You are blocked from using this chat room."
+        /> `;
+      } else {
+        return html` <${Message} ...${msg} /> `;
+      }
     })}
   </div>`;
 }
@@ -67,9 +77,13 @@ export function Message({ float, text, username, state, timestamp }) {
   </div>`;
 }
 
-export function BlockingMessage() {
-  return html` <div class="text-danger text-right" style="font-size: 0.8rem;">
-    Blocking Message
+export function BlockingMessage({ text }) {
+  return html` <div
+    data-testid="blocked-message"
+    class="text-danger text-right"
+    style="font-size: 0.8rem;"
+  >
+    ${text}
   </div>`;
 }
 
@@ -131,7 +145,11 @@ export default function Hangchat({
       onNavigation=${onNavigation}
     >
       <${Messages} messages=${messages} name=${name} />
-      <div class="w-100" style="position:absolute; bottom:0;">
+      <div
+        data-testid="hangchat-ui"
+        class="w-100"
+        style="position:absolute; bottom:0;"
+      >
         <${MessageEditor}
           loading=${loading}
           messageText=${messageText}
