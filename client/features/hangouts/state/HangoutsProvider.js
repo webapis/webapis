@@ -139,7 +139,7 @@ export default function HangoutsProvider(props) {
       name: user && user.username,
       dState: "read",
     });
-    // removeUnread({ dispatch, hangout: accept, name: username });
+    removeUnread({ dispatch, hangout: accept, name: user && user.username });
     onAppRoute({ featureRoute: `/ACCEPT`, route: "/hangouts" });
     sendPendingHangout({ hangout: accept });
   }
@@ -263,7 +263,7 @@ export default function HangoutsProvider(props) {
     }
   }, [on_user_client_command, user, hangout]);
   useEffect(() => {
-    if (hangout) {
+    if (hangout && user) {
       switch (hangout.state) {
         // case "ACCEPTER":
         // case "INVITER":
@@ -294,7 +294,7 @@ export default function HangoutsProvider(props) {
       loadMessages({ hangout, name: user && user.username, dispatch });
       setTimeout(() => {}, 100);
     }
-  }, [hangout]);
+  }, [hangout, user]);
 
   // useEffect(() => {
   //   if (!username) {

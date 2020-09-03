@@ -22,7 +22,7 @@ export default function HangoutsFeatureRoutes(props) {
   const { onAppRoute, routeState } = useAppRoute();
   const { featureRoute } = routeState;
   const { state, funcs } = useHangouts();
-
+  const { hangout } = state;
   const { onUnreadSelect, onUnreadRemove, reducedUnreads } = useUnread({
     ...state,
     onAppRoute,
@@ -31,24 +31,24 @@ export default function HangoutsFeatureRoutes(props) {
   switch (featureRoute) {
     case "/bckui":
       return html` <${Suspense} fallback=${Loading}>
-        <${Block} hangout=${hangout} onBlock=${onUserClientCommand} />
+        <${Block} hangout=${hangout} ...${hangout} />
       <//>`;
     case "/UNBLOCK":
       return html`
         <${Suspense} fallback=${Loading}>
-          <${Blocked} ...${state} ...${funcs} />
+          <${Blocked} ...${state} ...${funcs} ...${hangout} />
         <//>
       `;
     case "/DECLINED":
     case "/DECLINE":
       return html`
         <${Suspense} fallback=${Loading}>
-          <${Declined} ...${state} ...${funcs} />
+          <${Declined} ...${state} ...${funcs} ...${hangout} />
         <//>
       `;
     case "/configure":
       return html` <${Suspense} fallback=${Loading}>
-        <${Configure} ...${state} ...${funcs} />
+        <${Configure} ...${state} ...${funcs} ...${hangout} />
       <//>`;
     case "/ACCEPTED":
     case "/ACCEPT":
@@ -62,21 +62,21 @@ export default function HangoutsFeatureRoutes(props) {
     case "/READ":
     case "/READER":
       return html` <${Suspense} fallback=${Loading}>
-        <${Hangchat} ...${state} ...${funcs} />
+        <${Hangchat} ...${state} ...${funcs} ...${hangout} />
       <//>`;
     case "/INVITEE":
       return html` <${Suspense} fallback=${Loading}>
-        <${Invite} ...${state} ...${funcs} />
+        <${Invite} ...${state} ...${funcs} ...${hangout} />
       <//>`;
     case "/INVITED":
     case "/INVITE":
     case "/DECLINER":
       return html` <${Suspense} fallback=${Loading}>
-        <${Invitee} ...${state} ...${funcs} />
+        <${Invitee} ...${state} ...${funcs} ...${hangout} />
       <//>`;
     case "/INVITER":
       return html` <${Suspense} fallback=${Loading}>
-        <${InviterContainer} state=${state} funcs=${funcs} />
+        <${InviterContainer} state=${state} funcs=${funcs} hangout=${hangout} />
       <//>`;
     case "/unread":
       return html` <${Suspense} fallback=${Loading}>

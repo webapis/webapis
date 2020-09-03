@@ -13,7 +13,7 @@ export default function MessageEditor({
 }) {
   return html`
     <div>
-      <div class="input-group mb-3">
+      <div class="input-group">
         <input
           disabled=${hangout && hangout.state === "BLOCKED"}
           type="text"

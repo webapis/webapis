@@ -290,9 +290,9 @@ export function BackSpace() {
 }
 
 export default function HangoutContainer({ state, funcs }) {
-  const { username } = state;
+  const { name } = state;
   useEffect(() => {
-    loadHangouts({ ...state, name: username });
+    loadHangouts({ ...state, name });
   }, []);
 
   return html`<${Hangouts} ...${state} ...${funcs} /> `;

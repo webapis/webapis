@@ -27,35 +27,30 @@ export default function Block({
   username = "",
 }) {
   return html`
-    <${Layout}>
-      <div class="card-header ">Block ${username}</div>
-      <div class="card-body">
+    <${Layout} username=${username} desc="You are about to block ">
+      <div class="d-flex flex-column h-100 justify-content-between">
         <div style=${style.checkboxRoot}>
           <input type="checkbox" style=${style.checkbox} onChange=${onReport} />
           <label>Report</label>
         </div>
-        <div class="row">
-          <div class="col">
-            <${Button}
-              data-testid="cancel-btn"
-              onClick=${onCancel}
-              title="Cancel"
-              bg="secondary"
-              outline
-              block
-            />
-          </div>
+        <div class="btn-group d-flex" role="group">
+          <${Button}
+            data-testid="cancel-btn"
+            onClick=${onCancel}
+            title="Close"
+            bg="secondary"
+            outline
+            block
+          />
 
-          <div class="col">
-            <${Button}
-              id="BLOCK"
-              onClick=${onUserClientCommand}
-              data-testid="block-btn"
-              title="Block"
-              bg="primary"
-              block
-            />
-          </div>
+          <${Button}
+            id="BLOCK"
+            onClick=${onUserClientCommand}
+            data-testid="block-btn"
+            title="Block"
+            bg="primary"
+            block
+          />
         </div>
       </div>
     <//>

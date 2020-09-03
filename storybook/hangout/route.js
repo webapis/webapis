@@ -4,14 +4,13 @@ import { AppRoute } from "../../client/components/app-route/index";
 import Block from "../../client/features/hangouts/ui-components/Block";
 import Blocked from "../../client/features/hangouts/ui-components/Blocked";
 import Configure from "../../client/features/hangouts/ui-components/Configure";
-//import Hangchat from "../../client/features/hangouts/ui-components/Hangchat";
 import Invite from "../../client/features/hangouts/ui-components/Invite";
 import Invitee from "../../client/features/hangouts/ui-components/Invitee";
+import Declined from "../../client/features/hangouts/ui-components/Declined";
 import { Inviter } from "../../client/features/hangouts/ui-components/Inviter";
 import UnreadHangouts from "../../client/features/hangouts/ui-components/UnreadHangouts";
 import Message from "../../client/features/hangouts/ui-components/messages/Message";
-import HangoutFilter from "../../client/features/hangouts/ui-components/Filter";
-import HangoutSearch from "../../client/features/hangouts/ui-components/Search";
+
 import HangoutsUiStates from "./hangouts.ui.state";
 import HangChatUiState from "./hangchat.ui.state";
 const html = htm.bind(h);
@@ -36,17 +35,20 @@ export default function HangoutRoutes() {
   return [
     html`
       <${AppRoute} path="/block">
-        <${Block} hangouts=${hangouts} username="demouser" />
+        <${Block} username="demouser" email="demouser@gmail.com" />
       <//>
       <${AppRoute} path="/blocked">
-        <${Blocked} hangouts=${hangouts} />
+        <${Blocked} username="demouser" email="demouser@gmail.com" />
       <//>
       <${AppRoute} path="/configure">
-        <${Configure} hangout=${{ username: "demouser" }} />
+        <${Configure} username="demouser" email="demouser@gmail.com" />
       <//>
 
       <${AppRoute} path="/invite">
-        <${Invite} hangouts=${hangouts} />
+        <${Invite} username="demouser" email="demouser@gmail.com" />
+      <//>
+      <${AppRoute} path="/declined">
+        <${Declined} username="demouser" email="demouser@gmail.com" />
       <//>
       <${AppRoute} path="/inviter">
         <${Inviter}
@@ -57,7 +59,7 @@ export default function HangoutRoutes() {
         />
       <//>
       <${AppRoute} path="/invitee">
-        <${Invitee} hangouts=${hangouts} />
+        <${Invitee} username="demouser" email="demouser@gmail.com" />
       <//>
       <${AppRoute} path="/unreadhangouts">
         <${UnreadHangouts} unreadhangouts=${hangouts} />

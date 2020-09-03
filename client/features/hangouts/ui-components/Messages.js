@@ -4,45 +4,32 @@ import {
   useState,
 } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
+import Layout from "./Layout";
 import MessageEditor from "./messages/MessageEditor";
 const html = htm.bind(h);
-export function Messages({ children }) {
-  return html` <div class="container-fluid">
-    <div class="d-none d-sm-block">
-      <div
-        class="row justify-content-center bg-success overflow-auto"
-        style="height:60vh"
-      >
-        <div class="col bg-light py-1">
-          ${children}
-        </div>
-      </div>
-    </div>
-    <div class="d-block d-sm-none">
-      <div
-        class="row justify-content-center bg-success overflow-auto"
-        style="height:75vh"
-      >
-        <div class="col bg-light pb-1">
-          ${children}
-        </div>
-      </div>
-    </div>
+export function Messages({ messages, name }) {
+  const { transformedMessages } = useTransformMessages({ messages, name });
+  return html` <div class="bg-light container-fluid pb-5">
+    ${transformedMessages &&
+    transformedMessages.map((msg) => {
+      return html` <${Message} ...${msg} /> `;
+    })}
   </div>`;
 }
 
-export function Message({ float, text, timelog, username, state }) {
+export function Message({ float, text, username, state, timestamp }) {
+  const { timelog } = useMessageTimeLog({ timestamp });
   if (float === "right")
     return html`<div
       data-testid="right-message-wrapper"
       class="row justify-content-end mb-2"
     >
       <div
-        class="float-right  align-self-end text-muted px-1 font-italic"
-        style="font-size: 0.7rem;"
+        class="float-right text-muted px-1 font-italic"
+        style="font-size: 0.6rem;width:60px;"
       >
-        <div data-testid="time">${timelog}</div>
-        <div data-testid="message-state">${state}</div>
+        <div class="text-right" data-testid="time">${timelog}</div>
+        <div class="text-right" data-testid="message-state">${state}</div>
       </div>
       <div
         data-testid="message"
@@ -54,32 +41,27 @@ export function Message({ float, text, timelog, username, state }) {
     </div>`;
   return html`<div
     data-testid="left-message-wrapper"
-    class="row justify-content-start mb-2"
+    class="no-gutters rounded  p-1 mb-2 d-flex"
+    style="max-width:75%;"
   >
-    <div
-      class="float-left bg-warning p-1 rounded row no-gutters"
-      style="max-width:75%;"
-    >
-      <div class="col-2 rounded row no-gutters">
-        <div class="col  d-flex justify-content-center ">
-          <div
-            class="bg-success align-self-center d-flex justify-content-center align-items-center rounded-circle"
-            style="width:30px;height:30px;font-size: 0.8rem;"
-          >
-            M
-          </div>
-        </div>
-      </div>
-      <div class="col-10" style="font-size: 0.8rem;" data-testid="message">
-        ${text}
+    <div class="d-flex">
+      <div
+        class="rounded-circle text-center bg-info"
+        style="width:40px;height:40px;line-height:2;"
+      >
+        M
       </div>
     </div>
     <div
-      class="float-left  align-self-end text-muted font-italic px-1"
-      style="font-size: 0.7rem;"
+      data-testid="message"
+      class="ml-1 p-1 bg-warning rounded"
+      style="font-size: 0.8rem;"
     >
+      ${text}
+    </div>
+    <div class=" font-italic text-muted pl-1" style="font-size: 0.6rem;">
       <div data-testid="message-sender">${username}</div>
-      <div data-testid="time">${timelog}</div>
+      <div data-testid="time" style="width:60px;">${timelog}</div>
       <div data-testid="message-state">${state}</div>
     </div>
   </div>`;
@@ -131,43 +113,25 @@ export function useMessageTimeLog({ timestamp }) {
   return { timelog };
 }
 
-function MessageContainer({ message }) {
-  const { timestamp } = message;
-  const { timelog } = useMessageTimeLog({ timestamp });
-
-  return html`<${Message} ...${message} timelog=${timelog} />`;
-}
-
-function MessageListContainer({ messages, name }) {
-  const { transformedMessages } = useTransformMessages({ messages, name });
-
-  return html`<${Messages}
-    >${transformedMessages &&
-    transformedMessages.map((msg) => {
-      return html` <${MessageContainer} message=${msg} /> `;
-    })}<//
-  >`;
-}
-
 export default function Hangchat({
   loading,
   messages = [],
   onMessageText,
   messageText,
-  username,
+  name,
   hangout,
   onUserClientCommand,
+  username,
+  onNavigation,
 }) {
-  useEffect(() => {
-    return () => {
-      // emptyHangout();
-      debugger;
-    };
-  }, []);
   return html`
-    <div class="row justify-content-center">
-      <div class="col-sm-5">
-        <${MessageListContainer} messages=${messages} name=${username} />
+    <${Layout}
+      username=${username}
+      desc="Chat room with"
+      onNavigation=${onNavigation}
+    >
+      <${Messages} messages=${messages} name=${name} />
+      <div class="w-100" style="position:absolute; bottom:0;">
         <${MessageEditor}
           loading=${loading}
           messageText=${messageText}
@@ -176,7 +140,7 @@ export default function Hangchat({
           hangout=${hangout}
         />
       </div>
-    </div>
+    <//>
   `;
 }
 

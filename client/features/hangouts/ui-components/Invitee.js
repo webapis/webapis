@@ -11,19 +11,19 @@ const style = {
     justifyContent: "center",
   },
 };
-export default function Invitee({ hangout }) {
+export default function Invitee({ username, email, state }) {
   return html`
-    <${Layout} id="invitee-ui">
-      <${Center}>
+    <${Layout} id="invitee-ui" username=${username} desc="Invitation for ">
+      <div
+        class="h-100 d-flex flex-column justify-content-center align-items-center text-center"
+      >
         <${Done} width="70" height="70" color="green" />
-      <//>
-      <${Center}>
         <p>
-          You will be able to chat with <b>${hangout && hangout.email}</b> once
-          your invition has been accepted.
+          You will be able to chat with <b>${email}</b> once your invition
+          accepted.
         </p>
-        ${hangout.state === "INVITED" && html`<div class="invited" />`}
-      <//>
+        ${state === "INVITED" && html`<div class="invited" />`}
+      </div>
     <//>
   `;
 }

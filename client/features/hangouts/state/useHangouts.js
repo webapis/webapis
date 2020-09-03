@@ -29,6 +29,7 @@ export function useHangouts() {
   function onNavigation(e) {
     e.stopPropagation();
     const id = e.currentTarget.id;
+    debugger;
     onAppRoute({ featureRoute: `/${id}`, route: "/hangouts" });
   }
 
@@ -63,13 +64,12 @@ export function useHangouts() {
     dispatch({ type: actionTypes.SEARCH_HANGOUT_STARTED });
   }
   function onSearchSelect(e) {
-    debugger;
     e.preventDefault();
-    debugger;
+
     const { id } = e.target;
 
     const hangout = hangouts.find((s) => s.username === id);
-    debugger;
+
     dispatch({ type: actionTypes.SELECTED_HANGOUT, hangout });
     setTimeout(function () {
       onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
@@ -109,8 +109,6 @@ export function useHangouts() {
         isValidGuestEmail: true,
       });
     }
-
-    debugger;
   }
   function onGuestEmailInputFocus() {
     dispatch({
@@ -119,7 +117,7 @@ export function useHangouts() {
     });
   }
   return {
-    state: { ...state, username, dispatch },
+    state: { ...state, name: username, dispatch },
     funcs: {
       onGuestEmailChange,
       onSearchSelect,
