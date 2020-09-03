@@ -13,7 +13,7 @@ const Configure = lazy(() => import("./ui-components/Configure"));
 const Hangchat = lazy(() => import("./ui-components/Messages"));
 const Invite = lazy(() => import("./ui-components/Invite"));
 const Invitee = lazy(() => import("./ui-components/Invitee"));
-const InviterContainer = lazy(() => import("./ui-components/Inviter"));
+const Inviter = lazy(() => import("./ui-components/Inviter"));
 const HangoutsContainer = lazy(() => import("./ui-components/Hangouts"));
 const Declined = lazy(() => import("./ui-components/Declined"));
 const UnreadHangouts = lazy(() => import("./ui-components/UnreadHangouts"));
@@ -22,7 +22,7 @@ export default function HangoutsFeatureRoutes(props) {
   const { onAppRoute, routeState } = useAppRoute();
   const { featureRoute } = routeState;
   const { state, funcs } = useHangouts();
-
+  const { hangout } = state;
   const { onUnreadSelect, onUnreadRemove, reducedUnreads } = useUnread({
     ...state,
     onAppRoute,
@@ -31,24 +31,28 @@ export default function HangoutsFeatureRoutes(props) {
   switch (featureRoute) {
     case "/bckui":
       return html` <${Suspense} fallback=${Loading}>
-        <${Block} hangout=${hangout} onBlock=${onUserClientCommand} />
+        <${Block}
+          hangout=${hangout}
+          onBlock=${onUserClientCommand}
+          ...${hangout}
+        />
       <//>`;
     case "/UNBLOCK":
       return html`
         <${Suspense} fallback=${Loading}>
-          <${Blocked} ...${state} ...${funcs} />
+          <${Blocked} ...${state} ...${funcs} ...${hangout} />
         <//>
       `;
     case "/DECLINED":
     case "/DECLINE":
       return html`
         <${Suspense} fallback=${Loading}>
-          <${Declined} ...${state} ...${funcs} />
+          <${Declined} ...${state} ...${funcs} ...${hangout} />
         <//>
       `;
     case "/configure":
       return html` <${Suspense} fallback=${Loading}>
-        <${Configure} ...${state} ...${funcs} />
+        <${Configure} ...${state} ...${funcs} ...${hangout} />
       <//>`;
     case "/ACCEPTED":
     case "/ACCEPT":
@@ -62,21 +66,21 @@ export default function HangoutsFeatureRoutes(props) {
     case "/READ":
     case "/READER":
       return html` <${Suspense} fallback=${Loading}>
-        <${Hangchat} ...${state} ...${funcs} />
+        <${Hangchat} ...${state} ...${funcs} ...${hangout} />
       <//>`;
     case "/INVITEE":
       return html` <${Suspense} fallback=${Loading}>
-        <${Invite} ...${state} ...${funcs} />
+        <${Invite} ...${state} ...${funcs} ...${hangout} />
       <//>`;
     case "/INVITED":
     case "/INVITE":
     case "/DECLINER":
       return html` <${Suspense} fallback=${Loading}>
-        <${Invitee} ...${state} ...${funcs} />
+        <${Invitee} ...${state} ...${funcs} ...${hangout} />
       <//>`;
     case "/INVITER":
       return html` <${Suspense} fallback=${Loading}>
-        <${InviterContainer} state=${state} funcs=${funcs} />
+        <${Inviter} state=${state} funcs=${funcs} ...${hangout} />
       <//>`;
     case "/unread":
       return html` <${Suspense} fallback=${Loading}>
