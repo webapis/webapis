@@ -4,45 +4,42 @@ import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js"
 import { Message, Messages } from "../ui-components/Messages";
 import { useMessageTimeLog } from "../ui-components/Messages";
 import Button from "controls/button/index";
-
+import Layout from "./Layout";
 const html = htm.bind(h);
 export function Inviter(props) {
   const { pendingHangout, onUserClientCommand } = props;
   return html`
-    <div class="row justify-content-center" id="inviter-ui">
-      <div class="col-sm-5 bg-light">
-        <${Messages}>
-          <${Message} ...${props} />
-        <//>
+    <${Layout}>
+      <div
+        class="d-flex flex-column justify-content-between"
+        style="height:100%"
+      >
+        <${Message} ...${props} />
 
-        <div class="row">
-          <div class="col">
-            <${Button}
-              id="DECLINE"
-              onClick=${onUserClientCommand}
-              data-testid="decline-btn"
-              loading=${pendingHangout && pendingHangout.command === "DECLINE"}
-              title="Decline"
-              block
-              bg="danger"
-              outline
-            />
-          </div>
+        <div class="btn-group d-flex" role="group">
+          <${Button}
+            id="DECLINE"
+            onClick=${onUserClientCommand}
+            data-testid="decline-btn"
+            loading=${pendingHangout && pendingHangout.command === "DECLINE"}
+            title="Decline"
+            block
+            bg="danger"
+            outline
+          />
 
-          <div class="col mb-1">
-            <${Button}
-              id="ACCEPT"
-              onClick=${onUserClientCommand}
-              data-testid="accept-btn"
-              loading=${pendingHangout && pendingHangout.command === "ACCEPT"}
-              title="Accept"
-              bg="primary"
-              block
-            />
-          </div>
+          <${Button}
+            id="ACCEPT"
+            onClick=${onUserClientCommand}
+            data-testid="accept-btn"
+            loading=${pendingHangout && pendingHangout.command === "ACCEPT"}
+            title="Accept"
+            bg="primary"
+            block
+          />
         </div>
       </div>
-    </div>
+    <//>
   `;
 }
 

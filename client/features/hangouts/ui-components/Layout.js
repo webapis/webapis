@@ -9,7 +9,7 @@ export default function Layout({ children, id }) {
       style="height:90vh"
       data-testid=${id}
     >
-      <div class=" row justify-content-center">
+      <div class=" row justify-content-center ">
         <div class="col-md-8 col-lg-5 pt-3">
           <div class="card">
             <div class="card-header">
@@ -25,8 +25,12 @@ export default function Layout({ children, id }) {
                 class="justify-content-center bg-success overflow-auto"
                 style="height:60vh"
               >
-                <div class="bg-light py-1">
-                  ${children}
+                <div
+                  class="bg-light py-1 d-flex justify-content-center h-100 w-100"
+                >
+                  <div class="w-100">
+                    ${children}
+                  </div>
                 </div>
               </div>
             </div>
@@ -35,8 +39,12 @@ export default function Layout({ children, id }) {
                 class="justify-content-center bg-success overflow-auto"
                 style="height:75vh"
               >
-                <div class="bg-light pb-1">
-                  ${children}
+                <div
+                  class="bg-light pb-1 d-flex justify-content-center h-100 w-100"
+                >
+                  <div class="w-100">
+                    ${children}
+                  </div>
                 </div>
               </div>
             </div>

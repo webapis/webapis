@@ -14,16 +14,18 @@ const style = {
 export default function Invitee({ hangout }) {
   return html`
     <${Layout} id="invitee-ui">
-      <${Center}>
+      <div
+        class="h-100 d-flex flex-column justify-content-center align-items-center"
+      >
         <${Done} width="70" height="70" color="green" />
-      <//>
-      <${Center}>
         <p>
           You will be able to chat with <b>${hangout && hangout.email}</b> once
-          your invition has been accepted.
+          your invition accepted.
         </p>
-        ${hangout.state === "INVITED" && html`<div class="invited" />`}
-      <//>
+        ${hangout &&
+        hangout.state === "INVITED" &&
+        html`<div class="invited" />`}
+      </div>
     <//>
   `;
 }

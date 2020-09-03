@@ -19,10 +19,15 @@ export default function Invite({
 }) {
   return html`
     <${Layout} id="invite-ui">
+    <div class="h-100 d-flex flex-column justify-content-around" >
+    <div class="">
+    <div class="d-flex justify-content-center">
       <${PersonAdd} color="green" />
-
+      </div>
+      <div class="d-flex justify-content-center">
       Start Conversation with <b>${hangout && hangout.email}</b>
-
+      </div>
+    <div class="m-3">
       <${TextInput}
         id="messageTextInput"
         onChange=${onMessageText}
@@ -30,6 +35,7 @@ export default function Invite({
         data-testid="messageTextInput"
         disabled=${loading}
       />
+      </div>
       <div class="d-flex justify-content-center">
         <${Button}
           disables=${messageText === ""}
@@ -41,6 +47,8 @@ export default function Invite({
           bg="primary"
         />
       <//>
+      </div>
+      </div>
     </${Layout}>
   `;
 }
