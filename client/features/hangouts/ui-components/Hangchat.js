@@ -5,7 +5,6 @@ import {
 } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 import Layout from "./Layout";
-import MessageEditor from "./messages/MessageEditor";
 const html = htm.bind(h);
 export function Messages({ messages, name }) {
   const { transformedMessages } = useTransformMessages({ messages, name });
@@ -195,4 +194,42 @@ function sortMessages({ messages }) {
   } else {
     return [];
   }
+}
+
+function MessageEditor({
+  loading,
+  messageText,
+  onMessageText,
+  onMessage,
+  hangout,
+}) {
+  return html`
+    <div>
+      <div class="input-group">
+        <input
+          disabled=${hangout && hangout.state === "BLOCKED"}
+          type="text"
+          class="form-control"
+          aria-label="Recipient's username"
+          aria-describedby="button-addon2"
+          onChange=${onMessageText}
+          data-testid="message-input"
+          value=${messageText}
+        />
+        <div class="input-group-append">
+          <button
+            class="btn btn-primary"
+            type="button"
+            loading=${loading}
+            disabled=${hangout && hangout.state === "BLOCKED"}
+            id="MESSAGE"
+            onClick=${onMessage}
+            data-testid="send-btn"
+          >
+            Send
+          </button>
+        </div>
+      </div>
+    </div>
+  `;
 }

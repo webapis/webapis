@@ -1,8 +1,7 @@
 import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 
-import { Message, Messages } from "../ui-components/Messages";
-import { useMessageTimeLog } from "../ui-components/Messages";
+import { Message, useMessageTimeLog } from "../ui-components/Hangchat";
 import Button from "controls/button/index";
 import Layout from "./Layout";
 const html = htm.bind(h);

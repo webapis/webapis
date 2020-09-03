@@ -6,11 +6,8 @@ import Button from "controls/button/index";
 const html = htm.bind(h);
 
 export default function Configure({
-  onBlock,
   onDelete,
   onArchive,
-  onNotification,
-  onConversationHistory,
   onNavigation,
   onOk,
   username,

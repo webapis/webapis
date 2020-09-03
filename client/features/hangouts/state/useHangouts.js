@@ -13,18 +13,8 @@ export function useHangouts() {
   const { onAppRoute } = useAppRoute();
   const authContext = useAuthContext();
   const username = authContext.state.user && authContext.state.user.username;
-  const { user } = authContext.state;
   const [state, dispatch] = useHangoutContext();
-  const {
-    hangout,
-    hangouts,
-    messageText,
-    messages,
-    inviteGuest,
-    pendingHangout,
-    loading,
-    guestEmail,
-  } = state;
+  const { hangouts, inviteGuest, guestEmail } = state;
 
   function onNavigation(e) {
     e.stopPropagation();
@@ -38,9 +28,6 @@ export function useHangouts() {
     changeMessageText({ dispatch, text });
   }
 
-  function emptyHangout() {
-    dispatch({ type: actionTypes.HANGOUT_UPDATED, hangout: null });
-  }
   function onUserClientCommand(e) {
     const id = e.target.id;
 
