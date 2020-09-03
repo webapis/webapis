@@ -207,7 +207,6 @@ export function removeUnreads({ dispatch, name, hangout, state }) {
 
   const localHangouts = JSON.parse(localStorage.getItem(hangoutKey));
   if (localHangouts && localHangouts.length > 0) {
-    debugger;
     let filtered = localHangouts.filter(
       (f) =>
         (f.username === username && f.state === state) ||
@@ -219,7 +218,6 @@ export function removeUnreads({ dispatch, name, hangout, state }) {
     });
     localStorage.setItem(hangoutKey, JSON.stringify(filtered));
   } else {
-    debugger;
   }
 }
 

@@ -29,6 +29,7 @@ export function useHangouts() {
   function onNavigation(e) {
     e.stopPropagation();
     const id = e.currentTarget.id;
+    debugger;
     onAppRoute({ featureRoute: `/${id}`, route: "/hangouts" });
   }
 

@@ -122,9 +122,14 @@ export default function Hangchat({
   hangout,
   onUserClientCommand,
   username,
+  onNavigation,
 }) {
   return html`
-    <${Layout} username=${username} desc="Chat room with ">
+    <${Layout}
+      username=${username}
+      desc="Chat room with"
+      onNavigation=${onNavigation}
+    >
       <${Messages} messages=${messages} name=${name} />
       <div class="w-100" style="position:absolute; bottom:0;">
         <${MessageEditor}

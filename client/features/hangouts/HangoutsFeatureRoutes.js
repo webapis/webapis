@@ -31,11 +31,7 @@ export default function HangoutsFeatureRoutes(props) {
   switch (featureRoute) {
     case "/bckui":
       return html` <${Suspense} fallback=${Loading}>
-        <${Block}
-          hangout=${hangout}
-          onBlock=${onUserClientCommand}
-          ...${hangout}
-        />
+        <${Block} hangout=${hangout} ...${hangout} />
       <//>`;
     case "/UNBLOCK":
       return html`
