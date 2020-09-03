@@ -7,9 +7,9 @@ import Button from "controls/button/index";
 import Layout from "./Layout";
 const html = htm.bind(h);
 export function Inviter(props) {
-  const { pendingHangout, onUserClientCommand } = props;
+  const { pendingHangout, onUserClientCommand, username } = props;
   return html`
-    <${Layout}>
+    <${Layout} username=${username} desc="Invitation from ">
       <div
         class="d-flex flex-column justify-content-between"
         style="height:100%"

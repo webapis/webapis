@@ -46,7 +46,7 @@ render(
               <${DropdownItem} id="block">Block<//>
               <${DropdownItem} id="blocked">Blocked<//>
               <${DropdownItem} id="configure">Configure<//>
-              <${DropdownItem} id="hangchat">Hangchat<//>
+              <${DropdownItem} id="declined">Declined<//>
               <${DropdownItem} id="hangouts">Hangout<//>
               <${DropdownItem} id="invite">Invite<//>
               <${DropdownItem} id="invitee">Invitee<//>

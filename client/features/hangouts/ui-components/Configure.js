@@ -13,39 +13,26 @@ export default function Configure({
   onConversationHistory,
   onNavigation,
   onOk,
-  hangout,
+  username,
 }) {
   return html`
-    <${Layout}>
-      <div class="card-header">
-        Configurations for ${hangout && hangout.username}
-      </div>
-      <div class="card-body">
-        <${FormCheckInput}
-          label="Notifications"
-          onChange=${onNotification}
-          id="notifications"
-        />
-        <${FormCheckInput}
-          label="Conversation History"
-          onChange=${onConversationHistory}
-          id="history"
-        />
-
-        <hr />
+    <${Layout} username=${username} desc="Configurations for ">
+      <div class="d-flex flex-column justify-content-between h-100">
         <div>
-          <${IconButton} title="Archive" onClick=${onArchive}>
-            <${ArchiveIcon} /> Archive
-          <//>
-          <${IconButton} title="Delete" onClick=${onDelete}>
-            <${TrashIcon} />Delete
-          <//>
-          <${IconButton} id="bckui" title="Block" onClick=${onNavigation}>
-            <${BlockIcon} />Block
-          <//>
+          <div class="btn-group-vertical p-5 d-flex" role="group">
+            <${IconButton} title="Archive" onClick=${onArchive}>
+              <${ArchiveIcon} /> Archive
+            <//>
+            <${IconButton} title="Delete" onClick=${onDelete}>
+              <${TrashIcon} />Delete
+            <//>
+            <${IconButton} id="bckui" title="Block" onClick=${onNavigation}>
+              <${BlockIcon} />Block
+            <//>
+          </div>
         </div>
-        <div>
-          <${Button} onClick=${onOk} title="OK" bg="primary" />
+        <div class="p-2">
+          <${Button} onClick=${onOk} title="Close" bg="primary" />
         </div>
       </div>
     <//>
@@ -58,19 +45,6 @@ function IconButton(props) {
     <button class="btn btn-outline-secondary" ...${props}>
       ${children}
     </button>
-  `;
-}
-
-function FormCheckInput(props) {
-  const { id, label } = props;
-  return html`
-  <div class="form-check">
-    <input class="form-check-input" type="checkbox" ...${props}>
-  <label class="form-check-label" for=${id}>
-    ${label}
-  </label>
-</div>
-</div>
   `;
 }
 

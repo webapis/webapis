@@ -2,7 +2,7 @@ import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.m
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 
 const html = htm.bind(h);
-export default function Layout({ children, id }) {
+export default function Layout({ children, id, username, desc }) {
   return html`
     <div
       class="container-fluid bg-danger fixed-bottom"
@@ -13,10 +13,15 @@ export default function Layout({ children, id }) {
         <div class="col-md-8 col-lg-5 pt-3">
           <div class="card">
             <div class="card-header">
-              <div class="d-flex justify-content-end">
-                <button class="btn btn-sm">
-                  <${GrearIcon} />
-                </button>
+              <div class="d-flex justify-content-between">
+                <div>
+                  ${desc} <span class="font-weight-bold">${username}</span>
+                </div>
+                <div>
+                  <button class="btn btn-sm">
+                    <${GrearIcon} />
+                  </button>
+                </div>
               </div>
             </div>
 

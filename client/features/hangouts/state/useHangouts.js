@@ -119,7 +119,7 @@ export function useHangouts() {
     });
   }
   return {
-    state: { ...state, username, dispatch },
+    state: { ...state, name: username, dispatch },
     funcs: {
       onGuestEmailChange,
       onSearchSelect,

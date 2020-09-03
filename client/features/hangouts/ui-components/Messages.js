@@ -36,7 +36,7 @@ export function Message({ float, text, username, state, timestamp }) {
         class="float-right bg-info p-1 rounded"
         style="max-width:70%; font-size: 0.8rem;"
       >
-        ${text}rtrt
+        ${text}
       </div>
     </div>`;
   return html`<div
@@ -57,7 +57,7 @@ export function Message({ float, text, username, state, timestamp }) {
       class="ml-1 p-1 bg-warning rounded"
       style="font-size: 0.8rem;"
     >
-      ${text}rtrtrrtrt
+      ${text}
     </div>
     <div class=" font-italic text-muted pl-1" style="font-size: 0.6rem;">
       <div data-testid="message-sender">${username}</div>
@@ -118,13 +118,14 @@ export default function Hangchat({
   messages = [],
   onMessageText,
   messageText,
-  username,
+  name,
   hangout,
   onUserClientCommand,
+  username,
 }) {
   return html`
-    <${Layout}>
-      <${Messages} messages=${messages} name=${username} />
+    <${Layout} username=${username} desc="Chat room with ">
+      <${Messages} messages=${messages} name=${name} />
       <div class="w-100" style="position:absolute; bottom:0;">
         <${MessageEditor}
           loading=${loading}

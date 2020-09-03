@@ -37,40 +37,40 @@ const messages = [
     username: "berouser",
     state: "read",
   },
-  // {
-  //   timelog: "Now",
-  //   text: "Hello bero. ",
-  //   username: "demouser",
-  //   state: "read",
-  // },
-  // {
-  //   timelog: "Now",
-  //   text: "Hello demo How are you doing today? Are you doing all right",
-  //   username: "berouser",
-  //   state: "read",
-  // },
-  // {
-  //   timelog: "Now",
-  //   text: "Hello bero. ",
-  //   username: "demouser",
-  //   state: "read",
-  // },
-  // {
-  //   timelog: "Now",
-  //   text: "Hello demo How are you doing today? Are you doing all right",
-  //   username: "berouser",
-  //   state: "read",
-  // },
-  // {
-  //   timelog: "Now",
-  //   text: "Hello bero. ",
-  //   username: "demouser",
-  //   state: "read",
-  // },
+  {
+    timelog: "Now",
+    text: "Hello bero. ",
+    username: "demouser",
+    state: "read",
+  },
+  {
+    timelog: "Now",
+    text: "Hello demo How are you doing today? Are you doing all right",
+    username: "berouser",
+    state: "read",
+  },
+  {
+    timelog: "Now",
+    text: "Hello bero. ",
+    username: "demouser",
+    state: "read",
+  },
+  {
+    timelog: "Now",
+    text: "Hello demo How are you doing today? Are you doing all right",
+    username: "berouser",
+    state: "read",
+  },
+  {
+    timelog: "Now",
+    text: "Hello bero. ",
+    username: "demouser",
+    state: "read",
+  },
 ];
 
 export default function HangchatUiState() {
   return html` <div style="height:100%">
-    <${Hangchat} messages=${messages} username="demouser" />
+    <${Hangchat} messages=${messages} name="demouser" username="berouser" />
   </div>`;
 }
