@@ -43,9 +43,8 @@ export function Inviter(props) {
   `;
 }
 
-export default function InviterContainer({ state, funcs }) {
-  const { hangout } = state;
-  const { message, username } = hangout;
+export default function InviterContainer({ state, funcs, hangout }) {
+  const { username, message } = hangout;
   const { timestamp, text, state: messageState } = message;
   const { timelog } = useMessageTimeLog({ timestamp });
   return html`
