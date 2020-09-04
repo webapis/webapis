@@ -42,7 +42,7 @@ describe("Blocker", () => {
     //     .contains(1);
     // cy.wait(200)
     cy.get("[data-testid=unread-link]").click();
-
+    cy.wait(200);
     cy.get("[data-testid=unread-ui]").find("[data-testid=berouser]").click();
 
     cy.get("[data-testid=message-input]").type("Hello berouser x");
