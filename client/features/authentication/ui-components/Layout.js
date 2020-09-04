@@ -7,7 +7,7 @@ export default function Layout({ children, id, username, desc }) {
   if (device === "phone")
     return html`
       <div
-        class="container-fluid bg-danger fixed-bottom"
+        class="container-fluid bg-success"
         style="height:90vh"
         data-testid=${id}
       >
@@ -40,7 +40,7 @@ export default function Layout({ children, id, username, desc }) {
     `;
   return html`
     <div
-      class="container-fluid bg-danger fixed-bottom"
+      class="container-fluid bg-success"
       style="height:90vh"
       data-testid=${id}
     >

@@ -2,6 +2,7 @@ import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.m
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 import { useEffect } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
 import { loadHangouts } from "../state/local-storage/common";
+import Layout from "./Layout";
 const html = htm.bind(h);
 
 export function Hangouts({
@@ -27,65 +28,60 @@ export function Hangouts({
   error,
 }) {
   return html`
-    <div class="container-fluid bg-success" style="height:90vh">
-      <div class=" row justify-content-center">
-        <div class="col-md-8 col-lg-5 pt-3">
-          <div class="card">
-            <div class="card-header ">
-              <${PeopleIcon} />
-            </div>
-            <div class="card-body">
-              <${SeachComponent}
-                onSearchInput=${onSearchInput}
-                onSearch=${onSearch}
-                placeholder="Enter username or email"
-                btnTitle="Search"
-                search=${search}
-                searching=${searching}
-                searchComplete=${searchComplete}
-              />
-              ${userNotFound &&
-              html`
-                <${InviteGuest}
-                  onGuestEmailChange=${onGuestEmailChange}
-                  onSendInviteGuest=${onSendInviteGuest}
-                  onMessageFoGuestInput=${onMessageFoGuestInput}
-                  onInviteGuest=${onInviteGuest}
-                  guestEmail=${guestEmail}
-                  invitationSuccess=${invitationSuccess}
-                  userNotFound=${userNotFound}
-                  invitingGuest=${invitingGuest}
-                  inviteGuest=${inviteGuest}
-                  messageForGuest=${messageForGuest}
-                  error=${error}
-                  isValidGuestEmail=${isValidGuestEmail}
-                  onGuestEmailInputFocus=${onGuestEmailInputFocus}
-                />
-              `}
+    <${Layout} desc="Contact List">
+      <div class="h-100 p-2">
+        <${SeachComponent}
+          onSearchInput=${onSearchInput}
+          onSearch=${onSearch}
+          placeholder="Enter username or email"
+          btnTitle="Search"
+          search=${search}
+          searching=${searching}
+          searchComplete=${searchComplete}
+        />
+        ${
+          userNotFound &&
+          html`
+            <${InviteGuest}
+              onGuestEmailChange=${onGuestEmailChange}
+              onSendInviteGuest=${onSendInviteGuest}
+              onMessageFoGuestInput=${onMessageFoGuestInput}
+              onInviteGuest=${onInviteGuest}
+              guestEmail=${guestEmail}
+              invitationSuccess=${invitationSuccess}
+              userNotFound=${userNotFound}
+              invitingGuest=${invitingGuest}
+              inviteGuest=${inviteGuest}
+              messageForGuest=${messageForGuest}
+              error=${error}
+              isValidGuestEmail=${isValidGuestEmail}
+              onGuestEmailInputFocus=${onGuestEmailInputFocus}
+            />
+          `
+        }
 
-              <div class="list-group">
-                ${hangouts &&
-                hangouts.map((h) => {
-                  return html`
-                    <div>
-                      <a
-                        id=${h.username}
-                        onClick=${onSearchSelect}
-                        data-testid=${h.username}
-                        href="#"
-                        class="list-group-item list-group-item-action mb-1 border rounded-pill border-success"
-                      >
-                        ${h.username}:${h.email}
-                      </a>
-                    </div>
-                  `;
-                })}
-              </div>
-            </div>
-          </div>
+        <div class="list-group">
+          ${
+            hangouts &&
+            hangouts.map((h) => {
+              return html`
+                <div>
+                  <a
+                    id=${h.username}
+                    onClick=${onSearchSelect}
+                    data-testid=${h.username}
+                    href="#"
+                    class="list-group-item list-group-item-action mb-1 border rounded-pill border-success"
+                  >
+                    ${h.username}:${h.email}
+                  </a>
+                </div>
+              `;
+            })
+          }
         </div>
-      </div>
-    </div>
+      <//>
+    </${Layout}>
   `;
 }
 

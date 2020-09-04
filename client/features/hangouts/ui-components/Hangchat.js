@@ -2,13 +2,15 @@ import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.m
 import {
   useEffect,
   useState,
+  useRef,
 } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 import Layout from "./Layout";
 const html = htm.bind(h);
-export function Messages({ messages, name }) {
+export function Messages({ messages, name, ref }) {
   const { transformedMessages } = useTransformMessages({ messages, name });
-  return html` <div class="bg-light container-fluid pb-5">
+
+  return html` <div ref=${ref} class="bg-light container-fluid pb-5">
     ${transformedMessages &&
     transformedMessages.map((msg) => {
       if (msg.type === "blocked") {
@@ -136,12 +138,22 @@ export default function Hangchat({
   onUserClientCommand,
   username,
   onNavigation,
+  scrollToBottom,
+  onScrollToBottom,
 }) {
+  useEffect(() => {
+    if (messages) {
+      onScrollToBottom(true);
+    }
+  }, [messages]);
+
   return html`
     <${Layout}
       username=${username}
       desc="Chat room with"
       onNavigation=${onNavigation}
+      scrollToBottom=${scrollToBottom}
+      onScrollToBottom=${onScrollToBottom}
     >
       <${Messages} messages=${messages} name=${name} />
       <div

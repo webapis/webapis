@@ -18,7 +18,10 @@ export default function Configure({
       desc="Configurations for "
       onNavigation=${onNavigation}
     >
-      <div class="d-flex flex-column justify-content-between h-100">
+      <div
+        data-testid="config-ui"
+        class="d-flex flex-column justify-content-between h-100"
+      >
         <div>
           <div class="btn-group-vertical p-5 d-flex" role="group">
             <${IconButton} title="Archive" onClick=${onArchive}>

@@ -96,9 +96,15 @@ export function useHangouts() {
       isValidGuestEmail: undefined,
     });
   }
+
+  function onScrollToBottom(scrollToBottom) {
+    debugger;
+    dispatch({ type: actionTypes.SCROLL_TO_BOTTOM, scrollToBottom });
+  }
   return {
     state: { ...state, name: username, dispatch },
     funcs: {
+      onScrollToBottom,
       onGuestEmailChange,
       onSearchSelect,
       onMessageForGuestInput,

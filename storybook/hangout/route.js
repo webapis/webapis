@@ -9,7 +9,6 @@ import Invitee from "../../client/features/hangouts/ui-components/Invitee";
 import Declined from "../../client/features/hangouts/ui-components/Declined";
 import { Inviter } from "../../client/features/hangouts/ui-components/Inviter";
 import UnreadHangouts from "../../client/features/hangouts/ui-components/UnreadHangouts";
-import Message from "../../client/features/hangouts/ui-components/messages/Message";
 
 import HangoutsUiStates from "./hangouts.ui.state";
 import HangChatUiState from "./hangchat.ui.state";
@@ -19,62 +18,64 @@ const hangouts = [
   { username: "usertwo" },
   { username: "userthree" },
 ];
-const hangout = {
-  username: "testuser",
-  email: "test@gmail.com",
-  message: { text: `Let's chat on Hangout!`, timestamp: 1590820782921 },
-};
-const message = {
-  username: "breno",
-  text: `Let's Chat on Hangout!`,
-  timestamp: 1591331767836,
-};
-//
+
 import { messages } from "./fakeMessages";
 export default function HangoutRoutes() {
   return [
     html`
       <${AppRoute} path="/block">
-        <${Block} username="demouser" email="demouser@gmail.com" />
+        <div class="fixed-bottom">
+          <${Block} username="demouser" email="demouser@gmail.com" />
+        </div>
       <//>
       <${AppRoute} path="/blocked">
-        <${Blocked} username="demouser" email="demouser@gmail.com" />
+        <div class="fixed-bottom">
+          <${Blocked} username="demouser" email="demouser@gmail.com" />
+        </div>
       <//>
       <${AppRoute} path="/configure">
-        <${Configure} username="demouser" email="demouser@gmail.com" />
-      <//>
-
-      <${AppRoute} path="/invite">
-        <${Invite} username="demouser" email="demouser@gmail.com" />
-      <//>
-      <${AppRoute} path="/declined">
-        <${Declined} username="demouser" email="demouser@gmail.com" />
-      <//>
-      <${AppRoute} path="/inviter">
-        <${Inviter}
-          text="let's chat"
-          username="demouser"
-          state="unread"
-          timelog="Now"
-        />
-      <//>
-      <${AppRoute} path="/invitee">
-        <${Invitee} username="demouser" email="demouser@gmail.com" />
-      <//>
-      <${AppRoute} path="/unreadhangouts">
-        <${UnreadHangouts} unreadhangouts=${hangouts} />
-      <//>
-      <${AppRoute} path="/message">
-        <div style=${{ padding: 20, backgroundColor: "#eeeeeee" }}>
-          <${Message} message="{message}" username=${hangout.username} />
+        <div class="fixed-bottom">
+          <${Configure} username="demouser" email="demouser@gmail.com" />
         </div>
       <//>
 
+      <${AppRoute} path="/invite">
+        <div class="fixed-bottom">
+          <${Invite} username="demouser" email="demouser@gmail.com" />
+        </div>
+      <//>
+      <${AppRoute} path="/declined">
+        <div class="fixed-bottom">
+          <${Declined} username="demouser" email="demouser@gmail.com" />
+        </div>
+      <//>
+      <${AppRoute} path="/inviter">
+        <div class="fixed-bottom">
+          <${Inviter}
+            text="let's chat"
+            username="demouser"
+            state="unread"
+            timelog="Now"
+          />
+        </div>
+      <//>
+      <${AppRoute} path="/invitee">
+        <div class="fixed-bottom">
+          <${Invitee} username="demouser" email="demouser@gmail.com" />
+        </div>
+      <//>
+      <${AppRoute} path="/unreadhangouts">
+        <div class="fixed-bottom">
+          <${UnreadHangouts} unreadhangouts=${hangouts} />
+        </div>
+      <//>
       <${AppRoute} path="/hangouts">
         <${HangoutsUiStates} />
       <//>
       <${AppRoute} path="/hangchat">
-        <${HangChatUiState} />
+        <div class="fixed-bottom">
+          <${HangChatUiState} />
+        </div>
       <//>
     `,
   ];

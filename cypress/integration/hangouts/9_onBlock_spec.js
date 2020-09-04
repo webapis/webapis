@@ -46,9 +46,11 @@ describe("onBlock", () => {
     // cy.get("[data-testid=hangouts-link]").click();
 
     cy.get("[data-testid=demouser]").click();
+    cy.get("[data-testid=hangchat-ui]");
     cy.get("[data-testid=config-btn]").click();
+    cy.get("[data-testid=config-ui]");
     cy.get("[data-testid=bckui-btn]").click();
-
+    cy.get("[data-testid=block-ui]");
     cy.get("[data-testid=block-btn]").click();
     cy.get("[data-testid=hangchat-ui]");
     cy.get("[data-testid=send-btn]").should("be.disabled");

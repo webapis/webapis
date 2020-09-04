@@ -34,13 +34,15 @@ export default function AuthFeatureRoutes() {
       return html`
         <${FeatureRoute} path="/change-pasword">
           <${Suspense} fallback=${Loading}>
-            <${ChangePassword}
-              ...${state}
-              onFocus=${onFocus}
-              onBlur=${onChangePassBlur}
-              onChange=${onChange}
-              onPasswordChange=${onPasswordChange}
-            />
+            <div class=" fixed-bottom">
+              <${ChangePassword}
+                ...${state}
+                onFocus=${onFocus}
+                onBlur=${onChangePassBlur}
+                onChange=${onChange}
+                onPasswordChange=${onPasswordChange}
+              />
+            </div>
           <//>
         <//>
       `;
@@ -48,14 +50,16 @@ export default function AuthFeatureRoutes() {
       return html`
         <${FeatureRoute} path="/login">
           <${Suspense} fallback=${Loading}>
-            <${Login}
-              ...${state}
-              onFocus=${onFocus}
-              onBlur=${onLoginBlur}
-              onChange=${onChange}
-              onLogin=${onLogin}
-              onAuthNavigation=${onAuthNavigation}
-            />
+            <div class=" fixed-bottom">
+              <${Login}
+                ...${state}
+                onFocus=${onFocus}
+                onBlur=${onLoginBlur}
+                onChange=${onChange}
+                onLogin=${onLogin}
+                onAuthNavigation=${onAuthNavigation}
+              />
+            </div>
           <//>
         <//>
       `;
@@ -63,14 +67,16 @@ export default function AuthFeatureRoutes() {
       return html`
         <${FeatureRoute} path="/signup">
           <${Suspense} fallback=${Loading}>
-            <${Signup}
-              ...${state}
-              onFocus=${onFocus}
-              onBlur=${onSignupBlur}
-              onChange=${onChange}
-              onSignup=${onSignup}
-              onAuthNavigation=${onAuthNavigation}
-            />
+            <div class=" fixed-bottom">
+              <${Signup}
+                ...${state}
+                onFocus=${onFocus}
+                onBlur=${onSignupBlur}
+                onChange=${onChange}
+                onSignup=${onSignup}
+                onAuthNavigation=${onAuthNavigation}
+              />
+            </div>
           <//>
         <//>
       `;
@@ -78,13 +84,15 @@ export default function AuthFeatureRoutes() {
       return html`
         <${FeatureRoute} path="/forgot-pasword">
           <${Suspense} fallback=${Loading}>
-            <${ForgotPassword}
-              ...${state}
-              onFocus=${onFocus}
-              onBlur=${onRequestPassChangeBlur}
-              onChange=${onChange}
-              onRequestPasswordChange=${onRequestPasswordChange}
-            />
+            <div class=" fixed-bottom">
+              <${ForgotPassword}
+                ...${state}
+                onFocus=${onFocus}
+                onBlur=${onRequestPassChangeBlur}
+                onChange=${onChange}
+                onRequestPasswordChange=${onRequestPasswordChange}
+              />
+            </div>
           <//>
         <//>
       `;
@@ -92,7 +100,9 @@ export default function AuthFeatureRoutes() {
     case "/profile":
       return html`<${FeatureRoute} path="/profile">
         <${Suspense} fallback=${Loading}>
-          <${Profile} />
+          <div class=" fixed-bottom">
+            <${Profile} />
+          </div>
         <//>
       <//> `;
 

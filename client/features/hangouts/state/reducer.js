@@ -40,9 +40,12 @@ export const initState = {
   on_socket_message: false,
   on_socket_command_send: false,
   unreadsCount: 0,
+  scrollToBottom: false,
 };
 export function reducer(state, action) {
   switch (action.type) {
+    case actionTypes.SCROLL_TO_BOTTOM:
+      return { ...state, scrollToBottom: action.scrollToBottom };
     case actionTypes.VALIDATED_GUEST_EMAIL_FORMAT:
       return { ...state, isValidGuestEmail: action.isValidGuestEmail };
     case actionTypes.INVITE_AS_GUEST_STARTED:

@@ -31,24 +31,32 @@ export default function HangoutsFeatureRoutes(props) {
   switch (featureRoute) {
     case "/bckui":
       return html` <${Suspense} fallback=${Loading}>
-        <${Block} hangout=${hangout} ...${hangout} ...${funcs} />
+        <div class="fixed-bottom">
+          <${Block} hangout=${hangout} ...${hangout} ...${funcs} />
+        </div>
       <//>`;
     case "/UNBLOCK":
       return html`
         <${Suspense} fallback=${Loading}>
-          <${Blocked} ...${state} ...${funcs} ...${hangout} />
+          <div class="fixed-bottom">
+            <${Blocked} ...${state} ...${funcs} ...${hangout} />
+          </div>
         <//>
       `;
     case "/DECLINED":
     case "/DECLINE":
       return html`
         <${Suspense} fallback=${Loading}>
-          <${Declined} ...${state} ...${funcs} ...${hangout} />
+          <div class="fixed-bottom">
+            <${Declined} ...${state} ...${funcs} ...${hangout} />
+          </div>
         <//>
       `;
     case "/configure":
       return html` <${Suspense} fallback=${Loading}>
-        <${Configure} ...${state} ...${funcs} ...${hangout} />
+        <div class="fixed-bottom">
+          <${Configure} ...${state} ...${funcs} ...${hangout} />
+        </div>
       <//>`;
     case "/ACCEPTED":
     case "/ACCEPT":
@@ -62,34 +70,50 @@ export default function HangoutsFeatureRoutes(props) {
     case "/READ":
     case "/READER":
       return html` <${Suspense} fallback=${Loading}>
-        <${Hangchat} ...${state} ...${funcs} ...${hangout} />
+        <div class="fixed-bottom">
+          <${Hangchat} ...${state} ...${funcs} ...${hangout} />
+        </div>
       <//>`;
     case "/INVITEE":
       return html` <${Suspense} fallback=${Loading}>
-        <${Invite} ...${state} ...${funcs} ...${hangout} />
+        <div class="fixed-bottom">
+          <${Invite} ...${state} ...${funcs} ...${hangout} />
+        </div>
       <//>`;
     case "/INVITED":
     case "/INVITE":
     case "/DECLINER":
       return html` <${Suspense} fallback=${Loading}>
-        <${Invitee} ...${state} ...${funcs} ...${hangout} />
+        <div class="fixed-bottom">
+          <${Invitee} ...${state} ...${funcs} ...${hangout} />
+        </div>
       <//>`;
     case "/INVITER":
       return html` <${Suspense} fallback=${Loading}>
-        <${InviterContainer} state=${state} funcs=${funcs} hangout=${hangout} />
+        <div class="fixed-bottom">
+          <${InviterContainer}
+            state=${state}
+            funcs=${funcs}
+            hangout=${hangout}
+          />
+        </div>
       <//>`;
     case "/unread":
       return html` <${Suspense} fallback=${Loading}>
-        <${UnreadHangouts}
-          unreadhangouts=${reducedUnreads}
-          onUnreadSelect=${onUnreadSelect}
-          onUnreadRemove=${onUnreadRemove}
-        />
+        <div class="fixed-bottom">
+          <${UnreadHangouts}
+            unreadhangouts=${reducedUnreads}
+            onUnreadSelect=${onUnreadSelect}
+            onUnreadRemove=${onUnreadRemove}
+          />
+        </div>
       <//>`;
 
     case "/hangout":
       return html` <${Suspense} fallback=${Loading}>
-        <${HangoutsContainer} state=${state} funcs=${funcs} />
+        <div class="fixed-bottom">
+          <${HangoutsContainer} state=${state} funcs=${funcs} />
+        </div>
       <//>`;
 
     default:

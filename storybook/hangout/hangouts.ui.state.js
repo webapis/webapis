@@ -5,69 +5,114 @@ const html = htm.bind(h);
 
 export default function HanogutUiState() {
   return html`
-    <div style="height:100%">
-      <h5 class="bg-success text-white text-center">Initial State</h5>
-      <${Hangouts}
-        hangouts=${[
-          { username: "demos" },
-          { username: "beros" },
-          { username: "guru" },
-        ]}
-        search=""
-      />
-      <h5 class="bg-success text-white text-center">
-        User Entered Search Input
-      </h5>
-      <${Hangouts} hangouts=${[]} search="feros" />
-      <h5 class="bg-success text-white text-center">
-        User Clicked Search Button
-      </h5>
-      <${Hangouts} hangouts=${[]} search="feros" searching=${true} />
-      <h5 class="bg-success text-white text-center">User is not found</h5>
-      <${Hangouts}
-        hangouts=${[]}
-        searchResult="notfound"
-        guestEmail=""
-        search="testUser"
-        userNotFound=${true}
-        searchComplete=${true}
-      />
-      <h5 class="bg-success text-white text-center">
-        User clicked invite button.
-      </h5>
-      <${Hangouts}
-        hangouts=${[]}
-        searchResult="notfound"
-        invitingGuest=${true}
-        inviteGuest=${true}
-        guestEmail="test@gmail.com"
-        messageForGuest="Hello demo let's chat as a guest!"
-      />
-      <h5 class="bg-success text-white text-center">
-        Guest Invitation is send successfully
-      </h5>
-      <${Hangouts}
-        hangouts=${[]}
-        searchResult="notfound"
-        invitationSuccess=${true}
-        inviteGuest=${false}
-        userNotFound=${true}
-      />
-      <h5 class="bg-success text-white text-center">
-        Guest Invitation sending failed
-      </h5>
-      <${Hangouts}
-        hangouts=${[]}
-        searchResult="notfound"
-        userNotFound=${true}
-        inviteGuest=${true}
-        error=${{ message: "something went wrong" }}
-      />
-      <h5 class="bg-success text-white text-center">User is found</h5>
-      <${Hangouts}
-        search="feros"
-        hangouts=${[{ username: "feros", state: "INVITEE" }]}
-      />
+    <div>
+      <div class="accordion" id="hangoutuistates">
+        <${Accordion} title="Initial State" collapseid="initState">
+          <${Hangouts}
+            hangouts=${[
+              { username: "demos" },
+              { username: "beros" },
+              { username: "guru" },
+            ]}
+            search=""
+          />
+        <//>
+        <${Accordion} title="User Entered Search Input" collapseid="search">
+          <${Hangouts} hangouts=${[]} search="feros" />
+        <//>
+        <${Accordion}
+          title="User Clicked Search Button"
+          collapseid="clicksearch"
+        >
+          <${Hangouts} hangouts=${[]} search="feros" searching=${true} />
+        <//>
+        <${Accordion} title="User is not found" collapseid="usernotfound">
+          <${Hangouts}
+            hangouts=${[]}
+            searchResult="notfound"
+            guestEmail=""
+            search="testUser"
+            userNotFound=${true}
+            searchComplete=${true}
+          />
+        <//>
+        <${Accordion}
+          title="User clicked invite button."
+          collapseid="clickinvite"
+        >
+          <${Hangouts}
+            hangouts=${[]}
+            searchResult="notfound"
+            invitingGuest=${true}
+            inviteGuest=${true}
+            guestEmail="test@gmail.com"
+            messageForGuest="Hello demo let's chat as a guest!"
+          />
+        <//>
+        <${Accordion}
+          title="Guest Invitation is send successfully"
+          collapseid="sendguestinvit"
+        >
+          <${Hangouts}
+            hangouts=${[]}
+            searchResult="notfound"
+            invitationSuccess=${true}
+            inviteGuest=${false}
+            userNotFound=${true}
+          />
+        <//>
+        <${Accordion}
+          title="Guest Invitation sending failed"
+          collapseid="failedsending"
+        >
+          <${Hangouts}
+            hangouts=${[]}
+            searchResult="notfound"
+            userNotFound=${true}
+            inviteGuest=${true}
+            error=${{ message: "something went wrong" }}
+          />
+        <//>
+        <${Accordion} title="User is found" collapseid=""> <//>
+        <${Accordion} title="" collapseid="">
+          <${Hangouts}
+            search="feros"
+            hangouts=${[{ username: "feros", state: "INVITEE" }]}
+          />
+        <//>
+      </div>
+    </div>
+  `;
+}
+
+function Accordion({ collapseid, children, title }) {
+  return html`
+    <div class="card">
+      <div class="card-header" id="headingOne">
+        <h2 class="mb-0">
+          <button
+            class="btn btn-link btn-block text-left"
+            type="button"
+            data-toggle="collapse"
+            data-target=${`#${collapseid}`}
+            aria-expanded="false"
+            aria-controls=${collapseid}
+          >
+            ${title}
+          </button>
+        </h2>
+      </div>
+
+      <div
+        id=${collapseid}
+        class="collapse show"
+        aria-labelledby="headingOne"
+        data-parent="#hangoutuistates"
+      >
+        <div class="">
+          ${children}
+        </div>
+      </div>
     </div>
   `;
 }

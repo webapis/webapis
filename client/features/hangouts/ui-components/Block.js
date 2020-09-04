@@ -28,7 +28,10 @@ export default function Block({
 }) {
   return html`
     <${Layout} username=${username} desc="You are about to block ">
-      <div class="d-flex flex-column h-100 justify-content-between">
+      <div
+        data-testid="block-ui"
+        class="d-flex flex-column h-100 justify-content-between"
+      >
         <div style=${style.checkboxRoot}>
           <input type="checkbox" style=${style.checkbox} onChange=${onReport} />
           <label>Report</label>
