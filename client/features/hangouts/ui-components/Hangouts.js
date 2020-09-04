@@ -71,9 +71,10 @@ export function Hangouts({
                     onClick=${onSearchSelect}
                     data-testid=${h.username}
                     href="#"
-                    class="list-group-item list-group-item-action mb-1 border rounded-pill border-success"
+                    class="list-group-item list-group-item-action mb-1 border rounded-pill border-success p-0 pl-4"
                   >
-                    ${h.username}:${h.email}
+                    <div class="p-0 m-0">${h.username}</div>
+                    <i class="p-0 m-0" style="font-size:0.6em">${h.email}</i>
                   </a>
                 </div>
               `;

@@ -34,7 +34,7 @@ export default function StorybookNavigation({ name }) {
     }
   }, []);
   return (
-    <div style={{ display: "flex", position: "fixed", width: "100%" }}>
+    <div style={{ display: "flex", width: "100%" }}>
       {drawerIsOpen && (
         <Drawer style={{ position: "absolute" }} toggleDrawer={toggleDrawer}>
           <StorybookDrawerContent

@@ -6,7 +6,7 @@ const html = htm.bind(h);
 export default function Navbar(props) {
   const { bg = "light", brand, children } = props;
   return html`
-    <div class="bg-success p-1 fixed-top container-fluid" style="z-index:5000;">
+    <div class="bg-success p-1  container-fluid">
       <nav
         class="navbar navbar-expand-lg navbar navbar-light bg-light rounded-pill"
         style="width:100%"

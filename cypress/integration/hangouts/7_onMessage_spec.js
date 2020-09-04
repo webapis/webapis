@@ -35,12 +35,14 @@ describe("onMessage_spec", () => {
     cy.wait(200);
     cy.get("[data-testid=unread-link]").click();
     cy.get("[data-testid=berouser]").click();
-
-    cy.get("[data-testid=message-input]").type("Hello berouser");
+    let msg = "Hello berouser";
+    cy.get("[data-testid=message-input]").type(msg);
     cy.get("[data-testid=send-btn]").click();
+    cy.wait(50);
     cy.get("[data-testid=right-message-wrapper]")
+      .last()
       .find("[data-testid=message]")
-      .contains("Hello berouser");
+      .contains(msg);
 
     // cy.get("[data-testid=right-message-wrapper]")
     //   .find("[data-testid=message-sender]")

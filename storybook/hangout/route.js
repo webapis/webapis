@@ -24,58 +24,40 @@ export default function HangoutRoutes() {
   return [
     html`
       <${AppRoute} path="/block">
-        <div class="fixed-bottom">
-          <${Block} username="demouser" email="demouser@gmail.com" />
-        </div>
+        <${Block} username="demouser" email="demouser@gmail.com" />
       <//>
       <${AppRoute} path="/blocked">
-        <div class="fixed-bottom">
-          <${Blocked} username="demouser" email="demouser@gmail.com" />
-        </div>
+        <${Blocked} username="demouser" email="demouser@gmail.com" />
       <//>
       <${AppRoute} path="/configure">
-        <div class="fixed-bottom">
-          <${Configure} username="demouser" email="demouser@gmail.com" />
-        </div>
+        <${Configure} username="demouser" email="demouser@gmail.com" />
       <//>
 
       <${AppRoute} path="/invite">
-        <div class="fixed-bottom">
-          <${Invite} username="demouser" email="demouser@gmail.com" />
-        </div>
+        <${Invite} username="demouser" email="demouser@gmail.com" />
       <//>
       <${AppRoute} path="/declined">
-        <div class="fixed-bottom">
-          <${Declined} username="demouser" email="demouser@gmail.com" />
-        </div>
+        <${Declined} username="demouser" email="demouser@gmail.com" />
       <//>
       <${AppRoute} path="/inviter">
-        <div class="fixed-bottom">
-          <${Inviter}
-            text="let's chat"
-            username="demouser"
-            state="unread"
-            timelog="Now"
-          />
-        </div>
+        <${Inviter}
+          text="let's chat"
+          username="demouser"
+          state="unread"
+          timelog="Now"
+        />
       <//>
       <${AppRoute} path="/invitee">
-        <div class="fixed-bottom">
-          <${Invitee} username="demouser" email="demouser@gmail.com" />
-        </div>
+        <${Invitee} username="demouser" email="demouser@gmail.com" />
       <//>
       <${AppRoute} path="/unreadhangouts">
-        <div class="fixed-bottom">
-          <${UnreadHangouts} unreadhangouts=${hangouts} />
-        </div>
+        <${UnreadHangouts} unreadhangouts=${hangouts} />
       <//>
       <${AppRoute} path="/hangouts">
         <${HangoutsUiStates} />
       <//>
       <${AppRoute} path="/hangchat">
-        <div class="fixed-bottom">
-          <${HangChatUiState} />
-        </div>
+        <${HangChatUiState} />
       <//>
     `,
   ];

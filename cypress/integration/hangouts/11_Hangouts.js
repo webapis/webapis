@@ -45,7 +45,7 @@ describe("Test Hangouts", () => {
       });
     cy.signout();
   });
-  it.only("User Clickes invite as a guest button (guest invitation success)", () => {
+  it("User Clickes invite as a guest button (guest invitation success)", () => {
     cy.server();
     cy.route({
       url: "/googleapis/gmailapi",

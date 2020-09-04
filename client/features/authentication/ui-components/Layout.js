@@ -11,7 +11,7 @@ export default function Layout({ children, id, username, desc }) {
         style="height:90vh"
         data-testid=${id}
       >
-        <div class=" row justify-content-center ">
+        <div class=" row justify-content-center">
           <div class="col-md-8 col-lg-4 pt-3">
             <div class="card">
               <div class="card-header">
@@ -22,7 +22,7 @@ export default function Layout({ children, id, username, desc }) {
               <div class="d-block d-sm-none">
                 <div
                   class="justify-content-center bg-success overflow-auto"
-                  style="height:75vh"
+                  style="height:60vh"
                 >
                   <div
                     class="bg-light pb-1 d-flex justify-content-center h-100 w-100"
