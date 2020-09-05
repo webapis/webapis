@@ -66,5 +66,5 @@ describe("Blocker", () => {
         cy.get("[data-testid=send-btn]").click();
         cy.get("[data-testid=blocked-message]").should("be.visible");
       });
-  });
+  
 });
