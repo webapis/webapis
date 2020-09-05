@@ -14,12 +14,8 @@ describe("Blocker", () => {
     cy.window()
       .its("localStorage")
       .invoke("setItem", "browserId", JSON.stringify("1234567890"));
-    // cy.visit("/");
   });
   it("blocker recieved succefully", () => {
-    // const currentDate = Date.UTC(2018, 10, 30);
-    // cy.clock(currentDate, ["Date"]);
-
     cy.signup({ username: "demouser" });
     cy.signout();
 
@@ -38,10 +34,7 @@ describe("Blocker", () => {
 
     cy.login({ username: "demouser" });
     cy.get("[data-testid=unread-link]").should("be.visible");
-    //     cy.get("[data-testid=unread-link]").find("[data-testid=message-count]")
-    //     .contains(1);
 
-    // cy.pause()
     cy.get("[data-testid=unread-link]").click();
     cy.get("[data-testid=unread-ui]");
     cy.get("[data-testid=berouser]").click();
