@@ -10,8 +10,6 @@ import {
   saveSentMessage,
   saveRecievedMessage,
   updateHangout,
-  removeUnread,
-  updateRecievedMessages,
   removeUnreads,
 } from "./local-storage/common";
 
@@ -82,19 +80,7 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
         }, 200);
 
         break;
-      // case "READ":
-      //   setTimeout(function () {
-      //     updateHangout({
-      //       hangout: { ...focusedHangout, state: "READ" },
-      //       name: username,
-      //       dispatch,
-      //     });
-      //     updateRecievedMessages(commonArg);
-      //     dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
-      //     // removeUnread(commonArg);
-      //   }, 200);
 
-      //   break;
       default:
         break;
     }
@@ -115,7 +101,7 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
         break;
       case "BLOCKER":
         updateHangout(commonArg);
-        //  dispatch({ type: actionTypes.HANGOUT_UPDATED, hangout });
+
         removeUnreads(commonArg);
         break;
       case "DECLINER":

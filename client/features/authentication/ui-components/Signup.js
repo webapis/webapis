@@ -1,10 +1,11 @@
 import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 import validationMessage from "../validation/validationMessages";
+import Layout from "./Layout";
 const html = htm.bind(h);
 import Button from "controls/button/index";
 import TextInput from "controls/text-input/index";
-import Alert from "controls/alert/index";
+
 export default function Signup(props) {
   const {
     username,
@@ -19,13 +20,9 @@ export default function Signup(props) {
     error,
     onAuthNavigation,
   } = props;
-  console.log("signup props");
 
   return html`
-    <div
-      class="col-md-4 border mx-auto rounded"
-      style=${{ margin: 15, padding: 16 }}
-    >
+    <${Layout} desc="Signup">
       ${loading &&
       html`
         <div class="progress" style="height: 5px;">
@@ -102,6 +99,6 @@ export default function Signup(props) {
         title="Signup"
         bg="primary"
       />
-    </div>
+    <//>
   `;
 }

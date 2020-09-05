@@ -1,5 +1,6 @@
 const findOne = require("./findOne");
 const findHangouts = require("./findHangouts");
+
 module.exports = function hangoutsOperation(req, res) {
   const { url } = req;
   const collectionName = "users";
@@ -14,6 +15,7 @@ module.exports = function hangoutsOperation(req, res) {
     case url.includes("/findHangouts"):
       findHangouts({ req, res, collection });
       break;
+
     default:
       return null;
   }

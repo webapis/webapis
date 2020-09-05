@@ -1,6 +1,3 @@
-const apiurl = require("url");
-const httpStatus = require("./http-status");
-const validations = require("./validations/validations");
 const userInputValidation = require("./validations/userInputValidation");
 const passhash = require("../../server/auth/hashPassword");
 const jwt = require("jsonwebtoken");
@@ -40,7 +37,7 @@ module.exports = async function ({ req, res, collection }) {
         //successful signup-------------------------------------
 
         const { hash, salt, iterations } = passhash.hashPassword(password);
-        //const browserId = hasBrowserId ? 'existingBr': Date.now().toString();
+
         const userBrowserId =
           browserId === null ? Date.now().toString() : browserId;
         const result = await collection.insertOne({

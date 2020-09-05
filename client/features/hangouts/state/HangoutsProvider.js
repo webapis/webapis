@@ -139,7 +139,7 @@ export default function HangoutsProvider(props) {
       name: user && user.username,
       dState: "read",
     });
-    // removeUnread({ dispatch, hangout: accept, name: username });
+    removeUnread({ dispatch, hangout: accept, name: user && user.username });
     onAppRoute({ featureRoute: `/ACCEPT`, route: "/hangouts" });
     sendPendingHangout({ hangout: accept });
   }
@@ -192,12 +192,6 @@ export default function HangoutsProvider(props) {
         dState: "pending",
       });
     } else {
-      // updateHangout({
-      //   hangout: { ...messaging, state: "MESSAGE" },
-      //   name: username,
-      //   dispatch,
-      // });
-
       sendPendingHangout({ hangout: messaging });
     }
     dispatch({ type: actionTypes.MESSAGE_TEXT_CHANGED, text: "" });
@@ -218,11 +212,6 @@ export default function HangoutsProvider(props) {
       timestamp,
     };
 
-    // updateHangout({
-    //   hangout: { ...block, state: "BLOCK", command: undefined },
-    //   name: username,
-    //   dispatch,
-    // });
     saveSentMessage({
       hangout: {
         ...block,
@@ -263,7 +252,7 @@ export default function HangoutsProvider(props) {
     }
   }, [on_user_client_command, user, hangout]);
   useEffect(() => {
-    if (hangout) {
+    if (hangout && user) {
       switch (hangout.state) {
         // case "ACCEPTER":
         // case "INVITER":
@@ -273,6 +262,12 @@ export default function HangoutsProvider(props) {
           //case "UNBLOCKER":
           // case "READER":
           onRead();
+          removeUnreads({
+            dispatch,
+            name: user && user.username,
+            hangout,
+            state: "MESSANGER",
+          });
           break;
         case "INVITEE":
           dispatch({
@@ -286,11 +281,9 @@ export default function HangoutsProvider(props) {
 
       // load messages from local storage
       loadMessages({ hangout, name: user && user.username, dispatch });
-      setTimeout(() => {
-        removeUnreads({ dispatch, name: user && user.username });
-      }, 100);
+      setTimeout(() => {}, 100);
     }
-  }, [hangout]);
+  }, [hangout, user]);
 
   // useEffect(() => {
   //   if (!username) {

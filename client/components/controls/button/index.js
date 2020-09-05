@@ -8,8 +8,7 @@ export default function Button(props) {
   return html`
     <button
       class="${bg && !outline && `btn btn-${bg}`} ${outline &&
-      `btn btn-outline-${bg}`} ${size && `btn btn-${size}`} ${block &&
-      "btn-block"}"
+      `btn btn-outline-${bg}`} ${size && `btn btn-${size}`}"
       ...${props}
       disabled=${loading}
     >
