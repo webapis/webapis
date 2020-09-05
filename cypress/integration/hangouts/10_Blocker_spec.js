@@ -40,31 +40,30 @@ describe("Blocker", () => {
     cy.get("[data-testid=unread-link]").should("be.visible");
     //     cy.get("[data-testid=unread-link]").find("[data-testid=message-count]")
     //     .contains(1);
-    // cy.wait(200)
+   cy.wait(200)
     // cy.pause()
     cy.get("[data-testid=unread-link]").click();
 
-        cy.get("[data-testid=message-input]").type("Hello berouser x");
+    cy.get("[data-testid=message-input]").type("Hello berouser x");
 
-        cy.get("[data-testid=send-btn]").click();
+    cy.get("[data-testid=send-btn]").click();
 
-        cy.signout();
+    cy.signout();
 
-        cy.login({ username: "berouser" });
+    cy.login({ username: "berouser" });
 
-        cy.block();
+    cy.block();
 
-        cy.signout();
+    cy.signout();
 
-        cy.login({ username: "demouser" });
+    cy.login({ username: "demouser" });
 
-        // cy.get("[data-testid=hangouts-link]").click();
-        cy.get("[data-testid=berouser]").click();
+    // cy.get("[data-testid=hangouts-link]").click();
+    cy.get("[data-testid=berouser]").click();
 
-        cy.get("[data-testid=message-input]").type("Hey x");
+    cy.get("[data-testid=message-input]").type("Hey x");
 
-        cy.get("[data-testid=send-btn]").click();
-        cy.get("[data-testid=blocked-message]").should("be.visible");
-      });
+    cy.get("[data-testid=send-btn]").click();
+    cy.get("[data-testid=blocked-message]").should("be.visible");
   });
 });

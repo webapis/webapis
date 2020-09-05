@@ -17,6 +17,7 @@ export function useHangouts() {
   const { hangouts, inviteGuest, guestEmail } = state;
 
   function onNavigation(e) {
+    e.preventDefault();
     if (authContext.state.user) {
       const id = e.currentTarget.id;
       onAppRoute({ featureRoute: `/${id}`, route: "/hangouts" });
