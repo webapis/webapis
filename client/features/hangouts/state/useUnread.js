@@ -23,6 +23,7 @@ export default function useUnread({
   }, [unreadhangouts]);
 
   function onUnreadSelect({ hangout }) {
+    debugger;
     dispatch({ type: actionTypes.SELECTED_HANGOUT, hangout });
 
     onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });

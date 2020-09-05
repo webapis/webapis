@@ -1,5 +1,4 @@
 Cypress.Commands.add("signup", ({ username, toggle = false }) => {
-  debugger;
   cy.visit("/");
   cy.get("[data-testid=socket-connection]").contains("offline");
   if (toggle) {
