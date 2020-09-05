@@ -11,19 +11,21 @@ describe("onInvite", () => {
         dbName: "test",
       });
     }
+    // cy.viewport("samsung-s10");
     //  cy.visit("/");
   });
   it("invite success", () => {
     const currentDate = Date.UTC(2018, 10, 30);
     cy.clock(currentDate, ["Date"]);
-    cy.signup({ username: "demouser" });
+    cy.signup({ username: "demouser", toggle: false });
 
     cy.signout();
 
-    cy.signup({ username: "berouser" });
+    cy.signup({ username: "berouser", toggle: false });
+
     cy.signout();
 
-    cy.login({ username: "demouser" });
+    cy.login({ username: "demouser", toggle: false });
     // cy.get("[data-testid=hangouts-link]").click();
 
     //cy.get("[data-testid=search]").click();

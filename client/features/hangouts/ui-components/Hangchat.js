@@ -52,8 +52,8 @@ export function Message({ float, text, username, state, timestamp }) {
     </div>`;
   return html`<div
     data-testid="left-message-wrapper"
-    class="no-gutters rounded  p-1 mb-2 d-flex"
-    style="max-width:75%;"
+    class="rounded  p-1 mb-2 d-flex"
+    style="max-width:80%;"
   >
     <div class="d-flex">
       <div

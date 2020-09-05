@@ -12,6 +12,7 @@ import UnreadHangouts from "../../client/features/hangouts/ui-components/UnreadH
 
 import HangoutsUiStates from "./hangouts.ui.state";
 import HangChatUiState from "./hangchat.ui.state";
+import NavigationState from "./navigation.state";
 const html = htm.bind(h);
 const hangouts = [
   { username: "userone" },
@@ -58,6 +59,9 @@ export default function HangoutRoutes() {
       <//>
       <${AppRoute} path="/hangchat">
         <${HangChatUiState} />
+      <//>
+      <${AppRoute} path="/navigation">
+        <${NavigationState} />
       <//>
     `,
   ];

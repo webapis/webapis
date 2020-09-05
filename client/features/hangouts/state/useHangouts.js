@@ -17,10 +17,12 @@ export function useHangouts() {
   const { hangouts, inviteGuest, guestEmail } = state;
 
   function onNavigation(e) {
-    e.stopPropagation();
-    const id = e.currentTarget.id;
-    debugger;
-    onAppRoute({ featureRoute: `/${id}`, route: "/hangouts" });
+    if (authContext.state.user) {
+      const id = e.currentTarget.id;
+      onAppRoute({ featureRoute: `/${id}`, route: "/hangouts" });
+    } else {
+      onAppRoute({ featureRoute: `/login`, route: "/auth" });
+    }
   }
 
   function onMessageText(e) {
@@ -48,12 +50,18 @@ export function useHangouts() {
 
     const { id } = e.target;
 
-    const hangout = hangouts.find((s) => s.username === id);
+    const selectedHangout = hangouts.find((s) => s.username === id);
 
-    dispatch({ type: actionTypes.SELECTED_HANGOUT, hangout });
-    setTimeout(function () {
-      onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
-    }, 200);
+    if (selectedHangout) {
+      dispatch({
+        type: actionTypes.SELECTED_HANGOUT,
+        hangout: selectedHangout,
+      });
+      onAppRoute({
+        featureRoute: `/${selectedHangout.state}`,
+        route: "/hangouts",
+      });
+    }
   }
   function onInviteGuest() {
     dispatch({ type: actionTypes.INVITE_GUEST, inviteGuest: !inviteGuest });
@@ -98,7 +106,6 @@ export function useHangouts() {
   }
 
   function onScrollToBottom(scrollToBottom) {
-    debugger;
     dispatch({ type: actionTypes.SCROLL_TO_BOTTOM, scrollToBottom });
   }
   return {

@@ -6,11 +6,7 @@ export default function Layout({ children, id, username, desc }) {
   const { device } = useMediaQuery();
   if (device === "phone")
     return html`
-      <div
-        class="container-fluid bg-success"
-        style="height:90vh"
-        data-testid=${id}
-      >
+      <div class="container-fluid bg-success" data-testid=${id}>
         <div class=" row justify-content-center">
           <div class="col-md-8 col-lg-4 pt-3">
             <div class="card">
@@ -20,10 +16,7 @@ export default function Layout({ children, id, username, desc }) {
                 </div>
               </div>
               <div class="d-block d-sm-none">
-                <div
-                  class="justify-content-center bg-success overflow-auto"
-                  style="height:60vh"
-                >
+                <div class="justify-content-center bg-success overflow-auto">
                   <div
                     class="bg-light pb-1 d-flex justify-content-center h-100 w-100"
                   >
@@ -39,11 +32,7 @@ export default function Layout({ children, id, username, desc }) {
       </div>
     `;
   return html`
-    <div
-      class="container-fluid bg-success"
-      style="height:90vh"
-      data-testid=${id}
-    >
+    <div class="container-fluid bg-success" data-testid=${id}>
       <div class=" row justify-content-center ">
         <div class="col-md-8 col-lg-4 pt-3">
           <div class="card">
@@ -54,10 +43,7 @@ export default function Layout({ children, id, username, desc }) {
             </div>
 
             <div class="d-none d-sm-block">
-              <div
-                class="justify-content-center bg-success overflow-auto"
-                style="height:65vh"
-              >
+              <div class="justify-content-center bg-success overflow-auto">
                 <div
                   class="bg-light py-1 d-flex justify-content-center h-100 w-100"
                 >

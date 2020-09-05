@@ -21,7 +21,6 @@ export default function Layout({
 
   useEffect(() => {
     if (scrollToBottom) {
-      debugger;
       scrollerRef.current.scrollTop = scrollerRef.current.scrollHeight;
       setTimeout(() => {
         onScrollToBottom(false);
@@ -32,39 +31,21 @@ export default function Layout({
   if (device === "phone")
     return html`
       <div
-        class="container-fluid bg-success"
+        class="container-fluid pt-1 m-0  p-1 bg-success no-gutter"
         style="height:90vh"
         data-testid=${id}
       >
-        <div class=" row justify-content-center">
-          <div class="col-md-8 col-lg-5 pt-3">
-            <div class="card">
-              <div class="card-header">
-                <div class="d-flex justify-content-between">
-                  <div>
-                    ${desc} <span class="font-weight-bold">${username}</span>
-                  </div>
-                  <div>
-                    <button
-                      data-testid="config-btn"
-                      id="configure"
-                      onClick=${onNavigation}
-                      class="btn btn-sm"
-                    >
-                      <${GrearIcon} onClick=${onNavigation} />
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <div class="d-block d-sm-none">
+        <div class=" row justify-content-center h-100">
+          <div class="col-md-8 col-lg-5 h-100">
+            <div class="card h-100">
+              <div class="d-block d-sm-none h-100">
                 <div
                   ref=${scrollerRef}
-                  class="justify-content-center bg-success overflow-auto"
-                  style="height:75vh"
+                  class="justify-content-center overflow-auto h-100"
+                  style="height:100%"
                 >
                   <div
-                    class="bg-light pb-1 d-flex justify-content-center h-100 w-100"
+                    class="bg-light pb-1 d-flex justify-content-center h-100 w-100 p-0"
                   >
                     <div class="w-100">
                       ${children}

@@ -41,6 +41,7 @@ describe("Blocker", () => {
     //     cy.get("[data-testid=unread-link]").find("[data-testid=message-count]")
     //     .contains(1);
     // cy.wait(200)
+    // cy.pause()
     cy.get("[data-testid=unread-link]").click();
 
     cy.get("[data-testid=unread-ui]").find("[data-testid=berouser]").click();

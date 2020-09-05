@@ -1,11 +1,8 @@
-const apiurl = require("url");
 const validations = require("./validations/validations");
-const httpStatus = require("./http-status");
 const authHeader = require("./http-auth");
 const jwt = require("jsonwebtoken");
 const passhash = require("../../server/auth/hashPassword");
 const userInputValidation = require("./validations/userInputValidation");
-const e = require("express");
 module.exports = async function ({ req, res, collection }) {
   try {
     let user = null;
