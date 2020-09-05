@@ -230,7 +230,7 @@ function MessageEditor({
         />
         <div class="input-group-append">
           <button
-            class="btn btn-primary"
+            class="btn btn-success outlined"
             type="button"
             loading=${loading}
             disabled=${hangout && hangout.state === "BLOCKED"}

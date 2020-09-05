@@ -24,7 +24,7 @@ export default function Login(props) {
       ${loading &&
       html`<div class="progress" style="height: 5px;">
         <div
-          class="progress-bar progress-bar-striped progress-bar-animated"
+          class="progress-bar progress-bar-striped progress-bar-animated "
           role="progressbar"
           aria-valuenow="100"
           aria-valuemin="0"
@@ -68,14 +68,16 @@ export default function Login(props) {
           onClick=${onLogin}
           loading=${loading}
           title="Login"
-          bg="primary"
+          outline
+          bg="success"
         />
 
         <${Button}
           onClick=${onForgotPassword}
           id="forgotpassword"
           data-testid="forgotpassword"
-          bg="primary"
+          outline
+          bg="success"
           title="Forgot Password!"
         />
       </div>

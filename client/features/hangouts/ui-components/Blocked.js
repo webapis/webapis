@@ -29,7 +29,7 @@ export default function Blocked({ username, onUserClientCommand, onClose }) {
             onClick=${onUserClientCommand}
             data-testid="unblock-btn"
             title="UNBLOCK"
-            bg="primary"
+            bg="success"
             block
           />
         </div>
