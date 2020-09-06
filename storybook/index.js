@@ -53,6 +53,7 @@ render(
               <${DropdownItem} id="inviter">Inviter<//>
               <${DropdownItem} id="unreadhangouts">UnreadHangouts<//>
               <${DropdownItem} id="hangchat">Hangchat<//>
+              <${DropdownItem} id="guest">GuestHangchatUi<//>
               <${DropdownItem} id="navigation">Navigation<//>
             <//>
           <//>

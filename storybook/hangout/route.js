@@ -12,6 +12,7 @@ import UnreadHangouts from "../../client/features/hangouts/ui-components/UnreadH
 
 import HangoutsUiStates from "./hangouts.ui.state";
 import HangChatUiState from "./hangchat.ui.state";
+import GuestHangchatUiState from "./guesthangchat.ui.state";
 import NavigationState from "./navigation.state";
 const html = htm.bind(h);
 const hangouts = [
@@ -20,10 +21,15 @@ const hangouts = [
   { username: "userthree" },
 ];
 
-import { messages } from "./fakeMessages";
 export default function HangoutRoutes() {
   return [
     html`
+      <${AppRoute} path="/guest">
+        <${GuestHangchatUiState}
+          username="demouser"
+          email="demouser@gmail.com"
+        />
+      <//>
       <${AppRoute} path="/block">
         <${Block} username="demouser" email="demouser@gmail.com" />
       <//>
