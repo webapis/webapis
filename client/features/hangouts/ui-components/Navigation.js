@@ -24,7 +24,7 @@ export default function Navigation({
           : html`<span class="badge badge-danger">offline</span>`}
       </a>
       <a
-        id="hangouts"
+        id="hangout"
         data-testid="hangouts-btn"
         onClick=${onHangoutNavigation}
         class="nav-link"
