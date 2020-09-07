@@ -43,10 +43,10 @@ describe("Blocker", () => {
 
     // cy.pause()
     cy.get("[data-testid=unread-link]").click();
+
     cy.wait(200);
-    cy.get("[data-testid=unread-ui]").should("be.visible");
     cy.get("[data-testid=berouser]").click();
-    cy.get("[data-testid=hangchat-ui]");
+
     cy.get("[data-testid=message-input]").type("Hello berouser x");
 
     cy.get("[data-testid=send-btn]").click();

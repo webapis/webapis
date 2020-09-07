@@ -1,4 +1,5 @@
 Cypress.Commands.add("decline", () => {
+  cy.get("[data-testid=unread-link]").should("be.visible");
   cy.get("[data-testid=message-count]").contains(1);
   cy.wait(200);
   cy.get("[data-testid=unread-link]").click();
