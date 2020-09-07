@@ -29,7 +29,10 @@ describe("onDecline", () => {
     cy.signout();
     cy.login({ username: "berouser" });
 
-    cy.get("[data-testid=unread-link]");
+    cy.wait(200);
+    cy.get("[data-testid=unread-link]").should("be.visible");
+    cy.wait(200);
+
     cy.get("[data-testid=unread-link]")
       .find("[data-testid=message-count]")
       .contains(1);

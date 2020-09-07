@@ -44,7 +44,7 @@ export default function Invite({
           onClick=${onUserClientCommand}
           data-testid="oninvite-btn"
           title="Send Invite"
-          bg="primary"
+          bg="success"
         />
       <//>
       </div>

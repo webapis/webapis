@@ -1,6 +1,6 @@
 import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
-import Navigation from "../../client/apps/webcom-app/Navigation";
+import Navigation from "../../client/features/hangouts/ui-components/Navigation";
 const html = htm.bind(h);
 const message = {
   text: "You can not send message because you are blocked",

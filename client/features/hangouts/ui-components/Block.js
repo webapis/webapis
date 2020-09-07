@@ -51,7 +51,7 @@ export default function Block({
             onClick=${onUserClientCommand}
             data-testid="block-btn"
             title="Block"
-            bg="primary"
+            bg="success"
             block
           />
         </div>

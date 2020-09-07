@@ -30,14 +30,16 @@ describe("onBlock", () => {
     cy.accept();
     cy.signout();
     cy.login({ username: "demouser" });
-    cy.get("[data-testid=unread-link]");
+    cy.wait(200);
+    cy.get("[data-testid=unread-link]").should("be.visible");
+    cy.wait(200);
     cy.get("[data-testid=unread-link]")
       .find("[data-testid=message-count]")
       .contains(1);
     cy.wait(200);
     cy.get("[data-testid=unread-link]").click();
     cy.get("[data-testid=berouser]").click();
-
+    cy.get("[data-testid=hangchat-ui]");
     cy.get("[data-testid=message-input]").type("Hello berouser x");
     cy.get("[data-testid=send-btn]").click();
     cy.signout();
