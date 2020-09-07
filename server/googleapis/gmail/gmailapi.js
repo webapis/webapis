@@ -5,7 +5,7 @@ const nodemailer = require("nodemailer");
 module.exports = async function serverToServer({ req, res }) {
   try {
     const { from, to, subject, text, type } = req.body;
-    debugger;
+
     // create reusable transporter object using the default SMTP transport
     let transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
@@ -21,7 +21,7 @@ module.exports = async function serverToServer({ req, res }) {
         // expires: 1484314697598
       },
     });
-    debugger;
+
     // send mail with defined transport object//
     let info = await transporter.sendMail({
       from, //'"Fred Foo 👻" <tkm.house.new@gmail.com>', // sender address
@@ -30,7 +30,7 @@ module.exports = async function serverToServer({ req, res }) {
       text, //: "Hello world?!", // plain text body
       html: htmlTemplate({ type }), // html body
     });
-    debugger;
+
     res.writeHead(200, { "Content-Type": "application/json" });
     res.write(
       JSON.stringify({
@@ -40,7 +40,7 @@ module.exports = async function serverToServer({ req, res }) {
     res.end();
   } catch (error) {
     const err = error;
-    debugger;
+
     res.writeHead(500, { "Content-Type": "application/json" });
     res.write(
       JSON.stringify({

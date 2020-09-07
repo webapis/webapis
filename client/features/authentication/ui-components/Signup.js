@@ -97,7 +97,8 @@ export default function Signup(props) {
         data-testid="signup-btn"
         loading=${loading}
         title="Signup"
-        bg="primary"
+        outline
+        bg="success"
       />
     <//>
   `;

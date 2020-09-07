@@ -41,7 +41,7 @@ export default function Configure({
           </div>
         </div>
         <div class="p-2">
-          <${Button} onClick=${onOk} title="Close" bg="primary" />
+          <${Button} onClick=${onOk} title="Close" bg="success" />
         </div>
       </div>
     <//>

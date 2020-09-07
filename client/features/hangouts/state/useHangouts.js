@@ -17,7 +17,9 @@ export function useHangouts() {
   const { hangouts, inviteGuest, guestEmail } = state;
 
   function onNavigation(e) {
+    e.preventDefault();
     if (authContext.state.user) {
+      debugger;
       const id = e.currentTarget.id;
       onAppRoute({ featureRoute: `/${id}`, route: "/hangouts" });
     } else {
@@ -48,7 +50,7 @@ export function useHangouts() {
   function onSearchSelect(e) {
     e.preventDefault();
 
-    const { id } = e.target;
+    const { id } = e.currentTarget;
 
     const selectedHangout = hangouts.find((s) => s.username === id);
 

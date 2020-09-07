@@ -33,7 +33,7 @@ export function Inviter(props) {
             data-testid="accept-btn"
             loading=${pendingHangout && pendingHangout.command === "ACCEPT"}
             title="Accept"
-            bg="primary"
+            bg="success"
             block
           />
         </div>

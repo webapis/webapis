@@ -4,9 +4,7 @@ import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js"
 import { useAppRoute } from "components/app-route/index";
 import { useAuth } from "features/authentication/index";
 import { useHangouts } from "features/hangouts/index";
-import GearIcon from "icons/bootstrap/GearIcon";
-import Navigation from "./Navigation";
-import { actionTypes } from "../../features/hangouts/state/actionTypes";
+import Navigation from "../../features/hangouts/ui-components/Navigation";
 const html = htm.bind(h);
 export function AppNavigation() {
   const { routeState } = useAppRoute();
