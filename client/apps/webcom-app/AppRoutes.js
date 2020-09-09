@@ -24,7 +24,7 @@ export function AppRoutes() {
 
   switch (route) {
     case "/auth":
-      return html`<div style=${{ height: "85vh" }}>
+      return html`<div style=${{ height: "90vh" }}>
         <${AppRoute} path=${"/auth"}>
           <${Suspense} fallback=${Loading}>
             <${AuthFeatureRoutes} />
@@ -34,7 +34,7 @@ export function AppRoutes() {
     case "/hangouts":
       return html` <${AppRoute} path=${"/hangouts"}>
         <${Suspense} fallback=${Loading}>
-          <div style=${{ height: "87vh" }}>
+          <div style=${{ height: "70vh" }}>
             <${HangoutsFeatureRoutes} />
           </div>
         <//>

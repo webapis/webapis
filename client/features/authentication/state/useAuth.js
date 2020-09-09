@@ -170,10 +170,14 @@ export function useAuth() {
   }
   function onAuthNavigation(e) {
     e.preventDefault();
-    e.stopPropagation();
+
     const id = e.currentTarget.id;
-    onAppRoute({ featureRoute: `/${id}`, route: "/auth" });
-    dispatch({ type: actionTypes.RESET_AUTH_STATE });
+    if (id === "signout") {
+      onSignOut();
+    } else {
+      onAppRoute({ featureRoute: `/${id}`, route: "/auth" });
+      dispatch({ type: actionTypes.RESET_AUTH_STATE });
+    }
   }
   return {
     state,

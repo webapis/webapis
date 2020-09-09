@@ -2,9 +2,6 @@ var fs = require("fs");
 var path = require("path");
 
 module.exports = function serveStatic(request, response) {
-  // console.log('process.env.appName',`${__dirname}../apps/${process.env.appName}/build/index.html`)
-  // console.log('request ', request.url);
-
   var filePath = "." + request.url;
   if (filePath == "./") {
     filePath = "/index.html";

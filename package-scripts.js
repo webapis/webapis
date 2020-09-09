@@ -100,6 +100,7 @@ function defaultBrowser({ features, record, type }) {
 
 module.exports = {
   scripts: {
+    storybook: { script: "rollup -c rollup.storybook.config.js -w" },
     apps: {
       webcom: {
         node: {
@@ -121,7 +122,7 @@ module.exports = {
       },
     },
     testAva: {
-      script: "ava",
+      script: "ava -w",
     },
     test: {
       local: {

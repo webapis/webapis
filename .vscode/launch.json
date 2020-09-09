@@ -5,6 +5,19 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug AVA test file",
+      "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/ava",
+      "runtimeArgs": [
+        "${file}"
+      ],
+      "outputCapture": "std",
+      "skipFiles": [
+        "<node_internals>/**/*.js"
+      ]
+    },
+    {
       "name": "Attach to Process Cypress",
       "type": "node",
       "request": "attach",

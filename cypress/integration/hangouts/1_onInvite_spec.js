@@ -11,26 +11,28 @@ describe("onInvite", () => {
         dbName: "test",
       });
     }
+    // cy.viewport("samsung-s10");
     //  cy.visit("/");
   });
   it("invite success", () => {
     const currentDate = Date.UTC(2018, 10, 30);
     cy.clock(currentDate, ["Date"]);
-    cy.signup({ username: "demouser" });
+    cy.signup({ username: "demouser", toggle: false });
 
     cy.signout();
 
-    cy.signup({ username: "berouser" });
+    cy.signup({ username: "berouser", toggle: false });
+
     cy.signout();
 
-    cy.login({ username: "demouser" });
+    cy.login({ username: "demouser", toggle: false });
     // cy.get("[data-testid=hangouts-link]").click();
 
-    cy.get("[data-testid=search]").click();
-    cy.get("[data-testid=search-ui]");
-    cy.get("[data-testid=search-input]").type("berouser");
+    //cy.get("[data-testid=search]").click();
+    //   cy.get("[data-testid=search-ui]");
+    cy.get("[data-testid=user-search-input]").type("berouser");
 
-    cy.get("[data-testid=search-btn]").click();
+    cy.get("[data-testid=user-search-button]").click();
 
     cy.get("[data-testid=berouser]").click();
     cy.get("[data-testid=invite-ui]");
@@ -115,7 +117,7 @@ describe("onInvite", () => {
       .its("localStorage")
       .invoke("removeItem", "demouser-berouser-messages");
     cy.login({ username: "demouser" });
-    cy.get("[data-testid=hangouts-link]").click();
+    //cy.get("[data-testid=hangouts-link]").click();
     cy.get("[data-testid=berouser]");
   });
 });

@@ -201,13 +201,24 @@ export function removeUnread({ hangout, dispatch, name }) {
   }
 }
 
-export function removeUnreads({ dispatch, name }) {
+export function removeUnreads({ dispatch, name, hangout, state }) {
+  const { username } = hangout;
   const hangoutKey = `${name}-unread-hangouts`;
-  localStorage.removeItem(hangoutKey);
-  dispatch({
-    type: actionTypes.UNREAD_HANGOUTS_UPDATED,
-    unreadhangouts: [],
-  });
+
+  const localHangouts = JSON.parse(localStorage.getItem(hangoutKey));
+  if (localHangouts && localHangouts.length > 0) {
+    let filtered = localHangouts.filter(
+      (f) =>
+        (f.username === username && f.state === state) ||
+        f.username !== username
+    );
+    dispatch({
+      type: actionTypes.UNREAD_HANGOUTS_UPDATED,
+      unreadhangouts: filtered,
+    });
+    localStorage.setItem(hangoutKey, JSON.stringify(filtered));
+  } else {
+  }
 }
 
 export function loadMessages({ hangout, name, dispatch }) {
@@ -231,5 +242,7 @@ export function loadHangouts({ name, dispatch }) {
   const localHangouts = JSON.parse(localStorage.getItem(hangoutKey));
   if (localHangouts && localHangouts.length > 0) {
     dispatch({ type: actionTypes.LOADED_HANGOUTS, hangouts: localHangouts });
+  } else {
+    dispatch({ type: actionTypes.LOADED_HANGOUTS, hangouts: [] });
   }
 }

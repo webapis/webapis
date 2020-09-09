@@ -38,12 +38,12 @@ describe("onAccept", () => {
 
     cy.get("[data-testid=accept-btn]").click();
     cy.get("[data-testid=right-message-wrapper]")
-      .find(".message-state")
+      .find("[data-testid=message-state]")
       //saveSentMessage(dState:'pending')-----------------------------2.1
       .contains("pending");
     // .then(() => {
     // cy.get("[data-testid=right-message-wrapper]")
-    //   .find(".message-state")
+    //   .find("[data-testid=message-state]")
     //   //saveSentMessage(dState:'pending')-----------------------------2.1
     //   .contains("pending");
     // cy.window()
@@ -111,7 +111,7 @@ describe("onAccept", () => {
       .find("[data-testid=message-sender]")
       .contains("demouser");
     cy.get("[data-testid=left-message-wrapper]")
-      .find(".message-state")
+      .find("[data-testid=message-state]")
       .contains("read");
 
     cy.get("[data-testid=left-message-wrapper]")
@@ -121,16 +121,16 @@ describe("onAccept", () => {
     cy.get("[data-testid=right-message-wrapper]")
       .find("[data-testid=message]")
       .contains("Accepted your invitation");
-    cy.get("[data-testid=right-message-wrapper]")
-      .find("[data-testid=message-sender]")
-      .contains("me");
+    // cy.get("[data-testid=right-message-wrapper]")
+    //   .find("[data-testid=message-sender]")
+    //   .contains("me");
     cy.get("[data-testid=right-message-wrapper]")
       .find("[data-testid=time]")
       .contains("Now");
     //updateSentMessage(dState:'delivered')------------------------------
     //updateHangout(ACCEPTED)--------------------------------------------
     cy.get("[data-testid=right-message-wrapper]")
-      .find(".message-state")
+      .find("[data-testid=message-state]")
       .contains("delivered");
   });
 });

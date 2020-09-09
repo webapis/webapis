@@ -22,16 +22,18 @@ describe("Decliner", () => {
     cy.signup({ username: "berouser" });
     cy.signout();
     cy.login({ username: "demouser" });
+
     cy.invite();
     cy.signout();
     cy.login({ username: "berouser" });
     cy.decline();
     cy.signout();
+
     cy.login({ username: "demouser" });
     // cy.get("[data-testid=unread-link]");
     // cy.get("[data-testid=unread-link]").find("[data-testid=message-count]")
     // .contains(0);
-    cy.get("[data-testid=hangouts-link]").click();
+    //  cy.get("[data-testid=hangouts-link]").click();
     cy.get("[data-testid=berouser]").click();
   });
 });

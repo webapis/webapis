@@ -4,7 +4,6 @@ export const initState = {
   hangout: null,
   unreadhangouts: [],
   messages: null,
-
   loading: false,
   error: null,
   messageText: "",
@@ -13,10 +12,19 @@ export const initState = {
   readyState: 0,
   socketMessage: null,
   //search
-  search: "",
   searchResult: [],
   searchHangouts: false,
-
+  search: "",
+  searchResult: [],
+  guestEmail: "", //InviteGuest
+  invitationSuccess: false, //InviteGuest
+  userNotFound: false, //InviteGuest
+  searching: false, //SeachComponent
+  invitingGuest: false, // Invite Guest
+  inviteGuest: false, // Invite Guest
+  messageForGuest: "Let's chat", // InviteGuest
+  searchComplete: false, //SearchComponent
+  isValidGuestEmail: undefined,
   //filter
   filter: "",
   filterResult: [],
@@ -32,9 +40,31 @@ export const initState = {
   on_socket_message: false,
   on_socket_command_send: false,
   unreadsCount: 0,
+  scrollToBottom: false,
 };
 export function reducer(state, action) {
   switch (action.type) {
+    case actionTypes.SCROLL_TO_BOTTOM:
+      return { ...state, scrollToBottom: action.scrollToBottom };
+    case actionTypes.VALIDATED_GUEST_EMAIL_FORMAT:
+      return { ...state, isValidGuestEmail: action.isValidGuestEmail };
+    case actionTypes.INVITE_AS_GUEST_STARTED:
+      return { ...state, invitingGuest: true };
+    case actionTypes.INVITE_AS_GUEST_SUCCESS:
+      return {
+        ...state,
+        invitingGuest: false,
+        invitationSuccess: true,
+        inviteGuest: false,
+      };
+    case actionTypes.INVITE_AS_GUEST_FAILED:
+      return { ...state, invitingGuest: false, error: action.error };
+    case actionTypes.GUEST_EMAIL_CHANGED:
+      return { ...state, guestEmail: action.guestEmail };
+    case actionTypes.MESSAGE_FOR_GUEST_CHANGED:
+      return { ...state, messageForGuest: action.messageForGuest };
+    case actionTypes.INVITE_GUEST:
+      return { ...state, inviteGuest: action.inviteGuest };
     case actionTypes.ON_SOCKET_MESSAGE:
       return { ...state, on_socket_message: action.on_socket_message };
     case actionTypes.ON_USER_CLIENT_COMMAND:
@@ -100,13 +130,15 @@ export function reducer(state, action) {
       return { ...state, messageText: action.text };
     //search
     case actionTypes.SEARCH_HANGOUT_STARTED:
-      return { ...state, loading: true, searchHangouts: true };
+      return { ...state, loading: true, searchHangouts: true, searching: true };
     case actionTypes.SEARCH_HANGOUT_SUCCESS:
       return {
         ...state,
         loading: false,
         hangouts: action.hangouts,
         searchHangouts: false,
+        searching: false,
+        userNotFound: action.userNotFound,
       };
     case actionTypes.SEARCH_HANGOUT_FAILED:
       return {
@@ -114,6 +146,7 @@ export function reducer(state, action) {
         loading: false,
         error: action.error,
         searchHangouts: false,
+        searching: false,
       };
 
     case actionTypes.SEARCH_INPUT_CHANGE:

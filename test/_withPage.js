@@ -1,25 +1,34 @@
 const puppeteer = require("puppeteer-core");
-
+let executablePath =
+  process.env.machine === "mac"
+    ? "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+    : "Chrome/Application/chrome.exe";
 module.exports = async (t, run) => {
   let BeroslaunchOptions = {
+    slowMo: 5,
+    isMobile: true,
     headless: false,
     ignoreHTTPSErrors: true,
     args: ["--window-position=0,0", "--window-size=300,700"],
-    executablePath: "Chrome/Application/chrome.exe", // because we are using puppeteer-core so we must define this option
+    executablePath:
+      "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome", // because we are using puppeteer-core so we must define this option
   };
 
   let DemoslaunchOptions = {
+    slowMo: 5,
+    isMobile: true,
     headless: false,
     ignoreHTTPSErrors: true,
     args: ["--window-position=550,0", "--window-size=300,700"],
-    executablePath: "Chrome/Application/chrome.exe", // because we are using puppeteer-core so we must define this option
+    executablePath:
+      "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome", // because we are using puppeteer-core so we must define this option
   };
 
   const berosBrowser = await puppeteer.launch(BeroslaunchOptions);
   const berosPage = await berosBrowser.newPage();
   await berosPage.setViewport({
     width: 500,
-    height: 400,
+    height: 700,
     isMobile: true,
     deviceScaleFactor: 1,
   });
@@ -27,7 +36,7 @@ module.exports = async (t, run) => {
   const demosPage = await demosBrowser.newPage();
   await demosPage.setViewport({
     width: 500,
-    height: 400,
+    height: 700,
     isMobile: true,
     deviceScaleFactor: 1,
   });

@@ -40,6 +40,7 @@ describe("onMessage_spec", () => {
 
     cy.get("[data-testid=message-input]").type("Hello berouser");
     cy.get("[data-testid=send-btn]").click();
+
     cy.signout();
     cy.login({ username: "berouser" });
 
@@ -47,7 +48,8 @@ describe("onMessage_spec", () => {
     cy.get("[data-testid=unread-link]")
       .find("[data-testid=message-count]")
       .contains(1);
-    cy.get("[data-testid=hangouts-link]").click();
+
+    cy.get("[data-testid=unread-link]").click();
 
     cy.get("[data-testid=demouser]").click();
     cy.get("[data-testid=message-count]").contains(0);
@@ -55,6 +57,7 @@ describe("onMessage_spec", () => {
     cy.get("[data-testid=left-message-wrapper]")
       .find("[data-testid=message]")
       .contains("Hello berouser");
+
     cy.get("[data-testid=left-message-wrapper]")
       .find("[data-testid=message-sender]")
       .contains("demouser");

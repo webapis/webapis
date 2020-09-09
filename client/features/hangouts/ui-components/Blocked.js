@@ -1,32 +1,20 @@
 import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 import { Block } from "icons/Block";
-import { Center } from "components/layout/Center";
 import Button from "controls/button/index";
 import Layout from "./Layout";
 
-const style = {
-  layout: {
-    display: "flex",
-    flexDirection: "column",
-    height: "100%",
-    justifyContent: "space-between",
-    boxSizing: "border-box",
-    paddingTop: 68,
-  },
-};
 const html = htm.bind(h);
 
-export default function Blocked({ hangout, onUnblock, onClose }) {
+export default function Blocked({ username, onUserClientCommand, onClose }) {
   return html`
-    <${Layout} style=${style.layout} id="blocked-ui">
-      <${Center} style=${{ flexDirection: "column", alignItems: "center" }}>
-        <${Block} width="60" height="70" color="red" />
-        <b data-testid="blocked-username">${hangout && hangout.username}</b> is
-        blocked
-      <//>
-      <div class="row">
-        <div class="col">
+    <${Layout} id="blocked-ui" username=${username} desc="You have blocked ">
+      <div class="d-flex flex-column  h-100 justify-content-between">
+        <div class="d-flex justify-content-center">
+          <${Block} width="60" height="70" color="red" />
+        </div>
+
+        <div class="btn-group d-flex" role="group">
           <${Button}
             data-testid="close-btn"
             onClick=${onClose}
@@ -35,14 +23,13 @@ export default function Blocked({ hangout, onUnblock, onClose }) {
             block
             outline
           />
-        </div>
-        <div class="col">
+
           <${Button}
             id="UNBLOCK"
-            onClick=${onUnblock}
+            onClick=${onUserClientCommand}
             data-testid="unblock-btn"
             title="UNBLOCK"
-            bg="primary"
+            bg="success"
             block
           />
         </div>

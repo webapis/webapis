@@ -14,12 +14,8 @@ describe("Blocker", () => {
     cy.window()
       .its("localStorage")
       .invoke("setItem", "browserId", JSON.stringify("1234567890"));
-    // cy.visit("/");
   });
   it("blocker recieved succefully", () => {
-    // const currentDate = Date.UTC(2018, 10, 30);
-    // cy.clock(currentDate, ["Date"]);
-
     cy.signup({ username: "demouser" });
     cy.signout();
 
@@ -37,11 +33,11 @@ describe("Blocker", () => {
     cy.signout();
 
     cy.login({ username: "demouser" });
-    cy.get("[data-testid=unread-link]");
-    //     cy.get("[data-testid=unread-link]").find("[data-testid=message-count]")
-    //     .contains(1);
-    // cy.wait(200)
+    cy.get("[data-testid=unread-link]").should("be.visible");
+
     cy.get("[data-testid=unread-link]").click();
+
+    cy.wait(200);
     cy.get("[data-testid=berouser]").click();
 
     cy.get("[data-testid=message-input]").type("Hello berouser x");
@@ -58,12 +54,12 @@ describe("Blocker", () => {
 
     cy.login({ username: "demouser" });
 
-    cy.get("[data-testid=hangouts-link]").click();
+    // cy.get("[data-testid=hangouts-link]").click();
     cy.get("[data-testid=berouser]").click();
 
     cy.get("[data-testid=message-input]").type("Hey x");
 
     cy.get("[data-testid=send-btn]").click();
-    cy.get("[data-testid=blocker-message]").should("be.visible");
+    cy.get("[data-testid=blocked-message]").should("be.visible");
   });
 });

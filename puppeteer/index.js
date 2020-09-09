@@ -1,13 +1,20 @@
 const puppeteer = require("puppeteer-core");
-
+//const puppeteer = require("puppeteer");
 (async () => {
   // set some options (set headless to false so we can see
   // this automated browsing experience)
   let BeroslaunchOptions = {
     headless: false,
     ignoreHTTPSErrors: true,
-    args: ["--window-position=0,0", "--window-size=300,700"],
-    executablePath: "Chrome/Application/chrome.exe", // because we are using puppeteer-core so we must define this option
+    args: [
+      "--window-position=0,0",
+      "--window-size=300,700",
+      "--no-sandbox",
+      "--disable-setuid-sandbox",
+    ],
+    executablePath:
+      "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome", // because we are using puppeteer-core so we must define this option
+    ///Applications/Google Chrome.app/Contents/MacOS/Google Chrome
   };
 
   const berosBrowser = await puppeteer.launch(BeroslaunchOptions);
@@ -29,23 +36,23 @@ const puppeteer = require("puppeteer-core");
   // go to the target web
   // await page.goto('https://google.com');
 
-  let DemoslaunchOptions = {
-    headless: false,
-    ignoreHTTPSErrors: true,
-    args: ["--window-position=550,0", "--window-size=300,700"],
-    executablePath: "Chrome/Application/chrome.exe", // because we are using puppeteer-core so we must define this option
-  };
+  // let DemoslaunchOptions = {
+  //   headless: false,
+  //   ignoreHTTPSErrors: true,
+  //   args: ["--window-position=550,0", "--window-size=300,700"],
+  //   executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' // because we are using puppeteer-core so we must define this option
+  // };
 
-  const demosBrowser = await puppeteer.launch(DemoslaunchOptions);
-  const demosPage = await demosBrowser.newPage();
-  await demosPage.setViewport({
-    width: 500,
-    height: 400,
-    isMobile: true,
-    deviceScaleFactor: 1,
-  });
-  await demosPage.goto("https://localhost:3000");
+  // const demosBrowser = await puppeteer.launch(DemoslaunchOptions);
+  // const demosPage = await demosBrowser.newPage();
+  // await demosPage.setViewport({
+  //   width: 500,
+  //   height: 400,
+  //   isMobile: true,
+  //   deviceScaleFactor: 1,
+  // });
+  // await demosPage.goto("https://localhost:3000");
 
   // close the browser
-  // await browser.close();
+  await browser.close();
 })();

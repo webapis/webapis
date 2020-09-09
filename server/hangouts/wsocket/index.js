@@ -1,5 +1,4 @@
 const hangoutHandler = require("./hangoutHandler");
-const onLineStateChangeHandler = require("./onLineStateChangeHandler");
 
 module.exports = async function hangouts({ hangout, ws, client, connections }) {
   const collection = await client.db("auth").collection("users");

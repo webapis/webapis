@@ -20,32 +20,38 @@ const style = {
   },
 };
 
-export default function Block({ onCancel, onBlock, onReport }) {
+export default function Block({
+  onCancel,
+  onUserClientCommand,
+  onReport,
+  username = "",
+}) {
   return html`
-    <${Layout} style=${style.layout}>
-      <div style=${style.checkboxRoot}>
-        <input type="checkbox" style=${style.checkbox} onChange=${onReport} />
-        <label>Report</label>
-      </div>
-      <div class="row">
-        <div class="col">
+    <${Layout} username=${username} desc="You are about to block ">
+      <div
+        data-testid="block-ui"
+        class="d-flex flex-column h-100 justify-content-between"
+      >
+        <div style=${style.checkboxRoot}>
+          <input type="checkbox" style=${style.checkbox} onChange=${onReport} />
+          <label>Report</label>
+        </div>
+        <div class="btn-group d-flex" role="group">
           <${Button}
             data-testid="cancel-btn"
             onClick=${onCancel}
-            title="Cancel"
+            title="Close"
             bg="secondary"
             outline
             block
           />
-        </div>
 
-        <div class="col">
           <${Button}
             id="BLOCK"
-            onClick=${onBlock}
+            onClick=${onUserClientCommand}
             data-testid="block-btn"
             title="Block"
-            bg="primary"
+            bg="success"
             block
           />
         </div>
