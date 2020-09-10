@@ -102,6 +102,17 @@ module.exports = {
   scripts: {
     storybook: { script: "rollup -c rollup.storybook.config.js -w" },
     apps: {
+      webrtc: {
+        node: {
+          dev: {
+            script: runApps({
+              back: "node",
+              env: "dev",
+              appName: "webrtc-app",
+            }),
+          },
+        },
+      },
       webcom: {
         node: {
           dev: {

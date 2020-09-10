@@ -4,6 +4,7 @@ import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js"
 import AppRouteProvider from "components/app-route/index";
 import HangoutAdapter from "features/hangouts/state/HangoutAdapter";
 import HangoutsProvider from "features/hangouts/state/HangoutsProvider";
+import WebRTCProvider from "features/webrtc/WebRTCProvider";
 import AuthProvider from "features/authentication/index";
 const html = htm.bind(h);
 export function RootProviders({ children }) {
@@ -15,11 +16,13 @@ export function RootProviders({ children }) {
       <${AuthProvider}
         authedRoute=${{ route: "/hangouts", featureRoute: "/hangout" }}
       >
-        <${HangoutsProvider}>
-          <${HangoutAdapter}
-            socketUrl=${location.origin.replace(/^http/, "ws")}
-          >
-            ${children}
+        <${WebRTCProvider}>
+          <${HangoutsProvider}>
+            <${HangoutAdapter}
+              socketUrl=${location.origin.replace(/^http/, "ws")}
+            >
+              ${children}
+            <//>
           <//>
         <//>
       <//>

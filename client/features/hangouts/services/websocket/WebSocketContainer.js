@@ -6,6 +6,7 @@ import {
 } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 import { useHangouts } from "../../state/useHangouts";
+import useSignaling from "./useSignaling";
 import * as actions from "./actions";
 import { actionTypes } from "../../state/actionTypes";
 import socketActionTypes from "./actionTypes";
@@ -25,13 +26,14 @@ export function WebSocketContainer(props) {
     searchHangouts,
     search,
     pendingHangout,
+    hangout,
     fetchHangouts,
     invitingGuest,
     guestEmail,
     messageForGuest,
   } = hangoutState;
   const { browserId, authStarted, user } = authState;
-
+  const sng = useSignaling({ socket, hangout, browserId });
   function onSocket() {
     const sock = new WebSocket(
       `${socketUrl}/hangouts/?username=${

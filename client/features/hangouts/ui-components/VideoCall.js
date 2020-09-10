@@ -11,9 +11,17 @@ import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js"
 import Layout from "./Layout";
 const html = htm.bind(h);
 
-export default function VideoCall({ username }) {
+export default function VideoCall({
+  username,
+  onVideoCall,
+  onCancelVideoCall,
+  onCloseVideoCall,
+  remoteStream,
+  calling = false,
+}) {
   const [stream, setStream] = useState(null);
-  const videoRef = useRef(null);
+  const localVideoRef = useRef(null);
+  const remoteVideoRef = useRef(null);
   useEffect(() => {
     navigator.mediaDevices
       .getUserMedia({ video: true, audio: false })
@@ -23,25 +31,64 @@ export default function VideoCall({ username }) {
   }, []);
   useEffect(() => {
     if (stream) {
-      videoRef.current.srcObject = stream;
+      localVideoRef.current.srcObject = stream;
     }
   }, [stream]);
-  return html`<div>
-    <${Layout} username=${username} desc="You are about to call ">
-      <div>
-        <video width="100" autoplay ref=${videoRef}></video>
 
-        <button class="btn btn-outline-success" data-testid="call-btn">
-          <span
-            class="spinner-grow spinner-grow-sm"
-            role="status"
-            aria-hidden="true"
-          ></span>
-          Calling...
+  useEffect(() => {
+    if (remoteStream) {
+      remoteVideoRef.current.srcObject = remoteStream;
+    }
+  }, [remoteStream]);
+
+  return html`<div>
+    <${Layout}
+      username=${username}
+      desc=${calling ? "Calling..." : "You are about to call "}
+    >
+      <div>
+        <video width="100" autoplay ref=${localVideoRef}></video>
+        <video width="200" autoplay ref=${remoteVideoRef}></video>
+
+        <button
+          id="videocall"
+          onClick=${onVideoCall}
+          disabled=${calling}
+          class="btn btn-outline-success"
+          data-testid="call-btn"
+        >
+          ${calling &&
+          html`
+            <span
+              class="spinner-grow spinner-grow-sm mr-1"
+              role="status"
+              aria-hidden="true"
+            ></span>
+          `}
+          ${calling ? "Calling..." : "Call"}
         </button>
-        <button class="btn btn-outline-danger" data-testid="close-call-btn">
-          Close
-        </button>
+        ${!calling &&
+        html`
+          <button
+            id="close-videocall"
+            onClick=${onCloseVideoCall}
+            class="btn btn-outline-danger"
+            data-testid="close-call-btn"
+          >
+            Close
+          </button>
+        `}
+        ${calling &&
+        html`
+          <button
+            id="cancel-videocall"
+            onClick=${onCancelVideoCall}
+            class="btn btn-outline-danger"
+            data-testid="cancel-call-btn"
+          >
+            Cancel
+          </button>
+        `}
       </div>
     <//>
   </div>`;

@@ -6,6 +6,7 @@ import {
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 import { useAppRoute } from "components/app-route/index";
 import { useHangouts } from "./state/useHangouts";
+import useWebRTC from "../webrtc/state/useWebRTC";
 import useUnread from "./state/useUnread";
 const Block = lazy(() => import("./ui-components/Block"));
 const Blocked = lazy(() => import("./ui-components/Blocked"));
@@ -28,11 +29,13 @@ export default function HangoutsFeatureRoutes(props) {
     ...state,
     onAppRoute,
   });
-
+  const { webrtcFuns, state: webrtcState } = useWebRTC({
+    target: hangout && hangout.username,
+  });
   switch (featureRoute) {
     case "/videocall":
       return html` <${Suspense} fallback=${Loading}>
-        <${VideoCall} hangout=${hangout} ...${hangout} ...${funcs} />
+        <${VideoCall} hangout=${hangout} ...${webrtcState} ...${webrtcFuns} />
       <//>`;
     case "/bckui":
       return html` <${Suspense} fallback=${Loading}>

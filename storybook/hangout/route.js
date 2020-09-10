@@ -25,9 +25,6 @@ const hangouts = [
 export default function HangoutRoutes() {
   return [
     html`
-      <${AppRoute} path="/videocall">
-        <${VideoCallUiState} />
-      <//>
       <${AppRoute} path="/guest">
         <${GuestHangchatUiState}
           username="demouser"
