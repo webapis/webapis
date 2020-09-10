@@ -13,45 +13,29 @@ const html = htm.bind(h);
 
 export default function VideoCaller({
   username,
-  onVideoCall,
-  onCancelVideoCall,
-  onCloseVideoCall,
-  remoteStream,
+  onClick,
+  localStream,
   calling = false,
 }) {
   const [stream, setStream] = useState(null);
   const localVideoRef = useRef(null);
-  const remoteVideoRef = useRef(null);
-  useEffect(() => {
-    navigator.mediaDevices
-      .getUserMedia({ video: true, audio: false })
-      .then((mediaStream) => {
-        setStream(mediaStream);
-      });
-  }, []);
-  useEffect(() => {
-    if (stream) {
-      localVideoRef.current.srcObject = stream;
-    }
-  }, [stream]);
 
   useEffect(() => {
-    if (remoteStream) {
-      remoteVideoRef.current.srcObject = remoteStream;
+    if (localStream) {
+      localVideoRef.current.srcObject = localStream;
     }
-  }, [remoteStream]);
+  }, [localStream]);
 
   return html`<div>
     <div>
       <video width="100" autoplay ref=${localVideoRef}></video>
-      <video width="200" autoplay ref=${remoteVideoRef}></video>
 
       <button
         id="videocall"
-        onClick=${onVideoCall}
+        onClick=${onClick}
         disabled=${calling}
         class="btn btn-outline-success"
-        data-testid="call-btn"
+        data-testid="videocall-btn"
       >
         ${calling &&
         html`
@@ -67,9 +51,9 @@ export default function VideoCaller({
       html`
         <button
           id="close-videocall"
-          onClick=${onCloseVideoCall}
+          onClick=${onClick}
           class="btn btn-outline-danger"
-          data-testid="close-call-btn"
+          data-testid="close-videocall-btn"
         >
           Close
         </button>
@@ -78,9 +62,9 @@ export default function VideoCaller({
       html`
         <button
           id="cancel-videocall"
-          onClick=${onCancelVideoCall}
+          onClick=${onClick}
           class="btn btn-outline-danger"
-          data-testid="cancel-call-btn"
+          data-testid="cancel-videocall-btn"
         >
           Cancel
         </button>

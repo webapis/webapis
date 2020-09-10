@@ -23,10 +23,37 @@ export default function useWebRTC({ target }) {
   }
   function onCancelVideoCall() {}
   function onCloseVideoCall() {}
-
+  function onAnswerVideoCall() {}
+  function onDeclineVideoCall() {}
+  function onEndVideoCall() {}
+  function onClick(e) {
+    const id = e.currentTarget.id;
+    switch (id) {
+      case "video-call":
+        onVideoCall();
+        break;
+      case "close-videocall":
+        onCloseVideoCall();
+        break;
+      case "cancel-videocall":
+        onCancelVideoCall();
+        break;
+      case "answer-video-call":
+        onAnswerVideoCall();
+        break;
+      case "decline-video-call":
+        onDeclineVideoCall();
+        break;
+      case "end-video-call":
+        onEndVideoCall();
+        break;
+      default:
+        throw "No id provided";
+    }
+  }
   return {
     state,
     dispatch,
-    webrcFuncs: { onVideoCall, onCancelVideoCall, onCloseVideoCall },
+    onClick,
   };
 }
