@@ -10,6 +10,6 @@ export default function ServiceProvider(props) {
     case "PREACT_APP_WEBSOCKET":
       return html`<${WebSocketContainer} ...${props} />`;
     default:
-      return null;
+      return html`<div ...${props} />`;
   }
 }
