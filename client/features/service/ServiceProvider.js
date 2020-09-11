@@ -3,10 +3,13 @@ import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js"
 import { ParseServer } from "../services/parse/ParseServer";
 import { WebSocketContainer } from "../services/websocket/WebSocketContainer";
 const html = htm.bind(h);
-export default function HangoutAdapter(props) {
-  if (PREACT_APP_BACK === "PREACT_APP_PARSE") {
-    return html`<${ParseServer} ...${props} />`;
-  } else if (PREACT_APP_BACK === "PREACT_APP_WEBSOCKET") {
-    return html`<${WebSocketContainer} ...${props} />`;
-  } else return null;
+export default function ServiceProvider(props) {
+  switch (PREACT_APP_BACK) {
+    case "PREACT_APP_PARSE":
+      return html`<${ParseServer} ...${props} />`;
+    case "PREACT_APP_WEBSOCKET":
+      return html`<${WebSocketContainer} ...${props} />`;
+    default:
+      return null;
+  }
 }
