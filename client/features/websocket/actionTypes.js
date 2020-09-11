@@ -1,0 +1,3 @@
+export default {
+  WEBSOCKET_INITIALIZED: "WEBSOCKET_INITIALIZED",
+};
