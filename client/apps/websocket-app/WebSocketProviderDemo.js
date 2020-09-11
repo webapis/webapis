@@ -6,7 +6,7 @@ import useWebSocket from "../../features/websocket/useWebSocket";
 import WebSocketProvider from "../../features/websocket/WebSocketProvider";
 const html = htm.bind(h);
 
-export default function WebSocketProviderDemo() {
+export default function WebSocketProviderDemo({ children }) {
   return html`<${WebSocketProvider} url="wss://localhost:3000/testwebsocket"
     >${children}<//
   > `;

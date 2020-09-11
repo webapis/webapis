@@ -4,7 +4,7 @@ import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js"
 import WebSocketProvider from "../../features/websocket/WebSocketProvider";
 const html = htm.bind(h);
 
-export default function WebSocketProviderBero() {
+export default function WebSocketProviderBero({ children }) {
   return html`<${WebSocketProvider} url="wss://localhost:3000/testwebsocket"
     >${children}<//
   > `;

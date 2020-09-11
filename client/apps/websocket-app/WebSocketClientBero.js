@@ -6,25 +6,36 @@ import {
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 import useWebSocket from "../../features/websocket/useWebSocket";
 import WebSocketClient from "../../features/websocket/demo-ui/WebSocketClient";
-
-export default function WebSocketClientBero() {
+const html = htm.bind(h);
+export default function WebSocketClientBero({ username }) {
   const [messageText, setMessageText] = useState("");
   const [messages, setMessages] = useState([]);
-  const {
-    state: { message },
-    sendMessage,
-  } = useWebSocket();
+  const { message, connectionState, sendMessage } = useWebSocket();
 
   function onChange() {
     setMessageText(e.target.value);
   }
+  useEffect(() => {
+    if (message) {
+      setMessages((prev) => [...prev, message]);
+    }
+  }, [message]);
 
+  function handleSendMessage() {
+    const msg = {
+      type: "demowebsocket",
+      message: { username, text: messageText },
+    };
+    sendMessage();
+  }
   return html`
     <${WebSocketClient}
+      connectionState=${connectionState}
+      username=${username}
       messages=${messages}
       message=${messageText}
       onChange=${onChange}
-      onClick=${sendMessage}
+      onClick=${handleSendMessage}
     />
   `;
 }
