@@ -62,6 +62,11 @@ render(
               <${DropdownItem} id="videocall">VideoCall<//>
             <//>
           <//>
+          <${NavDropdown} title="websocket">
+            <${DropdownMenu}>
+              <${DropdownItem} id="websocket">WebSocketClient<//>
+            <//>
+          <//>
         <//>
       <//>
     <//>

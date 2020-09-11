@@ -11,22 +11,50 @@ import {
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 import reducer, { initState } from "./reducer";
 import { initWebSocket } from "./actions";
+import actionTypes from "./actionTypes";
 const html = htm.bind(h);
 
 export const WebSocketContext = createContext();
 
 export default function WebSocketProvider(props) {
-  const { user, url } = props;
+  const { url } = props || {};
 
   const [state, dispatch] = useReducer(reducer, initState);
-
+  const { websocket } = state;
   useEffect(() => {
-    if (user) {
+    if (url) {
+      debugger;
       initWebSocket({ url, dispatch });
     }
-  }, [user]);
-
+  }, [url]);
+  useEffect(() => {
+    if (websocket) {
+      debugger;
+      websocket.onmessage = (message) => {
+        const msg = JSON.parse(message.data);
+        dispatch({ type: actionTypes.MESSAGE_RECIEVED, message: msg });
+      };
+      websocket.onopen = () => {
+        debugger;
+        dispatch({
+          type: actionTypes.CONNECTION_STATE_CHANGED,
+          connectionState: "open",
+        });
+      };
+      websocket.onclose = () => {
+        debugger;
+        dispatch({
+          type: actionTypes.CONNECTION_STATE_CHANGED,
+          connectionState: "close",
+        });
+      };
+      websocket.onerror = (error) => {
+        debugger;
+        dispatch({ type: actionTypes.SOCKET_ERROR, error });
+      };
+    }
+  }, [websocket]);
   const value = useMemo(() => [state, dispatch], [state]);
 
-  return html`<${HangoutContext.Provider} value=${value} ...${props} />`;
+  return html`<${WebSocketContext.Provider} value=${value} ...${props} />`;
 }

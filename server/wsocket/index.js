@@ -18,7 +18,9 @@ module.exports = async function (server, client) {
 
   wss.on("connection", async function connection(ws, request) {
     //FIXME :HG same user signs in from multiple devices at the same time
-    if (request.url.includes("hangouts")) {
+    if (request.url.includes("testwebsocket")) {
+      debugger;
+    } else if (request.url.includes("hangouts")) {
       try {
         const token = cookie.parse(request.headers["cookie"]);
 

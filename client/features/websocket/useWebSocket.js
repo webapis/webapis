@@ -18,6 +18,10 @@ export default function useWebSocket() {
   }
 
   const [state, dispatch] = context;
+  const { websocket } = state;
+  function sendMessage(msg) {
+    websocket.send(JSON.stringify(msg));
+  }
 
-  return { state, dispatch };
+  return { state, dispatch, sendMessage };
 }
