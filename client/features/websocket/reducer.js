@@ -11,7 +11,6 @@ export default function reducer(state, action) {
     case actionTypes.SOCKET_ERROR:
       return { ...state, error: action.error };
     case actionTypes.CONNECTION_STATE_CHANGED:
-      debugger;
       return { ...state, connectionState: action.connectionState };
     case actionTypes.MESSAGE_RECIEVED:
       return { ...state, message: action.message };

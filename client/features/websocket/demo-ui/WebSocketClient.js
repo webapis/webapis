@@ -29,7 +29,7 @@ export default function WebSocketClient({
           <div class="card-body">
             <ui>
               ${messages &&
-              messages.map((m) => html`<li>${m.username}:${m.message}</li>`)}
+              messages.map((m) => html`<li>${m.username}:${m.text}</li>`)}
             </ui>
             <div class="input-group mb-3">
               <input

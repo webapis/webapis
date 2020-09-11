@@ -17,7 +17,11 @@ export default function WebSocketClientBero({ username }) {
   }
   useEffect(() => {
     if (message) {
-      setMessages((prev) => [...prev, message]);
+      debugger;
+      setMessages((prev) => [
+        ...prev,
+        { username: message.sender, text: message.data.text },
+      ]);
     }
   }, [message]);
 
@@ -27,7 +31,7 @@ export default function WebSocketClientBero({ username }) {
       target: "demouser",
       data: { text: messageText },
     };
-    debugger;
+
     sendMessage(msg);
   }
   return html`

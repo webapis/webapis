@@ -23,33 +23,29 @@ export default function WebSocketProvider(props) {
   const { websocket } = state;
   useEffect(() => {
     if (url) {
-      debugger;
       initWebSocket({ url, dispatch });
     }
   }, [url]);
   useEffect(() => {
     if (websocket) {
-      debugger;
       websocket.onmessage = (message) => {
         const msg = JSON.parse(message.data);
+
         dispatch({ type: actionTypes.MESSAGE_RECIEVED, message: msg });
       };
       websocket.onopen = () => {
-        debugger;
         dispatch({
           type: actionTypes.CONNECTION_STATE_CHANGED,
           connectionState: "open",
         });
       };
       websocket.onclose = () => {
-        debugger;
         dispatch({
           type: actionTypes.CONNECTION_STATE_CHANGED,
           connectionState: "close",
         });
       };
       websocket.onerror = (error) => {
-        debugger;
         dispatch({ type: actionTypes.SOCKET_ERROR, error });
       };
     }

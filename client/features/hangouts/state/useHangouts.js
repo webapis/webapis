@@ -19,7 +19,6 @@ export function useHangouts() {
   function onNavigation(e) {
     e.preventDefault();
     if (authContext.state.user) {
-      debugger;
       const id = e.currentTarget.id;
       onAppRoute({ featureRoute: `/${id}`, route: "/hangouts" });
     } else {
