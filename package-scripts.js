@@ -131,7 +131,19 @@ module.exports = {
           },
         },
       },
+      websocket: {
+        node: {
+          dev: {
+            script: runApps({
+              back: "node",
+              env: "dev",
+              appName: "websocket-app",
+            }),
+          },
+        },
+      },
     },
+
     testAva: {
       script: "ava -w",
     },
