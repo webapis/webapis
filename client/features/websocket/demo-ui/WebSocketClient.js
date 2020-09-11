@@ -12,7 +12,7 @@ import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js"
 const html = htm.bind(h);
 
 export default function WebSocketClient({
-  sendMessage,
+  onClick,
   messages,
   username,
   onChange,
@@ -41,7 +41,7 @@ export default function WebSocketClient({
               />
               <div class="input-group-append">
                 <button
-                  onClick=${sendMessage}
+                  onClick=${onClick}
                   class="btn btn-outline-secondary"
                   type="button"
                   id="button-addon2"

@@ -1,7 +1,7 @@
 require("dotenv").config();
 const PORT = process.env.PORT || 3000;
 //import http from 'http';
-const ws = require("./wsocket");
+const ws = require("./websocket");
 //import { parseServer } from "./parse";//
 const httpRoute = require("./http-route");
 const https = require("https");

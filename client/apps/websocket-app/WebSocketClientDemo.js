@@ -12,7 +12,7 @@ export default function WebSocketClientDemo({ username }) {
   const [messages, setMessages] = useState([]);
   const { message, connectionState, sendMessage } = useWebSocket();
 
-  function onChange() {
+  function onChange(e) {
     setMessageText(e.target.value);
   }
   useEffect(() => {
@@ -23,10 +23,12 @@ export default function WebSocketClientDemo({ username }) {
 
   function handleSendMessage() {
     const msg = {
-      type: "demowebsocket",
-      message: { username, text: messageText },
+      type: "test-websocket",
+      target: "berouser",
+      data: { text: messageText },
     };
-    sendMessage();
+    debugger;
+    sendMessage(msg);
   }
   return html`
     <${WebSocketClient}

@@ -7,7 +7,8 @@ import WebSocketProvider from "../../features/websocket/WebSocketProvider";
 const html = htm.bind(h);
 
 export default function WebSocketProviderDemo({ children }) {
-  return html`<${WebSocketProvider} url="wss://localhost:3000/testwebsocket"
+  return html`<${WebSocketProvider}
+    url="wss://localhost:3000/unauthed-msg/?username=demouser"
     >${children}<//
   > `;
 }

@@ -1,3 +1,30 @@
+const { authedHandler } = require("./authedHandler");
+const { unauthedHandler } = require("./unauthedHandler");
+const url = require("url");
+
+const EventEmitter = require("events");
+const WebSocket = require("ws");
+module.exports = wsocket = new EventEmitter();
+let connections = {};
+
+module.exports = async function (server, client) {
+  const collection = await client.db("auth").collection("users");
+  const wss = new WebSocket.Server({ server });
+
+  wss.on("connection", async function connection(ws, request) {
+    if (request.url.includes("unauthed-msg")) {
+      debugger;
+      unauthedHandler({ ws, request, connections });
+    } else if (request.url.includes("authed-msg")) {
+      authedHandler({ request, connections, ws });
+    } else {
+      throw "proper url for websocket not provided";
+    }
+  });
+};
+//
+
+/*
 const hangoutsHandler = require("../hangouts/wsocket");
 const { errorMonitor } = require("../app-monitor/wsocket");
 const {
@@ -11,16 +38,22 @@ const EventEmitter = require("events");
 const WebSocket = require("ws");
 module.exports = wsocket = new EventEmitter();
 let connections = {};
-
+let testconnections={}
 module.exports = async function (server, client) {
   const collection = await client.db("auth").collection("users");
   const wss = new WebSocket.Server({ server });
 
   wss.on("connection", async function connection(ws, request) {
     //FIXME :HG same user signs in from multiple devices at the same time
-    if (request.url.includes("testwebsocket")) {
-      debugger;
-    } else if (request.url.includes("hangouts")) {
+    if (request.url.includes("unauthed-msg")) {
+      let uname = url.parse(request.url, true).query.username;
+      testconnections[uname] = ws;
+
+      ws.on('message',function(message){
+
+      })
+      debugger;//
+    } else if (request.url.includes("authed-msg")) {/////-------------------------?
       try {
         const token = cookie.parse(request.headers["cookie"]);
 
@@ -45,14 +78,14 @@ module.exports = async function (server, client) {
             const hangout = JSON.parse(message);
             hangoutsHandler({ hangout, connections, ws, client });
           } catch (error) {
-            const err = error;
-
+            const err = error;//
             throw new Error(error);
           }
         });
         ws.on("close", function () {
           console.log("connection closed:", username);
           delete connections[`${username}-${browserId}`];
+         
         });
       } catch (error) {
         const err = error;
@@ -65,3 +98,5 @@ module.exports = async function (server, client) {
   });
 };
 //
+
+*/
