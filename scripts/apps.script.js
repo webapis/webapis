@@ -8,7 +8,7 @@ const { crossEnv, series, concurrent } = require("nps-utils");
 
 //returns buildtime envs for rollup.js
 function clientEnv({ appName, rtc, auth, env }) {
-  return crossEnv(`appName=${appName} rtc=${rtc} auth=${auth} ENV=${env} `);
+  return crossEnv(`appName=${appName} RTC=${rtc} AUTH=${auth} ENV=${env} `);
 }
 // returns rintime envs for nodejs
 function serverEnv({ appName, env }) {
@@ -55,23 +55,23 @@ function clientScript({ appName, env, rtc, auth }) {
 const apps = [
   {
     appName: "webcom-app",
-    rtc: "websocket",
-    auth: "nodejs",
-    env: "dev",
+    rtc: "WEBSOCKET",
+    auth: "NODEJS",
+    env: "DEV",
     scriptName: "webcomdev",
   },
   {
     appName: "websocket-app",
-    rtc: "websocket",
-    auth: "nodejs",
-    env: "dev",
+    rtc: "WEBSOCKET",
+    auth: "NODEJS",
+    env: "DEV",
     scriptName: "websocketdev",
   },
   {
     appName: "websocket-app",
-    rtc: "websocket",
-    auth: "nodejs",
-    env: "dev",
+    rtc: "WEBSOCKET",
+    auth: "NODEJS",
+    env: "DEV",
     scriptName: "websocketprod",
   },
 ];

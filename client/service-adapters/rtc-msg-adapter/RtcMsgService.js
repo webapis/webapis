@@ -4,7 +4,7 @@ import { ParseServer } from "./parse/ParseServer";
 import WebSocketProvider from "../../features/websocket/WebSocketProvider";
 const html = htm.bind(h);
 export default function RtcMsgService(props) {
-  switch (PREACT_APP_RTC) {
+  switch (RTC) {
     case "PARSE":
       return html`<${ParseServer} ...${props} />`;
     case "WEBSOCKET":
