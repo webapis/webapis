@@ -3,6 +3,7 @@ import { useAuthContext } from "./AuthProvider";
 import actionTypes from "./actionTypes";
 import * as cv from "../validation/constraintValidators";
 import { useAppRoute } from "components/app-route/index";
+import { sign } from "jsonwebtoken";
 
 export function useAuth() {
   const {
@@ -57,7 +58,18 @@ export function useAuth() {
           cv.validateUserNameConstraint({ username }).isValid &&
           cv.validatePasswordConstraint({ password }).isValid
         ) {
-          dispatch({ type: actionTypes.SIGNUP_STARTED });
+          signup({
+            username,
+            email,
+            password,
+            started: () => {
+              dispatch({ type: actionTypes.SIGNUP_STARTED });
+            },
+            success: ({ token }) => {},
+            failed: ({ error }) => {
+              dispatch({ type: actionTypes.SIGNUP_FAILED, error });
+            },
+          });
         } else {
           dispatch({
             type: actionTypes.CONSTRAINT_VALIDATION,
