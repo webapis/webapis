@@ -1,34 +1,6 @@
 const { crossEnv, series, concurrent } = require("nps-utils");
-function runApps({ back, env, appName }) {
-  return concurrent({
-    server: {
-      script:
-        crossEnv(app({ appName }) + backEnd({ back })) + serverEnv({ env }),
-    },
-    client: {
-      script:
-        crossEnv(app({ appName }) + backEnd({ back })) + clientEnv({ env }),
-    },
-  });
-}
-
-function serverEnv({ env }) {
-  return env === "prod" ? "node server/index.js" : "nodemon server/index.js";
-}
-
-function clientEnv({ env }) {
-  return env === "prod" ? "rollup -c" : "rollup -c -w";
-}
-
-function backEnd({ back }) {
-  return back === "node"
-    ? "PREACT_APP_BACK=PREACT_APP_NODEJS "
-    : "PREACT_APP_BACK=PREACT_APP_PARSE ";
-}
-
-function app({ appName }) {
-  return `appName=${appName} `;
-}
+const { storybook } = require("./scripts/storybook.script");
+const { appScripts } = require("./scripts/apps.script");
 
 function crossMap({ browsers, features, record, type }) {
   //nps cy.local.cross.browser.chrome.hangouts
@@ -100,50 +72,8 @@ function defaultBrowser({ features, record, type }) {
 
 module.exports = {
   scripts: {
-    storybook: { script: "rollup -c rollup.storybook.config.js -w" },
-    apps: {
-      webrtc: {
-        node: {
-          dev: {
-            script: runApps({
-              back: "node",
-              env: "dev",
-              appName: "webrtc-app",
-            }),
-          },
-        },
-      },
-      webcom: {
-        node: {
-          dev: {
-            script: runApps({
-              back: "node",
-              env: "dev",
-              appName: "webcom-app",
-            }),
-          },
-          prod: {
-            script: runApps({
-              back: "node",
-              env: "prod",
-              appName: "webcom-app",
-            }),
-          },
-        },
-      },
-      websocket: {
-        node: {
-          dev: {
-            script: runApps({
-              back: "node",
-              env: "dev",
-              appName: "websocket-app",
-            }),
-          },
-        },
-      },
-    },
-
+    ...appScripts,
+    storybook,
     testAva: {
       script: "ava -w",
     },

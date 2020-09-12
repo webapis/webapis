@@ -12,7 +12,7 @@ const { MongoClient } = require("mongodb");
 // parse
 if (process.env.PREACT_APP_BACK === "PREACT_APP_PARSE") {
   // parseServer();
-} //
+}
 
 const options = {
   key: fs.readFileSync("key.pem"),
