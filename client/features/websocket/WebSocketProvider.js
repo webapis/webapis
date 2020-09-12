@@ -29,6 +29,7 @@ export default function WebSocketProvider(props) {
   useEffect(() => {
     if (websocket) {
       websocket.onmessage = (message) => {
+        debugger;
         const msg = JSON.parse(message.data);
 
         dispatch({ type: actionTypes.MESSAGE_RECIEVED, message: msg });
@@ -52,13 +53,9 @@ export default function WebSocketProvider(props) {
   }, [websocket]);
 
   function sendMessage(msg) {
+    debugger;
     websocket.send(JSON.stringify(msg));
   }
 
-  return html`<div
-    ...${props}
-    sendMessage=${sendMessage}
-    message=${message}
-    connectionState=${connectionState}
-  />`;
+  return children({ sendMessage, message, connectionState });
 }

@@ -12,13 +12,37 @@ import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js"
 const html = htm.bind(h);
 
 export default function WebSocketClient({
-  onClick,
-  messages,
   username,
-  onChange,
   message,
+  sendMessage,
   connectionState,
+  target,
 }) {
+  const [messageText, setMessageText] = useState("");
+  const [messages, setMessages] = useState([]);
+
+  function onChange(e) {
+    setMessageText(e.target.value);
+  }
+  useEffect(() => {
+    if (message) {
+      debugger;
+      setMessages((prev) => [
+        ...prev,
+        { username: message.sender, text: message.data.text },
+      ]);
+    }
+  }, [message]);
+
+  function handleSendMessage() {
+    debugger;
+    const msg = {
+      type: "test-websocket",
+      target,
+      data: { text: messageText },
+    };
+    sendMessage(msg);
+  }
   return html`<div>
     <div class="row">
       <div class="col">
@@ -33,15 +57,16 @@ export default function WebSocketClient({
             </ui>
             <div class="input-group mb-3">
               <input
+                id=${username}
                 onChange=${onChange}
                 type="text"
                 class="form-control"
                 placeholder="Enter message text"
-                value=${message}
+                value=${messageText}
               />
               <div class="input-group-append">
                 <button
-                  onClick=${onClick}
+                  onClick=${handleSendMessage}
                   class="btn btn-outline-secondary"
                   type="button"
                   id="button-addon2"

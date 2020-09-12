@@ -10,6 +10,6 @@ export default function RtcMsgService(props) {
     case "WEBSOCKET":
       return html`<${WebSocketProvider} ...${props} />`;
     default:
-      return html`<div ...${props} />`;
+      return null;
   }
 }
