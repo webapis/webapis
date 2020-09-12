@@ -5,7 +5,14 @@ import * as cv from "../validation/constraintValidators";
 import { useAppRoute } from "components/app-route/index";
 
 export function useAuth() {
-  const { state, dispatch } = useAuthContext();
+  const {
+    state,
+    login,
+    signup,
+    changepassword,
+    requestpasswordchange,
+    dispatch,
+  } = useAuthContext();
   const { onAppRoute } = useAppRoute();
 
   function onChange(e) {

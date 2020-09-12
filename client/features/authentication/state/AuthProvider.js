@@ -31,8 +31,21 @@ export function useAuthContext() {
 }
 
 export default function AuthProvider(props) {
-  const { children, authedRoute } = props;
-  const [state, dispatch] = useReducer(authReducer, initState);
+  const {
+    children,
+    authedRoute,
+    login,
+    signup,
+    changepassword,
+    requestpasswordchange,
+  } = props;
+  const [state, dispatch] = useReducer(authReducer, {
+    ...initState,
+    login,
+    signup,
+    changepassword,
+    requestpasswordchange,
+  });
   const { onAppRoute } = useAppRoute();
   const { user } = state;
   const value = useMemo(() => [state, dispatch], [state]);
@@ -54,9 +67,7 @@ export default function AuthProvider(props) {
 
   return html`
     <${AuthContext.Provider} value=${value} ...${props}>
-      <${AuthAdapter} state=${state} dispatch=${dispatch}>
-        ${children}
-      <//>
+      ${children}
     <//>
   `;
 }

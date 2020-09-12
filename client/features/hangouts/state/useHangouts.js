@@ -33,7 +33,6 @@ export function useHangouts() {
 
   function onUserClientCommand(e) {
     const id = e.target.id;
-
     dispatch({
       type: actionTypes.ON_USER_CLIENT_COMMAND,
       on_user_client_command: id,
