@@ -2,33 +2,34 @@
 import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 import AppRouteProvider from "components/app-route/index";
-import HangoutAdapter from "features/hangouts/state/HangoutAdapter";
+//import HangoutAdapter from "features/hangouts/state/HangoutAdapter";
 import HangoutsProvider from "features/hangouts/state/HangoutsProvider";
 import AuthService from "../../service-adapters/auth-adapter/AuthService";
 
 import RTCMsgService from "../../service-adapters/rtc-msg-adapter/RtcMsgService";
 const html = htm.bind(h);
 export function RootProviders(props) {
-  return html`
-    <${AppRouteProvider}
-      title="Webcom"
-      initState=${{ route: "/auth", featureRoute: "/login" }}
+  const { children } = props;
+  return html` <${AppRouteProvider}
+    title="Webcom"
+    initState=${{ route: "/auth", featureRoute: "/login" }}
+  >
+    <${AuthService}
+      ...${props}
+      authedRoute=${{ route: "/hangouts", featureRoute: "/hangout" }}
     >
-      <${AuthService}
-        authedRoute=${{ route: "/hangouts", featureRoute: "/hangout" }}
+      <${RTCMsgService} ...${props}
+        >${({ message, connectionState, sendMessage }) => {
+          return html`<${HangoutsProvider}
+            ...${props}
+            message=${message}
+            sendMessage=${sendMessage}
+            connectionState=${connectionState}
+          />`;
+        }}<//
       >
-        <${RTCMsgService}
-          >${({ sendMessage, message, connectionState }) => {
-            return html` <${HangoutsProvider}...${props}
-              sendMessage=${sendMessage}
-              message=${message}
-              connectionState=${connectionState}
-            />`;
-          }}
-        <//>
-      <//>
     <//>
-  `;
+  <//>`;
 }
 
 /*
@@ -62,4 +63,16 @@ export function RootProviders({ children }) {
     <//>
   `;
 }
+*/
+
+/*
+<${RTCMsgService}
+      >${({ sendMessage, message, connectionState }) => {
+        return html` <${HangoutsProvider}...${props}
+          sendMessage=${sendMessage}
+          message=${message}
+          connectionState=${connectionState}
+        />`;
+      }}
+    <//>
 */

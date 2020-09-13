@@ -33,8 +33,8 @@ export default [
   image(),
   production && terser(),
   replace({
-    RTC: process.env.RTC,
-    AUTH: process.env.AUTH,
+    RTC: JSON.stringify(process.env.RTC),
+    AUTH: JSON.stringify(process.env.AUTH),
   }),
   replace({
     ip: JSON.stringify(process.env.ip),

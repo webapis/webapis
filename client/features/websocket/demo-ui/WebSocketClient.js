@@ -26,7 +26,6 @@ export default function WebSocketClient({
   }
   useEffect(() => {
     if (message) {
-      debugger;
       setMessages((prev) => [
         ...prev,
         { username: message.sender, text: message.data.text },
@@ -35,7 +34,6 @@ export default function WebSocketClient({
   }, [message]);
 
   function handleSendMessage() {
-    debugger;
     const msg = {
       type: "test-websocket",
       target,

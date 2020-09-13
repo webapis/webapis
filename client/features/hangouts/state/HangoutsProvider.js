@@ -37,7 +37,8 @@ export function useHangoutContext() {
 }
 
 export default function HangoutsProvider(props) {
-  const { sendMessage } = props;
+  const { sendMessage, message, connectionState } = props;
+
   const { onAppRoute } = useAppRoute();
   const { state: authState } = useAuth();
   const { user } = authState;

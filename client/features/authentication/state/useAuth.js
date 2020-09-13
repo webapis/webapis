@@ -3,8 +3,12 @@ import { useAuthContext } from "./AuthProvider";
 import actionTypes from "./actionTypes";
 import * as cv from "../validation/constraintValidators";
 import { useAppRoute } from "components/app-route/index";
-import { sign } from "jsonwebtoken";
-
+import {
+  generateBrowserId,
+  saveBrowserIdToLocalStorage,
+  browserIdExists,
+  loadBrowserId,
+} from "../state/onBrowserId";
 export function useAuth() {
   const {
     state,
@@ -43,53 +47,148 @@ export function useAuth() {
         cv.validateEmailOrUsername({ value: emailorusername }).isValid &&
         password.length > 0
       ) {
-        dispatch({ type: actionTypes.LOGIN_STARTED });
+        login({
+          emailorusername,
+          password,
+          started: () => {
+            dispatch({ type: actionTypes.LOGIN_STARTED });
+          },
+          success: ({ reponse, result }) => {
+            if (response.status === 200) {
+              const { token, username, email } = result;
+              if (browserIdExists()) {
+                dispatch({
+                  type: actionTypes.BROWSER_ID_LOADED,
+                  browserId: loadBrowserId(),
+                });
+              } else {
+                const { browserId } = result;
+
+                saveBrowserIdToLocalStorage({ browserId });
+                dispatch({
+                  type: actionTypes.BROWSER_ID_LOADED,
+                  browserId,
+                });
+              }
+
+              dispatch({
+                type: actionTypes.LOGIN_SUCCESS,
+                user: { token, username, email },
+              });
+              window.localStorage.setItem(
+                "webcom",
+                JSON.stringify({
+                  token,
+                  username,
+                  email,
+                })
+              );
+            } else if (response.status === 400) {
+              const { errors } = result;
+
+              errors.forEach((error) => {
+                serverValidation({ status: error, dispatch });
+              });
+              dispatch({ type: actionTypes.LOGIN_FAILED });
+            } else if (response.status === 500) {
+              const { error } = result;
+
+              dispatch({ type: actionTypes.SERVER_ERROR_RECIEVED, error });
+              dispatch({ type: actionTypes.LOGIN_FAILED });
+            }
+          },
+          failed: (error) => {
+            dispatch({ type: actionTypes.SERVER_ERROR_RECIEVED, error });
+            dispatch({ type: actionTypes.LOGIN_FAILED });
+          },
+          hasBrowserId: browserIdExists(),
+        });
       }
     }
   }
   function onSignup() {
-    try {
-      const { username, password, email } = state;
-      if (window.jsDisabled) {
-        dispatch({ type: actionTypes.SIGNUP_STARTED });
+    const { username, password, email } = state;
+    if (window.jsDisabled) {
+      dispatch({ type: actionTypes.SIGNUP_STARTED });
+    } else {
+      if (
+        cv.validateEmailConstraint({ email }).isValid &&
+        cv.validateUserNameConstraint({ username }).isValid &&
+        cv.validatePasswordConstraint({ password }).isValid
+      ) {
+        const browserId = loadBrowserId();
+        signup({
+          username,
+          email,
+          password,
+          browserId,
+          started: () => {
+            dispatch({ type: actionTypes.SIGNUP_STARTED });
+          },
+          success: ({ result, response }) => {
+            if (response.status === 200) {
+              const { token, username, email } = result;
+              dispatch({
+                type: actionTypes.SIGNUP_SUCCESS,
+                user: { token, username, email },
+              });
+
+              window.localStorage.setItem(
+                "webcom",
+                JSON.stringify({
+                  token,
+                  username,
+                  email,
+                })
+              );
+              if (browserIdExists()) {
+                dispatch({
+                  type: actionTypes.BROWSER_ID_LOADED,
+                  browserId,
+                });
+              } else {
+                const { browserId } = result;
+                saveBrowserIdToLocalStorage({ browserId });
+                dispatch({
+                  type: actionTypes.BROWSER_ID_LOADED,
+                  browserId,
+                });
+              }
+            } else if (response.status === 400) {
+              const { errors } = result;
+
+              errors.forEach((error) => {
+                serverValidation({ status: error, dispatch });
+              });
+              dispatch({ type: actionTypes.SIGNUP_FAILED });
+            } else if (response.status === 500) {
+              const { error } = result;
+
+              dispatch({ type: actionTypes.SERVER_ERROR_RECIEVED, error });
+              dispatch({ type: actionTypes.SIGNUP_FAILED });
+            }
+          },
+          failed: (error) => {
+            dispatch({ type: actionTypes.SIGNUP_FAILED, error });
+          },
+        });
       } else {
-        if (
-          cv.validateEmailConstraint({ email }).isValid &&
-          cv.validateUserNameConstraint({ username }).isValid &&
-          cv.validatePasswordConstraint({ password }).isValid
-        ) {
-          signup({
-            username,
-            email,
-            password,
-            started: () => {
-              dispatch({ type: actionTypes.SIGNUP_STARTED });
-            },
-            success: ({ token }) => {},
-            failed: ({ error }) => {
-              dispatch({ type: actionTypes.SIGNUP_FAILED, error });
-            },
-          });
-        } else {
-          dispatch({
-            type: actionTypes.CONSTRAINT_VALIDATION,
-            name: "password",
-            ...cv.validatePasswordConstraint({ password }),
-          });
-          dispatch({
-            type: actionTypes.CONSTRAINT_VALIDATION,
-            name: "email",
-            ...cv.validateEmailConstraint({ email }),
-          });
-          dispatch({
-            type: actionTypes.CONSTRAINT_VALIDATION,
-            name: "username",
-            ...cv.validateUserNameConstraint({ username }),
-          });
-        }
+        dispatch({
+          type: actionTypes.CONSTRAINT_VALIDATION,
+          name: "password",
+          ...cv.validatePasswordConstraint({ password }),
+        });
+        dispatch({
+          type: actionTypes.CONSTRAINT_VALIDATION,
+          name: "email",
+          ...cv.validateEmailConstraint({ email }),
+        });
+        dispatch({
+          type: actionTypes.CONSTRAINT_VALIDATION,
+          name: "username",
+          ...cv.validateUserNameConstraint({ username }),
+        });
       }
-    } catch (error) {
-      const err = error;
     }
   }
   function onRequestPasswordChange() {

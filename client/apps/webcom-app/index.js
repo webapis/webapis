@@ -6,12 +6,13 @@ import {
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 import { App } from "./App";
 import { RootProviders } from "./RootProviders";
+import AppRouteProvider from "components/app-route/index";
 //Parse.liveQueryServerURL = `https://${ip}:1337/parse`
 //Parse.serverURL = 'https://parseapi.back4app.com/'
 //Parse.liveQueryServerURL = `wss://webapis.back4app.io`//
 const html = htm.bind(h);
 render(
-  html`<${RootProviders}>
+  html` <${RootProviders}>
     <${App} />
   <//>`,
 
