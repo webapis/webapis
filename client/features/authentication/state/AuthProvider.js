@@ -201,7 +201,7 @@ export default function AuthProvider(props) {
   }
   return html`
     <${AuthContext.Provider} value=${value} ...${props}>
-      ${children}
+      ${children({ user })}
     <//>
   `;
 }

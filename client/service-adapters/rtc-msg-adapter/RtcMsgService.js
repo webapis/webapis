@@ -4,10 +4,10 @@ import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js"
 import WebSocketProvider from "../../features/websocket/WebSocketProvider";
 const html = htm.bind(h);
 export default function RtcMsgService(props) {
-  const { children } = props;
+  const { children, url } = props;
   return html`<${WebSocketProvider} ...${props}
     >${({ sendMessage, message, connectionState }) => {
-      return children({ message, sendMessage, connectionState });
+      return children({ message, sendMessage, connectionState, url });
     }}<//
   >`;
 }

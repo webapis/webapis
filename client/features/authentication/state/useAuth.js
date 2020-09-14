@@ -21,10 +21,8 @@ export function useAuth() {
   function onLogin() {
     const { emailorusername, password } = state;
     if (window.jsDisabled) {
-      debugger;
       dispatch({ type: actionTypes.LOGIN_STARTED });
     } else {
-      debugger;
       dispatch({
         type: actionTypes.CONSTRAINT_VALIDATION,
         name: "emailorusername",

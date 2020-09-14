@@ -18,11 +18,11 @@ export const WebSocketContext = createContext();
 
 export default function WebSocketProvider(props) {
   const { url, children } = props || {};
-
   const [state, dispatch] = useReducer(reducer, initState);
   const { websocket, message, connectionState } = state;
   useEffect(() => {
     if (url) {
+      debugger;
       initWebSocket({ url, dispatch });
     }
   }, [url]);
@@ -30,10 +30,11 @@ export default function WebSocketProvider(props) {
     if (websocket) {
       websocket.onmessage = (message) => {
         const msg = JSON.parse(message.data);
-
+        debugger;
         dispatch({ type: actionTypes.MESSAGE_RECIEVED, message: msg });
       };
       websocket.onopen = () => {
+        debugger;
         dispatch({
           type: actionTypes.CONNECTION_STATE_CHANGED,
           connectionState: "open",
@@ -52,6 +53,7 @@ export default function WebSocketProvider(props) {
   }, [websocket]);
 
   function sendMessage({ data, type }) {
+    debugger;
     websocket.send(JSON.stringify({ data, type }));
   }
 

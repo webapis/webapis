@@ -22,9 +22,11 @@ module.exports.handlePersistance = async function ({
           const senderOnline =
             connections[`${senderUserName}-${browser.browserId}`];
           if (senderOnline) {
-            senderOnline.send(
-              JSON.stringify({ hangout: sender, type: "ACKHOWLEDGEMENT" })
-            );
+            const msg = {
+              data: { hangout: sender, type: "ACKHOWLEDGEMENT" },
+              type: "HANGOUT",
+            };
+            senderOnline.send(JSON.stringify(msg));
           } else {
             await collection.update(
               { username: senderUserName },
@@ -41,9 +43,11 @@ module.exports.handlePersistance = async function ({
         for (const browser of targetBrowsers) {
           const targetOnline = connections[`${username}-${browser.browserId}`];
           if (targetOnline) {
-            targetOnline.send(
-              JSON.stringify({ hangout: target, type: "HANGOUT" })
-            ); //-----------------
+            const msg = {
+              data: { hangout: target, type: "HANGOUT" },
+              type: "HANGOUT",
+            };
+            targetOnline.send(JSON.stringify(msg)); //-----------------
           } else {
             await collection.update(
               { username },

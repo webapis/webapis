@@ -13,6 +13,7 @@ import { reducer, initState } from "./reducer";
 import { useMessage } from "./useMessage";
 import { useAuth } from "features/authentication/state/useAuth";
 import { actionTypes } from "./actionTypes";
+import * as actions from "./actions";
 import { clientCommands } from "./clientCommands";
 import {
   loadMessages,
@@ -43,14 +44,32 @@ export default function HangoutsProvider(props) {
   const { state: authState } = useAuth();
   const { user } = authState;
   const [state, dispatch] = useReducer(reducer, initState);
-  const { hangout, on_user_client_command, messageText, browserId } = state;
-  //TODO HG onmessage sound effect
+  const {
+    hangout,
+    on_user_client_command,
+    messageText,
+    browserId,
+    searchHangouts,
+    search,
+  } = state;
+
   const handleMessage = useMessage({
     message,
     username: user && user.username,
     dispatch,
     focusedHangout: hangout,
   });
+
+  useEffect(() => {
+    if (searchHangouts) {
+      actions.searchHangouts({
+        search,
+        dispatch,
+        username: user && user.username,
+      });
+    }
+  }, [searchHangouts]);
+
   useEffect(() => {
     if (user === null) {
       dispatch({ type: actionTypes.SET_HANGOUT_TO_INIT_STATE });

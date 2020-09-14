@@ -56,7 +56,7 @@ describe("onInvite", () => {
       timestamp: currentDate,
       text: "Lets chat on Hangout",
     };
-
+    cy.pause();
     cy.get("[data-testid=oninvite-btn]")
       .click()
       .then(() => {

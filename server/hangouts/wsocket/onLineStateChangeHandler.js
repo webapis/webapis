@@ -17,11 +17,12 @@ module.exports.onLineStateChangeHandler = async function ({
       const delayedHangouts = connectedBrowser.delayed;
 
       if (delayedHangouts && delayedHangouts.length > 0) {
+        const msg = {
+          data: { hangouts: delayedHangouts, type: "DELAYED_ACKHOWLEDGEMENTS" },
+          type: "HANGOUT",
+        };
         ws.send(
-          JSON.stringify({
-            hangouts: delayedHangouts,
-            type: "DELAYED_ACKHOWLEDGEMENTS",
-          }) //--
+          JSON.stringify(msg) //--
         );
       }
       pulldelayedHangouts({
@@ -34,13 +35,13 @@ module.exports.onLineStateChangeHandler = async function ({
     if (connectedBrowser && connectedBrowser.undelivered) {
       const undeliveredHangouts = connectedBrowser.undelivered;
       if (undeliveredHangouts && undeliveredHangouts.length > 0) {
+        const msg = {
+          data: { hangouts: undeliveredHangouts, type: "UNDELIVERED_HANGOUTS" },
+          type: "HANGOUT",
+        };
         ws.send(
-          JSON.stringify({
-            hangouts: undeliveredHangouts,
-            type: "UNDELIVERED_HANGOUTS",
-          }) //--
+          JSON.stringify(msg) //--
         );
-
         pullUndeliveredHangouts({
           browserId: connectedBrowser.browserId,
           username: ws.user.username,

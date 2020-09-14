@@ -5,7 +5,7 @@ import AppRouteProvider from "components/app-route/index";
 //import HangoutAdapter from "features/hangouts/state/HangoutAdapter";
 import HangoutsProvider from "features/hangouts/state/HangoutsProvider";
 import AuthService from "../../service-adapters/auth-adapter/AuthService";
-
+import { loadBrowserId } from "../../features/authentication/state/onBrowserId";
 import RTCMsgService from "../../service-adapters/rtc-msg-adapter/RtcMsgService";
 const html = htm.bind(h);
 export function RootProviders(props) {
@@ -17,17 +17,28 @@ export function RootProviders(props) {
     <${AuthService}
       ...${props}
       authedRoute=${{ route: "/hangouts", featureRoute: "/hangout" }}
-    >
-      <${RTCMsgService} ...${props}
-        >${({ message, connectionState, sendMessage }) => {
-          return html`<${HangoutsProvider}
-            ...${props}
-            message=${message}
-            sendMessage=${sendMessage}
-            connectionState=${connectionState}
-          />`;
-        }}<//
-      >
+      >${({ user }) => {
+        let url = null;
+        let browserId = loadBrowserId();
+        if (user && browserId) {
+          url = ` ${location.origin.replace(
+            /^http/,
+            "ws"
+          )}/authed-msg/?username=${user.username}&browserId=${browserId}`;
+        }
+        return html`
+          <${RTCMsgService} ...${props} url=${url}
+            >${({ message, connectionState, sendMessage }) => {
+              return html`<${HangoutsProvider}
+                ...${props}
+                message=${message}
+                sendMessage=${sendMessage}
+                connectionState=${connectionState}
+              />`;
+            }}<//
+          >
+        `;
+      }}
     <//>
   <//>`;
 }
