@@ -8,6 +8,8 @@ export const initState = {
 
 export default function reducer(state, action) {
   switch (action.type) {
+    case actionTypes.CLOSED_WEBSOCKET:
+      return initState;
     case actionTypes.SOCKET_ERROR:
       return { ...state, error: action.error };
     case actionTypes.CONNECTION_STATE_CHANGED:

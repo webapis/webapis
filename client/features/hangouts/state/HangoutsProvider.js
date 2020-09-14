@@ -59,7 +59,21 @@ export default function HangoutsProvider(props) {
     dispatch,
     focusedHangout: hangout,
   });
-
+  useEffect(() => {
+    if (connectionState === "open") {
+      debugger;
+      dispatch({
+        type: actionTypes.SOCKET_CONNECTION_STATE_CHANGED,
+        connected: true,
+      });
+    } else if (connectionState === "close") {
+      debuggger;
+      dispatch({
+        type: actionTypes.SOCKET_CONNECTION_STATE_CHANGED,
+        connected: false,
+      });
+    }
+  }, [connectionState]);
   useEffect(() => {
     if (searchHangouts) {
       actions.searchHangouts({

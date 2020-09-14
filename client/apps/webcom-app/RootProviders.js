@@ -17,7 +17,7 @@ export function RootProviders(props) {
     <${AuthService}
       ...${props}
       authedRoute=${{ route: "/hangouts", featureRoute: "/hangout" }}
-      >${({ user }) => {
+      >${({ user, signedout }) => {
         let url = null;
         let browserId = loadBrowserId();
         if (user && browserId) {
@@ -27,7 +27,7 @@ export function RootProviders(props) {
           )}/authed-msg/?username=${user.username}&browserId=${browserId}`;
         }
         return html`
-          <${RTCMsgService} ...${props} url=${url}
+          <${RTCMsgService} ...${props} url=${url} closeConnection=${signedout}
             >${({ message, connectionState, sendMessage }) => {
               return html`<${HangoutsProvider}
                 ...${props}

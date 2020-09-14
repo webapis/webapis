@@ -56,6 +56,7 @@ export default function AuthProvider(props) {
     password,
     emailorusername,
     loginStarted,
+    signedout,
   } = state;
   const value = useMemo(() => [state, dispatch], [state]);
   useEffect(() => {
@@ -201,7 +202,7 @@ export default function AuthProvider(props) {
   }
   return html`
     <${AuthContext.Provider} value=${value} ...${props}>
-      ${children({ user })}
+      ${children({ user, signedout })}
     <//>
   `;
 }

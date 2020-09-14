@@ -19,7 +19,15 @@ export const WebSocketContext = createContext();
 export default function WebSocketProvider(props) {
   const { url, children } = props || {};
   const [state, dispatch] = useReducer(reducer, initState);
-  const { websocket, message, connectionState } = state;
+  const { websocket, message, connectionState, closeConnection } = state;
+
+  useEffect(() => {
+    if (closeConnection) {
+      debugger;
+      websocket.close();
+    }
+  }, [closeConnection]);
+
   useEffect(() => {
     if (url) {
       debugger;

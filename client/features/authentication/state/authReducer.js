@@ -27,6 +27,7 @@ export const initState = {
   loginStarted: false, //used by service
   changePasswordStared: false, //used by service
   requestPassChangeStarted: false, //used by service,
+  signedout: false,
 };
 
 export function authReducer(state, action) {
@@ -130,7 +131,8 @@ export function authReducer(state, action) {
     case actionTypes.GOT_TOKEN_FROM_URL:
       return { ...state, token: action.token };
     case actionTypes.LOGOUT:
-      return { ...initState };
+      debugger;
+      return { ...initState, signedout: true };
     case actionTypes.RECOVER_LOCAL_AUTH_STATE:
       return {
         ...state,
