@@ -17,8 +17,6 @@ export default function NodejsAuthProvider(props) {
     failed,
   }) {
     try {
-      debugger;
-
       const response = await fetch(`/auth/signup`, {
         body: JSON.stringify({
           password,
@@ -33,10 +31,9 @@ export default function NodejsAuthProvider(props) {
         method: "POST",
       });
       const result = await response.json();
-      debugger;
+
       success({ result, response });
     } catch (error) {
-      debugger;
       failed(error);
     }
   }
@@ -49,8 +46,6 @@ export default function NodejsAuthProvider(props) {
     hasBrowserId,
   }) {
     try {
-      started();
-
       const response = await fetch(`/auth/login`, {
         headers: {
           "Conten-Type": "application/json",
@@ -63,10 +58,10 @@ export default function NodejsAuthProvider(props) {
 
       const result = await response.json();
 
-      success(result);
+      success({ result, response });
     } catch (error) {
       const err = error;
-      debugger;
+
       failed(error);
     }
   }

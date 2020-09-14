@@ -21,8 +21,10 @@ export function useAuth() {
   function onLogin() {
     const { emailorusername, password } = state;
     if (window.jsDisabled) {
+      debugger;
       dispatch({ type: actionTypes.LOGIN_STARTED });
     } else {
+      debugger;
       dispatch({
         type: actionTypes.CONSTRAINT_VALIDATION,
         name: "emailorusername",
@@ -47,20 +49,16 @@ export function useAuth() {
   }
   function onSignup() {
     const { username, password, email } = state;
-    debugger;
+
     if (window.jsDisabled) {
-      debugger;
       dispatch({ type: actionTypes.SIGNUP_STARTED });
     } else {
-      debugger;
       if (
         cv.validateEmailConstraint({ email }).isValid &&
         cv.validateUserNameConstraint({ username }).isValid &&
         cv.validatePasswordConstraint({ password }).isValid
       ) {
-        debugger;
         dispatch({ type: actionTypes.SIGNUP_STARTED });
-        debugger;
       } else {
         dispatch({
           type: actionTypes.CONSTRAINT_VALIDATION,

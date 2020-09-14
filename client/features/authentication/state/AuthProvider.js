@@ -48,7 +48,15 @@ export default function AuthProvider(props) {
 
   const [state, dispatch] = useReducer(authReducer, initState);
   const { onAppRoute } = useAppRoute();
-  const { user, signupStarted, username, email, password } = state;
+  const {
+    user,
+    signupStarted,
+    username,
+    email,
+    password,
+    emailorusername,
+    loginStarted,
+  } = state;
   const value = useMemo(() => [state, dispatch], [state]);
   useEffect(() => {
     if (userExist()) {
@@ -56,12 +64,18 @@ export default function AuthProvider(props) {
     }
   }, []);
   useEffect(() => {
-    if (signupStarted && email && password && username) {
-      debugger;
+    if (signupStarted) {
       const browserId = loadBrowserId();
       handleSignUp({ username, email, password, browserId });
     }
-  }, [signupStarted, email, password, username]);
+  }, [signupStarted]);
+
+  useEffect(() => {
+    if (loginStarted) {
+      handleLogin({ emailorusername, password });
+    }
+  }, [loginStarted]);
+
   useEffect(() => {
     if (user) {
       onAppRoute({
@@ -77,7 +91,7 @@ export default function AuthProvider(props) {
       emailorusername,
       password,
 
-      success: ({ reponse, result }) => {
+      success: ({ response, result }) => {
         if (response.status === 200) {
           const { token, username, email } = result;
           if (browserIdExists()) {
@@ -129,7 +143,6 @@ export default function AuthProvider(props) {
     });
   }
   function handleSignUp({ username, email, password, browserId }) {
-    debugger;
     signup({
       username,
       email,
@@ -137,7 +150,6 @@ export default function AuthProvider(props) {
       browserId,
 
       success: ({ result, response }) => {
-        debugger;
         if (response.status === 200) {
           const { token, username, email } = result;
           dispatch({
@@ -182,7 +194,7 @@ export default function AuthProvider(props) {
       },
       failed: (error) => {
         const err = error;
-        debugger;
+
         dispatch({ type: actionTypes.SIGNUP_FAILED, error });
       },
     });
