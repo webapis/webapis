@@ -41,6 +41,7 @@ export const initState = {
   on_socket_command_send: false,
   unreadsCount: 0,
   scrollToBottom: false,
+  sendhangout: false,
 };
 export function reducer(state, action) {
   switch (action.type) {
@@ -97,12 +98,13 @@ export function reducer(state, action) {
         pendingHangout: null,
         loading: false,
         messageText: "",
+        sendhangout: false,
       };
     case actionTypes.SENDING_HANGOUT_STARTED:
       return {
         ...state,
         loading: true,
-        pendingHangout: action.pendingHangout,
+        sendhanout: true,
       };
     //----
     case actionTypes.CLEARED_HANGOUT:

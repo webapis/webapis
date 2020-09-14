@@ -42,15 +42,15 @@ export default function HangoutsProvider(props) {
 
   const { onAppRoute } = useAppRoute();
   const { state: authState } = useAuth();
-  const { user } = authState;
+  const { user, browserId } = authState;
   const [state, dispatch] = useReducer(reducer, initState);
   const {
     hangout,
     on_user_client_command,
     messageText,
-    browserId,
     searchHangouts,
     search,
+    sendhangout,
   } = state;
 
   const handleMessage = useMessage({
@@ -58,16 +58,15 @@ export default function HangoutsProvider(props) {
     username: user && user.username,
     dispatch,
     focusedHangout: hangout,
+    sendhangout,
   });
   useEffect(() => {
     if (connectionState === "open") {
-      debugger;
       dispatch({
         type: actionTypes.SOCKET_CONNECTION_STATE_CHANGED,
         connected: true,
       });
     } else if (connectionState === "close") {
-      debuggger;
       dispatch({
         type: actionTypes.SOCKET_CONNECTION_STATE_CHANGED,
         connected: false,
@@ -269,9 +268,7 @@ export default function HangoutsProvider(props) {
   }
   function onUnblock() {}
   useEffect(() => {
-    if (on_user_client_command) {
-    }
-    if (on_user_client_command && user && hangout) {
+    if (on_user_client_command && user && hangout && sendhangout) {
       switch (on_user_client_command) {
         case clientCommands.MESSAGE:
           onMessage();

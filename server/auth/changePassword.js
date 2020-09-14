@@ -70,7 +70,7 @@ module.exports = async function changePassword({ req, res, collection }) {
       res.statusCode = 200;
       res.writeHead(200, {
         "Content-Type": "application/json",
-        "Set-Cookie": `${user.username}=${newToken};Expires=Wed, 21 Oct 2025 07:28:00 GMT; Path=/hangout`,
+        "Set-Cookie": `${user.username}=${newToken};Expires=Wed, 21 Oct 2025 07:28:00 GMT; Path=/authed-msg`,
       });
       res.write(
         JSON.stringify({

@@ -5,7 +5,12 @@ const hangoutsHandler = require("../hangouts/wsocket");
 const jwt = require("jsonwebtoken");
 const url = require("url");
 const cookie = require("cookie");
-module.exports.authedHandler = async function ({ request, connections, ws }) {
+module.exports.authedHandler = async function ({
+  request,
+  connections,
+  ws,
+  collection,
+}) {
   try {
     const token = cookie.parse(request.headers["cookie"]);
 
@@ -23,16 +28,17 @@ module.exports.authedHandler = async function ({ request, connections, ws }) {
 
     connections[`${username}-${browserId}`] = ws;
 
-    onLineStateChangeHandler({ connections, ws, client, browserId });
+    onLineStateChangeHandler({ connections, ws, collection, browserId });
+
     ws.on("message", function incoming(message) {
       console.log("recieved,", message);
       try {
         const msg = JSON.parse(message);
         const { data } = msg;
+
         switch (msg.type) {
           case "HANGOUT":
-            debugger;
-            hangoutsHandler({ hangout: data, connections, ws, client });
+            hangoutsHandler({ hangout: data, connections, ws, collection });
             break;
           default:
             throw "No handler provided for message data type";
@@ -46,5 +52,7 @@ module.exports.authedHandler = async function ({ request, connections, ws }) {
       console.log("connection closed:", username);
       delete connections[`${username}-${browserId}`];
     });
-  } catch (error) {}
+  } catch (error) {
+    const err = error;
+  }
 };

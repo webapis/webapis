@@ -3,7 +3,6 @@ const { testWebSocket } = require("./testWebSocket");
 const url = require("url");
 module.exports.unauthedHandler = async function ({ ws, request, connections }) {
   try {
-    debugger;
     let uname = url.parse(request.url, true).query.username;
     connections[uname] = ws;
     console.log("socket connected to", uname);
@@ -24,7 +23,5 @@ module.exports.unauthedHandler = async function ({ ws, request, connections }) {
       delete connections[uname];
       console.log("socket closed by", uname);
     });
-  } catch (error) {
-    debugger;
-  }
+  } catch (error) {}
 };

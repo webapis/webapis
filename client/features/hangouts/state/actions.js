@@ -31,7 +31,7 @@ export async function fetchHangout({ search, dispatch, username }) {
   try {
     dispatch({ type: actionTypes.FETCH_HANGOUT_STARTED });
     const response = await fetch(
-      `/hangouts/find?search=${search}&username=${username}`
+      `/authed-msg/hangouts/find?search=${search}&username=${username}`
     );
     if (response.ok) {
       const { hangouts } = await response.json();
@@ -45,7 +45,7 @@ export async function fetchHangout({ search, dispatch, username }) {
 export async function searchHangouts({ search, dispatch, username }) {
   try {
     const response = await fetch(
-      `/hangouts/findOne?search=${search}&username=${username}`
+      `/authed-msg/hangouts/findOne?search=${search}&username=${username}`
     );
     if (response.ok) {
       const { hangouts } = await response.json();
@@ -65,7 +65,9 @@ export async function searchHangouts({ search, dispatch, username }) {
 
 export async function findHangouts({ dispatch, username }) {
   try {
-    const response = await fetch(`/hangouts/findHangouts?username=${username}`);
+    const response = await fetch(
+      `/authed-msg/hangouts/findHangouts?username=${username}`
+    );
     if (response.ok) {
       const { hangouts } = await response.json();
 

@@ -47,7 +47,7 @@ module.exports = async function ({ req, res, collection }) {
           // success login---------------------------------------------
           res.writeHead(200, {
             "Content-Type": "application/json",
-            "Set-Cookie": `${user.username}=${token};Expires=Wed, 21 Oct 2025 07:28:00 GMT;  Path=/hangouts`,
+            "Set-Cookie": `${user.username}=${token};Expires=Wed, 21 Oct 2025 07:28:00 GMT;  Path=/authed-msg;`,
           });
           if (!hasBrowserId) {
             const browserId = Date.now().toString();
@@ -111,7 +111,7 @@ module.exports = async function ({ req, res, collection }) {
             //success login 200------------------------------------------
             res.writeHead(200, {
               "Content-Type": "application/json",
-              "Set-Cookie": `${user.username}=${token};Expires=Wed, 21 Oct 2025 07:28:00 GMT; Path=/hangouts`,
+              "Set-Cookie": `${user.username}=${token};Expires=Wed, 21 Oct 2025 07:28:00 GMT; Path=/authed-msg`,
             });
             // res.write(
             //   JSON.stringify({

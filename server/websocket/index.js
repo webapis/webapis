@@ -13,10 +13,9 @@ module.exports = async function (server, client) {
 
   wss.on("connection", async function connection(ws, request) {
     if (request.url.includes("unauthed-msg")) {
-      debugger;
       unauthedHandler({ ws, request, connections });
     } else if (request.url.includes("authed-msg")) {
-      authedHandler({ request, connections, ws });
+      authedHandler({ request, connections, ws, collection });
     } else {
       throw "proper url for websocket not provided";
     }
@@ -52,7 +51,7 @@ module.exports = async function (server, client) {
       ws.on('message',function(message){
 
       })
-      debugger;//
+      //
     } else if (request.url.includes("authed-msg")) {/////-------------------------?
       try {
         const token = cookie.parse(request.headers["cookie"]);

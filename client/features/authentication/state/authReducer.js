@@ -131,7 +131,6 @@ export function authReducer(state, action) {
     case actionTypes.GOT_TOKEN_FROM_URL:
       return { ...state, token: action.token };
     case actionTypes.LOGOUT:
-      debugger;
       return { ...initState, signedout: true };
     case actionTypes.RECOVER_LOCAL_AUTH_STATE:
       return {

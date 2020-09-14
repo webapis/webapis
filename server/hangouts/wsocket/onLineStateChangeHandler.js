@@ -2,9 +2,10 @@ module.exports.onLineStateChangeHandler = async function ({
   client,
   ws,
   browserId,
+  collection,
 }) {
   try {
-    const collection = await client.db("auth").collection("users");
+    //const collection = await client.db("auth").collection("users");
 
     const user = await collection.findOne({ username: ws.user.username });
     const connectedBrowser = user.browsers.find((b) => {
