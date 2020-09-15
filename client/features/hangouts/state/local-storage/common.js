@@ -20,6 +20,7 @@ export function updateUnread({ dispatch, hangout, name, dState }) {
 }
 
 export function saveSentMessage({ hangout, dispatch, name, dState }) {
+  debugger;
   const { username, message } = hangout;
   const messageKey = `${name}-${username}-messages`;
   const localMessages = JSON.parse(localStorage.getItem(messageKey));
@@ -159,6 +160,7 @@ export function updateHangout({ dispatch, name, hangout }) {
 
 export function saveHangout({ hangout, dispatch, name }) {
   const { username } = hangout;
+  debugger;
   const hangoutKey = `${name}-hangouts`;
   let localHangouts = JSON.parse(localStorage.getItem(hangoutKey));
 

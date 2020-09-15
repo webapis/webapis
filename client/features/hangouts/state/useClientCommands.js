@@ -54,7 +54,7 @@ export default function useClientCommands({
       dState: "pending",
     });
 
-    onAppRoute({ featureRoute: `/INVITE`, route: "/hangouts" });
+    onAppRoute({ featureRoute: `/INVITED`, route: "/hangouts" });
 
     sendMessage({ data: invitation, type: "HANGOUT" });
     // sendPendingHangout({ hangout: invitation });

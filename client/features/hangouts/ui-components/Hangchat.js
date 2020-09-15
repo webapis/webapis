@@ -8,7 +8,11 @@ import Layout from "./Layout";
 const html = htm.bind(h);
 export function Messages({ messages, name, ref }) {
   const { transformedMessages } = useTransformMessages({ messages, name });
-
+  useEffect(() => {
+    if (messages) {
+      debugger;
+    }
+  }, [messages]);
   return html` <div ref=${ref} class="bg-light container-fluid pb-5">
     ${transformedMessages &&
     transformedMessages.map((msg) => {

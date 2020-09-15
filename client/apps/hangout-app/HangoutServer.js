@@ -11,17 +11,18 @@ export default function HangoutServer({ children }) {
   const [beroMessage, setBeroState] = useState(null);
   function sendMessageDemo({ data, type }) {
     const { timestamp } = data;
-    debugger;
+
     switch (data.command) {
       case clientCommands.INVITE:
-        debugger;
         setDemoState({
           data: {
             type: "ACKHOWLEDGEMENT",
-            username: "berouser",
-            timestamp,
-            email: "berouser@gmail.com",
-            state: "INVITED",
+            hangout: {
+              username: "berouser",
+              timestamp,
+              email: "berouser@gmail.com",
+              state: "INVITED",
+            },
           },
           type: "HANGOUT",
         });

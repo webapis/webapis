@@ -10,7 +10,7 @@ import {
 } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 import { reducer, initState } from "./reducer";
-import { useMessage } from "./useMessage";
+import { useMessage } from "./message-hooks/useMessage";
 import { actionTypes } from "./actionTypes";
 import * as actions from "./actions";
 import { clientCommands } from "./clientCommands";
@@ -24,7 +24,7 @@ import {
   saveRecievedMessage,
   removeUnread,
 } from "./local-storage/common";
-import { useAppRoute } from "components/app-route/index";
+import { useAppRoute } from "./message-hooks/node_modules/components/app-route/index";
 import useClientCommands from "./useClientCommands";
 const html = htm.bind(h);
 const HangoutContext = createContext();
