@@ -11,7 +11,6 @@ import {
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 import { reducer, initState } from "./reducer";
 import { useMessage } from "./useMessage";
-import { useAuth } from "features/authentication/state/useAuth";
 import { actionTypes } from "./actionTypes";
 import * as actions from "./actions";
 import { clientCommands } from "./clientCommands";
@@ -39,12 +38,10 @@ export function useHangoutContext() {
 }
 
 export default function HangoutsProvider(props) {
-  const { sendMessage, message, connectionState } = props;
+  const { sendMessage, message, connectionState, authState } = props;
 
   const { onAppRoute } = useAppRoute();
-  const {
-    state: { user, browserId },
-  } = useAuth();
+  const { user, browserId } = authState;
 
   const [state, dispatch] = useReducer(reducer, initState);
   const {
@@ -61,6 +58,7 @@ export default function HangoutsProvider(props) {
     username: user && user.username,
     dispatch,
     focusedHangout: hangout,
+    browserId,
   });
   useClientCommands({
     state,

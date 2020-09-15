@@ -10,14 +10,41 @@ import {
 } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 import HangoutFeatureRoutes from "../../features/hangouts/HangoutsFeatureRoutes";
-import HangoutNavigation from "./HangoutNavigation";
+import Navigation from "../../features/hangouts/ui-components/Navigation";
+import AppRouteProvider from "../../components/app-route/index";
 import HangoutProvider from "../../features/hangouts/state/HangoutsProvider";
 const html = htm.bind(h);
 
-export default function HangoutClient() {
+export default function HangoutClient({
+  authState,
+  sendMessage,
+  message,
+  connectionState,
+  target,
+}) {
+  const { user } = authState;
   return html`<div>
-    <${HangoutProvider}>
-      <${HangoutNavigation} />
+    <${AppRouteProvider}
+      title="Hangout"
+      initState=${{ route: "/hangout", featureRoute: "/hangouts" }}
+    >
+      <${HangoutProvider}
+        authState=${authState}
+        sendMessage=${sendMessage}
+        message=${message}
+        connectionState=${connectionState}
+      >
+        <${Navigation}
+          socketConnected=${true}
+          authed=${true}
+          messageCounter=${0}
+          target=${target}
+          username=${user.username}
+          onAuthNavigation=${() => {}}
+          onHangoutNavigation=${() => {}}
+        />
+        <${HangoutFeatureRoutes} user=${user} />
+      <//>
     <//>
   </div>`;
 }

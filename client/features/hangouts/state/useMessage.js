@@ -2,7 +2,7 @@ import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.m
 import { useEffect } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
 import { useAppRoute } from "components/app-route/index";
 import { actionTypes } from "./actionTypes";
-import { useAuth } from "../../authentication/state/useAuth";
+
 import {
   updateSentMessage,
   saveUnread,
@@ -13,10 +13,15 @@ import {
   removeUnreads,
 } from "./local-storage/common";
 
-export function useMessage({ message, username, dispatch, focusedHangout }) {
+export function useMessage({
+  message,
+  username,
+  dispatch,
+  focusedHangout,
+  browserId,
+}) {
   const { onAppRoute } = useAppRoute();
-  const { state: authState } = useAuth();
-  const { browserId } = authState;
+
   function onDeliveryAcknowledgement({ hangout, offline }) {
     const commonArg = { dispatch, name: username, hangout };
     switch (hangout.state) {

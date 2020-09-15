@@ -1,24 +1,22 @@
 import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
 
 import { useHangoutContext } from "./HangoutsProvider";
-import { useAuthContext } from "features/authentication/index";
 import { useAppRoute } from "components/app-route/index";
-
 import { changeMessageText } from "./actions";
 import { emailRegex } from "../../authentication/validation/validationRegex";
 
 import { actionTypes } from "./actionTypes";
 
-export function useHangouts() {
+export function useHangouts({ user }) {
   const { onAppRoute } = useAppRoute();
-  const authContext = useAuthContext();
-  const username = authContext.state.user && authContext.state.user.username;
+
+  const username = user && username;
   const [state, dispatch] = useHangoutContext();
   const { hangouts, inviteGuest, guestEmail } = state;
 
   function onNavigation(e) {
     e.preventDefault();
-    if (authContext.state.user) {
+    if (user) {
       const id = e.currentTarget.id;
       onAppRoute({ featureRoute: `/${id}`, route: "/hangouts" });
     } else {
