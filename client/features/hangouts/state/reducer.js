@@ -72,6 +72,7 @@ export function reducer(state, action) {
       const nextState = {
         ...state,
         on_user_client_command: action.on_user_client_command,
+        sendhangout: true,
       };
 
       return nextState;
@@ -104,7 +105,6 @@ export function reducer(state, action) {
       return {
         ...state,
         loading: true,
-        sendhanout: true,
       };
     //----
     case actionTypes.CLEARED_HANGOUT:

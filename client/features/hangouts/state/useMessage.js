@@ -37,9 +37,11 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
         debugger;
         setTimeout(function () {
           if (browserId === hangout.browserId) {
+            debugger;
             updateHangout(commonArg);
             updateSentMessage(commonArg);
           } else {
+            debugger;
             saveHangout({ hangout, dispatch, name: username });
             saveSentMessage({ hangout, dispatch, name, dState: "delivered" });
           }
@@ -160,7 +162,6 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
   }
   useEffect(() => {
     if (message && message.type === "HANGOUT" && username) {
-      debugger;
       const { data } = message;
       switch (message.data.type) {
         case "DELAYED_ACKHOWLEDGEMENTS":
@@ -178,7 +179,6 @@ export function useMessage({ message, username, dispatch, focusedHangout }) {
           }, 0);
           break;
         case "ACKHOWLEDGEMENT":
-          debugger;
           dispatch({
             type: actionTypes.ON_SOCKET_MESSAGE,
             on_socket_message: true,

@@ -54,6 +54,13 @@ function clientScript({ appName, env, rtc, auth }) {
 
 const apps = [
   {
+    appName: "hangout-app",
+    rtc: "WEBSOCKET",
+    auth: "NODEJS",
+    env: "DEV",
+    scriptName: "hangoutdev",
+  },
+  {
     appName: "webcom-app",
     rtc: "WEBSOCKET",
     auth: "NODEJS",
