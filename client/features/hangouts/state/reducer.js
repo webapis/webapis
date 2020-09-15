@@ -137,10 +137,10 @@ export function reducer(state, action) {
       return {
         ...state,
         loading: false,
-        hangouts: action.hangouts,
+        hangouts: [action.hangout],
         searchHangouts: false,
         searching: false,
-        userNotFound: action.userNotFound,
+        //userNotFound: action.userNotFound,
       };
     case actionTypes.SEARCH_HANGOUT_FAILED:
       return {

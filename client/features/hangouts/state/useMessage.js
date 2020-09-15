@@ -23,6 +23,7 @@ export function useMessage({
   const { onAppRoute } = useAppRoute();
 
   function onDeliveryAcknowledgement({ hangout, offline }) {
+    debugger;
     const commonArg = { dispatch, name: username, hangout };
     switch (hangout.state) {
       case "UNBLOCKED":
@@ -95,6 +96,7 @@ export function useMessage({
   }
 
   function onHangout({ hangout }) {
+    debugger;
     const commonArg = { dispatch, name: username, hangout };
     switch (hangout.state) {
       case "ACCEPTER":
@@ -168,6 +170,7 @@ export function useMessage({
   useEffect(() => {
     if (message && message.type === "HANGOUT" && username) {
       const { data } = message;
+      debugger;
       switch (message.data.type) {
         case "DELAYED_ACKHOWLEDGEMENTS":
           dispatch({
@@ -175,7 +178,7 @@ export function useMessage({
             on_socket_message: true,
           });
 
-          handleDelayedAcknowledgements({ hangouts: data.hangouts });
+          handleDelayedAcknowledgements({ hangouts: data });
           setTimeout(() => {
             dispatch({
               type: actionTypes.ON_SOCKET_MESSAGE,
@@ -188,9 +191,9 @@ export function useMessage({
             type: actionTypes.ON_SOCKET_MESSAGE,
             on_socket_message: true,
           });
-
+          debugger;
           onDeliveryAcknowledgement({
-            hangout: data.hangout,
+            hangout: data,
             offline: false,
           });
           setTimeout(() => {
@@ -206,13 +209,10 @@ export function useMessage({
             on_socket_message: true,
           });
 
-          if (
-            focusedHangout &&
-            focusedHangout.username === data.hangout.username
-          ) {
-            onHangout({ hangout: data.hangout, unread: false });
+          if (focusedHangout && focusedHangout.username === data.username) {
+            onHangout({ hangout: data, unread: false });
           } else {
-            onHangout({ hangout: data.hangout, unread: true });
+            onHangout({ hangout: data, unread: true });
           }
           setTimeout(() => {
             dispatch({
@@ -226,7 +226,7 @@ export function useMessage({
             type: actionTypes.ON_SOCKET_MESSAGE,
             on_socket_message: true,
           });
-          handleHangouts({ hangouts: data.hangouts });
+          handleHangouts({ hangouts: data });
           setTimeout(() => {
             dispatch({
               type: actionTypes.ON_SOCKET_MESSAGE,

@@ -48,14 +48,15 @@ export async function searchHangouts({ search, dispatch, username }) {
       `/authed-msg/hangouts/findOne?search=${search}&username=${username}`
     );
     if (response.ok) {
-      const { hangouts } = await response.json();
+      const { hangout } = await response.json();
+
       //3.
-      const userNotFound = hangouts.length === 0 ? true : false;
+      //const userNotFound = hangouts.length === 0 ? true : false;
 
       dispatch({
         type: actionTypes.SEARCH_HANGOUT_SUCCESS,
-        hangouts,
-        userNotFound,
+        hangout,
+        //  userNotFound,
       });
     }
   } catch (error) {

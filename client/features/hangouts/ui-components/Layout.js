@@ -36,7 +36,7 @@ export default function Layout({
         data-testid=${id}
       >
         <div class=" row justify-content-center h-100">
-          <div class="col-md-8 col-lg-5 h-100">
+          <div class="col-md-8  h-100">
             <div class="card h-100">
               <div class="d-block d-sm-none h-100">
                 <div
@@ -65,7 +65,7 @@ export default function Layout({
       data-testid=${id}
     >
       <div class=" row justify-content-center ">
-        <div class="col-md-8 col-lg-5 pt-3">
+        <div class="col-md-8 col-lg-12 pt-3">
           <div class="card">
             <div class="card-header">
               <div class="d-flex justify-content-between">

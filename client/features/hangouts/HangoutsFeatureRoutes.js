@@ -69,6 +69,7 @@ export default function HangoutsFeatureRoutes(props) {
     case "/UNBLOCKER":
     case "/READ":
     case "/READER":
+    case "/INVITED":
       return html` <${Suspense} fallback=${Loading}>
         <${Hangchat} ...${state} ...${funcs} ...${hangout} />
       <//>`;
@@ -76,12 +77,12 @@ export default function HangoutsFeatureRoutes(props) {
       return html` <${Suspense} fallback=${Loading}>
         <${Invite} ...${state} ...${funcs} ...${hangout} />
       <//>`;
-    case "/INVITED":
-    case "/INVITE":
-    case "/DECLINER":
-      return html` <${Suspense} fallback=${Loading}>
-        <${Invitee} ...${state} ...${funcs} ...${hangout} />
-      <//>`;
+    // case "/INVITED":
+    // case "/INVITE":
+    // case "/DECLINER":
+    //   return html` <${Suspense} fallback=${Loading}>
+    //     <${Invitee} ...${state} ...${funcs} ...${hangout} />
+    //   <//>`;
     case "/INVITER":
       return html` <${Suspense} fallback=${Loading}>
         <${InviterContainer} state=${state} funcs=${funcs} hangout=${hangout} />

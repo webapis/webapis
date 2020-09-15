@@ -4,7 +4,6 @@ import { useMediaQuery } from "../../../components/layout/useMediaQuery";
 const html = htm.bind(h);
 export default function Navigation({
   username,
-  name,
   authed,
   onAuthNavigation,
   onHangoutNavigation,
@@ -95,7 +94,7 @@ export default function Navigation({
             class="btn  my-2 my-sm-0 btn-sm btn-outline-success mr-1"
             type="submit"
           >
-            ${name}, signed in
+            ${username}, signed in
           </button>
         `}
         ${authed &&

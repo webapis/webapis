@@ -38,16 +38,16 @@ module.exports = async function findOne({ req, res, collection }) {
         res.writeHead(200, { "Content-Type": "application/json" });
         res.write(
           JSON.stringify({
-            hangouts: [user.hangouts.find((h) => h.username === search)],
+            hangout: user.hangouts.find((h) => h.username === search),
           })
         );
         res.end();
       } else {
         // if hangout previously was not connected
         let users = await collection
-          .find({ $or: [{ username: search }, { email: search }] })
-          .project({ salt: 0, hash: 0, iterations: 0 })
-          .toArray();
+          .findOne({ $or: [{ username: search }, { email: search }] })
+          .project({ salt: 0, hash: 0, iterations: 0 });
+        // .toArray();
 
         res.writeHead(200, { "Content-Type": "application/json" });
         res.write(

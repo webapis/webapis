@@ -7,12 +7,8 @@ import { emailRegex } from "../../authentication/validation/validationRegex";
 
 import { actionTypes } from "./actionTypes";
 
-export function useHangouts({ user }) {
+export function useHangoutNav({ user }) {
   const { onAppRoute } = useAppRoute();
-
-  const username = user && username;
-  const [state, dispatch] = useHangoutContext();
-  const { hangouts, inviteGuest, guestEmail } = state;
 
   function onNavigation(e) {
     e.preventDefault();
@@ -23,6 +19,15 @@ export function useHangouts({ user }) {
       onAppRoute({ featureRoute: `/login`, route: "/auth" });
     }
   }
+  return { onNavigation };
+}
+
+export function useHangouts({ user }) {
+  const { onAppRoute } = useAppRoute();
+  const { onNavigation } = useHangoutNav({ user });
+  const username = user && username;
+  const [state, dispatch] = useHangoutContext();
+  const { hangouts, inviteGuest, guestEmail } = state;
 
   function onMessageText(e) {
     const text = e.target.value;
