@@ -39,16 +39,14 @@ export default function useDeliveryAcknowledgement({
 
     const commonArg = { dispatch, username, hangout };
     switch (hangout.state) {
+      case "UNDECLINED":
+        setTimeout(function () {
+          updateHangout({ hangout, dispatch, username });
+        }, 0);
+        break;
       case "UNBLOCKED":
         setTimeout(function () {
-          // saveUnblovked({
-          //   dispatch,
-          //   hangout,
-          //   name: username,
-          //   focusedHangout,
-          //   onAppRoute,
-          //   offline,
-          // });
+          updateHangout({ hangout, dispatch, username });
         }, 0);
 
         break;
@@ -77,6 +75,7 @@ export default function useDeliveryAcknowledgement({
         break;
       case "DECLINED":
         setTimeout(function () {
+          updateHangout({ hangout, dispatch, username });
           dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
         }, 200);
         break;

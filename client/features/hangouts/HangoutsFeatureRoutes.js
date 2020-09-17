@@ -50,18 +50,19 @@ export default function HangoutsFeatureRoutes(props) {
         <${Block} hangout=${hangout} ...${hangout} ...${funcs} />
       <//>`;
     case "/UNBLOCK":
+    case "/UNDECLINE":
       return html`
         <${Suspense} fallback=${Loading}>
           <${Blocked} ...${state} ...${funcs} ...${hangout} />
         <//>
       `;
-    case "/DECLINED":
-    case "/DECLINE":
-      return html`
-        <${Suspense} fallback=${Loading}>
-          <${Declined} ...${state} ...${funcs} ...${hangout} />
-        <//>
-      `;
+    // case "/DECLINED":
+    // case "/DECLINE":
+    //   return html`
+    //     <${Suspense} fallback=${Loading}>
+    //       <${Declined} ...${state} ...${funcs} ...${hangout} />
+    //     <//>
+    //   `;
     case "/configure":
       return html` <${Suspense} fallback=${Loading}>
         <${Configure} ...${state} ...${funcs} ...${hangout} />
@@ -80,6 +81,8 @@ export default function HangoutsFeatureRoutes(props) {
     case "/INVITED":
     case "/INVITER":
     case "/HANGCHAT":
+    case "/DECLINE":
+    case "/DECLINED":
       return html` <${Suspense} fallback=${Loading}>
         <${Hangchat} ...${state} ...${funcs} ...${hangout} user=${user} />
       <//>`;

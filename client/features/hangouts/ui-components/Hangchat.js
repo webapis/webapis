@@ -34,6 +34,22 @@ export function Messages({ messages, username, ref }) {
         ${msg.type &&
         msg.type === "blocker" &&
         html`<${InfoMessage} type="danger" text=${infoMessages.blocker} />`}
+        ${msg.type &&
+        msg.type === "unblocked" &&
+        html`<${InfoMessage} type="warning" text=${infoMessages.unblocked} />`}
+        ${msg.type &&
+        msg.type === "unblocker" &&
+        html`<${InfoMessage}
+          float="left"
+          type="success"
+          text=${infoMessages.unblocker}
+        />`}
+        ${msg.type &&
+        msg.type === "undeclined" &&
+        html`<${InfoMessage} type="success" text=${infoMessages.unblocker} />`}
+        ${msg.type &&
+        msg.type === "declined" &&
+        html`<${InfoMessage} type="danger" text=${infoMessages.declined} />`}
       </div>`;
     })}
   </div>`;
@@ -99,10 +115,10 @@ export function BlockingMessage({ text }) {
   </div>`;
 }
 
-function InfoMessage({ type, text }) {
+function InfoMessage({ type, text, float = "right" }) {
   return html`<div
     data-testid="info-message"
-    class=${`text-right text-${type}`}
+    class=${`text-${float} text-${type}`}
     style="font-size: 1rem;"
   >
     ${text}
@@ -190,7 +206,11 @@ export default function Hangchat({
           hangout.state === "MESSAGED" ||
           hangout.state === "MESSANGER" ||
           hangout.state === "BLOCKED" ||
-          hangout.state === "BLOCKER") &&
+          hangout.state === "UNBLOCKED" ||
+          hangout.state === "UNBLOCKER" ||
+          hangout.state === "BLOCKER" ||
+          hangout.state === "DECLINED" ||
+          hangout.state === "UNDECLINED") &&
         html` <${MessageEditor}
           loading=${loading}
           messageText=${messageText}
@@ -273,7 +293,8 @@ function MessageEditor({
           disabled=${hangout &&
           (hangout.state === "BLOCKED" ||
             hangout.state === "INVITE" ||
-            hangout.state === "INVITED")}
+            hangout.state === "INVITED" ||
+            hangout.state === "DECLINED")}
           type="text"
           class="form-control"
           aria-label="Recipient's username"
@@ -290,7 +311,8 @@ function MessageEditor({
             disabled=${hangout &&
             (hangout.state === "BLOCKED" ||
               hangout.state === "INVITE" ||
-              hangout.state === "INVITED")}
+              hangout.state === "INVITED" ||
+              hangout.state === "DECLINED")}
             id="MESSAGE"
             onClick=${onMessage}
             data-testid="send-btn"

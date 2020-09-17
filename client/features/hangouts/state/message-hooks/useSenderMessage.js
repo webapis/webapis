@@ -84,14 +84,23 @@ export default function useSenderMessage({
           }
           break;
         case "UNBLOCKER":
-          // saveUnblocker({
-          //   dispatch,
-          //   hangout,
-          //   name: username,
-          //   focusedHangout,
-          //   onAppRoute,
-          //   unread,
-          // });
+          updateHangout(commonArg);
+          updateHangout(commonArg);
+          saveRecievedMessage({
+            hangout,
+            dispatch,
+            username,
+            dState:
+              focusedHangout && focusedHangout.target === hangout.target
+                ? "read"
+                : "unread",
+          });
+          if (
+            !focusedHangout ||
+            (focusedHangout && focusedHangout.target !== hangout.target)
+          ) {
+            saveUnread(commonArg);
+          }
           break;
         case "READER":
           break;

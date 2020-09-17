@@ -6,9 +6,14 @@ import Layout from "./Layout";
 
 const html = htm.bind(h);
 
-export default function Blocked({ username, onUserClientCommand, onClose }) {
+export default function Blocked({
+  target,
+  onUserClientCommand,
+  onClose,
+  state,
+}) {
   return html`
-    <${Layout} id="blocked-ui" username=${username} desc="You have blocked ">
+    <${Layout} id="blocked-ui" target=${target} desc="You have blocked ">
       <div class="d-flex flex-column  h-100 justify-content-between">
         <div class="d-flex justify-content-center">
           <${Block} width="60" height="70" color="red" />
@@ -23,15 +28,28 @@ export default function Blocked({ username, onUserClientCommand, onClose }) {
             block
             outline
           />
-
-          <${Button}
-            id="UNBLOCK"
-            onClick=${onUserClientCommand}
-            data-testid="unblock-btn"
-            title="UNBLOCK"
-            bg="success"
-            block
-          />
+          ${state === "BLOCKED" &&
+          html`
+            <${Button}
+              id="UNBLOCK"
+              onClick=${onUserClientCommand}
+              data-testid="unblock-btn"
+              title="UNBLOCK"
+              bg="success"
+              block
+            />
+          `}
+          ${state === "DECLINED" &&
+          html`
+            <${Button}
+              id="UNDECLINE"
+              onClick=${onUserClientCommand}
+              data-testid="undecline-btn"
+              title="UNDECLINE"
+              bg="success"
+              block
+            />
+          `}
         </div>
       </div>
     <//>

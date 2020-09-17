@@ -180,6 +180,65 @@ export default function HangoutServer({ children }) {
           type: "HANGOUT",
         });
         break;
+      case clientCommands.UNBLOCK:
+        setBeroState({
+          data: {
+            type: "ACKHOWLEDGEMENT",
+            hangout: {
+              target: "demouser",
+              email: "demouser@gmail.com",
+              state: "UNBLOCKED",
+              message: data.message,
+              timestamp: Date.now(),
+            },
+          },
+          type: "HANGOUT",
+        });
+
+        setDemoState({
+          data: {
+            type: "HANGOUT",
+            hangout: {
+              target: "berouser",
+              email: "berouser@gmail.com",
+              state: "UNBLOCKER",
+              timestamp: Date.now(),
+              message: { ...data.message, type: "unblocker" },
+            },
+          },
+          type: "HANGOUT",
+        });
+        break;
+      case clientCommands.DECLINE:
+        setBeroState({
+          data: {
+            type: "ACKHOWLEDGEMENT",
+            hangout: {
+              target: "demouser",
+              email: "demouser@gmail.com",
+              timestamp: Date.now() - 1,
+              state: "DECLINED",
+              message: data.message,
+            },
+          },
+          type: "HANGOUT",
+        });
+        break;
+      case clientCommands.UNDECLINE:
+        setBeroState({
+          data: {
+            type: "ACKHOWLEDGEMENT",
+            hangout: {
+              target: "demouser",
+              email: "demouser@gmail.com",
+              timestamp: Date.now(),
+              state: "UNDECLINED",
+              message: data.message,
+            },
+          },
+          type: "HANGOUT",
+        });
+        break;
       default:
         throw "No client command provided";
     }

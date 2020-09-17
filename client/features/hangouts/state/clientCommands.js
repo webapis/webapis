@@ -8,4 +8,5 @@ export const clientCommands = {
   MESSAGE: "MESSAGE",
   ONLINE: "ONLINE",
   READING: "READING",
+  UNDECLINE: "UNDECLINE",
 };

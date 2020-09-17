@@ -1,7 +1,7 @@
 import infoMessages from "../../../client/features/hangouts/ui-components/infoMessages";
 describe("HangoutSpec", () => {
   beforeEach(() => {});
-  it("Hangout spec test", () => {
+  it("demouser invites berouser and berouser accepts", () => {
     cy.visit("/");
     cy.server();
     cy.route({
@@ -156,7 +156,7 @@ describe("HangoutSpec", () => {
     cy.get("[data-testid=democlient]").find("[data-testid=send-btn]").click();
   });
 
-  it.only("Bero unblocks demouser", () => {
+  it("Bero unblocks demouser", () => {
     cy.window()
       .its("localStorage")
       .invoke(
@@ -191,10 +191,141 @@ describe("HangoutSpec", () => {
         ])
       );
     cy.visit("/");
+    //bero
+    cy.get("[data-testid=beroclient]").find("[data-testid=demouser]").click();
+    cy.get("[data-testid=beroclient]").find("[data-testid=config-btn]").click();
+    cy.get("[data-testid=beroclient]")
+      .find("[data-testid=blocked-ui-btn]")
+      .click();
+    cy.get("[data-testid=beroclient]")
+      .find("[data-testid=unblock-btn]")
+      .click();
+
+    //demo views new message
+    cy.get("[data-testid=democlient]")
+      .find("[data-testid=unread-link]")
+      .click();
+    cy.get("[data-testid=democlient]").find("[data-testid=unread-ui]");
+    cy.get("[data-testid=democlient]").find("[data-testid=berouser]").click();
+  });
+
+  it("bero declines invitation", () => {
+    cy.window()
+      .its("localStorage")
+      .invoke(
+        "setItem",
+        "demouser-hangouts",
+        JSON.stringify([
+          {
+            target: "berouser",
+            email: "berouser@gmail.com",
+            state: "INVITED",
+            message: {
+              text: "Lets chat bero",
+              timestamp: Date.now(),
+            },
+            timestamp: Date.now(),
+          },
+        ])
+      );
+
+    cy.window()
+      .its("localStorage")
+      .invoke(
+        "setItem",
+        "demouser-berouser-messages",
+        JSON.stringify([
+          {
+            owner: "demouser",
+            text: "Lets chat bero",
+            timestamp: Date.now(),
+            state: "delivered",
+          },
+        ])
+      );
+
+    cy.window()
+      .its("localStorage")
+      .invoke(
+        "setItem",
+        "berouser-hangouts",
+        JSON.stringify([
+          {
+            target: "demouser",
+            email: "demouser@gmail.com",
+            state: "INVITER",
+            message: {
+              text: "Lets chat bero",
+              timestamp: Date.now(),
+            },
+            timestamp: Date.now(),
+          },
+        ])
+      );
+
+    cy.window()
+      .its("localStorage")
+      .invoke(
+        "setItem",
+        "berouser-demouser-messages",
+        JSON.stringify([
+          {
+            owner: "demouser",
+            text: "Lets chat bero",
+            timestamp: Date.now(),
+            state: "delivered",
+          },
+        ])
+      );
+    cy.visit("/");
 
     cy.get("[data-testid=beroclient]").find("[data-testid=demouser]").click();
+    cy.get("[data-testid=beroclient]")
+      .find("[data-testid=decline-btn]")
+      .click();
+  });
 
+  it("bero undeclines invitation", () => {
+    cy.window()
+      .its("localStorage")
+      .invoke(
+        "setItem",
+        "berouser-hangouts",
+        JSON.stringify([
+          {
+            target: "demouser",
+            email: "demouser@gmail.com",
+            state: "DECLINED",
+            timestamp: Date.now(),
+            message: { text: "", type: "declined", timestamp: Date.now() },
+          },
+        ])
+      );
+
+    cy.window()
+      .its("localStorage")
+      .invoke(
+        "setItem",
+        "berouser-demouser-messages",
+        JSON.stringify([
+          {
+            text: "",
+            type: "declined",
+            timestamp: Date.now(),
+            owner: "berouser",
+            state: "delivered",
+          },
+        ])
+      );
+
+    cy.visit("/");
+    cy.get("[data-testid=beroclient]").find("[data-testid=demouser]").click();
     cy.get("[data-testid=beroclient]").find("[data-testid=config-btn]").click();
-    // cy.get("[data-testid=beroclient]").find("[data-testid=bckui-btn]").click();
+    cy.get("[data-testid=beroclient]")
+      .find("[data-testid=declined-ui-btn]")
+      .click();
+    cy.get("[data-testid=beroclient]")
+      .find("[data-testid=undecline-btn]")
+      .click();
   });
 });
