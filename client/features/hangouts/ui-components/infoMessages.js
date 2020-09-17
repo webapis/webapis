@@ -5,4 +5,5 @@ export default {
   unblocked: "You have unblocked this user.",
   unblocker: "Chat room is unblocked.",
   declined: "Invitation declined.",
+  undeclined: "Invitation is accepted.",
 };

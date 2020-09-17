@@ -22,7 +22,8 @@ export function Messages({ messages, username, ref }) {
       return html`<div>
         ${(msg.type === undefined ||
           msg.type === "invited" ||
-          msg.type === "blocker") &&
+          msg.type === "blocker" ||
+          msg.type === "undeclined") &&
         html`<${Message} ...${msg} />`}
         ${msg.type &&
         msg.type === "invited" &&
@@ -46,7 +47,8 @@ export function Messages({ messages, username, ref }) {
         />`}
         ${msg.type &&
         msg.type === "undeclined" &&
-        html`<${InfoMessage} type="success" text=${infoMessages.unblocker} />`}
+        msg.owner === "me" &&
+        html`<${InfoMessage} type="success" text=${infoMessages.undeclined} />`}
         ${msg.type &&
         msg.type === "declined" &&
         html`<${InfoMessage} type="danger" text=${infoMessages.declined} />`}

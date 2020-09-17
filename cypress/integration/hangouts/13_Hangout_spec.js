@@ -317,8 +317,39 @@ describe("HangoutSpec", () => {
           },
         ])
       );
+    cy.window()
+      .its("localStorage")
+      .invoke(
+        "setItem",
+        "demouser-hangouts",
+        JSON.stringify([
+          {
+            target: "berouser",
+            email: "berouser@gmail.com",
+            state: "INVITED",
+            timestamp: Date.now(),
+            message: { text: "", type: "invited", timestamp: Date.now() },
+          },
+        ])
+      );
 
+    cy.window()
+      .its("localStorage")
+      .invoke(
+        "setItem",
+        "demouser-berouser-messages",
+        JSON.stringify([
+          {
+            text: "Hello bero ltes chat",
+            type: "invited",
+            timestamp: Date.now(),
+            owner: "demouser",
+            state: "delivered",
+          },
+        ])
+      );
     cy.visit("/");
+    cy.get("[data-testid=democlient]").find("[data-testid=berouser]").click();
     cy.get("[data-testid=beroclient]").find("[data-testid=demouser]").click();
     cy.get("[data-testid=beroclient]").find("[data-testid=config-btn]").click();
     cy.get("[data-testid=beroclient]")

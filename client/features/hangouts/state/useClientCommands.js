@@ -202,7 +202,11 @@ export default function useClientCommands({
   function onUndecline() {
     const timestamp = Date.now();
 
-    const message = { text: messageText, timestamp, type: "undeclined" };
+    const message = {
+      text: "Invitation accepted",
+      timestamp,
+      type: "undeclined",
+    };
 
     const undecline = {
       target: hangout.target,

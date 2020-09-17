@@ -232,8 +232,21 @@ export default function HangoutServer({ children }) {
               target: "demouser",
               email: "demouser@gmail.com",
               timestamp: Date.now(),
-              state: "UNDECLINED",
+              state: "ACCEPTED",
               message: data.message,
+            },
+          },
+          type: "HANGOUT",
+        });
+        setDemoState({
+          data: {
+            type: "HANGOUT",
+            hangout: {
+              target: "berouser",
+              email: "berouser@gmail.com",
+              timestamp: Date.now(),
+              message: data.message,
+              state: "ACCEPTER",
             },
           },
           type: "HANGOUT",
