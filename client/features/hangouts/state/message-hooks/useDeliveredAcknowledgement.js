@@ -95,7 +95,7 @@ export default function useDeliveryAcknowledgement({
           removeUnreads(commonArg);
           dispatch({ type: actionTypes.HANGOUT_UPDATED, hangout });
           dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
-          onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
+          // onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
         }, 200);
 
         break;

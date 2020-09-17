@@ -123,13 +123,13 @@ export default function HangoutsProvider(props) {
         case "MESSANGER":
           //case "UNBLOCKER":
           // case "READER":
-          onRead();
-          removeUnreads({
-            dispatch,
-            name: user && user.username,
-            hangout,
-            state: "MESSANGER",
-          });
+          // onRead();
+          // removeUnreads({
+          //   dispatch,
+          //   name: user && user.username,
+          //   hangout,
+          //   state: "MESSANGER",
+          // });
           break;
         case "INVITEE":
           dispatch({

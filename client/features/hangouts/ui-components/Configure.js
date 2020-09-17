@@ -10,11 +10,11 @@ export default function Configure({
   onArchive,
   onNavigation,
   onOk,
-  username,
+  target,
 }) {
   return html`
     <${Layout}
-      username=${username}
+      target=${target}
       desc="Configurations for "
       onNavigation=${onNavigation}
     >
@@ -41,7 +41,13 @@ export default function Configure({
           </div>
         </div>
         <div class="p-2">
-          <${Button} onClick=${onOk} title="Close" bg="success" />
+          <${Button}
+            id="HANGCHAT"
+            data-testid="config-close-btn"
+            onClick=${onNavigation}
+            title="Close"
+            bg="success"
+          />
         </div>
       </div>
     <//>

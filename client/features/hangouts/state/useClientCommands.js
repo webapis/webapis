@@ -116,29 +116,28 @@ export default function useClientCommands({
       timestamp,
       browserId,
     };
-    saveSentMessage({
-      hangout: messaging,
-      dispatch,
-      username: user && user.username,
-      dState: "pending",
-    });
+
     if (hangout.state === "BLOCKER") {
       saveSentMessage({
         ///------------------------------updating tobe checked
         hangout: {
           ...hangout,
           message: {
-            ...hangout.message,
-            text: "You cannot send this message because you are blocked",
+            ...message,
             type: "blocker",
           },
         },
         dispatch,
         username: user && user.username,
-        dState: "pending",
+        dState: "blocked",
       });
     } else {
-      // sendPendingHangout({ hangout: messaging });
+      saveSentMessage({
+        hangout: messaging,
+        dispatch,
+        username: user && user.username,
+        dState: "pending",
+      });
       sendMessage({ data: messaging, type: "HANGOUT" });
     }
     dispatch({ type: actionTypes.MESSAGE_TEXT_CHANGED, text: "" });
@@ -151,7 +150,7 @@ export default function useClientCommands({
       target: hangout.target,
       email,
       message: {
-        text: "You have blocked this message",
+        text: "",
         timestamp,
         type: "blocked",
       },
@@ -169,6 +168,7 @@ export default function useClientCommands({
       dState: "pending",
     });
     //sendPendingHangout({ hangout: block });
+    onAppRoute({ featureRoute: "/HANGCHAT", appRoute: "/hangouts" });
     sendMessage({ data: block, type: "HANGOUT" });
   }
   function onUnblock() {}

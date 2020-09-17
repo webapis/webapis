@@ -71,14 +71,16 @@ export default function useSenderMessage({
             hangout,
             dispatch,
             username,
-            dState: "unread",
+            dState:
+              focusedHangout && focusedHangout.target === hangout.target
+                ? "read"
+                : "unread",
           });
-          if (!focusedHangout) {
+          if (
+            !focusedHangout ||
+            (focusedHangout && focusedHangout.target !== hangout.target)
+          ) {
             saveUnread(commonArg);
-          } else {
-            if (focusedHangout && focusedhangout.target !== hangout.target) {
-              saveUnread(commonArg);
-            }
           }
           break;
         case "UNBLOCKER":

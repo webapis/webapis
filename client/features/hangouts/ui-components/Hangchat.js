@@ -20,11 +20,20 @@ export function Messages({ messages, username, ref }) {
     transformedMessages.length > 0 &&
     transformedMessages.map((msg) => {
       return html`<div>
-        <${Message} ...${msg} />
+        ${(msg.type === undefined ||
+          msg.type === "invited" ||
+          msg.type === "blocker") &&
+        html`<${Message} ...${msg} />`}
         ${msg.type &&
         msg.type === "invited" &&
         msg.owner === "me" &&
         html`<${InfoMessage} type="success" text=${infoMessages.invited} />`}
+        ${msg.type &&
+        msg.type === "blocked" &&
+        html`<${InfoMessage} type="danger" text=${infoMessages.blocked} />`}
+        ${msg.type &&
+        msg.type === "blocker" &&
+        html`<${InfoMessage} type="danger" text=${infoMessages.blocker} />`}
       </div>`;
     })}
   </div>`;
@@ -176,7 +185,12 @@ export default function Hangchat({
         ${(hangout.state === "ACCEPTED" ||
           hangout.state === "INVITE" ||
           hangout.state === "INVITED" ||
-          hangout.state === "ACCEPTER") &&
+          hangout.state === "ACCEPTER" ||
+          hangout.state === "MESSAGE" ||
+          hangout.state === "MESSAGED" ||
+          hangout.state === "MESSANGER" ||
+          hangout.state === "BLOCKED" ||
+          hangout.state === "BLOCKER") &&
         html` <${MessageEditor}
           loading=${loading}
           messageText=${messageText}

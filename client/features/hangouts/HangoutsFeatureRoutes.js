@@ -79,6 +79,7 @@ export default function HangoutsFeatureRoutes(props) {
     case "/READER":
     case "/INVITED":
     case "/INVITER":
+    case "/HANGCHAT":
       return html` <${Suspense} fallback=${Loading}>
         <${Hangchat} ...${state} ...${funcs} ...${hangout} user=${user} />
       <//>`;

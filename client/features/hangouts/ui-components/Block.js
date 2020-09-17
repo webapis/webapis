@@ -24,10 +24,10 @@ export default function Block({
   onCancel,
   onUserClientCommand,
   onReport,
-  username = "",
+  target = "",
 }) {
   return html`
-    <${Layout} username=${username} desc="You are about to block ">
+    <${Layout} target=${target} desc="You are about to block ">
       <div
         data-testid="block-ui"
         class="d-flex flex-column h-100 justify-content-between"
