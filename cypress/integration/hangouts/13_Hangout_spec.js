@@ -75,7 +75,7 @@ describe("HangoutSpec", () => {
     cy.get("[data-testid=beroclient]").find("[data-testid=send-btn]").click();
   });
 
-  it.only("Bero Blockes Demo", () => {
+  it("Bero Blocks Demo", () => {
     cy.window()
       .its("localStorage")
       .invoke(
@@ -154,5 +154,47 @@ describe("HangoutSpec", () => {
       .find("[data-testid=message-input]")
       .type("Hi bero hope you have not blovked me");
     cy.get("[data-testid=democlient]").find("[data-testid=send-btn]").click();
+  });
+
+  it.only("Bero unblocks demouser", () => {
+    cy.window()
+      .its("localStorage")
+      .invoke(
+        "setItem",
+        "berouser-hangouts",
+        JSON.stringify([
+          {
+            target: "demouser",
+            email: "demouser@gmail.com",
+            state: "BLOCKED",
+            timestamp: Date.now(),
+            message: {
+              text: "",
+              timestamp: Date.now(),
+            },
+          },
+        ])
+      );
+    cy.window()
+      .its("localStorage")
+      .invoke(
+        "setItem",
+        "berouser-demouser-messages",
+        JSON.stringify([
+          {
+            text: "",
+            datetime: Date.now(),
+            owner: "berouser",
+            type: "blocked",
+            state: "delivered",
+          },
+        ])
+      );
+    cy.visit("/");
+
+    cy.get("[data-testid=beroclient]").find("[data-testid=demouser]").click();
+
+    cy.get("[data-testid=beroclient]").find("[data-testid=config-btn]").click();
+    // cy.get("[data-testid=beroclient]").find("[data-testid=bckui-btn]").click();
   });
 });

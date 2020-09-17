@@ -4,7 +4,7 @@ import { useHangoutContext } from "./HangoutsProvider";
 import { useAppRoute } from "../../../components/app-route/index";
 import { changeMessageText } from "./actions";
 import { emailRegex } from "../../authentication/validation/validationRegex";
-
+import { loadHangouts, loadMessages } from "./local-storage/common";
 import { actionTypes } from "./actionTypes";
 
 export function useHangoutNav({ user }) {
@@ -64,6 +64,8 @@ export function useHangouts({ user }) {
         featureRoute: `/${selectedHangout.state}`,
         appRoute: "/hangouts",
       });
+
+      loadMessages({ hangout: selectedHangout, username, dispatch });
     }
   }
   function onInviteGuest() {
@@ -111,6 +113,10 @@ export function useHangouts({ user }) {
   function onScrollToBottom(scrollToBottom) {
     dispatch({ type: actionTypes.SCROLL_TO_BOTTOM, scrollToBottom });
   }
+
+  function loadLocalHangouts() {
+    loadHangouts({ username, dispatch });
+  }
   return {
     state: { ...state, name: username, dispatch },
     funcs: {
@@ -126,6 +132,7 @@ export function useHangouts({ user }) {
       onGuestEmailInputFocus,
       onNavigation,
       onMessageText,
+      loadLocalHangouts,
     },
   };
 }
