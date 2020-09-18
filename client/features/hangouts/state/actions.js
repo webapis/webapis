@@ -1,4 +1,5 @@
 import { actionTypes } from "./actionTypes";
+
 //retrieves hangouts from localStorage
 export function loadHangouts({ username, dispatch }) {
   const hangouts = JSON.parse(localStorage.getItem(`${username}-hangouts`));
@@ -47,16 +48,16 @@ export async function searchHangouts({ search, dispatch, username }) {
     const response = await fetch(
       `/authed-msg/hangouts/findOne?search=${search}&username=${username}`
     );
-    if (response.ok) {
+    if (response.status === 200) {
       const { hangout } = await response.json();
-
-      //3.
-      //const userNotFound = hangouts.length === 0 ? true : false;
-
       dispatch({
         type: actionTypes.SEARCH_HANGOUT_SUCCESS,
-        hangout,
-        //  userNotFound,
+        hangouts: [hangout],
+      });
+    } else if (response.status === 400) {
+      dispatch({
+        type: actionTypes.SEARCH_HANGOUT_SUCCESS,
+        hangouts: [],
       });
     }
   } catch (error) {

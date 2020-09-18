@@ -17,10 +17,10 @@ module.exports = async function findOne({ req, res, collection }) {
     // prevent for searching users's own name
     if (search === username) {
       debugger;
-      res.writeHead(200, { "Content-Type": "application/json" });
+      res.writeHead(400, { "Content-Type": "application/json" });
       res.write(
         JSON.stringify({
-          hangouts: [],
+          hangout: null,
         })
       );
       res.end();
@@ -44,22 +44,27 @@ module.exports = async function findOne({ req, res, collection }) {
         res.end();
       } else {
         // if hangout previously was not connected
-        let users = await collection
+        let hangout = await collection
           .findOne({ $or: [{ username: search }, { email: search }] })
           .project({ salt: 0, hash: 0, iterations: 0 });
         // .toArray();
-
-        res.writeHead(200, { "Content-Type": "application/json" });
-        res.write(
-          JSON.stringify({
-            hangouts:
-              users &&
-              users.map((u) => {
-                return { ...u, state: "INVITEE" };
-              }),
-          })
-        );
-        res.end();
+        if (hangout) {
+          res.writeHead(200, { "Content-Type": "application/json" });
+          res.write(
+            JSON.stringify({
+              hangout: { ...hangout, state: "INVITEE" },
+            })
+          );
+          res.end();
+        } else {
+          res.writeHead(400, { "Content-Type": "application/json" });
+          res.write(
+            JSON.stringify({
+              hangout: null,
+            })
+          );
+          res.end();
+        }
       }
     }
   } catch (error) {

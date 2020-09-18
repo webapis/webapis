@@ -45,6 +45,15 @@ export const initState = {
 };
 export function reducer(state, action) {
   switch (action.type) {
+    case actionTypes.RESET_GUEST_INVITATION:
+      return {
+        ...state,
+        invitationSuccess: false,
+        inviteGuest: false,
+        userNotFound: false,
+        guestEmail: "",
+        search: "",
+      };
     case actionTypes.SCROLL_TO_BOTTOM:
       return { ...state, scrollToBottom: action.scrollToBottom };
     case actionTypes.VALIDATED_GUEST_EMAIL_FORMAT:
@@ -137,10 +146,10 @@ export function reducer(state, action) {
       return {
         ...state,
         loading: false,
-        hangouts: [action.hangout],
+        hangouts: action.hangouts,
         searchHangouts: false,
         searching: false,
-        //userNotFound: action.userNotFound,
+        userNotFound: action.hangouts.length === 0 ? true : false,
       };
     case actionTypes.SEARCH_HANGOUT_FAILED:
       return {

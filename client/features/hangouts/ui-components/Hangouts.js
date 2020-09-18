@@ -26,6 +26,7 @@ export function Hangouts({
   onGuestEmailInputFocus,
   onSearchSelect,
   error,
+  resetGuestInvitation,
 }) {
   return html`
     <${Layout} desc="Contact List">
@@ -43,6 +44,7 @@ export function Hangouts({
           userNotFound &&
           html`
             <${InviteGuest}
+              resetGuestInvitation=${resetGuestInvitation}
               onGuestEmailChange=${onGuestEmailChange}
               onSendInviteGuest=${onSendInviteGuest}
               onMessageFoGuestInput=${onMessageFoGuestInput}
@@ -154,6 +156,7 @@ export function InviteGuest({
   error,
   isValidGuestEmail,
   onGuestEmailInputFocus,
+  resetGuestInvitation,
 }) {
   return html`
     <div>
@@ -175,7 +178,10 @@ export function InviteGuest({
         html`
           <div class="alert alert-success" role="alert">
             Guest invitation sent to ${guestusername} successfuly.
-            <button class="btn btn-outline-success small">
+            <button
+              class="btn btn-outline-success small"
+              onClick=${resetGuestInvitation}
+            >
               ok
             </button>
           </div>
@@ -201,7 +207,7 @@ export function InviteGuest({
           <input
             onFocus=${onGuestEmailInputFocus}
             onChange=${onGuestEmailChange}
-            data-testid="guest-email"
+            data-testid="guest-email-input"
             disabled=${invitingGuest}
             type="email"
             class="form-control ${isValidGuestEmail &&
@@ -213,7 +219,7 @@ export function InviteGuest({
           />
           <div class="input-group-append">
             <button
-              data-testid="invite"
+              data-testid="invite-btn"
               onClick=${onSendInviteGuest}
               disabled=${guestEmail === ""}
               class="btn btn-outline-secondary"

@@ -17,7 +17,7 @@ const Invite = lazy(() => import("./ui-components/Invite"));
 const Invitee = lazy(() => import("./ui-components/Invitee"));
 const InviterContainer = lazy(() => import("./ui-components/Inviter"));
 const HangoutsContainer = lazy(() => import("./ui-components/Hangouts"));
-const Declined = lazy(() => import("./ui-components/Declined"));
+//const Declined = lazy(() => import("./ui-components/Declined"));
 const UnreadHangouts = lazy(() => import("./ui-components/UnreadHangouts"));
 const VideoCall = lazy(() => import("./ui-components/VideoCall"));
 const html = htm.bind(h);

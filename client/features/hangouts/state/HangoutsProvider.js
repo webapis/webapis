@@ -51,6 +51,9 @@ export default function HangoutsProvider(props) {
     searchHangouts,
     search,
     messages,
+    invitingGuest,
+    guestEmail,
+    messageForGuest,
     //  sendhangout,
   } = state;
 
@@ -68,10 +71,20 @@ export default function HangoutsProvider(props) {
     user,
     browserId,
   });
+
   useEffect(() => {
-    if (hangout) {
+    if (invitingGuest && user && guestEmail && messageForGuest) {
+      debugger;
+      actions.InviteAsGuest({
+        from: user.email,
+        to: guestEmail,
+        subject: messageForGuest,
+        text: "invitation",
+        type: "GUEST_INVITATION",
+        dispatch,
+      });
     }
-  }, [hangout]);
+  }, [invitingGuest, user, guestEmail, messageForGuest]);
   useEffect(() => {
     if (connectionState === "open") {
       dispatch({

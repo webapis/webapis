@@ -30,7 +30,7 @@ module.exports = async function serverToServer({ req, res }) {
       text, //: "Hello world?!", // plain text body
       html: htmlTemplate({ type }), // html body
     });
-
+    debugger; //
     res.writeHead(200, { "Content-Type": "application/json" });
     res.write(
       JSON.stringify({
@@ -40,7 +40,7 @@ module.exports = async function serverToServer({ req, res }) {
     res.end();
   } catch (error) {
     const err = error;
-
+    debugger;
     res.writeHead(500, { "Content-Type": "application/json" });
     res.write(
       JSON.stringify({

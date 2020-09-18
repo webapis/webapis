@@ -85,6 +85,7 @@ export function useHangouts({ user }) {
     });
   }
   function onSendInviteGuest(e) {
+    debugger;
     const emailConstraint = new RegExp(emailRegex);
     if (guestEmail === "") {
       dispatch({
@@ -117,6 +118,9 @@ export function useHangouts({ user }) {
   function loadLocalHangouts() {
     loadHangouts({ username, dispatch });
   }
+  function resetGuestInvitation() {
+    dispatch({ type: actionTypes.RESET_GUEST_INVITATION });
+  }
   return {
     state: { ...state, name: username, dispatch },
     funcs: {
@@ -133,6 +137,7 @@ export function useHangouts({ user }) {
       onNavigation,
       onMessageText,
       loadLocalHangouts,
+      resetGuestInvitation,
     },
   };
 }
