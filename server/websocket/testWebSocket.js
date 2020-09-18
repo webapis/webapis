@@ -5,11 +5,18 @@ module.exports.testWebSocket = async function ({
   sender,
 }) {
   try {
-    const { target, data } = message;
-
+    const {
+      data: { target, text },
+    } = message;
+    debugger;
     const socket = connections[target];
-
-    socket.send(JSON.stringify({ sender, data, type: "test-websocket" }));
+    debugger;
+    socket.send(
+      JSON.stringify({
+        data: { text, target: sender },
+        type: "test-websocket",
+      })
+    );
   } catch (error) {
     throw error;
   }

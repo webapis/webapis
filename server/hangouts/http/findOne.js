@@ -3,7 +3,6 @@ const cookie = require("cookie");
 const jwt = require("jsonwebtoken");
 module.exports = async function findOne({ req, res, collection }) {
   try {
-    debugger;
     // verify user authorization/
     const token = cookie.parse(req.headers["cookie"]);
 
@@ -16,7 +15,6 @@ module.exports = async function findOne({ req, res, collection }) {
     const { username } = decoded;
     // prevent for searching users's own name
     if (search === username) {
-      debugger;
       res.writeHead(400, { "Content-Type": "application/json" });
       res.write(
         JSON.stringify({
@@ -25,7 +23,6 @@ module.exports = async function findOne({ req, res, collection }) {
       );
       res.end();
     } else {
-      debugger;
       let user = await collection.findOne({ username });
       // search for hangout among connected hangouts
       if (

@@ -8,8 +8,10 @@ module.exports.unauthedHandler = async function ({ ws, request, connections }) {
     console.log("socket connected to", uname);
     ws.on("message", function unauthedMessageRecieved(message) {
       const msg = JSON.parse(message);
+      debugger;
       switch (msg.type) {
         case "test-websocket":
+          debugger;
           testWebSocket({ message: msg, ws, connections, sender: uname });
           break;
         case "error-monitor":

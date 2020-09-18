@@ -13,6 +13,7 @@ module.exports = async function (server, client) {
 
   wss.on("connection", async function connection(ws, request) {
     if (request.url.includes("unauthed-msg")) {
+      debugger;
       unauthedHandler({ ws, request, connections });
     } else if (request.url.includes("authed-msg")) {
       authedHandler({ request, connections, ws, collection });

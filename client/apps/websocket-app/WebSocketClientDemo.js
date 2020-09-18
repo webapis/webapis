@@ -5,7 +5,7 @@ import {
 } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 import WebSocketProvider from "../../features/websocket/WebSocketProvider";
-import WebSocketClient from "../../features/websocket/demo-ui/WebSocketClient";
+import WebSocketClient from "./WebSocketClient";
 const html = htm.bind(h);
 export default function WebSocketClientDemo({ username }) {
   return html`<${WebSocketProvider}

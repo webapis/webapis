@@ -22,30 +22,36 @@ export default function WebSocketClient({
   const [messages, setMessages] = useState([]);
 
   function onChange(e) {
+    const value = e.target.value;
+    console.log("value", value);
+
     setMessageText(e.target.value);
+    console.log("messageText", messageText);
   }
   useEffect(() => {
     if (message) {
-      setMessages((prev) => [
-        ...prev,
-        { username: message.sender, text: message.data.text },
-      ]);
+      const {
+        data: { target, text },
+      } = message;
+      debugger;
+      setMessages((prev) => [...prev, { username: target, text }]);
     }
   }, [message]);
 
   function handleSendMessage() {
     const msg = {
       type: "test-websocket",
-      target,
-      data: { text: messageText },
+
+      data: { text: messageText, target },
     };
+
     sendMessage(msg);
   }
   return html`<div>
     <div class="row">
       <div class="col">
         <div class="card">
-          <div class="card-header">
+          <div class="card-header" data-testid="connectionstate">
             WebSocket client, ${username}:${connectionState}
           </div>
           <div class="card-body">
@@ -56,14 +62,16 @@ export default function WebSocketClient({
             <div class="input-group mb-3">
               <input
                 id=${username}
-                onChange=${onChange}
+                onInput=${onChange}
                 type="text"
                 class="form-control"
                 placeholder="Enter message text"
+                data-testid="message-input"
                 value=${messageText}
               />
               <div class="input-group-append">
                 <button
+                  data-testid="send-btn"
                   onClick=${handleSendMessage}
                   class="btn btn-outline-secondary"
                   type="button"
