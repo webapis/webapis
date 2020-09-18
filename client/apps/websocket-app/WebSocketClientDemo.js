@@ -9,7 +9,7 @@ import WebSocketClient from "../../features/websocket/demo-ui/WebSocketClient";
 const html = htm.bind(h);
 export default function WebSocketClientDemo({ username }) {
   return html`<${WebSocketProvider}
-    url="wss://localhost:3000/unauthed-msg/?username=demouser"
+    url=${`wss://localhost:${PORT}/unauthed-msg/?username=demouser`}
     >${({ sendMessage, message, connectionState }) => {
       return html`
         <${WebSocketClient}

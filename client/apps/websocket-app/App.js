@@ -10,10 +10,10 @@ const html = htm.bind(h);
 export default function App() {
   return html`
     <div class="row">
-      <div class="col">
+      <div class="col" data-testid="beroclient">
         <${WebSocketClientBero} username="bero" />
       </div>
-      <div class="col">
+      <div class="col" data-testid="democlient">
         <${WebSocketClientDemo} username="demo" />
       </div>
     </div>

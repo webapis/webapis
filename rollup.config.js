@@ -13,6 +13,33 @@ const production = !process.env.ROLLUP_WATCH;
 
 export default [
   {
+    input: `assets/libs/dev/build-required/hooks.dev.cdn.js`,
+
+    output: [
+      {
+        dir: `builds/${process.env.appName}/build`,
+        format: "es",
+        // sourcemap: "inline",
+      },
+    ],
+    plugins: [
+      ...commonPlugins,
+      //  del({ targets: `builds/${process.env.appName}/build/*` }),
+    ],
+  },
+  {
+    input: `assets/libs/dev/build-required/preact.combat.dev.cdn.js`,
+
+    output: [
+      {
+        dir: `builds/${process.env.appName}/build`,
+        format: "es",
+        // sourcemap: "inline",
+      },
+    ],
+    plugins: commonPlugins,
+  },
+  {
     input: `client/apps/${process.env.appName}/index.js`,
     external: externals,
     output: [
@@ -23,8 +50,6 @@ export default [
       },
     ],
     plugins: [
-      // del({ targets: `builds/${process.env.appName}/build/*` }),
-
       !production &&
         copy({
           targets: [
@@ -75,29 +100,5 @@ export default [
         open: false,
       }),
     ],
-  },
-  {
-    input: `assets/libs/dev/build-required/hooks.dev.cdn.js`,
-
-    output: [
-      {
-        dir: `builds/${process.env.appName}/build`,
-        format: "es",
-        // sourcemap: "inline",
-      },
-    ],
-    plugins: commonPlugins,
-  },
-  {
-    input: `assets/libs/dev/build-required/preact.combat.dev.cdn.js`,
-
-    output: [
-      {
-        dir: `builds/${process.env.appName}/build`,
-        format: "es",
-        // sourcemap: "inline",
-      },
-    ],
-    plugins: commonPlugins,
   },
 ];

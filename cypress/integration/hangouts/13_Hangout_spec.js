@@ -4,7 +4,7 @@ describe("HangoutSpec", () => {
     cy.viewport(1280, 720);
   });
   it("demouser invites berouser and berouser accepts", () => {
-    cy.visit("/");
+    cy.visit("https://localhost:3005");
     cy.server();
     cy.route({
       url: "/authed-msg/hangouts/findOne?search=berouser&username=demouser",
@@ -123,7 +123,7 @@ describe("HangoutSpec", () => {
           type: "HANGOUT",
         })
       );
-    cy.visit("/");
+    cy.visit("https://localhost:3005");
 
     //bero views new message
     cy.get("[data-testid=beroclient]")
@@ -192,7 +192,7 @@ describe("HangoutSpec", () => {
           },
         ])
       );
-    cy.visit("/");
+    cy.visit("https://localhost:3005");
     //bero
     cy.get("[data-testid=beroclient]").find("[data-testid=demouser]").click();
     cy.get("[data-testid=beroclient]").find("[data-testid=config-btn]").click();
@@ -279,7 +279,7 @@ describe("HangoutSpec", () => {
           },
         ])
       );
-    cy.visit("/");
+    cy.visit("https://localhost:3005");
 
     cy.get("[data-testid=beroclient]").find("[data-testid=demouser]").click();
     cy.get("[data-testid=beroclient]")
@@ -350,7 +350,7 @@ describe("HangoutSpec", () => {
           },
         ])
       );
-    cy.visit("/");
+    cy.visit("https://localhost:3005");
     cy.get("[data-testid=democlient]").find("[data-testid=berouser]").click();
     cy.get("[data-testid=beroclient]").find("[data-testid=demouser]").click();
     cy.get("[data-testid=beroclient]").find("[data-testid=config-btn]").click();
@@ -375,7 +375,7 @@ describe("HangoutSpec", () => {
       response: {},
       method: "POST",
     });
-    cy.visit("/");
+    cy.visit("https://localhost:3005");
     cy.get("[data-testid=democlient]")
       .find("[data-testid=user-search-input]")
       .type("berouser");
