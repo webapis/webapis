@@ -7,12 +7,14 @@ const { crossEnv, series, concurrent } = require("nps-utils");
 //-env :client and server side: specfies prod, test, dev environment
 
 //returns buildtime envs for rollup.js
-function clientEnv({ appName, rtc, auth, env }) {
-  return crossEnv(`appName=${appName} RTC=${rtc} AUTH=${auth} ENV=${env} `);
+function clientEnv({ appName, rtc, auth, env, port }) {
+  return crossEnv(
+    `appName=${appName} RTC=${rtc} AUTH=${auth} ENV=${env} PORT=${port} `
+  );
 }
 // returns rintime envs for nodejs
-function serverEnv({ appName, env }) {
-  return crossEnv(`appName=${appName} ENV=${env} `);
+function serverEnv({ appName, env, port }) {
+  return crossEnv(`appName=${appName} ENV=${env} PORT=${port} `);
 }
 
 function serverCommands({ env }) {
@@ -32,21 +34,22 @@ function clientCommands({ env }) {
     case "prod":
       return "rollup -c";
     default:
-      return "rollup -c -w";
+      throw "No env specified for client command";
+    //return "rollup -c rollup.config.dev.libs.js && rollup -c -w";
   }
 }
 
-function serverScript({ appName, env }) {
+function serverScript({ appName, env, port }) {
   return {
     description: "server script",
-    script: `${serverEnv({ appName, env })} ${serverCommands({ env })}`,
+    script: `${serverEnv({ appName, env, port })} ${serverCommands({ env })}`,
   };
 }
 
-function clientScript({ appName, env, rtc, auth }) {
+function clientScript({ appName, env, rtc, auth, port }) {
   return {
     description: "client script",
-    script: `${clientEnv({ appName, rtc, auth, env })}${clientCommands({
+    script: `${clientEnv({ appName, rtc, auth, env, port })}${clientCommands({
       env,
     })}`,
   };
@@ -57,28 +60,32 @@ const apps = [
     appName: "hangout-app",
     rtc: "WEBSOCKET",
     auth: "NODEJS",
-    env: "DEV",
+    env: "dev",
+    port: 3005,
     scriptName: "hangoutdev",
   },
   {
     appName: "webcom-app",
     rtc: "WEBSOCKET",
     auth: "NODEJS",
-    env: "DEV",
+    env: "dev",
+    port: 3001,
     scriptName: "webcomdev",
   },
   {
     appName: "websocket-app",
     rtc: "WEBSOCKET",
     auth: "NODEJS",
-    env: "DEV",
+    env: "dev",
+    port: 3002,
     scriptName: "websocketdev",
   },
   {
     appName: "websocket-app",
     rtc: "WEBSOCKET",
     auth: "NODEJS",
-    env: "DEV",
+    env: "dev",
+    port: 3003,
     scriptName: "websocketprod",
   },
 ];
@@ -91,10 +98,12 @@ const appScripts = apps.reduce((a, c, i) => {
         rtc: c.rtc,
         auth: c.auth,
         env: c.env,
+        port: c.port,
       }),
       [`${c.scriptName}_server`]: serverScript({
         appName: c.appName,
         env: c.env,
+        port: c.port,
       }),
       [`${c.scriptName}`]: concurrent.nps(
         `${c.scriptName}_client`,
@@ -110,10 +119,12 @@ const appScripts = apps.reduce((a, c, i) => {
         rtc: c.rtc,
         auth: c.auth,
         env: c.env,
+        port: c.port,
       }),
       [`${c.scriptName}_server`]: serverScript({
         appName: c.appName,
         env: c.env,
+        port: c.port,
       }),
       [`${c.scriptName}`]: concurrent.nps(
         `${c.scriptName}_client`,

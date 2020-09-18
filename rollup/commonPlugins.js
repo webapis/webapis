@@ -43,15 +43,14 @@ export default [
   }),
   !production &&
     replace({
-      "https://cdn.jsdelivr.net/npm/whatwg-fetch@3.2.0/fetch.js":
-        "https://localhost:3000/fetch.js",
-      "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js":
-        "https://localhost:3000/preact.module.js",
-      "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js":
-        "https://localhost:3000/htm.module.js",
-      "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/preact.combat.cdn.js":
-        "https://localhost:3000/preact.combat.dev.cdn.js",
-      "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js":
-        "https://localhost:3000/hooks.dev.cdn.js",
+      "https://cdn.jsdelivr.net/npm/whatwg-fetch@3.2.0/fetch.js": `https://localhost:${process.env.PORT}/fetch.js`,
+      "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js": `https://localhost:${process.env.PORT}/preact.module.js`,
+      "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js": `https://localhost:${process.env.PORT}/htm.module.js`,
+      "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/preact.combat.cdn.js": `https://localhost:${process.env.PORT}/preact.combat.dev.cdn.js`,
+      "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js": `https://localhost:${process.env.PORT}/hooks.dev.cdn.js`,
+
+      "https://localhost:3000/preact.module.js": `https://localhost:${process.env.PORT}/preact.module.js`,
+      "https://localhost:3000/hooks.dev.cdn.js": `https://localhost:${process.env.PORT}/hooks.dev.cdn.js`,
+      "https://localhost:3000/preact.module.js": `https://localhost:${process.env.PORT}/preact.module.js`,
     }),
 ];

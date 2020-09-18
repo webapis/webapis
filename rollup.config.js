@@ -23,13 +23,13 @@ export default [
       },
     ],
     plugins: [
-      del({ targets: `builds/${process.env.appName}/build/*` }),
+      // del({ targets: `builds/${process.env.appName}/build/*` }),
 
       !production &&
         copy({
           targets: [
             {
-              src: "assets/libs/dev/**",
+              src: "assets/libs/dev/build-not-required/**",
               dest: `builds/${process.env.appName}/build`,
             },
             {
@@ -42,7 +42,7 @@ export default [
         copy({
           targets: [
             {
-              src: "assets/libs/prod/**",
+              src: "assets/libs/dev/build-not-required/**",
               dest: `builds/${process.env.appName}/build`,
             },
             {
@@ -76,111 +76,28 @@ export default [
       }),
     ],
   },
-  // {
-  //   input: `client/features/authentication/change-password/change-password.js`,
-  //   output: [
-  //     {
-  //       dir: `builds/${process.env.appName}/build`,
-  //       format: "es",
-  //       sourcemap: "inline",
-  //     },
-  //   ],
-  //   plugins: [
-  //     ...commonPlugins,
-  //     copy({
-  //       targets: [
-  //         {
-  //           src: "assets/libs/parse.min.js",
-  //           dest: `builds/${process.env.appName}/build`,
-  //         },
-  //         {
-  //           src: "assets/fonts/Roboto/Roboto-Regular.ttf",
-  //           dest: `builds/${process.env.appName}/build`,
-  //         },
-  //         {
-  //           src: "assets/manifest/**",
-  //           dest: `builds/${process.env.appName}/build`,
-  //         },
-  //         {
-  //           src: "node_modules/bootstrap/dist/css/bootstrap.min.css",
-  //           dest: `builds/${process.env.appName}/build`,
-  //         },
-  //         {
-  //           src: "node_modules/bootstrap/dist/js/bootstrap.min.js",
-  //           dest: `builds/${process.env.appName}/build`,
-  //         },
-  //         //   { src: 'node_modules/bootstrap/js/dist/util.js', dest: `builds/${process.env.appName}/build` },
-  //         {
-  //           src: "node_modules/jquery/dist/jquery.min.js",
-  //           dest: `builds/${process.env.appName}/build`,
-  //         },
-  //       ],
-  //     }),
-  //     // htmlTemplate({
-  //     //   template: "config/rollup/html-template/changepassword.html",
-  //     //   target: `builds/${process.env.appName}/build/changepassword.html`,
-  //     //   attrs: ['type="module"'],
-  //     // }),
-  //     serve({
-  //       contentBase: `builds/${process.env.appName}/build/`,
-  //       openPage: "/changepassword.html",
-  //       port: 10002,
-  //       open: false,
-  //     }),
-  //   ],
-  // },
+  {
+    input: `assets/libs/dev/build-required/hooks.dev.cdn.js`,
 
-  // {
-  //   input: `client/storybook/index.js`,
-  //   external: externals,
-  //   output: [
-  //     {
-  //       dir: `client/storybook/build`,
-  //       format: "es",
-  //       sourcemap: "inline",
-  //     },
-  //   ],
-  //   plugins: [
-  //     del({ targets: `client/storybook/build/*` }),
+    output: [
+      {
+        dir: `builds/${process.env.appName}/build`,
+        format: "es",
+        // sourcemap: "inline",
+      },
+    ],
+    plugins: commonPlugins,
+  },
+  {
+    input: `assets/libs/dev/build-required/preact.combat.dev.cdn.js`,
 
-  //     !production &&
-  //       copy({
-  //         targets: [
-  //           { src: "assets/libs/dev/**", dest: `client/storybook/build` },
-  //           {
-  //             src: "config/rollup/html-template/dev/index.html",
-  //             dest: `client/storybook/build`,
-  //           },
-  //         ],
-  //       }),
-  //     production &&
-  //       copy({
-  //         targets: [
-  //           { src: "assets/libs/prod/**", dest: `client/storybook/build` },
-  //           {
-  //             src: "config/rollup/html-template/prod/index.html",
-  //             dest: `client/storybook/build`,
-  //           },
-  //         ],
-  //       }),
-  //     ...commonPlugins,
-  //     copy({
-  //       targets: [
-  //         { src: "assets/manifest/**", dest: `client/storybook/build` },
-
-  //         {
-  //           src: "config/rollup/html-template/index.html",
-  //           dest: `client/storybook/build/`,
-  //         },
-  //       ],
-  //     }),
-
-  //     serve({
-  //       contentBase: `client/storybook/build/`,
-  //       openPage: "/index.html",
-  //       port: 10004,
-  //       open: true,
-  //     }),
-  //   ],
-  // },
+    output: [
+      {
+        dir: `builds/${process.env.appName}/build`,
+        format: "es",
+        // sourcemap: "inline",
+      },
+    ],
+    plugins: commonPlugins,
+  },
 ];
