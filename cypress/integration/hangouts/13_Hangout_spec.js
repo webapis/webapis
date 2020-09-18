@@ -1,9 +1,10 @@
 import infoMessages from "../../../client/features/hangouts/ui-components/infoMessages";
+import testProtocols from "./testProtocols";
 describe("HangoutSpec", () => {
   beforeEach(() => {
     cy.viewport(1280, 720);
   });
-  it("demouser invites berouser and berouser accepts", () => {
+  it.only("demouser invites berouser and berouser accepts", () => {
     cy.visit("https://localhost:3005");
     cy.server();
     cy.route({
@@ -16,6 +17,9 @@ describe("HangoutSpec", () => {
         },
       },
     });
+    cy.route({ url: "/hangout-protocol", method: "post" }).as(
+      "protocolCatcher"
+    );
     //demo user sends an invitation
     cy.get("[data-testid=democlient]")
       .find("[data-testid=hangouts-btn]")
@@ -32,6 +36,11 @@ describe("HangoutSpec", () => {
     cy.get("[data-testid=democlient]")
       .find("[data-testid=oninvite-btn]")
       .click();
+
+    cy.wait("@protocolCatcher").then((xhr) => {
+      const { requestBody } = xhr;
+      testProtocols({ protocol: requestBody });
+    });
     cy.get("[data-testid=democlient]")
       .find("[data-testid=info-message]")
       .contains(infoMessages.invited);
@@ -391,4 +400,6 @@ describe("HangoutSpec", () => {
       .type("webapis.github@gmail.com");
     cy.get("[data-testid=democlient]").find("[data-testid=invite-btn]").click();
   });
+
+  it("Test Hangout server", () => {});
 });

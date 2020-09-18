@@ -1,13 +1,13 @@
 const hangoutHandler = require("./hangoutHandler");
 
 module.exports = async function hangouts({
-  hangout,
+  data,
   ws,
   connections,
   collection,
 }) {
   //const collection = await client.db("auth").collection("users");
-
+  const { hangout } = data;
   switch (hangout.command) {
     case "ACCEPT":
     case "BLOCK":

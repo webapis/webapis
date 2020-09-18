@@ -55,9 +55,14 @@ export default function WebSocketClient({
             WebSocket client, ${username}:${connectionState}
           </div>
           <div class="card-body">
-            <ui>
+            <ui data-testid="message-list">
               ${messages &&
-              messages.map((m) => html`<li>${m.username}:${m.text}</li>`)}
+              messages.map(
+                (m) =>
+                  html`<li data-testid="message-item">
+                    ${m.username}:${m.text}
+                  </li>`
+              )}
             </ui>
             <div class="input-group mb-3">
               <input

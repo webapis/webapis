@@ -6,6 +6,7 @@ import {
   useState,
 } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
 import { clientCommands } from "../../features/hangouts/state/clientCommands";
+import protocolSender from "./protocolSender";
 export default function HangoutServer({ children }) {
   const [demoMessage, setDemoState] = useState(null);
   const [beroMessage, setBeroState] = useState(null);
@@ -18,6 +19,7 @@ export default function HangoutServer({ children }) {
   }, []);
 
   function sendMessageDemo({ data, type }) {
+    protocolSender({ protocol: { data, type } });
     const { timestamp, browserId } = data;
 
     switch (data.command) {

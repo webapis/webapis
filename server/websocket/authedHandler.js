@@ -38,7 +38,7 @@ module.exports.authedHandler = async function ({
 
         switch (msg.type) {
           case "HANGOUT":
-            hangoutsHandler({ hangout: data, connections, ws, collection });
+            hangoutsHandler({ data, connections, ws, collection });
             break;
           default:
             throw "No handler provided for message data type";

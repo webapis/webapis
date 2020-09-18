@@ -19,7 +19,7 @@ module.exports = async function hangoutHandler({
       state: senderState,
       browserId,
     };
-    //
+
     const target = {
       username: ws.user.username,
       email: ws.user.email,

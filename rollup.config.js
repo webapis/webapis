@@ -24,7 +24,7 @@ export default [
     ],
     plugins: [
       ...commonPlugins,
-      //  del({ targets: `builds/${process.env.appName}/build/*` }),
+      del({ targets: `builds/${process.env.appName}/build/*` }),
     ],
   },
   {
