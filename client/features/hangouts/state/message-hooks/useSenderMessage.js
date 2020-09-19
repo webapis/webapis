@@ -19,7 +19,8 @@ export default function useSenderMessage({
       message &&
       message.type === "HANGOUT" &&
       message.data.type === "HANGOUT" &&
-      username
+      username &&
+      message.data.sender !== username
     ) {
       const {
         data: { hangout },

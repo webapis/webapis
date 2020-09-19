@@ -7,14 +7,14 @@ const { crossEnv, series, concurrent } = require("nps-utils");
 //-env :client and server side: specfies prod, test, dev environment
 
 //returns buildtime envs for rollup.js
-function clientEnv({ appName, rtc, auth, env, port }) {
+function clientEnv({ appName, outputAppName, rtc, auth, env, port }) {
   return crossEnv(
-    `appName=${appName} RTC=${rtc} AUTH=${auth} ENV=${env} PORT=${port} `
+    `appName=${appName} outputAppName=${outputAppName} RTC=${rtc} AUTH=${auth} NODE_ENV=${env} PORT=${port} `
   );
 }
 // returns rintime envs for nodejs
 function serverEnv({ appName, env, port }) {
-  return crossEnv(`appName=${appName} ENV=${env} PORT=${port} `);
+  return crossEnv(`appName=${appName} NODE_ENV=${env} PORT=${port} `);
 }
 
 function serverCommands({ env }) {
@@ -46,48 +46,65 @@ function serverScript({ appName, env, port }) {
   };
 }
 
-function clientScript({ appName, env, rtc, auth, port }) {
+function clientScript({ appName, outputAppName, env, rtc, auth, port }) {
   return {
     description: "client script",
-    script: `${clientEnv({ appName, rtc, auth, env, port })}${clientCommands({
+    script: `${clientEnv({
+      appName,
+      outputAppName,
+      rtc,
+      auth,
+      env,
+      port,
+    })}${clientCommands({
       env,
     })}`,
   };
 }
-
-const apps = [
+const hangoutTestApps = [
   {
+    //   appName: "hgws-app",
+    //   rtc: "WEBSOCKET",
+    //   auth: "NODEJS",
+    //   env: "dev",
+    //   port: 3004,
+    //   scriptName: "hg-ws-dev",
+    // },{
     appName: "hangout-app",
-    rtc: "WEBSOCKET",
+    outputAppName: "hgmock-app",
+    rtc: "MOCK",
     auth: "NODEJS",
     env: "dev",
     port: 3005,
-    scriptName: "hangoutdev",
+    scriptName: "hg-mock-dev",
   },
-  {
-    appName: "webcom-app",
-    rtc: "WEBSOCKET",
-    auth: "NODEJS",
-    env: "dev",
-    port: 3001,
-    scriptName: "webcomdev",
-  },
-  {
-    appName: "websocket-app",
-    rtc: "WEBSOCKET",
-    auth: "NODEJS",
-    env: "dev",
-    port: 3002,
-    scriptName: "websocketdev",
-  },
-  {
-    appName: "websocket-app",
-    rtc: "WEBSOCKET",
-    auth: "NODEJS",
-    env: "dev",
-    port: 3003,
-    scriptName: "websocketprod",
-  },
+];
+const apps = [
+  ...hangoutTestApps,
+  // {
+  //   appName: "webcom-app",
+  //   rtc: "WEBSOCKET",
+  //   auth: "NODEJS",
+  //   env: "dev",
+  //   port: 3001,
+  //   scriptName: "webcomdev",
+  // },
+  // {
+  //   appName: "websocket-app",
+  //   rtc: "WEBSOCKET",
+  //   auth: "NODEJS",
+  //   env: "dev",
+  //   port: 3002,
+  //   scriptName: "websocketdev",
+  // },
+  // {
+  //   appName: "websocket-app",
+  //   rtc: "WEBSOCKET",
+  //   auth: "NODEJS",
+  //   env: "dev",
+  //   port: 3003,
+  //   scriptName: "websocketprod",
+  // },
 ];
 const appScripts = apps.reduce((a, c, i) => {
   let accum = {};
@@ -95,13 +112,14 @@ const appScripts = apps.reduce((a, c, i) => {
     accum = {
       [`${c.scriptName}_client`]: clientScript({
         appName: c.appName,
+        outputAppName: c.outputAppName,
         rtc: c.rtc,
         auth: c.auth,
         env: c.env,
         port: c.port,
       }),
       [`${c.scriptName}_server`]: serverScript({
-        appName: c.appName,
+        appName: c.outputAppName,
         env: c.env,
         port: c.port,
       }),
@@ -116,13 +134,14 @@ const appScripts = apps.reduce((a, c, i) => {
 
       [`${c.scriptName}_client`]: clientScript({
         appName: c.appName,
+        outputAppName: c.outputAppName,
         rtc: c.rtc,
         auth: c.auth,
         env: c.env,
         port: c.port,
       }),
       [`${c.scriptName}_server`]: serverScript({
-        appName: c.appName,
+        appName: c.outputAppName,
         env: c.env,
         port: c.port,
       }),

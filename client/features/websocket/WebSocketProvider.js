@@ -37,7 +37,7 @@ export default function WebSocketProvider(props) {
     if (websocket) {
       websocket.onmessage = (message) => {
         const msg = JSON.parse(message.data);
-        debugger;
+
         dispatch({ type: actionTypes.MESSAGE_RECIEVED, message: msg });
       };
       websocket.onopen = () => {

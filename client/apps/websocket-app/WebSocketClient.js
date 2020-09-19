@@ -33,7 +33,7 @@ export default function WebSocketClient({
       const {
         data: { target, text },
       } = message;
-      debugger;
+
       setMessages((prev) => [...prev, { username: target, text }]);
     }
   }, [message]);

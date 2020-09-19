@@ -23,6 +23,7 @@ export default function HangoutClient({
   target,
 }) {
   const { user } = authState;
+
   return html`<div>
     <${AppRouteProvider}
       title="Hangout"

@@ -6,6 +6,7 @@ import {
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 import HangoutClient from "./HangoutClient";
 import HangoutServer from "./HangoutServer";
+import RtcMsgService from "../../service-adapters/rtc-msg-adapter/RtcMsgService";
 const html = htm.bind(h);
 const demoAuthState = {
   user: { username: "demouser" },
@@ -17,21 +18,21 @@ const beroAuthState = {
 };
 render(
   html`
-    <${HangoutServer}
-      >${({ sendMessageDemo, sendMessageBero, beroMessage, demoMessage }) => {
+    <${RtcMsgService}
+      >${({ sendMessage, message, connectionState }) => {
         return html` <div class="row">
           <div class="col" data-testid="democlient">
             <${HangoutClient}
               authState=${demoAuthState}
-              message=${demoMessage}
-              sendMessage=${sendMessageDemo}
+              message=${message}
+              sendMessage=${sendMessage}
             />
           </div>
           <div class="col" data-testid="beroclient">
             <${HangoutClient}
               authState=${beroAuthState}
-              message=${beroMessage}
-              sendMessage=${sendMessageBero}
+              message=${message}
+              sendMessage=${sendMessage}
             />
           </div>
         </div>`;

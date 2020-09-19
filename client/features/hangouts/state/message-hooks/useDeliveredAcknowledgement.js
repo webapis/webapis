@@ -20,7 +20,8 @@ export default function useDeliveryAcknowledgement({
       message &&
       message.type === "HANGOUT" &&
       message.data.type === "ACKHOWLEDGEMENT" &&
-      username
+      username &&
+      message.data.sender === username
     ) {
       onDeliveryAcknowledgement();
     }

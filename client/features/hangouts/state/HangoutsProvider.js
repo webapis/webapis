@@ -74,7 +74,6 @@ export default function HangoutsProvider(props) {
 
   useEffect(() => {
     if (invitingGuest && user && guestEmail && messageForGuest) {
-      debugger;
       actions.InviteAsGuest({
         from: user.email,
         to: guestEmail,

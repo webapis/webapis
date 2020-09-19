@@ -85,7 +85,6 @@ export function useHangouts({ user }) {
     });
   }
   function onSendInviteGuest(e) {
-    debugger;
     const emailConstraint = new RegExp(emailRegex);
     if (guestEmail === "") {
       dispatch({

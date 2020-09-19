@@ -17,14 +17,14 @@ export default [
 
     output: [
       {
-        dir: `builds/${process.env.appName}/build`,
+        dir: `builds/${process.env.outputAppName}/build`,
         format: "es",
         // sourcemap: "inline",
       },
     ],
     plugins: [
       ...commonPlugins,
-      del({ targets: `builds/${process.env.appName}/build/*` }),
+      del({ targets: `builds/${process.env.outputAppName}/build/*` }),
     ],
   },
   {
@@ -32,7 +32,7 @@ export default [
 
     output: [
       {
-        dir: `builds/${process.env.appName}/build`,
+        dir: `builds/${process.env.outputAppName}/build`,
         format: "es",
         // sourcemap: "inline",
       },
@@ -44,7 +44,7 @@ export default [
     external: externals,
     output: [
       {
-        dir: `builds/${process.env.appName}/build`,
+        dir: `builds/${process.env.outputAppName}/build`,
         format: "es",
         sourcemap: "inline",
       },
@@ -55,11 +55,11 @@ export default [
           targets: [
             {
               src: "assets/libs/dev/build-not-required/**",
-              dest: `builds/${process.env.appName}/build`,
+              dest: `builds/${process.env.outputAppName}/build`,
             },
             {
               src: "config/rollup/html-template/dev/index.html",
-              dest: `builds/${process.env.appName}/build`,
+              dest: `builds/${process.env.outputAppName}/build`,
             },
           ],
         }),
@@ -68,11 +68,11 @@ export default [
           targets: [
             {
               src: "assets/libs/dev/build-not-required/**",
-              dest: `builds/${process.env.appName}/build`,
+              dest: `builds/${process.env.outputAppName}/build`,
             },
             {
               src: "config/rollup/html-template/prod/index.html",
-              dest: `builds/${process.env.appName}/build`,
+              dest: `builds/${process.env.outputAppName}/build`,
             },
           ],
         }),
@@ -81,20 +81,20 @@ export default [
         targets: [
           {
             src: "assets/sounds/**",
-            dest: `builds/${process.env.appName}/build`,
+            dest: `builds/${process.env.outputAppName}/build`,
           },
           {
             src: "client/features/app-monitor/client-error.js",
-            dest: `builds/${process.env.appName}/build`,
+            dest: `builds/${process.env.outputAppName}/build`,
           },
           {
             src: "assets/manifest/**",
-            dest: `builds/${process.env.appName}/build`,
+            dest: `builds/${process.env.outputAppName}/build`,
           },
         ],
       }),
       serve({
-        contentBase: `builds/${process.env.appName}/build/`,
+        contentBase: `builds/${process.env.outputAppName}/build/`,
         openPage: "/index.html",
         port: 10001,
         open: false,

@@ -4,7 +4,7 @@ describe("HangoutSpec", () => {
   beforeEach(() => {
     cy.viewport(1280, 720);
   });
-  it.only("demouser invites berouser and berouser accepts", () => {
+  it("demouser invites berouser and berouser accepts", () => {
     cy.visit("https://localhost:3005");
     cy.server();
     cy.route({
@@ -37,10 +37,10 @@ describe("HangoutSpec", () => {
       .find("[data-testid=oninvite-btn]")
       .click();
 
-    cy.wait("@protocolCatcher").then((xhr) => {
-      const { requestBody } = xhr;
-      testProtocols({ protocol: requestBody });
-    });
+    // cy.wait("@protocolCatcher").then((xhr) => {
+    //   const { requestBody } = xhr;
+    //   testProtocols({ protocol: requestBody });
+    // });
     cy.get("[data-testid=democlient]")
       .find("[data-testid=info-message]")
       .contains(infoMessages.invited);
@@ -91,64 +91,79 @@ describe("HangoutSpec", () => {
       .its("localStorage")
       .invoke(
         "setItem",
-        "beroInitState",
-        JSON.stringify({
-          data: {
-            type: "HANGOUT",
-            hangout: {
-              target: "demouser",
-              email: "demouser@gmail.com",
-              state: "MESSANGER",
+        "berouser-hangouts",
+        JSON.stringify([
+          {
+            target: "demouser",
+            email: "demouser@gmail.com",
+            state: "MESSANGER",
+            timestamp: Date.now(),
+            message: {
+              text: "Hello Bero How are you",
               timestamp: Date.now(),
-              message: {
-                text: "Hello Bero How are you",
-                timestamp: Date.now(),
-              },
             },
           },
-          type: "HANGOUT",
-        })
+        ])
       );
 
     cy.window()
       .its("localStorage")
       .invoke(
         "setItem",
-        "demoInitState",
-        JSON.stringify({
-          data: {
-            type: "HANGOUT",
-            hangout: {
-              target: "berouser",
-              email: "berouser@gmail.com",
-              state: "MESSANGER",
+        "berouser-demouser-messages",
+        JSON.stringify([
+          {
+            owner: "demouser",
+            email: "demouser@gmail.com",
+            state: "read",
+            timestamp: Date.now(),
+            text: "Hello Bero How are you",
+          },
+        ])
+      );
+    cy.window()
+      .its("localStorage")
+      .invoke(
+        "setItem",
+        "demouser-hangouts",
+        JSON.stringify([
+          {
+            target: "berouser",
+            email: "berouser@gmail.com",
+            state: "MESSANGER",
+            timestamp: Date.now(),
+            message: {
+              text: "Hello Demo How are you",
               timestamp: Date.now(),
-              message: {
-                text: "Hello Demo How are you",
-                timestamp: Date.now(),
-              },
             },
           },
-          type: "HANGOUT",
-        })
+        ])
+      );
+
+    cy.window()
+      .its("localStorage")
+      .invoke(
+        "setItem",
+        "demouser-berouser-messages",
+        JSON.stringify([
+          {
+            owner: "demouser",
+            email: "demouser@gmail.com",
+            state: "delivered",
+            timestamp: Date.now(),
+            text: "Hello Bero How are you",
+          },
+        ])
       );
     cy.visit("https://localhost:3005");
 
-    //bero views new message
-    cy.get("[data-testid=beroclient]")
-      .find("[data-testid=unread-link]")
-      .click();
-    cy.get("[data-testid=beroclient]").find("[data-testid=unread-ui]");
     cy.get("[data-testid=beroclient]").find("[data-testid=demouser]").click();
-    //demo views new message
-    cy.get("[data-testid=democlient]")
-      .find("[data-testid=unread-link]")
-      .click();
-    cy.get("[data-testid=democlient]").find("[data-testid=unread-ui]");
+
     cy.get("[data-testid=democlient]").find("[data-testid=berouser]").click();
 
     // berouser blocks demouser
     // test config-btn
+
     cy.get("[data-testid=beroclient]").find("[data-testid=config-btn]").click();
     //test config-close-btn
     cy.get("[data-testid=beroclient]")
@@ -168,6 +183,24 @@ describe("HangoutSpec", () => {
   });
 
   it("Bero unblocks demouser", () => {
+    cy.window()
+      .its("localStorage")
+      .invoke(
+        "setItem",
+        "berouser-hangouts",
+        JSON.stringify([
+          {
+            target: "demouser",
+            email: "demouser@gmail.com",
+            state: "BLOCKED",
+            timestamp: Date.now(),
+            message: {
+              text: "",
+              timestamp: Date.now(),
+            },
+          },
+        ])
+      );
     cy.window()
       .its("localStorage")
       .invoke(

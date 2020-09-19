@@ -72,7 +72,7 @@ function defaultBrowser({ features, record, type }) {
 
 module.exports = {
   scripts: {
-    runAllapps: concurrent.nps("hangoutdev", "websocketdev"),
+    hgdev: concurrent.nps("hg-mock-dev"),
     ...appScripts,
     storybook,
     testAva: {

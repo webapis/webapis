@@ -8,260 +8,256 @@ import {
 import { clientCommands } from "../../features/hangouts/state/clientCommands";
 import protocolSender from "./protocolSender";
 export default function HangoutServer({ children }) {
-  const [demoMessage, setDemoState] = useState(null);
-  const [beroMessage, setBeroState] = useState(null);
+  const [message, setMessage] = useState(null);
 
-  useEffect(() => {
-    const beroInitState = JSON.parse(localStorage.getItem("beroInitState"));
-
-    setBeroState(beroInitState);
-    setDemoState(JSON.parse(localStorage.getItem("demoInitState")));
-  }, []);
-
-  function sendMessageDemo({ data, type }) {
-    protocolSender({ protocol: { data, type } });
-    const { timestamp, browserId } = data;
-
+  function sendMessage({ data, type, sender }) {
+    const { timestamp, browserId, target, email } = data;
     switch (data.command) {
       case clientCommands.INVITE:
-        setDemoState({
+        setMessage({
           data: {
             type: "ACKHOWLEDGEMENT",
             hangout: {
-              target: "berouser",
+              target,
               timestamp,
-              email: "berouser@gmail.com",
+              email,
               state: "INVITED",
               browserId,
               message: data.message,
             },
+            sender,
           },
           type: "HANGOUT",
         });
-        setBeroState({
-          data: {
-            type: "HANGOUT",
-            hangout: {
-              target: "demouser",
-              timestamp,
-              email: "demouser@gmail.com",
-              state: "INVITER",
-              message: data.message,
+
+        setTimeout(() => {
+          setMessage({
+            data: {
+              type: "HANGOUT",
+              hangout: {
+                target: sender,
+                timestamp,
+                email: `${sender}@gmail.com`,
+                state: "INVITER",
+                message: data.message,
+              },
+              sender,
             },
-          },
-          type: "HANGOUT",
-        });
+            type: "HANGOUT",
+          });
+        }, 500);
         break;
       case clientCommands.ACCEPT:
-        break;
-      case clientCommands.DECLINE:
-        break;
-      case clientCommands.MESSAGE:
-        setDemoState({
+        setMessage({
           data: {
             type: "ACKHOWLEDGEMENT",
             hangout: {
-              target: "berouser",
-              email: "berouser@gmail.com",
-              state: "MESSAGED",
+              target,
               timestamp,
-              message: data.message,
-            },
-          },
-          type: "HANGOUT",
-        });
-
-        setBeroState({
-          data: {
-            type: "HANGOUT",
-            hangout: {
-              target: "demouser",
-              email: "demouser@gmail.com",
-              state: "MESSANGER",
-              message: data.message,
-              timestamp,
-            },
-          },
-          type: "HANGOUT",
-        });
-        break;
-      case clientCommands.BLOCK:
-        break;
-      case clientCommands.UNBLOCK:
-        break;
-      default:
-        throw "No client command provided";
-    }
-  }
-  function sendMessageBero({ data, type }) {
-    const { timestamp, browserId } = data;
-
-    switch (data.command) {
-      case clientCommands.ACCEPT:
-        setBeroState({
-          data: {
-            hangout: {
-              target: "demouser",
-              timestamp,
-              email: "demouser@gmail.com",
+              email,
               state: "ACCEPTED",
+              browserId,
               message: data.message,
             },
-            type: "ACKHOWLEDGEMENT",
+            sender,
           },
           type: "HANGOUT",
         });
 
-        setDemoState({
-          type: "HANGOUT",
-          data: {
+        setTimeout(() => {
+          setMessage({
+            data: {
+              type: "HANGOUT",
+              hangout: {
+                target: sender,
+                timestamp,
+                email: `${sender}@gmail.com`,
+                state: "ACCEPTER",
+                message: data.message,
+              },
+              sender,
+            },
             type: "HANGOUT",
-            hangout: {
-              state: "ACCEPTER",
-              timestamp,
-              message: data.message,
-              target: "berouser",
-              email: "berouser@gmail.com",
-            },
-          },
-        });
-        break;
-      case clientCommands.MESSAGE:
-        setBeroState({
-          data: {
-            type: "ACKHOWLEDGEMENT",
-            hangout: {
-              state: "MESSAGED",
-              timestamp,
-              message: data.message,
-              target: "demouser",
-              email: "demouser@gmail.com",
-            },
-          },
-          type: "HANGOUT",
-        });
-        setDemoState({
-          data: {
-            type: "HANGOUT",
-            hangout: {
-              target: "berouser",
-              email: "berouser@gmail.com",
-              message: data.message,
-              state: "MESSANGER",
-            },
-          },
-          type: "HANGOUT",
-        });
-        break;
-      case clientCommands.BLOCK:
-        setBeroState({
-          data: {
-            type: "ACKHOWLEDGEMENT",
-            hangout: {
-              target: "demouser",
-              email: "demouser@gmail.com",
-              state: "BLOCKED",
-              message: data.message,
-              timestamp: Date.now(),
-            },
-          },
-          type: "HANGOUT",
-        });
-
-        setDemoState({
-          data: {
-            type: "HANGOUT",
-            hangout: {
-              target: "berouser",
-              email: "berouser@gmail.com",
-              state: "BLOCKER",
-              message: { type: "blocker", message: "", timestamp: Date.now() },
-              timestamp: Date.now(),
-            },
-          },
-          type: "HANGOUT",
-        });
-        break;
-      case clientCommands.UNBLOCK:
-        setBeroState({
-          data: {
-            type: "ACKHOWLEDGEMENT",
-            hangout: {
-              target: "demouser",
-              email: "demouser@gmail.com",
-              state: "UNBLOCKED",
-              message: data.message,
-              timestamp: Date.now(),
-            },
-          },
-          type: "HANGOUT",
-        });
-
-        setDemoState({
-          data: {
-            type: "HANGOUT",
-            hangout: {
-              target: "berouser",
-              email: "berouser@gmail.com",
-              state: "UNBLOCKER",
-              timestamp: Date.now(),
-              message: { ...data.message, type: "unblocker" },
-            },
-          },
-          type: "HANGOUT",
-        });
+          });
+        }, 500);
         break;
       case clientCommands.DECLINE:
-        setBeroState({
+        setMessage({
           data: {
             type: "ACKHOWLEDGEMENT",
             hangout: {
-              target: "demouser",
-              email: "demouser@gmail.com",
-              timestamp: Date.now() - 1,
+              target,
+              timestamp,
+              email,
               state: "DECLINED",
+              browserId,
               message: data.message,
             },
+            sender,
           },
           type: "HANGOUT",
         });
+
+        // setTimeout(()=>{
+        //   setMessage({
+        //     data: {
+        //       type: "HANGOUT",
+        //       hangout: {
+        //         target:sender,
+        //         timestamp,
+        //         email:`${sender}@gmail.com`,
+        //         state: "DECLINER",
+        //         message: data.message,
+        //       }
+        //     },
+        //     type: "HANGOUT",
+        //   });
+        // },5000)
+        break;
+      case clientCommands.BLOCK:
+        setMessage({
+          data: {
+            type: "ACKHOWLEDGEMENT",
+            hangout: {
+              target,
+              timestamp,
+              email,
+              state: "BLOCKED",
+              browserId,
+              message: data.message,
+            },
+            sender,
+          },
+          type: "HANGOUT",
+        });
+
+        setTimeout(() => {
+          setMessage({
+            data: {
+              type: "HANGOUT",
+              hangout: {
+                target: sender,
+                timestamp,
+                email: `${sender}@gmail.com`,
+                state: "BLOCKER",
+                message: data.message,
+              },
+              sender,
+            },
+            type: "HANGOUT",
+          });
+        }, 500);
+        break;
+      case clientCommands.UNBLOCK:
+        setMessage({
+          data: {
+            type: "ACKHOWLEDGEMENT",
+            hangout: {
+              target,
+              timestamp,
+              email,
+              state: "UNBLOCKED",
+              browserId,
+              message: data.message,
+            },
+            sender,
+          },
+          type: "HANGOUT",
+        });
+
+        setTimeout(() => {
+          setMessage({
+            data: {
+              type: "HANGOUT",
+              hangout: {
+                target: sender,
+                timestamp,
+                email: `${sender}@gmail.com`,
+                state: "UNBLOCKER",
+                message: data.message,
+              },
+              sender,
+            },
+            type: "HANGOUT",
+          });
+        }, 500);
         break;
       case clientCommands.UNDECLINE:
-        setBeroState({
+        setMessage({
           data: {
             type: "ACKHOWLEDGEMENT",
             hangout: {
-              target: "demouser",
-              email: "demouser@gmail.com",
-              timestamp: Date.now(),
-              state: "ACCEPTED",
+              target,
+              timestamp,
+              email,
+              state: "UNDECLINED",
+              browserId,
               message: data.message,
             },
+            sender,
           },
           type: "HANGOUT",
         });
-        setDemoState({
-          data: {
+
+        setTimeout(() => {
+          setMessage({
+            data: {
+              type: "HANGOUT",
+              hangout: {
+                target: sender,
+                timestamp,
+                email: `${sender}@gmail.com`,
+                state: "UNDECLINER",
+                message: data.message,
+              },
+              sender,
+            },
             type: "HANGOUT",
+          });
+        }, 500);
+        break;
+      case clientCommands.MESSAGE:
+        setMessage({
+          data: {
+            type: "ACKHOWLEDGEMENT",
             hangout: {
-              target: "berouser",
-              email: "berouser@gmail.com",
-              timestamp: Date.now(),
+              target,
+              timestamp,
+              email,
+              state: "MESSAGED",
+              browserId,
               message: data.message,
-              state: "ACCEPTER",
             },
+            sender,
           },
           type: "HANGOUT",
         });
+
+        setTimeout(() => {
+          setMessage({
+            data: {
+              type: "HANGOUT",
+              hangout: {
+                target: sender,
+                timestamp,
+                email: `${sender}@gmail.com`,
+                state: "MESSANGER",
+                message: data.message,
+              },
+              sender,
+            },
+            type: "HANGOUT",
+          });
+        }, 500);
         break;
       default:
         throw "No client command provided";
     }
   }
+
   return children({
-    sendMessageDemo,
-    sendMessageBero,
-    beroMessage,
-    demoMessage,
+    message,
+    sendMessage,
+    connectionState: "open",
   });
 }
