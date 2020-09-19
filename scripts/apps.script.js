@@ -63,13 +63,15 @@ function clientScript({ appName, outputAppName, env, rtc, auth, port }) {
 }
 const hangoutTestApps = [
   {
-    //   appName: "hgws-app",
-    //   rtc: "WEBSOCKET",
-    //   auth: "NODEJS",
-    //   env: "dev",
-    //   port: 3004,
-    //   scriptName: "hg-ws-dev",
-    // },{
+    appName: "hangout-app",
+    outputAppName: "hgws-app",
+    rtc: "WEBSOCKET",
+    auth: "NODEJS",
+    env: "dev",
+    port: 3004,
+    scriptName: "hg-ws-dev",
+  },
+  {
     appName: "hangout-app",
     outputAppName: "hgmock-app",
     rtc: "MOCK",
@@ -89,14 +91,15 @@ const apps = [
   //   port: 3001,
   //   scriptName: "webcomdev",
   // },
-  // {
-  //   appName: "websocket-app",
-  //   rtc: "WEBSOCKET",
-  //   auth: "NODEJS",
-  //   env: "dev",
-  //   port: 3002,
-  //   scriptName: "websocketdev",
-  // },
+  {
+    appName: "websocket-app",
+    outputAppName: "ws-app",
+    rtc: "WEBSOCKET",
+    auth: "NODEJS",
+    env: "dev",
+    port: 3002,
+    scriptName: "ws-dev",
+  },
   // {
   //   appName: "websocket-app",
   //   rtc: "WEBSOCKET",

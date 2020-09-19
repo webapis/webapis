@@ -8,12 +8,14 @@ export default function RtcMsgService(props) {
   const { children, url } = props;
   switch (RTC) {
     case "WEBSOCKET":
+      debugger;
       return html`<${WebSocketProvider} ...${props}
         >${({ sendMessage, message, connectionState }) => {
           return children({ message, sendMessage, connectionState, url });
         }}<//
       >`;
     case "MOCK":
+      debugger;
       return html`<${HangoutServer} ...${props}
         >${({ sendMessage, message, connectionState }) => {
           return children({ message, sendMessage, connectionState, url });

@@ -93,12 +93,12 @@ export default [
           },
         ],
       }),
-      serve({
-        contentBase: `builds/${process.env.outputAppName}/build/`,
-        openPage: "/index.html",
-        port: 10001,
-        open: false,
-      }),
+      // serve({
+      //   contentBase: `builds/${process.env.outputAppName}/build/`,
+      //   openPage: "/index.html",
+      //   port: 10001,
+      //   open: false,
+      // }),
     ],
   },
 ];
