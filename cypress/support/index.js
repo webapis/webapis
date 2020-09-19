@@ -23,7 +23,12 @@ import "./parse/deleteUser";
 import "./auth/login";
 import "./auth/signup";
 import "./auth/signout";
-
+import "./hangout/invitation";
+import "./hangout/block";
+import "./hangout/unblock";
+import "./hangout/decline";
+import "./hangout/undecline";
+import "./hangout/inviteasguest";
 Cypress.on("window:before:load", (win) => {
   delete win.fetch;
 });
