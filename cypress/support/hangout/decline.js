@@ -1,4 +1,4 @@
-Cypress.Commands.add("decline", () => {
+Cypress.Commands.add("decline", ({ PORT }) => {
   cy.window()
     .its("localStorage")
     .invoke(
@@ -66,7 +66,7 @@ Cypress.Commands.add("decline", () => {
         },
       ])
     );
-  cy.visit("https://localhost:3005");
+  cy.visit(`https://localhost:${PORT}`);
 
   cy.get("[data-testid=beroclient]").find("[data-testid=demouser]").click();
   cy.get("[data-testid=beroclient]").find("[data-testid=decline-btn]").click();

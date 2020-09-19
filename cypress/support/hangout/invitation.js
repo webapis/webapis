@@ -1,6 +1,6 @@
 import infoMessages from "../../../client/features/hangouts/ui-components/infoMessages";
-Cypress.Commands.add("invitation", () => {
-  cy.visit("https://localhost:3005");
+Cypress.Commands.add("invitation", ({ PORT }) => {
+  cy.visit(`https://localhost:${PORT}`);
   cy.server();
   cy.route({
     url: "/authed-msg/hangouts/findOne?search=berouser&username=demouser",

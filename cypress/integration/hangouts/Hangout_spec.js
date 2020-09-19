@@ -5,28 +5,32 @@ describe("Test hangout with mocked backend", () => {
     cy.viewport(1280, 720);
   });
   it("Invitation", () => {
-    cy.invitation();
+    cy.invitation({ PORT: 3005 });
   });
 
   it("Block user from sending message", () => {
-    cy.block();
+    cy.block({ PORT: 3005 });
   });
 
   it("Unblock user ", () => {
-    cy.unblock();
+    cy.unblock({ PORT: 3005 });
   });
 
   it("decline invitation", () => {
-    cy.decline();
+    cy.decline({ PORT: 3005 });
   });
 
   it("bero undeclines invitation", () => {
-    cy.undecline();
+    cy.undecline({ PORT: 3005 });
   });
 
   it("User not fount, Invite as a Guest", () => {
-    cy.inviteasguest();
+    cy.inviteasguest({ PORT: 3005 });
   });
+});
 
-  it("Test Hangout server", () => {});
+describe("Test hangout with ws", () => {
+  it("Invitation", () => {
+    cy.invitation({ PORT: 3004 });
+  });
 });

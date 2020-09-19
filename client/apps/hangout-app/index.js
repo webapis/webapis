@@ -19,6 +19,7 @@ const beroAuthState = {
 render(
   html`
     <${RtcMsgService}
+      url=${`wss://localhost:${PORT}/unauthed-msg/?username=berouser`}
       >${({ sendMessage, message, connectionState }) => {
         return html` <div class="row">
           <div class="col" data-testid="democlient">

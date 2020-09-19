@@ -1,4 +1,4 @@
-Cypress.Commands.add("block", () => {
+Cypress.Commands.add("block", ({ PORT }) => {
   cy.window()
     .its("localStorage")
     .invoke(
@@ -67,7 +67,7 @@ Cypress.Commands.add("block", () => {
         },
       ])
     );
-  cy.visit("https://localhost:3005");
+  cy.visit(`https://localhost:${PORT}`);
 
   cy.get("[data-testid=beroclient]").find("[data-testid=demouser]").click();
 

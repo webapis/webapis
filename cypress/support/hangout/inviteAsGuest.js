@@ -1,4 +1,4 @@
-Cypress.Commands.add("inviteasguest", () => {
+Cypress.Commands.add("inviteasguest", ({ PORT }) => {
   cy.server();
   cy.route({
     url: "/authed-msg/hangouts/findOne?search=berouser&username=demouser",
@@ -11,7 +11,7 @@ Cypress.Commands.add("inviteasguest", () => {
     response: {},
     method: "POST",
   });
-  cy.visit("https://localhost:3005");
+  cy.visit(`https://localhost:${PORT}`);
   cy.get("[data-testid=democlient]")
     .find("[data-testid=user-search-input]")
     .type("berouser");

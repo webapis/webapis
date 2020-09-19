@@ -1,4 +1,4 @@
-Cypress.Commands.add("undecline", () => {
+Cypress.Commands.add("undecline", ({ PORT }) => {
   cy.window()
     .its("localStorage")
     .invoke(
@@ -61,7 +61,7 @@ Cypress.Commands.add("undecline", () => {
         },
       ])
     );
-  cy.visit("https://localhost:3005");
+  cy.visit(`https://localhost:${PORT}`);
   cy.get("[data-testid=democlient]").find("[data-testid=berouser]").click();
   cy.get("[data-testid=beroclient]").find("[data-testid=demouser]").click();
   cy.get("[data-testid=beroclient]").find("[data-testid=config-btn]").click();

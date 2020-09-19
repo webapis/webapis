@@ -1,4 +1,4 @@
-Cypress.Commands.add("unblock", () => {
+Cypress.Commands.add("unblock", ({ PORT }) => {
   cy.window()
     .its("localStorage")
     .invoke(
@@ -50,7 +50,7 @@ Cypress.Commands.add("unblock", () => {
         },
       ])
     );
-  cy.visit("https://localhost:3005");
+  cy.visit(`https://localhost:${PORT}`);
   //bero
   cy.get("[data-testid=beroclient]").find("[data-testid=demouser]").click();
   cy.get("[data-testid=beroclient]").find("[data-testid=config-btn]").click();
