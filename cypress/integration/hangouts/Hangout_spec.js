@@ -1,11 +1,14 @@
 import infoMessages from "../../../client/features/hangouts/ui-components/infoMessages";
 import testProtocols from "./testProtocols";
+
+describe("Test websocket", () => {
+  it("websocket", () => {
+    cy.websocket();
+  });
+});
 describe("Test hangout with mocked backend", () => {
   beforeEach(() => {
     cy.viewport(1280, 720);
-  });
-  it("websocket", () => {
-    cy.websocket();
   });
 
   it("Invitation", () => {
@@ -55,7 +58,7 @@ describe("Test hangout with ws", () => {
 });
 
 describe("Test Hangout with ws and mongodb", () => {
-  it.only("Invitation", () => {
+  it.skip("Invitation", () => {
     cy.invitation({ PORT: 3006 });
   });
 });

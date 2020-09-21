@@ -6,11 +6,11 @@ import WebSocketProvider from "../../features/websocket/WebSocketProvider";
 import WebSocketClient from "./WebSocketClient";
 
 const html = htm.bind(h);
-
+const start = "true";
 export default function App() {
   return html`
     <div class="row">
-      <${WebSocketProvider} url=${RTC_URL}
+      <${WebSocketProvider} url=${`${RTC_URL}/${start}`}
         >${({ sendMessage, message, connectionState }) => {
           return html`
             <div class="col" data-testid="beroclient">

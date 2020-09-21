@@ -17,7 +17,7 @@ let beroAuthState = JSON.stringify({
 
 exports.hgws = {
   rtcUrl: ({ PORT }) => {
-    return `"wss://localhost:${PORT}/hangout-app/unauthed-msg"`;
+    return `wss://localhost:${PORT}/hangout-app/unauthed-msg`;
   },
 };
 exports.hgmock = {

@@ -72,16 +72,16 @@ function clientScript({
   };
 }
 const hangoutTestApps = [
-  // {
-  //   appName: "websocket-app",
-  //   outputAppName: "ws-app",
-  //   rtc: "WEBSOCKET",
-  //   auth: "NODEJS",
-  //   env: "dev",
-  //   port: 3002,
-  //   scriptName: "ws-dev",
-  //   rtcUrl: ws.rtcUrl({ PORT: 3002 }),
-  // },
+  {
+    appName: "websocket-app",
+    outputAppName: "ws-app",
+    rtc: "WEBSOCKET",
+    auth: "NODEJS",
+    env: "dev",
+    port: 3002,
+    scriptName: "ws-dev",
+    rtcUrl: ws.rtcUrl({ PORT: 3002 }),
+  },
   {
     appName: "hangout-app",
     outputAppName: "hg-ws-app",
