@@ -4,7 +4,16 @@ import {
   render,
 } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
-import {} from "../../components/app-route/index";
+//import {} from "../../components/app-route/index";
+import AppNavigation from "./AppNavigation";
+import RouteContainer from "./RouteContainer";
+import { useAuth } from "../../features/authentication/state/useAuth";
 const html = htm.bind(h);
 
-export default function App() {}
+export default function App({ user }) {
+  const { onAuthNavigation } = useAuth();
+  return html`<div>
+    <${AppNavigation} user=${user} onAuthNavigation=${onAuthNavigation} />
+    <${RouteContainer} user=${user} />
+  </div>`;
+}

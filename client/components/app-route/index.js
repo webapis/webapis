@@ -23,9 +23,9 @@ export function useAppRoute() {
   const [state, dispatch] = context;
   const { name } = state;
   function onAppRoute({ appRoute, featureRoute }) {
-    if (name) {
-      localStorage.setItem(name, JSON.stringify({ route, featureRoute }));
-    }
+    //if (name) {
+    //  localStorage.setItem(name, JSON.stringify({ route, featureRoute }));
+    // }
 
     dispatch({ type: actionTypes.APP_ROUTE_CHANGED, featureRoute, appRoute });
   }

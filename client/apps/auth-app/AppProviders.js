@@ -9,5 +9,14 @@ import AuthProvider from "../../features/authentication/state/AuthProvider";
 const html = htm.bind(h);
 
 export default function AppProviders({ children }) {
-  return html`<${AppRouteProvider}> <${AuthProvider}> ${children}<//> <//>`;
+  return html`<${AppRouteProvider}
+    title="Hangout"
+    initState=${{ appRoute: "/auth", featureRoute: "/login" }}
+  >
+    <${AuthProvider}>
+      ${({ user, signedout }) => {
+        return children({ user, signedout });
+      }}<//
+    >
+  <//>`;
 }
