@@ -84,7 +84,7 @@ export default function AuthProvider(props) {
         featureRoute: authedRoute.featureRoute,
       });
     } else {
-      onAppRoute({ route: "/auth", featureRoute: "/login" });
+      onAppRoute({ appRoute: "/auth", featureRoute: "/login" });
     }
   }, [user]);
   function handleLogin({ emailorusername, password }) {
