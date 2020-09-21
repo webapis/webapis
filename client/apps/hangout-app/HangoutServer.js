@@ -15,7 +15,7 @@ export default function HangoutServer({ children }) {
       hangout: { timestamp, browserId, target, email, message },
       sender,
     } = data;
-    debugger;
+
     switch (data.hangout.command) {
       case clientCommands.INVITE:
         setMessage({

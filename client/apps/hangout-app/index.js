@@ -24,10 +24,11 @@ const beroAuthState = {
   },
   browsers: [{ browserId: "1234567890" }],
 };
+
 render(
   html`
     <${RtcMsgService}
-      url=${`wss://localhost:${PORT}/hangout-app/unauthed-msg/?userone=${JSON.stringify(
+      url=${`${RTC_URL}/?userone=${JSON.stringify(
         beroAuthState
       )}&usertwo=${JSON.stringify(demoAuthState)}`}
       >${({ sendMessage, message, connectionState }) => {

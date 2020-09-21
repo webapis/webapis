@@ -53,3 +53,9 @@ describe("Test hangout with ws", () => {
     cy.undecline({ PORT: 3004 });
   });
 });
+
+describe("Test Hangout with ws and mongodb", () => {
+  it.only("Invitation", () => {
+    cy.invitation({ PORT: 3006 });
+  });
+});

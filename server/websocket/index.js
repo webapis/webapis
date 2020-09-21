@@ -11,9 +11,7 @@ module.exports = async function (server, client) {
   const wss = new WebSocket.Server({ server });
 
   wss.on("connection", async function connection(ws, request) {
-    debugger;
     if (request.url.includes("unauthed-msg")) {
-      debugger;
       unauthedHandler({ ws, request, collection });
     } else if (request.url.includes("authed-msg")) {
       authedHandler({ request, ws, collection });

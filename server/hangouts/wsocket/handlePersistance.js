@@ -8,7 +8,7 @@ module.exports.handlePersistance = async function ({
   connections,
 }) {
   ////
-  debugger;
+
   try {
     const { email, message, offline, timestamp } = hangout;
 
@@ -245,6 +245,5 @@ module.exports.handlePersistance = async function ({
     }
   } catch (error) {
     const err = error;
-    debugger;
   }
 };

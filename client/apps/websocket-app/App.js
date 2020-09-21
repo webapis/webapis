@@ -10,8 +10,7 @@ const html = htm.bind(h);
 export default function App() {
   return html`
     <div class="row">
-      <${WebSocketProvider}
-        url=${`wss://localhost:${PORT}/websocket-app/unauthed-msg`}
+      <${WebSocketProvider} url=${RTC_URL}
         >${({ sendMessage, message, connectionState }) => {
           return html`
             <div class="col" data-testid="beroclient">

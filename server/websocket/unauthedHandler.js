@@ -1,6 +1,7 @@
 const { errorMonitor } = require("../app-monitor/wsocket");
 const { testWebSocket } = require("./testWebSocket");
 const hangoutsHandler = require("../hangouts/wsocket/hangoutHandler");
+const handlePersistance = require("../hangouts/wsocket/handlePersistance");
 const url = require("url");
 
 module.exports.unauthedHandler = async function ({
@@ -11,27 +12,27 @@ module.exports.unauthedHandler = async function ({
 }) {
   //
   try {
-    debugger;
     switch (true) {
       case request.url.includes("hangout-app"):
-        debugger;
-        unAuthedHangoutApp({ ws, request });
+        if (request.url.includes("mongodb")) {
+          debugger;
+          unAuthedHangoutApp({ ws, request, cb: handlePersistance });
+        } else {
+          unAuthedHangoutApp({ ws, request });
+        }
+
         break;
       case request.url.includes("websocket-app"):
-        debugger;
         testWebSocket({ ws, request });
         break;
       default:
         throw "No socket handler provided";
     }
-  } catch (error) {
-    debugger;
-  }
+  } catch (error) {}
 };
 
-function unAuthedHangoutApp({ ws, request }) {
+function unAuthedHangoutApp({ ws, request, cb = () => {} }) {
   try {
-    debugger;
     let connections = {};
     let userone = JSON.parse(url.parse(request.url, true).query.userone);
     let usertwo = JSON.parse(url.parse(request.url, true).query.usertwo);
@@ -39,19 +40,17 @@ function unAuthedHangoutApp({ ws, request }) {
     let peers = [userone, usertwo];
     connections[`${userone.user.username}-${userone.user.browserId}`] = ws;
     connections[`${usertwo.user.username}-${usertwo.user.browserId}`] = ws;
-    debugger;
+
     ws.on("message", (socketMessage) => {
-      debugger;
       const {
         data: {
           sender, ////
           hangout: { target },
         },
       } = JSON.parse(socketMessage);
-      debugger;
+
       const targetUser = peers.find((p) => p.user.username === target);
       const senderUser = peers.find((p) => p.user.username === sender);
-      debugger;
 
       hangoutsHandler({
         socketMessage,
@@ -59,7 +58,7 @@ function unAuthedHangoutApp({ ws, request }) {
         ws,
         targetUser,
         senderUser,
-        cb: () => {},
+        cb,
       });
     });
     ws.on("close", () => {
@@ -67,7 +66,5 @@ function unAuthedHangoutApp({ ws, request }) {
       delete connections[usertwo.user.username];
       console.log("socket closed by", userone.username);
     });
-  } catch (error) {
-    debugger;
-  }
+  } catch (error) {}
 }

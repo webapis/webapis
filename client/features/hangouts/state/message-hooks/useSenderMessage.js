@@ -25,7 +25,7 @@ export default function useSenderMessage({
       const {
         data: { hangout },
       } = message;
-      debugger;
+
       const commonArg = { dispatch, username, hangout };
       switch (hangout.state) {
         case "ACCEPTER":

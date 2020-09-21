@@ -33,7 +33,7 @@ export default function WebSocketClient({
       const {
         data: { text, owner },
       } = message;
-      debugger;
+
       setMessages((prev) => [...prev, { owner, text }]);
     }
   }, [message]);
@@ -43,7 +43,7 @@ export default function WebSocketClient({
       type: "test-websocket",
       data: { text: messageText, owner: username },
     };
-    debugger;
+
     sendMessage(msg);
   }
   return html`<div>
