@@ -6,6 +6,7 @@ module.exports = hangoutStates = {
   UNBLOCKER: "UNBLOCKER",
   MESSANGER: "MESSANGER",
   READER: "READER",
+  UNDECLINER: "UNDECLINER",
   // acknowlegement
   INVITED: "INVITED",
   ACCEPTED: "ACCEPTED",
@@ -15,4 +16,5 @@ module.exports = hangoutStates = {
   MESSAGED: "MESSAGED",
   READ: "READ",
   READING: "READING",
+  UNDECLINED: "UNDECLINED",
 };

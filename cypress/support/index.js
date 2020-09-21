@@ -29,6 +29,7 @@ import "./hangout/unblock";
 import "./hangout/decline";
 import "./hangout/undecline";
 import "./hangout/inviteasguest";
+import "./websocket/index";
 Cypress.on("window:before:load", (win) => {
   delete win.fetch;
 });

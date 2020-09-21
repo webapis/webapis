@@ -71,4 +71,11 @@ Cypress.Commands.add("undecline", ({ PORT }) => {
   cy.get("[data-testid=beroclient]")
     .find("[data-testid=undecline-btn]")
     .click();
+
+  cy.get("[data-testid=democlient]")
+    .find("[data-testid=message-input]")
+    .should("be.enabled");
+  cy.get("[data-testid=democlient]")
+    .find("[data-testid=send-btn]")
+    .should("be.enabled");
 });

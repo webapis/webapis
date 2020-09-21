@@ -212,7 +212,8 @@ export default function Hangchat({
           hangout.state === "UNBLOCKER" ||
           hangout.state === "BLOCKER" ||
           hangout.state === "DECLINED" ||
-          hangout.state === "UNDECLINED") &&
+          hangout.state === "UNDECLINED" ||
+          hangout.state === "UNDECLINER") &&
         html` <${MessageEditor}
           loading=${loading}
           messageText=${messageText}

@@ -31,20 +31,19 @@ export default function WebSocketClient({
   useEffect(() => {
     if (message) {
       const {
-        data: { target, text },
+        data: { text, owner },
       } = message;
-
-      setMessages((prev) => [...prev, { username: target, text }]);
+      debugger;
+      setMessages((prev) => [...prev, { owner, text }]);
     }
   }, [message]);
 
   function handleSendMessage() {
     const msg = {
       type: "test-websocket",
-
-      data: { text: messageText, target, sender: username },
+      data: { text: messageText, owner: username },
     };
-
+    debugger;
     sendMessage(msg);
   }
   return html`<div>
@@ -60,7 +59,7 @@ export default function WebSocketClient({
               messages.map(
                 (m) =>
                   html`<li data-testid="message-item">
-                    ${m.username}:${m.text}
+                    ${m.owner}:${m.text}
                   </li>`
               )}
             </ui>

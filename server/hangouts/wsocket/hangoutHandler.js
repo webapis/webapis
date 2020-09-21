@@ -14,7 +14,7 @@ module.exports = async function hangoutHandler({
     debugger;
     const {
       data: { hangout },
-    } = socketMessage;
+    } = JSON.parse(socketMessage);
     const { senderState, targetState } = stateMapper({
       command: hangout.command,
     });
@@ -49,7 +49,7 @@ module.exports = async function hangoutHandler({
         for (const browser of senderBrowsers) {
           const senderOnline =
             connections[`${senderUser.user.username}-${browser.browserId}`];
-          debugger;
+          debugger; //
           if (senderOnline) {
             const msg = {
               data: {
@@ -85,10 +85,8 @@ module.exports = async function hangoutHandler({
     await funcs.senderOnline();
     await funcs.targetOnline();
     cb({
-      connections,
       target,
       sender,
-      collection,
       senderUserName: senderUser.user.username,
       username: sTarget,
       hangout,

@@ -25,7 +25,7 @@ Cypress.Commands.add("invitation", ({ PORT }) => {
   cy.get("[data-testid=democlient]").find("[data-testid=berouser]").click();
 
   cy.get("[data-testid=democlient]").find("[data-testid=oninvite-btn]").click();
-
+  //cy.pause()
   // cy.wait("@protocolCatcher").then((xhr) => {
   //   const { requestBody } = xhr;
   //   testProtocols({ protocol: requestBody });

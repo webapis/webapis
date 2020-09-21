@@ -85,8 +85,9 @@ export default function useSenderMessage({
           }
           break;
         case "UNBLOCKER":
+        case "UNDECLINER":
           updateHangout(commonArg);
-          updateHangout(commonArg);
+
           saveRecievedMessage({
             hangout,
             dispatch,
@@ -103,6 +104,7 @@ export default function useSenderMessage({
             saveUnread(commonArg);
           }
           break;
+
         case "READER":
           break;
         default:

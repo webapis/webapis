@@ -5,24 +5,24 @@ const url = require("url");
 const EventEmitter = require("events");
 const WebSocket = require("ws");
 module.exports = wsocket = new EventEmitter();
-let connections = {};
 
 module.exports = async function (server, client) {
   const collection = await client.db("auth").collection("users");
   const wss = new WebSocket.Server({ server });
 
   wss.on("connection", async function connection(ws, request) {
+    debugger;
     if (request.url.includes("unauthed-msg")) {
       debugger;
-      unauthedHandler({ ws, request, connections, collection });
+      unauthedHandler({ ws, request, collection });
     } else if (request.url.includes("authed-msg")) {
-      authedHandler({ request, connections, ws, collection });
+      authedHandler({ request, ws, collection });
     } else {
       throw "proper url for websocket not provided";
     }
   });
 };
-
+//
 /*
 const hangoutsHandler = require("../hangouts/wsocket");
 const { errorMonitor } = require("../app-monitor/wsocket");

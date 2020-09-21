@@ -4,6 +4,10 @@ describe("Test hangout with mocked backend", () => {
   beforeEach(() => {
     cy.viewport(1280, 720);
   });
+  it("websocket", () => {
+    cy.websocket();
+  });
+
   it("Invitation", () => {
     cy.invitation({ PORT: 3005 });
   });
