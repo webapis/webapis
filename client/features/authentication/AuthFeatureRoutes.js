@@ -4,7 +4,7 @@ import {
   lazy,
 } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/preact.combat.cdn.js";
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
-import { FeatureRoute, useAppRoute } from "components/app-route/index";
+import { useAppRoute } from "components/app-route/index";
 import { useAuth } from "./state/useAuth";
 const Login = lazy(() => import("./ui-components/Login"));
 const ChangePassword = lazy(() => import("./ui-components/ChangePassword"));
@@ -27,65 +27,59 @@ export default function AuthFeatureRoutes() {
     onAuthNavigation,
     state,
   } = useAuth();
-  const { onAppRoute, routeState } = useAppRoute();
-  const { featureRoute } = routeState;
+  const {
+    onAppRoute,
+    state: { featureRoute },
+  } = useAppRoute();
   switch (featureRoute) {
     case "/change-pasword":
       return html`
-        <${FeatureRoute} path="/change-pasword">
-          <${Suspense} fallback=${Loading}>
-            <${ChangePassword}
-              ...${state}
-              onFocus=${onFocus}
-              onBlur=${onChangePassBlur}
-              onChange=${onChange}
-              onPasswordChange=${onPasswordChange}
-            />
-          <//>
+        <${Suspense} fallback=${Loading}>
+          <${ChangePassword}
+            ...${state}
+            onFocus=${onFocus}
+            onBlur=${onChangePassBlur}
+            onChange=${onChange}
+            onPasswordChange=${onPasswordChange}
+          />
         <//>
       `;
     case "/login":
       return html`
-        <${FeatureRoute} path="/login">
-          <${Suspense} fallback=${Loading}>
-            <${Login}
-              ...${state}
-              onFocus=${onFocus}
-              onBlur=${onLoginBlur}
-              onChange=${onChange}
-              onLogin=${onLogin}
-              onAuthNavigation=${onAuthNavigation}
-            />
-          <//>
+        <${Suspense} fallback=${Loading}>
+          <${Login}
+            ...${state}
+            onFocus=${onFocus}
+            onBlur=${onLoginBlur}
+            onChange=${onChange}
+            onLogin=${onLogin}
+            onAuthNavigation=${onAuthNavigation}
+          />
         <//>
       `;
     case "/signup":
       return html`
-        <${FeatureRoute} path="/signup">
-          <${Suspense} fallback=${Loading}>
-            <${Signup}
-              ...${state}
-              onFocus=${onFocus}
-              onBlur=${onSignupBlur}
-              onChange=${onChange}
-              onSignup=${onSignup}
-              onAuthNavigation=${onAuthNavigation}
-            />
-          <//>
+        <${Suspense} fallback=${Loading}>
+          <${Signup}
+            ...${state}
+            onFocus=${onFocus}
+            onBlur=${onSignupBlur}
+            onChange=${onChange}
+            onSignup=${onSignup}
+            onAuthNavigation=${onAuthNavigation}
+          />
         <//>
       `;
     case "/forgot-pasword":
       return html`
-        <${FeatureRoute} path="/forgot-pasword">
-          <${Suspense} fallback=${Loading}>
-            <${ForgotPassword}
-              ...${state}
-              onFocus=${onFocus}
-              onBlur=${onRequestPassChangeBlur}
-              onChange=${onChange}
-              onRequestPasswordChange=${onRequestPasswordChange}
-            />
-          <//>
+        <${Suspense} fallback=${Loading}>
+          <${ForgotPassword}
+            ...${state}
+            onFocus=${onFocus}
+            onBlur=${onRequestPassChangeBlur}
+            onChange=${onChange}
+            onRequestPasswordChange=${onRequestPasswordChange}
+          />
         <//>
       `;
 

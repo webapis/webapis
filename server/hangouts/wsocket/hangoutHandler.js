@@ -48,7 +48,7 @@ module.exports = async function hangoutHandler({
         for (const browser of senderBrowsers) {
           const senderOnline =
             connections[`${senderUser.user.username}-${browser.browserId}`];
-          //
+
           if (senderOnline) {
             const msg = {
               data: {
@@ -83,7 +83,8 @@ module.exports = async function hangoutHandler({
     };
     await funcs.senderOnline();
     await funcs.targetOnline();
-    cb({
+    debugger;
+    await cb({
       target,
       sender,
       senderUserName: senderUser.user.username,

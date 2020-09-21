@@ -12,9 +12,9 @@ module.exports = async function (server, client) {
 
   wss.on("connection", async function connection(ws, request) {
     if (request.url.includes("unauthed-msg")) {
-      unauthedHandler({ ws, request, collection });
+      unauthedHandler({ ws, request });
     } else if (request.url.includes("authed-msg")) {
-      authedHandler({ request, ws, collection });
+      authedHandler({ request, ws });
     } else {
       throw "proper url for websocket not provided";
     }

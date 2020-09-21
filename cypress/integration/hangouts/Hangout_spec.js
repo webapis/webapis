@@ -58,7 +58,7 @@ describe("Test hangout with ws", () => {
 });
 
 describe("Test Hangout with ws and mongodb", () => {
-  it.skip("Invitation", () => {
+  it.only("Invitation", () => {
     cy.invitation({ PORT: 3006 });
   });
 });

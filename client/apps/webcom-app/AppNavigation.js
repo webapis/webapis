@@ -13,7 +13,7 @@ export function AppNavigation() {
   const { onSignOut, onAuthNavigation, state: authState } = useAuth();
   const { user } = authState;
 
-  const { state, funcs } = useHangouts();
+  const { state, funcs } = useHangouts({ user });
   const {
     hangout,
     socketConnected,
@@ -29,7 +29,7 @@ export function AppNavigation() {
       socketConnected=${socketConnected}
       authed=${user ? true : false}
       messageCounter=${unreadsCount}
-      username=${hangout && hangout.username}
+      username=${user && user.username}
       name=${user && user.username}
       onAuthNavigation=${onAuthNavigation}
       onHangoutNavigation=${onNavigation}

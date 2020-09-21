@@ -178,7 +178,7 @@ export function useAuth() {
     if (id === "signout") {
       onSignOut();
     } else {
-      onAppRoute({ featureRoute: `/${id}`, route: "/auth" });
+      onAppRoute({ featureRoute: `/${id}`, appRoute: "/auth" });
       dispatch({ type: actionTypes.RESET_AUTH_STATE });
     }
   }

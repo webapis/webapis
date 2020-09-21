@@ -27,9 +27,10 @@ export function RootProviders(props) {
           )}/authed-msg/?username=${user.username}&browserId=${browserId}`;
         }
         return html`
-          <${RTCMsgService} ...${props} url=${url} closeConnection=${signedout}
-            >${({ message, connectionState, sendMessage }) => {
+          <${RTCMsgService} ...${props} url=${url} closeConnection=${signedout}>
+            ${({ message, connectionState, sendMessage }) => {
               return html`<${HangoutsProvider}
+                authState=${{ user, browserId }}
                 ...${props}
                 message=${message}
                 sendMessage=${sendMessage}

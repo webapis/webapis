@@ -21,12 +21,12 @@ const HangoutsContainer = lazy(() => import("./ui-components/Hangouts"));
 const UnreadHangouts = lazy(() => import("./ui-components/UnreadHangouts"));
 const VideoCall = lazy(() => import("./ui-components/VideoCall"));
 const html = htm.bind(h);
-export default function HangoutsFeatureRoutes(props) {
+export default function HangoutsFeatureRoutes({ user }) {
   const {
     onAppRoute,
     state: { featureRoute },
   } = useAppRoute();
-  const { user } = props;
+
   const { state, funcs } = useHangouts({ user });
   const { hangout } = state;
   const { onUnreadSelect, onUnreadRemove, reducedUnreads } = useUnread({

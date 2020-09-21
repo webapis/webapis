@@ -1,15 +1,10 @@
 const { errorMonitor } = require("../app-monitor/wsocket");
 const { testWebSocket } = require("./testWebSocket");
 const hangoutsHandler = require("../hangouts/wsocket/hangoutHandler");
-const handlePersistance = require("../hangouts/wsocket/handlePersistance");
+const { handlePersistance } = require("../hangouts/wsocket/handlePersistance");
 const url = require("url");
 
-module.exports.unauthedHandler = async function ({
-  ws,
-  request,
-  connections,
-  collection,
-}) {
+module.exports.unauthedHandler = async function ({ ws, request, connections }) {
   //
   try {
     switch (true) {
@@ -28,7 +23,9 @@ module.exports.unauthedHandler = async function ({
       default:
         throw "No socket handler provided";
     }
-  } catch (error) {}
+  } catch (error) {
+    debugger;
+  }
 };
 
 function unAuthedHangoutApp({ ws, request, cb = () => {} }) {

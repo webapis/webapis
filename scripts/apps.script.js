@@ -112,6 +112,16 @@ const hangoutTestApps = [
     scriptName: "hg-ws-mg-dev",
     rtcUrl: hgwsmb.rtcUrl({ PORT: 3006 }),
   },
+  {
+    appName: "webcom-app",
+    outputAppName: "webcom-app",
+    rtc: "WEBSOCKET",
+    auth: "NODEJS",
+    env: "dev",
+    port: 3007,
+    scriptName: "webcom-dev",
+    rtcUrl: hgwsmb.rtcUrl({ PORT: 3007 }),
+  },
 ];
 const apps = [...hangoutTestApps];
 const appScripts = apps.reduce((a, c, i) => {
