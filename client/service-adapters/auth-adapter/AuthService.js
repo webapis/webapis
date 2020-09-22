@@ -5,52 +5,36 @@ import {
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 
 import NodeJsAuthService from "../../features/authentication/services/nodejs/NodejsAuthService";
+import AuthMockService from "../../apps/auth-app/AuthMockService";
 import AuthProvider from "../../features/authentication/state/AuthProvider";
 const html = htm.bind(h);
 export default function AuthService(props) {
-  return html`<${NodeJsAuthService}
-    >${({ signup, login, changepassword, requestpasswordchange }) => {
-      return html`<${AuthProvider}
-        ...${props}
-        signup=${signup}
-        login=${login}
-        changepassword=${changepassword}
-        requestpasswordchange=${requestpasswordchange}
-      />`;
-    }}
-  <//>`;
-
-  // switch (AUTH) {
-  //   case AUTH=== "NODEJS":
-  //     return html`<${NodeJsAuthService}
-  //       >${({ signup, login, changepassword, requestpasswordchange }) => {
-  //         return html`<${AuthProvider}
-  //           signup${signup}
-  //           login=${login}
-  //           changepassword=${changepassword}
-  //           requestpasswordchange=${requestpasswordchange}
-  //         />`;
-  //       }}
-  //     <//>`;
-  //   default:
-  //     return null;
-  // }
+  switch (AUTH) {
+    case "MOCK":
+      return html`<${AuthMockService}
+        >${({ signup, login, changepassword, requestpasswordchange }) => {
+          return html`<${AuthProvider}
+            ...${props}
+            signup=${signup}
+            login=${login}
+            changepassword=${changepassword}
+            requestpasswordchange=${requestpasswordchange}
+          />`;
+        }}
+      <//>`;
+    case "NODEJS":
+      return html`<${NodeJsAuthService}
+        >${({ signup, login, changepassword, requestpasswordchange }) => {
+          return html`<${AuthProvider}
+            ...${props}
+            signup=${signup}
+            login=${login}
+            changepassword=${changepassword}
+            requestpasswordchange=${requestpasswordchange}
+          />`;
+        }}
+      <//>`;
+    default:
+      throw "No Auth service provided";
+  }
 }
-
-/*
-html`<${AuthProvider}
-    ...${props}
-      signup${signup}
-      login=${login}
-      changepassword=${changepassword}
-      requestpasswordchange=${requestpasswordchange}
-    />`;
-*/
-
-/*
-html`<${NodeJsAuthService}
-  >${({ signup, login, changepassword, requestpasswordchange }) => {
-    return html `<div>${children}</div>`
-  }}
-<//>`
-*/

@@ -1,16 +1,7 @@
 import validationMessages from "../../../client/features/authentication/validation/validationMessages";
-
-describe("1_Signup_client_side_validation_spec", () => {
-  beforeEach(() => {
-    cy.window()
-      .its("localStorage")
-      .invoke("setItem", "browserId", JSON.stringify("1234567890"));
-    cy.visit("/");
-    cy.get("[data-testid=signup-link]").click();
-  });
-  //node, parse
-  //required
-  it.skip("user submits: empty username, email, password (onSubmit)", () => {
+describe("Client Side validation", () => {
+  it("user submits: empty username, email, password (onSubmit)", () => {
+    cy.visit("https://localhost:3008");
     cy.get("[data-testid=signup-link]").click();
     cy.get("[data-testid=signup-btn]").click();
     cy.get("[data-testid=message-username]").contains(
@@ -23,9 +14,8 @@ describe("1_Signup_client_side_validation_spec", () => {
       validationMessages.REQUIRED_FIELD
     );
   });
-  //node, parse
-  //required
-  it.skip("user input is: empty username, email, password (onBlur)", () => {
+
+  it("user input is: empty username, email, password (onBlur)", () => {
     cy.get("[data-testid=username]")
       .focus()
       .blur()
@@ -46,9 +36,8 @@ describe("1_Signup_client_side_validation_spec", () => {
       validationMessages.REQUIRED_FIELD
     );
   });
-  //node, parse
-  //invalid
-  it.skip("user input is:  invalid username,email, or week password (onBlur)", () => {
+
+  it("user input is:  invalid username,email, or week password (onBlur)", () => {
     cy.get("[data-testid=username]")
       .type("123")
       .blur()
@@ -69,9 +58,8 @@ describe("1_Signup_client_side_validation_spec", () => {
       validationMessages.INVALID_PASSWORD
     );
   });
-  //node, parse
-  //valid
-  it.only("user input is valid username,email, password (onBlur)", () => {
+
+  it("user input is valid username,email, password (onBlur)", () => {
     cy.get("[data-testid=username]")
       .type("testuser")
       .blur()
@@ -85,5 +73,31 @@ describe("1_Signup_client_side_validation_spec", () => {
     cy.get("[data-testid=message-username]").should("not.be.visible");
     cy.get("[data-testid=message-email]").should("not.be.visible");
     cy.get("[data-testid=message-password]").should("not.be.visible");
+  });
+});
+
+describe("Test server side validation with AuthMockSerive", () => {
+  beforeEach(() => {
+    cy.server();
+    cy.window()
+      .its("localStorage")
+      .invoke("setItem", "browserId", JSON.stringify("1234567890"));
+  });
+  it("client side JS disabled: user submmits empty fields", () => {
+    cy.emptyFields({ PORT: 3008 });
+  });
+
+  it("client side JS disabled: user submits invalid username,email, or week password", () => {
+    cy.invalidFields({ PORT: 3008 });
+  });
+
+  it("user enters taken username", () => {
+    cy.takenUserName({ PORT: 3008 });
+  });
+  it("user enters taken email", () => {
+    cy.takenEmail({ PORT: 3008 });
+  });
+  it("user enters taken email and username", () => {
+    cy.existingUser({ PORT: 3008 });
   });
 });

@@ -126,7 +126,7 @@ const hangoutTestApps = [
     appName: "auth-app",
     outputAppName: "auth-app",
     rtc: "NONE",
-    auth: "NODEJS",
+    auth: "MOCK",
     env: "dev",
     port: 3008,
     scriptName: "auth-dev",

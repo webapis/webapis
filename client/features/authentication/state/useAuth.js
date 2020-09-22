@@ -3,12 +3,7 @@ import { useAuthContext } from "./AuthProvider";
 import actionTypes from "./actionTypes";
 import * as cv from "../validation/constraintValidators";
 import { useAppRoute } from "components/app-route/index";
-import {
-  generateBrowserId,
-  saveBrowserIdToLocalStorage,
-  browserIdExists,
-  loadBrowserId,
-} from "../state/onBrowserId";
+
 export function useAuth() {
   const { state, dispatch } = useAuthContext();
 

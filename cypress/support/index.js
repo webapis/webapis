@@ -15,14 +15,18 @@
 
 // Import commands.js using ES2015 syntax:
 import "./commands";
-import "./loginByEmail";
-import "./parse/signup";
-import "./parse/createUser";
-import "./parse/loginByEmail";
-import "./parse/deleteUser";
-import "./auth/login";
-import "./auth/signup";
-import "./auth/signout";
+
+import "./auth/login/empyFields";
+import "./auth/login/invalidEmailorusername";
+import "./auth/login/nonexistentingUser";
+import "./auth/login/wrongPassword";
+
+import "./auth/signup/emptyFields";
+import "./auth/signup/existingUser";
+import "./auth/signup/invalidFields";
+import "./auth/signup/takenEmail";
+import "./auth/signup/takenUserName";
+
 import "./hangout/invitation";
 import "./hangout/block";
 import "./hangout/unblock";

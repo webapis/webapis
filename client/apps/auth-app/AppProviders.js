@@ -6,6 +6,7 @@ import {
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 import AppRouteProvider from "../../components/app-route/index";
 import AuthProvider from "../../features/authentication/state/AuthProvider";
+import AuthService from "../../service-adapters/auth-adapter/AuthService";
 const html = htm.bind(h);
 
 export default function AppProviders({ children }) {
@@ -13,10 +14,10 @@ export default function AppProviders({ children }) {
     title="Hangout"
     initState=${{ appRoute: "/auth", featureRoute: "/login" }}
   >
-    <${AuthProvider}>
+    <${AuthService}>
       ${({ user, signedout }) => {
         return children({ user, signedout });
-      }}<//
-    >
-  <//>`;
+      }}
+    <//></${AppRouteProvider}
+  >`;
 }
