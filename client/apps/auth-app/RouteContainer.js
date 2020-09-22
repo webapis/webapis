@@ -18,6 +18,12 @@ export default function RouteContainer({ user }) {
           <${AuthFeatureRoutes} user=${user} />
         <//>
       </div>`;
+    case "/home":
+      return html`<div style="height:70vh">
+        <${Suspense} fallback=${Loading}>
+          <div>Home</div>
+        <//>
+      </div>`;
   }
 }
 

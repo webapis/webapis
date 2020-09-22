@@ -12,7 +12,7 @@ const html = htm.bind(h);
 export default function AppProviders({ children }) {
   return html`<${AppRouteProvider}
     title="Hangout"
-    initState=${{ appRoute: "/auth", featureRoute: "/login" }}
+    initState=${{ appRoute: "/home", featureRoute: "/home" }}
   >
     <${AuthService}>
       ${({ user, signedout }) => {
