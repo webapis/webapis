@@ -35,6 +35,7 @@ export default [
   replace({
     RTC: JSON.stringify(process.env.RTC),
     AUTH: JSON.stringify(process.env.AUTH),
+    AUTH_URL: JSON.stringify(process.env.AUTH_URL),
     RTC_URL: JSON.stringify(process.env.RTC_URL),
   }),
   replace({

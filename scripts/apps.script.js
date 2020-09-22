@@ -10,7 +10,7 @@ const { crossEnv, series, concurrent } = require("nps-utils");
 //returns buildtime envs for rollup.js
 function clientEnv({ appName, outputAppName, rtc, rtcUrl, auth, env, port }) {
   return crossEnv(
-    `appName=${appName} outputAppName=${outputAppName} RTC=${rtc} RTC_URL=${rtcUrl} AUTH=${auth} NODE_ENV=${env} PORT=${port} `
+    `appName=${appName} outputAppName=${outputAppName} RTC=${rtc} RTC_URL=${rtcUrl} AUTH=${auth}  NODE_ENV=${env} PORT=${port} `
   );
 }
 // returns rintime envs for nodejs
@@ -124,12 +124,22 @@ const hangoutTestApps = [
   },
   {
     appName: "auth-app",
-    outputAppName: "auth-app",
+    outputAppName: "auth-mock-app",
     rtc: "NONE",
     auth: "MOCK",
     env: "dev",
     port: 3008,
-    scriptName: "auth-dev",
+    scriptName: "auth-mock-dev",
+    rtcUrl: "NONE",
+  },
+  {
+    appName: "auth-app",
+    outputAppName: "auth-nodejs-app",
+    rtc: "NONE",
+    auth: "NODEJS",
+    env: "dev",
+    port: 3009,
+    scriptName: "auth-nodejs-dev",
     rtcUrl: "NONE",
   },
 ];

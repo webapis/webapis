@@ -12,7 +12,6 @@ export default function NodejsAuthProvider(props) {
     email,
     password,
     browserId,
-    started,
     success,
     failed,
   }) {
@@ -30,21 +29,15 @@ export default function NodejsAuthProvider(props) {
         },
         method: "POST",
       });
-      const result = await response.json();
+      const { token, inputValErrorCodes } = await response.json();
+      const { status, ok } = response;
 
-      success({ result, response });
+      success({ token, inputValErrorCodes, ok, status });
     } catch (error) {
       failed(error);
     }
   }
-  async function login({
-    emailorusername,
-    password,
-    started,
-    success,
-    failed,
-    hasBrowserId,
-  }) {
+  async function login({ emailorusername, password, success, failed }) {
     try {
       const response = await fetch(`/auth/login`, {
         headers: {
@@ -56,12 +49,12 @@ export default function NodejsAuthProvider(props) {
         body: JSON.stringify({ hasBrowserId }),
       });
 
-      const result = await response.json();
+      const { token, inputValErrorCodes } = await response.json();
+      const { status, ok } = response;
 
-      success({ result, response });
+      success({ token, inputValErrorCodes, ok, status });
     } catch (error) {
       const err = error;
-
       failed(error);
     }
   }

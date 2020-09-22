@@ -38,15 +38,13 @@ module.exports = async function ({ req, res, collection }) {
 
         const { hash, salt, iterations } = passhash.hashPassword(password);
 
-        const userBrowserId =
-          browserId === null ? Date.now().toString() : browserId;
         const result = await collection.insertOne({
           hash,
           salt,
           iterations,
           email,
           username,
-          browsers: [{ browserId: userBrowserId }],
+          browsers: [{ browserId }],
         });
 
         const user = result.ops[0];

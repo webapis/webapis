@@ -113,13 +113,6 @@ module.exports = async function ({ req, res, collection }) {
               "Content-Type": "application/json",
               "Set-Cookie": `${user.username}=${token};Expires=Wed, 21 Oct 2025 07:28:00 GMT; Path=/authed-msg`,
             });
-            // res.write(
-            //   JSON.stringify({
-            //     token,
-            //     username: user.username,
-            //     email: user.email,
-            //   })
-            // );
 
             if (!hasBrowserId) {
               const browserId = Date.now().toString();
@@ -130,17 +123,12 @@ module.exports = async function ({ req, res, collection }) {
               res.write(
                 JSON.stringify({
                   token,
-                  username: user.username,
-                  email: user.email,
-                  browserId,
                 })
               );
             } else {
               res.write(
                 JSON.stringify({
                   token,
-                  username: user.username,
-                  email: user.email,
                 })
               );
             }

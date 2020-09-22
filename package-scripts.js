@@ -72,6 +72,7 @@ function defaultBrowser({ features, record, type }) {
 
 module.exports = {
   scripts: {
+    authdev: concurrent.nps("auth-mock-dev", "auth-nodejs-dev"),
     hgdev: concurrent.nps("hg-mock-dev", "hg-ws-dev", "ws-dev"),
     ...appScripts,
     storybook,

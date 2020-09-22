@@ -75,29 +75,32 @@ describe("Client Side validation", () => {
     cy.get("[data-testid=message-password]").should("not.be.visible");
   });
 });
+[3008, 3009].forEach((PORT) => {
+  describe(`Test server side validation with ${
+    PORT === 3008 ? "AuthMockSerive" : "AuthNodeJsService"
+  }`, () => {
+    beforeEach(() => {
+      cy.server();
+      cy.window()
+        .its("localStorage")
+        .invoke("setItem", "browserId", JSON.stringify("1234567890"));
+    });
+    it("client side JS disabled: user submmits empty fields", () => {
+      cy.emptyFields({ PORT });
+    });
 
-describe("Test server side validation with AuthMockSerive", () => {
-  beforeEach(() => {
-    cy.server();
-    cy.window()
-      .its("localStorage")
-      .invoke("setItem", "browserId", JSON.stringify("1234567890"));
-  });
-  it("client side JS disabled: user submmits empty fields", () => {
-    cy.emptyFields({ PORT: 3008 });
-  });
+    it("client side JS disabled: user submits invalid username,email, or week password", () => {
+      cy.invalidFields({ PORT });
+    });
 
-  it("client side JS disabled: user submits invalid username,email, or week password", () => {
-    cy.invalidFields({ PORT: 3008 });
-  });
-
-  it("user enters taken username", () => {
-    cy.takenUserName({ PORT: 3008 });
-  });
-  it("user enters taken email", () => {
-    cy.takenEmail({ PORT: 3008 });
-  });
-  it("user enters taken email and username", () => {
-    cy.existingUser({ PORT: 3008 });
+    it("user enters taken username", () => {
+      cy.takenUserName({ PORT });
+    });
+    it("user enters taken email", () => {
+      cy.takenEmail({ PORT });
+    });
+    it("user enters taken email and username", () => {
+      cy.existingUser({ PORT });
+    });
   });
 });
