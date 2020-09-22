@@ -33,25 +33,31 @@ describe("Client side login tests", () => {
     );
   });
 });
+[3008, 3009].forEach((PORT) => {
+  describe(`Login validation with ${
+    PORT === 3008 ? "AuthMockService" : "AuthNodeJsService"
+  }   `, () => {
+    beforeEach(() => {
+      cy.server();
 
-describe("Login validation with  AuthMockService ", () => {
-  beforeEach(() => {
-    cy.server();
-
-    Cypress.on("window:before:load", (win) => {
-      win.jsDisabled = true;
+      Cypress.on("window:before:load", (win) => {
+        win.jsDisabled = true;
+      });
+      cy.window()
+        .its("localStorage")
+        .invoke("setItem", "browserId", JSON.stringify("1234567899"));
     });
-  });
-  it("user submits: empty emailorusername or password (219) client JSDisabled", () => {
-    cy.emptyFields({ PORT: 3008 });
-  });
-  it("user submits: invalid emailorusername (218) client JSDisabled", () => {
-    cy.invalidEmailOrUsername({ PORT: 3008 });
-  });
-  it("user submits :non existent usernameoremail (212)", () => {
-    cy.noneExistingUser({ PORT: 3008 });
-  });
-  it("user submits: matching emailorusername and wrong password (212)", () => {
-    cy.wrongPassword({ PORT: 3008 });
+    it("user submits: empty emailorusername or password (219) client JSDisabled", () => {
+      cy.emptyFields({ PORT });
+    });
+    it("user submits: invalid emailorusername (218) client JSDisabled", () => {
+      cy.invalidEmailOrUsername({ PORT });
+    });
+    it("user submits :non existent usernameoremail (212)", () => {
+      cy.noneExistingUser({ PORT });
+    });
+    it("user submits: matching emailorusername and wrong password (212)", () => {
+      cy.wrongPassword({ PORT });
+    });
   });
 });

@@ -49,7 +49,11 @@ module.exports = async function ({ req, res, collection }) {
             "Content-Type": "application/json",
             "Set-Cookie": `${user.username}=${token};Expires=Wed, 21 Oct 2025 07:28:00 GMT;  Path=/authed-msg;`,
           });
-          if (!hasBrowserId) {
+          // check whether browserId exists
+          let browserIdExists =
+            user.browsers &&
+            user.browsers.some((b) => b.browserId === browserId);
+          if (!browserIdExists) {
             const browserId = Date.now().toString();
             const updateBrowsers = await collection.update(
               { username: user.username },
@@ -58,22 +62,17 @@ module.exports = async function ({ req, res, collection }) {
             res.write(
               JSON.stringify({
                 token,
-                username: user.username,
-                email: user.email,
-                browserId,
               })
             );
+            res.end();
           } else {
             res.write(
               JSON.stringify({
                 token,
-                username: user.username,
-                email: user.email,
               })
             );
+            res.end();
           }
-
-          res.end();
         } else {
           // invalid credential 401-------------------------------------
           errors.push(212);
@@ -113,8 +112,11 @@ module.exports = async function ({ req, res, collection }) {
               "Content-Type": "application/json",
               "Set-Cookie": `${user.username}=${token};Expires=Wed, 21 Oct 2025 07:28:00 GMT; Path=/authed-msg`,
             });
-
-            if (!hasBrowserId) {
+            // check whether browserId exists
+            let browserIdExists =
+              user.browsers &&
+              user.browsers.some((b) => b.browserId === browserId);
+            if (!browserIdExists) {
               const browserId = Date.now().toString();
               const updateBrowsers = await collection.update(
                 { username: user.username },
@@ -125,15 +127,15 @@ module.exports = async function ({ req, res, collection }) {
                   token,
                 })
               );
+              res.end();
             } else {
               res.write(
                 JSON.stringify({
                   token,
                 })
               );
+              res.end();
             }
-
-            res.end();
           } else {
             // invalid credential 401 ------------------------------------
             errors.push(212);

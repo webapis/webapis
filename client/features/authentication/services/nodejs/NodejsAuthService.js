@@ -37,7 +37,13 @@ export default function NodejsAuthProvider(props) {
       failed(error);
     }
   }
-  async function login({ emailorusername, password, success, failed }) {
+  async function login({
+    emailorusername,
+    password,
+    success,
+    failed,
+    browserId,
+  }) {
     try {
       const response = await fetch(`/auth/login`, {
         headers: {
@@ -46,7 +52,7 @@ export default function NodejsAuthProvider(props) {
           Authorization: `Basic ${btoa(`${emailorusername}:${password}`)}`,
         },
         method: "POST",
-        body: JSON.stringify({ hasBrowserId }),
+        body: JSON.stringify({ browserId }),
       });
 
       const { token, inputValErrorCodes } = await response.json();
