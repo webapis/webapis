@@ -4,6 +4,7 @@ import validationMessages from "../../../client/features/authentication/validati
   describe("Client side login tests", () => {
     it("user inputs: empty emailorusername or password (onBlur)", () => {
       cy.visit(`https://localhost:${PORT}`);
+      cy.get("[data-testid=login-link]").click();
       cy.get("[data-testid=emailorusername]").focus();
       cy.wait(500);
       cy.get("[data-testid=emailorusername]").blur();
@@ -59,6 +60,10 @@ import validationMessages from "../../../client/features/authentication/validati
     });
     it("user submits: matching emailorusername and wrong password (212)", () => {
       cy.wrongPassword({ PORT });
+    });
+
+    it("Successful Login", () => {
+      cy.successfulLogin({ PORT });
     });
   });
 });

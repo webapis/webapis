@@ -17,14 +17,14 @@ export default function RouteContainer() {
   const {
     state: { user },
   } = useAuth();
-  useEffect(() => {
-    if (user) {
-      debugger;
-      onAppRoute({ appRoute: "/home", featureRoute: "/home" });
-    } else {
-      onAppRoute({ appRoute: "/auth", featureRoute: "/login" });
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (user) {
+  //     debugger;
+  //     onAppRoute({ appRoute: "/home", featureRoute: "/home" });
+  //   } else {
+  //     onAppRoute({ appRoute: "/auth", featureRoute: "/login" });
+  //   }
+  // }, [user]);
   switch (appRoute) {
     case "/auth":
       return html`<div style="height:70vh">

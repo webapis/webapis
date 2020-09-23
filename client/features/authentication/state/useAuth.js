@@ -172,7 +172,7 @@ export function useAuth() {
   }
   function onAuthNavigation(e) {
     e.preventDefault();
-
+    debugger;
     const id = e.currentTarget.id;
     if (id === "signout") {
       onSignOut();

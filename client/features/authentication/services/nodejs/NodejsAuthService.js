@@ -57,10 +57,15 @@ export default function NodejsAuthProvider(props) {
         body: JSON.stringify({ browserId }),
       });
 
-      const { token, inputValErrorCodes } = await response.json();
+      const {
+        token,
+        inputValErrorCodes,
+        email,
+        username,
+      } = await response.json();
       const { status, ok } = response;
 
-      success({ token, inputValErrorCodes, ok, status });
+      success({ token, inputValErrorCodes, ok, status, email, username });
     } catch (error) {
       const err = error;
       failed(error);

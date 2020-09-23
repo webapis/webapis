@@ -106,5 +106,9 @@ describe("Client Side validation", () => {
     it("user enters taken email and username", () => {
       cy.existingUser({ PORT });
     });
+
+    it("successful signup", () => {
+      cy.successfulSignUp({ PORT });
+    });
   });
 });

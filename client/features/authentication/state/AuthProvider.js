@@ -87,7 +87,15 @@ export default function AuthProvider(props) {
       emailorusername,
       password,
       browserId,
-      success: ({ token, inputValErrorCodes, ok, status, serverError }) => {
+      success: ({
+        token,
+        username,
+        email,
+        inputValErrorCodes,
+        ok,
+        status,
+        serverError,
+      }) => {
         if (status === 200) {
           dispatch({
             type: actionTypes.LOGIN_SUCCESS,

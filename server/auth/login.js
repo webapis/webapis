@@ -62,6 +62,8 @@ module.exports = async function ({ req, res, collection }) {
             res.write(
               JSON.stringify({
                 token,
+                username: user.username,
+                email: user.email,
               })
             );
             res.end();
@@ -125,6 +127,8 @@ module.exports = async function ({ req, res, collection }) {
               res.write(
                 JSON.stringify({
                   token,
+                  username: user.username,
+                  email: user.email,
                 })
               );
               res.end();
@@ -132,6 +136,8 @@ module.exports = async function ({ req, res, collection }) {
               res.write(
                 JSON.stringify({
                   token,
+                  username: user.username,
+                  email: user.email,
                 })
               );
               res.end();

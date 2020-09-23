@@ -1,7 +1,7 @@
 import validationMessages from "../../../../client/features/authentication/validation/validationMessages";
 Cypress.Commands.add("noneExistingUser", ({ PORT }) => {
   cy.visit(`https://localhost:${PORT}`);
-
+  cy.get("[data-testid=login-link]").click();
   cy.route({
     url: "/mock/auth/login",
     status: 400,

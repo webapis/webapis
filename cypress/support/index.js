@@ -20,12 +20,14 @@ import "./auth/login/empyFields";
 import "./auth/login/invalidEmailorusername";
 import "./auth/login/nonexistentingUser";
 import "./auth/login/wrongPassword";
+import "./auth/login/successfulLogin";
 
 import "./auth/signup/emptyFields";
 import "./auth/signup/existingUser";
 import "./auth/signup/invalidFields";
 import "./auth/signup/takenEmail";
 import "./auth/signup/takenUserName";
+import "./auth/signup/successfulSignUp";
 
 import "./hangout/invitation";
 import "./hangout/block";
