@@ -8,9 +8,18 @@ const { crossEnv, series, concurrent } = require("nps-utils");
 //-env :client and server side: specfies prod, test, dev environment
 
 //returns buildtime envs for rollup.js
-function clientEnv({ appName, outputAppName, rtc, rtcUrl, auth, env, port }) {
+function clientEnv({
+  appName,
+  outputAppName,
+  rtc,
+  rtcUrl,
+  auth,
+  env,
+  port,
+  hangouts,
+}) {
   return crossEnv(
-    `appName=${appName} outputAppName=${outputAppName} RTC=${rtc} RTC_URL=${rtcUrl} AUTH=${auth}  NODE_ENV=${env} PORT=${port} `
+    `appName=${appName} outputAppName=${outputAppName} HANGOUTS=${hangouts} RTC=${rtc} RTC_URL=${rtcUrl} AUTH=${auth}  NODE_ENV=${env} PORT=${port} `
   );
 }
 // returns rintime envs for nodejs
@@ -55,6 +64,7 @@ function clientScript({
   rtcUrl,
   auth,
   port,
+  hangouts,
 }) {
   return {
     description: "client script",
@@ -66,6 +76,7 @@ function clientScript({
       env,
       port,
       rtcUrl,
+      hangouts,
     })}${clientCommands({
       env,
     })}`,
@@ -77,6 +88,7 @@ const hangoutTestApps = [
     outputAppName: "ws-app",
     rtc: "WEBSOCKET",
     auth: "NODEJS",
+    hangouts: "NONE",
     env: "dev",
     port: 3002,
     scriptName: "ws-dev",
@@ -87,6 +99,7 @@ const hangoutTestApps = [
     outputAppName: "hg-ws-app",
     rtc: "WEBSOCKET",
     auth: "NODEJS",
+    hangouts: "INCLUDE",
     env: "dev",
     port: 3004,
     scriptName: "hg-ws-dev",
@@ -97,6 +110,7 @@ const hangoutTestApps = [
     outputAppName: "hgmock-app",
     rtc: "MOCK",
     auth: "NODEJS",
+    hangouts: "INCLUDE",
     env: "dev",
     port: 3005,
     scriptName: "hg-mock-dev",
@@ -107,6 +121,7 @@ const hangoutTestApps = [
     outputAppName: "hg-ws-mg-app",
     rtc: "WEBSOCKET",
     auth: "NODEJS",
+    hangouts: "INCLUDE",
     env: "dev",
     port: 3006,
     scriptName: "hg-ws-mg-dev",
@@ -117,6 +132,7 @@ const hangoutTestApps = [
     outputAppName: "webcom-app",
     rtc: "WEBSOCKET",
     auth: "NODEJS",
+    hangouts: "INCLUDE",
     env: "dev",
     port: 3007,
     scriptName: "webcom-dev",
@@ -127,6 +143,7 @@ const hangoutTestApps = [
     outputAppName: "auth-mock-app",
     rtc: "NONE",
     auth: "MOCK",
+    hangouts: "NONE",
     env: "dev",
     port: 3008,
     scriptName: "auth-mock-dev",
@@ -137,6 +154,7 @@ const hangoutTestApps = [
     outputAppName: "auth-nodejs-app",
     rtc: "NONE",
     auth: "NODEJS",
+    hangouts: "NONE",
     env: "dev",
     port: 3009,
     scriptName: "auth-nodejs-dev",
@@ -156,6 +174,7 @@ const appScripts = apps.reduce((a, c, i) => {
         env: c.env,
         port: c.port,
         rtcUrl: c.rtcUrl,
+        hangouts: c.hangouts,
       }),
       [`${c.scriptName}_server`]: serverScript({
         appName: c.outputAppName,
@@ -179,6 +198,7 @@ const appScripts = apps.reduce((a, c, i) => {
         env: c.env,
         port: c.port,
         rtcUrl: c.rtcUrl,
+        hangouts: c.hangouts,
       }),
       [`${c.scriptName}_server`]: serverScript({
         appName: c.outputAppName,

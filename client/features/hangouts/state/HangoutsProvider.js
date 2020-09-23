@@ -14,6 +14,7 @@ import { useMessage } from "./message-hooks/useMessage";
 import { actionTypes } from "./actionTypes";
 import * as actions from "./actions";
 import { clientCommands } from "./clientCommands";
+import { loadBrowserId } from "../../authentication/state/AuthProvider";
 import {
   loadMessages,
   removeUnreads,
@@ -24,6 +25,7 @@ import {
   saveRecievedMessage,
   removeUnread,
 } from "./local-storage/common";
+import { useAuth } from "../../authentication/state/useAuth";
 //import { useAppRoute } from "./message-hooks/node_modules/components/app-route/index";
 import useClientCommands from "./useClientCommands";
 const html = htm.bind(h);
@@ -38,10 +40,12 @@ export function useHangoutContext() {
 }
 
 export default function HangoutsProvider(props) {
-  const { sendMessage, message, connectionState, authState } = props;
+  const {
+    state: { user },
+  } = useAuth();
+  const { sendMessage, message, connectionState } = props;
 
   //const { onAppRoute } = useAppRoute();
-  const { user, browserId } = authState;
 
   const [state, dispatch] = useReducer(reducer, initState);
   const {
@@ -62,14 +66,14 @@ export default function HangoutsProvider(props) {
     username: user && user.username,
     dispatch,
     focusedHangout: hangout,
-    browserId,
+    browserId: loadBrowserId(),
   });
   useClientCommands({
     state,
     dispatch,
     sendMessage,
     user,
-    browserId,
+    browserId: loadBrowserId(),
   });
 
   useEffect(() => {

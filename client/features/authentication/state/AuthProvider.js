@@ -72,7 +72,7 @@ export default function AuthProvider(props) {
 
   // useEffect(() => {
   //   if (user) {
-  //     debugger;
+  //
   //     onAppRoute({
   //       appRoute: authedRoute.appRoute,
   //       featureRoute: authedRoute.featureRoute,
@@ -152,7 +152,7 @@ export default function AuthProvider(props) {
             })
           );
         } else if (status > 200 && status < 500) {
-          //debugger;
+          //
           inputValErrorCodes.forEach((error) => {
             serverValidation({ status: error, dispatch });
           });

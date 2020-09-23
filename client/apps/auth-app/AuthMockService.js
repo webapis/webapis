@@ -19,7 +19,7 @@ export default function AuthMockService({ children }) {
       });
       const { token, inputValErrorCodes } = await response.json();
       const { status, ok } = response;
-      //debugger;
+      //
       success({ token, inputValErrorCodes, ok, status });
     } catch (error) {
       failed(error);

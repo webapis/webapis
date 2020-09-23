@@ -4,10 +4,11 @@ const html = htm.bind(h);
 import AuthService from "./auth-adapter/AuthService";
 import RtcMsgService from "./rtc-msg-adapter/RtcMsgService";
 import AppRouteProvider from "../components/app-route/index";
-export default function ServiceAdapter({ children }) {
+export default function ServiceAdapter(props) {
+  const { children } = props;
   return html`<${AppRouteProvider}>
     <${AuthService}>
-      <${RtcMsgService}>${children}<//>
+      <${RtcMsgService} ...${props}>${children}<//>
     <//>
   <//>`;
 }

@@ -37,6 +37,7 @@ export default [
     AUTH: JSON.stringify(process.env.AUTH),
     AUTH_URL: JSON.stringify(process.env.AUTH_URL),
     RTC_URL: JSON.stringify(process.env.RTC_URL),
+    HANGOUTS: JSON.stringify(process.env.HANGOUTS),
   }),
   replace({
     ip: JSON.stringify(process.env.ip),

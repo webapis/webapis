@@ -7,9 +7,24 @@ import {
 } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
 import { clientCommands } from "../../features/hangouts/state/clientCommands";
 import protocolSender from "./protocolSender";
-export default function RtcMockServer({ children }) {
-  const [message, setMessage] = useState(null);
+export default function RtcMockServer({
+  children,
+  sendMessage,
+  message,
+  connectionState,
+  setRtcUrl,
+}) {
+  return children({
+    message,
+    sendMessage,
+    connectionState: "open",
+    setRtcUrl,
+  });
+}
 
+export function RtcMockServerProvider({ children }) {
+  const [message, setMessage] = useState(null);
+  const [connectionState, setConnectionState] = useState("open");
   function sendMessage({ data, type }) {
     const {
       hangout: { timestamp, browserId, target, email, message },
@@ -258,13 +273,6 @@ export default function RtcMockServer({ children }) {
         throw "No client command provided";
     }
   }
-
   function setRtcUrl() {}
-
-  return children({
-    message,
-    sendMessage,
-    connectionState: "open",
-    setRtcUrl,
-  });
+  return children({ sendMessage, message, connectionState, setRtcUrl });
 }
