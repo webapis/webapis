@@ -17,9 +17,9 @@ const html = htm.bind(h);
 export const WebSocketContext = createContext();
 
 export default function WebSocketProvider(props) {
-  const { url, children, closeConnection } = props || {};
+  const { children, closeConnection } = props || {};
   const [state, dispatch] = useReducer(reducer, initState);
-  const { websocket, message, connectionState } = state;
+  const { websocket, message, connectionState, url } = state;
 
   useEffect(() => {
     if (closeConnection) {
@@ -61,6 +61,8 @@ export default function WebSocketProvider(props) {
   function sendMessage({ data, type }) {
     websocket.send(JSON.stringify({ data, type }));
   }
-
-  return children({ sendMessage, message, connectionState });
+  function setRtcUrl(url) {
+    dispatch({ type: actionTypes.URL_CHANGED, url });
+  }
+  return children({ sendMessage, message, connectionState, setRtcUrl });
 }

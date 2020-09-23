@@ -9,7 +9,7 @@ import {
   useEffect,
 } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
-import { reducer } from "./reducer";
+import { reducer, initState } from "./reducer";
 import { actionTypes } from "./actionTypes";
 const html = htm.bind(h);
 const AppRouteContext = createContext();
@@ -34,7 +34,6 @@ export function useAppRoute() {
 }
 
 export default function AppRouteProvider(props) {
-  const { initState } = props;
   const [state, dispatch] = useReducer(reducer, initState);
 
   useEffect(() => {

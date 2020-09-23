@@ -25,10 +25,7 @@ export default function HangoutClient({
   const { user } = authState;
 
   return html`<div>
-    <${AppRouteProvider}
-      title="Hangout"
-      initState=${{ appRoute: "/hangouts", featureRoute: "/hangout" }}
-    >
+    <${AppRouteProvider}>
       <${HangoutProvider}
         authState=${authState}
         sendMessage=${sendMessage}

@@ -1,11 +1,11 @@
 const userInputValidation = require("./validations/userInputValidation");
 const passhash = require("../../server/auth/hashPassword");
 const jwt = require("jsonwebtoken");
-//
+
 module.exports = async function ({ req, res, collection }) {
   try {
     let errors = [];
-
+    debugger;
     let { username, email, password, browserId } = req.body;
 
     if (userInputValidation.signupConstraints({ username, email, password })) {
@@ -16,7 +16,7 @@ module.exports = async function ({ req, res, collection }) {
       });
       res.statusCode = 400;
       res.writeHead(400, { "Content-Type": "application/json" });
-      res.write(JSON.stringify({ errors }));
+      res.write(JSON.stringify({ inputValErrorCodes: errors }));
       res.end();
     } else {
       await userInputValidation.userValidation(
@@ -31,7 +31,7 @@ module.exports = async function ({ req, res, collection }) {
       if (errors.length > 0) {
         res.statussCode = 400;
         res.writeHead(400, { "Content-Type": "application/json" });
-        res.write(JSON.stringify({ errors }));
+        res.write(JSON.stringify({ inputValErrorCodes: errors }));
         res.end();
       } else {
         //successful signup-------------------------------------
@@ -59,18 +59,15 @@ module.exports = async function ({ req, res, collection }) {
           "Content-Type": "application/json",
           "Set-Cookie": `${user.username}=${token};Expires=Wed, 21 Oct 2025 07:28:00 GMT; Path=/authed-msg;`,
         });
-        res.write(
-          JSON.stringify({ token, email, username, browserId: userBrowserId })
-        );
+        res.write(JSON.stringify({ token }));
         res.end();
       }
-    }
+    } //
   } catch (error) {
     const err = error;
-
+    debugger;
     res.writeHead(500, { "Content-Type": "application/json" });
-    res.write(JSON.stringify({ error }));
+    res.write(JSON.stringify({ serverError: error }));
     res.end();
   }
 };
-//

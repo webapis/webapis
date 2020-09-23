@@ -10,8 +10,8 @@ module.exports = async function ({ req, res, collection }) {
 
     let { emailorusername, password } = authHeader.getCredentials(req);
 
-    let { hasBrowserId } = req.body;
-
+    let { browserId } = req.body;
+    //
     let errors = [];
     if (
       userInputValidation.loginFirstConstraints({ emailorusername, password })
@@ -22,7 +22,7 @@ module.exports = async function ({ req, res, collection }) {
       });
       res.statusCode = 400;
       res.writeHead(400, { "Content-Type": "application/json" });
-      res.write(JSON.stringify({ errors }));
+      res.write(JSON.stringify({ inputValErrorCodes: errors }));
       res.end();
     } else {
       //is email
@@ -77,7 +77,7 @@ module.exports = async function ({ req, res, collection }) {
           // invalid credential 401-------------------------------------
           errors.push(212);
           res.writeHead(400, { "Content-Type": "application/json" });
-          res.write(JSON.stringify({ errors }));
+          res.write(JSON.stringify({ inputValErrorCodes: errors }));
           res.end();
         }
       } else {
@@ -88,7 +88,7 @@ module.exports = async function ({ req, res, collection }) {
           // username is not registered 411  ------------------------------
           errors.push(212);
           res.writeHead(400, { "Content-Type": "application/json" });
-          res.write(JSON.stringify({ errors }));
+          res.write(JSON.stringify({ inputValErrorCodes: errors }));
           res.end();
         } else {
           resBcrypt = passhash.isPasswordCorrect(
@@ -140,7 +140,7 @@ module.exports = async function ({ req, res, collection }) {
             // invalid credential 401 ------------------------------------
             errors.push(212);
             res.writeHead(400, { "Content-Type": "application/json" });
-            res.write(JSON.stringify({ errors }));
+            res.write(JSON.stringify({ inputValErrorCodes: errors }));
             res.end();
           }
         }

@@ -7,7 +7,7 @@ import {
 } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
 import { clientCommands } from "../../features/hangouts/state/clientCommands";
 import protocolSender from "./protocolSender";
-export default function HangoutServer({ children }) {
+export default function RtcMockServer({ children }) {
   const [message, setMessage] = useState(null);
 
   function sendMessage({ data, type }) {
@@ -259,9 +259,12 @@ export default function HangoutServer({ children }) {
     }
   }
 
+  function setRtcUrl() {}
+
   return children({
     message,
     sendMessage,
     connectionState: "open",
+    setRtcUrl,
   });
 }

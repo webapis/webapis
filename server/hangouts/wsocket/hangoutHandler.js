@@ -83,7 +83,7 @@ module.exports = async function hangoutHandler({
     };
     await funcs.senderOnline();
     await funcs.targetOnline();
-    debugger;
+
     await cb({
       target,
       sender,

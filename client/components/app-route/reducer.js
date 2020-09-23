@@ -1,5 +1,8 @@
 import { actionTypes } from "./actionTypes";
-
+export const initState = {
+  appRoute: "/",
+  featureRoute: "/",
+};
 export function reducer(state, action) {
   switch (action.type) {
     case actionTypes.APP_ROUTE_CHANGED:

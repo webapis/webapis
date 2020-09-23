@@ -4,10 +4,13 @@ export const initState = {
   websocket: null,
   connectionState: null,
   error: null,
+  url: null,
 };
 
 export default function reducer(state, action) {
   switch (action.type) {
+    case actionTypes.URL_CHANGED:
+      return { ...state, url: action.url };
     case actionTypes.CLOSED_WEBSOCKET:
       return initState;
     case actionTypes.SOCKET_ERROR:

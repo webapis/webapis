@@ -7,7 +7,7 @@ Cypress.Commands.add("invalidFields", ({ PORT }) => {
 
   cy.get("[data-testid=signup-link]").click();
   cy.route({
-    url: "/auth/signup",
+    url: "/mock/auth/signup",
     method: "post",
     status: 400,
     response: { inputValErrorCodes: [210, 211, 209] },

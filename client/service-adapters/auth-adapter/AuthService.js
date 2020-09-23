@@ -23,7 +23,7 @@ export default function AuthService(props) {
         }}
       <//>`;
     case "NODEJS":
-      debugger;
+      // debugger;
       return html`<${NodeJsAuthService}
         >${({ signup, login, changepassword, requestpasswordchange }) => {
           return html`<${AuthProvider}
@@ -35,6 +35,8 @@ export default function AuthService(props) {
           />`;
         }}
       <//>`;
+    case "NONE":
+      return html`<div ...${props} />`;
     default:
       throw "No Auth service provided";
   }

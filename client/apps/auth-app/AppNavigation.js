@@ -3,6 +3,7 @@ import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js"
 import { useMediaQuery } from "../../components/layout/useMediaQuery";
 const html = htm.bind(h);
 export default function AppNavigation({
+  user,
   username,
   authed,
   onAuthNavigation,
@@ -30,7 +31,7 @@ export default function AppNavigation({
     <div class="collapse navbar-collapse" id="webcom">
       <ul class="navbar-nav mr-auto"></ul>
       <form class="form-inline my-2 my-lg-0">
-        ${authed &&
+        ${user &&
         html`
           <button
             id="profile"
@@ -42,7 +43,7 @@ export default function AppNavigation({
             ${username}, signed in
           </button>
         `}
-        ${authed &&
+        ${user &&
         html`
           <button
             id="signout"
@@ -54,7 +55,7 @@ export default function AppNavigation({
             <${SignoutIcon} />
           </button>
         `}
-        ${!authed &&
+        ${!user &&
         html`<button
           id="signup"
           data-testid="signup-link"
@@ -64,7 +65,7 @@ export default function AppNavigation({
         >
           Signup
         </button> `}
-        ${!authed &&
+        ${!user &&
         html`
           <button
             id="login"

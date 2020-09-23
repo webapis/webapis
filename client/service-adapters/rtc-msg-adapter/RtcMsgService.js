@@ -2,22 +2,39 @@ import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.m
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 //import { ParseServer } from "./parse/ParseServer";
 import WebSocketProvider from "../../features/websocket/WebSocketProvider";
-import HangoutServer from "../../apps/hangout-app/HangoutServer";
+import RtcMockServer from "../../apps/hangout-app/RtcMockServer";
+import RtcMsgConsumers from "./RtcMsgConsumers";
 const html = htm.bind(h);
 export default function RtcMsgService(props) {
   const { children, url } = props;
   switch (RTC) {
     case "WEBSOCKET":
       return html`<${WebSocketProvider} ...${props}
-        >${({ sendMessage, message, connectionState }) => {
-          return children({ message, sendMessage, connectionState, url });
+        >${({ sendMessage, message, connectionState, setRtcUrl }) => {
+          return html`<${RtcMsgConsumers}
+            connectionState=${connectionState}
+            message=${message}
+            sendMessage=${sendMessage}
+            setRtcUrl=${setRtcUrl}
+            ...${props}
+          />`;
         }}<//
       >`;
     case "MOCK":
-      return html`<${HangoutServer} ...${props}
-        >${({ sendMessage, message, connectionState }) => {
-          return children({ message, sendMessage, connectionState, url });
+      return html`<${RtcMockServer} ...${props}
+        >${({ sendMessage, message, connectionState, setRtcUrl }) => {
+          return html`<${RtcMsgConsumers}
+            connectionState=${connectionState}
+            message=${message}
+            sendMessage=${sendMessage}
+            setRtcUrl=${setRtcUrl}
+            ...${props}
+          />`;
         }}<//
       >`;
+    case "NONE":
+      return html`<div ...${props} />`;
+    default:
+      throw "No RTCService";
   }
 }

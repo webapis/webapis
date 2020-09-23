@@ -10,10 +10,17 @@ import RouteContainer from "./RouteContainer";
 import { useAuth } from "../../features/authentication/state/useAuth";
 const html = htm.bind(h);
 
-export default function App({ user }) {
-  const { onAuthNavigation } = useAuth();
+export default function App() {
+  const {
+    onAuthNavigation,
+    state: { user },
+  } = useAuth();
   return html`<div>
-    <${AppNavigation} user=${user} onAuthNavigation=${onAuthNavigation} />
-    <${RouteContainer} user=${user} />
+    <${AppNavigation}
+      user=${user}
+      username=${user && user.username}
+      onAuthNavigation=${onAuthNavigation}
+    />
+    <${RouteContainer} />
   </div>`;
 }

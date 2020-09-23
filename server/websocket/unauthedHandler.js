@@ -10,7 +10,6 @@ module.exports.unauthedHandler = async function ({ ws, request, connections }) {
     switch (true) {
       case request.url.includes("hangout-app"):
         if (request.url.includes("mongodb")) {
-          debugger;
           unAuthedHangoutApp({ ws, request, cb: handlePersistance });
         } else {
           unAuthedHangoutApp({ ws, request });
@@ -23,9 +22,7 @@ module.exports.unauthedHandler = async function ({ ws, request, connections }) {
       default:
         throw "No socket handler provided";
     }
-  } catch (error) {
-    debugger;
-  }
+  } catch (error) {}
 };
 
 function unAuthedHangoutApp({ ws, request, cb = () => {} }) {

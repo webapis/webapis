@@ -34,7 +34,6 @@ export function useAuthContext() {
 export default function AuthProvider(props) {
   const {
     children,
-    authedRoute,
     login,
     signup,
     changepassword,
@@ -71,16 +70,17 @@ export default function AuthProvider(props) {
     }
   }, [loginStarted]);
 
-  useEffect(() => {
-    if (user) {
-      onAppRoute({
-        route: authedRoute.route,
-        featureRoute: authedRoute.featureRoute,
-      });
-    } else {
-      onAppRoute({ appRoute: "/auth", featureRoute: "/login" });
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (user) {
+  //     debugger;
+  //     onAppRoute({
+  //       appRoute: authedRoute.appRoute,
+  //       featureRoute: authedRoute.featureRoute,
+  //     });
+  //   } else {
+  //     onAppRoute({ appRoute: "/auth", featureRoute: "/login" });
+  //   }
+  // }, [user]);
   function handleLogin({ emailorusername, password }) {
     const browserId = loadBrowserId();
     login({
@@ -154,7 +154,7 @@ export default function AuthProvider(props) {
             type: actionTypes.SERVER_ERROR_RECIEVED,
             error: serverError,
           });
-          dispatch({ type: actionTypes.SIGNUP_FAILED });
+          dispatch({ type: actionTypes.SIGNUP_FAILED, error: serverError });
         }
       },
       failed: (error) => {
@@ -164,7 +164,7 @@ export default function AuthProvider(props) {
   }
   return html`
     <${AuthContext.Provider} value=${value} ...${props}>
-      ${children({ user, signedout })}
+      ${children}
     <//>
   `;
 }

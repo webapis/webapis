@@ -5,7 +5,7 @@ Cypress.Commands.add("emptyFields", ({ PORT }) => {
     win.jsDisabled = true;
   });
   cy.route({
-    url: "/auth/signup",
+    url: "/mock/auth/signup",
     method: "post",
     status: 400,
     response: { inputValErrorCodes: [205, 207, 208] },

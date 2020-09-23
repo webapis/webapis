@@ -1,10 +1,15 @@
 import validationMessages from "../../../../client/features/authentication/validation/validationMessages";
 Cypress.Commands.add("takenUserName", ({ PORT }) => {
+  cy.task("seed:user", {
+    email: "testuserone@gmail.com",
+    username: "testuser",
+    password: "TestPassword!22s",
+  });
   cy.visit(`https://localhost:${PORT}`);
 
   cy.get("[data-testid=signup-link]").click();
   cy.route({
-    url: "/auth/signup",
+    url: "/mock/auth/signup",
     method: "post",
     status: 400,
     response: { inputValErrorCodes: [213] },

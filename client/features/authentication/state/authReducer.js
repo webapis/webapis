@@ -77,6 +77,7 @@ export function authReducer(state, action) {
         loading: false,
         loginStarted: false,
         authStarted: false,
+        error: action.error,
       };
     case actionTypes.SIGNUP_STARTED:
       return {
@@ -100,6 +101,7 @@ export function authReducer(state, action) {
         loading: false,
         signupStarted: false,
         authStarted: false,
+        error: action.error,
       };
     case actionTypes.CHANGE_PASSWORD_STARTED:
       return { ...state, loading: true, changePasswordStared: true };

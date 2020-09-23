@@ -11,7 +11,6 @@ module.exports.handlePersistance = async function ({
   connections,
 }) {
   try {
-    debugger;
     const client = await new MongoClient(url, { useUnifiedTopology: true });
     await client.connect();
     const collection = await client.db("auth").collection("users");
@@ -21,7 +20,7 @@ module.exports.handlePersistance = async function ({
     const senderBrowsers = senderUser.browsers;
     const targetUser = await collection.findOne({ username });
     const targetBrowsers = targetUser.browsers;
-    debugger;
+
     let funcs = {
       senderOffline: async function () {
         for (const browser of senderBrowsers) {
@@ -36,10 +35,9 @@ module.exports.handlePersistance = async function ({
                 upsert: true,
               }
             );
-            debugger;
+
             //assert.equal(1, 2);
             if (process.env.NODE_ENV === "dev") {
-              debugger;
               //assert.equal(1, 2);
             }
             //  console.log('NODE_ENV',process.env.NODE_ENV)
@@ -133,11 +131,11 @@ module.exports.handlePersistance = async function ({
       // pullSenderAllUnreads: async function () {},
       // pullTargetAllUnreads: async function () {},
     };
-    debugger;
+
     switch (hangout.command) {
       case "INVITE": //------------------------------------
         //SENDER
-        debugger;
+
         funcs.pushSenderHangout(); //INVITED
         funcs.senderOffline();
         //TARGET
@@ -214,7 +212,6 @@ module.exports.handlePersistance = async function ({
         throw "hangout.command not specified";
     }
   } catch (error) {
-    debugger;
     const err = error;
   }
 };

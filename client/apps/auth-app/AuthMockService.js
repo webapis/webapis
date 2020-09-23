@@ -13,7 +13,7 @@ export default function AuthMockService({ children }) {
     failed,
   }) {
     try {
-      const response = await fetch("/auth/signup", {
+      const response = await fetch("/mock/auth/signup", {
         method: "POST",
         body: JSON.stringify({ username, email, password }),
       });
@@ -33,7 +33,7 @@ export default function AuthMockService({ children }) {
     browserId,
   }) {
     try {
-      const response = await fetch(`/auth/login`, {
+      const response = await fetch(`/mock/auth/login`, {
         headers: {
           "Conten-Type": "application/json",
           "Access-Control-Allow-Headers": "*",

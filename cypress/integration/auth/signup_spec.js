@@ -1,7 +1,7 @@
 import validationMessages from "../../../client/features/authentication/validation/validationMessages";
 describe("Client Side validation", () => {
   it("user submits: empty username, email, password (onSubmit)", () => {
-    cy.visit("https://localhost:3008");
+    cy.visit("https://localhost:3009");
     cy.get("[data-testid=signup-link]").click();
     cy.get("[data-testid=signup-btn]").click();
     cy.get("[data-testid=message-username]").contains(
@@ -80,6 +80,10 @@ describe("Client Side validation", () => {
     PORT === 3008 ? "AuthMockSerive" : "AuthNodeJsService"
   }`, () => {
     beforeEach(() => {
+      cy.task("seed:deleteCollection", {
+        dbName: "auth",
+        collectionName: "users",
+      });
       cy.server();
       cy.window()
         .its("localStorage")

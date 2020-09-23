@@ -3,7 +3,7 @@ Cypress.Commands.add("emptyFields", ({ PORT }) => {
   cy.visit(`https://localhost:${PORT}`);
 
   cy.route({
-    url: "/auth/login",
+    url: "/mock/auth/login",
     status: 400,
     response: { inputValErrorCodes: [219] },
     method: "post",

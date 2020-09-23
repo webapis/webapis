@@ -2,7 +2,7 @@ import validationMessages from "../../../../client/features/authentication/valid
 Cypress.Commands.add("invalidEmailOrUsername", ({ PORT }) => {
   cy.visit(`https://localhost:${PORT}`);
   cy.route({
-    url: "/auth/login",
+    url: "/mock/auth/login",
     status: 400,
     response: { inputValErrorCodes: [218] },
     method: "POST",

@@ -16,6 +16,7 @@ export default function NodejsAuthProvider(props) {
     failed,
   }) {
     try {
+      debugger;
       const response = await fetch(`/auth/signup`, {
         body: JSON.stringify({
           password,
@@ -31,9 +32,10 @@ export default function NodejsAuthProvider(props) {
       });
       const { token, inputValErrorCodes } = await response.json();
       const { status, ok } = response;
-
+      debugger;
       success({ token, inputValErrorCodes, ok, status });
     } catch (error) {
+      debugger;
       failed(error);
     }
   }
