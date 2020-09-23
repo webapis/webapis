@@ -22,9 +22,15 @@ export default function HangoutClient({
   target,
 }) {
   const { user } = authState;
-
-  return html`<div>
-    <${ServiceAdapter}
+  if (RTC === "WEBSOCKET") {
+    return html`<div>
+      <${ServiceAdapter}>
+        <${NavigationContainer} user=${user} />
+        <${RouteContainer} user=${user} />
+      <//>
+    </div>`;
+  } else if (RTC === "MOCK") {
+    return html`<${ServiceAdapter}
       authState=${authState}
       sendMessage=${sendMessage}
       message=${message}
@@ -32,6 +38,8 @@ export default function HangoutClient({
     >
       <${NavigationContainer} user=${user} />
       <${RouteContainer} user=${user} />
-    <//>
-  </div>`;
+    <//>`;
+  } else {
+    throw "RTC for HangoutCLient not specified";
+  }
 }
