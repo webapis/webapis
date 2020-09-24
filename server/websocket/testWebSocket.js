@@ -5,11 +5,9 @@ module.exports.testWebSocket = async function ({
   sender,
 }) {
   try {
-    //const socket = connections[target];//
-    //
     ws.on("message", (socketMessage) => {
       const { data } = JSON.parse(socketMessage);
-
+      debugger;
       ws.send(
         JSON.stringify({
           data,

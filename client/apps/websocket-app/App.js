@@ -10,7 +10,8 @@ const start = "true";
 export default function App() {
   return html`
     <div class="row">
-      <${WebSocketProvider} url=${`${RTC_URL}/${start}`}
+      <${WebSocketProvider}
+        socketUrl=${`wss://localhost:${PORT}/unauthed-msg/websocket-app`}
         >${({ sendMessage, message, connectionState }) => {
           return html`
             <div class="col" data-testid="beroclient">

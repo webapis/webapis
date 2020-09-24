@@ -2,7 +2,7 @@ import infoMessages from "../../../client/features/hangouts/ui-components/infoMe
 import testProtocols from "./testProtocols";
 
 describe("Test websocket", () => {
-  it.skip("websocket", () => {
+  it("websocket", () => {
     cy.websocket();
   });
 });
@@ -45,30 +45,3 @@ describe("Test websocket", () => {
     });
   });
 });
-
-// describe("Test hangout with ws", () => {
-//   it("Invitation", () => {
-//     cy.invitation({ PORT: 3004 });
-//   });
-//   it("Block user from sending message", () => {
-//     cy.block({ PORT: 3004 });
-//   });
-
-//   it("Unblock user ", () => {
-//     cy.unblock({ PORT: 3004 });
-//   });
-
-//   it("decline invitation", () => {
-//     cy.decline({ PORT: 3004 });
-//   });
-
-//   it("bero undeclines invitation", () => {
-//     cy.undecline({ PORT: 3004 });
-//   });
-// });
-
-// describe("Test Hangout with ws and mongodb", () => {
-//   it.only("Invitation", () => {
-//     cy.invitation({ PORT: 3006 });
-//   });
-// });
