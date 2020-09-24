@@ -2,15 +2,15 @@ import infoMessages from "../../../client/features/hangouts/ui-components/infoMe
 import testProtocols from "./testProtocols";
 
 describe("Test websocket", () => {
-  it("websocket", () => {
+  it.skip("websocket", () => {
     cy.websocket();
   });
 });
-[3004].forEach((PORT) => {
+[3005, 3004].forEach((PORT) => {
   let backend = null;
-  if (PORT === 3004) {
+  if (PORT === 3005) {
     backend = "RtcMock";
-  } else if (PORT === 3005) {
+  } else if (PORT === 3004) {
     backend = "RtcWs";
   } else {
     backend = "RtcWsMongo";
@@ -20,7 +20,7 @@ describe("Test websocket", () => {
       cy.viewport(1280, 720);
     });
 
-    it.only("Invitation", () => {
+    it("Invitation", () => {
       cy.invitation({ PORT });
     });
 

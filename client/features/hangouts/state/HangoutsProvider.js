@@ -25,7 +25,7 @@ import {
   saveRecievedMessage,
   removeUnread,
 } from "./local-storage/common";
-import { useAuth } from "../../authentication/state/useAuth";
+
 //import { useAppRoute } from "./message-hooks/node_modules/components/app-route/index";
 import useClientCommands from "./useClientCommands";
 const html = htm.bind(h);
@@ -40,12 +40,7 @@ export function useHangoutContext() {
 }
 
 export default function HangoutsProvider(props) {
-  const {
-    state: { user },
-  } = useAuth();
-  const { sendMessage, message, connectionState } = props;
-
-  //const { onAppRoute } = useAppRoute();
+  const { sendMessage, message, connectionState, user } = props;
 
   const [state, dispatch] = useReducer(reducer, initState);
   const {

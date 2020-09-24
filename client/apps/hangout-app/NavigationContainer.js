@@ -18,11 +18,11 @@ const html = htm.bind(h);
 export default function NavigationContainer({ user }) {
   const { onNavigation } = useHangoutNav({ user });
   const {
-    state: { unreadsCount },
+    state: { unreadsCount, socketConnected },
   } = useHangouts({ user });
   return html`
     <${Navigation}
-      socketConnected=${true}
+      socketConnected=${socketConnected}
       authed=${true}
       messageCounter=${unreadsCount}
       username=${user.username}

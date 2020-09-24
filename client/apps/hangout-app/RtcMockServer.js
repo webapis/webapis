@@ -7,24 +7,31 @@ import {
 } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
 import { clientCommands } from "../../features/hangouts/state/clientCommands";
 import protocolSender from "./protocolSender";
-export default function RtcMockServer({
-  children,
-  sendMessage,
-  message,
-  connectionState,
-  setRtcUrl,
-}) {
-  return children({
-    message,
-    sendMessage,
-    connectionState: "open",
-    setRtcUrl,
-  });
-}
-
-export function RtcMockServerProvider({ children }) {
+export default function RtcMockServer({ children, user }) {
   const [message, setMessage] = useState(null);
   const [connectionState, setConnectionState] = useState("open");
+
+  useEffect(() => {
+    if (user) {
+      const username = user.username;
+
+      window.addEventListener(username, function (e) {
+        const { message: remoteMessage } = e.detail;
+        setMessage(remoteMessage);
+        console.log(`${username},recieved event issssss:`, e.detail);
+      });
+    }
+  }, [user]);
+  function dispatchMessage(message) {
+    const targetUsername =
+      user.username === "demouser" ? "berouser" : "demouser";
+    var event = new CustomEvent(targetUsername, {
+      detail: {
+        message,
+      },
+    });
+    window.dispatchEvent(event);
+  }
   function sendMessage({ data, type }) {
     const {
       hangout: { timestamp, browserId, target, email, message },
@@ -50,7 +57,7 @@ export function RtcMockServerProvider({ children }) {
         });
 
         setTimeout(() => {
-          setMessage({
+          const remoteMessage = {
             data: {
               type: "HANGOUT",
               hangout: {
@@ -63,7 +70,8 @@ export function RtcMockServerProvider({ children }) {
               sender,
             },
             type: "HANGOUT",
-          });
+          };
+          dispatchMessage(remoteMessage);
         }, 500);
         break;
       case clientCommands.ACCEPT:
@@ -84,7 +92,7 @@ export function RtcMockServerProvider({ children }) {
         });
 
         setTimeout(() => {
-          setMessage({
+          let remoteMessage = {
             data: {
               type: "HANGOUT",
               hangout: {
@@ -97,7 +105,8 @@ export function RtcMockServerProvider({ children }) {
               sender,
             },
             type: "HANGOUT",
-          });
+          };
+          dispatchMessage(remoteMessage);
         }, 500);
         break;
       case clientCommands.DECLINE:
@@ -151,7 +160,7 @@ export function RtcMockServerProvider({ children }) {
         });
 
         setTimeout(() => {
-          setMessage({
+          let remoteMessage = {
             data: {
               type: "HANGOUT",
               hangout: {
@@ -164,7 +173,8 @@ export function RtcMockServerProvider({ children }) {
               sender,
             },
             type: "HANGOUT",
-          });
+          };
+          dispatchMessage(remoteMessage);
         }, 500);
         break;
       case clientCommands.UNBLOCK:
@@ -185,7 +195,7 @@ export function RtcMockServerProvider({ children }) {
         });
 
         setTimeout(() => {
-          setMessage({
+          let remoteMessage = {
             data: {
               type: "HANGOUT",
               hangout: {
@@ -198,7 +208,8 @@ export function RtcMockServerProvider({ children }) {
               sender,
             },
             type: "HANGOUT",
-          });
+          };
+          dispatchMessage(remoteMessage);
         }, 500);
         break;
       case clientCommands.UNDECLINE:
@@ -219,7 +230,7 @@ export function RtcMockServerProvider({ children }) {
         });
 
         setTimeout(() => {
-          setMessage({
+          let remoteMessage = {
             data: {
               type: "HANGOUT",
               hangout: {
@@ -232,7 +243,8 @@ export function RtcMockServerProvider({ children }) {
               sender,
             },
             type: "HANGOUT",
-          });
+          };
+          dispatchMessage(remoteMessage);
         }, 500);
         break;
       case clientCommands.MESSAGE:
@@ -253,7 +265,7 @@ export function RtcMockServerProvider({ children }) {
         });
 
         setTimeout(() => {
-          setMessage({
+          let remoteMessage = {
             data: {
               type: "HANGOUT",
               hangout: {
@@ -266,7 +278,8 @@ export function RtcMockServerProvider({ children }) {
               sender,
             },
             type: "HANGOUT",
-          });
+          };
+          dispatchMessage(remoteMessage);
         }, 500);
         break;
       default:
@@ -274,5 +287,10 @@ export function RtcMockServerProvider({ children }) {
     }
   }
   function setRtcUrl() {}
-  return children({ sendMessage, message, connectionState, setRtcUrl });
+  return children({
+    message,
+    sendMessage,
+    connectionState: "open",
+    setRtcUrl,
+  });
 }

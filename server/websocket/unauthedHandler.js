@@ -4,15 +4,27 @@ const hangoutsHandler = require("../hangouts/wsocket/hangoutHandler");
 const { handlePersistance } = require("../hangouts/wsocket/handlePersistance");
 const url = require("url");
 
-module.exports.unauthedHandler = async function ({ ws, request, connections }) {
+module.exports.unauthedHandler = async function ({
+  ws,
+  request,
+  connections,
+  peers,
+}) {
   //
   try {
     switch (true) {
       case request.url.includes("hangout-app"):
         if (request.url.includes("mongodb")) {
-          unAuthedHangoutApp({ ws, request, cb: handlePersistance });
+          debugger;
+          unAuthedHangoutApp({
+            ws,
+            request,
+            connections,
+            peers,
+            cb: handlePersistance,
+          });
         } else {
-          unAuthedHangoutApp({ ws, request });
+          unAuthedHangoutApp({ ws, request, connections, peers });
         }
 
         break;
@@ -25,26 +37,33 @@ module.exports.unauthedHandler = async function ({ ws, request, connections }) {
   } catch (error) {}
 };
 
-function unAuthedHangoutApp({ ws, request, cb = () => {} }) {
+function unAuthedHangoutApp({
+  ws,
+  request,
+  connections,
+  peers,
+  cb = () => {},
+}) {
   try {
-    let connections = {};
-    let userone = JSON.parse(url.parse(request.url, true).query.userone);
-    let usertwo = JSON.parse(url.parse(request.url, true).query.usertwo);
+    debugger;
 
-    let peers = [userone, usertwo];
-    connections[`${userone.user.username}-${userone.user.browserId}`] = ws;
-    connections[`${usertwo.user.username}-${usertwo.user.browserId}`] = ws;
+    //
+    let senderUser = JSON.parse(url.parse(request.url, true).query.user);
+    peers.push(senderUser);
+    connections[
+      `${senderUser.user.username}-${senderUser.user.browserId}`
+    ] = ws;
 
     ws.on("message", (socketMessage) => {
+      debugger; //
       const {
         data: {
           sender, ////
           hangout: { target },
         },
       } = JSON.parse(socketMessage);
-
-      const targetUser = peers.find((p) => p.user.username === target);
-      const senderUser = peers.find((p) => p.user.username === sender);
+      debugger;
+      let targetUser = peers.find((p) => p.user.username === target);
 
       hangoutsHandler({
         socketMessage,
@@ -56,9 +75,13 @@ function unAuthedHangoutApp({ ws, request, cb = () => {} }) {
       });
     });
     ws.on("close", () => {
-      delete connections[userone.user.username];
-      delete connections[usertwo.user.username];
-      console.log("socket closed by", userone.username);
+      delete connections[
+        `${senderUser.user.username}-${senderUser.user.browserId}`
+      ];
+
+      console.log("socket closed by", senderUser.user.username);
     });
-  } catch (error) {}
+  } catch (error) {
+    debugger;
+  }
 }

@@ -3,43 +3,32 @@ import {
   createContext,
 } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
 import {
-  useContext,
-  useMemo,
-  useReducer,
   useEffect,
+  useState,
 } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 import NavigationContainer from "./NavigationContainer";
 import RouteContainer from "./RouteContainer";
 import ServiceAdapter from "../../service-adapters/ServiceAdapter";
+
 const html = htm.bind(h);
 
-export default function HangoutClient({
-  authState,
-  sendMessage,
-  message,
-  connectionState,
-  target,
-}) {
-  const { user } = authState;
-  if (RTC === "WEBSOCKET") {
-    return html`<div>
-      <${ServiceAdapter}>
-        <${NavigationContainer} user=${user} />
-        <${RouteContainer} user=${user} />
-      <//>
-    </div>`;
-  } else if (RTC === "MOCK") {
-    return html`<${ServiceAdapter}
-      authState=${authState}
-      sendMessage=${sendMessage}
-      message=${message}
-      connectionState=${connectionState}
-    >
-      <${NavigationContainer} user=${user} />
-      <${RouteContainer} user=${user} />
-    <//>`;
-  } else {
-    throw "RTC for HangoutCLient not specified";
-  }
+export default function HangoutClient({ user }) {
+  const [socketUrl, setSocketUrl] = useState(null);
+  useEffect(() => {
+    if (user) {
+      setSocketUrl(
+        `wss://localhost:${PORT}/unauthed-msg/hangout-app/?user=${JSON.stringify(
+          {
+            user: { ...user, browserId: "1234567890" },
+            browsers: [{ browserId: "1234567890" }],
+          }
+        )}`
+      );
+    }
+  }, [user]);
+  return html`<${ServiceAdapter} user=${user} socketUrl=${socketUrl}>
+    <${NavigationContainer} user=${user} />
+    <${RouteContainer} user=${user} />
+  <//>`;
 }

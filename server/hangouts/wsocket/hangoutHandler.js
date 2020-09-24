@@ -11,6 +11,7 @@ module.exports = async function hangoutHandler({
   cb,
 }) {
   try {
+    debugger;
     const {
       data: { hangout },
     } = JSON.parse(socketMessage);
@@ -58,12 +59,15 @@ module.exports = async function hangoutHandler({
               },
               type: "HANGOUT",
             };
+            debugger;
             senderOnline.send(JSON.stringify(msg));
           }
         }
       },
       targetOnline: async function () {
+        debugger;
         for (const browser of targetBrowsers) {
+          debugger;
           const targetOnline =
             connections[`${targetUser.user.username}-${browser.browserId}`];
 
@@ -93,7 +97,7 @@ module.exports = async function hangoutHandler({
     });
   } catch (error) {
     const err = error;
-
+    debugger;
     console.log("hangoutHandlerError", error);
   }
 };

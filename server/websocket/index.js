@@ -4,6 +4,8 @@ const url = require("url");
 
 const EventEmitter = require("events");
 const WebSocket = require("ws");
+let connections = {};
+let peers = [];
 module.exports = wsocket = new EventEmitter();
 
 module.exports = async function (server, client) {
@@ -12,7 +14,7 @@ module.exports = async function (server, client) {
 
   wss.on("connection", async function connection(ws, request) {
     if (request.url.includes("unauthed-msg")) {
-      unauthedHandler({ ws, request });
+      unauthedHandler({ ws, request, connections, peers });
     } else if (request.url.includes("authed-msg")) {
       authedHandler({ request, ws });
     } else {

@@ -35,11 +35,6 @@ export default function HangoutsFeatureRoutes({ user }) {
     onAppRoute,
   });
 
-  useEffect(() => {
-    if (featureRoute) {
-    }
-  }, [featureRoute]);
-
   switch (featureRoute) {
     case "/videocall":
       return html` <${Suspense} fallback=${Loading}>
@@ -56,13 +51,7 @@ export default function HangoutsFeatureRoutes({ user }) {
           <${Blocked} ...${state} ...${funcs} ...${hangout} />
         <//>
       `;
-    // case "/DECLINED":
-    // case "/DECLINE":
-    //   return html`
-    //     <${Suspense} fallback=${Loading}>
-    //       <${Declined} ...${state} ...${funcs} ...${hangout} />
-    //     <//>
-    //   `;
+
     case "/configure":
       return html` <${Suspense} fallback=${Loading}>
         <${Configure} ...${state} ...${funcs} ...${hangout} />
@@ -90,16 +79,7 @@ export default function HangoutsFeatureRoutes({ user }) {
       return html` <${Suspense} fallback=${Loading}>
         <${Invite} ...${state} ...${funcs} ...${hangout} />
       <//>`;
-    // case "/INVITED":
-    // case "/INVITE":
-    // case "/DECLINER":
-    //   return html` <${Suspense} fallback=${Loading}>
-    //     <${Invitee} ...${state} ...${funcs} ...${hangout} />
-    //   <//>`;
-    // case "/INVITER":
-    //   return html` <${Suspense} fallback=${Loading}>
-    //     <${InviterContainer} state=${state} funcs=${funcs} hangout=${hangout} />
-    //   <//>`;
+
     case "/unread":
       return html` <${Suspense} fallback=${Loading}>
         <${UnreadHangouts}
