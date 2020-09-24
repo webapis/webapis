@@ -36,8 +36,8 @@ module.exports = async function hangoutHandler({
     };
 
     const target = {
-      target: senderUser.user.username,
-      email: senderUser.user.email,
+      target: senderUser.username,
+      email: senderUser.email,
       message,
       timestamp,
       state: targetState,
@@ -48,14 +48,14 @@ module.exports = async function hangoutHandler({
       senderOnline: async function () {
         for (const browser of senderBrowsers) {
           const senderOnline =
-            connections[`${senderUser.user.username}-${browser.browserId}`];
+            connections[`${senderUser.username}-${browser.browserId}`];
 
           if (senderOnline) {
             const msg = {
               data: {
                 hangout: sender,
                 type: "ACKHOWLEDGEMENT",
-                sender: senderUser.user.username,
+                sender: senderUser.username,
               },
               type: "HANGOUT",
             };
@@ -69,14 +69,14 @@ module.exports = async function hangoutHandler({
         for (const browser of targetBrowsers) {
           debugger;
           const targetOnline =
-            connections[`${targetUser.user.username}-${browser.browserId}`];
+            connections[`${targetUser.username}-${browser.browserId}`];
 
           if (targetOnline) {
             const msg = {
               data: {
                 hangout: target,
                 type: "HANGOUT",
-                sender: senderUser.user.username,
+                sender: senderUser.username,
               },
               type: "HANGOUT",
             };
@@ -91,7 +91,7 @@ module.exports = async function hangoutHandler({
     await cb({
       target,
       sender,
-      senderUserName: senderUser.user.username,
+      senderUserName: senderUser.username,
       username: sTarget,
       hangout,
     });

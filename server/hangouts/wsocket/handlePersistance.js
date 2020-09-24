@@ -1,6 +1,3 @@
-const url = process.env.DB_URL || "mongodb://127.0.0.1:27017";
-const { MongoClient } = require("mongodb");
-
 const assert = require("assert");
 module.exports.handlePersistance = async function ({
   target,
@@ -9,11 +6,9 @@ module.exports.handlePersistance = async function ({
   username,
   hangout,
   connections,
+  collection,
 }) {
   try {
-    const client = await new MongoClient(url, { useUnifiedTopology: true });
-    await client.connect();
-    const collection = await client.db("auth").collection("users");
     const { email, message, offline, timestamp } = hangout;
 
     const senderUser = await collection.findOne({ username: senderUserName });

@@ -1,5 +1,15 @@
 import infoMessages from "../../../client/features/hangouts/ui-components/infoMessages";
 Cypress.Commands.add("invitation", ({ PORT }) => {
+  cy.task("seed:user", {
+    email: "demouser@gmail.com",
+    username: "demouser",
+    password: "TestPassword!22s",
+  });
+  cy.task("seed:user", {
+    email: "berouser@gmail.com",
+    username: "berouser",
+    password: "TestPassword!22s",
+  });
   cy.visit(`https://localhost:${PORT}`);
   cy.server();
   cy.route({

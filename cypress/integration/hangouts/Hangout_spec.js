@@ -6,7 +6,7 @@ describe("Test websocket", () => {
     cy.websocket();
   });
 });
-[3005, 3004].forEach((PORT) => {
+[/*3005, 3004,*/ 3006].forEach((PORT) => {
   let backend = null;
   if (PORT === 3005) {
     backend = "RtcMock";
@@ -18,9 +18,15 @@ describe("Test websocket", () => {
   describe(`Test hangout with ${backend}`, () => {
     beforeEach(() => {
       cy.viewport(1280, 720);
+      if (PORT === 3006) {
+        cy.task("seed:deleteCollection", {
+          dbName: "auth",
+          collectionName: "users",
+        });
+      }
     });
 
-    it("Invitation", () => {
+    it.only("Invitation", () => {
       cy.invitation({ PORT });
     });
 

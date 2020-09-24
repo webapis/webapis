@@ -18,12 +18,10 @@ export default function HangoutClient({ user }) {
   useEffect(() => {
     if (user) {
       setSocketUrl(
-        `wss://localhost:${PORT}/unauthed-msg/hangout-app/?user=${JSON.stringify(
-          {
-            user: { ...user, browserId: "1234567890" },
-            browsers: [{ browserId: "1234567890" }],
-          }
-        )}`
+        `${RTC_URL}/?user=${JSON.stringify({
+          user: { ...user, browserId: "1234567890" },
+          browsers: [{ browserId: "1234567890" }],
+        })}`
       );
     }
   }, [user]);
