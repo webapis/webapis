@@ -1,4 +1,5 @@
 const stateMapper = require("../stateMapper");
+const { undefinedArguments } = require("../../helpers");
 //const mongoDBPersistance = require("./handlePersistance");
 
 module.exports = async function hangoutHandler({
@@ -11,7 +12,15 @@ module.exports = async function hangoutHandler({
   cb,
 }) {
   try {
-    debugger;
+    undefinedArguments({
+      collection,
+      socketMessage,
+      ws,
+      connections,
+      targetUser,
+      senderUser,
+      cb,
+    });
     const {
       data: { hangout },
     } = JSON.parse(socketMessage);
@@ -59,15 +68,13 @@ module.exports = async function hangoutHandler({
               },
               type: "HANGOUT",
             };
-            debugger;
+
             senderOnline.send(JSON.stringify(msg));
           }
         }
       },
       targetOnline: async function () {
-        debugger;
         for (const browser of targetBrowsers) {
-          debugger;
           const targetOnline =
             connections[`${targetUser.username}-${browser.browserId}`];
 
@@ -87,8 +94,11 @@ module.exports = async function hangoutHandler({
     };
     await funcs.senderOnline();
     await funcs.targetOnline();
-
+    //persist to  databas//
+    debugger;
     await cb({
+      connections,
+      collection,
       target,
       sender,
       senderUserName: senderUser.username,
@@ -96,8 +106,7 @@ module.exports = async function hangoutHandler({
       hangout,
     });
   } catch (error) {
-    const err = error;
     debugger;
-    console.log("hangoutHandlerError", error);
+    throw error;
   }
 };

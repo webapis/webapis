@@ -35,6 +35,12 @@ Cypress.Commands.add("invitation", ({ PORT }) => {
   cy.get("[data-testid=democlient]").find("[data-testid=berouser]").click();
 
   cy.get("[data-testid=democlient]").find("[data-testid=oninvite-btn]").click();
+  cy.task("query:mongodb", {
+    username: "demouser",
+  }).then((result) => {
+    debugger;
+  });
+  cy.pause();
   //cy.pause()
   // cy.wait("@protocolCatcher").then((xhr) => {
   //   const { requestBody } = xhr;

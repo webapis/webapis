@@ -7,7 +7,7 @@ module.exports.testWebSocket = async function ({
   try {
     ws.on("message", (socketMessage) => {
       const { data } = JSON.parse(socketMessage);
-      debugger;
+
       ws.send(
         JSON.stringify({
           data,

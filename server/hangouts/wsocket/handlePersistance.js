@@ -1,4 +1,5 @@
 const assert = require("assert");
+const { undefinedArguments } = require("../../helpers");
 module.exports.handlePersistance = async function ({
   target,
   sender,
@@ -9,18 +10,30 @@ module.exports.handlePersistance = async function ({
   collection,
 }) {
   try {
+    undefinedArguments({
+      target,
+      sender,
+      senderUserName,
+      username,
+      hangout,
+      connections,
+      collection,
+    });
+    debugger;
     const { email, message, offline, timestamp } = hangout;
 
     const senderUser = await collection.findOne({ username: senderUserName });
     const senderBrowsers = senderUser.browsers;
     const targetUser = await collection.findOne({ username });
     const targetBrowsers = targetUser.browsers;
-
+    debugger;
     let funcs = {
       senderOffline: async function () {
         for (const browser of senderBrowsers) {
+          debugger;
           const senderOffline =
             connections[`${senderUserName}-${browser.browserId}`];
+          debugger;
           if (senderOffline) {
             await collection.update(
               { username: senderUserName },
@@ -30,12 +43,6 @@ module.exports.handlePersistance = async function ({
                 upsert: true,
               }
             );
-
-            //assert.equal(1, 2);
-            if (process.env.NODE_ENV === "dev") {
-              //assert.equal(1, 2);
-            }
-            //  console.log('NODE_ENV',process.env.NODE_ENV)
           }
         }
       },
@@ -59,7 +66,7 @@ module.exports.handlePersistance = async function ({
         const browsers = user.browsers;
         for await (const browser of browsers) {
           // UPDATE HANGOUT ON TARGET
-          await collection.update(
+          const updateResult = await collection.update(
             { username },
             { $set: { "browsers.$[t].hangouts.$[u]": target } },
             {
@@ -78,7 +85,7 @@ module.exports.handlePersistance = async function ({
         const browsers = user.browsers;
 
         for await (const browser of browsers) {
-          const upd = await collection.update(
+          const updateResult = await collection.update(
             { username: senderUserName },
             { $set: { "browsers.$[t].hangouts.$[u]": sender } },
             {
@@ -89,12 +96,13 @@ module.exports.handlePersistance = async function ({
               multi: true,
             }
           );
+          debugger;
         }
       },
       pushSenderHangout: async function () {
         //PUSH HANGOUT ON SENDER
         for await (const browser of senderBrowsers) {
-          await collection.update(
+          const updateResult = await collection.update(
             { username: senderUserName },
             { $push: { "browsers.$[t].hangouts": sender } },
             {
@@ -208,5 +216,7 @@ module.exports.handlePersistance = async function ({
     }
   } catch (error) {
     const err = error;
+    debugger;
+    throw error;
   }
 };

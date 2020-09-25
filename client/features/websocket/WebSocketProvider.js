@@ -30,7 +30,6 @@ export default function WebSocketProvider(props) {
 
   useEffect(() => {
     if (socketUrl) {
-      debugger;
       initWebSocket({ url: socketUrl, dispatch });
     }
   }, [socketUrl]);
@@ -42,28 +41,24 @@ export default function WebSocketProvider(props) {
         dispatch({ type: actionTypes.MESSAGE_RECIEVED, message: msg });
       };
       websocket.onopen = () => {
-        debugger;
         dispatch({
           type: actionTypes.CONNECTION_STATE_CHANGED,
           connectionState: "open",
         });
       };
       websocket.onclose = () => {
-        debugger;
         dispatch({
           type: actionTypes.CONNECTION_STATE_CHANGED,
           connectionState: "close",
         });
       };
       websocket.onerror = (error) => {
-        debugger;
         dispatch({ type: actionTypes.SOCKET_ERROR, error });
       };
     }
   }, [websocket]);
 
   function sendMessage({ data, type }) {
-    debugger;
     websocket.send(JSON.stringify({ data, type }));
   }
   function setRtcUrl(url) {

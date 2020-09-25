@@ -7,7 +7,8 @@ const deleteCollection = require("./deleteCollection");
 const seedOnInvite = require("./seedOnInvite");
 const seedOnAccept = require("./seedOnAccept");
 const dropDatabase = require("./dropDatabase");
-const onHangoutSeed = require("./hangout/onHangoutSeed");
+const queryMongoDb = require("./hangout/queryMongoDb");
+//const onHangoutSeed = require("./hangout/onHangoutSeed");
 ///
 // ***********************************************************
 // This example plugins/index.js can be used to load plugins
@@ -30,6 +31,9 @@ module.exports = (on, config) => {
   // `config` is the resolved Cypress config
 
   on("task", {
+    "query:mongodb": ({ username }) => {
+      return queryMongoDb({ username });
+    },
     "seed:login": ({ email, username, password }) => {
       return seedLogin({ email, username, password });
     },
@@ -54,20 +58,20 @@ module.exports = (on, config) => {
     "seed:dropDatabase": ({ dbName }) => {
       return dropDatabase({ dbName });
     },
-    "seed:onHangout": ({
-      collectionName,
-      dbName,
-      hangout,
-      senderUsername,
-      senderEmail,
-    }) => {
-      return onHangoutSeed({
-        collectionName,
-        dbName,
-        hangout,
-        senderUsername,
-        senderEmail,
-      });
-    },
+    // "seed:onHangout": ({
+    //   collectionName,
+    //   dbName,
+    //   hangout,
+    //   senderUsername,
+    //   senderEmail,
+    // }) => {
+    //   return onHangoutSeed({
+    //     collectionName,
+    //     dbName,
+    //     hangout,
+    //     senderUsername,
+    //     senderEmail,
+    //   });
+    // },
   });
 };

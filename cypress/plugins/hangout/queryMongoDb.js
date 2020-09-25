@@ -6,17 +6,13 @@ const client = new MongoClient(url, {
   useNewUrlParser: true,
 });
 
-module.exports = async function deleteCollection({ collectionName, dbName }) {
+module.exports = async function queryMongoDb({ username }) {
   try {
     const clnt = await client.connect();
+    const database = await clnt.db("auth");
+    const collection = await database.collection("users");
 
-    const database = clnt.db(dbName);
-
-    const collection = database.collection(collectionName);
-
-    await collection.deleteMany();
-
-    return result;
+    return await collection.findOne({ username });
   } catch (error) {
     return error;
   }
