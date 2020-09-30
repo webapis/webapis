@@ -34,11 +34,12 @@ module.exports.hangoutHandlerNew = async function ({
       removeDelayedAck({ col, username, browserId }); //
     sendUndelivered({ cUser, ws, browserId }) &&
       persist &&
-      removeDeliveredAck({ col, username, browserId }); //
+      removeDelivered({ col, username, browserId }); //
     //
     ws.on("message", async (socketMessage) => {
       const { data } = JSON.parse(socketMessage);
       const { type } = data;
+
       switch (type) {
         case "HANGOUT":
           let { hangout } = data;
@@ -53,13 +54,20 @@ module.exports.hangoutHandlerNew = async function ({
 
           sendHangout({ cUser, tUser, connections, hForTarget, hForSender }) &&
             persist &&
-            updateHangout({ col, cUser, tUser, hForTarget, hForSender });
+            updateHangout({
+              col,
+              cUser,
+              tUser,
+              hForTarget,
+              hForSender,
+              hangout,
+            });
           persist && saveDelayedAck({ col, connections, cUser, hForSender });
           persist && saveUndelivered({ col, connections, tUser, hForTarget });
           break;
         case "OFFLINE_HANGOUTS":
-          debugger;
           let { hangouts } = data;
+
           hangouts.forEach(async (hangout) => {
             const { target } = hangout;
 
@@ -77,7 +85,14 @@ module.exports.hangoutHandlerNew = async function ({
               hForSender,
             }) &&
               persist &&
-              updateHangout({ col, cUser, tUser, hForTarget, hForSender });
+              updateHangout({
+                col,
+                cUser,
+                tUser,
+                hForTarget,
+                hForSender,
+                hangout,
+              });
             persist && saveDelayedAck({ col, connections, cUser, hForSender });
             persist && saveUndelivered({ col, connections, tUser, hForTarget });
           });

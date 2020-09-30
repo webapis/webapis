@@ -27,7 +27,7 @@ Cypress.Commands.add("targetOfflineInvitation", ({ PORT }) => {
   cy.get("[data-testid=democlient]").find("[data-testid=berouser]").click();
 
   cy.get("[data-testid=democlient]").find("[data-testid=oninvite-btn]").click();
-  // cy.pause()
+
   if (PORT === 3006) {
     //test data persistence to sender
     cy.task("query:mongodb", {
@@ -59,7 +59,7 @@ Cypress.Commands.add("targetOfflineInvitation", ({ PORT }) => {
       };
       expect(browser).to.deep.equal(expected);
     });
-
+    // cy.pause();
     // test data persistence to target
     cy.task("query:mongodb", { username: "berouser" }).then((result) => {
       const { browsers } = result;
@@ -91,6 +91,7 @@ Cypress.Commands.add("targetOfflineInvitation", ({ PORT }) => {
 
   //cy.pause();
   cy.get("[data-testid=beroclient]").find("#connect").click();
+  //cy.pause();
   // cy.pause()
   if (PORT === 3006) {
     // test data persistence to target

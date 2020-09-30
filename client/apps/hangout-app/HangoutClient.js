@@ -22,20 +22,15 @@ export default function HangoutClient({ user }) {
         setRtcUrl(
           `${RTC_URL}/?username=${user.username}&browserId=${user.browserId}`
         );
-        // setSocketUrl(
-        //   `${RTC_URL}/?user=${JSON.stringify({
-        //     ...user,
-        //     browserId: "BID1234567890",
-        //     browsers: [{ browserId: "BID1234567890" }],
-        //   })}`
-        // );
-      } //
+      }
       return html`<div>
         <button id="connect" disabled=${!user} class="btn" onClick=${connect}>
           Connect
         </button>
-        <${NavigationContainer} user=${user} />
-        <${RouteContainer} user=${user} />
+        <div>
+          <${NavigationContainer} user=${user} />
+          <${RouteContainer} user=${user} />
+        </div>
       </div>`;
     }}
   <//>`;

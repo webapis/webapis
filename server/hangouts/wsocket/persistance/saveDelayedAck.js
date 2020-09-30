@@ -1,13 +1,16 @@
 //invoked on message event. after sendOnlineHangout() function
 //the purpose of this function is to store hangout items for browsers of messages sender in offline state. message sender could use
 //multiple devices or browsers at the same time or in different times.
+const { undefinedArguments } = require("../../../helpers");
 module.exports.saveDelayedAck = async function ({
   cUser,
   connections,
   hForSender,
+  col,
 }) {
   try {
-    const { browsers, username } = cUser.browsers;
+    undefinedArguments({ cUser, col, hForSender });
+    const { browsers, username } = cUser;
 
     let funcs = {
       senderOffline: async function () {
@@ -15,7 +18,7 @@ module.exports.saveDelayedAck = async function ({
           const senderOnline = connections[`${username}-${browser.browserId}`];
           //
           if (!senderOnline) {
-            await collection.update(
+            await col.update(
               { username },
               { $push: { "browsers.$[t].delayed": hForSender } },
               {
@@ -28,5 +31,7 @@ module.exports.saveDelayedAck = async function ({
       },
     };
     funcs.senderOffline();
-  } catch (error) {}
+  } catch (error) {
+    throw error;
+  }
 };

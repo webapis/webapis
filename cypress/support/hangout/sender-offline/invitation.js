@@ -26,10 +26,17 @@ Cypress.Commands.add("senderOfflineInvitation", ({ PORT }) => {
   cy.get("[data-testid=democlient]").find("[data-testid=berouser]").click();
 
   cy.get("[data-testid=democlient]").find("[data-testid=oninvite-btn]").click();
-
-  cy.get("[data-testid=democlient]").find("#connect").click();
+  //cy.pause()
   cy.get("[data-testid=beroclient]").find("#connect").click();
+  cy.wait(200);
+  cy.get("[data-testid=democlient]").find("#connect").click();
 
+  cy.get("[data-testid=democlient]")
+    .find("[data-testid=socket-connection]")
+    .contains("online");
+  //cy.pause()
+
+  cy.wait(200);
   if (PORT === 3006) {
     //test data persistence to sender
     cy.task("query:mongodb", {
@@ -101,6 +108,7 @@ Cypress.Commands.add("senderOfflineInvitation", ({ PORT }) => {
     .should("be.disabled");
   // cy.pause();
   //berouser accepts a message
+
   cy.get("[data-testid=beroclient]")
     .find("[data-testid=message-count]")
     .contains(1);

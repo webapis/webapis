@@ -30,7 +30,11 @@ export default function RtcMockServer({ children, user }) {
           setMessage(remoteMessage);
           console.log(`${username},recieved event issssss:`, e.detail);
         } else {
-          setOfflineHangouts((prev) => [...prev, remoteMessage]);
+          const {
+            data: { hangout },
+          } = remoteMessage;
+          debugger;
+          setOfflineHangouts((prev) => [...prev, hangout]);
         }
       });
     }

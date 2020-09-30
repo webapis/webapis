@@ -1,12 +1,15 @@
 //invoked after sendOnlineHangout functino returns true. function updates hangout state for sender and target user
+const { undefinedArguments } = require("../../../helpers");
 module.exports.updateHangout = async function ({
   hForTarget,
   hForSender,
   col,
   cUser,
   tUser,
+  hangout,
 }) {
   try {
+    undefinedArguments({ hForTarget, hForSender, col, cUser, tUser, hangout });
     const { username: senderUserName } = cUser;
     const { username: targetUserName } = tUser;
     let funcs = {
@@ -30,8 +33,10 @@ module.exports.updateHangout = async function ({
       },
 
       pushHangout: async function ({ username, hangout }) {
-        //PUSH HANGOUT ON SENDER
-        for await (const browser of senderBrowsers) {
+        const user = await col.findOne({ username });
+        const browsers = user.browsers;
+
+        for await (const browser of browsers) {
           const updateResult = await col.update(
             { username },
             { $push: { "browsers.$[t].hangouts": hangout } },
@@ -105,5 +110,7 @@ module.exports.updateHangout = async function ({
       default:
         throw "hangout.command not specified";
     }
-  } catch (error) {}
+  } catch (error) {
+    throw error;
+  }
 };

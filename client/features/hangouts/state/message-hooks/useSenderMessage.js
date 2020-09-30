@@ -34,11 +34,12 @@ export default function useSenderMessage({
       username &&
       message.data.sender !== username
     ) {
+      debugger;
       const {
         data: { hangouts },
       } = message;
-      hangouts.forEach((d) => {
-        const { hangout } = d.data;
+      hangouts.forEach((hangout) => {
+        debugger;
 
         handleSenderHangout({ hangout });
       });
