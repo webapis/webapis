@@ -9,7 +9,7 @@ module.exports = async (t, run) => {
     isMobile: true,
     headless: false,
     ignoreHTTPSErrors: true,
-    args: ["--window-position=0,0", "--window-size=300,700"],
+    args: ["--window-position=0,0", "--window-size=300,800"],
     executablePath:
       "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome", // because we are using puppeteer-core so we must define this option
   };
@@ -19,7 +19,7 @@ module.exports = async (t, run) => {
     isMobile: true,
     headless: false,
     ignoreHTTPSErrors: true,
-    args: ["--window-position=550,0", "--window-size=300,700"],
+    args: ["--window-position=550,0", "--window-size=300,800"],
     executablePath:
       "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome", // because we are using puppeteer-core so we must define this option
   };
@@ -28,7 +28,7 @@ module.exports = async (t, run) => {
   const berosPage = await berosBrowser.newPage();
   await berosPage.setViewport({
     width: 500,
-    height: 700,
+    height: 800,
     isMobile: true,
     deviceScaleFactor: 1,
   });
@@ -36,7 +36,7 @@ module.exports = async (t, run) => {
   const demosPage = await demosBrowser.newPage();
   await demosPage.setViewport({
     width: 500,
-    height: 700,
+    height: 800,
     isMobile: true,
     deviceScaleFactor: 1,
   });

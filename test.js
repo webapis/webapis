@@ -71,18 +71,18 @@ test(
     await demosPage.waitForSelector("ul[data-testid=unread-ui]");
     await demosPage.waitForSelector("li[data-testid=berouser]");
     await demosPage.click("li[data-testid=berouser]");
-    await demosPage.waitForSelector("div[data-testid=inviter-ui]");
+    await demosPage.waitForSelector("div[data-testid=hangchat-ui]");
     await demosPage.click("button[data-testid=accept-btn]");
 
-    //berouser sees new unread message
-    //berouser opens unread new message
-    await berosPage.waitForFunction(
-      'document.querySelector("span[data-testid=message-count]").innerText.includes("1")'
-    );
-    await berosPage.click("a[data-testid=unread-link]");
-    await berosPage.waitForSelector("ul[data-testid=unread-ui]");
-    await berosPage.waitForSelector("li[data-testid=demouser]");
-    await berosPage.click("li[data-testid=demouser]");
+    // //berouser sees new unread message
+    // //berouser opens unread new message
+    // await berosPage.waitForFunction(
+    //   'document.querySelector("span[data-testid=message-count]").innerText.includes("1")'
+    // );
+    // await berosPage.click("a[data-testid=unread-link]");
+    // await berosPage.waitForSelector("ul[data-testid=unread-ui]");
+    // await berosPage.waitForSelector("li[data-testid=demouser]");
+    // await berosPage.click("li[data-testid=demouser]");
 
     //hangchat-ui visible
     //berouser types a message
