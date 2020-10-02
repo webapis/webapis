@@ -8,13 +8,13 @@ import Layout from "./Layout";
 import Button from "../../../components/controls/button/index";
 import infoMessages from "./infoMessages";
 const html = htm.bind(h);
-export function Messages({ messages, username, ref }) {
+export function Messages({ messages, username, ref, onScrollToBottom }) {
   const { transformedMessages } = useTransformMessages({ messages, username });
   useEffect(() => {
-    if (messages) {
-      console.log("raw messages", messages);
+    if (transformedMessages) {
+      onScrollToBottom(true);
     }
-  }, [messages]);
+  }, [transformedMessages]);
   return html` <div ref=${ref} class="bg-light container-fluid pb-5">
     ${transformedMessages &&
     transformedMessages.length > 0 &&
@@ -180,12 +180,6 @@ export default function Hangchat({
   scrollToBottom,
   onScrollToBottom,
 }) {
-  useEffect(() => {
-    if (messages) {
-      onScrollToBottom(true);
-    }
-  }, [messages]);
-
   return html`
     <${Layout}
       target=${target}
@@ -194,7 +188,11 @@ export default function Hangchat({
       scrollToBottom=${scrollToBottom}
       onScrollToBottom=${onScrollToBottom}
     >
-      <${Messages} messages=${messages} username=${user && user.username} />
+      <${Messages}
+        onScrollToBottom=${onScrollToBottom}
+        messages=${messages}
+        username=${user && user.username}
+      />
       <div
         data-testid="hangchat-ui"
         class="w-100"
