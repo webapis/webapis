@@ -27,6 +27,7 @@ module.exports.authedHandlers = async function ({
     const senderUser = await collection.findOne({ username });
 
     connections[`${username}-${browserId}`] = ws;
+
     switch (true) {
       case request.url.includes("hangouts"):
         hangoutHandlerNew({

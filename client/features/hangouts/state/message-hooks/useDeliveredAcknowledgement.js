@@ -27,6 +27,7 @@ export default function useDeliveryAcknowledgement({
       const {
         data: { hangout },
       } = message;
+
       onDeliveryAcknowledgement({ hangout });
     }
   }, [message, username]);

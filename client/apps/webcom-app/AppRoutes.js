@@ -8,6 +8,7 @@ import { useEffect } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/asset
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 import { useAppRoute } from "components/app-route/index";
 import { loadBrowserId } from "../../features/authentication/state/AuthProvider";
+import { useAuth } from "../../features/authentication/state/useAuth";
 const AuthFeatureRoutes = lazy(() =>
   import("features/authentication/AuthFeatureRoutes")
 );
@@ -18,17 +19,24 @@ const HangoutsFeatureRoutes = lazy(() =>
 const ErrorPage = lazy(() => import("./ErrorPage"));
 const AppMonitor = lazy(() => import("features/app-monitor/index"));
 export function AppRoutes(props) {
-  const { user, setRtcUrl, connectionState } = props;
+  const {
+    state: { user },
+  } = useAuth();
+  const { setRtcUrl, connectionState } = props;
   const {
     state: { appRoute },
+    onAppRoute,
   } = useAppRoute();
 
   useEffect(() => {
     const browserId = loadBrowserId();
     if (user) {
       setRtcUrl(
-        `wss://localhost:${PORT}/authed-msg/webcom-app/?username=${user.username}&browserId=${browserId}`
+        `wss://localhost:${PORT}/authed-msg/hangouts/webcom-app/?username=${user.username}&browserId=${browserId}`
       );
+
+      onAppRoute({ appRoute: "/hangouts", featureRoute: "/hangout" });
+    } else {
     }
   }, [user]);
   switch (appRoute) {
@@ -41,7 +49,7 @@ export function AppRoutes(props) {
     case "/hangouts":
       return html` <${Suspense} fallback=${Loading}>
         <div style=${{ height: "70vh" }}>
-          <${HangoutsFeatureRoutes} user=${user} />
+          <${HangoutsFeatureRoutes} user=${user && user} />
         </div>
       <//>`;
     case "/error":

@@ -111,6 +111,7 @@ module.exports.updateHangout = async function ({
         throw "hangout.command not specified";
     }
   } catch (error) {
+    debugger;
     throw error;
   }
 };

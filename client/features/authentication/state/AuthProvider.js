@@ -65,6 +65,10 @@ export default function AuthProvider(props) {
     }
   }, [staticUser]);
   useEffect(() => {
+    if (user) {
+    }
+  }, [user]);
+  useEffect(() => {
     if (signupStarted) {
       handleSignUp({ username, email, password });
     }

@@ -12,13 +12,21 @@ import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js"
 import HangoutsProvider from "./HangoutsProvider";
 const html = htm.bind(h);
 
-export default function HangoutsAdapter(props) {
+export default function HangoutsService(props) {
+  const { children, user, sendMessage, message, connectionState } = props;
   switch (HANGOUTS) {
     case "INCLUDE":
-      return html`<${HangoutsProvider} ...${props} />`;
+      return html`<${HangoutsProvider}
+        user=${user}
+        sendMessage=${sendMessage}
+        message=${message}
+        connectionState=${connectionState}
+        user=${user}
+        >${children}<//
+      >`;
     case "NONE":
-      return html`<div ...${props} />`;
+      return children(props);
     default:
-      throw "HangoutsAdapter case missing";
+      throw "HangoutsSerivce case missing";
   }
 }

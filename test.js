@@ -39,7 +39,7 @@ test(
     await berosPage.click("#signup");
     await berosPage.waitFor(".show");
     await berosPage.click(".navbar-toggler");
-    debugger;
+
     await berosPage.type("#username", "berouser");
     await berosPage.type("#email", "berouser@gmail.com");
     await berosPage.type("#password", "Testfly1977!");
@@ -54,6 +54,7 @@ test(
     await demosPage.type("#email", "demouser@gmail.com");
     await demosPage.type("#password", "Testfly1977!");
     await demosPage.click("#signup-btn");
+
     //berouser send invitation
     await berosPage.type("input[data-testid=user-search-input]", "demouser");
     await berosPage.click("button[data-testid=user-search-button]");
@@ -61,6 +62,7 @@ test(
     await berosPage.click("a[data-testid=demouser]");
     await berosPage.waitForSelector("div[data-testid=invite-ui]");
     await berosPage.click("button[data-testid=oninvite-btn]");
+
     //demouser accepts invitation
     await demosPage.waitForFunction(
       'document.querySelector("span[data-testid=message-count]").innerText.includes("1")'
@@ -81,6 +83,7 @@ test(
     await berosPage.waitForSelector("ul[data-testid=unread-ui]");
     await berosPage.waitForSelector("li[data-testid=demouser]");
     await berosPage.click("li[data-testid=demouser]");
+
     //hangchat-ui visible
     //berouser types a message
     //berouser sends a message to demouser
@@ -90,8 +93,6 @@ test(
       "Hello bero. how are you ?"
     );
     await berosPage.click("button[data-testid=send-btn]");
-
-    debugger;
 
     debugger;
     t.true((await berosPage.title()).includes("Document"));

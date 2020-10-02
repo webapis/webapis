@@ -28,6 +28,7 @@ export default function useClientCommands({
   const { socketConnected } = state;
   const { onAppRoute } = useAppRoute();
   const { hangout, sendhangout, on_user_client_command, messageText } = state;
+
   function onInvite() {
     const { email } = hangout;
 
@@ -310,7 +311,7 @@ export default function useClientCommands({
           throw "No matching clientCommand found";
       }
     }
-  }, [on_user_client_command, user, hangout]);
+  }, [on_user_client_command, user, hangout, sendhangout]);
   function clientCommandFulfilled() {
     dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
   }

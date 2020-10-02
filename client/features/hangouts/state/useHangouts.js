@@ -1,5 +1,5 @@
 import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
-
+import { useEffect } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
 import { useHangoutContext } from "./HangoutsProvider";
 import { useAppRoute } from "../../../components/app-route/index";
 import { changeMessageText } from "./actions";
@@ -28,7 +28,10 @@ export function useHangouts({ user }) {
   const username = user && user.username;
   const [state, dispatch] = useHangoutContext();
   const { hangouts, inviteGuest, guestEmail } = state;
-
+  useEffect(() => {
+    if (user) {
+    }
+  }, [user]);
   function onMessageText(e) {
     const text = e.target.value;
     changeMessageText({ dispatch, text });
@@ -36,6 +39,7 @@ export function useHangouts({ user }) {
 
   function onUserClientCommand(e) {
     const id = e.target.id;
+
     dispatch({
       type: actionTypes.ON_USER_CLIENT_COMMAND,
       on_user_client_command: id,

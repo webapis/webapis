@@ -74,7 +74,10 @@ export default function HangoutsProvider(props) {
     user,
     browserId: loadBrowserId(),
   });
-
+  useEffect(() => {
+    if (user) {
+    }
+  }, [user]);
   useEffect(() => {
     if (user && socketConnected) {
       actions.fetchHangouts({ dispatch, username: user.username });

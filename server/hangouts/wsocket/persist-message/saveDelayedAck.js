@@ -32,6 +32,7 @@ module.exports.saveDelayedAck = async function ({
     };
     funcs.senderOffline();
   } catch (error) {
+    debugger;
     throw error;
   }
 };

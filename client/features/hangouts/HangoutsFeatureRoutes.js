@@ -34,7 +34,10 @@ export default function HangoutsFeatureRoutes({ user }) {
     ...state,
     onAppRoute,
   });
-
+  useEffect(() => {
+    if (user) {
+    }
+  }, [user]);
   switch (featureRoute) {
     case "/videocall":
       return html` <${Suspense} fallback=${Loading}>
@@ -61,6 +64,7 @@ export default function HangoutsFeatureRoutes({ user }) {
     case "/ACCEPTER":
     case "/MESSANGER":
     case "/MESSAGED":
+    case "/MESSAGE":
     case "/BLOCKER":
     case "/BLOCKED":
     case "/UNBLOCKED":
@@ -68,6 +72,7 @@ export default function HangoutsFeatureRoutes({ user }) {
     case "/READ":
     case "/READER":
     case "/INVITED":
+    case "/INVITE":
     case "/INVITER":
     case "/HANGCHAT":
     case "/DECLINE":

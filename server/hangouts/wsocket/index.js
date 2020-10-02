@@ -43,9 +43,9 @@ module.exports.hangoutHandlerNew = async function ({
       switch (type) {
         case "HANGOUT":
           let { hangout } = data;
-          debugger;
+
           const { target } = hangout;
-          debugger;
+
           const tUser = await col.findOne({ username: target });
           const { hForTarget, hForSender } = hangoutMapper({
             hangout,
@@ -109,7 +109,6 @@ module.exports.hangoutHandlerNew = async function ({
       console.log("socket closed by", username);
     });
   } catch (error) {
-    debugger;
     throw error;
   }
 };

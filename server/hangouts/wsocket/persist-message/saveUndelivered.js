@@ -32,7 +32,7 @@ module.exports.saveUndelivered = async function ({
     };
     funcs.targetOffline();
   } catch (error) {
-    //
+    debugger;
     throw error;
   }
 };
