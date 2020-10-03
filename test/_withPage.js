@@ -9,7 +9,13 @@ module.exports = async (t, run) => {
     isMobile: true,
     headless: false,
     ignoreHTTPSErrors: true,
-    args: ["--window-position=0,0", "--window-size=300,800"],
+    args: [
+      "--no-sandbox",
+      "--disable-setuid-sandbox",
+      "--window-position=0,0",
+      "--window-size=300,800",
+      "--allow-insecure-localhost",
+    ],
     executablePath:
       "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome", // because we are using puppeteer-core so we must define this option
   };
@@ -19,7 +25,13 @@ module.exports = async (t, run) => {
     isMobile: true,
     headless: false,
     ignoreHTTPSErrors: true,
-    args: ["--window-position=550,0", "--window-size=300,800"],
+    args: [
+      "--no-sandbox",
+      "--disable-setuid-sandbox",
+      "--window-position=550,0",
+      "--window-size=300,800",
+      "--allow-insecure-localhost",
+    ],
     executablePath:
       "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome", // because we are using puppeteer-core so we must define this option
   };
@@ -44,6 +56,8 @@ module.exports = async (t, run) => {
   //const page = await browser.newPage();//
   try {
     await run(t, berosPage, demosPage);
+  } catch (e) {
+    console.log("er", e);
   } finally {
     await berosPage.close();
     await demosPage.close();

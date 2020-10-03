@@ -77,8 +77,9 @@ module.exports = {
     ...appScripts,
     storybook,
     testAva: {
-      script: "ava -w",
+      script: "ava",
     },
+    testJest: { script: "jest" },
     test: {
       local: {
         script: series.nps("cy.local"),
