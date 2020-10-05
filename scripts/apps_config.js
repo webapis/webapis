@@ -36,3 +36,8 @@ exports.ws = {
     return `wss://localhost:${PORT}/websocket-app/unauthed-msg`;
   },
 };
+exports.webcom = {
+  rtcUrl: ({ PORT }) => {
+    return `wss://localhost:${PORT}/websocket-app/unauthed-msg`;
+  },
+};

@@ -167,9 +167,9 @@ const hangoutTestApps = [
     auth: "NODEJS",
     hangouts: "INCLUDE",
     env: "prod",
-    port: 3010,
+    port: process.env.PORT || 3010,
     scriptName: "webcom-prod",
-    rtcUrl: hgwsmb.rtcUrl({ PORT: 3010 }),
+    rtcUrl: hgwsmb.rtcUrl({ PORT: process.env.PORT || 3010 }),
   },
 ];
 const apps = [...hangoutTestApps];
