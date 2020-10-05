@@ -52,7 +52,7 @@ const options = {
     console.log("_______Server listening on port:", PORT);
     if (error) {
       const err = error;
-
+      console.log("Heroku triggered error |||||||||||||||||||||", error);
       process.exit(0);
       throw error;
     }
