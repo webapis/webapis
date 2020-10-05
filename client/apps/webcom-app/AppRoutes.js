@@ -37,6 +37,7 @@ export function AppRoutes(props) {
 
       onAppRoute({ appRoute: "/hangouts", featureRoute: "/hangout" });
     } else {
+      onAppRoute({ appRoute: "/auth", featureRoute: "/login" });
     }
   }, [user]);
   switch (appRoute) {
@@ -58,7 +59,9 @@ export function AppRoutes(props) {
       <//>`;
 
     default:
-      return null;
+      return html` <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>`;
   }
 }
 
