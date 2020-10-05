@@ -1,4 +1,4 @@
-const { hgws, hgwsmb, ws, hgmock } = require("./apps_config.js");
+const { hgws, hgwsmb, ws, hgmock, webcom } = require("./apps_config.js");
 const { crossEnv, series, concurrent } = require("nps-utils");
 //ENV:
 //-appName :client side: required for build time tobe able to move build files to specific app folder
@@ -169,7 +169,7 @@ const hangoutTestApps = [
     env: "prod",
     port: process.env.PORT || 3010,
     scriptName: "webcom-prod",
-    rtcUrl: hgwsmb.rtcUrl({ PORT: process.env.PORT || 3010 }),
+    rtcUrl: webcom.rtcUrl({ PORT: process.env.PORT || 3010 }),
   },
 ];
 const apps = [...hangoutTestApps];

@@ -32,7 +32,7 @@ export function AppRoutes(props) {
     const browserId = loadBrowserId();
     if (user) {
       setRtcUrl(
-        `wss://localhost:${PORT}/authed-msg/hangouts/webcom-app/?username=${user.username}&browserId=${browserId}`
+        `${RTC_URL}/authed-msg/hangouts/webcom-app/?username=${user.username}&browserId=${browserId}`
       );
 
       onAppRoute({ appRoute: "/hangouts", featureRoute: "/hangout" });

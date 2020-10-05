@@ -38,6 +38,6 @@ exports.ws = {
 };
 exports.webcom = {
   rtcUrl: ({ PORT }) => {
-    return `wss://localhost:${PORT}/websocket-app/unauthed-msg`;
+    return `https://webapis-demo.herokuapp.com`;
   },
 };
