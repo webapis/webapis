@@ -31,7 +31,7 @@ function serverCommands({ env }) {
   switch (env) {
     case "dev":
       return "nodemon server/index.js";
-    case "prod":
+    case "production":
       return "node server/index.js";
     default:
       return "nodemon server/index.js";
