@@ -42,7 +42,7 @@ export default [
   replace({
     ip: JSON.stringify(process.env.ip),
     PORT: JSON.stringify(process.env.PORT),
-    //  HOST: process.env.NODE_ENV==='production' ? location.origin.replace(/^http/, 'ws') :'wss//localhost:3000'
+    //  HOST: process.env.NODE_ENV==='production' ? location.origin.replace(/^http/, 'ws') :`wss//localhost:${process.env.PORT}`
   }),
   !production &&
     replace({

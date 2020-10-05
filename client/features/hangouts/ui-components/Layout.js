@@ -32,7 +32,7 @@ export default function Layout({
     return html`
       <div
         class="container-fluid pt-1 m-0  p-1 bg-success no-gutter"
-        style="height:72vh"
+        style="height:55vh"
         data-testid=${id}
       >
         <div class=" row justify-content-center h-100">

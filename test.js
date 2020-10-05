@@ -1,7 +1,7 @@
 const puppeteer = require("puppeteer-core");
 const test = require("ava");
 const assert = require("assert");
-const withPage = require("./test/_withPage");
+//const withPage = require("./test/_withPage");
 
 const mongoUrl = "mongodb://localhost:27017";
 const url = "https://localhost:3007";
@@ -12,8 +12,8 @@ let BeroslaunchOptions = {
   headless: false,
   ignoreHTTPSErrors: true,
   args: [
-    "--no-sandbox",
-    "--disable-setuid-sandbox",
+    // "--no-sandbox",
+    // "--disable-setuid-sandbox",
     "--window-position=0,0",
     "--window-size=300,800",
     "--allow-insecure-localhost",
@@ -28,8 +28,8 @@ let DemoslaunchOptions = {
   headless: false,
   ignoreHTTPSErrors: true,
   args: [
-    "--no-sandbox",
-    "--disable-setuid-sandbox",
+    // "--no-sandbox",
+    // "--disable-setuid-sandbox",
     "--window-position=550,0",
     "--window-size=300,800",
     "--allow-insecure-localhost",
@@ -95,7 +95,7 @@ test.after((t) => {
 test('page title should contain "Document"', async (t) => {
   // //navbar-toggler
 
-  await page.waitForSelector(".navbar-toggler");
+  await t.context.berosPage.waitForSelector(".navbar-toggler");
 
   await t.context.berosPage.waitForSelector(".navbar-toggler");
   await t.context.berosPage.click(".navbar-toggler");
@@ -136,21 +136,24 @@ test('page title should contain "Document"', async (t) => {
   await t.context.berosPage.click("button[data-testid=user-search-button]");
   await t.context.berosPage.waitForSelector("a[data-testid=demouser]");
   await t.context.berosPage.click("a[data-testid=demouser]");
-  debugger;
+
   await t.context.berosPage.waitForSelector("div[data-testid=invite-ui]");
   await t.context.berosPage.click("button[data-testid=oninvite-btn]");
-  debugger;
+
   // //demouser accepts invitation
   await t.context.demosPage.waitForFunction(
     'document.querySelector("span[data-testid=message-count]").innerText.includes("1")'
   );
-  // await demosPage.click("a[data-testid=unread-link]");
-  // await demosPage.waitForSelector("ul[data-testid=unread-ui]");
-  // await demosPage.waitForSelector("li[data-testid=berouser]");
-  // await demosPage.click("li[data-testid=berouser]");
-  // await demosPage.waitForSelector("div[data-testid=hangchat-ui]");
-  // await demosPage.click("button[data-testid=accept-btn]");
 
+  await t.context.demosPage.click("a[data-testid=unread-link]");
+  await t.context.demosPage.waitForSelector("ul[data-testid=unread-ui]");
+  await t.context.demosPage.waitForSelector("li[data-testid=berouser]");
+  await t.context.demosPage.click("li[data-testid=berouser]");
+  await t.context.demosPage.waitForSelector("div[data-testid=hangchat-ui]");
+  await t.context.demosPage.click("button[data-testid=decline-btn]");
+  await t.context.demosPage.waitForSelector("div[data-testid=hangchat-ui]");
+  await t.context.demosPage.waitForSelector("div[data-testid=hangchat-ui]");
+  debugger;
   // //berouser sees new unread message
   // //berouser opens unread new message
   // await berosPage.waitForFunction(
