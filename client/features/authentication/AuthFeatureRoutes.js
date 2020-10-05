@@ -84,14 +84,16 @@ export default function AuthFeatureRoutes() {
       `;
 
     case "/profile":
-      return html`<${FeatureRoute} path="/profile">
+      return html`
         <${Suspense} fallback=${Loading}>
           <${Profile} />
         <//>
-      <//> `;
+      `;
 
     default:
-      return null;
+      return html` <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>`;
   }
 }
 
