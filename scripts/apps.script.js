@@ -41,7 +41,7 @@ function clientCommands({ env }) {
   switch (env) {
     case "dev":
       return "rollup -c -w";
-    case "prod":
+    case "production":
       return "rollup -c";
     default:
       throw "No env specified for client command";
