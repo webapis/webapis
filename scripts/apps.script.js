@@ -166,7 +166,7 @@ const hangoutTestApps = [
     rtc: "WEBSOCKET",
     auth: "NODEJS",
     hangouts: "INCLUDE",
-    env: "prod",
+    env: process.env.NODE_ENV || "dev",
     port: process.env.PORT || 3010,
     scriptName: "webcom-prod",
     rtcUrl: webcom.rtcUrl({ PORT: process.env.PORT || 3010 }),
