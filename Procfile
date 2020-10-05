@@ -1,1 +1,1 @@
-web: nps apps.webcom.node.prod
+web: nps webcom
