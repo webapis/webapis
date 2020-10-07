@@ -32,7 +32,6 @@ export default function useClientCommands({
 
   function onHangout({ command }) {
     try {
-      debugger;
       const timestamp = Date.now();
       const { email, state } = hangout;
 
@@ -50,7 +49,6 @@ export default function useClientCommands({
         browserId,
       };
       if (command === "INVITE") {
-        debugger;
         updateHangout({
           dispatch,
           username,
@@ -78,7 +76,6 @@ export default function useClientCommands({
         });
       }
       if (socketConnected && state !== "BLOCKER") {
-        debugger;
         sendMessage({
           data: {
             type: "HANGOUT",
@@ -88,7 +85,6 @@ export default function useClientCommands({
           type: "HANGOUT",
         });
       } else if (!socketConnected && state !== "BLOCKER") {
-        debugger;
         saveOfflineSentHangout({
           hangout: newhangout,
           username,

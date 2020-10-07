@@ -186,7 +186,6 @@ export default function Hangchat({
 }) {
   useEffect(() => {
     if (hangout) {
-      debugger;
     }
   }, [hangout]);
   return html`

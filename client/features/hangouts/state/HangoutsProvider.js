@@ -76,7 +76,6 @@ export default function HangoutsProvider(props) {
       actions.fetchHangouts({ dispatch, username: user.username });
     }
     if (user && !socketConnected) {
-      debugger;
       loadHangouts({ username: user.username, dispatch });
     }
   }, [user, socketConnected]);

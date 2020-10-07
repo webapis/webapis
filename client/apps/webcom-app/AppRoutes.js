@@ -30,7 +30,7 @@ export function AppRoutes(props) {
 
   useEffect(() => {
     const browserId = loadBrowserId();
-    if (user && connectionState === null) {
+    if (user) {
       setRtcUrl(
         `${RTC_URL}/authed-msg/hangouts/webcom-app/?username=${user.username}&browserId=${browserId}`
       );

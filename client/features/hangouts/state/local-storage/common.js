@@ -324,10 +324,8 @@ export function loadHangouts({ username, dispatch }) {
 
   const localHangouts = JSON.parse(localStorage.getItem(hangoutKey));
   if (localHangouts && localHangouts.length > 0) {
-    debugger;
     dispatch({ type: actionTypes.LOADED_HANGOUTS, hangouts: localHangouts });
   } else {
-    debugger;
     dispatch({ type: actionTypes.LOADED_HANGOUTS, hangouts: [] });
   }
 }
