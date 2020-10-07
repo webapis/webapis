@@ -38,6 +38,6 @@ exports.ws = {
 };
 exports.webcom = {
   rtcUrl: ({ PORT }) => {
-    return `https://webapis-demo.herokuapp.com`;
+    return "none"; //`https://webapis-demo.herokuapp.com`.replace(/^http/, 'ws') ;
   },
 };
