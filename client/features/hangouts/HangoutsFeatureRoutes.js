@@ -94,6 +94,7 @@ export default function HangoutsFeatureRoutes({ user, appRoute }) {
       <//>`;
 
     case "/":
+    case "/hangout":
       return html` <${Suspense} fallback=${Loading}>
         <${HangoutsContainer} state=${state} funcs=${funcs} />
       <//>`;

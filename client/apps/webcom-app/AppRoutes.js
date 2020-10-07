@@ -47,10 +47,12 @@ export function AppRoutes(props) {
           <${AuthFeatureRoutes} />
         <//>
       </div>`;
+    case "/hangout":
     case "/":
+      debugger;
       return html` <${Suspense} fallback=${Loading}>
         <div style=${{ height: "70vh" }}>
-          <${HangoutsFeatureRoutes} user=${user && user} appRoute="/" />
+          <${HangoutsFeatureRoutes} user=${user && user} appRoute=${"/"} />
         </div>
       <//>`;
     case "/error":

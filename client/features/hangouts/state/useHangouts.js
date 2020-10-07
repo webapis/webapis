@@ -1,5 +1,8 @@
 import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
-import { useEffect } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
+import {
+  useEffect,
+  useState,
+} from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
 import { useHangoutContext } from "./HangoutsProvider";
 import { useAppRoute } from "../../../components/app-route/index";
 import { changeMessageText } from "./actions";
@@ -7,13 +10,19 @@ import { emailRegex } from "../../authentication/validation/validationRegex";
 import { loadHangouts, loadMessages } from "./local-storage/common";
 import { actionTypes } from "./actionTypes";
 
-export function useHangoutNav({ user }) {
+export function useHangoutNav({ user, appRoute }) {
   const { onAppRoute } = useAppRoute();
-
+  const [rootRoute, setRoute] = useState(null);
+  useEffect(() => {
+    if (appRoute) {
+      setRoute(appRoute);
+    }
+  }, [appRoute]);
   function onNavigation(e) {
     e.preventDefault();
     if (user) {
       const id = e.currentTarget.id;
+      debugger;
       onAppRoute({ featureRoute: `/${id}`, appRoute: "/" });
     } else {
       onAppRoute({ featureRoute: `/login`, appRoute: "/auth" });
@@ -24,7 +33,7 @@ export function useHangoutNav({ user }) {
 
 export function useHangouts({ user, appRoute }) {
   const { onAppRoute } = useAppRoute();
-  const { onNavigation } = useHangoutNav({ user });
+  const { onNavigation } = useHangoutNav({ user, appRoute });
   const username = user && user.username;
   const [state, dispatch] = useHangoutContext();
   const { hangouts, inviteGuest, guestEmail, on_user_client_command } = state;
