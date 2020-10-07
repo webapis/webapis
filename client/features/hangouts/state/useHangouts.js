@@ -22,7 +22,7 @@ export function useHangoutNav({ user, appRoute }) {
     e.preventDefault();
     if (user) {
       const id = e.currentTarget.id;
-      debugger;
+
       onAppRoute({ featureRoute: `/${id}`, appRoute: "/" });
     } else {
       onAppRoute({ featureRoute: `/login`, appRoute: "/auth" });

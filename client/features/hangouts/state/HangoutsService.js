@@ -25,7 +25,7 @@ export default function HangoutsService(props) {
         >${children}<//
       >`;
     case "NONE":
-      return children(props);
+      return children;
     default:
       throw "HangoutsSerivce case missing";
   }
