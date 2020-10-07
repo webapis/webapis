@@ -45,88 +45,21 @@ export default function useSenderMessage({
 
   function handleSenderHangout({ hangout }) {
     const commonArg = { dispatch, username, hangout };
-    switch (hangout.state) {
-      case "ACCEPTER":
-        updateHangout(commonArg);
-        saveRecievedMessage({
-          hangout,
-          dispatch,
-          username,
-          dState:
-            focusedHangout && focusedHangout.target === hangout.target
-              ? "read"
-              : "unread",
-        });
-        if (
-          !focusedHangout ||
-          (focusedHangout && focusedHangout.target !== hangout.target)
-        ) {
-          saveUnread(commonArg);
-        }
-        break;
-      case "BLOCKER":
-        updateHangout(commonArg);
-        removeUnreads(commonArg);
-        break;
-      case "DECLINER":
-        updateHangout(commonArg);
-        break;
-      case "INVITER":
-        saveHangout({ hangout, dispatch, username });
-        saveRecievedMessage({
-          hangout,
-          dispatch,
-          username,
-          dState: "unread",
-        });
-        saveUnread(commonArg);
-
-        break;
-      case "MESSANGER":
-        //FIXME GH focused hangout issue
-
-        updateHangout(commonArg);
-        saveRecievedMessage({
-          hangout,
-          dispatch,
-          username,
-          dState:
-            focusedHangout && focusedHangout.target === hangout.target
-              ? "read"
-              : "unread",
-        });
-        if (
-          !focusedHangout ||
-          (focusedHangout && focusedHangout.target !== hangout.target)
-        ) {
-          saveUnread(commonArg);
-        }
-        break;
-      case "UNBLOCKER":
-      case "UNDECLINER":
-        updateHangout(commonArg);
-
-        saveRecievedMessage({
-          hangout,
-          dispatch,
-          username,
-          dState:
-            focusedHangout && focusedHangout.target === hangout.target
-              ? "read"
-              : "unread",
-        });
-        if (
-          !focusedHangout ||
-          (focusedHangout && focusedHangout.target !== hangout.target)
-        ) {
-          saveUnread(commonArg);
-        }
-        break;
-
-      case "READER":
-        break;
-      default:
-        break;
+    updateHangout(commonArg);
+    saveRecievedMessage({
+      hangout,
+      dispatch,
+      username,
+      dState:
+        focusedHangout && focusedHangout.target === hangout.target
+          ? "read"
+          : "unread",
+    });
+    if (
+      !focusedHangout ||
+      (focusedHangout && focusedHangout.target !== hangout.target)
+    ) {
+      saveUnread(commonArg);
     }
   }
 }

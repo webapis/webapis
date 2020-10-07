@@ -1,4 +1,5 @@
 Cypress.Commands.add("decline", ({ PORT }) => {
+  cy.window().its("localStorage").invoke("setItem", "connectionState", "open");
   if (PORT === 3006) {
     let demoHangout = {
       target: "berouser",
@@ -117,7 +118,7 @@ Cypress.Commands.add("decline", ({ PORT }) => {
             message: {
               text: "",
               timestamp,
-              type: "declined",
+              type: "DECLINE",
             },
             timestamp,
             state: "DECLINED",
@@ -146,7 +147,7 @@ Cypress.Commands.add("decline", ({ PORT }) => {
             message: {
               text: "",
               timestamp,
-              type: "declined",
+              type: "DECLINE",
             },
             timestamp,
             state: "DECLINER",

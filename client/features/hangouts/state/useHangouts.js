@@ -14,7 +14,7 @@ export function useHangoutNav({ user }) {
     e.preventDefault();
     if (user) {
       const id = e.currentTarget.id;
-      onAppRoute({ featureRoute: `/${id}`, appRoute: "/hangouts" });
+      onAppRoute({ featureRoute: `/${id}`, appRoute: "/" });
     } else {
       onAppRoute({ featureRoute: `/login`, appRoute: "/auth" });
     }
@@ -22,16 +22,13 @@ export function useHangoutNav({ user }) {
   return { onNavigation };
 }
 
-export function useHangouts({ user }) {
+export function useHangouts({ user, appRoute }) {
   const { onAppRoute } = useAppRoute();
   const { onNavigation } = useHangoutNav({ user });
   const username = user && user.username;
   const [state, dispatch] = useHangoutContext();
-  const { hangouts, inviteGuest, guestEmail } = state;
-  useEffect(() => {
-    if (user) {
-    }
-  }, [user]);
+  const { hangouts, inviteGuest, guestEmail, on_user_client_command } = state;
+
   function onMessageText(e) {
     const text = e.target.value;
     changeMessageText({ dispatch, text });
@@ -40,6 +37,22 @@ export function useHangouts({ user }) {
   function onUserClientCommand(e) {
     const id = e.target.id;
 
+    switch (id) {
+      case "INVITE":
+      case "BLOCK":
+      case "DECLINE":
+      case "UNBLOCK":
+        onAppRoute({ appRoute, featureRoute: `/HANGCHAT` });
+        break;
+      case "UNDECLINE":
+        changeMessageText({ text: "Invitation accepted", dispatch });
+        onAppRoute({ appRoute, featureRoute: `/HANGCHAT` });
+        break;
+      case "ACCEPT":
+        changeMessageText({ text: "Invitation accepted", dispatch });
+        break;
+      default:
+    }
     dispatch({
       type: actionTypes.ON_USER_CLIENT_COMMAND,
       on_user_client_command: id,
@@ -79,7 +92,7 @@ export function useHangouts({ user }) {
       });
       onAppRoute({
         featureRoute: `/${selectedHangout.state}`,
-        appRoute: "/hangouts",
+        appRoute,
       });
 
       loadMessages({ hangout: selectedHangout, username, dispatch });

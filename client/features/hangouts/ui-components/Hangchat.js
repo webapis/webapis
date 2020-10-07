@@ -21,36 +21,40 @@ export function Messages({ messages, username, ref, onScrollToBottom }) {
     transformedMessages.map((msg) => {
       return html`<div>
         ${(msg.type === undefined ||
-          msg.type === "invited" ||
-          msg.type === "blocker" ||
-          msg.type === "undeclined") &&
+          msg.type === "INVITE" ||
+          // msg.type === "BLOCK" ||
+          msg.type === "MESSAGE" ||
+          msg.type === "ACCEPT" ||
+          msg.type === "UNDECLINE") &&
         html`<${Message} ...${msg} />`}
         ${msg.type &&
-        msg.type === "invited" &&
+        msg.type === "INVITE" &&
         msg.owner === "me" &&
         html`<${InfoMessage} type="success" text=${infoMessages.invited} />`}
         ${msg.type &&
-        msg.type === "blocked" &&
+        msg.owner === "me" &&
+        msg.type === "BLOCK" &&
         html`<${InfoMessage} type="danger" text=${infoMessages.blocked} />`}
         ${msg.type &&
-        msg.type === "blocker" &&
+        msg.owner === "me" &&
+        msg.type === "BLOCKER" &&
         html`<${InfoMessage} type="danger" text=${infoMessages.blocker} />`}
         ${msg.type &&
-        msg.type === "unblocked" &&
+        msg.type === "UNBLOCK" &&
         html`<${InfoMessage} type="warning" text=${infoMessages.unblocked} />`}
         ${msg.type &&
-        msg.type === "unblocker" &&
+        msg.type === "UNBLOCK" &&
         html`<${InfoMessage}
           float="left"
           type="success"
           text=${infoMessages.unblocker}
         />`}
         ${msg.type &&
-        msg.type === "undeclined" &&
+        msg.type === "UNDECLINE" &&
         msg.owner === "me" &&
         html`<${InfoMessage} type="success" text=${infoMessages.undeclined} />`}
         ${msg.type &&
-        msg.type === "declined" &&
+        msg.type === "DECLINE" &&
         html`<${InfoMessage} type="danger" text=${infoMessages.declined} />`}
       </div>`;
     })}
@@ -180,6 +184,11 @@ export default function Hangchat({
   scrollToBottom,
   onScrollToBottom,
 }) {
+  useEffect(() => {
+    if (hangout) {
+      debugger;
+    }
+  }, [hangout]);
   return html`
     <${Layout}
       target=${target}

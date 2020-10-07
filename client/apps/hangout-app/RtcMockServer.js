@@ -26,10 +26,10 @@ export default function RtcMockServer({ children, user }) {
 
       window.addEventListener(username, function (e) {
         const { message: remoteMessage } = e.detail;
-        if (connectionState === "open") {
+        if (user && connectionState === "open") {
           setMessage(remoteMessage);
           console.log(`${username},recieved event issssss:`, e.detail);
-        } else {
+        } else if (user && connectionState === "offline") {
           const {
             data: { hangout },
           } = remoteMessage;
@@ -38,7 +38,7 @@ export default function RtcMockServer({ children, user }) {
         }
       });
     }
-  }, [user]);
+  }, [user, connectionState]);
   function dispatchMessage(message) {
     const targetUsername =
       user.username === "demouser" ? "berouser" : "demouser";
@@ -360,7 +360,9 @@ export default function RtcMockServer({ children, user }) {
     }
   }
   function setRtcUrl() {
-    setConnectionState("open");
+    let cState = localStorage.getItem("connectionState");
+
+    setConnectionState(cState);
   }
   return children({
     message,

@@ -1,5 +1,6 @@
 import infoMessages from "../../../../client/features/hangouts/ui-components/infoMessages";
 Cypress.Commands.add("targetOfflineInvitation", ({ PORT }) => {
+  cy.window().its("localStorage").invoke("setItem", "connectionState", "open");
   cy.visit(`https://localhost:${PORT}`);
   cy.get("[data-testid=democlient]").find("#connect").click();
 
@@ -16,7 +17,7 @@ Cypress.Commands.add("targetOfflineInvitation", ({ PORT }) => {
   });
   cy.route({ url: "/hangout-protocol", method: "post" }).as("protocolCatcher");
   //demo user sends an invitation
-  cy.get("[data-testid=democlient]").find("[data-testid=hangouts-btn]").click();
+  //cy.get("[data-testid=democlient]").find("[data-testid=hangouts-btn]").click();
   cy.get("[data-testid=democlient]")
     .find("[data-testid=user-search-input]")
     .type("berouser");
@@ -49,7 +50,7 @@ Cypress.Commands.add("targetOfflineInvitation", ({ PORT }) => {
             message: {
               text: "Let's chat, berouser!",
               timestamp,
-              type: "invited",
+              type: "INVITE",
             },
             timestamp,
             state: "INVITED",
@@ -78,7 +79,7 @@ Cypress.Commands.add("targetOfflineInvitation", ({ PORT }) => {
           message: {
             text: "Let's chat, berouser!",
             timestamp,
-            type: "invited",
+            type: "INVITE",
           },
           timestamp,
           state: "INVITER",
@@ -149,8 +150,9 @@ Cypress.Commands.add("targetOfflineInvitation", ({ PORT }) => {
             target: "demouser",
             email: "demouser@gmail.com",
             message: {
-              text: "Accepted your invitation",
+              text: "Invitation accepted",
               timestamp,
+              type: "ACCEPT",
             },
             timestamp,
             state: "ACCEPTED",
@@ -178,8 +180,9 @@ Cypress.Commands.add("targetOfflineInvitation", ({ PORT }) => {
             target: "berouser",
             email: "berouser@gmail.com",
             message: {
-              text: "Accepted your invitation",
+              text: "Invitation accepted",
               timestamp,
+              type: "ACCEPT",
             },
             timestamp,
             state: "ACCEPTER",
@@ -222,7 +225,7 @@ Cypress.Commands.add("targetOfflineInvitation", ({ PORT }) => {
             message: {
               text: "Hello Bero how are you",
               timestamp,
-              //type: "invited",
+              type: "MESSAGE",
             },
             timestamp,
             state: "MESSAGED",
@@ -252,7 +255,7 @@ Cypress.Commands.add("targetOfflineInvitation", ({ PORT }) => {
             message: {
               text: "Hello Bero how are you",
               timestamp,
-              //  type: "invited",
+              type: "MESSAGE",
             },
             timestamp,
             state: "MESSANGER",

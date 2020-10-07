@@ -1,4 +1,5 @@
 Cypress.Commands.add("unblock", ({ PORT }) => {
+  cy.window().its("localStorage").invoke("setItem", "connectionState", "open");
   if (PORT === 3006) {
     let demoHangout = {
       target: "berouser",
@@ -105,7 +106,7 @@ Cypress.Commands.add("unblock", ({ PORT }) => {
             message: {
               text: "",
               timestamp,
-              type: "unblocked",
+              type: "UNBLOCK",
             },
             timestamp,
             state: "UNBLOCKED",
@@ -134,7 +135,7 @@ Cypress.Commands.add("unblock", ({ PORT }) => {
             message: {
               text: "",
               timestamp,
-              type: "unblocked",
+              type: "UNBLOCK",
             },
             timestamp,
             state: "UNBLOCKER",

@@ -71,77 +71,24 @@ export default function useDeliveryAcknowledgement({
   function onDeliveryAcknowledgement({ hangout }) {
     const commonArg = { dispatch, username, hangout };
 
-    switch (hangout.state) {
-      case "UNDECLINED":
-        setTimeout(function () {
-          updateHangout({ hangout, dispatch, username });
-        }, 0);
-        break;
-      case "UNBLOCKED":
-        setTimeout(function () {
-          updateHangout({ hangout, dispatch, username });
-        }, 0);
+    // updateHangout({ hangout, dispatch, username });
+    if (browserId === hangout.browserId) {
+      updateHangout({ hangout, dispatch, username });
 
-        break;
-      case "INVITED":
-        setTimeout(function () {
-          if (browserId === hangout.browserId) {
-            updateHangout({ hangout, dispatch, username });
-
-            updateSentMessage({
-              hangout,
-              dispatch,
-              username,
-              dState: "delivered",
-            });
-          } else {
-            saveHangout({ hangout, dispatch, username });
-            saveSentMessage({
-              hangout,
-              dispatch,
-              username,
-              dState: "delivered",
-            });
-          }
-        }, 200);
-        // dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
-        break;
-      case "DECLINED":
-        setTimeout(function () {
-          updateHangout({ hangout, dispatch, username });
-          dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
-        }, 200);
-        break;
-      case "ACCEPTED":
-        setTimeout(function () {
-          updateHangout(commonArg);
-          updateSentMessage(commonArg);
-          dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
-        }, 200);
-
-        break;
-      case "BLOCKED":
-        setTimeout(function () {
-          updateHangout(commonArg);
-          updateSentMessage(commonArg);
-          removeUnreads(commonArg);
-          dispatch({ type: actionTypes.HANGOUT_UPDATED, hangout });
-          dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
-          // onAppRoute({ featureRoute: `/${hangout.state}`, route: "/hangouts" });
-        }, 200);
-
-        break;
-      case "MESSAGED":
-        setTimeout(function () {
-          updateHangout(commonArg);
-          updateSentMessage(commonArg);
-          dispatch({ type: actionTypes.SENDING_HANGOUT_FULLFILLED });
-        }, 200);
-
-        break;
-
-      default:
-        break;
+      updateSentMessage({
+        hangout,
+        dispatch,
+        username,
+        dState: "delivered",
+      });
+    } else {
+      saveHangout({ hangout, dispatch, username });
+      saveSentMessage({
+        hangout,
+        dispatch,
+        username,
+        dState: "delivered",
+      });
     }
   }
 }

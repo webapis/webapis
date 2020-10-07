@@ -9,10 +9,10 @@ import AuthMockService from "../../apps/auth-app/AuthMockService";
 import AuthProvider from "../../features/authentication/state/AuthProvider";
 const html = htm.bind(h);
 export default function AuthService(props) {
-  const { children } = props;
+  const { children, staticUser } = props;
   switch (AUTH) {
     case "MOCK":
-      return html`<${AuthMockService}
+      return html`<${AuthMockService} staticUser=${staticUser}
         >${({ signup, login, changepassword, requestpasswordchange }) => {
           return html`<${AuthProvider}
             ...${props}
@@ -28,7 +28,7 @@ export default function AuthService(props) {
       <//>`;
     case "NODEJS":
       //
-      return html`<${NodeJsAuthService}
+      return html`<${NodeJsAuthService} staticUser=${staticUser}
         >${({ signup, login, changepassword, requestpasswordchange }) => {
           return html`<${AuthProvider}
             ...${props}
@@ -43,7 +43,7 @@ export default function AuthService(props) {
         }}
       <//>`;
     case "NONE":
-      return children(props);
+      return children({ user: staticUser });
     default:
       throw "No Auth service provided";
   }

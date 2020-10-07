@@ -14,15 +14,10 @@ export default function RouteContainer({ user }) {
     onAppRoute,
   } = useAppRoute();
 
-  useEffect(() => {
-    if (user) {
-      onAppRoute({ appRoute: "/hangouts", featureRoute: "/hangout" });
-    }
-  }, [user]);
   switch (appRoute) {
-    case "/hangouts":
+    case "/":
       return html` <${Suspense} fallback=${Loading}>
-        <${HangoutFeatureRoutes} user=${user} />
+        <${HangoutFeatureRoutes} user=${user} appRoute="/" />
       <//>`;
   }
 }

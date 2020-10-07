@@ -4,7 +4,7 @@ import WebSocketProvider from "../../features/websocket/WebSocketProvider";
 import RtcMockServer from "../../apps/hangout-app/RtcMockServer";
 const html = htm.bind(h);
 export default function RtcMsgService(props) {
-  const { children } = props;
+  const { children, staticUser } = props;
   switch (RTC) {
     case "WEBSOCKET":
       return html`<${WebSocketProvider}
@@ -13,7 +13,7 @@ export default function RtcMsgService(props) {
         }}<//
       >`;
     case "MOCK":
-      return html`<${RtcMockServer}
+      return html`<${RtcMockServer} user=${staticUser}
         >${({ sendMessage, message, connectionState, setRtcUrl }) => {
           return children({
             sendMessage,

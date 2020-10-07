@@ -77,6 +77,7 @@ module.exports = {
     hgdev: concurrent.nps("hg-mock-dev", "hg-ws-dev", "ws-dev", "hg-ws-mg-dev"),
     ...appScripts,
     storybook,
+    testE2E: { script: "node puppeteer/index.js" },
     testAva: {
       script: "ava",
     },

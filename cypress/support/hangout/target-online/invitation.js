@@ -1,5 +1,6 @@
 import infoMessages from "../../../../client/features/hangouts/ui-components/infoMessages";
 Cypress.Commands.add("invitation", ({ PORT }) => {
+  cy.window().its("localStorage").invoke("setItem", "connectionState", "open");
   cy.visit(`https://localhost:${PORT}`);
   cy.get("[data-testid=democlient]").find("#connect").click();
   cy.get("[data-testid=beroclient]").find("#connect").click();
@@ -17,10 +18,12 @@ Cypress.Commands.add("invitation", ({ PORT }) => {
   });
   cy.route({ url: "/hangout-protocol", method: "post" }).as("protocolCatcher");
   //demo user sends an invitation
-  cy.get("[data-testid=democlient]").find("[data-testid=hangouts-btn]").click();
+
+  //cy.get("[data-testid=democlient]").find("[data-testid=hangouts-btn]").click();
   cy.get("[data-testid=democlient]")
     .find("[data-testid=user-search-input]")
     .type("berouser");
+
   cy.get("[data-testid=democlient]")
     .find("[data-testid=user-search-button]")
     .click();
@@ -28,6 +31,7 @@ Cypress.Commands.add("invitation", ({ PORT }) => {
   cy.get("[data-testid=democlient]").find("[data-testid=berouser]").click();
 
   cy.get("[data-testid=democlient]").find("[data-testid=oninvite-btn]").click();
+
   if (PORT === 3006) {
     //test data persistence to sender
     cy.task("query:mongodb", {
@@ -49,7 +53,7 @@ Cypress.Commands.add("invitation", ({ PORT }) => {
             message: {
               text: "Let's chat, berouser!",
               timestamp,
-              type: "invited",
+              type: "INVITE",
             },
             timestamp,
             state: "INVITED",
@@ -78,7 +82,7 @@ Cypress.Commands.add("invitation", ({ PORT }) => {
             message: {
               text: "Let's chat, berouser!",
               timestamp,
-              type: "invited",
+              type: "INVITE",
             },
             timestamp,
             state: "INVITER",
@@ -97,7 +101,7 @@ Cypress.Commands.add("invitation", ({ PORT }) => {
   cy.get("[data-testid=democlient]")
     .find("[data-testid=send-btn]")
     .should("be.disabled");
-  // cy.pause();
+
   //berouser accepts a message
   cy.get("[data-testid=beroclient]")
     .find("[data-testid=message-count]")
@@ -129,8 +133,9 @@ Cypress.Commands.add("invitation", ({ PORT }) => {
             target: "demouser",
             email: "demouser@gmail.com",
             message: {
-              text: "Accepted your invitation",
+              text: "Invitation accepted",
               timestamp,
+              type: "ACCEPT",
             },
             timestamp,
             state: "ACCEPTED",
@@ -158,8 +163,9 @@ Cypress.Commands.add("invitation", ({ PORT }) => {
             target: "berouser",
             email: "berouser@gmail.com",
             message: {
-              text: "Accepted your invitation",
+              text: "Invitation accepted",
               timestamp,
+              type: "ACCEPT",
             },
             timestamp,
             state: "ACCEPTER",
@@ -202,6 +208,7 @@ Cypress.Commands.add("invitation", ({ PORT }) => {
             message: {
               text: "Hello Bero how are you",
               timestamp,
+              type: "MESSAGE",
               //type: "invited",
             },
             timestamp,
@@ -231,6 +238,7 @@ Cypress.Commands.add("invitation", ({ PORT }) => {
             message: {
               text: "Hello Bero how are you",
               timestamp,
+              type: "MESSAGE",
               //  type: "invited",
             },
             timestamp,

@@ -30,16 +30,16 @@ export function AppRoutes(props) {
 
   useEffect(() => {
     const browserId = loadBrowserId();
-    if (user) {
+    if (user && connectionState === null) {
       setRtcUrl(
         `${RTC_URL}/authed-msg/hangouts/webcom-app/?username=${user.username}&browserId=${browserId}`
       );
 
-      onAppRoute({ appRoute: "/hangouts", featureRoute: "/hangout" });
+      // onAppRoute({ appRoute: "/hangouts", featureRoute: "/hangout" });
     } else {
-      onAppRoute({ appRoute: "/auth", featureRoute: "/login" });
+      // onAppRoute({ appRoute: "/auth", featureRoute: "/login" });
     }
-  }, [user]);
+  }, [user, connectionState]);
   switch (appRoute) {
     case "/auth":
       return html`<div style=${{ height: "90vh" }}>
@@ -47,10 +47,10 @@ export function AppRoutes(props) {
           <${AuthFeatureRoutes} />
         <//>
       </div>`;
-    case "/hangouts":
+    case "/":
       return html` <${Suspense} fallback=${Loading}>
         <div style=${{ height: "70vh" }}>
-          <${HangoutsFeatureRoutes} user=${user && user} />
+          <${HangoutsFeatureRoutes} user=${user && user} appRoute="/" />
         </div>
       <//>`;
     case "/error":

@@ -28,7 +28,6 @@ import {
   loadOfflineSentHangouts,
 } from "./local-storage/common";
 
-//import { useAppRoute } from "./message-hooks/node_modules/components/app-route/index";
 import useClientCommands from "./useClientCommands";
 const html = htm.bind(h);
 const HangoutContext = createContext();
@@ -47,8 +46,6 @@ export default function HangoutsProvider(props) {
   const [state, dispatch] = useReducer(reducer, initState);
   const {
     hangout,
-    // on_user_client_command,
-    //  messageText,
     searchHangouts,
     search,
     messages,
@@ -57,7 +54,6 @@ export default function HangoutsProvider(props) {
     messageForGuest,
     socketConnected,
     hangouts,
-    //  sendhangout,
   } = state;
 
   useMessage({
@@ -74,15 +70,13 @@ export default function HangoutsProvider(props) {
     user,
     browserId: loadBrowserId(),
   });
-  useEffect(() => {
-    if (user) {
-    }
-  }, [user]);
+
   useEffect(() => {
     if (user && socketConnected) {
       actions.fetchHangouts({ dispatch, username: user.username });
     }
     if (user && !socketConnected) {
+      debugger;
       loadHangouts({ username: user.username, dispatch });
     }
   }, [user, socketConnected]);
@@ -129,14 +123,14 @@ export default function HangoutsProvider(props) {
     }
   }, [connectionState]);
   useEffect(() => {
-    if (searchHangouts) {
+    if (searchHangouts && user) {
       actions.searchHangouts({
         search,
         dispatch,
         username: user && user.username,
       });
     }
-  }, [searchHangouts]);
+  }, [searchHangouts, user]);
 
   useEffect(() => {
     if (user === null) {
@@ -159,20 +153,7 @@ export default function HangoutsProvider(props) {
   useEffect(() => {
     if (hangout && user) {
       switch (hangout.state) {
-        // case "ACCEPTER":
-        // case "INVITER":
-        // case "DECLINER":
-        // case "BLOCKER":
         case "MESSANGER":
-          //case "UNBLOCKER":
-          // case "READER":
-          // onRead();
-          // removeUnreads({
-          //   dispatch,
-          //   name: user && user.username,
-          //   hangout,
-          //   state: "MESSANGER",
-          // });
           break;
         case "INVITEE":
           dispatch({
@@ -183,10 +164,6 @@ export default function HangoutsProvider(props) {
         default:
           break;
       }
-
-      // load messages from local storage
-      // loadMessages({ hangout, name: user && user.username, dispatch });
-      setTimeout(() => {}, 100);
     }
   }, [hangout, user]);
 

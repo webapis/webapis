@@ -79,6 +79,7 @@ export function useAuth() {
   }
 
   function onSignOut() {
+    onAppRoute({ appRoute: "/auth", featureRoute: "/login" });
     localStorage.removeItem("webcom");
     dispatch({ type: actionTypes.LOGOUT });
   }

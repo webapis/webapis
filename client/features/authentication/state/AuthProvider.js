@@ -64,10 +64,7 @@ export default function AuthProvider(props) {
       dispatch({ type: actionTypes.LOGIN_SUCCESS, user: staticUser });
     }
   }, [staticUser]);
-  useEffect(() => {
-    if (user) {
-    }
-  }, [user]);
+
   useEffect(() => {
     if (signupStarted) {
       handleSignUp({ username, email, password });
@@ -119,6 +116,7 @@ export default function AuthProvider(props) {
               email,
             })
           );
+          onAppRoute({ appRoute: "/", featureRoute: "/" });
         } else if (status > 200 && status < 500) {
           inputValErrorCodes.forEach((error) => {
             serverValidation({ status: error, dispatch });
@@ -161,6 +159,7 @@ export default function AuthProvider(props) {
               email,
             })
           );
+          onAppRoute({ appRoute: "/", featureRoute: "/" });
         } else if (status > 200 && status < 500) {
           //
           inputValErrorCodes.forEach((error) => {

@@ -11,7 +11,7 @@ export default function ServiceAdapter(props) {
   return html`<${AppRouteProvider}>
     <${AuthService} staticUser=${staticUser}>
       ${({ user }) => {
-        return html` <${RtcMsgService}>
+        return html` <${RtcMsgService} staticUser=${staticUser}>
           ${({ sendMessage, message, connectionState, setRtcUrl }) => {
             return html`<${HangoutsService}
               sendMessage=${sendMessage}

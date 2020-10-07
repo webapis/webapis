@@ -125,6 +125,7 @@ export function reducer(state, action) {
         unreadsCount: action.unreadhangouts.length,
       };
     case actionTypes.HANGOUT_UPDATED:
+      debugger;
       return { ...state, hangout: action.hangout };
 
     case actionTypes.HANGOUTS_UPDATED:

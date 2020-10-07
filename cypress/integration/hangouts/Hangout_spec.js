@@ -280,9 +280,7 @@ describe("Test websocket", () => {
         );
 
       cy.visit(`https://localhost:${PORT}`);
-      cy.get("[data-testid=democlient]")
-        .find("[data-testid=hangouts-btn]")
-        .click();
+
       cy.get("[data-testid=democlient]")
         .find("[data-testid=hangouts-list-group]")
         .children()

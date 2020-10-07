@@ -12,15 +12,12 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "ava": "^3.11.1",
     "eslint-config-preact": "^1.1.1",
     "exact": "^0.8.0",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.11",
     "nodemon": "^2.0.3",
-    "prettier": "^2.0.5",
-    "parse": "2.13.0",
-    "parse-server": "4.3.0"
+    "prettier": "^2.0.5"
   },
   "dependencies": {
     "@rollup/plugin-image": "2.0.4",

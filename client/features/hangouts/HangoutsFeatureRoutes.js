@@ -7,6 +7,7 @@ import { useEffect } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/asset
 import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
 import { useAppRoute } from "components/app-route/index";
 import { useHangouts } from "./state/useHangouts";
+
 //import useWebRTC from "../webrtc/state/useWebRTC";
 import useUnread from "./state/useUnread";
 const Block = lazy(() => import("./ui-components/Block"));
@@ -21,23 +22,21 @@ const HangoutsContainer = lazy(() => import("./ui-components/Hangouts"));
 const UnreadHangouts = lazy(() => import("./ui-components/UnreadHangouts"));
 const VideoCall = lazy(() => import("./ui-components/VideoCall"));
 const html = htm.bind(h);
-export default function HangoutsFeatureRoutes({ user }) {
+export default function HangoutsFeatureRoutes({ user, appRoute }) {
   const {
     onAppRoute,
     state: { featureRoute },
   } = useAppRoute();
 
-  const { state, funcs } = useHangouts({ user });
+  const { state, funcs } = useHangouts({ user, appRoute });
   const { hangout } = state;
   const { onUnreadSelect, onUnreadRemove, reducedUnreads } = useUnread({
     user,
     ...state,
     onAppRoute,
+    appRoute,
   });
-  useEffect(() => {
-    if (user) {
-    }
-  }, [user]);
+
   switch (featureRoute) {
     case "/videocall":
       return html` <${Suspense} fallback=${Loading}>
@@ -94,7 +93,7 @@ export default function HangoutsFeatureRoutes({ user }) {
         />
       <//>`;
 
-    case "/hangout":
+    case "/":
       return html` <${Suspense} fallback=${Loading}>
         <${HangoutsContainer} state=${state} funcs=${funcs} />
       <//>`;

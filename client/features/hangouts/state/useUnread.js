@@ -16,6 +16,7 @@ export default function useUnread({
   dispatch,
   onAppRoute,
   user,
+  appRoute,
 }) {
   const [reducedUnreads, setReducedUnreads] = useState([]);
 
@@ -28,7 +29,7 @@ export default function useUnread({
   function onUnreadSelect({ hangout }) {
     dispatch({ type: actionTypes.SELECTED_HANGOUT, hangout });
 
-    onAppRoute({ featureRoute: `/${hangout.state}`, appRoute: "/hangouts" });
+    onAppRoute({ featureRoute: `/${hangout.state}`, appRoute });
     // updateRecievedReadMessages({
     //   hangout,
     //   username: user && user.username,

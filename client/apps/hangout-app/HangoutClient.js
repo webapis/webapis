@@ -16,7 +16,7 @@ const html = htm.bind(h);
 export default function HangoutClient({ user }) {
   const [socketUrl, setSocketUrl] = useState(null);
 
-  return html`<${ServiceAdapter} user=${user} socketUrl=${socketUrl}>
+  return html`<${ServiceAdapter} staticUser=${user} socketUrl=${socketUrl}>
     ${({ setRtcUrl }) => {
       function connect() {
         setRtcUrl(

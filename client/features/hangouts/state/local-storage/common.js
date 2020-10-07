@@ -21,6 +21,7 @@ export function updateUnread({ dispatch, hangout, username, dState }) {
 
 export function saveSentMessage({ hangout, dispatch, username, dState }) {
   const { target, message } = hangout;
+
   const messageKey = `${username}-${target}-messages`;
   const localMessages = JSON.parse(localStorage.getItem(messageKey));
   const pendingMessage = { ...message, owner: username, state: dState };
@@ -323,8 +324,10 @@ export function loadHangouts({ username, dispatch }) {
 
   const localHangouts = JSON.parse(localStorage.getItem(hangoutKey));
   if (localHangouts && localHangouts.length > 0) {
+    debugger;
     dispatch({ type: actionTypes.LOADED_HANGOUTS, hangouts: localHangouts });
   } else {
+    debugger;
     dispatch({ type: actionTypes.LOADED_HANGOUTS, hangouts: [] });
   }
 }

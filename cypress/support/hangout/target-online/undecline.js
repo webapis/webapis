@@ -1,4 +1,5 @@
 Cypress.Commands.add("undecline", ({ PORT }) => {
+  cy.window().its("localStorage").invoke("setItem", "connectionState", "open");
   if (PORT === 3006) {
     let demoHangout = {
       target: "berouser",
@@ -118,7 +119,7 @@ Cypress.Commands.add("undecline", ({ PORT }) => {
             message: {
               text: "Invitation accepted",
               timestamp,
-              type: "undeclined",
+              type: "UNDECLINE",
             },
             timestamp,
             state: "UNDECLINED",
@@ -147,7 +148,7 @@ Cypress.Commands.add("undecline", ({ PORT }) => {
             message: {
               text: "Invitation accepted",
               timestamp,
-              type: "undeclined",
+              type: "UNDECLINE",
             },
             timestamp,
             state: "UNDECLINER",
