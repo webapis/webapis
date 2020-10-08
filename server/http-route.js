@@ -61,6 +61,7 @@ function route({ url, req, res, server }) {
   const hangoutsRegex = /.*\/hangouts\/.*/;
   const appMonitorRegex = /.*\/monitor\/.*/;
   const googleapisRegex = /.*\/googleapis\/.*/;
+  debugger;
   switch (true) {
     case authRegex.test(url):
       authOperation(req, res);
