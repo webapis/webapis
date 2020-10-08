@@ -37,38 +37,18 @@ module.exports.hangoutHandlerNew = async function ({
       removeDelivered({ col, username, browserId }); //
 
     ws.on("message", async (socketMessage) => {
-      const { data } = JSON.parse(socketMessage);
-      const { type } = data;
+      debugger;
+      if (socketMessage === "heartbeat") {
+        debugger; //
+        ws.isAlive = true;
+      } else {
+        const { data } = JSON.parse(socketMessage);
+        const { type } = data;
 
-      switch (type) {
-        case "HANGOUT":
-          let { hangout } = data;
+        switch (type) {
+          case "HANGOUT":
+            let { hangout } = data;
 
-          const { target } = hangout;
-
-          const tUser = await col.findOne({ username: target });
-          const { hForTarget, hForSender } = hangoutMapper({
-            hangout,
-            cUser,
-          });
-
-          sendHangout({ cUser, tUser, connections, hForTarget, hForSender }) &&
-            persist &&
-            updateHangout({
-              col,
-              cUser,
-              tUser,
-              hForTarget,
-              hForSender,
-              hangout,
-            });
-          persist && saveDelayedAck({ col, connections, cUser, hForSender });
-          persist && saveUndelivered({ col, connections, tUser, hForTarget });
-          break;
-        case "OFFLINE_HANGOUTS":
-          let { hangouts } = data;
-
-          hangouts.forEach(async (hangout) => {
             const { target } = hangout;
 
             const tUser = await col.findOne({ username: target });
@@ -95,11 +75,45 @@ module.exports.hangoutHandlerNew = async function ({
               });
             persist && saveDelayedAck({ col, connections, cUser, hForSender });
             persist && saveUndelivered({ col, connections, tUser, hForTarget });
-          });
+            break;
+          case "OFFLINE_HANGOUTS":
+            let { hangouts } = data;
 
-          break;
-        default:
-          throw "No hangout type specified";
+            hangouts.forEach(async (hangout) => {
+              const { target } = hangout;
+
+              const tUser = await col.findOne({ username: target });
+              const { hForTarget, hForSender } = hangoutMapper({
+                hangout,
+                cUser,
+              });
+
+              sendHangout({
+                cUser,
+                tUser,
+                connections,
+                hForTarget,
+                hForSender,
+              }) &&
+                persist &&
+                updateHangout({
+                  col,
+                  cUser,
+                  tUser,
+                  hForTarget,
+                  hForSender,
+                  hangout,
+                });
+              persist &&
+                saveDelayedAck({ col, connections, cUser, hForSender });
+              persist &&
+                saveUndelivered({ col, connections, tUser, hForTarget });
+            });
+
+            break;
+          default:
+            throw "No hangout type specified";
+        }
       }
     });
 

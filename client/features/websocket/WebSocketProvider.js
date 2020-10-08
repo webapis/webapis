@@ -47,6 +47,7 @@ export default function WebSocketProvider(props) {
 
           dispatch({ type: actionTypes.MESSAGE_RECIEVED, message: msg });
         } else {
+          websocket.send("heartbeat");
           debugger;
         }
       };

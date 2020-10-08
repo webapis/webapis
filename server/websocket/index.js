@@ -19,6 +19,7 @@ module.exports = async function (server, client) {
     debugger;
   }
   wss.on("connection", async function connection(ws, request) {
+    ws.isAlive = true;
     if (request.url.includes("unauthed-msg")) {
       unauthedHandlers({ ws, request, connections, peers });
     } else if (request.url.includes("authed-msg")) {
@@ -29,9 +30,9 @@ module.exports = async function (server, client) {
   });
   const interval = setInterval(function ping() {
     wss.clients.forEach(function each(ws) {
-      // if (ws.isAlive === false) return ws.terminate();
+      if (ws.isAlive === false) return ws.terminate();
       debugger;
-      // ws.isAlive = false;
+      ws.isAlive = false;
       ws.send("heartbeat");
     });
   }, 30000);
