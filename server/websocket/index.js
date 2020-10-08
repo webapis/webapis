@@ -4,6 +4,7 @@ const url = require("url");
 
 const EventEmitter = require("events");
 const WebSocket = require("ws");
+const { ws } = require("../../scripts/apps_config");
 let connections = {};
 let peers = [];
 module.exports = wsocket = new EventEmitter();
@@ -11,7 +12,12 @@ module.exports = wsocket = new EventEmitter();
 module.exports = async function (server, client) {
   const collection = await client.db("auth").collection("users");
   const wss = new WebSocket.Server({ server });
-
+  function heartbeat() {
+    this.isAlive = true;
+  }
+  function noop() {
+    debugger;
+  }
   wss.on("connection", async function connection(ws, request) {
     if (request.url.includes("unauthed-msg")) {
       unauthedHandlers({ ws, request, connections, peers });
@@ -20,6 +26,18 @@ module.exports = async function (server, client) {
     } else {
       throw "proper url for websocket not provided";
     }
+    ws.on("pong", heartbeat);
+  });
+  const interval = setInterval(function ping() {
+    wss.clients.forEach(function each(ws) {
+      // if (ws.isAlive === false) return ws.terminate();
+      debugger;
+      // ws.isAlive = false;
+      ws.send("heartbeat");
+    });
+  }, 30000);
+  wss.on("close", function close() {
+    clearInterval(interval);
   });
 };
 

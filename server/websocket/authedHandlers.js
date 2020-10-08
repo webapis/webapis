@@ -13,7 +13,6 @@ module.exports.authedHandlers = async function ({
   collection,
 }) {
   try {
-    debugger;
     undefinedArguments({ request, connections, ws, collection });
     const token = cookie.parse(request.headers["cookie"]);
 
@@ -28,7 +27,7 @@ module.exports.authedHandlers = async function ({
     const senderUser = await collection.findOne({ username });
 
     connections[`${username}-${browserId}`] = ws;
-    debugger;
+
     switch (true) {
       case request.url.includes("hangouts"):
         hangoutHandlerNew({
@@ -51,7 +50,6 @@ module.exports.authedHandlers = async function ({
       delete connections[`${username}-${browserId}`];
     });
   } catch (error) {
-    debugger;
     const err = error;
   }
 };

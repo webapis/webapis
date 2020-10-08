@@ -41,9 +41,14 @@ export default function WebSocketProvider(props) {
   useEffect(() => {
     if (websocket) {
       websocket.onmessage = (message) => {
-        const msg = JSON.parse(message.data);
+        if (!message.data.includes("heartbeat")) {
+          debugger;
+          const msg = JSON.parse(message.data);
 
-        dispatch({ type: actionTypes.MESSAGE_RECIEVED, message: msg });
+          dispatch({ type: actionTypes.MESSAGE_RECIEVED, message: msg });
+        } else {
+          debugger;
+        }
       };
       websocket.onopen = () => {
         dispatch({
@@ -52,6 +57,7 @@ export default function WebSocketProvider(props) {
         });
       };
       websocket.onclose = () => {
+        debugger;
         dispatch({
           type: actionTypes.CONNECTION_STATE_CHANGED,
           connectionState: "close",

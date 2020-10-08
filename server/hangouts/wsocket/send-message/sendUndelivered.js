@@ -3,7 +3,6 @@
 const { undefinedArguments } = require("../../../helpers");
 module.exports.sendUndelivered = function ({ cUser, browserId, ws }) {
   try {
-    debugger;
     undefinedArguments({ cUser, browserId, ws });
     const connectedBrowser = cUser.browsers.find((b) => {
       if (b.browserId === browserId) {
@@ -30,7 +29,6 @@ module.exports.sendUndelivered = function ({ cUser, browserId, ws }) {
     }
     return false;
   } catch (error) {
-    debugger;
     throw error;
   }
 };
