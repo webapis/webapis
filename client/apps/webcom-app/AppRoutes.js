@@ -30,15 +30,22 @@ export function AppRoutes(props) {
 
   useEffect(() => {
     const browserId = loadBrowserId();
+
     if (user) {
-      setRtcUrl(
-        `${location.origin.replace(
-          /^http/,
-          "ws"
-        )}/authed-msg/hangouts/webcom-app/?username=${
-          user.username
-        }&browserId=${browserId}`
-      );
+      if (ENV === "production") {
+        setRtcUrl(
+          `${location.origin.replace(
+            /^http/,
+            "ws"
+          )}/authed-msg/hangouts/webcom-app/?username=${
+            user.username
+          }&browserId=${browserId}`
+        );
+      } else {
+        setRtcUrl(
+          `wss://localhost:${PORT}/authed-msg/hangouts/webcom-app/?username=${user.username}&browserId=${browserId}`
+        );
+      }
 
       // onAppRoute({ appRoute: "/hangouts", featureRoute: "/hangout" });
     } else {
