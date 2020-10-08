@@ -37,7 +37,6 @@ module.exports.hangoutHandlerNew = async function ({
       removeDelivered({ col, username, browserId }); //
 
     ws.on("message", async (socketMessage) => {
-      debugger;
       if (socketMessage === "heartbeat") {
         ws.isAlive = true;
       } else {
