@@ -17,6 +17,7 @@ module.exports = async function (server, client) {
   }
 
   wss.on("connection", async function connection(ws, request) {
+    debugger;
     ws.isAlive = true;
     if (request.url.includes("unauthed-msg")) {
       unauthedHandlers({ ws, request, connections, peers });
