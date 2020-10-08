@@ -4,27 +4,28 @@
   // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
-  {
-    "name": "Launch Puppeteer",
-    "program": "${workspaceFolder}/puppeteer/index.js",
-    "request": "launch",
-    "skipFiles": [
-      "<node_internals>/**"
-    ],
-    "type": "pwa-node"
-  },
+    {
+      "type": "node",
+      "request": "attach",
+      "name": "Attach to remote",
+      "address": "localhost",
+      "port": 9090
+    },
+    {
+      "name": "Launch Puppeteer",
+      "program": "${workspaceFolder}/puppeteer/index.js",
+      "request": "launch",
+      "skipFiles": ["<node_internals>/**"],
+      "type": "pwa-node"
+    },
     {
       "type": "node",
       "request": "launch",
       "name": "Debug AVA test file",
       "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/ava",
-      "runtimeArgs": [
-        "${file}"
-      ],
+      "runtimeArgs": ["${file}"],
       "outputCapture": "std",
-      "skipFiles": [
-        "<node_internals>/**/*.js"
-      ]
+      "skipFiles": ["<node_internals>/**/*.js"]
     },
     {
       "name": "Attach to Process Cypress",
@@ -37,11 +38,9 @@
       "request": "launch",
       "name": "Launch Program",
       "program": "${workspaceFolder}/index.js",
-      "skipFiles": [
-        "<node_internals>/**"
-      ]
+      "skipFiles": ["<node_internals>/**"]
     },
-  
+
     {
       "name": "Debug Jest Tests",
       "type": "node",
