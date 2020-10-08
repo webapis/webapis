@@ -9,7 +9,7 @@
       "request": "attach",
       "name": "Attach to remote",
       "address": "localhost",
-      "port": 9090
+      "port": 9229
     },
     {
       "name": "Launch Puppeteer",

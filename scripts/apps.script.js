@@ -32,7 +32,7 @@ function serverCommands({ env }) {
     case "dev":
       return "nodemon server/index.js";
     case "production":
-      return "node --inspect=9090 server/index.js";
+      return "node --inspect=9229 server/index.js";
     default:
       return "nodemon server/index.js";
   }
