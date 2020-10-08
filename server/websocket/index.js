@@ -26,7 +26,6 @@ module.exports = async function (server, client) {
     } else {
       throw "proper url for websocket not provided";
     }
-    ws.on("pong", heartbeat);
   });
   const interval = setInterval(function ping() {
     wss.clients.forEach(function each(ws) {
