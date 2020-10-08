@@ -39,9 +39,9 @@ module.exports.hangoutHandlerNew = async function ({
     ws.on("message", async (socketMessage) => {
       debugger;
       if (socketMessage === "heartbeat") {
-        debugger; //
         ws.isAlive = true;
       } else {
+        debugger;
         const { data } = JSON.parse(socketMessage);
         const { type } = data;
 

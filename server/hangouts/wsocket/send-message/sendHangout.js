@@ -36,7 +36,7 @@ module.exports.sendHangout = async function ({
         for (const browser of targetBrowsers) {
           const targetOnline =
             connections[`${tUser.username}-${browser.browserId}`];
-
+          debugger;
           if (targetOnline) {
             const msg = {
               data: {
@@ -47,6 +47,9 @@ module.exports.sendHangout = async function ({
               type: "HANGOUT",
             };
             targetOnline.send(JSON.stringify(msg)); //-----------------
+            debugger;
+          } else {
+            debugger;
           }
         }
       },

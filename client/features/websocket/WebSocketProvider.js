@@ -48,7 +48,6 @@ export default function WebSocketProvider(props) {
           dispatch({ type: actionTypes.MESSAGE_RECIEVED, message: msg });
         } else {
           websocket.send("heartbeat");
-          debugger;
         }
       };
       websocket.onopen = () => {
@@ -58,7 +57,6 @@ export default function WebSocketProvider(props) {
         });
       };
       websocket.onclose = () => {
-        debugger;
         dispatch({
           type: actionTypes.CONNECTION_STATE_CHANGED,
           connectionState: "close",
