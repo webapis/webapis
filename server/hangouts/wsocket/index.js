@@ -24,7 +24,7 @@ module.exports.hangoutHandlerNew = async function ({
     const client = await new MongoClient(dbUrl, { useUnifiedTopology: true });
 
     connections[`${username}-${browserId}`] = ws;
-
+    debugger;
     await client.connect();
     const col = await client.db("auth").collection("users");
     const cUser = await col.findOne({ username });
@@ -37,6 +37,7 @@ module.exports.hangoutHandlerNew = async function ({
       removeDelivered({ col, username, browserId }); //
 
     ws.on("message", async (socketMessage) => {
+      debugger;
       const { data } = JSON.parse(socketMessage);
       const { type } = data;
 
@@ -109,6 +110,7 @@ module.exports.hangoutHandlerNew = async function ({
       console.log("socket closed by", username);
     });
   } catch (error) {
+    debugger;
     throw error;
   }
 };

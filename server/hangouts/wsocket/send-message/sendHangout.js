@@ -29,6 +29,7 @@ module.exports.sendHangout = async function ({
             };
 
             senderOnline.send(JSON.stringify(msg));
+            debugger;
           }
         }
       },
@@ -48,11 +49,15 @@ module.exports.sendHangout = async function ({
             };
             targetOnline.send(JSON.stringify(msg)); //-----------------
           }
+          debugger;
         }
       },
     };
 
     await funcs.senderOnline();
     await funcs.targetOnline();
-  } catch (error) {}
+  } catch (error) {
+    debugger;
+    throw error;
+  }
 };
