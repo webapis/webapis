@@ -52,7 +52,7 @@ module.exports.hangoutHandlerNew = async function ({
             hangout,
             cUser,
           });
-
+          debugger;
           sendHangout({ cUser, tUser, connections, hForTarget, hForSender }) &&
             persist &&
             updateHangout({
@@ -77,7 +77,7 @@ module.exports.hangoutHandlerNew = async function ({
               hangout,
               cUser,
             });
-
+            debugger;
             sendHangout({
               cUser,
               tUser,

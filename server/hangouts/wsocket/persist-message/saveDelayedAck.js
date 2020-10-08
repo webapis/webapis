@@ -16,7 +16,7 @@ module.exports.saveDelayedAck = async function ({
       senderOffline: async function () {
         for (const browser of browsers) {
           const senderOnline = connections[`${username}-${browser.browserId}`];
-          //
+          debugger;
           if (!senderOnline) {
             await col.update(
               { username },

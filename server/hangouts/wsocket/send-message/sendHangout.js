@@ -48,6 +48,7 @@ module.exports.sendHangout = async function ({
               type: "HANGOUT",
             };
             targetOnline.send(JSON.stringify(msg)); //-----------------
+            debugger;
           }
           debugger;
         }

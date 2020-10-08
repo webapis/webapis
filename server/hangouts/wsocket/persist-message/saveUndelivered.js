@@ -16,7 +16,7 @@ module.exports.saveUndelivered = async function ({
       targetOffline: async function () {
         for (const browser of browsers) {
           const targetOnline = connections[`${username}-${browser.browserId}`];
-
+          debugger;
           if (!targetOnline) {
             let result = await col.update(
               { username },
