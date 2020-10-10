@@ -6,7 +6,7 @@ import commonPlugins from "./commonPlugins";
 import externals from "./externals";
 import buildLibraries from "./build-libraries";
 import buildTimeEnv from "./build-environments";
-import copyLibraries from "./copy-libraries";
+
 import copyHtml from "./copy-html";
 import replaceLibraries from "./replace-libraries";
 import copyAssets from "./copy-assets";
@@ -24,5 +24,11 @@ export default {
       plugins: [...replaceLibraries],
     },
   ],
-  plugins: [...buildTimeEnv, ...copyHtml, ...commonPlugins, copyAssets],
+  plugins: [
+    del({ targets: `builds/${process.env.outputAppName}/build/*.js` }),
+    ...buildTimeEnv,
+    ...copyHtml,
+    ...commonPlugins,
+    ...copyAssets,
+  ],
 };

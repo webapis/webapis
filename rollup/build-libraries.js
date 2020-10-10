@@ -4,7 +4,7 @@ import del from "rollup-plugin-delete";
 import externals from "./externals";
 import replaceLabraries from "./replace-libraries";
 import buildEnv from "./build-environments";
-import copyLibraries from "./copy-libraries";
+
 import copyAssets from "./copy-assets";
 //import commonPlugins from "./rollup/commonPlugins";
 const production = !process.env.ROLLUP_WATCH;
@@ -19,7 +19,7 @@ export default [
     output: [
       {
         dir: path.resolve(
-          __dirname + `/builds/${process.env.outputAppName}/build`
+          __dirname + `/builds/${process.env.outputAppName}/build/libs`
         ),
         format: "es",
         plugins: [...buildEnv, ...replaceLabraries],
@@ -52,7 +52,7 @@ export default [
     output: [
       {
         dir: path.resolve(
-          __dirname + `/builds/${process.env.outputAppName}/build`
+          __dirname + `/builds/${process.env.outputAppName}/build/libs`
         ),
         format: "es",
         sourcemap: true,
@@ -69,7 +69,7 @@ export default [
     output: [
       {
         dir: path.resolve(
-          __dirname + `/builds/${process.env.outputAppName}/build`
+          __dirname + `/builds/${process.env.outputAppName}/build/libs`
         ),
         format: "es",
         sourcemap: true,
@@ -86,7 +86,7 @@ export default [
     output: [
       {
         dir: path.resolve(
-          __dirname + `/builds/${process.env.outputAppName}/build`
+          __dirname + `/builds/${process.env.outputAppName}/build/libs`
         ),
         format: "es",
         sourcemap: true,

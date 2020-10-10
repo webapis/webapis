@@ -77,47 +77,47 @@ export default [
     ],
   }),
   //production
-  production &&
-    copy({
-      targets: [
-        {
-          //bootstrap.min.js
-          src: path.resolve(
-            __dirname + "/node_modules/bootstrap/dist/js/bootstrap.min.js"
-          ),
-          dest: path.resolve(
-            __dirname + `/builds/${process.env.outputAppName}/build`
-          ),
-        },
-        {
-          //bootstrap.min.js.map
-          src: path.resolve(
-            __dirname + "/node_modules/bootstrap/dist/js/bootstrap.min.js.map"
-          ),
-          dest: path.resolve(
-            __dirname + `/builds/${process.env.outputAppName}/build`
-          ),
-        },
-        {
-          //bootstrap.min.css
-          src: path.resolve(
-            __dirname + "/node_modules/bootstrap/dist/css/bootstrap.min.css"
-          ),
-          dest: path.resolve(
-            __dirname + `/builds/${process.env.outputAppName}/build`
-          ),
-        },
-        {
-          //bootstrap.min.css.map
-          src: path.resolve(
-            __dirname + "/node_modules/bootstrap/dist/css/bootstrap.min.css.map"
-          ),
-          dest: path.resolve(
-            __dirname + `/builds/${process.env.outputAppName}/build`
-          ),
-        },
-      ],
-    }),
+  // production &&
+  //   copy({
+  //     targets: [
+  //       {
+  //         //bootstrap.min.js
+  //         src: path.resolve(
+  //           __dirname + "/node_modules/bootstrap/dist/js/bootstrap.min.js"
+  //         ),
+  //         dest: path.resolve(
+  //           __dirname + `/builds/${process.env.outputAppName}/build`
+  //         ),
+  //       },
+  //       {
+  //         //bootstrap.min.js.map
+  //         src: path.resolve(
+  //           __dirname + "/node_modules/bootstrap/dist/js/bootstrap.min.js.map"
+  //         ),
+  //         dest: path.resolve(
+  //           __dirname + `/builds/${process.env.outputAppName}/build`
+  //         ),
+  //       },
+  //       {
+  //         //bootstrap.min.css
+  //         src: path.resolve(
+  //           __dirname + "/node_modules/bootstrap/dist/css/bootstrap.min.css"
+  //         ),
+  //         dest: path.resolve(
+  //           __dirname + `/builds/${process.env.outputAppName}/build`
+  //         ),
+  //       },
+  //       {
+  //         //bootstrap.min.css.map
+  //         src: path.resolve(
+  //           __dirname + "/node_modules/bootstrap/dist/css/bootstrap.min.css.map"
+  //         ),
+  //         dest: path.resolve(
+  //           __dirname + `/builds/${process.env.outputAppName}/build`
+  //         ),
+  //       },
+  //     ],
+  //   }),
   //development
   !production &&
     copy({
