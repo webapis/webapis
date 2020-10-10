@@ -1,7 +1,7 @@
 const path = require("path");
 
 import del from "rollup-plugin-delete";
-
+import babel from "@rollup/plugin-babel";
 import commonPlugins from "./commonPlugins";
 import externals from "./externals";
 import buildLibraries from "./build-libraries";
@@ -31,6 +31,7 @@ export default {
         `builds/${process.env.outputAppName}/build/*.map`,
       ],
     }),
+    //  babel({ babelHelpers: 'bundled' }),
     ...buildTimeEnv,
     ...copyHtml,
     ...commonPlugins,

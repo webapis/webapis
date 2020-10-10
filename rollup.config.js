@@ -11,6 +11,7 @@ import commonPlugins from "./rollup/commonPlugins";
 import externals from "./rollup/externals";
 import buildLibraries from "./rollup/build-libraries";
 import buildApp from "./rollup/build-app";
+
 const production = !process.env.ROLLUP_WATCH;
 
 export default [buildApp];

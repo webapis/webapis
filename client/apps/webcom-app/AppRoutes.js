@@ -13,6 +13,7 @@ const html = htm.bind(h);
 const HangoutsFeatureRoutes = lazy(() =>
   import("features/hangouts/HangoutsFeatureRoutes")
 );
+const Hangout = lazy(() => import("./Hangout"));
 const ErrorPage = lazy(() => import("./ErrorPage"));
 const AppMonitor = lazy(() => import("features/app-monitor/index"));
 export function AppRoutes(props) {
@@ -60,7 +61,9 @@ export function AppRoutes(props) {
     case "/":
       return html` <${Suspense} fallback=${Loading}>
         <div style=${{ height: "70vh" }}>
-          <${HangoutsFeatureRoutes} user=${user && user} appRoute="/" />
+          ${HangoutsFeatureRoutes
+            ? html`<${HangoutsFeatureRoutes}< />`
+            : html`<div>Loading...</div>`}
         </div>
       <//>`;
     case "/error":
