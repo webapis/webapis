@@ -1,9 +1,6 @@
-import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
-import {
-  Suspense,
-  lazy,
-} from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/preact.combat.cdn.js";
-import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
+import { h } from "preact";
+import { Suspense, lazy } from "compat.module";
+import htm from "htm.module";
 import { useAppRoute } from "components/app-route/index";
 import { useAuth } from "./state/useAuth";
 const Login = lazy(() => import("./ui-components/Login"));

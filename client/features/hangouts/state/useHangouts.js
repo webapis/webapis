@@ -1,8 +1,5 @@
-import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
-import {
-  useEffect,
-  useState,
-} from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
+import { h } from "preact";
+import { useEffect, useState } from "preact/hooks";
 import { useHangoutContext } from "./HangoutsProvider";
 import { useAppRoute } from "../../../components/app-route/index";
 import { changeMessageText } from "./actions";

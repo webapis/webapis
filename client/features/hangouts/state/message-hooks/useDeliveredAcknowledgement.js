@@ -1,4 +1,4 @@
-import { useEffect } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
+import { useEffect } from "preact/hooks";
 import {
   updateSentMessage,
   saveUnread,

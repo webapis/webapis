@@ -1,12 +1,12 @@
-import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
-import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
+import { h } from "preact";
+import htm from "htm.module";
 
 import { useAppRoute } from "components/app-route/index";
 import { useAuth } from "features/authentication/index";
 import { useHangouts } from "features/hangouts/index";
 import Navigation from "../../features/hangouts/ui-components/Navigation";
 const html = htm.bind(h);
-export function AppNavigation() {
+export default function AppNavigation() {
   const { routeState } = useAppRoute();
 
   const { featureRoute } = routeState;

@@ -1,4 +1,4 @@
-const { crossEnv, series, concurrent } = require("nps-utils");
+const { crossEnv, series, concurrent, copy } = require("nps-utils");
 const { storybook } = require("./scripts/storybook.script");
 const { appScripts } = require("./scripts/apps.script");
 
@@ -72,16 +72,17 @@ function defaultBrowser({ features, record, type }) {
 
 module.exports = {
   scripts: {
+    copyLibs: copy(
+      `node_modules/preact/dist/preact.module.js builds/${process.env.outputAppName}/build/libs`
+    ),
+
     webcom: concurrent.nps("webcom-prod"),
     authdev: concurrent.nps("auth-mock-dev", "auth-nodejs-dev"),
     hgdev: concurrent.nps("hg-mock-dev", "hg-ws-dev", "ws-dev", "hg-ws-mg-dev"),
     ...appScripts,
+    webcomDev: series.nps("copyLibs", "webcom-dev"),
     storybook,
     testE2E: { script: "node puppeteer/index.js" },
-    testAva: {
-      script: "ava",
-    },
-    testJest: { script: "jest" },
     test: {
       local: {
         script: series.nps("cy.local"),

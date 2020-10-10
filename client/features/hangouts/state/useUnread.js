@@ -1,7 +1,4 @@
-import {
-  useEffect,
-  useState,
-} from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
+import { useEffect, useState } from "preact/hooks";
 import { actionTypes } from "./actionTypes";
 import {
   updateUnread,

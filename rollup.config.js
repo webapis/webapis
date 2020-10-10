@@ -9,6 +9,24 @@ import copy from "rollup-plugin-copy";
 import alias from "rollup-plugin-alias";
 import commonPlugins from "./rollup/commonPlugins";
 import externals from "./rollup/externals";
+import buildLibraries from "./rollup/build-libraries";
+import buildApp from "./rollup/build-app";
+const production = !process.env.ROLLUP_WATCH;
+
+export default [...buildLibraries, buildApp];
+
+/*
+require("dotenv").config();
+const path = require("path");
+import image from "@rollup/plugin-image";
+import serve from "rollup-plugin-serve";
+import del from "rollup-plugin-delete";
+import { terser } from "rollup-plugin-terser";
+import replace from "@rollup/plugin-replace";
+import copy from "rollup-plugin-copy";
+import alias from "rollup-plugin-alias";
+import commonPlugins from "./rollup/commonPlugins";
+import externals from "./rollup/externals";
 const production = !process.env.ROLLUP_WATCH;
 
 export default [
@@ -19,7 +37,7 @@ export default [
       {
         dir: `builds/${process.env.outputAppName}/build`,
         format: "es",
-        // sourcemap: "inline",
+       sourcemap: "inline",
       },
     ],
     plugins: [
@@ -34,7 +52,31 @@ export default [
       {
         dir: `builds/${process.env.outputAppName}/build`,
         format: "es",
-        // sourcemap: "inline",
+         sourcemap: "inline",
+      },
+    ],
+    plugins: commonPlugins,
+  },
+  {
+    input: `assets/libs/dev/build-required/debug.module.js`,
+
+    output: [
+      {
+        dir: `builds/${process.env.outputAppName}/build`,
+        format: "es",
+        sourcemap: "inline",
+      },
+    ],
+    plugins: commonPlugins,
+  },
+  {
+    input: `assets/libs/dev/build-required/devtools.module.js`,
+
+    output: [
+      {
+        dir: `builds/${process.env.outputAppName}/build`,
+        format: "es",
+       sourcemap: "inline",
       },
     ],
     plugins: commonPlugins,
@@ -93,12 +135,9 @@ export default [
           },
         ],
       }),
-      // serve({
-      //   contentBase: `builds/${process.env.outputAppName}/build/`,
-      //   openPage: "/index.html",
-      //   port: 10001,
-      //   open: false,
-      // }),
+  
     ],
   },
 ];
+
+*/

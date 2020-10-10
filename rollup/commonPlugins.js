@@ -1,3 +1,35 @@
+const path = require("path");
+import image from "@rollup/plugin-image";
+import { terser } from "rollup-plugin-terser";
+import alias from "rollup-plugin-alias";
+const production = !process.env.ROLLUP_WATCH;
+export default [
+  alias({
+    entries: [
+      {
+        find: "controls",
+        replacement: path.resolve(__dirname + "/client/components/controls"),
+      },
+      {
+        find: "features",
+        replacement: path.resolve(__dirname + "/client/features"),
+      },
+      {
+        find: "components",
+        replacement: path.resolve(__dirname + "/client/components"),
+      },
+      {
+        find: "icons",
+        replacement: path.resolve(__dirname + "/client/components/icons"),
+      },
+      { find: "server", replacement: path.resolve(__dirname + "/server") },
+    ],
+  }),
+  image(),
+  //terser(),
+];
+
+/*
 require("dotenv").config();
 const path = require("path");
 import image from "@rollup/plugin-image";
@@ -56,5 +88,9 @@ export default [
       "https://localhost:3000/preact.module.js": `https://localhost:${process.env.PORT}/preact.module.js`,
       "https://localhost:3000/hooks.dev.cdn.js": `https://localhost:${process.env.PORT}/hooks.dev.cdn.js`,
       "https://localhost:3000/preact.module.js": `https://localhost:${process.env.PORT}/preact.module.js`,
+       "https://localhost:3000/debug.module.js": `https://localhost:${process.env.PORT}/debug.module.js`,
+        "https://localhost:3000/devtools.module.js": `https://localhost:${process.env.PORT}/devtools.module.js`
     }),
 ];
+
+*/

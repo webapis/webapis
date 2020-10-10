@@ -4,7 +4,7 @@ import {
   useReducer,
   useEffect,
   useState,
-} from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
+} from "preact/hooks";
 import { clientCommands } from "../../features/hangouts/state/clientCommands";
 import protocolSender from "./protocolSender";
 export default function RtcMockServer({ children, user }) {

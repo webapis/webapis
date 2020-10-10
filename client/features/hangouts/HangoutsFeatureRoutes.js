@@ -1,10 +1,7 @@
-import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
-import {
-  lazy,
-  Suspense,
-} from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/preact.combat.cdn.js";
-import { useEffect } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
-import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
+import { h } from "preact";
+import { lazy, Suspense } from "compat.module";
+import { useEffect } from "preact/hooks";
+import htm from "htm.module";
 import { useAppRoute } from "components/app-route/index";
 import { useHangouts } from "./state/useHangouts";
 

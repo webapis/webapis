@@ -1,14 +1,11 @@
-import {
-  h,
-  createContext,
-} from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
+import { h, createContext } from "preact";
 import {
   useReducer,
   useMemo,
   useContext,
   useState,
   useEffect,
-} from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
+} from "preact/hooks";
 import reducer, { initState } from "./reducer";
 import actionTypes from "./actionTypes";
 import List, { ListItem } from "controls/list";

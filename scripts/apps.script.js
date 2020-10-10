@@ -40,9 +40,9 @@ function serverCommands({ env }) {
 function clientCommands({ env }) {
   switch (env) {
     case "dev":
-      return "rollup -c -w";
+      return "rollup -c -w --waitForBundleInput";
     case "production":
-      return "rollup -c";
+      return "rollup -c --waitForBundleInput";
     default:
       throw "No env specified for client command";
     //return "rollup -c rollup.config.dev.libs.js && rollup -c -w";

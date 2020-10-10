@@ -1,8 +1,4 @@
-import {
-  useEffect,
-  useState,
-  useContext,
-} from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
+import { useEffect, useState, useContext } from "preact/hooks";
 import iceServers from "./ice-servers";
 import { WebRTCContext } from "./WebRTCProvider";
 import { initializeVideoOffer } from "./actions";

@@ -1,10 +1,6 @@
-import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
-import {
-  useEffect,
-  useState,
-  useReducer,
-} from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
-import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
+import { h } from "preact";
+import { useEffect, useState, useReducer } from "preact/hooks";
+import htm from "htm.module";
 import { useHangouts } from "../../state/useHangouts";
 import useSignaling from "./useSignaling";
 import * as actions from "./actions";

@@ -1,5 +1,5 @@
-import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
-import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
+import { h } from "preact";
+import htm from "htm.module";
 import WebSocketProvider from "../../features/websocket/WebSocketProvider";
 import RtcMockServer from "../../apps/hangout-app/RtcMockServer";
 const html = htm.bind(h);

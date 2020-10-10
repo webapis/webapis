@@ -1,5 +1,5 @@
 import { actionTypes } from "./actionTypes";
-import { useEffect } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
+import { useEffect } from "preact/hooks";
 import filterHangouts from "./local-storage/filterHangouts";
 import { loadHangouts } from "./local-storage/common";
 

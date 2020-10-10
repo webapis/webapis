@@ -1,9 +1,4 @@
-import {
-  useContext,
-  useMemo,
-  useReducer,
-  useEffect,
-} from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
+import { useContext, useMemo, useReducer, useEffect } from "preact/hooks";
 import { clientCommands } from "./clientCommands";
 import {
   loadMessages,

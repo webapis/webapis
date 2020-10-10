@@ -1,11 +1,5 @@
-import {
-  h,
-  createContext,
-} from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
-import {
-  useContext,
-  useState,
-} from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
+import { h, createContext } from "preact";
+import { useContext, useState } from "preact/hooks";
 
 const ThemeContext = createContext();
 

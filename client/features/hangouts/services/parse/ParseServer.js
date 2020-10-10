@@ -1,5 +1,5 @@
-import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
-import { useEffect } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
+import { h } from "preact";
+import { useEffect } from "preact/hooks";
 import { useHangouts } from "../../state/useHangouts";
 import * as actions from "./actions";
 import stateMapper from "../../state/stateMapper";

@@ -1,8 +1,5 @@
-import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
-import {
-  useState,
-  useEffect,
-} from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
+import { h } from "preact";
+import { useState, useEffect } from "preact/hooks";
 import deviceType from "./deviceType";
 
 export function useMediaQuery() {

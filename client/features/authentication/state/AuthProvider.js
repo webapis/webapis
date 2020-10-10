@@ -1,14 +1,6 @@
-import {
-  h,
-  createContext,
-} from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
-import {
-  useReducer,
-  useContext,
-  useEffect,
-  useMemo,
-} from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
-import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
+import { h, createContext } from "preact";
+import { useReducer, useContext, useEffect, useMemo } from "preact/hooks";
+import htm from "htm.module";
 import { authReducer, initState } from "./authReducer";
 //import AuthAdapter from "./AuthAdapter";
 import serverValidation from "../validation/serverErrorActions";
@@ -77,17 +69,6 @@ export default function AuthProvider(props) {
     }
   }, [loginStarted]);
 
-  // useEffect(() => {
-  //   if (user) {
-  //
-  //     onAppRoute({
-  //       appRoute: authedRoute.appRoute,
-  //       featureRoute: authedRoute.featureRoute,
-  //     });
-  //   } else {
-  //     onAppRoute({ appRoute: "/auth", featureRoute: "/login" });
-  //   }
-  // }, [user]);
   function handleLogin({ emailorusername, password }) {
     const browserId = loadBrowserId();
     login({

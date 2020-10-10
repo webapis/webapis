@@ -1,11 +1,8 @@
-import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
+import { h } from "preact";
 
-import {
-  Suspense,
-  lazy,
-} from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/preact.combat.cdn.js";
-import { useEffect } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
-import htm from "https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.module.js";
+import { Suspense, lazy } from "compat.module";
+import { useEffect } from "preact/hooks";
+import htm from "htm.module";
 import { useAppRoute } from "components/app-route/index";
 import { loadBrowserId } from "../../features/authentication/state/AuthProvider";
 import { useAuth } from "../../features/authentication/state/useAuth";
@@ -63,7 +60,7 @@ export function AppRoutes(props) {
     case "/":
       return html` <${Suspense} fallback=${Loading}>
         <div style=${{ height: "70vh" }}>
-          <${HangoutsFeatureRoutes} user=${user && user} appRoute=${"/"} />
+          <${HangoutsFeatureRoutes} user=${user && user} appRoute="/" />
         </div>
       <//>`;
     case "/error":

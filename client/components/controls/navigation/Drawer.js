@@ -1,5 +1,5 @@
-import { h } from "https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.6/preact.module.js";
-import { useState } from "https://cdn.jsdelivr.net/gh/webapis/webapis@cdn/assets/libs/prod/hooks.cdn.js";
+import { h } from "preact";
+import { useState } from "preact/hooks";
 import { drawer } from "./style";
 import { useMediaQuery } from "components/layout/useMediaQuery";
 
