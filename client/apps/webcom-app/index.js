@@ -15,7 +15,7 @@ import AppNavigation from "./AppNavigation";
 import { AppRoutes } from "./AppRoutes";
 //Parse.liveQueryServerURL = `https://${ip}:1337/parse`
 //Parse.serverURL = 'https://parseapi.back4app.com/'
-//Parse.liveQueryServerURL = `wss://webapis.back4app.io`
+//Parse.liveQueryServerURL = `wss://webapis.back4app.io`//
 const html = htm.bind(h);
 render(
   html`<${AppRouteProvider}>

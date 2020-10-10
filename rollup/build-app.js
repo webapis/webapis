@@ -25,7 +25,12 @@ export default {
     },
   ],
   plugins: [
-    del({ targets: `builds/${process.env.outputAppName}/build/*.js` }),
+    del({
+      targets: [
+        `builds/${process.env.outputAppName}/build/*.js`,
+        `builds/${process.env.outputAppName}/build/*.map`,
+      ],
+    }),
     ...buildTimeEnv,
     ...copyHtml,
     ...commonPlugins,
