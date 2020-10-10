@@ -13,7 +13,7 @@ import buildLibraries from "./rollup/build-libraries";
 import buildApp from "./rollup/build-app";
 const production = !process.env.ROLLUP_WATCH;
 
-export default [...buildLibraries, buildApp];
+export default [buildApp];
 
 /*
 require("dotenv").config();

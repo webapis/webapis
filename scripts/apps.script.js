@@ -40,9 +40,9 @@ function serverCommands({ env }) {
 function clientCommands({ env }) {
   switch (env) {
     case "dev":
-      return "rollup -c -w --waitForBundleInput";
+      return "rollup -c -w ";
     case "production":
-      return "rollup -c --waitForBundleInput";
+      return "rollup -c ";
     default:
       throw "No env specified for client command";
     //return "rollup -c rollup.config.dev.libs.js && rollup -c -w";
@@ -55,11 +55,20 @@ function serverScript({ appName, env, port }) {
     script: `${serverEnv({ appName, env, port })} ${serverCommands({ env })}`,
   };
 }
-//      `node_modules/preact/dist/preact.module.js node_modules/jquery/dist/jquery.slim.min.js builds/${outputAppName}/build/libs`
+
 function copyLibsScript({ outputAppName, assets }) {
   return {
     description: "copy client libraries",
     script: copy(`${assets} builds/${outputAppName}/build/libs`),
+  };
+}
+
+function buildLibsScript({ port, outputAppName }) {
+  return {
+    description: "build libs",
+    script: crossEnv(
+      `outputAppName=${outputAppName} PORT=${port} rollup -c rollup.libs.config.js`
+    ),
   };
 }
 
@@ -203,6 +212,10 @@ const appScripts = apps.reduce((a, c, i) => {
   let accum = {};
   if (i === 0) {
     accum = {
+      [`${c.scriptName}_buildLibs`]: buildLibsScript({
+        outputAppName: c.outputAppName,
+        port: c.port,
+      }),
       [`${c.scriptName}_copyLibs`]: copyLibsScript({
         outputAppName: c.outputAppName,
         assets: c.assets,
@@ -232,6 +245,10 @@ const appScripts = apps.reduce((a, c, i) => {
   } else {
     accum = {
       ...a,
+      [`${c.scriptName}_buildLibs`]: buildLibsScript({
+        outputAppName: c.outputAppName,
+        port: c.port,
+      }),
       [`${c.scriptName}_copyLibs`]: copyLibsScript({
         outputAppName: c.outputAppName,
         assets: c.assets,
@@ -254,6 +271,7 @@ const appScripts = apps.reduce((a, c, i) => {
         port: c.port,
       }),
       [`${c.scriptName}`]: concurrent.nps(
+        `${c.scriptName}_buildLibs`,
         `${c.scriptName}_copyLibs`,
         `${c.scriptName}_client`,
         `${c.scriptName}_server`
