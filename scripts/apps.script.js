@@ -1,5 +1,5 @@
 const { hgws, hgwsmb, ws, hgmock, webcom } = require("./apps_config.js");
-const { crossEnv, series, concurrent } = require("nps-utils");
+const { crossEnv, series, concurrent, copy } = require("nps-utils");
 //ENV:
 //-appName :client side: required for build time tobe able to move build files to specific app folder
 //-appName :server side: required for server to be able server app from specific app folder
@@ -55,6 +55,13 @@ function serverScript({ appName, env, port }) {
     script: `${serverEnv({ appName, env, port })} ${serverCommands({ env })}`,
   };
 }
+//      `node_modules/preact/dist/preact.module.js node_modules/jquery/dist/jquery.slim.min.js builds/${outputAppName}/build/libs`
+function copyLibsScript({ outputAppName, assets }) {
+  return {
+    description: "copy client libraries",
+    script: copy(`${assets} builds/${outputAppName}/build/libs`),
+  };
+}
 
 function clientScript({
   appName,
@@ -82,8 +89,13 @@ function clientScript({
     })}`,
   };
 }
+let assets =
+  "node_modules/preact/dist/preact.module.js node_modules/preact/dist/preact.module.js.map node_modules/htm/dist/htm.module.js node_modules/jquery/dist/jquery.slim.min.js node_modules/jquery/dist/jquery.slim.min.map client/features/app-monitor/client-error.js node_modules/bootstrap/dist/js/bootstrap.min.js node_modules/bootstrap/dist/js/bootstrap.min.js.map node_modules/bootstrap/dist/css/bootstrap.min.css node_modules/bootstrap/dist/css/bootstrap.min.css.map node_modules/bootstrap/dist/js/bootstrap.js node_modules/bootstrap/dist/js/bootstrap.js.map node_modules/bootstrap/dist/css/bootstrap.css node_modules/bootstrap/dist/css/bootstrap.css.map node_modules/whatwg-fetch/dist/fetch.umd.js";
+
 const hangoutTestApps = [
   {
+    assets,
+
     appName: "websocket-app",
     outputAppName: "ws-app",
     rtc: "WEBSOCKET",
@@ -95,6 +107,8 @@ const hangoutTestApps = [
     rtcUrl: ws.rtcUrl({ PORT: 3002 }),
   },
   {
+    assets,
+    dest: "builds/hg-ws-app/build/libs",
     appName: "hangout-app",
     outputAppName: "hg-ws-app",
     rtc: "WEBSOCKET",
@@ -106,6 +120,8 @@ const hangoutTestApps = [
     rtcUrl: hgws.rtcUrl({ PORT: 3004 }),
   },
   {
+    assets,
+    dest: "builds/hgmock-app/build/libs",
     appName: "hangout-app",
     outputAppName: "hgmock-app",
     rtc: "MOCK",
@@ -117,6 +133,8 @@ const hangoutTestApps = [
     rtcUrl: hgmock.rtcUrl({ PORT: 3005 }),
   },
   {
+    assets,
+    dest: "builds/hg-ws-mg-app/build/libs",
     appName: "hangout-app",
     outputAppName: "hg-ws-mg-app",
     rtc: "WEBSOCKET",
@@ -128,6 +146,8 @@ const hangoutTestApps = [
     rtcUrl: hgwsmb.rtcUrl({ PORT: 3006 }),
   },
   {
+    assets,
+    dest: "../builds/ws-app/build/libs --cwd=scripts",
     appName: "webcom-app",
     outputAppName: "webcom-app",
     rtc: "WEBSOCKET",
@@ -139,6 +159,8 @@ const hangoutTestApps = [
     rtcUrl: hgwsmb.rtcUrl({ PORT: 3007 }),
   },
   {
+    assets,
+    dest: "builds/auth-mock-app/build/libs",
     appName: "auth-app",
     outputAppName: "auth-mock-app",
     rtc: "NONE",
@@ -150,6 +172,8 @@ const hangoutTestApps = [
     rtcUrl: "NONE",
   },
   {
+    assets,
+    dest: "builds/auth-nodejs-app/build/libs",
     appName: "auth-app",
     outputAppName: "auth-nodejs-app",
     rtc: "NONE",
@@ -161,6 +185,8 @@ const hangoutTestApps = [
     rtcUrl: "NONE",
   },
   {
+    assets,
+    dest: "builds/webcom-app/build/libs",
     appName: "webcom-app",
     outputAppName: "webcom-app",
     rtc: "WEBSOCKET",
@@ -177,6 +203,10 @@ const appScripts = apps.reduce((a, c, i) => {
   let accum = {};
   if (i === 0) {
     accum = {
+      [`${c.scriptName}_copyLibs`]: copyLibsScript({
+        outputAppName: c.outputAppName,
+        assets: c.assets,
+      }),
       [`${c.scriptName}_client`]: clientScript({
         appName: c.appName,
         outputAppName: c.outputAppName,
@@ -186,6 +216,8 @@ const appScripts = apps.reduce((a, c, i) => {
         port: c.port,
         rtcUrl: c.rtcUrl,
         hangouts: c.hangouts,
+        libs: c.libs,
+        dest: c.dest,
       }),
       [`${c.scriptName}_server`]: serverScript({
         appName: c.outputAppName,
@@ -200,7 +232,10 @@ const appScripts = apps.reduce((a, c, i) => {
   } else {
     accum = {
       ...a,
-
+      [`${c.scriptName}_copyLibs`]: copyLibsScript({
+        outputAppName: c.outputAppName,
+        assets: c.assets,
+      }),
       [`${c.scriptName}_client`]: clientScript({
         appName: c.appName,
         outputAppName: c.outputAppName,
@@ -210,6 +245,8 @@ const appScripts = apps.reduce((a, c, i) => {
         port: c.port,
         rtcUrl: c.rtcUrl,
         hangouts: c.hangouts,
+        libs: c.libs,
+        dest: c.dest,
       }),
       [`${c.scriptName}_server`]: serverScript({
         appName: c.outputAppName,
@@ -217,6 +254,7 @@ const appScripts = apps.reduce((a, c, i) => {
         port: c.port,
       }),
       [`${c.scriptName}`]: concurrent.nps(
+        `${c.scriptName}_copyLibs`,
         `${c.scriptName}_client`,
         `${c.scriptName}_server`
       ),

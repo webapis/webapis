@@ -5,75 +5,75 @@ export default [
   //common
   copy({
     targets: [
-      {
-        //preact
-        src: path.resolve(
-          __dirname + "/node_modules/preact/dist/preact.module.js"
-        ),
-        dest: path.resolve(
-          __dirname + `/builds/${process.env.outputAppName}/build`
-        ),
-      },
-      {
-        //preact
-        src: path.resolve(
-          __dirname + "/node_modules/preact/dist/preact.module.js.map"
-        ),
-        dest: path.resolve(
-          __dirname + `/builds/${process.env.outputAppName}/build`
-        ),
-      },
-      {
-        //htm
-        src: path.resolve(__dirname + "/node_modules/htm/dist/htm.module.js"),
-        dest: path.resolve(
-          __dirname + `/builds/${process.env.outputAppName}/build`
-        ),
-      },
-      {
-        //jquery.slim.min.js
-        src: path.resolve(
-          __dirname + "/node_modules/jquery/dist/jquery.slim.min.js"
-        ),
-        dest: path.resolve(
-          __dirname + `/builds/${process.env.outputAppName}/build`
-        ),
-      },
-      {
-        //jquery.slim.min.js.map
-        src: path.resolve(
-          __dirname + "/node_modules/jquery/dist/jquery.slim.min.js.map"
-        ),
-        dest: path.resolve(
-          __dirname + `/builds/${process.env.outputAppName}/build`
-        ),
-      },
-      {
-        //popper.js
-        src: path.resolve(
-          __dirname + "/node_modules/@popperjs/core/dist/esm/popper.js"
-        ),
-        dest: path.resolve(
-          __dirname + `/builds/${process.env.outputAppName}/build`
-        ),
-      },
-      {
-        //webrtc.adapter.js
-        src: path.resolve(
-          __dirname + "/node_modules/webrtc-adapter/dist/adapter_core.js"
-        ),
-        dest: path.resolve(
-          __dirname + `/builds/${process.env.outputAppName}/build`
-        ),
-      },
-      {
-        src: path.resolve(
-          __dirname + "/client/features/app-monitor/client-error.js"
-        ),
-        dest: path.resolve(
-          __dirname + `/builds/${process.env.outputAppName}/build`
-        ),
-      },
+      // {
+      //   //preact
+      //   src: path.resolve(
+      //     __dirname + "/node_modules/preact/dist/preact.module.js"
+      //   ),
+      //   dest: path.resolve(
+      //     __dirname + `/builds/${process.env.outputAppName}/build`
+      //   ),
+      // },
+      // {
+      //   //preact
+      //   src: path.resolve(
+      //     __dirname + "/node_modules/preact/dist/preact.module.js.map"
+      //   ),
+      //   dest: path.resolve(
+      //     __dirname + `/builds/${process.env.outputAppName}/build`
+      //   ),
+      // },
+      // {
+      //   //htm
+      //   src: path.resolve(__dirname + "/node_modules/htm/dist/htm.module.js"),
+      //   dest: path.resolve(
+      //     __dirname + `/builds/${process.env.outputAppName}/build`
+      //   ),
+      // },
+      // {
+      //   //jquery.slim.min.js
+      //   src: path.resolve(
+      //     __dirname + "/node_modules/jquery/dist/jquery.slim.min.js"
+      //   ),
+      //   dest: path.resolve(
+      //     __dirname + `/builds/${process.env.outputAppName}/build`
+      //   ),
+      // },
+      // {
+      //   //jquery.slim.min.js.map
+      //   src: path.resolve(
+      //     __dirname + "/node_modules/jquery/dist/jquery.slim.min.js.map"
+      //   ),
+      //   dest: path.resolve(
+      //     __dirname + `/builds/${process.env.outputAppName}/build`
+      //   ),
+      // },
+      // {
+      //   //popper.js
+      //   src: path.resolve(
+      //     __dirname + "/node_modules/@popperjs/core/dist/esm/popper.js"
+      //   ),
+      //   dest: path.resolve(
+      //     __dirname + `/builds/${process.env.outputAppName}/build`
+      //   ),
+      // },
+      // {
+      //   //webrtc.adapter.js
+      //   src: path.resolve(
+      //     __dirname + "/node_modules/webrtc-adapter/dist/adapter_core.js"
+      //   ),
+      //   dest: path.resolve(
+      //     __dirname + `/builds/${process.env.outputAppName}/build`
+      //   ),
+      // },
+      // {
+      //   src: path.resolve(
+      //     __dirname + "/client/features/app-monitor/client-error.js"
+      //   ),
+      //   dest: path.resolve(
+      //     __dirname + `/builds/${process.env.outputAppName}/build`
+      //   ),
+      // },
     ],
   }),
   //production
@@ -122,43 +122,43 @@ export default [
   !production &&
     copy({
       targets: [
-        {
-          //preact
-          src: path.resolve(
-            __dirname + "/node_modules/preact/dist/preact.module.js"
-          ),
-          dest: path.resolve(
-            __dirname + `/builds/${process.env.outputAppName}/build`
-          ),
-        },
-        {
-          //preact
-          src: path.resolve(
-            __dirname + "/node_modules/preact/dist/preact.module.js.map"
-          ),
-          dest: path.resolve(
-            __dirname + `/builds/${process.env.outputAppName}/build`
-          ),
-        },
+        // {
+        //   //preact
+        //   src: path.resolve(
+        //     __dirname + "/node_modules/preact/dist/preact.module.js"
+        //   ),
+        //   dest: path.resolve(
+        //     __dirname + `/builds/${process.env.outputAppName}/build`
+        //   ),
+        // },
+        // {
+        //   //preact
+        //   src: path.resolve(
+        //     __dirname + "/node_modules/preact/dist/preact.module.js.map"
+        //   ),
+        //   dest: path.resolve(
+        //     __dirname + `/builds/${process.env.outputAppName}/build`
+        //   ),
+        // },
 
-        {
-          //bootstrap js
-          src: path.resolve(
-            __dirname + "/node_modules/bootstrap/dist/js/bootstrap.js"
-          ),
-          dest: path.resolve(
-            __dirname + `/builds/${process.env.outputAppName}/build`
-          ),
-        },
-        {
-          //bootstrap.js
-          src: path.resolve(
-            __dirname + "/node_modules/bootstrap/dist/js/bootstrap.js.map"
-          ),
-          dest: path.resolve(
-            __dirname + `/builds/${process.env.outputAppName}/build`
-          ),
-        },
+        // {
+        //   //bootstrap js
+        //   src: path.resolve(
+        //     __dirname + "/node_modules/bootstrap/dist/js/bootstrap.js"
+        //   ),
+        //   dest: path.resolve(
+        //     __dirname + `/builds/${process.env.outputAppName}/build`
+        //   ),
+        // },
+        // {
+        //   //bootstrap.js
+        //   src: path.resolve(
+        //     __dirname + "/node_modules/bootstrap/dist/js/bootstrap.js.map"
+        //   ),
+        //   dest: path.resolve(
+        //     __dirname + `/builds/${process.env.outputAppName}/build`
+        //   ),
+        // },
         {
           //bootstrap.css
           src: path.resolve(
