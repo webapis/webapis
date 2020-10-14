@@ -99,7 +99,7 @@ function clientScript({
   };
 }
 let assets =
-  "node_modules/preact/dist/preact.module.js node_modules/preact/dist/preact.module.js.map node_modules/htm/dist/htm.module.js node_modules/jquery/dist/jquery.slim.min.js node_modules/jquery/dist/jquery.slim.min.map client/features/app-monitor/client-error.js node_modules/bootstrap/dist/js/bootstrap.min.js node_modules/bootstrap/dist/js/bootstrap.min.js.map node_modules/bootstrap/dist/css/bootstrap.min.css node_modules/bootstrap/dist/css/bootstrap.min.css.map node_modules/bootstrap/dist/js/bootstrap.js node_modules/bootstrap/dist/js/bootstrap.js.map node_modules/bootstrap/dist/css/bootstrap.css node_modules/bootstrap/dist/css/bootstrap.css.map node_modules/whatwg-fetch/dist/fetch.umd.js";
+  "node_modules/preact/devtools/dist/devtools.umd.js.map node_modules/preact/devtools/dist/devtools.umd.js node_modules/preact/debug/dist/debug.umd.js.map node_modules/preact/debug/dist/debug.umd.js node_modules/preact/dist/preact.module.js node_modules/preact/dist/preact.module.js.map node_modules/htm/dist/htm.module.js node_modules/jquery/dist/jquery.slim.min.js node_modules/jquery/dist/jquery.slim.min.map client/features/app-monitor/client-error.js node_modules/bootstrap/dist/js/bootstrap.min.js node_modules/bootstrap/dist/js/bootstrap.min.js.map node_modules/bootstrap/dist/css/bootstrap.min.css node_modules/bootstrap/dist/css/bootstrap.min.css.map node_modules/bootstrap/dist/js/bootstrap.js node_modules/bootstrap/dist/js/bootstrap.js.map node_modules/bootstrap/dist/css/bootstrap.css node_modules/bootstrap/dist/css/bootstrap.css.map node_modules/whatwg-fetch/dist/fetch.umd.js";
 
 const hangoutTestApps = [
   {
