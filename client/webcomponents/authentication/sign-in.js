@@ -2,8 +2,9 @@ import {
   validateEmailOrUsername,
   validateEmptyString,
 } from "../../features/authentication/validation/constraintValidators";
-
-function createTemplate({ onClick, shadowRoot, onChange, isValid = true }) {
+import loadBrowserId from "./loadBrowserId";
+import { pubsub } from "./pubsub.js";
+function createTemplate({ shadowRoot }) {
   const template = document.createElement("template");
 
   template.innerHTML = `<link
@@ -15,7 +16,7 @@ function createTemplate({ onClick, shadowRoot, onChange, isValid = true }) {
     <div class="row justify-content-center">
       <div class="card" style="width: 20rem;">
         <div class="card-body">
-          <h5 class="card-title">Login</h5>
+          <h5 class="card-title">Sign in</h5>
           <div class="form-group">
             <input
               id="emailorusername"
@@ -42,7 +43,7 @@ function createTemplate({ onClick, shadowRoot, onChange, isValid = true }) {
               Error Message
             </div>
           </div>
-          <button id="login-btn" class="btn btn-outline-success">Login</button>
+          <button id="login-btn" class="btn btn-outline-success">Sign in</button>
           <button class="btn btn-link">Forgot Password!</button>
         </div>
       </div>
@@ -89,18 +90,13 @@ class SignIn extends HTMLElement {
       let passwordValue = passwordInput.value;
       if (
         validateEmailOrUsername({ value: emailorusernameValue }).isValid &&
-        validateEmptyString({ value: passwordValue })
+        validateEmptyString({ value: passwordValue }).isValid
       ) {
-        this.dispatchEvent(
-          new CustomEvent("login", {
-            detail: {
-              emailorusername: emailorusernameValue,
-              password: passwordValue,
-              browserId: loadBrowserId(),
-            },
-            bubbles: true,
-          })
-        );
+        pubsub.publish("login", {
+          emailorusername: emailorusernameValue,
+          password: passwordValue,
+          browserId: loadBrowserId(),
+        });
       } else {
         this.updatePasswordValidation({ value: passwordValue, passwordInput });
         this.updateEmailOrUsernameValidation({
@@ -109,14 +105,27 @@ class SignIn extends HTMLElement {
         });
       }
     });
-    this.addEventListener(
-      "server",
-      (e) => {
+
+    pubsub.subscribe("server_signin_validation_error", (data) => {
+      data.forEach((validation) => {
+        const { name, message } = validation;
+        if (name === "emailorusername") {
+          emailorusername.classList.add("is-invalid");
+          let emailorusernamemsg = this.shadowRoot.querySelector(
+            "#emailorusername-msg"
+          );
+          emailorusernamemsg.textContent = message;
+        } else if (name === "password") {
+          passwordInput.classList.add("is-invalid");
+          let passwordmsg = this.shadowRoot.querySelector("#password-msg");
+          passwordmsg.textContent = message;
+        }
+
         debugger;
-        console.log("server", e);
-      },
-      true
-    );
+      });
+
+      console.log("server_auth_error event recieved", data);
+    });
   } //connectedCallback
 
   updateEmailOrUsernameValidation({ value, emailorusername }) {
@@ -145,12 +154,12 @@ class SignIn extends HTMLElement {
 
 window.customElements.define("sign-in", SignIn);
 
-export function loadBrowserId() {
-  if (localStorage.getItem("browserId")) {
-    return localStorage.getItem("browserId");
-  } else {
-    let browserId = `BID${Date.now()}`;
-    localStorage.setItem("browserId", browserId);
-    return browserId;
-  }
-}
+// export function loadBrowserId() {
+//   if (localStorage.getItem("browserId")) {
+//     return localStorage.getItem("browserId");
+//   } else {
+//     let browserId = `BID${Date.now()}`;
+//     localStorage.setItem("browserId", browserId);
+//     return browserId;
+//   }
+// }

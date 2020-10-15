@@ -7,6 +7,7 @@ class AuthComponent extends HTMLElement {
     shadowRoot.innerHTML = `
       <auth-service-nodejs>
         <sign-in></sign-in>
+        <sign-up></sign-up>
       </auth-service-nodejs>
     `;
   }
@@ -15,6 +16,7 @@ class AuthComponent extends HTMLElement {
     console.log("AuthComponent Loaded");
     import("./auth-service-nodejs");
     import("./sign-in");
+    import("./sign-up");
   }
 }
 
