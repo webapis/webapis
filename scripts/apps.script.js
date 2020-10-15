@@ -206,6 +206,19 @@ const hangoutTestApps = [
     scriptName: "webcom-prod",
     rtcUrl: webcom.rtcUrl({ PORT: process.env.PORT || 3010 }),
   },
+  {
+    assets,
+    dest: "builds/webcomponent-auth-app/build/libs",
+    appName: "webcomponent-auth-app",
+    outputAppName: "webcomponent-auth-app",
+    rtc: "WEBSOCKET",
+    auth: "NODEJS",
+    hangouts: "INCLUDE",
+    env: process.env.NODE_ENV || "dev",
+    port: process.env.PORT || 3011,
+    scriptName: "webcomponent-auth-dev",
+    rtcUrl: webcom.rtcUrl({ PORT: process.env.PORT || 3011 }),
+  },
 ];
 const apps = [...hangoutTestApps];
 const appScripts = apps.reduce((a, c, i) => {

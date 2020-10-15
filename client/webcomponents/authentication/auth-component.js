@@ -1,3 +1,7 @@
+import { pubsub } from "../pubsub";
+// import '../router/web-route'
+// import './sign-in'
+// import './sign-up'
 class AuthComponent extends HTMLElement {
   constructor() {
     super();
@@ -6,17 +10,33 @@ class AuthComponent extends HTMLElement {
 
     shadowRoot.innerHTML = `
       <auth-service-nodejs>
-        <sign-in></sign-in>
-        <sign-up></sign-up>
+        <web-route route="signin">
+          <sign-in></sign-in>
+        </web-route>
+        <web-route route="signup">
+          <sign-up></sign-up>
+        </web-route>
       </auth-service-nodejs>
     `;
   }
 
   connectedCallback() {
     console.log("AuthComponent Loaded");
-    import("./auth-service-nodejs");
-    import("./sign-in");
-    import("./sign-up");
+    Promise.all([
+      import("../router/web-route"),
+      import("./auth-service-nodejs"),
+    ]).then((result) => {
+      pubsub.publish("route", { route: "signin" });
+    });
+
+    pubsub.subscribe("route", (data) => {
+      const { route } = data;
+      if (route === "signin") {
+        import("./sign-in");
+      } else if (route === "signup") {
+        import("./sign-up");
+      }
+    });
   }
 }
 

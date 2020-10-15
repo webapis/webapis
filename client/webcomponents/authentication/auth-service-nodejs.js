@@ -1,4 +1,4 @@
-import { pubsub } from "./pubsub";
+import { pubsub } from "../pubsub";
 import validationMessages from "../../features/authentication/validation/validationMessages";
 class AuthServiceNodejs extends HTMLElement {
   constructor() {

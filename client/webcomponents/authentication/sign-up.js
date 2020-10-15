@@ -3,7 +3,7 @@ import {
   validatePasswordConstraint,
   validateUserNameConstraint,
 } from "../../features/authentication/validation/constraintValidators";
-import { pubsub } from "./pubsub.js";
+import { pubsub } from "../pubsub.js";
 import loadBrowserId from "./loadBrowserId";
 function createTemplate({ shadowRoot }) {
   const template = document.createElement("template");

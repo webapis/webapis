@@ -3,7 +3,7 @@ import {
   validateEmptyString,
 } from "../../features/authentication/validation/constraintValidators";
 import loadBrowserId from "./loadBrowserId";
-import { pubsub } from "./pubsub.js";
+import { pubsub } from "../pubsub.js";
 function createTemplate({ shadowRoot }) {
   const template = document.createElement("template");
 
