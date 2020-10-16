@@ -83,6 +83,7 @@ module.exports = {
     webcomDev: series.nps("copyLibs", "webcom-dev"),
     storybook,
     testE2E: { script: "node puppeteer/index.js" },
+    testWebcomponent: { script: "node puppeteer/webcomponents.js" },
     test: {
       local: {
         script: series.nps("cy.local"),

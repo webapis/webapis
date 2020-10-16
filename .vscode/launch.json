@@ -19,6 +19,13 @@
       "type": "pwa-node"
     },
     {
+      "name": "Webcomponents",
+      "program": "${workspaceFolder}/puppeteer/webcomponents.js",
+      "request": "launch",
+      "skipFiles": ["<node_internals>/**"],
+      "type": "pwa-node"
+    },
+    {
       "type": "node",
       "request": "launch",
       "name": "Debug AVA test file",

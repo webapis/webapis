@@ -5,19 +5,25 @@ import { pubsub } from "../pubsub";
 class AuthComponent extends HTMLElement {
   constructor() {
     super();
-    const shadowRoot = this.attachShadow({ mode: "open" });
-    const linkElem = document.createElement("link");
+    if (ENV === "dev") {
+      this.innerHTML = `
+        <auth-service-nodejs> </auth-service-nodejs>
+  
+        <sign-in exportparts="abc"></sign-in>
+  
+        <sign-up></sign-up>
+      `;
+    } else {
+      const shadowRoot = this.attachShadow({ mode: "open" });
 
-    shadowRoot.innerHTML = `
-      <auth-service-nodejs>
-        <web-route route="signin">
-          <sign-in></sign-in>
-        </web-route>
-        <web-route route="signup">
-          <sign-up></sign-up>
-        </web-route>
-      </auth-service-nodejs>
-    `;
+      shadowRoot.innerHTML = `
+        <auth-service-nodejs> </auth-service-nodejs>
+  
+        <sign-in exportparts="abc"></sign-in>
+  
+        <sign-up></sign-up>
+      `;
+    }
   }
 
   connectedCallback() {

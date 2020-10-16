@@ -1,4 +1,4 @@
-import "https://cdn.jsdelivr.net/npm/whatwg-fetch@3.2.0/fetch.js";
+import "./";
 import { h, render } from "preact";
 import htm from "htm.module";
 import AppServices from "./AppServices";

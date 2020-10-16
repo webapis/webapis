@@ -1,7 +1,7 @@
 import validationMessages from "../../../../client/features/authentication/validation/validationMessages";
 Cypress.Commands.add("invalidEmailOrUsername", ({ PORT }) => {
   cy.visit(`https://localhost:${PORT}`);
-  cy.get("[data-testid=login-link]").click();
+  //cy.get("[data-testid=login-link]").click();
   cy.route({
     url: "/mock/auth/login",
     status: 400,
@@ -9,7 +9,7 @@ Cypress.Commands.add("invalidEmailOrUsername", ({ PORT }) => {
     method: "POST",
   });
   cy.get("[data-testid=emailorusername]").type("1232/*sd$");
-  cy.get("[data-testid=login-btn]").click();
+  cy.get("[data-testid=signin-btn]").click();
   cy.get("[data-testid=message-emailorusername]").contains(
     validationMessages.INVALID_USERNAME_OR_EMAIL
   );

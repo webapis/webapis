@@ -3,8 +3,8 @@ import validationMessages from "../../features/authentication/validation/validat
 class AuthServiceNodejs extends HTMLElement {
   constructor() {
     super();
-    const shadowRoot = this.attachShadow({ mode: "open" });
-    pubsub.subscribe("login", async (data) => {
+    //const shadowRoot = this.attachShadow({ mode: "open" });
+    pubsub.subscribe("signin", async (data) => {
       try {
         const { emailorusername, password, browserId } = data;
 
@@ -43,6 +43,7 @@ class AuthServiceNodejs extends HTMLElement {
           });
         }
       } catch (error) {
+        debugger;
         // throw error;
       }
     });
@@ -50,7 +51,6 @@ class AuthServiceNodejs extends HTMLElement {
     pubsub.subscribe("signup", async (data) => {
       try {
         const { email, username, password, browserId } = data;
-        debugger;
 
         const response = await fetch(`/auth/signup`, {
           body: JSON.stringify({
@@ -88,11 +88,12 @@ class AuthServiceNodejs extends HTMLElement {
           });
         }
       } catch (error) {
+        debugger;
         // failed(error);
       }
     });
 
-    shadowRoot.innerHTML = `<slot></slot>`;
+    //  shadowRoot.innerHTML = `<slot></slot>`;
   }
 }
 

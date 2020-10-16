@@ -1,5 +1,5 @@
 import validationMessages from "../../../../client/features/authentication/validation/validationMessages";
-Cypress.Commands.add("emptyFields", ({ PORT }) => {
+Cypress.Commands.add("emptyFieldsSignup", ({ PORT }) => {
   cy.visit(`https://localhost:${PORT}`);
   Cypress.on("window:before:load", (win) => {
     win.jsDisabled = true;

@@ -1,11 +1,13 @@
 import validationMessages from "../../../client/features/authentication/validation/validationMessages";
-
-[3008, 3009].forEach((PORT) => {
+//3008,3009,3011
+[3011].forEach((PORT) => {
   describe("Client side login tests", () => {
     it("user inputs: empty emailorusername or password (onBlur)", () => {
       cy.visit(`https://localhost:${PORT}`);
-      cy.get("[data-testid=login-link]").click();
+
+      // cy.get("[data-testid=signin-link]").click();
       cy.get("[data-testid=emailorusername]").focus();
+
       cy.wait(500);
       cy.get("[data-testid=emailorusername]").blur();
       cy.get("[data-testid=password]").focus();
@@ -20,7 +22,8 @@ import validationMessages from "../../../client/features/authentication/validati
     });
 
     it("user submits: empty emailorusername or password(onLogin)", () => {
-      cy.get("[data-testid=login-btn]").click();
+      cy.visit(`https://localhost:${PORT}`);
+      cy.get("[data-testid=signin-btn]").click();
       cy.get("[data-testid=message-emailorusername]").contains(
         validationMessages.REQUIRED_FIELD
       );
@@ -30,6 +33,7 @@ import validationMessages from "../../../client/features/authentication/validati
     });
 
     it("user inputs: invalid emailorusername ", () => {
+      cy.visit(`https://localhost:${PORT}`);
       cy.get("[data-testid=emailorusername]").type("@312-*/").blur();
       cy.get("[data-testid=message-emailorusername]").contains(
         validationMessages.INVALID_USERNAME_OR_EMAIL
@@ -62,7 +66,7 @@ import validationMessages from "../../../client/features/authentication/validati
       cy.wrongPassword({ PORT });
     });
 
-    it("Successful Login", () => {
+    it.only("Successful Login", () => {
       cy.successfulLogin({ PORT });
     });
   });

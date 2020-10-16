@@ -9,9 +9,9 @@ class WebRoutes extends HTMLElement {
       const { route } = data;
 
       if (this.getAttribute("route") === route) {
-        this.shadowRoot.innerHTML = `<slot></slot>`;
+        this.innerHTML = `<slot></slot>`;
       } else {
-        this.shadowRoot.innerHTML = "";
+        this.innerHTML = "";
       }
     });
   }

@@ -8,12 +8,9 @@ import loadBrowserId from "./loadBrowserId";
 function createTemplate({ shadowRoot }) {
   const template = document.createElement("template");
 
-  template.innerHTML = `<link
-      rel="stylesheet "
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
-      crossorigin="anonymous"
-    />
+  template.innerHTML = `<link rel="stylesheet" href="libs/bootstrap.css" />
+
+    <script src="libs/jquery.slim.min.js"></script>
     <div class="row justify-content-center">
       <div class="card" style="width: 20rem;">
         <div class="card-body">
@@ -55,8 +52,9 @@ function createTemplate({ shadowRoot }) {
               Error Message
             </div>
           </div>
-          <button id="signup-btn" class="btn btn-outline-success">Sign up</button>
-          
+          <button id="signup-btn" class="btn btn-outline-success">
+            Sign up
+          </button>
         </div>
       </div>
     </div>`;
@@ -139,7 +137,18 @@ class SignUp extends HTMLElement {
         }
       });
     });
-  }
+    pubsub.subscribe("route", (data) => {
+      const { route } = data;
+
+      if (route === "signup") {
+        createTemplate({ shadowRoot: this.shadowRoot });
+      } else {
+        let template = this.shadowRoot.querySelector("template");
+        const rootNode = this.shadowRoot.getRootNode();
+        this.shadowRoot.innerHTML = "";
+      }
+    });
+  } //connectedCallback
 
   usernameValidation({ username, usernameInput, usernameMsg }) {
     const { isValid, message } = validateUserNameConstraint({
