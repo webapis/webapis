@@ -1,4 +1,7 @@
 import "./app-navigation";
 import "../../webcomponents/authentication/auth-component";
+import "../../webcomponents/firebase-auth-ui/firebase-auth-ui";
 document.body.innerHTML = `<app-navigation></app-navigation>
-  <auth-component></auth-component> `;
+
+  <firebase-auth-ui></firebase-auth-ui>
+  `;

@@ -97,7 +97,7 @@ class AuthNavigation extends HTMLElement {
     });
   }
   authedUiState({ self, data }) {
-    const { username } = data;
+    const { username, token, email } = data;
     const {
       signinNavBtn,
       signoutBtn,
@@ -109,6 +109,10 @@ class AuthNavigation extends HTMLElement {
     profileNavBtn.classList.add("visible");
     profileNavBtn.textContent = `${username}, signed in`;
     debugger;
+    window.localStorage.setItem(
+      "webcom",
+      JSON.stringify({ username, email, token })
+    );
   }
   anonymousUiState(self) {
     const {

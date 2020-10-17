@@ -70,73 +70,31 @@ class AppNavigation extends HTMLElement {
   }
   connectedCallback() {
     createTemplate({ shadowRoot: this.shadowRoot });
-    let signinBtn = this.shadowRoot.querySelector("#signin-btn");
-    let signupBtn = this.shadowRoot.querySelector("#signup-btn");
-    let signoutBtn = this.shadowRoot.querySelector("#signout-btn");
-    const shadowRoot = this.shadowRoot;
-    signinBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      pubsub.publish("route", { route: "signin" });
-    });
-    signupBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-
-      pubsub.publish("route", { route: "signup" });
-    });
-
-    signoutBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      pubsub.publish("route", { route: "signout" });
-      this._signout({ shadowRoot });
-    });
 
     // pubsub.subscribe("auth_success", (data) => {
     //  // this._auth(data);
     // });
 
-    this._initialload({ shadowRoot });
+    //  this._initialload({ shadowRoot });
   } // connectCallback
 
-  _signout({ shadowRoot }) {
-    shadowRoot.querySelector("#signup-btn").setAttribute("hidden", false);
-    shadowRoot.querySelector("#signin-btn").setAttribute("hidden", false);
-    window.localStorage.removeItem("webcom");
-  }
-  _auth(data) {
-    const { token, username, email } = data;
-    window.localStorage.setItem(
-      "webcom",
-      JSON.stringify({
-        token,
-        username,
-        email,
-      })
-    );
-    shadowRoot.querySelector(
-      "#profile-btn"
-    ).textContent = `${username}, signed in`;
-    shadowRoot.querySelector("#signup-btn").classList.add("hide");
-    shadowRoot.querySelector("#signin-btn").setAttribute("hidden", true);
-    shadowRoot.querySelector("#profile-btn").setAttribute("hidden", false);
-    shadowRoot.querySelector("#signout-btn").setAttribute("hidden", false);
-  }
-  _initialload({ shadowRoot }) {
-    if (window.localStorage.getItem("webcom")) {
-      debugger;
-      const { token, username, email } = JSON.parse(
-        window.localStorage.getItem("webcom")
-      );
-      debugger;
-      pubsub.publish("local_auth", { token, email, username });
-      shadowRoot.querySelector(
-        "#profile-btn"
-      ).textContent = `${username}, signed in`;
-      shadowRoot.querySelector("#signup-btn").setAttribute("hidden", true);
-      shadowRoot.querySelector("#signin-btn").setAttribute("hidden", true);
-    } else {
-      shadowRoot.querySelector("#profile-btn").setAttribute("hidden", true);
-      shadowRoot.querySelector("#signout-btn").setAttribute("hidden", true);
-    }
-  }
+  // _initialload({ shadowRoot }) {
+  //   if (window.localStorage.getItem("webcom")) {
+  //     debugger;
+  //     const { token, username, email } = JSON.parse(
+  //       window.localStorage.getItem("webcom")
+  //     );
+  //     debugger;
+  //     pubsub.publish("local_auth", { token, email, username });
+  //     shadowRoot.querySelector(
+  //       "#profile-btn"
+  //     ).textContent = `${username}, signed in`;
+  //     shadowRoot.querySelector("#signup-btn").setAttribute("hidden", true);
+  //     shadowRoot.querySelector("#signin-btn").setAttribute("hidden", true);
+  //   } else {
+  //     shadowRoot.querySelector("#profile-btn").setAttribute("hidden", true);
+  //     shadowRoot.querySelector("#signout-btn").setAttribute("hidden", true);
+  //   }
+  // }
 } //class
 customElements.define("app-navigation", AppNavigation);
